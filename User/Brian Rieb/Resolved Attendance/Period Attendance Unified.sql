@@ -1,5 +1,11 @@
 -- Trying to put together a unifying query for attendance
 
+
+-- Just realized you have to pull all periods for a given day if ANY period has been changed since
+-- last run time. It might be a good idea to to this with a table variable (indexed)that gets the DAILY_ATTEND_GU
+-- based off any changed period, and then the main select uses that DAILY ATTEND_GU to get records.
+-- The table variable could also be used to hook to calendar for the total scheduled mintues (assuming that will be a separate pull)
+
 -- hard part is going to be separatley? or somehow together calculating total scheduled minutes.
 -- Also, Need to find out about the types
 -- will probably want to group by student/day/type adding minutes
@@ -94,6 +100,7 @@ FROM
 WHERE
 	-- don't worry about tardies or positives
 	ReasonCode.TYPE NOT IN ('TDY', 'TAR', 'POS')
+	
 	-- add constraints for only recent runs (it might be nice to store somewhere when the last time it was completed successfully... and then adjust
 	-- sproc to check for anything since the last run time?
 	
