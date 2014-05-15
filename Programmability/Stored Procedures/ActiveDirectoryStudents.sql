@@ -23,7 +23,6 @@ BEGIN
 --*                                                                                                                              *
 --********************************************************************************************************************************
 
-
 --<APS - Student Active Directory Feed>
 --SQL View Technology runs 
 DECLARE  @vDistrict_Number VARCHAR(20)
@@ -32,7 +31,7 @@ DECLARE  @vRunDate smalldatetime
 SET @vDistrict_Number = (SELECT CONVERT(xml,[VALUE]).value('(/ROOT/SIS/@DISTRICT_NUMBER)[1]','varchar(20)') AS DISTRICT_NUMBER
                          FROM rev.REV_APPLICATION  WHERE [KEY] = 'REV_INSTALL_CONSTANT')
 SET @vSchYr = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
-set @vRunDate = GETDATE()
+set @vRunDate = GETDATE() - 1 -- Previous day
 --All Enrollments
 ; with AllEnrollments AS
 (
@@ -51,21 +50,25 @@ JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
 -- Only primary active enrollment
 SELECT 
    @vDistrict_Number                        AS [DistrictNumber]
-, @vSchYr                                  AS [SchoolYear]
-, stu.SIS_NUMBER                           AS [StudentIDNumber]
-, sch.SCHOOL_CODE                          AS [SORSchoolNumber]
-, org.ORGANIZATION_NAME                    AS [SchoolName]
-, grd.VALUE_DESCRIPTION                    AS [Grade]
-, CONVERT(VARCHAR(8), ssy.ENTER_DATE, 112) AS [EnterDate]
-, CASE
+ , @vSchYr                                  AS [SchoolYear]
+ , stu.SIS_NUMBER                           AS [StudentIDNumber]
+ , sch.SCHOOL_CODE                          AS [SORSchoolNumber]
+ , org.ORGANIZATION_NAME                    AS [SchoolName]
+ , CASE 
+       WHEN grd.VALUE_DESCRIPTION IN ('P1', 'P2') THEN 'PK'         
+       WHEN grd.VALUE_DESCRIPTION IN ('T1', 'T2', 'T3', 'T4', 'C1', 'C2', 'C3', 'C4') THEN '12'
+	   ELSE grd.VALUE_DESCRIPTION
+   END                                      AS [Grade]
+ , CONVERT(VARCHAR(8), ssy.ENTER_DATE, 112) AS [EnterDate]
+ , CASE
       WHEN ENTER_DATE = @vRunDate THEN 'A'
-                  WHEN LEAVE_DATE = @vRunDate THEN 'D'
-                  ELSE ''
+	  WHEN LEAVE_DATE = @vRunDate THEN 'D'
+	  ELSE ''
    END                                      AS [AddDelStatus]
-, per.LAST_NAME                            AS [LastName]
-, per.FIRST_NAME                           AS [FirstName]
-, per.MIDDLE_NAME                          AS [StudentMiddleName]
-, 'P'                                      AS [SchoolOfRecord]
+ , per.LAST_NAME                            AS [LastName]
+ , per.FIRST_NAME                           AS [FirstName]
+ , per.MIDDLE_NAME                          AS [StudentMiddleName]
+ , 'P'                                      AS [SchoolOfRecord]
 FROM rev.EPC_STU               stu
 JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
                                        and ssy.STATUS is NULL
@@ -82,21 +85,25 @@ LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12','GRADE') grd on grd.VALUE_CODE
 UNION
 SELECT 
    @vDistrict_Number                        AS [DistrictNumber]
-, @vSchYr                                  AS [SchoolYear]
-, stu.SIS_NUMBER                           AS [StudentIDNumber]
-, sch.SCHOOL_CODE                          AS [SORSchoolNumber]
-, org.ORGANIZATION_NAME                    AS [SchoolName]
-, grd.VALUE_DESCRIPTION                    AS [Grade]
-, CONVERT(VARCHAR(8), ssy.ENTER_DATE, 112) AS [EnterDate]
+ , @vSchYr                                  AS [SchoolYear]
+ , stu.SIS_NUMBER                           AS [StudentIDNumber]
+ , sch.SCHOOL_CODE                          AS [SORSchoolNumber]
+ , org.ORGANIZATION_NAME                    AS [SchoolName]
+ ,  CASE 
+       WHEN grd.VALUE_DESCRIPTION IN ('P1', 'P2') THEN 'PK'         
+       WHEN grd.VALUE_DESCRIPTION IN ('T1', 'T2', 'T3', 'T4', 'C1', 'C2', 'C3', 'C4') THEN '12'
+	   ELSE grd.VALUE_DESCRIPTION
+   END                                      AS [Grade]
+ , CONVERT(VARCHAR(8), ssy.ENTER_DATE, 112) AS [EnterDate]
 , CASE
       WHEN ENTER_DATE = @vRunDate THEN 'A'
-                  WHEN LEAVE_DATE = @vRunDate THEN 'D'
-                  ELSE ''
+	  WHEN LEAVE_DATE = @vRunDate THEN 'D'
+	  ELSE ''
    END                                      AS [AddDelStatus]
-, per.LAST_NAME                            AS [LastName]
-, per.FIRST_NAME                           AS [FirstName]
-, per.MIDDLE_NAME                          AS [StudentMiddleName]
-, 'S'                                      AS [SchoolOfRecord]
+ , per.LAST_NAME                            AS [LastName]
+ , per.FIRST_NAME                           AS [FirstName]
+ , per.MIDDLE_NAME                          AS [StudentMiddleName]
+ , 'S'                                      AS [SchoolOfRecord]
 FROM rev.EPC_STU               stu
 JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
                                        and ssy.STATUS is NULL
@@ -109,6 +116,5 @@ JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
 LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12','GRADE') grd on grd.VALUE_CODE = ssy.GRADE 
 --where we have no active primary enrollment
 WHERE not exists(select s.STUDENT_GU from AllEnrollments s where s.STUDENT_GU = stu.STUDENT_GU and s.STATUS is null and s.EXCLUDE_ADA_ADM is null)
-
 END --END STORED PROCEDURE
 GO
