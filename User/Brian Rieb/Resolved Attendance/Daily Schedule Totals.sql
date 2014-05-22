@@ -1,11 +1,7 @@
--- This is an attempt to pull total instructional minutes for every
--- day/kid/ssy? or enorllment? It seems like overkill cuz that's something
--- like enrollments (120k/yr) * instructional days (120) * years
--- but the ulimate goal will be to ONLy run this for certain kids/days
--- probably every kid for the current day (so maybe like 130k reocrds per run)
-
---what about spanning multiple periods... How do we handle passing periods
--- also what about periods that have lunch built in?
+-- This qurey should return 1 record per student per school per day enrolled. 
+-- we are missing a lot of kids, which may be because:
+-- * Rotation Periods are not setup? (how to handle??? - non cycle days?)
+-- * Bell schedules not setup?
 
 SELECT
 	StudentSchoolYear.STUDENT_SCHOOL_YEAR_GU
@@ -70,12 +66,20 @@ FROM
 	rev.EPC_SCH_YR_MET_DY				SchoolYearMeetingDay
 	ON
 	SectionMeetingDay.SCH_YR_MET_DY_GU = SchoolYearMeetingDay.SCH_YR_MET_DY_GU
+
+	--need School year options for default bell schedule and # meeting days
+	INNER JOIN
+	rev.EPC_SCH_YR_OPT					SchoolYearOptions
+	ON OrganziationYear.ORGANIZATION_YEAR_GU = SchoolYearOptions.ORGANIZATION_YEAR_GU
 	
 	-- x Calendar Possible Days
 	INNER JOIN
 	rev.EPC_SCH_ATT_CAL					AttendanceCalendar
 	ON AttendanceCalendar.SCHOOL_YEAR_GU = OrganziationYear.ORGANIZATION_YEAR_GU
-	AND AttendanceCalendar.ROTATION = SchoolYearMeetingDay.MEET_DAY_CODE
+	AND (AttendanceCalendar.ROTATION = SchoolYearMeetingDay.MEET_DAY_CODE 
+		OR SchoolYearOptions.MEETING_DAY_NUMBER = 0
+		OR SchoolYearOptions.MEETING_DAY_NUMBER IS NULL
+		)
 	-- Make sure calendar date falls within scheduled section?
 	
 	AND (
@@ -86,33 +90,28 @@ FROM
 			)
 		)
 
-	-- Need To relate Bell Period to Schedule Period
-	INNER JOIN
+	-- Need To relate Bell Period to Schedule Period (but not all schools may have rotation cycles
+	-- in which case.. we have to join to bell schedules differently)
+	LEFT JOIN
 	rev.EPC_SCH_YR_ROT_CYCLE				SchoolYearRotationCycle
 	ON
 	SchoolYearRotationCycle.ORGANIZATION_YEAR_GU = OrganziationYear.ORGANIZATION_YEAR_GU
 	AND SchoolYearRotationCycle.ROTATION_CYCLE_CODE = AttendanceCalendar.ROTATION
 
-	INNER JOIN
+	LEFT JOIN
 	
 	rev.EPC_SCH_YR_ROT_CYCLE_PER			SchoolYearRotationCyclePeriodBegin
 	ON
 	SchoolYearRotationCyclePeriodBegin.SCH_YR_ROT_CYCLE_GU = SchoolYearRotationCycle.SCH_YR_ROT_CYCLE_GU
 	AND SchoolYearRotationCyclePeriodBegin.SCHEDULE_PERIOD = SectionMeetingDay.PERIOD_BEGIN
 
-	INNER JOIN
+	LEFT JOIN
 	
 	rev.EPC_SCH_YR_ROT_CYCLE_PER			SchoolYearRotationCyclePeriodEnd
 	ON
 	SchoolYearRotationCyclePeriodEnd.SCH_YR_ROT_CYCLE_GU = SchoolYearRotationCycle.SCH_YR_ROT_CYCLE_GU
 	AND SchoolYearRotationCyclePeriodEnd.SCHEDULE_PERIOD = SectionMeetingDay.PERIOD_END
 	
-
-		
-	--need School year options for default bell schedule
-	INNER JOIN
-	rev.EPC_SCH_YR_OPT					SchoolYearOptions
-	ON OrganziationYear.ORGANIZATION_YEAR_GU = SchoolYearOptions.ORGANIZATION_YEAR_GU
 
 
 	INNER JOIN
@@ -130,17 +129,18 @@ FROM
 		)
 	
 
+
 	INNER JOIN
 	rev.EPC_SCH_YR_BELL_SCHED_PER		BellPeriodBegin
 	ON
 	BellPeriodBegin.BELL_SCHEDULE_GU = BellSchedule.BELL_SCHEDULE_GU
-	AND BellPeriodBegin.BELL_PERIOD = SchoolYearRotationCyclePeriodBegin.BELL_PERIOD
+	AND BellPeriodBegin.BELL_PERIOD = CASE WHEN SchoolYearRotationCyclePeriodBegin.BELL_PERIOD IS NOT NULL THEN SchoolYearRotationCyclePeriodBegin.BELL_PERIOD ELSE SectionMeetingDay.PERIOD_BEGIN END
 	
 	INNER JOIN
 	rev.EPC_SCH_YR_BELL_SCHED_PER		BellPeriodEnd
 	ON
 	BellPeriodEnd.BELL_SCHEDULE_GU = BellSchedule.BELL_SCHEDULE_GU
-	AND BellPeriodEnd.BELL_PERIOD = SchoolYearRotationCyclePeriodEnd.BELL_PERIOD
+	AND BellPeriodEnd.BELL_PERIOD = CASE WHEN SchoolYearRotationCyclePeriodEnd.BELL_PERIOD IS NOT NULL THEN SchoolYearRotationCyclePeriodEnd.BELL_PERIOD ELSE SectionMeetingDay.PERIOD_END END
 
 
 	--debug purposes
@@ -163,5 +163,5 @@ GROUP BY
 	,School.SCHOOL_CODE
 ORDER BY
 	AttendanceCalendar.CAL_DATE	
-	,Student.SIS_NUMBER				
 	,School.SCHOOL_CODE	
+	,Student.SIS_NUMBER				
