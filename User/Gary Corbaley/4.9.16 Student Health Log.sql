@@ -1,8 +1,22 @@
+/**
+ * 
+ * $LastChangedBy: Gary Corbaley
+ * $LastChangedDate: 6/10/2014
+ *
+ * Request By: Andy Gutierrez
+ * InitialRequestDate: 5/15/2014
+ * 
+ * Initial Request: Pull all records from HE020 and format them to be imported into Synergy Health Log table.
+ *
+ * Description: Convert all Health Log entries into a format that can be uploaded to Synergy.
+ * One Record Per Entry
+ *
+ * Tables Referenced: HE050
+ */
 
 
 
-
-SELECT
+SELECT DISTINCT
 	'' AS [SCHOOL_YEAR]
 	,[Health Log].[SCH_NBR] AS [SCHOOL_CODE]
 	,'' AS [ENTERED_BY]
