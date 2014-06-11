@@ -1,5 +1,18 @@
-
-
+/**
+ * 
+ * $LastChangedBy: Gary Corbaley
+ * $LastChangedDate: 6/10/2014
+ *
+ * Request By: Andy Gutierrez
+ * InitialRequestDate: 5/15/2014
+ * 
+ * Initial Request: Pull all records from HE020 and format them to be imported into Synergy Immunization table.
+ *
+ * Description: Convert all Immunization entries into a format that can be uploaded to Synergy.
+ * One Record Per Entry
+ *
+ * Tables Referenced: HE020
+ */
 
 
 
