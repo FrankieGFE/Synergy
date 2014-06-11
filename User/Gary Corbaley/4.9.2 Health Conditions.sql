@@ -1,4 +1,18 @@
-
+/**
+ * 
+ * $LastChangedBy: Gary Corbaley
+ * $LastChangedDate: 6/10/2014
+ *
+ * Request By: Andy Gutierrez
+ * InitialRequestDate: 5/15/2014
+ * 
+ * Initial Request: Pull all records from HE015 and format them to be imported into Synergy Health Conditions table.
+ *
+ * Description: Convert all health condition entries into a format that can be uploaded to Synergy.
+ * One Record Per Entry
+ *
+ * Tables Referenced: HE015
+ */
 
 
 
