@@ -1,9 +1,16 @@
 
---DELETE REV.REV_PERSON_PHONE 
+/*
+*	Date Created:  6/17/2014
+*  Created By:  Debbie Chavez
+*
+*One time fix to delete duplicate phone numbers for Staff only in Rev_Person_Phone.
+*/
 
-SELECT 
-	* 
-FROM 
+BEGIN TRANSACTION
+
+DELETE REV.REV_PERSON_PHONE
+
+FROM
 (
 		SELECT 
 			ROW_NUMBER ()OVER (PARTITION BY PERSON.PERSON_GU, PHONE ORDER BY PHONE) AS RN
@@ -20,10 +27,12 @@ FROM
 		ON
 		PERSON.PERSON_GU = PPHONE.PERSON_GU
 
-		WHERE
-		BADGE_NUM = 'E139953'
+		--WHERE
+		--BADGE_NUM = 'E139953'
 ) AS T1
 
 WHERE
 	RN != 1
-
+	AND T1.PERSON_PHONE_GU = REV_PERSON_PHONE.PERSON_PHONE_GU
+	
+ROLLBACK
