@@ -1,12 +1,12 @@
  SELECT 
             School.SCHOOL_CODE,Organization.ORGANIZATION_NAME, Student.SIS_NUMBER, RevYear.SCHOOL_YEAR, Enroll.EXCLUDE_ADA_ADM
-            ,(CONVERT (VARCHAR (8), Enroll.LEAVE_DATE, 112)) AS LEAVEDATE
-            ,(CONVERT (VARCHAR (8), Enroll.ENTER_DATE, 112)) AS ENTERDATE
-            ,StudentSchoolYear.STUDENT_SCHOOL_YEAR_GU
+           , PERSON.LAST_NAME, PERSON.FIRST_NAME,Grades.[ALT_CODE_1] AS GRADE
+		   ,(CONVERT (VARCHAR (8), Enroll.ENTER_DATE, 112)) AS ENTERDATE ,(CONVERT (VARCHAR (8), Enroll.LEAVE_DATE, 112)) AS LEAVEDATE
+		   /*
+		    ,StudentSchoolYear.STUDENT_SCHOOL_YEAR_GU
             ,Enroll.CHANGE_DATE_TIME_STAMP
             ,Enroll.CHANGE_ID_STAMP
-            ,Grades.[ALT_CODE_1] AS GRADE
-            ,EnterCode.ALT_CODE_1 AS ENTER_CODE
+             ,EnterCode.ALT_CODE_1 AS ENTER_CODE
             ,LeaveCode.ALT_CODE_1 AS LEAVE_CODE
             ,Enroll.ENR_USER_DD_4 AS HOMECHAR
             ,Enroll.ADD_DATE_TIME_STAMP
@@ -17,6 +17,7 @@
             ,Added.FIRST_NAME AS ADDFRSNME
             ,AddBadge.BADGE_NUM AS ADDBADGE
             ,ChangeBadge.BADGE_NUM AS CHGBADGE
+			*/
       FROM
             [011-SYNERGYDB].ST_Production.rev.EPC_STU_SCH_YR AS StudentSchoolYear
             INNER JOIN 
@@ -44,6 +45,11 @@
             [011-SYNERGYDB].ST_Production.rev.EPC_STU_ENROLL AS Enroll
             ON 
             Enroll.STUDENT_SCHOOL_YEAR_GU = StudentSchoolYear.STUDENT_SCHOOL_YEAR_GU
+			INNER JOIN
+			rev.REV_PERSON AS PERSON
+			ON
+			PERSON.PERSON_GU = Student.STUDENT_GU
+
           
 		  
 		  -- THIS IS TO GET THE GRADE LEVEL
@@ -113,5 +119,11 @@
       
       WHERE
             NO_SHOW_STUDENT = 'N'
-            AND NOT
-			(RevYear.SCHOOL_YEAR = 2013 AND RevYear.EXTENSION = 'S')
+            AND 
+			(RevYear.SCHOOL_YEAR = 2014 --AND RevYear.EXTENSION = 'S'
+			)		
+			AND 
+		
+		 StudentSchoolYear.STATUS is NULL
+		 AND SCHOOL_CODE = '413'
+	ORDER BY FIRST_NAME

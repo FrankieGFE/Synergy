@@ -8,7 +8,7 @@ GO
 *	Used to fix update 9.0.1.0 Error:  " The ALTER TABLE statement conflicted with the FOREIGN KEY constraint "EGB_STANDARDS_NEW_F3".  
 *	The conflict occurred in database "ST_Experiment", table "rev.EGB_STANDARDSTYPES", column 'ID'.  
 *
-*	Cause of error:  Shayne SQL/Accessed records for standardized grading.
+*	
 */
 
 SET identity_insert rev.EGB_STANDARDSTYPES ON
