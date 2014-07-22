@@ -17,14 +17,14 @@
 
 
 SELECT DISTINCT
-	'' AS [SCHOOL_YEAR]
+	'2013' AS [SCHOOL_YEAR]
 	,[Health Log].[SCH_NBR] AS [SCHOOL_CODE]
-	,'' AS [ENTERED_BY]
+	,'e' + CONVERT(VARCHAR,CASE WHEN [Opperator].[OPER_NBR] IS NULL THEN '117025' ELSE [Opperator].[OPER_NBR] END) AS [ENTERED_BY]
 	,[Health Log].[LOGDATE] AS [EFFECTIVE_DATE]
 	,[Health Log].[LOG_REACD] AS [HEALTH_CODE]
 	,[Health Log].[ID_NBR] AS [SIS_NUMBER]
-	,[Health Log].[LOG_REASON] AS [ACCIDNENT_DESC]
-	,[Health Log].[LOG_RESULT] AS [ACTION_TAKEN]
+	,[Health Log].[LOG_REASON] + [Health Log].[LOG_RESULT] + [Health Log].[LOG_COMNT] AS [ACCIDENT_DESC]
+	,[Health Log].[LOG_ACTCD] AS [ACTION_TAKEN]
 	,'' AS [CARE_GIVER]
 	,'' AS [CONTACT_ATTEMPT_TIME]
 	,'' AS [CONTACT_MADE_TIME]
@@ -56,6 +56,24 @@ SELECT DISTINCT
 	,'' AS [WHERE_TAKEN]
 	,'' AS [WHO_NOTIFIED_PARENT]
 	,'' AS [WITNESSES]
+	,CASE WHEN [Health Log].[LOG_OUTCD] = '' THEN '' ELSE CONVERT(VARCHAR,[Health Log].[LOG_OUTCD]) + '-' + [OutcomeCodes].[CODE_DESCR] END AS [UD_HealthInfo_UDHealthIncident_Outcome]
 	
 FROM
 	[DBTSIS].[HE050_V] AS [Health Log]
+	
+	LEFT OUTER JOIN
+	[DBTOAS].[OS010_V] AS [Opperator]
+	
+	ON
+	[Health Log].[MNT_INIT] = [Opperator].[OPER_INIT]
+	
+	LEFT OUTER JOIN
+	[DBTSIS].[HE082_V] AS [OutcomeCodes]
+	
+	ON
+	[Health Log].[DST_NBR] = [OutcomeCodes].[DST_NBR]
+	AND [Health Log].[LOG_OUTCD] = [OutcomeCodes].[CODE_NME]
+	AND [OutcomeCodes].[CODE_TYPE] = 'OUTCD'
+	
+WHERE
+	[Health Log].[LOGDATE] BETWEEN '20130813' AND '20140522'

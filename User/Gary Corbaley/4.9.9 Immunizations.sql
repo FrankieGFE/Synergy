@@ -21,7 +21,7 @@ SELECT
 	,'' AS [SCHOOL_YEAR]
 	,'' AS [SCHOOL_CODE]
 	,[Immunizations].[IMMTYPE] AS [VACCINATION]
-	,[Immunizations].[IMMDATE] AS [DOSAGE_DATE]
+	,CASE WHEN [Immunizations].[IMMDATE] = '0' THEN '' ELSE CONVERT(VARCHAR,[Immunizations].[IMMDATE]) END AS [DOSAGE_DATE]
 	,'' AS [COMMENT]
 	,[Immunizations].[IMMEXMPT] AS [EXEMPT_REASON]
 	,'' AS [SOURCE]
@@ -32,3 +32,6 @@ SELECT
 	,'' AS [DOSAGE_COMPLIANCE]
 FROM
 	[DBTSIS].[HE020_V] AS [Immunizations]
+	
+WHERE
+	[Immunizations].[IMMDATE] BETWEEN '19970000' AND '19979999'

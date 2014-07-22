@@ -18,7 +18,7 @@
 
 SELECT
 	[Conditions].[ID_NBR] AS [SIS_NUMBER]
-	,'' AS [SCHOOL_YEAR]
+	,'2013' AS [SCHOOL_YEAR]
 	,'' AS [SCHOOL_CODE]
 	,[Conditions].[START_DT] AS [DATE_ENTERED]
 	,[Conditions].[HLCODE] AS [CONDITION_CODE]
