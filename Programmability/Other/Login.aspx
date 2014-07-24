@@ -169,7 +169,7 @@
         </form>
 
         <div id="Footer">
-			<!-- APS ADDED By Don Jarrett 7/21/2014 //--><div class="copyright" style="padding-bottom: 5px">By logging into this site, you agree to <a href="http://aps.edu" target="_blank" style="text-decoration: underline;">these terms</a>.</div><!-- APS END ADDED //-->
+			<!-- APS ADDED By Don Jarrett 7/21/2014 //--><div class="copyright" style="padding-bottom: 5px">By logging into this site, you agree to <a href="https://www.aps.edu/student-information-systems-sis/synergy-terms/" target="_blank" style="text-decoration: underline;">these terms</a>.</div><!-- APS END ADDED //-->
             <span id="ContactUsSpacer" runat="server"><a runat="server" id="ContactUsHref" href="mailto:support@edupoint.com?subject">Contact Us</a> |</span>
             <a href="#" onclick="ManualPopup()">Check For Popup</a><!-- APS COMMENT Don Jarrett 7/21/2014 |
             <a href="#" onclick="AddFavorite()">Add This Page to My Favorites</a> END APS COMMENT //-->
