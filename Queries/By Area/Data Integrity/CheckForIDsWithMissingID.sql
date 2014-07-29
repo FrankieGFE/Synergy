@@ -1,3 +1,12 @@
+/**
+ * $LastChangedBy: e204042 
+ * $LastChangedDate: 2014-07-29
+ *
+ * Checks a file against the missing IDs in Synergy that were in SchoolMax to see
+ * if they have any course history.
+ *
+ */
+
 SELECT
     *
 FROM
