@@ -28,35 +28,35 @@
 
       FROM
              --READ ALL ENROLLMENTS         
-            [011-SYNERGYDB].ST_Production.rev.EPC_STU_ENROLL AS Enroll
+            .rev.EPC_STU_ENROLL AS Enroll
 			--GET STUDENT_GU AND ORG_YEAR_GU
 			 INNER JOIN		  
-		    [011-SYNERGYDB].ST_Production.rev.EPC_STU_SCH_YR AS StudentSchoolYear
+		    .rev.EPC_STU_SCH_YR AS StudentSchoolYear
 			ON 
             Enroll.STUDENT_SCHOOL_YEAR_GU = StudentSchoolYear.STUDENT_SCHOOL_YEAR_GU
 			--GET STUDENT_GU  TO READ PERSON WITH STUDENTS
 			INNER JOIN
-            [011-SYNERGYDB].ST_Production.rev.EPC_STU AS Student
+            .rev.EPC_STU AS Student
             ON 
             Student.STUDENT_GU = StudentSchoolYear.STUDENT_GU
 			--NEED ORG_YEAR FOR REV_YEAR
             INNER JOIN 
-            [011-SYNERGYDB].ST_Production.rev.REV_ORGANIZATION_YEAR AS OrgYear 
+            .rev.REV_ORGANIZATION_YEAR AS OrgYear 
             ON 
             OrgYear.ORGANIZATION_YEAR_GU = StudentSchoolYear.ORGANIZATION_YEAR_GU
 			--GET SCHOOL NAME
             INNER JOIN 
-            [011-SYNERGYDB].ST_Production.rev.REV_ORGANIZATION AS Organization 
+            .rev.REV_ORGANIZATION AS Organization 
             ON 
             Organization.ORGANIZATION_GU=OrgYear.ORGANIZATION_GU
 			--GET SCHOOL NUMBER
             INNER JOIN 
-            [011-SYNERGYDB].ST_Production.rev.EPC_SCH AS School 
+            .rev.EPC_SCH AS School 
             ON 
             School.ORGANIZATION_GU =OrgYear.ORGANIZATION_GU
 			--GET SCHOOL YEAR
             INNER JOIN 
-            [011-SYNERGYDB].ST_Production.rev.REV_YEAR AS RevYear 
+            .rev.REV_YEAR AS RevYear 
             ON 
             RevYear.YEAR_GU = OrgYear.YEAR_GU 
 			--GET STUDENT NAME AND ADDRESS_GU
@@ -76,9 +76,9 @@
                   Val.[ALT_CODE_1]
                   ,Val.VALUE_CODE
             FROM
-                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_DEF] AS [Def]
+                  .[rev].[REV_BOD_LOOKUP_DEF] AS [Def]
                   INNER JOIN
-                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
+                  .[rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
                   ON
                   [Def].[LOOKUP_DEF_GU]=[Val].[LOOKUP_DEF_GU]
                   AND [Def].[LOOKUP_NAMESPACE]='K12'
@@ -93,6 +93,7 @@
 				AND RevYear.EXTENSION = @EXTENSION
 				AND NO_SHOW_STUDENT = @NO_SHOW
 				AND SCHOOL_CODE = @SCHOOL
+				AND STATUS IS NULL
 
 
 	ORDER BY 
