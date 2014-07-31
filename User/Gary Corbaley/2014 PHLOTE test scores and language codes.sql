@@ -14,9 +14,27 @@
  * Tables Referenced: NM030
  */
 
+ /*
+ USE SynergyConversion
+ GO
 
-USE [PR]
+ CREATE TABLE [StudentLanguage]
 
+(
+	SIS_NUMBER nvarchar(20)	NOT NULL
+	,PRIMARY_LANG VARCHAR (2)
+	,CONTACT_LANG VARCHAR (2)
+	,Q1 VARCHAR (2)
+	,Q2 VARCHAR (2)
+	,Q3 VARCHAR (3)
+	,Q4 VARCHAR (4)
+	,Q5 VARCHAR (5)	
+	)
+*/
+
+
+ USE PR
+ GO
 -- SYnergy to Schoolmax Language Codes Crosswalk
 DECLARE @LanguageCodeCrosswalk TABLE(
             SYNERGY_CODE VARCHAR(5)
@@ -81,21 +99,26 @@ VALUES
 ,('52','052')
 
 
+
+
+
+INSERT INTO SynergyConversion.dbo.StudentLanguage
+
 SELECT
 	[Languages].[ID_NBR]
-	,[Languages].[PRM_LNG] AS [Primary Language SMAX]
+	--,[Languages].[PRM_LNG] AS [Primary Language SMAX]
 	,[PrimaryLanguageCodeCrosswalk].[SYNERGY_CODE] AS [Primary Language Synergy]
-	,[Languages].[CON_LNG] AS [Contact Language SMAX]
+	--,[Languages].[CON_LNG] AS [Contact Language SMAX]
 	,[ContactLanguageCodeCrosswalk].[SYNERGY_CODE] AS [Contact Language Synergy]
-	,[Languages].[HLS_Q_1] AS [QUESTION 1 SMAX]
+	--,[Languages].[HLS_Q_1] AS [QUESTION 1 SMAX]
 	,[Test1LanguageCodeCrosswalk].[SYNERGY_CODE] AS [QUESTION 1 SYNERGY]
-	,[Languages].[HLS_Q_2] AS [QUESTION 2 SMAX]
+	--,[Languages].[HLS_Q_2] AS [QUESTION 2 SMAX]
 	,[Test2LanguageCodeCrosswalk].[SYNERGY_CODE] AS [QUESTION 2 SYNERGY]
-	,[Languages].[HLS_Q_3_1] AS [QUESTION 3 SMAX]
+	--,[Languages].[HLS_Q_3_1] AS [QUESTION 3 SMAX]
 	,[Test3LanguageCodeCrosswalk].[SYNERGY_CODE] AS [QUESTION 3 SYNERGY]
-	,[Languages].[HLS_Q_4_1] AS [QUESTION 4 SMAX]
+	--,[Languages].[HLS_Q_4_1] AS [QUESTION 4 SMAX]
 	,[Test4LanguageCodeCrosswalk].[SYNERGY_CODE] AS [QUESTION 4 SYNERGY]
-	,[Languages].[HLS_Q_5_1] AS [QUESTION 5 SMAX]
+	--,[Languages].[HLS_Q_5_1] AS [QUESTION 5 SMAX]
 	,[Test5LanguageCodeCrosswalk].[SYNERGY_CODE] AS [QUESTION 5 SYNERGY]
 	
 FROM
@@ -151,7 +174,7 @@ FROM
 	
 WHERE
 	[Languages].[DST_NBR] = 1
-	AND [Languages].[RN] = 1
+	--AND [Languages].[RN] = 1
 	--AND [Languages].[ID_NBR] = '970031860'
 	
 ORDER BY
