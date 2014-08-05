@@ -11,15 +11,13 @@ GO
 
 /**
  * FUNCTION APS.PrimaryEnrollmentsAsOf
- * pulls values for a specified lookup table.  This differs from the Edupoint SIF standard as
- * it retrieves more inofrmation (such as list information)
+ * Pulls enrollment information based on a current dayy
  *
  * Tables Used: REV_BOD_LOOKUP_DEF, REV_BOD_LOOKUP_VALUES
  *
- * #param nvarchar(50) @namespace lookup namespace (e.g. 'k12')
- * #param nvarchar(50) @lookupname lookup name (e.g. 'enter_code')
+ * #param DATE @AsOfDate date to look for enrollments
  * 
- * #return TABLE All value fields (see REV_BOD_LOOKUP_VALUES clomuns) for the lookup table.
+ * #return TABLE enrollment information
  */
 ALTER FUNCTION APS.PrimaryEnrollmentsAsOf(@AsOfDate DATE)
 RETURNS TABLE
@@ -31,6 +29,7 @@ RETURN
 		,SSY.STUDENT_SCHOOL_YEAR_GU
 		,Enrollment.ENROLLMENT_GU
 		,Enrollment.GRADE
+		,Enrollment.EXCLUDE_ADA_ADM
 		,Enrollment.ENTER_DATE
 		,Enrollment.LEAVE_DATE
 		,SchoolCalendar.START_DATE AS SchoolYearStartDate
