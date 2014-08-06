@@ -16,7 +16,11 @@ GO
  * 
  * By not having to specify a year/extention, or lookup "current year" in system it allows queries
  * based off this function to work idenpendently of current values or having to know what year/extension
- * a date falls in
+ * a date falls in.
+ *
+ * ++NOTE++: Currently (8/6/2014) Counts from this function are VERY close, but not exactly matching Synergy
+ * report.  Preliminary tests on some static date yields the 2 being off between 2-5 per day (variable amount,
+ * and these are net differences)
  *
  * Tables Used: EPC_ATT_CAL_TYPE, EPC_ATT_CAL_OPT, REV_ORGANIZATION_YEAR, EPC_STU_SCH_YR, EPC_STU_ENROLL
  *
