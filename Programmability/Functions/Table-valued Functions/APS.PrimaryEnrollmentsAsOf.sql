@@ -1,7 +1,7 @@
 /**
  * $Revision: 19 $
  * $LastChangedBy: e201594 $
- * $LastChangedDate: 2012-09-27 08:34:31 -0600 (Thu, 27 Sep 2012) $
+ * $LastChangedDate: 2014-08-06 08:34:31 -0600 (Wed, 6 Sep 2014) $
  */
  
 -- Removing function if it exists
@@ -11,39 +11,85 @@ GO
 
 /**
  * FUNCTION APS.PrimaryEnrollmentsAsOf
- * Pulls enrollment information based on a current dayy
+ * Pulls primary enrollment information based on a current day.  Great for doing student counts.
+ * It looks a little complex because this function does not require you speciify a year/extension.
+ * 
+ * By not having to specify a year/extention, or lookup "current year" in system it allows queries
+ * based off this function to work idenpendently of current values or having to know what year/extension
+ * a date falls in
  *
- * Tables Used: REV_BOD_LOOKUP_DEF, REV_BOD_LOOKUP_VALUES
+ * Tables Used: EPC_ATT_CAL_TYPE, EPC_ATT_CAL_OPT, REV_ORGANIZATION_YEAR, EPC_STU_SCH_YR, EPC_STU_ENROLL
  *
  * #param DATE @AsOfDate date to look for enrollments
  * 
- * #return TABLE enrollment information
+ * #return TABLE basic enrollment information for all students who are enrolled on that date.
  */
 ALTER FUNCTION APS.PrimaryEnrollmentsAsOf(@AsOfDate DATE)
 RETURNS TABLE
 AS
-RETURN
+RETURN	
+SELECT
+	STUDENT_GU
+	,ORGANIZATION_YEAR_GU
+	,STUDENT_SCHOOL_YEAR_GU
+	,ENROLLMENT_GU
+	,GRADE
+	,ENTER_DATE
+	,LEAVE_DATE
+FROM
+	--see below why are subselecting (row_number)--
+	(
 	SELECT
 		SSY.STUDENT_GU
 		,SSY.ORGANIZATION_YEAR_GU
 		,SSY.STUDENT_SCHOOL_YEAR_GU
 		,Enrollment.ENROLLMENT_GU
 		,Enrollment.GRADE
-		,Enrollment.EXCLUDE_ADA_ADM
 		,Enrollment.ENTER_DATE
 		,Enrollment.LEAVE_DATE
-		,SchoolCalendar.START_DATE AS SchoolYearStartDate
-		,SchoolCalendar.END_DATE AS SchoolYearEndDate
+		-- We have to row number to make sure we only get one record per kid.  We noticed
+		-- about 4 kids who have overlapping ADA enrollments.  This could have been caused
+		-- by import + NYR, but regardless of reason, we can only count kids once
+		,ROW_NUMBER() OVER (PARTITION BY SSY.STUDENT_GU ORDER BY ENROLLMENT.ENTER_DATE) AS RN
 	FROM
-		-- we start with school canendar to narrow down the org_years
-		-- becasue enrollments never really have a leave date, unless they are duing the term
-		rev.EPC_SCH_ATT_CAL_OPT AS SchoolCalendar
+		/* Because Synergy does not close out (and leave_dates for past years) We have to narrow
+		 * our enrollment search to only org years that the @AsOfDate is applicable to.
+		 * 
+		 * I first tried using school calendars, but it turns out that synergy allows
+		 * enrollments outside of school calendars (at least by using a combo of
+		 * new-year rollover and adjusting the calendar post-facto)
+		 *
+		 * This subselect retrieves all OrgYearGus that match the @AsOfDate that
+		 * falls within **DISTRICT WIDE**
+		 * 
+		 * We might want to consider making this a separate function, as I believe we may be
+		 * using this method frequently.
+		 */
+		(
+		SELECT
+			CalenderOptions.YEAR_GU
+			,CalenderType.START_DATE
+			,CalenderType.END_DATE
+			,OrgYear.ORGANIZATION_YEAR_GU
+		FROM
+			rev.EPC_ATT_CAL_TYPE AS CalenderType -- this has the start and end dates
+			INNER JOIN
+			rev.EPC_ATT_CAL_OPT AS CalenderOptions -- this ties the date to a year_gu
+			ON
+			CalenderType.ATT_CAL_OPT_GU = CalenderOptions.ATT_CAL_OPT_GU
 
-		-- SSY, because you never know what the School of Record (SOR) is in a historical context
+			INNER JOIN
+			rev.REV_ORGANIZATION_YEAR AS OrgYear -- this grabs the orgyear
+			ON
+			CalenderOptions.YEAR_GU = OrgYear.YEAR_GU
+		WHERE
+			@AsOfDate BETWEEN CalenderType.START_DATE AND CalenderType.END_DATE
+		) AS NarrowedOrgYears
+		-- Student School Year - Everything flows through here
 		INNER JOIN
 		rev.EPC_STU_SCH_YR AS SSY
 		ON
-		SchoolCalendar.ORG_YEAR_GU = SSY.ORGANIZATION_YEAR_GU
+		NarrowedOrgYears.ORGANIZATION_YEAR_GU = SSY.ORGANIZATION_YEAR_GU
 
 		-- Enrollment because enter and leave dates truly reside here, and not most recent as it is bubbled up to SSY
 		INNER JOIN
@@ -52,8 +98,9 @@ RETURN
 		SSY.STUDENT_SCHOOL_YEAR_GU = Enrollment.STUDENT_SCHOOL_YEAR_GU
 
 	WHERE
-		@AsOfDate BETWEEN SchoolCalendar.START_DATE AND SchoolCalendar.END_DATE
-		AND Enrollment.ENTER_DATE <= CONVERT(DATE, @AsOfDate) -- check for existing and applicable enrollmentdate
+		-- We are dealing with Enrollment enter/leaves because SSY only has **most recent** info, and not necessarily what it was on
+		-- the date we are looking for.
+		Enrollment.ENTER_DATE <= CONVERT(DATE, @AsOfDate) -- check for existing and applicable enrollmentdate
 
 		-- make sure not past leave dates
 		AND (
@@ -61,8 +108,10 @@ RETURN
 			OR Enrollment.LEAVE_DATE >= @AsOfDate
 			)
 
-		-- only show students not excluded from ADA/ADM
-		AND (
-			Enrollment.EXCLUDE_ADA_ADM IS NULL
-			OR Enrollment.EXCLUDE_ADA_ADM = '1' -- No concurrents, only null (ADA) or 1 (non-ADA/ADM)
-			)
+		-- only show ADA students not excluded from ADA/ADM
+		AND Enrollment.EXCLUDE_ADA_ADM IS NULL
+
+	) AS MainPull
+WHERE
+	-- here is where we only take the first record.
+	RN = 1
