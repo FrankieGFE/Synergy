@@ -13,8 +13,8 @@ USE [PR]
  
 --Change the variable @Today if you want to check another member day
 DECLARE 
-		--@Today DATE = GETDATE()
-		@Today DATE = '2014-08-14 00:00:00.000'
+		@Today DATE = GETDATE()
+		--@Today DATE = '2014-08-14 00:00:00.000'
 		,@MemberDay INT 
 		,@CurrentSchoolYear INT
 		,@DayLastYear DATE
@@ -40,7 +40,7 @@ FROM
 		,[Grades].[ALT_CODE_1] AS [Grade]
 		,COUNT ([EnrollmentsAsOf].[ENROLLMENT_GU]) AS ENROLL_COUNT
 	FROM
-		OPENQUERY([SYNSECONDDB.APS.EDU.ACTD],'SELECT * FROM  [ST_Experiment].APS.PrimaryEnrollmentsAsOf(''08/14/2014'')') AS [EnrollmentsAsOf]
+		OPENQUERY([SYNSECONDDB.APS.EDU.ACTD],'SELECT * FROM  [ST_Experiment].APS.PrimaryEnrollmentsAsOf(GETDATE())') AS [EnrollmentsAsOf]
 		
 		INNER JOIN 
 		[SYNSECONDDB.APS.EDU.ACTD].[ST_Experiment].rev.EPC_STU_ENROLL AS [EnrollmentDetails] -- Contains Grade and Start Date
