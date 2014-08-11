@@ -37,44 +37,18 @@ RETURN
 		,Enrollment.ENTER_DATE
 		,Enrollment.LEAVE_DATE
 	FROM
-		/* Because Synergy does not close out (and leave_dates for past years) We have to narrow
-		 * our enrollment search to only org years that the @AsOfDate is applicable to.
-		 * 
-		 * I first tried using school calendars, but it turns out that synergy allows
-		 * enrollments outside of school calendars (at least by using a combo of
-		 * new-year rollover and adjusting the calendar post-facto)
-		 *
-		 * This subselect retrieves all OrgYearGus that match the @AsOfDate that
-		 * falls within **DISTRICT WIDE**
-		 * 
-		 * We might want to consider making this a separate function, as I believe we may be
-		 * using this method frequently.
-		 */
-		(
-		SELECT
-			CalenderOptions.YEAR_GU
-			,CalenderType.START_DATE
-			,CalenderType.END_DATE
-			,OrgYear.ORGANIZATION_YEAR_GU
-		FROM
-			rev.EPC_ATT_CAL_TYPE AS CalenderType -- this has the start and end dates
-			INNER JOIN
-			rev.EPC_ATT_CAL_OPT AS CalenderOptions -- this ties the date to a year_gu
-			ON
-			CalenderType.ATT_CAL_OPT_GU = CalenderOptions.ATT_CAL_OPT_GU
+		--YearDates and OrgYears help us focus our search 
+		APS.YearDates
+		INNER JOIN
+		rev.REV_ORGANIZATION_YEAR AS OrgYear
+		ON
+		YearDates.YEAR_GU = OrgYear.YEAR_GU
 
-			INNER JOIN
-			rev.REV_ORGANIZATION_YEAR AS OrgYear -- this grabs the orgyear
-			ON
-			CalenderOptions.YEAR_GU = OrgYear.YEAR_GU
-		WHERE
-			@AsOfDate BETWEEN CalenderType.START_DATE AND CalenderType.END_DATE
-		) AS NarrowedOrgYears
 		-- Student School Year - Everything flows through here
 		INNER JOIN
 		rev.EPC_STU_SCH_YR AS SSY
 		ON
-		NarrowedOrgYears.ORGANIZATION_YEAR_GU = SSY.ORGANIZATION_YEAR_GU
+		OrgYear.ORGANIZATION_YEAR_GU = SSY.ORGANIZATION_YEAR_GU
 
 		-- Enrollment because enter and leave dates truly reside here, and not most recent as it is bubbled up to SSY
 		INNER JOIN
