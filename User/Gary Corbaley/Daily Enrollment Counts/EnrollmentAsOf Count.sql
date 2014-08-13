@@ -18,7 +18,7 @@
 		--,[Grades].[ALT_CODE_1] AS [Grade]
 		,COUNT ([EnrollmentsAsOf].[ENROLLMENT_GU]) AS ENROLL_COUNT
 	FROM
-		APS.PrimaryEnrollmentsAsOf('08/13/2014') AS [EnrollmentsAsOf]
+		APS.PrimaryEnrollmentsAsOf(GETDATE()) AS [EnrollmentsAsOf]
 		
 		INNER JOIN 
 		rev.EPC_STU_ENROLL AS [EnrollmentDetails] -- Contains Grade and Start Date
