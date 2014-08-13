@@ -40,35 +40,35 @@ FROM
 		,[Grades].[ALT_CODE_1] AS [Grade]
 		,COUNT ([EnrollmentsAsOf].[ENROLLMENT_GU]) AS ENROLL_COUNT
 	FROM
-		OPENQUERY([SYNSECONDDB.APS.EDU.ACTD],'SELECT * FROM  [ST_Experiment].APS.PrimaryEnrollmentsAsOf(GETDATE())') AS [EnrollmentsAsOf]
+		OPENQUERY([SYNERGYDBDC.APS.EDU.ACTD],'SELECT * FROM  [ST_Production].APS.PrimaryEnrollmentsAsOf(GETDATE())') AS [EnrollmentsAsOf]
 		
 		INNER JOIN 
-		[SYNSECONDDB.APS.EDU.ACTD].[ST_Experiment].rev.EPC_STU_ENROLL AS [EnrollmentDetails] -- Contains Grade and Start Date
+		[SYNERGYDBDC.APS.EDU.ACTD].[ST_Production].rev.EPC_STU_ENROLL AS [EnrollmentDetails] -- Contains Grade and Start Date
 		ON 
 		[EnrollmentsAsOf].[ENROLLMENT_GU] = [EnrollmentDetails].[ENROLLMENT_GU]
 		
 		INNER JOIN
-		[SYNSECONDDB.APS.EDU.ACTD].[ST_Experiment].rev.EPC_STU_SCH_YR AS [StudentSchoolYear] -- Contains Grade and Start Date 	
+		[SYNERGYDBDC.APS.EDU.ACTD].[ST_Production].rev.EPC_STU_SCH_YR AS [StudentSchoolYear] -- Contains Grade and Start Date 	
 		ON
 		[EnrollmentDetails].[STUDENT_SCHOOL_YEAR_GU] = [StudentSchoolYear].[STUDENT_SCHOOL_YEAR_GU]
 		
 		INNER JOIN 
-		[SYNSECONDDB.APS.EDU.ACTD].[ST_Experiment].rev.REV_ORGANIZATION_YEAR AS [OrgYear] -- Links between School and Year
+		[SYNERGYDBDC.APS.EDU.ACTD].[ST_Production].rev.REV_ORGANIZATION_YEAR AS [OrgYear] -- Links between School and Year
 		ON 
 		[StudentSchoolYear].[ORGANIZATION_YEAR_GU] = [OrgYear].[ORGANIZATION_YEAR_GU]
 		
 		INNER JOIN 
-		[SYNSECONDDB.APS.EDU.ACTD].[ST_Experiment].rev.REV_ORGANIZATION AS [Organization] -- Contains the School Name
+		[SYNERGYDBDC.APS.EDU.ACTD].[ST_Production].rev.REV_ORGANIZATION AS [Organization] -- Contains the School Name
 		ON 
 		[OrgYear].[ORGANIZATION_GU] = [Organization].[ORGANIZATION_GU]
 		
 		INNER JOIN 
-		[SYNSECONDDB.APS.EDU.ACTD].[ST_Experiment].rev.REV_YEAR AS [RevYear] -- Contains the School Year
+		[SYNERGYDBDC.APS.EDU.ACTD].[ST_Production].rev.REV_YEAR AS [RevYear] -- Contains the School Year
 		ON 
 		[OrgYear].[YEAR_GU] = [RevYear].[YEAR_GU]
 		
 		INNER JOIN 
-		[SYNSECONDDB.APS.EDU.ACTD].[ST_Experiment].rev.EPC_SCH AS [School] -- Contains the School Code / Number
+		[SYNERGYDBDC.APS.EDU.ACTD].[ST_Production].rev.EPC_SCH AS [School] -- Contains the School Code / Number
 		ON 
 		[OrgYear].[ORGANIZATION_GU] = [School].[ORGANIZATION_GU]
 		
@@ -78,9 +78,9 @@ FROM
 			  Val.[ALT_CODE_1]
 			  ,Val.VALUE_CODE
 		FROM
-			  [SYNSECONDDB.APS.EDU.ACTD].[ST_Experiment].[rev].[REV_BOD_LOOKUP_DEF] AS [Def]
+			  [SYNERGYDBDC.APS.EDU.ACTD].[ST_Production].[rev].[REV_BOD_LOOKUP_DEF] AS [Def]
 			  INNER JOIN
-			  [SYNSECONDDB.APS.EDU.ACTD].[ST_Experiment].[rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
+			  [SYNERGYDBDC.APS.EDU.ACTD].[ST_Production].[rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
 			  ON
 			  [Def].[LOOKUP_DEF_GU]=[Val].[LOOKUP_DEF_GU]
 			  AND [Def].[LOOKUP_NAMESPACE]='K12'
@@ -90,7 +90,7 @@ FROM
 		[EnrollmentDetails].[GRADE] = [Grades].[VALUE_CODE]
 	    
 		INNER JOIN 
-		[SYNSECONDDB.APS.EDU.ACTD].[ST_Experiment].rev.EPC_STU AS [Student] -- Contains Student ID State ID Language Code Cohort Year
+		[SYNERGYDBDC.APS.EDU.ACTD].[ST_Production].rev.EPC_STU AS [Student] -- Contains Student ID State ID Language Code Cohort Year
 		ON 
 		[StudentSchoolYear].[STUDENT_GU] = [Student].[STUDENT_GU]
 	
