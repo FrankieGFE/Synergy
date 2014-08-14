@@ -119,7 +119,7 @@ row_number() over (partition by t.sis_number order by sn) dn
 ;
 
 -----------
-declare @SchRunYear INT = (select school_year from rev.SIF_22_Common_CurrentYear) + 1
+declare @SchRunYear INT = (select school_year from rev.SIF_22_Common_CurrentYear)
 declare @SchRunExt  CHAR(1) = 'R'
 ;with StuRacesR AS
 ( SELECT ethlist.PERSON_GU
