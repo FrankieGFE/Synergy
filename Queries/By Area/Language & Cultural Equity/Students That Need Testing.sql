@@ -48,7 +48,7 @@
 
       FROM
 	  			
-			 [011-SYNERGYDB].ST_Production.rev.EPC_STU AS Student		
+			 rev.EPC_STU AS Student		
 						
 			INNER JOIN
 			rev.EPC_STU_SCH_YR AS SSY
@@ -94,9 +94,9 @@
                   Val.[ALT_CODE_1]
                   ,Val.VALUE_CODE
             FROM
-                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_DEF] AS [Def]
+                  [rev].[REV_BOD_LOOKUP_DEF] AS [Def]
                   INNER JOIN
-                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
+                  [rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
                   ON
                   [Def].[LOOKUP_DEF_GU]=[Val].[LOOKUP_DEF_GU]
                   AND [Def].[LOOKUP_NAMESPACE]='K12'
@@ -117,9 +117,9 @@
                   Val.VALUE_CODE
 				  ,Val.VALUE_DESCRIPTION
             FROM
-                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_DEF] AS [Def]
+                  [rev].[REV_BOD_LOOKUP_DEF] AS [Def]
                   INNER JOIN
-                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
+                  [rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
                   ON
                   [Def].[LOOKUP_DEF_GU]=[Val].[LOOKUP_DEF_GU]
                   AND [Def].[LOOKUP_NAMESPACE]='K12'
@@ -141,9 +141,9 @@
                   Val.VALUE_CODE
 				  ,Val.VALUE_DESCRIPTION
             FROM
-                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_DEF] AS [Def]
+                  [rev].[REV_BOD_LOOKUP_DEF] AS [Def]
                   INNER JOIN
-                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
+                  [rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
                   ON
                   [Def].[LOOKUP_DEF_GU]=[Val].[LOOKUP_DEF_GU]
                   AND [Def].[LOOKUP_NAMESPACE]='K12'
@@ -158,9 +158,9 @@
                   Val.VALUE_CODE
 				  ,Val.VALUE_DESCRIPTION
             FROM
-                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_DEF] AS [Def]
+                  [rev].[REV_BOD_LOOKUP_DEF] AS [Def]
                   INNER JOIN
-                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
+                  [rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
                   ON
                   [Def].[LOOKUP_DEF_GU]=[Val].[LOOKUP_DEF_GU]
                   AND [Def].[LOOKUP_NAMESPACE]='K12'
@@ -175,9 +175,9 @@
                   Val.VALUE_CODE
 				  ,Val.VALUE_DESCRIPTION
             FROM
-                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_DEF] AS [Def]
+                  [rev].[REV_BOD_LOOKUP_DEF] AS [Def]
                   INNER JOIN
-                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
+                  [rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
                   ON
                   [Def].[LOOKUP_DEF_GU]=[Val].[LOOKUP_DEF_GU]
                   AND [Def].[LOOKUP_NAMESPACE]='K12'
@@ -193,9 +193,9 @@
                   Val.VALUE_CODE
 				  ,Val.VALUE_DESCRIPTION
             FROM
-                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_DEF] AS [Def]
+                  [rev].[REV_BOD_LOOKUP_DEF] AS [Def]
                   INNER JOIN
-                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
+                  [rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
                   ON
                   [Def].[LOOKUP_DEF_GU]=[Val].[LOOKUP_DEF_GU]
                   AND [Def].[LOOKUP_NAMESPACE]='K12'
