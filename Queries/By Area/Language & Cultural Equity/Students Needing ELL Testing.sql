@@ -1,3 +1,10 @@
+/* Brian Rieb
+ * 8/22/2014
+ *
+ * List of PHLOTE kids who need testing 
+ * **NOTE** This looks at SchoolMax for testing data
+ */
+
 SELECT
 	Organization.ORGANIZATION_NAME AS SchoolName
 	,GradeLevel.VALUE_DESCRIPTION AS GradeLevel
