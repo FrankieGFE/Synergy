@@ -1,10 +1,33 @@
--- Brian Rieb
--- 8/19/2014
---
--- Complex way of testing schoolmax to Synergy conversion of ELL history records
--- and identify what records will not get pulled over (no corresponding student)
+/* Brian Rieb
+ * 8/19/2014
+ *
+ * This wipes ELL History and inserts ELLL History From SchoolMax
+ *
+ * Run this from the destination (Synergy DB) with rollback first, then with commit
+ * Server must have SMAXDBPROD.APS.EDU.ACTD registered as a linked server
+ *
+ * Basically, we do a complex pull from schoolmax (converting 1 record per status change into entry/exits)
+ * join it in with student (to make sure they exist and get the GU) and then inserts them into
+ * ELL History table.
+ */
+BEGIN TRANSACTION
+	--	Wipe existing records?
+	DELETE FROM
+	REV.EPC_STU_PGM_ELL_HIS	
+
+
+INSERT INTO 
+	REV.EPC_STU_PGM_ELL_HIS (
+		STU_PGM_ELL_HIS_GU
+		,STUDENT_GU
+		,ENTRY_DATE
+		,EXIT_DATE
+		,EXIT_REASON
+		,PROGRAM_CODE
+	)
 SELECT
-	SchoolMaxELLHistory.ID_NBR
+	NEWID() AS STU_PGM_ELL_HIS_GU
+	,Student.STUDENT_GU
 	,CONVERT(DATETIME, CONVERT(CHAR(8), SchoolMaxELLHistory.EnterDate)) AS ENTRY_DATE
 	,CONVERT(DATETIME, CONVERT(CHAR(8), SchoolMaxELLHistory.ExitDate)) AS EXIT_DATE
 	,CASE COALESCE(DATEDIFF(year, CONVERT(DATETIME, CONVERT(CHAR(8), SchoolMaxELLHistory.ExitDate)), '2014-08-01'), -1)
@@ -125,10 +148,10 @@ FROM
 
 			') AS SchoolMaxELLHistory
 
-	LEFT JOIN
+	INNER JOIN
 
 	rev.EPC_STU AS Student
 	ON
 	SchoolMaxELLHistory.ID_NBR = Student.SIS_NUMBER
-WHERE
-	Student.SIS_NUMBER IS NULL
+
+ROLLBACK
