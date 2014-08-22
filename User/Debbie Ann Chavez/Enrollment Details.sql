@@ -2,6 +2,13 @@
             School.SCHOOL_CODE,Organization.ORGANIZATION_NAME, Student.SIS_NUMBER, RevYear.SCHOOL_YEAR, Enroll.EXCLUDE_ADA_ADM
            , PERSON.LAST_NAME, PERSON.FIRST_NAME,Grades.[ALT_CODE_1] AS GRADE
 		   ,(CONVERT (VARCHAR (8), Enroll.ENTER_DATE, 112)) AS ENTERDATE ,(CONVERT (VARCHAR (8), Enroll.LEAVE_DATE, 112)) AS LEAVEDATE
+		   ,HOMELANGUAGE.VALUE_DESCRIPTION AS HOME_LANGUAGE
+		   ,HOMELANGUAGE2.VALUE_DESCRIPTION AS LANGUAGE_FIRST_LEARN 
+		  ,HOMELANGUAGE3.VALUE_DESCRIPTION AS LANGUAGE_BY_HOME
+		  ,HOMELANGUAGE4.VALUE_DESCRIPTION AS LANGUAGE_TO_HOME
+		  ,HOMELANGUAGE5.VALUE_DESCRIPTION AS LANGUAGE_BY_ADULT_HOME
+		   ,Student.STUDENT_GU
+
 		   /*
 		    ,StudentSchoolYear.STUDENT_SCHOOL_YEAR_GU
             ,Enroll.CHANGE_DATE_TIME_STAMP
@@ -116,6 +123,102 @@
         [011-synergydb].[ST_Production].[rev].[EPC_STAFF] AS [AddBadge]
         ON
         Enroll.[ADD_ID_STAMP]=[AddBadge].[STAFF_GU]   
+
+			LEFT JOIN
+		 (SELECT
+                  Val.VALUE_CODE
+				  ,Val.VALUE_DESCRIPTION
+            FROM
+                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_DEF] AS [Def]
+                  INNER JOIN
+                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
+                  ON
+                  [Def].[LOOKUP_DEF_GU]=[Val].[LOOKUP_DEF_GU]
+                  AND [Def].[LOOKUP_NAMESPACE]='K12'
+                  AND [Def].[LOOKUP_DEF_CODE] = 'Language'
+	) AS HOMELANGUAGE
+
+	ON
+	Student.HOME_LANGUAGE = HOMELANGUAGE.VALUE_CODE
+
+
+	LEFT JOIN
+	rev.EPC_STU_PGM_ELL AS LANGUAGES
+	ON
+	LANGUAGES.STUDENT_GU = Student.STUDENT_GU
+
+	
+	LEFT JOIN
+		 (SELECT
+                  Val.VALUE_CODE
+				  ,Val.VALUE_DESCRIPTION
+            FROM
+                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_DEF] AS [Def]
+                  INNER JOIN
+                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
+                  ON
+                  [Def].[LOOKUP_DEF_GU]=[Val].[LOOKUP_DEF_GU]
+                  AND [Def].[LOOKUP_NAMESPACE]='K12'
+                  AND [Def].[LOOKUP_DEF_CODE] = 'Language'
+	) AS HOMELANGUAGE2
+
+	ON
+	LANGUAGES.LANGUAGE_FIRST_LEARN = HOMELANGUAGE2.VALUE_CODE
+
+		INNER JOIN
+		 (SELECT
+                  Val.VALUE_CODE
+				  ,Val.VALUE_DESCRIPTION
+            FROM
+                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_DEF] AS [Def]
+                  INNER JOIN
+                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
+                  ON
+                  [Def].[LOOKUP_DEF_GU]=[Val].[LOOKUP_DEF_GU]
+                  AND [Def].[LOOKUP_NAMESPACE]='K12'
+                  AND [Def].[LOOKUP_DEF_CODE] = 'Language'
+	) AS HOMELANGUAGE3
+
+	ON
+	LANGUAGES.LANGUAGE_BY_HOME = HOMELANGUAGE3.VALUE_CODE
+
+	LEFT JOIN
+		 (SELECT
+                  Val.VALUE_CODE
+				  ,Val.VALUE_DESCRIPTION
+            FROM
+                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_DEF] AS [Def]
+                  INNER JOIN
+                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
+                  ON
+                  [Def].[LOOKUP_DEF_GU]=[Val].[LOOKUP_DEF_GU]
+                  AND [Def].[LOOKUP_NAMESPACE]='K12'
+                  AND [Def].[LOOKUP_DEF_CODE] = 'Language'
+	) AS HOMELANGUAGE4
+
+	ON
+	LANGUAGES.LANGUAGE_TO_HOME = HOMELANGUAGE4.VALUE_CODE
+
+
+		LEFT JOIN
+		 (SELECT
+                  Val.VALUE_CODE
+				  ,Val.VALUE_DESCRIPTION
+            FROM
+                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_DEF] AS [Def]
+                  INNER JOIN
+                  [011-SYNERGYDB].ST_Production.[rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
+                  ON
+                  [Def].[LOOKUP_DEF_GU]=[Val].[LOOKUP_DEF_GU]
+                  AND [Def].[LOOKUP_NAMESPACE]='K12'
+                  AND [Def].[LOOKUP_DEF_CODE] = 'Language'
+	) AS HOMELANGUAGE5
+
+	ON
+	LANGUAGES.LANGUAGE_BY_ADULT_HOME = HOMELANGUAGE5.VALUE_CODE
+
+	
+
       
       WHERE
             NO_SHOW_STUDENT = 'N'
@@ -125,5 +228,8 @@
 			AND 
 		
 		 StudentSchoolYear.STATUS is NULL
-		 AND SCHOOL_CODE = '413'
-	ORDER BY FIRST_NAME
+		 AND SCHOOL_CODE = '250'
+		 AND Grades.[ALT_CODE_1] = 'K'
+
+
+	ORDER BY HOMELANGUAGE.VALUE_DESCRIPTION

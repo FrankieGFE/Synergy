@@ -1,4 +1,5 @@
-SELECT School.SCHOOL_CODE, COUNT (*)AS ENROLL_COUNT 
+SELECT 
+	School.SCHOOL_CODE, COUNT (*)AS ENROLL_COUNT 
 		/*
 		School.SCHOOL_CODE,Organization.ORGANIZATION_NAME, Student.SIS_NUMBER, RevYear.SCHOOL_YEAR, Enroll.EXCLUDE_ADA_ADM
 		,(CONVERT (VARCHAR (8), Enroll.LEAVE_DATE, 112)) AS LEAVEDATE
@@ -10,30 +11,30 @@ SELECT School.SCHOOL_CODE, COUNT (*)AS ENROLL_COUNT
 		,Enroll.ADD_ID_STAMP
 		*/
 	FROM
-		[011-SYNERGYDB].ST_Production.rev.EPC_STU_SCH_YR AS StudentSchoolYear
+		rev.EPC_STU_SCH_YR AS StudentSchoolYear
 		INNER JOIN 
-		[011-SYNERGYDB].ST_Production.rev.EPC_STU AS Student
+		rev.EPC_STU AS Student
 		ON 
 		Student.STUDENT_GU = StudentSchoolYear.STUDENT_GU
 		INNER JOIN 
-		[011-SYNERGYDB].ST_Production.rev.REV_ORGANIZATION_YEAR AS OrgYear 
+		rev.REV_ORGANIZATION_YEAR AS OrgYear 
 		ON 
 		OrgYear.ORGANIZATION_YEAR_GU = StudentSchoolYear.ORGANIZATION_YEAR_GU
 		INNER JOIN 
-		[011-SYNERGYDB].ST_Production.rev.REV_ORGANIZATION AS Organization 
+		rev.REV_ORGANIZATION AS Organization 
 		ON 
 		Organization.ORGANIZATION_GU=OrgYear.ORGANIZATION_GU
 		INNER JOIN 
-		[011-SYNERGYDB].ST_Production.rev.EPC_SCH AS School 
+		rev.EPC_SCH AS School 
 		ON 
 		School.ORGANIZATION_GU =OrgYear.ORGANIZATION_GU
 		INNER JOIN 
-		[011-SYNERGYDB].ST_Production.rev.REV_YEAR AS RevYear 
+		rev.REV_YEAR AS RevYear 
 		ON 
 		RevYear.YEAR_GU = OrgYear.YEAR_GU 
 		AND RevYear.SCHOOL_YEAR = 2013
 		INNER JOIN 
-		[011-SYNERGYDB].ST_Production.rev.EPC_STU_ENROLL AS Enroll
+		rev.EPC_STU_ENROLL AS Enroll
 		ON 
 		Enroll.STUDENT_SCHOOL_YEAR_GU = StudentSchoolYear.STUDENT_SCHOOL_YEAR_GU
 		
@@ -60,35 +61,38 @@ SELECT  COUNT (*)
 		,Enroll.ADD_ID_STAMP
 		*/
 	FROM
-		[011-SYNERGYDB].ST_Production.rev.EPC_STU_SCH_YR AS StudentSchoolYear
+		rev.EPC_STU_SCH_YR AS StudentSchoolYear
 		INNER JOIN 
-		[011-SYNERGYDB].ST_Production.rev.EPC_STU AS Student
+		rev.EPC_STU AS Student
 		ON 
 		Student.STUDENT_GU = StudentSchoolYear.STUDENT_GU
 		INNER JOIN 
-		[011-SYNERGYDB].ST_Production.rev.REV_ORGANIZATION_YEAR AS OrgYear 
+		rev.REV_ORGANIZATION_YEAR AS OrgYear 
 		ON 
 		OrgYear.ORGANIZATION_YEAR_GU = StudentSchoolYear.ORGANIZATION_YEAR_GU
 		INNER JOIN 
-		[011-SYNERGYDB].ST_Production.rev.REV_ORGANIZATION AS Organization 
+		rev.REV_ORGANIZATION AS Organization 
 		ON 
 		Organization.ORGANIZATION_GU=OrgYear.ORGANIZATION_GU
 		INNER JOIN 
-		[011-SYNERGYDB].ST_Production.rev.EPC_SCH AS School 
+		rev.EPC_SCH AS School 
 		ON 
 		School.ORGANIZATION_GU =OrgYear.ORGANIZATION_GU
 		INNER JOIN 
-		[011-SYNERGYDB].ST_Production.rev.REV_YEAR AS RevYear 
+		rev.REV_YEAR AS RevYear 
 		ON 
 		RevYear.YEAR_GU = OrgYear.YEAR_GU 
-		AND RevYear.SCHOOL_YEAR = 2013
+		AND RevYear.SCHOOL_YEAR = 2014
 		INNER JOIN 
-		[011-SYNERGYDB].ST_Production.rev.EPC_STU_ENROLL AS Enroll
+		rev.EPC_STU_ENROLL AS Enroll
 		ON 
 		Enroll.STUDENT_SCHOOL_YEAR_GU = StudentSchoolYear.STUDENT_SCHOOL_YEAR_GU
 		
 	WHERE
-		--NO_SHOW_STUDENT = 'N'
+		NO_SHOW_STUDENT = 'N'
 		--AND
-		(RevYear.SCHOOL_YEAR = 2013 AND RevYear.EXTENSION = 'S')
+		AND (RevYear.SCHOOL_YEAR = 2014 AND RevYear.EXTENSION = 'R')
 		--AND SCHOOL_CODE = '540'
+		AND STATUS IS NULL
+
+		--AND Enroll.EXCLUDE_ADA_ADM IS NULL
