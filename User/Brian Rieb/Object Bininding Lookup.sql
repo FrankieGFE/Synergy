@@ -17,5 +17,7 @@ FROM
 	rev.REV_BOD_OBJECT_PROP_BIND AS Bind
 	ON
 	Prop.BOD_OBJECT_PROP_GU = Bind.BOD_OBJECT_PROP_GU
---WHERE
---	SynObject.NAME LIKE '%ELLH%'
+WHERE
+	SynObject.NAME LIKE '%District%'
+	-- TABLE_NAME LIKE '%CFG%'
+	--LABEL LIKE '%Enabled%'

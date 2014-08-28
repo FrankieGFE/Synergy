@@ -28,6 +28,7 @@ SELECT
 	,History.ENTRY_DATE
 	,History.EXIT_DATE
 	,History.EXIT_REASON
+	,History.STU_PGM_ELL_HIS_GU
 FROM
 	rev.EPC_STU_PGM_ELL_HIS AS History
 
