@@ -20,13 +20,13 @@ FROM
 	Enroll.STUDENT_GU = Student.STUDENT_GU
 
 	LEFT JOIN
-	APS.LCELatestEvaluationAsOf(GETDATE()) AS MostRecentTest
+	OPENQUERY([SMAXDBPROD.APS.EDU.ACTD],'SELECT CAST(ID_NBR AS VARCHAR) AS ID_NBR FROM PR.APS.LCELatestEvaluationAsOf (GETDATE()) WHERE DST_NBR = 1') AS MostRecentTest
 	ON
-	Enroll.STUDENT_GU = MostRecentTest.STUDENT_GU
+	Student.SIS_NUMBER = MostRecentTest.ID_NBR COLLATE DATABASE_DEFAULT
 
 	LEFT JOIN
-	APS.LCEMostRecentTestWaiverAsOf(GETDATE()) As Waivers
-	ON Enroll.STUDENT_GU = Waivers.STUDENT_GU
+	OPENQUERY([SMAXDBPROD.APS.EDU.ACTD],'SELECT CAST(ID_NBR AS VARCHAR) AS ID_NBR, DECLND FROM PR.APS.LCEMostRecentTestDeclineAsOf (GETDATE()) WHERE DST_NBR = 1') AS Refusals
+	ON Student.SIS_NUMBER = Refusals.ID_NBR COLLATE DATABASE_DEFAULT
 
 	-- the rest of the joins is to accomidate the formatted columns
 	INNER JOIN
@@ -55,7 +55,8 @@ FROM
 	Student.HOME_LANGUAGE = HomeLanguage.VALUE_CODE
 WHERE
 	Student.HOME_LANGUAGE NOT IN ('00','54')
-	AND MostRecentTest.STUDENT_GU IS NULL -- No Tests
+	AND COALESCE(Refusals.DECLND,'N') != 'Y' -- No Declines
+	AND MostRecentTest.ID_NBR IS NULL -- No Tests
 	AND GradeLevel.VALUE_DESCRIPTION NOT IN ('P1', 'P2', 'PK')
 ORDER BY
 	Organization.ORGANIZATION_NAME

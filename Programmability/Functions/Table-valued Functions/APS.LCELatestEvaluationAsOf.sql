@@ -40,7 +40,7 @@ FROM
 		,StudentTest.Organization_GU
 		,StudentTest.GRADE
 		,StudentTestPart.PERFORMANCE_LEVEL
-		,TestLevels.IS_ELL
+		,COALESCE(TestLevels.IS_ELL,-1) AS IS_ELL
 		,ROW_NUMBER() OVER (PARTITION BY STUDENT_GU ORDER BY ADMIN_DATE DESC) AS RN
 	FROM
 		rev.EPC_TEST AS TestDefinition
@@ -62,7 +62,7 @@ FROM
 		StudentTestPart.STU_TEST_PART_GU = StudentTestPartScore.STU_TEST_PART_GU
 		*/
 
-		INNER JOIN
+		LEFT JOIN
 		rev.UD_ELL_TEST_ELIGIBILITY AS TestLevels
 		ON
 		StudentTestPart.PERFORMANCE_LEVEL = TestLevels.LEVEL
