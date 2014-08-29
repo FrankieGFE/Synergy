@@ -210,3 +210,10 @@ SET
 	[VALUE] = CONVERT(NVARCHAR(MAX), @XMLData)
 WHERE
 	[KEY] = 'REV_INSTALL_CONSTANT'
+
+/* ****************************************************************
+ * Finally, Create a backup so the DB can be used to do a DB to DB 
+ * restore
+ * ****************************************************************/
+PRINT '*** Creating Local Backup'
+BACKUP DATABASE [ST_DAILY] TO DISK='D:\BACKUPS\MANUAL\ST_DAILY.BAK' WITH FORMAT
