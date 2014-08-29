@@ -11,6 +11,7 @@
  */
 
 
+
 SELECT
 	[Student].[STUDENT_GU]
 	,[Student].[SIS_NUMBER]
