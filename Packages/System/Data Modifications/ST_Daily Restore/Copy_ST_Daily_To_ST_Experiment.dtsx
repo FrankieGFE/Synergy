@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/29/2014 9:07:03 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="046-DJARRETT"
+  DTS:CreatorName="APS\e204042"
+  DTS:DTSID="{1E105479-15D4-4514-97EA-8B907194221B}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Copy_ST_Daily_To_ST_Experiment"
+  DTS:PackageType="6"
+  DTS:VersionGUID="{EA589496-4BDE-48CE-8064-AD03E5D68483}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[{465BD727-82D4-4C5B-8217-3EB0CE3AA6AD\}]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{465BD727-82D4-4C5B-8217-3EB0CE3AA6AD}"
+      DTS:ObjectName="{465BD727-82D4-4C5B-8217-3EB0CE3AA6AD}">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="D:\DATABASES\MSSQL11.MSSQLSERVER\MSSQL\DATA\Copy_ST_Daily_To_ST_Experiment_2014-8-29_9-6-54.txt" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:LogProviders>
+    <DTS:LogProvider
+      DTS:ConfigString="{465BD727-82D4-4C5B-8217-3EB0CE3AA6AD}"
+      DTS:CreationName="DTS.LogProviderTextFile.3"
+      DTS:DTSID="{A1B63DDC-D5F6-4C83-BE7B-A75E2CB0FE09}"
+      DTS:ObjectName="{A1B63DDC-D5F6-4C83-BE7B-A75E2CB0FE09}">
+      <DTS:ObjectData>
+        <InnerObject />
+      </DTS:ObjectData>
+    </DTS:LogProvider>
+  </DTS:LogProviders>
+  <DTS:Variables />
+  <DTS:LoggingOptions
+    DTS:LoggingMode="1">
+    <DTS:SelectedLogProviders>
+      <DTS:SelectedLogProvider
+        DTS:InstanceID="{A1B63DDC-D5F6-4C83-BE7B-A75E2CB0FE09}" />
+    </DTS:SelectedLogProviders>
+  </DTS:LoggingOptions>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\synseconddb_aps_edu_actd_synseconddb_aps_edu_actd_Transfer Objects Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.TransferObjectsTask.TransferObjectsTask, Microsoft.SqlServer.TransferObjectsTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:DTSID="{2ADC4BAF-BCB3-45AF-9A57-B12CC8B81359}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.TransferObjectsTask.TransferObjectsTask, Microsoft.SqlServer.TransferObjectsTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="synseconddb_aps_edu_actd_synseconddb_aps_edu_actd_Transfer Objects Task"
+      DTS:TaskContact="SQL Objects Transfer Task; Microsoft Corporation; Microsoft SQL Server v9; � 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <TaskData
+          TaskProductVersion="9"
+          TaskServicePackVersion="2" xmlns="www.microsoft.com/sqlserver/dts/tasks/transferobjectstask">
+          <TransferType
+            Name="DetachAttach"
+            LogTransferDumps="False" xmlns="" />
+          <SourceServer
+            Name="synseconddb.aps.edu.actd"
+            UseTrustedAuthentication="WindowsAuthentication" xmlns="" />
+          <DestinationServer
+            Name="synseconddb.aps.edu.actd"
+            UseTrustedAuthentication="WindowsAuthentication" xmlns="" />
+          <Databases xmlns="">
+            <DatabaseObject
+              Name="ST_Daily"
+              DestName="ST_Experiment"
+              TypeOfCopy="CopyToDestination"
+              ExistInDestinationDatabase="DropExistingAndContinueTransfer"
+              OverwriteFile="True">
+              <DatabaseFiles>
+                <DatabaseFile
+                  SourceLocalPath="D:\DATABASES\ST_Daily.mdf"
+                  SharedFilePath="D:\DATABASES\ST_Daily.mdf"
+                  FileType="DatabaseFile"
+                  DestinationFilePath="D:\DATABASES\MSSQL11.MSSQLSERVER\MSSQL\DATA\ST_Experiment.mdf" />
+                <DatabaseFile
+                  SourceLocalPath="L:\LOGS\ST_Daily_log.ldf"
+                  SharedFilePath="L:\LOGS\ST_Daily_log.ldf"
+                  FileType="LogFile"
+                  DestinationFilePath="D:\DATABASES\MSSQL11.MSSQLSERVER\MSSQL\DATA\ST_Experiment_log.ldf" />
+              </DatabaseFiles>
+            </DatabaseObject>
+          </Databases>
+        </TaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+</DTS:Executable>
