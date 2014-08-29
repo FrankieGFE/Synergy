@@ -37,6 +37,8 @@ SELECT TOP 1 @FileName = @BKFolder + FileName FROM @filelist ORDER BY FileName D
 
 -- kick off current users/processes
 -- -------------------------------------------------------
+PRINT '*** Switching DB into single user'
+
 ALTER DATABASE ST_Daily
 SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 
@@ -45,7 +47,7 @@ SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 IF @DayOfWeek = 0 
 	-- No diffs are needed, so norecovery option is not turned on
 	BEGIN
-		PRINT 'Starting Full restore (diffs to follow)'
+		PRINT '*** Starting Full restore (no diffs)'
 		RESTORE DATABASE 
 			ST_Daily 
 		FROM DISK=@FileName
@@ -57,7 +59,7 @@ IF @DayOfWeek = 0
 ELSE
 	-- diffs will be needed, restore with norecovery
 	BEGIN
-		PRINT 'Starting Full restore with NORECOVERY'
+		PRINT '*** Starting Full restore (diffs to follow)'
 		RESTORE DATABASE 
 			ST_Daily 
 		FROM DISK=@FileName
@@ -100,7 +102,7 @@ BEGIN
 		-- if its the last daily, we can do it with recovery
 		IF @counter = 1
 		BEGIN
-			PRINT 'Starting Diff Restore'
+			PRINT '*** Starting Last DIFF restore'
 			RESTORE DATABASE 
 				ST_Daily 
 			FROM DISK=@FileName
@@ -108,7 +110,7 @@ BEGIN
 		-- not the last diff, so need the norecovery option
 		ELSE
 		BEGIN
-			PRINT 'Starting Last DIFF restore'
+			PRINT '*** Starting Diff Restore'
 			RESTORE DATABASE 
 				ST_Daily 
 			FROM DISK=@FileName
@@ -123,10 +125,10 @@ BEGIN
 END -- endif
 
 -- Turning to simple logging ----------------------------
-PRINT 'Turning Off Log File'
+PRINT '*** Turning Off Log File'
 ALTER DATABASE [ST_Daily] SET RECOVERY SIMPLE WITH NO_WAIT
 
-PRINT 'Turning On Multi-User'
+PRINT '*** Turning On Multi-User'
 --Let people/processes back in!
 ALTER DATABASE ST_Daily
 SET MULTI_USER WITH ROLLBACK IMMEDIATE;
@@ -141,7 +143,7 @@ USE ST_Daily
 
 -- Createing SISProg Rights
 -- -------------------------------------------------------
-PRINT 'Creating USER APS\SISProg'
+PRINT '*** Creating USER APS\SISProg'
 CREATE USER [APS\SISProg] FOR LOGIN [APS\SISProg] WITH DEFAULT_SCHEMA=[dbo] -- SISProg should not have access to production
 EXEC sp_addrolemember 'db_datareader', 'APS\SISProg'; -- adding role data_reader
 GRANT CONNECT TO [APS\SISProg]
@@ -151,7 +153,7 @@ GRANT VIEW DEFINITION TO [APS\SISProg]
 
 --Clearing Job Queue
 -- -------------------------------------------------------
-PRINT 'Clearing Job Queue'
+PRINT '*** Clearing Job Queue'
 BEGIN TRANSACTION
 	-- Remove foreign constraint so we can use the faster truncate process
 	ALTER TABLE [rev].[REV_PROCESS_QUEUE_RESULT] DROP [REV_PROCESS_QUEUE_RESULT_F1]
@@ -172,7 +174,7 @@ COMMIT
 
 --remove items in the e-mail queue
 -- -------------------------------------------------------
-PRINT 'Removing E-mail Queue'
+PRINT '*** Removing E-mail Queue'
 DELETE FROM 
 	rev.REV_EMAIL_QUEUE
 
@@ -181,7 +183,7 @@ DELETE FROM
 
 --Turning off e-mail capabilities
 -- -------------------------------------------------------
-PRINT 'Turning off e-mail capabilities'
+PRINT '*** Turning off e-mail capabilities'
 DECLARE @XMLData XML
 
 --Populate the XML variable with the appropriate contents form the settings table

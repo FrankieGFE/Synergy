@@ -34,11 +34,14 @@ SELECT
 FROM
 	-- Enrollments
 	APS.PrimaryEnrollmentsAsOf(GETDATE()) AS Enroll
+
+	/* As per Lynne (8/28/2014) => Once PHLOTE, always PHLOTE
 	-- PHLOTE Students
 	INNER JOIN
 	APS.PHLOTEAsOf(GETDATE()) AS PHLOTE
 	ON
 	Enroll.STUDENT_GU = PHLOTE.STUDENT_GU
+	*/
 	-- Latest Assessment
 	INNER JOIN
 	APS.LCELatestEvaluationAsOf(GETDATE()) AS Assessment

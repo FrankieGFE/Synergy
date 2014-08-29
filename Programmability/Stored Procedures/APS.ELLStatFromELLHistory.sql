@@ -63,11 +63,11 @@ FROM
 	ON
 	MostRecentELLHistory.STUDENT_GU = ELL.STUDENT_GU
 WHERE
-	-- change only if different
-	ELL.ENTRY_DATE != MostRecentELLHistory.ENTRY_DATE
-	OR ELL.EXIT_DATE != MostRecentELLHistory.EXIT_DATE
-	OR ELL.EXIT_REASON != MostRecentELLHistory.EXIT_REASON
-	OR ELL.PROGRAM_CODE != MostRecentELLHistory.PROGRAM_CODE
+	-- change only if different (Deb's idea: COALESCE as Nulls goof all sorts of compares up - good catch)
+	COALESCE(ELL.ENTRY_DATE,'1974-07-07') != COALESCE(MostRecentELLHistory.ENTRY_DATE,'1974-07-07')
+	OR COALESCE(ELL.EXIT_DATE,'1974-07-07') != COALESCE(MostRecentELLHistory.EXIT_DATE,'1974-07-07')
+	OR COALESCE(ELL.EXIT_REASON,'') != COALESCE(MostRecentELLHistory.EXIT_REASON,'')
+	OR COALESCE(ELL.PROGRAM_CODE,'') != COALESCE(MostRecentELLHistory.PROGRAM_CODE,'')
 
 -- ------------------------------------------------------------------------------------------------------------------------------
 -- IF They dont exist, create the ELL Record

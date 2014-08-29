@@ -108,10 +108,6 @@ FROM
 WHERE
 	CalculatedELL.STUDENT_GU IS NULL
 
--- Lastly, need to update(or create) all the ELL records to match most recent ELL History
--- ----------------------------------------------------------------------------------
-EXEC APS.ELLStatFromELLHistory @ValidateOnly
-
 --Validation Check to see how many records will be processed, 0 = INSERT AND UPDATE, 1 = ROLLBACK - WILL NOT - UPDATE/INSERT
 IF @ValidateOnly = 0
 	BEGIN
@@ -121,4 +117,12 @@ ELSE
 	BEGIN
 		ROLLBACK
 	END
+
+-- Lastly, need to update(or create) all the ELL records to match most recent ELL History
+-- This needs to be done outside other transaction (can't have transactions within
+-- transactions.
+-- ----------------------------------------------------------------------------------
+EXEC APS.ELLStatFromELLHistory @ValidateOnly
+
+
 END -- END SPROC
