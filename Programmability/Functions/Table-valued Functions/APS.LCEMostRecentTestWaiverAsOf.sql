@@ -10,7 +10,7 @@ GO
 
 
 /*
-*	Pull Most Recent Test Assessment Refusal or Sped Waiver
+*	Pull Most Recent LCE Test Assessment Refusal or Sped Waiver
 */
 
 ALTER FUNCTION APS.LCEMostRecentTestWaiverAsOf(@AsOfDate DATETIME)
@@ -31,21 +31,20 @@ FROM (
 		,WAIVER_TYPE
 		,WAIVER_ENTER_DATE
 		,WAIVER_EXIT_DATE
+		-- Why are we row numbering
 		 ,ROW_NUMBER() OVER (PARTITION BY STUDENT_GU ORDER BY WAIVER_ENTER_DATE DESC) AS RN
 	 FROM
 	rev.EPC_STU_PGM_ELL_WAV
 	WHERE
+	-- why are we using these codes
 	WAIVER_TYPE IN ('RTEST', 'RSPED')
-	AND WAIVER_ENTER_DATE <= @AsOfDate
-	AND 
-		(WAIVER_EXIT_DATE IS NULL
-		OR WAIVER_EXIT_DATE >=@AsOfDate)
+	AND @AsOfDate BETWEEN WAIVER_ENTER_DATE AND COALESCE (WAIVER_EXIT_DATE, @asOfDate)
 
 	) AS ALLWAIVERS
-INNER JOIN
-rev.EPC_STU AS STU
-ON
-ALLWAIVERS.STUDENT_GU = STU.STUDENT_GU
+	INNER JOIN
+	rev.EPC_STU AS STU
+	ON
+	ALLWAIVERS.STUDENT_GU = STU.STUDENT_GU
 
 WHERE
-RN = 1
+	RN = 1 -- again.. need comments on why we are row nubering
