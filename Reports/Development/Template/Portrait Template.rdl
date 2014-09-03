@@ -18,6 +18,9 @@
           <QueryParameter Name="@AsOfDate">
             <Value>=Parameters!AsOfDate.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@School">
+            <Value>=Parameters!School.Value</Value>
+          </QueryParameter>
         </QueryParameters>
         <CommandText>/* Brian Rieb
  * 8/22/2014
@@ -77,6 +80,7 @@ WHERE
 	Student.HOME_LANGUAGE NOT IN ('00','54')
 	AND MostRecentTest.STUDENT_GU IS NULL -- No Tests
 	AND GradeLevel.VALUE_DESCRIPTION NOT IN ('P1', 'P2', 'PK')
+	AND Organization.ORGANIZATION_GU LIKE @School
 ORDER BY
 	Organization.ORGANIZATION_NAME
 	,GradeLevel.LIST_ORDER</CommandText>
@@ -121,20 +125,8 @@ ORDER BY
           <DataField>ORGANIZATION_NAME</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="LOGIN_NAME">
-          <DataField>LOGIN_NAME</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="ORGANIZATION_GU">
           <DataField>ORGANIZATION_GU</DataField>
-          <rd:TypeName>System.Guid</rd:TypeName>
-        </Field>
-        <Field Name="ORGANIZATION_UPDATE">
-          <DataField>ORGANIZATION_UPDATE</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SCHOOL_CODE">
-          <DataField>SCHOOL_CODE</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
