@@ -64,6 +64,3 @@ FROM
 	APS.LookupTable('K12','Grade') AS GradeLevel
 	ON
 	Enroll.GRADE = GradeLevel.VALUE_CODE
-WHERE
-	Test.TEST_NAME = 'WAPT'
-	AND StudentTest.ADMIN_DATE > '2014-08-13'
