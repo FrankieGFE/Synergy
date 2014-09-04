@@ -31,7 +31,6 @@ SELECT
 	,ELLTests.Organization_GU
 	,ELLTests.GRADE
 	,ELLTests.PERFORMANCE_LEVEL
-	,ELLTests.IS_ELL
 FROM
 	(
 	SELECT
@@ -42,7 +41,6 @@ FROM
 		,StudentTest.Organization_GU
 		,StudentTest.GRADE
 		,StudentTestPart.PERFORMANCE_LEVEL
-		,COALESCE(TestLevels.IS_ELL,-1) AS IS_ELL
 		,ROW_NUMBER() OVER (PARTITION BY STUDENT_GU ORDER BY ADMIN_DATE DESC) AS RN
 	FROM
 		rev.EPC_TEST AS TestDefinition
@@ -56,14 +54,8 @@ FROM
 		ON
 		StudentTest.STUDENT_TEST_GU = StudentTestPart.STUDENT_TEST_GU
 	
-		LEFT JOIN
-		rev.UD_ELL_TEST_ELIGIBILITY AS TestLevels
-		ON
-		StudentTestPart.PERFORMANCE_LEVEL = TestLevels.LEVEL
-		AND TestDefinition.TEST_NAME = TestLevels.TEST
-
 	WHERE
-		TestDefinition.TEST_TYPE = 'ASSES' -- Spanish Assessments
+		TestDefinition.TEST_TYPE = 'ALTSP' -- Spanish Assessments
 		AND StudentTest.ADMIN_DATE <= @asOfDate
 		AND StudentTestPart.PERFORMANCE_LEVEL != 'INCOM'  -- If a test has an incomplete performance level, do not use it
 	) AS ELLTests
