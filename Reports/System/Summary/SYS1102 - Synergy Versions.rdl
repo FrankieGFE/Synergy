@@ -1,0 +1,725 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:cl="http://schemas.microsoft.com/sqlserver/reporting/2010/01/componentdefinition" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition">
+  <Description>A Sample Description</Description>
+  <Author>Brian Rieb</Author>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="dsSynSecondDB">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>Data Source=synseconddb.aps.edu.actd</ConnectString>
+      </ConnectionProperties>
+      <rd:SecurityType>DataBase</rd:SecurityType>
+      <rd:DataSourceID>f497ad18-13f7-4c1a-9daf-f045f0043f5b</rd:DataSourceID>
+    </DataSource>
+    <DataSource Name="dsSynergyDBDC">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>Data Source=synergydbdc.aps.edu.actd</ConnectString>
+      </ConnectionProperties>
+      <rd:SecurityType>DataBase</rd:SecurityType>
+      <rd:DataSourceID>cab1379a-e4f6-493e-a742-00b4c7d27a50</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="SecondaryEnvironments">
+      <Query>
+        <DataSourceName>dsSynSecondDB</DataSourceName>
+        <CommandText>SELECT 
+    *
+FROM
+(
+    SELECT TOP 1 
+    'Experiment' AS [Environment]
+    ,[VERSION]
+FROM 
+    [ST_Experiment].[rev].[REV_VER]
+
+ORDER BY
+    [DEPLOYMENT_DATE] DESC
+) AS [Exp]
+
+UNION ALL
+SELECT 
+    *
+FROM
+(
+    SELECT TOP 1
+    'Functional' AS [Environment]
+    ,[VERSION]
+FROM 
+    [ST_Functional].[rev].[REV_VER]
+
+ORDER BY
+    [DEPLOYMENT_DATE] DESC
+) AS [Func]
+
+UNION ALL
+SELECT 
+    *
+FROM
+(
+    SELECT TOP 1
+    'Implement' AS [Environment]
+    ,[VERSION]
+FROM 
+    [ST_Implement].[rev].[REV_VER]
+
+ORDER BY
+    [DEPLOYMENT_DATE] DESC
+) AS [Imp]
+
+UNION ALL
+SELECT 
+    *
+FROM
+(
+    SELECT TOP 1
+    'Release' AS [Environment]
+    ,[VERSION]
+FROM 
+    [ST_Release].[rev].[REV_VER]
+
+ORDER BY
+    [DEPLOYMENT_DATE] DESC
+) AS [Release]
+UNION ALL
+SELECT 
+    *
+FROM
+(
+    SELECT TOP 1
+    'SPED' AS [Environment]
+    ,[VERSION]
+FROM 
+    [ST_SPED].[rev].[REV_VER]
+
+ORDER BY
+    [DEPLOYMENT_DATE] DESC
+) AS [SPED]
+
+UNION ALL
+SELECT 
+    *
+FROM
+(
+    SELECT TOP 1
+    'Stars' AS [Environment]
+    ,[VERSION]
+FROM 
+    [ST_Stars].[rev].[REV_VER]
+
+ORDER BY
+    [DEPLOYMENT_DATE] DESC
+) AS [Stars]
+
+UNION ALL
+SELECT 
+    *
+FROM
+(
+    SELECT TOP 1
+    'Training' AS [Environment]
+    ,[VERSION]
+FROM 
+    [ST_Train].[rev].[REV_VER]
+
+ORDER BY
+    [DEPLOYMENT_DATE] DESC
+) AS [Stars]</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Environment">
+          <DataField>Environment</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="VERSION">
+          <DataField>VERSION</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="LiveEnvironment">
+      <Query>
+        <DataSourceName>dsSynergyDBDC</DataSourceName>
+        <CommandText>SELECT TOP 1 
+	'Live' AS [Environment]
+	,[VERSION]
+  FROM [ST_Production].[rev].[REV_VER]
+
+ORDER BY
+    [DEPLOYMENT_DATE] DESC</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Environment">
+          <DataField>Environment</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="VERSION">
+          <DataField>VERSION</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>1.4375in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.42708in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Environment</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Current Version</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox3</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Environment">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Environment.Value</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Environment</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="VERSION">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!VERSION.Value</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>VERSION</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Details" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>LiveEnvironment</DataSetName>
+            <Top>0.2175in</Top>
+            <Left>0.23833in</Left>
+            <Height>0.5in</Height>
+            <Width>2.86458in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Tablix Name="Tablix3">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>1.4375in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.42708in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Environment1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Environment.Value</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Environment1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="VERSION1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!VERSION.Value</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>VERSION1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details1" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>SecondaryEnvironments</DataSetName>
+            <Top>0.73139in</Top>
+            <Left>0.23833in</Left>
+            <Height>0.25in</Height>
+            <Width>2.86458in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+        </ReportItems>
+        <Height>1.16667in</Height>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Body>
+      <Width>8in</Width>
+      <Page>
+        <PageHeader>
+          <Height>0.88542in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="ReportTitle">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!ReportName</Value>
+                      <Style>
+                        <FontFamily>Segoe UI Light</FontFamily>
+                        <FontSize>18pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:WatermarkTextbox>Title</rd:WatermarkTextbox>
+              <rd:DefaultName>ReportTitle</rd:DefaultName>
+              <Left>0.86458in</Left>
+              <Height>0.4in</Height>
+              <Width>7.13542in</Width>
+              <Visibility>
+                <Hidden>=iif(Globals!PageNumber = 1, FALSE, TRUE)</Hidden>
+              </Visibility>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Image Name="Logo">
+              <Source>Embedded</Source>
+              <Value>APS</Value>
+              <Sizing>FitProportional</Sizing>
+              <Height>0.87375in</Height>
+              <Width>0.83681in</Width>
+              <ZIndex>1</ZIndex>
+              <Visibility>
+                <Hidden>=iif(Globals!PageNumber = 1, FALSE, TRUE)</Hidden>
+              </Visibility>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Image>
+            <Textbox Name="Description">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Synergy Environment Versions</Value>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>11pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.43625in</Top>
+              <Left>0.86458in</Left>
+              <Height>0.4375in</Height>
+              <Width>7.13542in</Width>
+              <ZIndex>2</ZIndex>
+              <Visibility>
+                <Hidden>=iif(Globals!PageNumber = 1, FALSE, TRUE)</Hidden>
+              </Visibility>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageFooter>
+          <Height>0.72639in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="ExecutionTime">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!ExecutionTime</Value>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+              <Top>0.25556in</Top>
+              <Left>6in</Left>
+              <Height>0.2in</Height>
+              <Width>2in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <VerticalAlign>Bottom</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="UserID">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=User!UserID</Value>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>UserID</rd:DefaultName>
+              <Top>0.075in</Top>
+              <Left>6in</Left>
+              <Height>0.2in</Height>
+              <Width>2in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="PageNumber">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!PageNumber</Value>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>/</Value>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=Globals!TotalPages</Value>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>PageNumber</rd:DefaultName>
+              <Top>0.25556in</Top>
+              <Left>2.64458in</Left>
+              <Height>0.2in</Height>
+              <Width>2.47917in</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <VerticalAlign>Bottom</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
+        <InteractiveHeight>10.25in</InteractiveHeight>
+        <InteractiveWidth>8in</InteractiveWidth>
+        <LeftMargin>0.25in</LeftMargin>
+        <RightMargin>0.25in</RightMargin>
+        <TopMargin>0.5in</TopMargin>
+        <BottomMargin>0.25in</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <EmbeddedImages>
+    <EmbeddedImage Name="APS">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>8d74b4e1-2438-4da5-99b2-472431da4a98</rd:ReportID>
+</Report>
