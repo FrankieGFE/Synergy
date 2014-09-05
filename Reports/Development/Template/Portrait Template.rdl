@@ -851,7 +851,7 @@ ORDER BY
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>10.25in</Height>
+        <Height>1.0625in</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1054,7 +1054,7 @@ ORDER BY
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>0.48139in</Height>
+          <Height>0.45556in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1167,6 +1167,43 @@ ORDER BY
               <Height>0.2in</Height>
               <Width>2.47917in</Width>
               <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <VerticalAlign>Bottom</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="PageNumber2">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Label>Data Source</Label>
+                      <Value>=IIf(Replace(DataSources!Synergy.DataSourceReference, "/Data Sources/","") = "ST_Production", "", Replace(DataSources!Synergy.DataSourceReference, "/Data Sources/",""))</Value>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>PageNumber</rd:DefaultName>
+              <Top>0.25556in</Top>
+              <Height>0.2in</Height>
+              <Width>2.47917in</Width>
+              <ZIndex>3</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
