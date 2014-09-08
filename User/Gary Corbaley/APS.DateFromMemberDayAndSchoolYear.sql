@@ -5,6 +5,8 @@
  * 
  * This function will return a single date for any given member day for a specific school year and extension.
  * The date is calculated from the given member day by first generating(at run time) a list of all the callendar dates for the specific year and assigning each date a member day value and marks them with a flag to identify if they are valid school days or just a weekend or holiday. The given member day is then compared to the day counter in the generated list and returning the first occuring date.
+ *
+ * This fuction will return the last day of school if no valid member day is given.
  */
 
 
@@ -25,11 +27,13 @@ BEGIN
 
 	-- Get the specific calendar GU for the requested school year and extension,
 	-- and get the start and end dates for that year.
-	SELECT
+	SELECT TOP 1
 		-- Set the varriable for the first day of school
 		@FirstDay = DistrictCalType.START_DATE
-		-- Set the varriable for the last day of school
+		-- Set the varriables for the last day of school
 		,@LastDay = DistrictCalType.END_DATE
+		-- Set return value to last day of school 
+		,@FINAL_DATE = DistrictCalType.END_DATE
 		-- Set the varriable for the school callendar
 		,@CalTypeGu = DistrictCalType.ATT_CAL_TYPE_GU
 	FROM
@@ -119,12 +123,9 @@ BEGIN
 		
 	WHERE
 		-- Get all callendar dates for the given member day 
-		[MEMBER_DAY] <= @MemberDay 
+		[MEMBER_DAY] = @MemberDay
 		-- Make sure that the callendar dates are valid school days
 		AND [isMemberDay] = 'TRUE'
-		
-		-- Sort the list of dates 
-	ORDER BY [CALENDAR_DAY]
 	
 		-- Limit the recusion to a maximum of 365 loops
 	OPTION (maxrecursion 365)
