@@ -33,7 +33,8 @@ FROM
 	SELECT
 		COUNT([EnrollmentsNow].[STUDENT_GU]) AS [STUDENT_COUNT]
 		,[OrgYear].[ORGANIZATION_GU]
-		,[Grades].[ALT_CODE_1] AS [GRADE]
+		,[Grades].[VALUE_DESCRIPTION] AS [GRADE]
+		,[Grades].[LIST_ORDER]
 	FROM
 		APS.PrimaryEnrollmentsAsOf(@onDate) AS [EnrollmentsNow] 
 		
@@ -44,25 +45,15 @@ FROM
 		[EnrollmentsNow].[ORGANIZATION_YEAR_GU] = [OrgYear].[ORGANIZATION_YEAR_GU]
 		
 		LEFT OUTER JOIN
-		(
-		SELECT
-			  Val.[ALT_CODE_1]
-			  ,Val.VALUE_CODE
-		FROM
-			  [rev].[REV_BOD_LOOKUP_DEF] AS [Def]
-			  INNER JOIN
-			  [rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
-			  ON
-			  [Def].[LOOKUP_DEF_GU]=[Val].[LOOKUP_DEF_GU]
-			  AND [Def].[LOOKUP_NAMESPACE]='K12'
-			  AND [Def].[LOOKUP_DEF_CODE]='Grade'
-		) AS [Grades]
+		 APS.LookupTable('K12','Grade') AS [Grades]
 		ON
 		[EnrollmentsNow].[GRADE] = [Grades].[VALUE_CODE]
 		
 	GROUP BY
 		[OrgYear].[ORGANIZATION_GU]
-		,[Grades].[ALT_CODE_1]
+		,[Grades].[VALUE_DESCRIPTION]
+		,[Grades].[LIST_ORDER]
+		
 	) AS [ENROLL_COUNT_NOW]
 	
 	
@@ -71,7 +62,8 @@ FROM
 	SELECT
 		COUNT([EnrollmentsLastYear].[STUDENT_GU]) AS [STUDENT_COUNT]
 		,[OrgYear].[ORGANIZATION_GU]
-		,[Grades].[ALT_CODE_1] AS [GRADE]
+		,[Grades].[VALUE_DESCRIPTION] AS [GRADE]
+		,[Grades].[LIST_ORDER]
 	FROM
 		APS.PrimaryEnrollmentsAsOf(@sameDayLastYear) AS [EnrollmentsLastYear] 
 		
@@ -82,25 +74,15 @@ FROM
 		[EnrollmentsLastYear].[ORGANIZATION_YEAR_GU] = [OrgYear].[ORGANIZATION_YEAR_GU]
 		
 		LEFT OUTER JOIN
-		(
-		SELECT
-			  Val.[ALT_CODE_1]
-			  ,Val.VALUE_CODE
-		FROM
-			  [rev].[REV_BOD_LOOKUP_DEF] AS [Def]
-			  INNER JOIN
-			  [rev].[REV_BOD_LOOKUP_VALUES] AS [Val]
-			  ON
-			  [Def].[LOOKUP_DEF_GU]=[Val].[LOOKUP_DEF_GU]
-			  AND [Def].[LOOKUP_NAMESPACE]='K12'
-			  AND [Def].[LOOKUP_DEF_CODE]='Grade'
-		) AS [Grades]
+		 APS.LookupTable('K12','Grade') AS [Grades]
 		ON
 		[EnrollmentsLastYear].[GRADE] = [Grades].[VALUE_CODE]
 		
 	GROUP BY
 		[OrgYear].[ORGANIZATION_GU]
-		,[Grades].[ALT_CODE_1]
+		,[Grades].[VALUE_DESCRIPTION]
+		,[Grades].[LIST_ORDER]
+		
 	) AS [ENROLL_COUNT_LAST_YEAR]
 	ON
 	[ENROLL_COUNT_NOW].[ORGANIZATION_GU] = [ENROLL_COUNT_LAST_YEAR].[ORGANIZATION_GU]
@@ -113,3 +95,4 @@ FROM
 	
 ORDER BY
 	[Organization].[ORGANIZATION_NAME]
+	,[ENROLL_COUNT_NOW].[LIST_ORDER]
