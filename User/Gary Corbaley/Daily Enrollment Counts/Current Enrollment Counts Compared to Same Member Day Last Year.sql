@@ -11,6 +11,7 @@
 
 
 DECLARE @SchoolYear NUMERIC, @Extension NVARCHAR(1), @onDate DATE, @sameDayLastYear DATE, @CURRENT_MEMBER_DAY AS INT
+DECLARE @SCHOOL_GU VARCHAR(128) = '%'
 
 SET @SchoolYear = 2014
 SET @Extension = 'R'
@@ -92,6 +93,9 @@ FROM
 	rev.REV_ORGANIZATION AS [Organization] -- Contains the School Name
 	ON 
 	[ENROLL_COUNT_NOW].[ORGANIZATION_GU] = [Organization].[ORGANIZATION_GU]
+	
+WHERE
+	[ENROLL_COUNT_NOW].[ORGANIZATION_GU] LIKE @SCHOOL_GU
 	
 ORDER BY
 	[Organization].[ORGANIZATION_NAME]
