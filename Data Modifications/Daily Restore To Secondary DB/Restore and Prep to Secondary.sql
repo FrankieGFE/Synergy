@@ -151,6 +151,14 @@ GRANT EXECUTE TO [APS\SISProg]
 GRANT SELECT TO [APS\SISProg]
 GRANT VIEW DEFINITION TO [APS\SISProg]
 
+PRINT '*** Creating USER APS\SynAdministratorSPED'
+CREATE USER [APS\SynAdministratorSPED] FOR LOGIN [APS\SynAdministratorSPED] WITH DEFAULT_SCHEMA=[dbo] -- SynAdministratorSPED should not have access to production
+EXEC sp_addrolemember 'db_datareader', 'APS\SynAdministratorSPED'; -- adding role data_reader
+GRANT CONNECT TO [APS\SynAdministratorSPED]
+GRANT EXECUTE TO [APS\SynAdministratorSPED]
+GRANT SELECT TO [APS\SynAdministratorSPED]
+GRANT VIEW DEFINITION TO [APS\SynAdministratorSPED]
+
 --Clearing Job Queue
 -- -------------------------------------------------------
 PRINT '*** Clearing Job Queue'

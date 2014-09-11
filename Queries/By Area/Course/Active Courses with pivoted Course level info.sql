@@ -77,22 +77,22 @@ FROM
 		LEFT JOIN
 		APS.LookupTable('k12.CourseInfo','Subject_Area') AS Subject2
 		ON
-		Course.SUBJECT_AREA_2 = Subject1.VALUE_CODE
+		Course.SUBJECT_AREA_2 = Subject2.VALUE_CODE
 
 		LEFT JOIN
 		APS.LookupTable('k12.CourseInfo','Subject_Area') AS Subject3
 		ON
-		Course.SUBJECT_AREA_3 = Subject1.VALUE_CODE
+		Course.SUBJECT_AREA_3 = Subject3.VALUE_CODE
 
 		LEFT JOIN
 		APS.LookupTable('k12.CourseInfo','Subject_Area') AS Subject4
 		ON
-		Course.SUBJECT_AREA_4 = Subject1.VALUE_CODE
+		Course.SUBJECT_AREA_4 = Subject4.VALUE_CODE
 
 		LEFT JOIN
 		APS.LookupTable('k12.CourseInfo','Subject_Area') AS Subject5
 		ON
-		Course.SUBJECT_AREA_5 = Subject1.VALUE_CODE
+		Course.SUBJECT_AREA_5 = Subject5.VALUE_CODE
 
 	WHERE
 		Course.INACTIVE = 'N'
