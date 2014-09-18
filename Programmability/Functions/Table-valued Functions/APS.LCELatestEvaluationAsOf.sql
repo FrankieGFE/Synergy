@@ -24,6 +24,7 @@ RETURN
 SELECT
 	ELLTests.TEST_GU
 	,ELLTests.TEST_NAME
+	,ELLTests.STUDENT_TEST_GU
 	,ELLTests.STUDENT_GU
 	,ELLTests.ADMIN_DATE
 	,ELLTests.Organization_GU
@@ -36,6 +37,7 @@ FROM
 		TestDefinition.TEST_GU
 		,TestDefinition.TEST_NAME
 		,StudentTest.STUDENT_GU
+		,StudentTest.STUDENT_TEST_GU
 		,StudentTest.ADMIN_DATE
 		,StudentTest.Organization_GU
 		,StudentTest.GRADE
