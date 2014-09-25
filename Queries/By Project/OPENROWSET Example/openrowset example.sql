@@ -25,3 +25,14 @@ FROM
 -- to your user
 REVERT
 GO
+
+
+/* ****************************************************************
+ * As an aside, here is the grant stantement that needed to be run to allow SISProg group to impersonate the query user
+
+	USE master
+	GO
+
+	GRANT IMPERSONATE ON LOGIN::QueryFileUser to [APS\SISProg];
+	GO
+*/
