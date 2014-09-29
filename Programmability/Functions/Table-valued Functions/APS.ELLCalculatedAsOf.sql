@@ -33,7 +33,7 @@ SELECT
 	,Assessment.TEST_NAME
 FROM
 	-- Enrollments
-	APS.PrimaryEnrollmentsAsOf(GETDATE()) AS Enroll
+	APS.PrimaryEnrollmentsAsOf(@AsOfDate) AS Enroll
 
 	/* As per Lynne (8/28/2014) => Once PHLOTE, always PHLOTE
 	-- PHLOTE Students
@@ -44,7 +44,7 @@ FROM
 	*/
 	-- Latest Assessment
 	INNER JOIN
-	APS.LCELatestEvaluationAsOf(GETDATE()) AS Assessment
+	APS.LCELatestEvaluationAsOf(@AsOfDate) AS Assessment
 	ON
 	Enroll.STUDENT_GU = Assessment.STUDENT_GU
 WHERE

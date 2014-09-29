@@ -12,7 +12,7 @@ EXECUTE AS LOGIN='QueryFileUser'
 GO
 
 SELECT 
-	Student.SIS_NUMBER AS [Student ID]
+	Kids.ID_NBR AS [Student ID]
 	,Student.STATE_STUDENT_NUMBER AS [Student State ID]
 	,CourseHistory.SCHOOL_YEAR AS [School Year]
 	,GradeLevel.VALUE_DESCRIPTION AS [Grade Level]
@@ -31,7 +31,7 @@ FROM
 		'Text;Database=\\SynTempSSIS\Files\TempQuery\;', 
 		'SELECT * from META2014Ids.txt'
 	    ) AS Kids
-	INNER JOIN
+	LEFT HASH JOIN
 	rev.EPC_STU AS Student
 	ON
 	Kids.ID_NBR = Student.SIS_NUMBER
@@ -58,7 +58,7 @@ FROM
 	CourseHistory.SCHOOL_NON_DISTRICT_GU = NonDistrictSchool.SCHOOL_NON_DISTRICT_GU
 
 ORDER BY
-	Student.SIS_NUMBER
+	Kids.ID_NBR
 	,CourseHistory.SCHOOL_YEAR
 	,COALESCE(School.SCHOOL_CODE,NonDistrictSchool.NAME)
 	,CourseHistory.TERM_CODE
