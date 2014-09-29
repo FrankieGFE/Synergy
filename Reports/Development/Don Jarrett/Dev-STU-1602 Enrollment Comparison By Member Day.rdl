@@ -37,11 +37,16 @@
       <Query>
         <DataSourceName>Synergy</DataSourceName>
         <QueryParameters>
-          <QueryParameter Name="@School">
-            <Value>=Parameters!School.Value</Value>
-          </QueryParameter>
           <QueryParameter Name="@AsOfDate">
             <Value>=Parameters!AsOfDate.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+          <QueryParameter Name="@Year">
+            <Value>=Parameters!Year.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+          <QueryParameter Name="@School">
+            <Value>=Parameters!School.Value</Value>
             <rd:UserDefined>true</rd:UserDefined>
           </QueryParameter>
         </QueryParameters>
@@ -55,13 +60,11 @@
  * 
  * This script will get a count of students currently enrolled, grouped by grade levels,and compare them to the counts from the same member day last year.
  */
-
-
 DECLARE @SchoolYear NUMERIC, @Extension NVARCHAR(1), @onDate DATE, @sameDayLastYear DATE, @CURRENT_MEMBER_DAY AS INT
-DECLARE @SCHOOL_GU VARCHAR(128) = '%'
+DECLARE @SCHOOL_GU VARCHAR(128) = @School
 
-SET @SchoolYear = 2014
-SET @Extension = 'R'
+SET @SchoolYear = CAST(LEFT(@Year,4) AS INT)
+SET @Extension = RIGHT(@Year,1)
 SET @onDate = @AsOfDate
 
 SET @CURRENT_MEMBER_DAY = APS.DistrictMemberDayFromDate(@SchoolYear,@Extension,@onDate)
@@ -74,12 +77,13 @@ FROM
 	(
 	SELECT
 		CASE WHEN [ENROLL_COUNT_NOW].[ORGANIZATION_NAME] IS NULL THEN [ENROLL_COUNT_LAST_YEAR].[ORGANIZATION_NAME] ELSE [ENROLL_COUNT_NOW].[ORGANIZATION_NAME] END AS [School_Name]
-		,CASE WHEN [ENROLL_COUNT_NOW].[GRADE] IS NULL THEN 'N/A'/* [ENROLL_COUNT_LAST_YEAR].[GRADE]*/ ELSE [ENROLL_COUNT_NOW].[GRADE] END AS [GRADE]
+		,CASE WHEN [ENROLL_COUNT_NOW].[GRADE] IS NULL THEN ISNULL([ENROLL_COUNT_LAST_YEAR].[GRADE],'N/A') ELSE [ENROLL_COUNT_NOW].[GRADE] END AS [GRADE]
 		,@CURRENT_MEMBER_DAY AS [Member_Day]
 		,@onDate AS [Current_Date]
-		,[ENROLL_COUNT_NOW].[STUDENT_COUNT] AS [Current_Enrollment_Count]
+		,ISNULL([ENROLL_COUNT_NOW].[STUDENT_COUNT],0) AS [Current_Enrollment_Count]
 		,@sameDayLastYear AS [Previous Year Date]
-		,[ENROLL_COUNT_LAST_YEAR].[STUDENT_COUNT] AS [Previous_Year_Enrollment_Count]
+		,ISNULL([ENROLL_COUNT_LAST_YEAR].[STUDENT_COUNT],0) AS [Previous_Year_Enrollment_Count]
+		,CASE WHEN [ENROLL_COUNT_NOW].[VALUE_CODE] IS NULL THEN [ENROLL_COUNT_LAST_YEAR].[VALUE_CODE] ELSE [ENROLL_COUNT_NOW].[VALUE_CODE] END AS [VALUE_CODE] --for ordering grade
 	FROM
 		(
 		SELECT
@@ -87,7 +91,7 @@ FROM
 			,[OrgYear].[ORGANIZATION_GU]
 			,[Organization].[ORGANIZATION_NAME]
 			,[Grades].[VALUE_DESCRIPTION] AS [GRADE]
-			,[Grades].[LIST_ORDER]
+			,[Grades].[VALUE_CODE]
 		FROM
 			APS.PrimaryEnrollmentsAsOf(@onDate) AS [EnrollmentsNow] 
 			
@@ -111,7 +115,7 @@ FROM
 			[OrgYear].[ORGANIZATION_GU]
 			,[Organization].[ORGANIZATION_NAME]
 			,[Grades].[VALUE_DESCRIPTION]
-			,[Grades].[LIST_ORDER]
+			,[Grades].[VALUE_CODE]
 			
 		) AS [ENROLL_COUNT_NOW]
 		
@@ -123,7 +127,7 @@ FROM
 			,[OrgYear].[ORGANIZATION_GU]
 			,[Organization].[ORGANIZATION_NAME]
 			,[Grades].[VALUE_DESCRIPTION] AS [GRADE]
-			,[Grades].[LIST_ORDER]
+			,[Grades].[VALUE_CODE]
 		FROM
 			APS.PrimaryEnrollmentsAsOf(@sameDayLastYear) AS [EnrollmentsLastYear] 
 			
@@ -147,7 +151,7 @@ FROM
 			[OrgYear].[ORGANIZATION_GU]
 			,[Organization].[ORGANIZATION_NAME]
 			,[Grades].[VALUE_DESCRIPTION]
-			,[Grades].[LIST_ORDER]
+			,[Grades].[VALUE_CODE]
 			
 		) AS [ENROLL_COUNT_LAST_YEAR]
 		ON
@@ -155,13 +159,14 @@ FROM
 		AND [ENROLL_COUNT_NOW].[GRADE] = [ENROLL_COUNT_LAST_YEAR].[GRADE]	
 		
 	WHERE
-		[ENROLL_COUNT_NOW].[ORGANIZATION_GU] LIKE @School
+		[ENROLL_COUNT_NOW].[ORGANIZATION_GU] LIKE @SCHOOL_GU
 		OR
-		[ENROLL_COUNT_LAST_YEAR].[ORGANIZATION_GU] LIKE @School
+		[ENROLL_COUNT_LAST_YEAR].[ORGANIZATION_GU] LIKE @SCHOOL_GU
 	) AS [ENROL_CONT_COMPARE]
 
 ORDER BY
-	[School_Name]</CommandText>
+	[School_Name]
+	,[VALUE_CODE]</CommandText>
       </Query>
       <Fields>
         <Field Name="School_Name">
@@ -192,6 +197,10 @@ ORDER BY
           <DataField>Previous_Year_Enrollment_Count</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="VALUE_CODE">
+          <DataField>VALUE_CODE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
     </DataSet>
     <DataSet Name="FocusFromUser">
@@ -215,6 +224,22 @@ ORDER BY
         </Field>
       </Fields>
     </DataSet>
+    <DataSet Name="YearList">
+      <SharedDataSet>
+        <SharedDataSetReference>/Data Sets/YearList</SharedDataSetReference>
+        <rd:ReportServerUrl>http://synergyreports.aps.edu/ReportServer</rd:ReportServerUrl>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="YEAR_GU">
+          <DataField>YEAR_GU</DataField>
+          <rd:TypeName>System.Guid</rd:TypeName>
+        </Field>
+        <Field Name="YearName">
+          <DataField>YearName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -231,7 +256,7 @@ ORDER BY
                   </Group>
                   <SortExpressions>
                     <SortExpression>
-                      <Value>=Fields!GRADE.Value</Value>
+                      <Value>=Fields!VALUE_CODE.Value</Value>
                     </SortExpression>
                   </SortExpressions>
                   <Label>=Fields!GRADE.Value</Label>
@@ -257,7 +282,9 @@ ORDER BY
                         <Style />
                       </ChartDataLabel>
                       <ToolTip>#VALY</ToolTip>
-                      <Style />
+                      <Style>
+                        <Color>=IIf(Fields!Current_Enrollment_Count.Value-Fields!Previous_Year_Enrollment_Count.Value&gt;0,"CornflowerBlue","Tomato")</Color>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -288,10 +315,11 @@ ORDER BY
                 <ChartCategoryAxes>
                   <ChartAxis Name="Primary">
                     <Style>
+                      <FontFamily>Segoe UI</FontFamily>
                       <FontSize>8pt</FontSize>
                     </Style>
                     <ChartAxisTitle>
-                      <Caption>Grade</Caption>
+                      <Caption />
                       <Style>
                         <FontSize>8pt</FontSize>
                       </Style>
@@ -319,6 +347,7 @@ ORDER BY
                     <CrossAt>NaN</CrossAt>
                     <Minimum>NaN</Minimum>
                     <Maximum>NaN</Maximum>
+                    <PreventLabelOffset>true</PreventLabelOffset>
                     <ChartAxisScaleBreak>
                       <Style />
                     </ChartAxisScaleBreak>
@@ -364,11 +393,13 @@ ORDER BY
                 <ChartValueAxes>
                   <ChartAxis Name="Primary">
                     <Style>
+                      <FontFamily>Segoe UI</FontFamily>
                       <FontSize>8pt</FontSize>
                     </Style>
                     <ChartAxisTitle>
-                      <Caption>Enrollment Change</Caption>
+                      <Caption>Difference</Caption>
                       <Style>
+                        <FontFamily>Segoe UI</FontFamily>
                         <FontSize>8pt</FontSize>
                       </Style>
                     </ChartAxisTitle>
@@ -440,29 +471,12 @@ ORDER BY
                 </Style>
               </ChartArea>
             </ChartAreas>
-            <ChartLegends>
-              <ChartLegend Name="Default">
-                <Style>
-                  <BackgroundGradientType>None</BackgroundGradientType>
-                  <FontSize>8pt</FontSize>
-                </Style>
-                <ChartLegendTitle>
-                  <Caption />
-                  <Style>
-                    <FontSize>8pt</FontSize>
-                    <FontWeight>Bold</FontWeight>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </ChartLegendTitle>
-                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
-                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
-              </ChartLegend>
-            </ChartLegends>
             <ChartTitles>
               <ChartTitle Name="Default">
                 <Caption>Enrollment Difference By Grade</Caption>
                 <Style>
                   <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontFamily>Segoe UI</FontFamily>
                   <FontWeight>Bold</FontWeight>
                   <TextAlign>General</TextAlign>
                   <VerticalAlign>Top</VerticalAlign>
@@ -488,10 +502,9 @@ ORDER BY
             <DataSetName>dsEnrollment</DataSetName>
             <Top>1.99014in</Top>
             <Height>3in</Height>
-            <Width>7.85291in</Width>
+            <Width>8in</Width>
             <Visibility>
-              <Hidden>true</Hidden>
-              <ToggleItem>Textbox1</ToggleItem>
+              <ToggleItem>GraphHeader</ToggleItem>
             </Visibility>
             <Style>
               <Border>
@@ -517,7 +530,7 @@ ORDER BY
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.21875in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -546,7 +559,7 @@ ORDER BY
                               <Style>None</Style>
                             </Border>
                             <BottomBorder>
-                              <Color>LightGrey</Color>
+                              <Color>Black</Color>
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </BottomBorder>
@@ -586,7 +599,7 @@ ORDER BY
                               <Style>None</Style>
                             </Border>
                             <BottomBorder>
-                              <Color>LightGrey</Color>
+                              <Color>Black</Color>
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </BottomBorder>
@@ -626,7 +639,7 @@ ORDER BY
                               <Style>None</Style>
                             </Border>
                             <BottomBorder>
-                              <Color>LightGrey</Color>
+                              <Color>Black</Color>
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </BottomBorder>
@@ -642,114 +655,7 @@ ORDER BY
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
-                  <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox23">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>Segoe UI Light</FontFamily>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox23</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox24">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>Segoe UI Light</FontFamily>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox24</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox28">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>Segoe UI Light</FontFamily>
-                                    <FontWeight>=IIf(Fields!Current_Enrollment_Count.Value-Fields!Previous_Year_Enrollment_Count.Value&lt;&gt;0,"Bold","Normal")</FontWeight>
-                                    <Color>White</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox28</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <BackgroundColor>White</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                  </TablixCells>
-                </TablixRow>
-                <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.22917in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -764,6 +670,7 @@ ORDER BY
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
+                                    <Format>#,0;(#,0)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -773,6 +680,10 @@ ORDER BY
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Current_Enrollment_Count1</rd:DefaultName>
+                          <Visibility>
+                            <Hidden>true</Hidden>
+                            <ToggleItem>SchoolBox</ToggleItem>
+                          </Visibility>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -798,6 +709,7 @@ ORDER BY
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
+                                    <Format>#,0;(#,0)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -807,6 +719,10 @@ ORDER BY
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Previous_Year_Enrollment_Count1</rd:DefaultName>
+                          <Visibility>
+                            <Hidden>true</Hidden>
+                            <ToggleItem>SchoolBox</ToggleItem>
+                          </Visibility>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -833,6 +749,7 @@ ORDER BY
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>=IIf(Fields!Current_Enrollment_Count.Value-Fields!Previous_Year_Enrollment_Count.Value&lt;&gt;0,"Bold","Normal")</FontWeight>
+                                    <Format>#,0;(#,0)</Format>
                                     <Color>=IIf(Fields!Current_Enrollment_Count.Value-Fields!Previous_Year_Enrollment_Count.Value=0,"Black","WhiteSmoke")</Color>
                                   </Style>
                                 </TextRun>
@@ -843,11 +760,15 @@ ORDER BY
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox18</rd:DefaultName>
+                          <Visibility>
+                            <Hidden>true</Hidden>
+                            <ToggleItem>SchoolBox</ToggleItem>
+                          </Visibility>
                           <Style>
                             <Border>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>=IIf(Fields!Current_Enrollment_Count.Value-Fields!Previous_Year_Enrollment_Count.Value =0,"White",IIf(Fields!Current_Enrollment_Count.Value-Fields!Previous_Year_Enrollment_Count.Value &gt; 0, "LightBlue", "Tomato"))</BackgroundColor>
+                            <BackgroundColor>=IIf(Fields!Current_Enrollment_Count.Value-Fields!Previous_Year_Enrollment_Count.Value =0,"White",IIf(Fields!Current_Enrollment_Count.Value-Fields!Previous_Year_Enrollment_Count.Value &gt; 0, "CornflowerBlue", "Tomato"))</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -859,7 +780,7 @@ ORDER BY
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.23958in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -874,6 +795,8 @@ ORDER BY
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>#,0;(#,0)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -913,6 +836,8 @@ ORDER BY
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>#,0;(#,0)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -952,7 +877,8 @@ ORDER BY
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
-                                    <FontWeight>=IIf(Sum(Fields!Current_Enrollment_Count.Value)-Sum(Fields!Previous_Year_Enrollment_Count.Value)&lt;&gt;0,"Bold","Normal")</FontWeight>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>#,0;(#,0)</Format>
                                     <Color>=IIf(Sum(Fields!Current_Enrollment_Count.Value)-Sum(Fields!Previous_Year_Enrollment_Count.Value)=0,"Black","White")</Color>
                                   </Style>
                                 </TextRun>
@@ -972,7 +898,7 @@ ORDER BY
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </BottomBorder>
-                            <BackgroundColor>=IIf(Sum(Fields!Current_Enrollment_Count.Value)-Sum(Fields!Previous_Year_Enrollment_Count.Value)=0,"White",IIf(Sum(Fields!Current_Enrollment_Count.Value)-Sum(Fields!Previous_Year_Enrollment_Count.Value)&gt;0,"LightBlue","Tomato"))</BackgroundColor>
+                            <BackgroundColor>=IIf(Sum(Fields!Current_Enrollment_Count.Value)-Sum(Fields!Previous_Year_Enrollment_Count.Value)=0,"White",IIf(Sum(Fields!Current_Enrollment_Count.Value)-Sum(Fields!Previous_Year_Enrollment_Count.Value)&gt;0,"CornflowerBlue","Tomato"))</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -999,6 +925,8 @@ ORDER BY
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>#,0;(#,0)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1036,6 +964,8 @@ ORDER BY
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>#,0;(#,0)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1073,7 +1003,8 @@ ORDER BY
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
-                                    <FontWeight>=IIf(Sum(Fields!Current_Enrollment_Count.Value, "dsEnrollment")-Sum(Fields!Previous_Year_Enrollment_Count.Value, "dsEnrollment")&lt;&gt;0,"Bold","Normal")</FontWeight>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>#,0;(#,0)</Format>
                                     <Color>=IIf(Sum(Fields!Current_Enrollment_Count.Value, "dsEnrollment")-Sum(Fields!Previous_Year_Enrollment_Count.Value, "dsEnrollment")=0,"Black","White")</Color>
                                   </Style>
                                 </TextRun>
@@ -1091,7 +1022,7 @@ ORDER BY
                             <Border>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>=IIf(Sum(Fields!Current_Enrollment_Count.Value, "dsEnrollment")-Sum(Fields!Previous_Year_Enrollment_Count.Value, "dsEnrollment")=0,"White",IIf(Sum(Fields!Current_Enrollment_Count.Value, "dsEnrollment")-Sum(Fields!Previous_Year_Enrollment_Count.Value, "dsEnrollment")&gt;0,"LightBlue","Tomato"))</BackgroundColor>
+                            <BackgroundColor>=IIf(Sum(Fields!Current_Enrollment_Count.Value, "dsEnrollment")-Sum(Fields!Previous_Year_Enrollment_Count.Value, "dsEnrollment")=0,"White",IIf(Sum(Fields!Current_Enrollment_Count.Value, "dsEnrollment")-Sum(Fields!Previous_Year_Enrollment_Count.Value, "dsEnrollment")&gt;0,"CornflowerBlue","Tomato"))</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -1115,7 +1046,7 @@ ORDER BY
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>3.12375in</Size>
+                    <Size>3.27084in</Size>
                     <CellContents>
                       <Textbox Name="Textbox7">
                         <CanGrow>true</CanGrow>
@@ -1140,7 +1071,7 @@ ORDER BY
                             <Style>None</Style>
                           </Border>
                           <BottomBorder>
-                            <Color>LightGrey</Color>
+                            <Color>Black</Color>
                             <Style>Solid</Style>
                             <Width>1pt</Width>
                           </BottomBorder>
@@ -1171,7 +1102,9 @@ ORDER BY
                                     </Style>
                                   </TextRun>
                                 </TextRuns>
-                                <Style />
+                                <Style>
+                                  <TextAlign>Right</TextAlign>
+                                </Style>
                               </Paragraph>
                             </Paragraphs>
                             <rd:DefaultName>Textbox5</rd:DefaultName>
@@ -1181,7 +1114,7 @@ ORDER BY
                                 <Style>None</Style>
                               </Border>
                               <BottomBorder>
-                                <Color>LightGrey</Color>
+                                <Color>Black</Color>
                                 <Style>Solid</Style>
                                 <Width>1pt</Width>
                               </BottomBorder>
@@ -1200,8 +1133,6 @@ ORDER BY
                         </TablixMember>
                       </TablixMembers>
                       <FixedData>true</FixedData>
-                      <KeepWithGroup>After</KeepWithGroup>
-                      <RepeatOnNewPage>true</RepeatOnNewPage>
                     </TablixMember>
                   </TablixMembers>
                   <FixedData>true</FixedData>
@@ -1209,7 +1140,7 @@ ORDER BY
                   <RepeatOnNewPage>true</RepeatOnNewPage>
                 </TablixMember>
                 <TablixMember>
-                  <Group Name="School_Name1">
+                  <Group Name="School_Name">
                     <GroupExpressions>
                       <GroupExpression>=Fields!School_Name.Value</GroupExpression>
                     </GroupExpressions>
@@ -1219,101 +1150,20 @@ ORDER BY
                       <Value>=Fields!School_Name.Value</Value>
                     </SortExpression>
                   </SortExpressions>
-                  <TablixHeader>
-                    <Size>3.12375in</Size>
-                    <CellContents>
-                      <Textbox Name="School_Name1">
-                        <CanGrow>true</CanGrow>
-                        <KeepTogether>true</KeepTogether>
-                        <Paragraphs>
-                          <Paragraph>
-                            <TextRuns>
-                              <TextRun>
-                                <Value>=Fields!School_Name.Value</Value>
-                                <Style>
-                                  <FontFamily>Segoe UI</FontFamily>
-                                </Style>
-                              </TextRun>
-                            </TextRuns>
-                            <Style />
-                          </Paragraph>
-                        </Paragraphs>
-                        <rd:DefaultName>School_Name1</rd:DefaultName>
-                        <Style>
-                          <Border>
-                            <Style>None</Style>
-                          </Border>
-                          <BottomBorder>
-                            <Color>LightGrey</Color>
-                            <Style>Solid</Style>
-                            <Width>1pt</Width>
-                          </BottomBorder>
-                          <PaddingLeft>2pt</PaddingLeft>
-                          <PaddingRight>2pt</PaddingRight>
-                          <PaddingTop>2pt</PaddingTop>
-                          <PaddingBottom>2pt</PaddingBottom>
-                        </Style>
-                      </Textbox>
-                    </CellContents>
-                  </TablixHeader>
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>1.67708in</Size>
+                        <Size>3.27084in</Size>
                         <CellContents>
-                          <Textbox Name="Textbox22">
+                          <Textbox Name="SchoolBox">
                             <CanGrow>true</CanGrow>
                             <KeepTogether>true</KeepTogether>
                             <Paragraphs>
                               <Paragraph>
                                 <TextRuns>
                                   <TextRun>
-                                    <Value />
-                                    <Style>
-                                      <FontFamily>Segoe UI Light</FontFamily>
-                                    </Style>
-                                  </TextRun>
-                                </TextRuns>
-                                <Style />
-                              </Paragraph>
-                            </Paragraphs>
-                            <rd:DefaultName>Textbox22</rd:DefaultName>
-                            <Style>
-                              <Border>
-                                <Style>None</Style>
-                              </Border>
-                              <PaddingLeft>2pt</PaddingLeft>
-                              <PaddingRight>2pt</PaddingRight>
-                              <PaddingTop>2pt</PaddingTop>
-                              <PaddingBottom>2pt</PaddingBottom>
-                            </Style>
-                          </Textbox>
-                        </CellContents>
-                      </TablixHeader>
-                      <KeepWithGroup>After</KeepWithGroup>
-                    </TablixMember>
-                    <TablixMember>
-                      <Group Name="GRADE1">
-                        <GroupExpressions>
-                          <GroupExpression>=Fields!GRADE.Value</GroupExpression>
-                        </GroupExpressions>
-                      </Group>
-                      <SortExpressions>
-                        <SortExpression>
-                          <Value>=Fields!GRADE.Value</Value>
-                        </SortExpression>
-                      </SortExpressions>
-                      <TablixHeader>
-                        <Size>1.67708in</Size>
-                        <CellContents>
-                          <Textbox Name="GRADE1">
-                            <CanGrow>true</CanGrow>
-                            <KeepTogether>true</KeepTogether>
-                            <Paragraphs>
-                              <Paragraph>
-                                <TextRuns>
-                                  <TextRun>
-                                    <Value>=Fields!GRADE.Value</Value>
+                                    <Label>SchoolNameText</Label>
+                                    <Value>=Fields!School_Name.Value</Value>
                                     <Style>
                                       <FontFamily>Segoe UI</FontFamily>
                                     </Style>
@@ -1322,48 +1172,6 @@ ORDER BY
                                 <Style />
                               </Paragraph>
                             </Paragraphs>
-                            <rd:DefaultName>GRADE1</rd:DefaultName>
-                            <Style>
-                              <Border>
-                                <Style>None</Style>
-                              </Border>
-                              <PaddingLeft>2pt</PaddingLeft>
-                              <PaddingRight>2pt</PaddingRight>
-                              <PaddingTop>2pt</PaddingTop>
-                              <PaddingBottom>2pt</PaddingBottom>
-                            </Style>
-                          </Textbox>
-                        </CellContents>
-                      </TablixHeader>
-                      <TablixMembers>
-                        <TablixMember />
-                      </TablixMembers>
-                      <Visibility>
-                        <Hidden>true</Hidden>
-                        <ToggleItem>School_Name1</ToggleItem>
-                      </Visibility>
-                    </TablixMember>
-                    <TablixMember>
-                      <TablixHeader>
-                        <Size>1.67708in</Size>
-                        <CellContents>
-                          <Textbox Name="Textbox14">
-                            <CanGrow>true</CanGrow>
-                            <KeepTogether>true</KeepTogether>
-                            <Paragraphs>
-                              <Paragraph>
-                                <TextRuns>
-                                  <TextRun>
-                                    <Value>School Total</Value>
-                                    <Style>
-                                      <FontFamily>Segoe UI</FontFamily>
-                                    </Style>
-                                  </TextRun>
-                                </TextRuns>
-                                <Style />
-                              </Paragraph>
-                            </Paragraphs>
-                            <rd:DefaultName>Textbox14</rd:DefaultName>
                             <Style>
                               <Border>
                                 <Style>None</Style>
@@ -1371,7 +1179,6 @@ ORDER BY
                               <BottomBorder>
                                 <Color>LightGrey</Color>
                                 <Style>Solid</Style>
-                                <Width>1pt</Width>
                               </BottomBorder>
                               <PaddingLeft>2pt</PaddingLeft>
                               <PaddingRight>2pt</PaddingRight>
@@ -1381,13 +1188,111 @@ ORDER BY
                           </Textbox>
                         </CellContents>
                       </TablixHeader>
-                      <KeepWithGroup>Before</KeepWithGroup>
+                      <TablixMembers>
+                        <TablixMember>
+                          <Group Name="GRADE1">
+                            <GroupExpressions>
+                              <GroupExpression>=Fields!GRADE.Value</GroupExpression>
+                            </GroupExpressions>
+                          </Group>
+                          <SortExpressions>
+                            <SortExpression>
+                              <Value>=Fields!VALUE_CODE.Value</Value>
+                            </SortExpression>
+                          </SortExpressions>
+                          <TablixHeader>
+                            <Size>1.67708in</Size>
+                            <CellContents>
+                              <Textbox Name="GRADE1">
+                                <CanGrow>true</CanGrow>
+                                <KeepTogether>true</KeepTogether>
+                                <Paragraphs>
+                                  <Paragraph>
+                                    <TextRuns>
+                                      <TextRun>
+                                        <Value>=Fields!GRADE.Value</Value>
+                                        <Style>
+                                          <FontFamily>Segoe UI</FontFamily>
+                                          <FontSize>8pt</FontSize>
+                                        </Style>
+                                      </TextRun>
+                                    </TextRuns>
+                                    <Style>
+                                      <TextAlign>Right</TextAlign>
+                                    </Style>
+                                  </Paragraph>
+                                </Paragraphs>
+                                <rd:DefaultName>GRADE1</rd:DefaultName>
+                                <Style>
+                                  <Border>
+                                    <Style>None</Style>
+                                  </Border>
+                                  <PaddingLeft>2pt</PaddingLeft>
+                                  <PaddingRight>2pt</PaddingRight>
+                                  <PaddingTop>2pt</PaddingTop>
+                                  <PaddingBottom>2pt</PaddingBottom>
+                                </Style>
+                              </Textbox>
+                            </CellContents>
+                          </TablixHeader>
+                          <TablixMembers>
+                            <TablixMember />
+                          </TablixMembers>
+                          <Visibility>
+                            <Hidden>true</Hidden>
+                            <ToggleItem>SchoolBox</ToggleItem>
+                          </Visibility>
+                        </TablixMember>
+                        <TablixMember>
+                          <TablixHeader>
+                            <Size>1.67708in</Size>
+                            <CellContents>
+                              <Textbox Name="Textbox14">
+                                <CanGrow>true</CanGrow>
+                                <KeepTogether>true</KeepTogether>
+                                <Paragraphs>
+                                  <Paragraph>
+                                    <TextRuns>
+                                      <TextRun>
+                                        <Value>School Total</Value>
+                                        <Style>
+                                          <FontFamily>Segoe UI</FontFamily>
+                                          <FontSize>8pt</FontSize>
+                                          <FontWeight>Bold</FontWeight>
+                                        </Style>
+                                      </TextRun>
+                                    </TextRuns>
+                                    <Style>
+                                      <TextAlign>Right</TextAlign>
+                                    </Style>
+                                  </Paragraph>
+                                </Paragraphs>
+                                <rd:DefaultName>Textbox14</rd:DefaultName>
+                                <Style>
+                                  <Border>
+                                    <Style>None</Style>
+                                  </Border>
+                                  <BottomBorder>
+                                    <Color>LightGrey</Color>
+                                    <Style>Solid</Style>
+                                    <Width>1pt</Width>
+                                  </BottomBorder>
+                                  <PaddingLeft>2pt</PaddingLeft>
+                                  <PaddingRight>2pt</PaddingRight>
+                                  <PaddingTop>2pt</PaddingTop>
+                                  <PaddingBottom>2pt</PaddingBottom>
+                                </Style>
+                              </Textbox>
+                            </CellContents>
+                          </TablixHeader>
+                        </TablixMember>
+                      </TablixMembers>
                     </TablixMember>
                   </TablixMembers>
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>3.12375in</Size>
+                    <Size>4.94792in</Size>
                     <CellContents>
                       <Textbox Name="Textbox9">
                         <CanGrow>true</CanGrow>
@@ -1399,10 +1304,14 @@ ORDER BY
                                 <Value>Total</Value>
                                 <Style>
                                   <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>8pt</FontSize>
+                                  <FontWeight>Bold</FontWeight>
                                 </Style>
                               </TextRun>
                             </TextRuns>
-                            <Style />
+                            <Style>
+                              <TextAlign>Right</TextAlign>
+                            </Style>
                           </Paragraph>
                         </Paragraphs>
                         <rd:DefaultName>Textbox9</rd:DefaultName>
@@ -1421,55 +1330,19 @@ ORDER BY
                       </Textbox>
                     </CellContents>
                   </TablixHeader>
-                  <TablixMembers>
-                    <TablixMember>
-                      <TablixHeader>
-                        <Size>1.67708in</Size>
-                        <CellContents>
-                          <Textbox Name="Textbox10">
-                            <CanGrow>true</CanGrow>
-                            <KeepTogether>true</KeepTogether>
-                            <Paragraphs>
-                              <Paragraph>
-                                <TextRuns>
-                                  <TextRun>
-                                    <Value />
-                                    <Style>
-                                      <FontFamily>Segoe UI</FontFamily>
-                                    </Style>
-                                  </TextRun>
-                                </TextRuns>
-                                <Style />
-                              </Paragraph>
-                            </Paragraphs>
-                            <rd:DefaultName>Textbox10</rd:DefaultName>
-                            <Visibility>
-                              <Hidden>=IIf(Parameters!School.Value="%",False,True)</Hidden>
-                            </Visibility>
-                            <Style>
-                              <Border>
-                                <Style>None</Style>
-                              </Border>
-                              <PaddingLeft>2pt</PaddingLeft>
-                              <PaddingRight>2pt</PaddingRight>
-                              <PaddingTop>2pt</PaddingTop>
-                              <PaddingBottom>2pt</PaddingBottom>
-                            </Style>
-                          </Textbox>
-                        </CellContents>
-                      </TablixHeader>
-                    </TablixMember>
-                  </TablixMembers>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
             <RepeatColumnHeaders>true</RepeatColumnHeaders>
             <FixedRowHeaders>true</FixedRowHeaders>
             <DataSetName>dsEnrollment</DataSetName>
-            <Top>5.05959in</Top>
-            <Height>1.25in</Height>
-            <Width>7.85291in</Width>
+            <Top>5.33445in</Top>
+            <Height>0.9375in</Height>
+            <Width>8in</Width>
             <ZIndex>1</ZIndex>
+            <Visibility>
+              <ToggleItem>DataHeader</ToggleItem>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1531,6 +1404,34 @@ ORDER BY
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>    Member Day: </Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!Member_Day.Value, "dsEnrollment")</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
                 </TextRuns>
                 <Style>
                   <TextAlign>Left</TextAlign>
@@ -1557,6 +1458,9 @@ ORDER BY
             <Height>0.77778in</Height>
             <Width>2.45833in</Width>
             <ZIndex>2</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Globals!RenderFormat.Name = "EXCELOPENXML", True, False)</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1575,7 +1479,7 @@ ORDER BY
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Enrollment Count Comparisons by Member Date. Click the Grade drop-down to see details.</Value>
+                    <Value>Enrollment count comparisont to same member day of last year. Expanding school gives grade breakdowns by school</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -1592,6 +1496,9 @@ ORDER BY
             <Height>0.4375in</Height>
             <Width>7.13542in</Width>
             <ZIndex>3</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Globals!RenderFormat.Name = "EXCELOPENXML", True, False)</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1625,6 +1532,9 @@ ORDER BY
             <Height>0.4in</Height>
             <Width>7.13542in</Width>
             <ZIndex>4</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Globals!RenderFormat.Name = "EXCELOPENXML", True, False)</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1642,29 +1552,37 @@ ORDER BY
             <Height>0.87375in</Height>
             <Width>0.83681in</Width>
             <ZIndex>5</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Globals!RenderFormat.Name = "EXCELOPENXML", True, False)</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
             </Style>
           </Image>
-          <Textbox Name="Textbox1">
+          <Textbox Name="GraphHeader">
             <CanGrow>true</CanGrow>
+            <ToggleImage>
+              <InitialState>true</InitialState>
+            </ToggleImage>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
                     <Value>Graph</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>14pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.70139in</Top>
-            <Height>0.26098in</Height>
+            <Top>1.6736in</Top>
+            <Height>0.31654in</Height>
             <Width>2.03125in</Width>
             <ZIndex>6</ZIndex>
             <Style>
@@ -1677,8 +1595,42 @@ ORDER BY
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="DataHeader">
+            <CanGrow>true</CanGrow>
+            <ToggleImage>
+              <InitialState>true</InitialState>
+            </ToggleImage>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Data</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>14pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>5.00403in</Top>
+            <Height>0.31654in</Height>
+            <Width>2.00125in</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>6.33264in</Height>
+        <Height>6.27195in</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1887,6 +1839,15 @@ ORDER BY
       <Prompt>User</Prompt>
       <Hidden>true</Hidden>
     </ReportParameter>
+    <ReportParameter Name="AsOfDate">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=Today()</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>As Of</Prompt>
+    </ReportParameter>
     <ReportParameter Name="School">
       <DataType>String</DataType>
       <DefaultValue>
@@ -1904,14 +1865,22 @@ ORDER BY
         </DataSetReference>
       </ValidValues>
     </ReportParameter>
-    <ReportParameter Name="AsOfDate">
-      <DataType>DateTime</DataType>
+    <ReportParameter Name="Year">
+      <DataType>String</DataType>
       <DefaultValue>
-        <Values>
-          <Value>=Today()</Value>
-        </Values>
+        <DataSetReference>
+          <DataSetName>YearList</DataSetName>
+          <ValueField>YearName</ValueField>
+        </DataSetReference>
       </DefaultValue>
-      <Prompt>As Of</Prompt>
+      <Prompt>Year</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>YearList</DataSetName>
+          <ValueField>YearName</ValueField>
+          <LabelField>YearName</LabelField>
+        </DataSetReference>
+      </ValidValues>
     </ReportParameter>
   </ReportParameters>
   <EmbeddedImages>
