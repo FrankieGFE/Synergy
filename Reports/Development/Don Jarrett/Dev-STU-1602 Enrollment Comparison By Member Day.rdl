@@ -682,7 +682,7 @@ ORDER BY
                           </Paragraphs>
                           <rd:DefaultName>Current_Enrollment_Count1</rd:DefaultName>
                           <Visibility>
-                            <Hidden>true</Hidden>
+                            <Hidden>=IIF(Parameters!GradeExpanded.Value="Collapse",true,false)</Hidden>
                             <ToggleItem>SchoolBox</ToggleItem>
                           </Visibility>
                           <Style>
@@ -721,7 +721,7 @@ ORDER BY
                           </Paragraphs>
                           <rd:DefaultName>Previous_Year_Enrollment_Count1</rd:DefaultName>
                           <Visibility>
-                            <Hidden>true</Hidden>
+                            <Hidden>=IIF(Parameters!GradeExpanded.Value="Collapse",true,false)</Hidden>
                             <ToggleItem>SchoolBox</ToggleItem>
                           </Visibility>
                           <Style>
@@ -762,7 +762,7 @@ ORDER BY
                           </Paragraphs>
                           <rd:DefaultName>Textbox18</rd:DefaultName>
                           <Visibility>
-                            <Hidden>true</Hidden>
+                            <Hidden>=IIF(Parameters!GradeExpanded.Value="Collapse",true,false)</Hidden>
                             <ToggleItem>SchoolBox</ToggleItem>
                           </Visibility>
                           <Style>
@@ -1158,6 +1158,9 @@ ORDER BY
                         <CellContents>
                           <Textbox Name="SchoolBox">
                             <CanGrow>true</CanGrow>
+                            <ToggleImage>
+                              <InitialState>=IIF(Parameters!GradeExpanded.Value="Collapse",false,true)</InitialState>
+                            </ToggleImage>
                             <KeepTogether>true</KeepTogether>
                             <Paragraphs>
                               <Paragraph>
@@ -1240,7 +1243,7 @@ ORDER BY
                             <TablixMember />
                           </TablixMembers>
                           <Visibility>
-                            <Hidden>true</Hidden>
+                            <Hidden>=IIF(Parameters!GradeExpanded.Value="Collapse",true,false)</Hidden>
                             <ToggleItem>SchoolBox</ToggleItem>
                           </Visibility>
                         </TablixMember>
@@ -1255,7 +1258,7 @@ ORDER BY
                                   <Paragraph>
                                     <TextRuns>
                                       <TextRun>
-                                        <Value>School Total</Value>
+                                        <Value />
                                         <Style>
                                           <FontFamily>Segoe UI</FontFamily>
                                           <FontSize>8pt</FontSize>
@@ -1371,14 +1374,21 @@ ORDER BY
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>    School: </Value>
+                    <Value>    Year: </Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!School.Label</Value>
+                    <Value>=Parameters!Year.Label</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve">    </Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>8pt</FontSize>
@@ -1420,6 +1430,27 @@ ORDER BY
               <Paragraph>
                 <TextRuns>
                   <TextRun>
+                    <Value>    School: </Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!School.Label</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
                     <Value>    Member Day: </Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
@@ -1441,14 +1472,7 @@ ORDER BY
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>    Year: </Value>
-                    <Style>
-                      <FontFamily>Segoe UI</FontFamily>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!Year.Label</Value>
+                    <Value xml:space="preserve">    </Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>8pt</FontSize>
@@ -1902,6 +1926,27 @@ ORDER BY
           <ValueField>ORGANIZATION_GU</ValueField>
           <LabelField>ORGANIZATION_NAME</LabelField>
         </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="GradeExpanded">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Collapse</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Expand School Grade Levels</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>Expand</Value>
+            <Label>Yes</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>Collapse</Value>
+            <Label>No</Label>
+          </ParameterValue>
+        </ParameterValues>
       </ValidValues>
     </ReportParameter>
   </ReportParameters>
