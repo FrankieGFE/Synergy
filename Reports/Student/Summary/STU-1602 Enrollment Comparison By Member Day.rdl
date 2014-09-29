@@ -682,7 +682,7 @@ ORDER BY
                           </Paragraphs>
                           <rd:DefaultName>Current_Enrollment_Count1</rd:DefaultName>
                           <Visibility>
-                            <Hidden>true</Hidden>
+                            <Hidden>=IIF(Parameters!GradeExpanded.Value="Collapse",true,false)</Hidden>
                             <ToggleItem>SchoolBox</ToggleItem>
                           </Visibility>
                           <Style>
@@ -721,7 +721,7 @@ ORDER BY
                           </Paragraphs>
                           <rd:DefaultName>Previous_Year_Enrollment_Count1</rd:DefaultName>
                           <Visibility>
-                            <Hidden>true</Hidden>
+                            <Hidden>=IIF(Parameters!GradeExpanded.Value="Collapse",true,false)</Hidden>
                             <ToggleItem>SchoolBox</ToggleItem>
                           </Visibility>
                           <Style>
@@ -762,7 +762,7 @@ ORDER BY
                           </Paragraphs>
                           <rd:DefaultName>Textbox18</rd:DefaultName>
                           <Visibility>
-                            <Hidden>true</Hidden>
+                            <Hidden>=IIF(Parameters!GradeExpanded.Value="Collapse",true,false)</Hidden>
                             <ToggleItem>SchoolBox</ToggleItem>
                           </Visibility>
                           <Style>
@@ -1158,6 +1158,9 @@ ORDER BY
                         <CellContents>
                           <Textbox Name="SchoolBox">
                             <CanGrow>true</CanGrow>
+                            <ToggleImage>
+                              <InitialState>=IIF(Parameters!GradeExpanded.Value="Collapse",false,true)</InitialState>
+                            </ToggleImage>
                             <KeepTogether>true</KeepTogether>
                             <Paragraphs>
                               <Paragraph>
@@ -1240,7 +1243,7 @@ ORDER BY
                             <TablixMember />
                           </TablixMembers>
                           <Visibility>
-                            <Hidden>true</Hidden>
+                            <Hidden>=IIF(Parameters!GradeExpanded.Value="Collapse",true,false)</Hidden>
                             <ToggleItem>SchoolBox</ToggleItem>
                           </Visibility>
                         </TablixMember>
@@ -1923,6 +1926,27 @@ ORDER BY
           <ValueField>ORGANIZATION_GU</ValueField>
           <LabelField>ORGANIZATION_NAME</LabelField>
         </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="GradeExpanded">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Collapse</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Expand School Grade Levels</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>Expand</Value>
+            <Label>Yes</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>Collapse</Value>
+            <Label>No</Label>
+          </ParameterValue>
+        </ParameterValues>
       </ValidValues>
     </ReportParameter>
   </ReportParameters>
