@@ -109,6 +109,27 @@ FROM
         </Field>
       </Fields>
     </DataSet>
+    <DataSet Name="FocusFromUser">
+      <SharedDataSet>
+        <SharedDataSetReference>/Data Sets/FocusFromUser</SharedDataSetReference>
+        <QueryParameters>
+          <QueryParameter Name="@User">
+            <Value>=Parameters!User.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <rd:ReportServerUrl>http://synergyreports.aps.edu/ReportServer</rd:ReportServerUrl>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="FOCUS_ORGANIZATION_GU">
+          <DataField>FOCUS_ORGANIZATION_GU</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FOCUS_YEAR_GU">
+          <DataField>FOCUS_YEAR_GU</DataField>
+          <rd:TypeName>System.Guid</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -1415,6 +1436,12 @@ FROM
     </ReportParameter>
     <ReportParameter Name="School">
       <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>FocusFromUser</DataSetName>
+          <ValueField>FOCUS_ORGANIZATION_GU</ValueField>
+        </DataSetReference>
+      </DefaultValue>
       <Prompt>School</Prompt>
       <ValidValues>
         <DataSetReference>
