@@ -33,6 +33,7 @@ FROM
 		,[ENROLL_COUNT_NOW].[STUDENT_COUNT] AS [Current_Enrollment_Count]
 		,@sameDayLastYear AS [Previous Year Date]
 		,[ENROLL_COUNT_LAST_YEAR].[STUDENT_COUNT] AS [Previous_Year_Enrollment_Count]
+		,[ENROLL_COUNT_NOW].[LIST_ORDER] --for ordering grade
 	FROM
 		(
 		SELECT
