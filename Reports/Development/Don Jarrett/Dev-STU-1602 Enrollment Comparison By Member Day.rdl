@@ -283,7 +283,8 @@ ORDER BY
                       </ChartDataLabel>
                       <ToolTip>#VALY</ToolTip>
                       <Style>
-                        <Color>=IIf(Fields!Current_Enrollment_Count.Value-Fields!Previous_Year_Enrollment_Count.Value&gt;0,"CornflowerBlue","Tomato")</Color>
+                        <Color>=IIf(Sum(Fields!Current_Enrollment_Count.Value)-Sum(Fields!Previous_Year_Enrollment_Count.Value)&gt;0,"CornflowerBlue","Tomato")</Color>
+                        <BackgroundHatchType>None</BackgroundHatchType>
                       </Style>
                       <ChartMarker>
                         <Style />
@@ -500,7 +501,7 @@ ORDER BY
               </Style>
             </ChartNoDataMessage>
             <DataSetName>dsEnrollment</DataSetName>
-            <Top>1.99014in</Top>
+            <Top>2.09431in</Top>
             <Height>3in</Height>
             <Width>8in</Width>
             <Visibility>
@@ -1336,7 +1337,7 @@ ORDER BY
             <RepeatColumnHeaders>true</RepeatColumnHeaders>
             <FixedRowHeaders>true</FixedRowHeaders>
             <DataSetName>dsEnrollment</DataSetName>
-            <Top>5.33445in</Top>
+            <Top>5.43862in</Top>
             <Height>0.9375in</Height>
             <Width>8in</Width>
             <ZIndex>1</ZIndex>
@@ -1440,6 +1441,27 @@ ORDER BY
               <Paragraph>
                 <TextRuns>
                   <TextRun>
+                    <Value>    Year: </Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!Year.Label</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
                     <Value />
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
@@ -1455,7 +1477,7 @@ ORDER BY
             <rd:DefaultName>Textbox124</rd:DefaultName>
             <Top>0.88194in</Top>
             <Left>0.86458in</Left>
-            <Height>0.77778in</Height>
+            <Height>0.88194in</Height>
             <Width>2.45833in</Width>
             <ZIndex>2</ZIndex>
             <Visibility>
@@ -1581,7 +1603,7 @@ ORDER BY
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>1.6736in</Top>
+            <Top>1.77777in</Top>
             <Height>0.31654in</Height>
             <Width>2.03125in</Width>
             <ZIndex>6</ZIndex>
@@ -1615,7 +1637,7 @@ ORDER BY
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>5.00403in</Top>
+            <Top>5.1082in</Top>
             <Height>0.31654in</Height>
             <Width>2.00125in</Width>
             <ZIndex>7</ZIndex>
@@ -1630,7 +1652,7 @@ ORDER BY
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>6.27195in</Height>
+        <Height>6.38653in</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1839,6 +1861,23 @@ ORDER BY
       <Prompt>User</Prompt>
       <Hidden>true</Hidden>
     </ReportParameter>
+    <ReportParameter Name="Year">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>YearList</DataSetName>
+          <ValueField>YearName</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>Year</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>YearList</DataSetName>
+          <ValueField>YearName</ValueField>
+          <LabelField>YearName</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
     <ReportParameter Name="AsOfDate">
       <DataType>DateTime</DataType>
       <DefaultValue>
@@ -1862,23 +1901,6 @@ ORDER BY
           <DataSetName>SchoolFromUserList</DataSetName>
           <ValueField>ORGANIZATION_GU</ValueField>
           <LabelField>ORGANIZATION_NAME</LabelField>
-        </DataSetReference>
-      </ValidValues>
-    </ReportParameter>
-    <ReportParameter Name="Year">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <DataSetReference>
-          <DataSetName>YearList</DataSetName>
-          <ValueField>YearName</ValueField>
-        </DataSetReference>
-      </DefaultValue>
-      <Prompt>Year</Prompt>
-      <ValidValues>
-        <DataSetReference>
-          <DataSetName>YearList</DataSetName>
-          <ValueField>YearName</ValueField>
-          <LabelField>YearName</LabelField>
         </DataSetReference>
       </ValidValues>
     </ReportParameter>
