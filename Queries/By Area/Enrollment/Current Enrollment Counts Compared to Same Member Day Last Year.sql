@@ -116,3 +116,4 @@ FROM
 
 ORDER BY
 	[School_Name]
+	,[LIST_ORDER]
