@@ -12,8 +12,8 @@
   DTS:ObjectName="GiftedHighSchoolKids"
   DTS:PackageType="5"
   DTS:ProtectionLevel="2"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{FEF7577D-92A6-43BA-A96E-7BC7559620CC}">
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{89303E92-7F4E-43BD-B516-C8B0D5FB757E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -27,12 +27,12 @@
           DTS:ConnectionString="Data Source=180-smaxods-01.aps.edu.actd;User ID=lincinq;Initial Catalog=HELPER;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
           <EncryptedData
             Type="http://www.w3.org/2001/04/xmlenc#Element"
-            Salt="d8I3jYocuw=="
-            IV="U7TiFuaA1MI=" xmlns="http://www.w3.org/2001/04/xmlenc#">
+            Salt="ys0KxDvVeA=="
+            IV="8h75ECwLZ2E=" xmlns="http://www.w3.org/2001/04/xmlenc#">
             <EncryptionMethod
               Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc" />
             <CipherData>
-              <CipherValue>U7TiFuaA1MJW+7ZBLoLEGDbMM4aIGbZ2HpjjmsGilx6Tivh5bA2VOWme4xS7qJ9tlmwcQJvz642wXbwXLqaJ6LUp4uu+In5smJu4AtdnBovYadf8l6/MvGJivBQd9gCPk/KWgxUpXHkTgRogl6ecJPYCtAAZm8nHS9UV76AF4qA=</CipherValue>
+              <CipherValue>8h75ECwLZ2FA4Qhwy8zmnMji4u/B6s7BVkwjC/jGf9r0YOWhEkMhbxfQrH3JCCpHARhHDkt++G6s77UqUGZdL56V9dSJbUO3LtARXkXAte5IkhvAya/+FZ4fLpc7uC9Hem+EG3yYrHoYDSz1aQrffQ0dEIz7EfgT49q5G0qHRTY=</CipherValue>
             </CipherData>
           </EncryptedData>
         </DTS:ConnectionManager>
@@ -58,7 +58,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="\\180-speddb.aps.edu.actd\TIENET Share\GiftedHighSchool\HighSchoolKidsWithGiftedCourses_091614.csv">
+          DTS:ConnectionString="\\180-speddb.aps.edu.actd\TIENET Share\GiftedHighSchool\HighSchoolKidsWithGiftedCourses_093014.csv">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -137,12 +137,12 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
           DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=TienetExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
           <EncryptedData
             Type="http://www.w3.org/2001/04/xmlenc#Element"
-            Salt="IuK4qDMQbw=="
-            IV="F2pHRb/jMeI=" xmlns="http://www.w3.org/2001/04/xmlenc#">
+            Salt="MdQuqda8NA=="
+            IV="dU2XcpH+wjM=" xmlns="http://www.w3.org/2001/04/xmlenc#">
             <EncryptionMethod
               Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc" />
             <CipherData>
-              <CipherValue>F2pHRb/jMeLRxGWcK7s5osh/VPwsRtxiPRkKVyCC74mw9RHPOx/CgwvunEu0sEH7vtbcyRqlkzqzTpsbY/+LzZaPYYC2L8bJEWdXbY85ulgYa9LXfI5Z8fuZffc7vyreBM8zQ+5Oc1N/B4ZucCoFKJYyv5dz7e/bvFEJsBG1u31P6DGrOd96HQ==</CipherValue>
+              <CipherValue>dU2XcpH+wjPQBJt/mYniRnvTRxMOi0oNeXSw7cDryMSU2GnLLUFh3CXb7szknpEXQ54nRdHDn+6rtxDNZw7Wb6nWK71P7vRxXgFNT5m79gVFI63XJfH3zSGD6aGDxmzX/brgJhn39JiyMra3lp5lH3SsdOqz+9YpRPA73SEEZSZGx2P9B0S9ag==</CipherValue>
             </CipherData>
           </EncryptedData>
         </DTS:ConnectionManager>
@@ -375,7 +375,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
                   description="The SQL command to be executed."
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT 
-	ORGANIZATION_NAME,SIS_NUMBER, LAST_NAME, FIRST_NAME, COURSE_ID, COURSE_TITLE, GFT
+	ORGANIZATION_NAME,SIS_NUMBER, LAST_NAME, FIRST_NAME, COURSE_ID, COURSE_TITLE, GFT,[Staff Name]
 
  FROM 
 (
@@ -388,7 +388,7 @@ SELECT
 	,CourseMaster.COURSE_TITLE
 	,GIFTED.COURSE_LEVEL
 	,SCHTYP.SCHOOL_TYPE
-	
+	,Staff.LAST_NAME+', '+Staff.FIRST_NAME AS [Staff Name]
  FROM
 	APS.PrimaryEnrollmentsAsOf(GETDATE()) AS Enroll
 	INNER JOIN
@@ -421,6 +421,10 @@ SELECT
 	ON
 	Schedule.ORGANIZATION_GU = ORG.ORGANIZATION_GU
 
+	LEFT JOIN
+	[rev].[REV_PERSON] AS [StaFF]
+	ON
+	[Schedule].[STAFF_GU]=[Staff].[PERSON_GU]
 
 	WHERE
 	COURSE_LEVEL = 'GFT'
@@ -547,6 +551,16 @@ ORDER BY GFT</property>
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[GFT]"
                       name="GFT"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Staff Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Staff Name]"
+                      length="122"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Staff Name]"
+                      name="Staff Name"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -585,6 +599,11 @@ ORDER BY GFT</property>
                       dataType="wstr"
                       length="5"
                       name="GFT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Staff Name]"
+                      dataType="wstr"
+                      length="122"
+                      name="Staff Name" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -634,6 +653,12 @@ ORDER BY GFT</property>
                       length="5"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GFT]"
                       name="GFT" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Staff Name]"
+                      dataType="wstr"
+                      length="122"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Staff Name]"
+                      name="Staff Name" />
                     <outputColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
