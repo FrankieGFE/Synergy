@@ -14,40 +14,40 @@ SELECT
     ,ISNULL([Organization].[ORGANIZATION_NAME],'') AS [Current Primary School]
     ,ISNULL([Grades].[VALUE_DESCRIPTION],'') AS [Current Grade Level]
 FROM
-(
-/*This is 3 pulls from the same Excel spreadsheet union'ed together.
-to get all the id's with data in the 2013-14 and 2014-2015 columns.*/
-SELECT 
-    * 
-FROM 
-    OPENROWSET('Microsoft.ACE.OLEDB.12.0', 'Excel 12.0; 
-			 HDR=YES; IMEX=1; Database=\\syntempssis.aps.edu.actd\Files\TempQuery\504Data.xlsx', 'SELECT [ID#] FROM [HIGH$] WHERE [2013-14] IS NOT NULL OR [2014-2015] IS NOT NULL')
+    (
+    /*This is 3 pulls from the same Excel spreadsheet union'ed together.
+    to get all the id's with data in the 2013-14 and 2014-2015 columns.*/
+    SELECT 
+	   * 
+    FROM 
+	   OPENROWSET('Microsoft.ACE.OLEDB.12.0', 'Excel 12.0; 
+				HDR=YES; IMEX=1; Database=\\syntempssis.aps.edu.actd\Files\TempQuery\504Data.xlsx', 'SELECT [ID#] FROM [HIGH$] WHERE [2013-14] IS NOT NULL OR [2014-2015] IS NOT NULL')
 
-WHERE
-    [ID#] IS NOT NULL
+    WHERE
+	   [ID#] IS NOT NULL
 
-UNION
+    UNION
 
-SELECT 
-    * 
-FROM 
-    OPENROWSET('Microsoft.ACE.OLEDB.12.0', 'Excel 12.0; 
-			 HDR=YES; IMEX=1; Database=\\syntempssis.aps.edu.actd\Files\TempQuery\504Data.xlsx', 'SELECT [ID#] FROM [MIDDLE$] WHERE [2013-14] IS NOT NULL OR [2014-2015] IS NOT NULL')
+    SELECT 
+	   * 
+    FROM 
+	   OPENROWSET('Microsoft.ACE.OLEDB.12.0', 'Excel 12.0; 
+				HDR=YES; IMEX=1; Database=\\syntempssis.aps.edu.actd\Files\TempQuery\504Data.xlsx', 'SELECT [ID#] FROM [MIDDLE$] WHERE [2013-14] IS NOT NULL OR [2014-2015] IS NOT NULL')
 
-WHERE
-    [ID#] IS NOT NULL
+    WHERE
+	   [ID#] IS NOT NULL
 
-UNION
+    UNION
 
-SELECT 
-    * 
-FROM 
-    OPENROWSET('Microsoft.ACE.OLEDB.12.0', 'Excel 12.0; 
-			 HDR=YES; IMEX=1; Database=\\syntempssis.aps.edu.actd\Files\TempQuery\504Data.xlsx', 'SELECT [ID#] FROM [ELEMENTARY$] WHERE [2013-14] IS NOT NULL OR [2014-2015] IS NOT NULL')
+    SELECT 
+	   * 
+    FROM 
+	   OPENROWSET('Microsoft.ACE.OLEDB.12.0', 'Excel 12.0; 
+				HDR=YES; IMEX=1; Database=\\syntempssis.aps.edu.actd\Files\TempQuery\504Data.xlsx', 'SELECT [ID#] FROM [ELEMENTARY$] WHERE [2013-14] IS NOT NULL OR [2014-2015] IS NOT NULL')
 
-WHERE
-    [ID#] IS NOT NULL
-) AS [504Students]
+    WHERE
+	   [ID#] IS NOT NULL
+    ) AS [504Students]
 
     LEFT JOIN --join student to get their GU
     [rev].[EPC_STU] AS [Student]
