@@ -1,7 +1,7 @@
 /**
- * $Revision: 20 $
- * $LastChangedBy: e201594 $
- * $LastChangedDate: 2012-10-01 12:06:39 -0600 (Mon, 01 Oct 2012) $
+ * $Revision$
+ * $LastChangedBy$
+ * $LastChangedDate$
  */
  
 -- Removing function if it exists

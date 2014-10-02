@@ -1,7 +1,7 @@
 /**
- * $Revision: 21 $
- * $LastChangedBy: e201594 $
- * $LastChangedDate: 2014-08-07 17:42:03 -0600 (Wed, 07 Aug 2014) $
+ * $Revision$
+ * $LastChangedBy$
+ * $LastChangedDate$
  *
  *  This view calculates the min/max possible calendar dates for a year_gu 
  *  It is used in conjunction withorgyear when narrowing down where people should be searching for things

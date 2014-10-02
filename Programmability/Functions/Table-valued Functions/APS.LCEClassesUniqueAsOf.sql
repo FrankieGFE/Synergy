@@ -1,8 +1,8 @@
 
 /**
- * $Revision: 1 $
- * $LastChangedBy: e104090 $
- * $LastChangedDate: 2014-09-04 $
+ * $Revision$
+ * $LastChangedBy$
+ * $LastChangedDate$
  *
  */
 

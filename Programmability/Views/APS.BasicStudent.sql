@@ -1,7 +1,7 @@
 /**
  * 
  * $LastChangedBy: Gary Corbaley
- * $LastChangedDate: 08/26/2014 $
+ * $LastChangedDate$
  *
  * Request By: Brian Rieb
  * InitialRequestDate: 08/26/2014

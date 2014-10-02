@@ -1,8 +1,8 @@
 
 /**
  * $Revision:1 $
- * $LastChangedBy: e104090 $
- * $LastChangedDate: 20140902 $
+ * $LastChangedBy$
+ * $LastChangedDate$
  */
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[LCEMostRecentALSRefusalAsOf]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
 	EXEC('CREATE FUNCTION APS.LCEMostRecentALSRefusalAsOf()RETURNS TABLE AS RETURN (SELECT 0 AS DUMMY)')

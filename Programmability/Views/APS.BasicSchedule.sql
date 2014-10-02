@@ -1,7 +1,7 @@
 /**
  * 
  * $LastChangedBy: Gary Corbaley
- * $LastChangedDate: 09/02/2014 $
+ * $LastChangedDate$
  *
  * 
  * This View pulls one record per student class (schedule)with pertinenet informaiton

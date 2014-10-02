@@ -1,7 +1,7 @@
 /**
  * 
  * $LastChangedBy: Brian Rieb
- * $LastChangedDate: 08/29/2014 $
+ * $LastChangedDate$
  *
  * Readable Student Test Information
  * One Record Per Student per test
