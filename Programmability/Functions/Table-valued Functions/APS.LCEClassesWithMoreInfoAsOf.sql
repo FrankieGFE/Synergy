@@ -1,7 +1,7 @@
 /**
- * $Revision: 188 $
- * $LastChangedBy: e201594 $
- * $LastChangedDate: 2014-10-02 08:06:16 -0600 (Thu, 02 Oct 2014) $
+ * $Revision$
+ * $LastChangedBy$
+ * $LastChangedDate$
  */
   
 -- Removing function if it exists
@@ -11,13 +11,11 @@ GO
 
 /**
  * FUNCTION APS.LCEClassesWithMoreInfoAsOf
- * Returns a list of properly tagged and credentialed sections as it applies to LCE
- *
- * Tables Used: APS.LCEClassesWithMoreInfoAsOf,  EPC_STU_PGM_ELL_HIS
+ * Returns a list of properly tagged and credentialed sections as it applies to LCE and pivoted tags as well as resolved credentials
  *
  * #param DATE @AsOfDate date to look for credentials
  * 
- * #return TABLE one record per section.  Includes credential and basic course information
+ * #return TABLE one record per section.  Includes credential and basic course information, resolved credentials and pivoted tags
  */
 ALTER FUNCTION APS.LCEClassesWithMoreInfoAsOf(@AsOfDate DATE)
 RETURNS TABLE
