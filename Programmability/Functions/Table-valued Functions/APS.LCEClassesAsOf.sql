@@ -1,9 +1,9 @@
 /**
  * $Revision$
  * $LastChangedBy$
- * $LastChangedDate: wha$
- * $Author: foo$
- * $Date: foo$
+ * $LastChangedDate$
+ * $Author$
+ * $Date$
  */
  
 -- Removing function if it exists
