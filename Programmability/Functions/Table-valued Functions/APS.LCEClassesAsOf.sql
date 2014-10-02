@@ -2,6 +2,7 @@
  * $Revision: 19 $
  * $LastChangedBy: e201594 $
  * $LastChangedDate: 2014-10-02$
+ * $Keywords: foo$
  */
  
 -- Removing function if it exists
