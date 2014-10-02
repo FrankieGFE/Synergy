@@ -2,10 +2,8 @@
  * $Revision$
  * $LastChangedBy$
  * $LastChangedDate$
- * $Author$
- * $Date$
  */
- 
+  
 -- Removing function if it exists
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[LCEClassesAsOf]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
 	EXEC('CREATE FUNCTION APS.LCEClassesAsOf() RETURNS TABLE AS RETURN (SELECT 0 AS DUMMY)')
