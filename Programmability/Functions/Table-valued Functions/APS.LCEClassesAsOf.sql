@@ -1,6 +1,6 @@
 /**
- * $Revision: 19 $
- * $LastChangedBy: e201594 $
+ * $Revision$
+ * $LastChangedBy$
  * $LastChangedDate: 2014-10-02$
  * $Keywords: foo$
  */
