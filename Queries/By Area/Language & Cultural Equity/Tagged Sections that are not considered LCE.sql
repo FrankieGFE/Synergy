@@ -17,6 +17,7 @@ FROM
 	(
 	SELECT
 		Sections.SECTION_GU
+		,Sections.ORGANIZATION_GU
 		,School.ORGANIZATION_NAME
 		,Sections.TERM_CODE
 		,Sections.COURSE_ID
@@ -127,4 +128,5 @@ FROM
 		)
 
 	) AS PivotedSectionData
-
+WHERE
+	ORGANIZATION_GU LIKE '%' -- Needed if its going to turn into a report.
