@@ -130,3 +130,8 @@ FROM
 	) AS PivotedSectionData
 WHERE
 	ORGANIZATION_GU LIKE '%' -- Needed if its going to turn into a report.
+ORDER BY
+	ORGANIZATION_NAME
+	,TERM_CODE
+	,COURSE_ID
+	,SECTION_ID
