@@ -22,9 +22,9 @@ GO
  *
  * Finally, the process can run some basic output for review/forensic work on what it did.  The type of output is controlled by the @Output variable.
  *
- * #param DATE @asOfDate			The date to run it's calcualations off of.  This also efects the ENTER_DATE of the BEP record created
- * #param DATE @RemoveFrom		Starting Date range of BEP records to remove (inclusive of date)
- * #param DATE @RemoveTo			End date range of BEP records to remove (inclusive of date)
+ * #param DATE @asOfDate			The date to run it's calcualations off of.  
+ * #param DATE @BEPRangeFrom		Starting Date range of BEP records to remove (inclusive of date) **AND** ENTER_DATE of the BEP record to be created
+ * #param DATE @BEPRangeTo		End date range of BEP records to remove (inclusive of date) **AND** EXIT_DATE of the BEP record to be created
  * #param VARCHAR(64) @RunMode	Whether to actually touch the BEP records. A values are 'CreateRecords' will create the records.
  *							Any other value will cause the BEP records to not be removed/created
  * #param VARCHAR(64) @Output		What the SPROC generates as a return (from a table standpoint) Non-valid values will cause no output. Valid values are:
@@ -35,8 +35,8 @@ GO
  */
 ALTER PROC [APS].[CreateLCEBilingualModelsAndHours](
 	@asOfDate DATE
-	,@RemoveFrom DATE 
-	,@RemoveTo DATE 
+	,@BEPRangeFrom DATE 
+	,@BEPRangeTo DATE 
 	,@RunMode VARCHAR(64) -- CreateRecords, or Test
 	,@Output VARCHAR(64) -- Totals, Student, Detail
 )
@@ -46,9 +46,10 @@ BEGIN
 
 /*
 -- use these if you rip the SQL out to run independently
-DECLARE @asOfDate DATE = GETDATE()
-DECLARE @RemoveFrom DATE = '8/13/2014'
-DECLARE @RemoveTo DATE = GETDATE()
+-- This Also gives an example of what data to pass to test and get details for 40th day 20114
+DECLARE @asOfDate DATE = '10/8/2014'
+DECLARE @BEPRangeFrom DATE = '8/13/2014'
+DECLARE @BEPRangeTo DATE = '10/8/2014'
 DECLARE @RunMode VARCHAR(64) = 'Test' -- CreateRecords, or Test
 DECLARE @Output VARCHAR(64) = 'Detail' -- Totals, Student, Detail
 */
@@ -612,41 +613,29 @@ BEGIN
 
 	-- ------------------------------------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------------
-	-- Step 2: Remove records to be replaced
+	-- Step 2: Remove BEP records inside the range we are working for
 	-- ------------------------------------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------------
 	DELETE FROM
 		rev.EPC_STU_PGM_ELL_BEP
 	WHERE
-		ENTER_DATE BETWEEN @RemoveFrom AND @RemoveTo
+		ENTER_DATE BETWEEN @BEPRangeFrom AND @BEPRangeTo
 
 
 
 	-- ------------------------------------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------------
-	-- Step 3: Close Open Ones For kids on our list
+	-- Step 3: Close Open BEPS with the start date of the next period
 	-- ------------------------------------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------------
 
-	-- **QUESTION**: Shouldn't I just be closing all?  I think so
 	UPDATE
 		CurrentBEP
 	SET
-		EXIT_DATE = @asOfDate
+		EXIT_DATE = @BEPRangeFrom
 	FROM
 		rev.EPC_STU_PGM_ELL_BEP AS CurrentBEP
 
--- **QUESTION**: Shouldn't I just be closing all?  I think so
-/*
-		INNER JOIN
-		(SELECT DISTINCT
-			STUDENT_GU
-		FROM
-			@BEPDetail 
-		)AS NewBEP
-		ON
-		CurrentBEP.STUDENT_GU = NewBEP.STUDENT_GU
-*/
 	WHERE
 		CurrentBEP.EXIT_DATE IS NULL
 
