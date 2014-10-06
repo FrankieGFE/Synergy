@@ -55,7 +55,7 @@ FROM
 		StudentTest.STUDENT_TEST_GU = StudentTestPart.STUDENT_TEST_GU
 	
 	WHERE
-		TestDefinition.TEST_TYPE = 'ALTSP' -- Spanish Assessments
+		TestDefinition.TEST_TYPE = 'ASSES' -- Spanish Assessments
 		AND StudentTest.ADMIN_DATE <= @asOfDate
 		AND StudentTestPart.PERFORMANCE_LEVEL != 'INCOM'  -- If a test has an incomplete performance level, do not use it
 	) AS ELLTests
