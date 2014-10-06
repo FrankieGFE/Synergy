@@ -131,6 +131,27 @@ ORDER BY
         </Field>
       </Fields>
     </DataSet>
+    <DataSet Name="FocusFromUser">
+      <SharedDataSet>
+        <SharedDataSetReference>/Data Sets/FocusFromUser</SharedDataSetReference>
+        <QueryParameters>
+          <QueryParameter Name="@User">
+            <Value>=Parameters!User.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <rd:ReportServerUrl>http://synergyreports.aps.edu/ReportServer</rd:ReportServerUrl>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="FOCUS_ORGANIZATION_GU">
+          <DataField>FOCUS_ORGANIZATION_GU</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FOCUS_YEAR_GU">
+          <DataField>FOCUS_YEAR_GU</DataField>
+          <rd:TypeName>System.Guid</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -746,7 +767,7 @@ ORDER BY
                       <Textbox Name="SchoolName1">
                         <CanGrow>true</CanGrow>
                         <ToggleImage>
-                          <InitialState>true</InitialState>
+                          <InitialState>=IIF(Parameters!ExpandSchool.Value="Collapse",false,true)</InitialState>
                         </ToggleImage>
                         <KeepTogether>true</KeepTogether>
                         <Paragraphs>
@@ -786,6 +807,7 @@ ORDER BY
                     <TablixMember>
                       <Group Name="Group1" />
                       <Visibility>
+                        <Hidden>=IIF(Parameters!ExpandSchool.Value="Collapse",true,false)</Hidden>
                         <ToggleItem>SchoolName1</ToggleItem>
                       </Visibility>
                     </TablixMember>
@@ -960,7 +982,7 @@ ORDER BY
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Paramaters</Value>
+                      <Value>Parameters</Value>
                       <Style>
                         <FontFamily>Segoe UI</FontFamily>
                         <FontSize>12pt</FontSize>
@@ -1254,6 +1276,12 @@ ORDER BY
     </ReportParameter>
     <ReportParameter Name="School">
       <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>FocusFromUser</DataSetName>
+          <ValueField>FOCUS_ORGANIZATION_GU</ValueField>
+        </DataSetReference>
+      </DefaultValue>
       <Prompt>School</Prompt>
       <ValidValues>
         <DataSetReference>
@@ -1261,6 +1289,27 @@ ORDER BY
           <ValueField>ORGANIZATION_GU</ValueField>
           <LabelField>ORGANIZATION_NAME</LabelField>
         </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="ExpandSchool">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Expand</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Expand Schools By Default</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>Expand</Value>
+            <Label>Yes</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>Collapse</Value>
+            <Label>No</Label>
+          </ParameterValue>
+        </ParameterValues>
       </ValidValues>
     </ReportParameter>
   </ReportParameters>
