@@ -16,6 +16,7 @@
 USE ST_Experiment
 BEGIN TRAN
 
+--uncomment this parts to run the update
 /*UPDATE
     [rev].[EPC_STU_ENROLL]
 
@@ -54,6 +55,9 @@ ROLLBACK
 
 USE ST_Release
 BEGIN TRAN
+
+--uncomment this part to run the update
+
 /*UPDATE [Student]
     SET [Student].[MILITARY_FAMILY_CODE]='AC'
 
