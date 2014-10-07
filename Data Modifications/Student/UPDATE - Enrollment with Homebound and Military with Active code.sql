@@ -13,11 +13,11 @@
  *
  */
 
-USE ST_Experiment
+USE ST_Release
 BEGIN TRAN
 
 --uncomment this parts to run the update
-/*UPDATE
+UPDATE
     [rev].[EPC_STU_ENROLL]
 
 SET
@@ -25,8 +25,6 @@ SET
 
 WHERE
     [ENR_USER_DD_4]='HOME'
-
-*/
 
 SELECT
     [Student].[STUDENT_GU]
@@ -58,8 +56,8 @@ BEGIN TRAN
 
 --uncomment this part to run the update
 
-/*UPDATE [Student]
-    SET [Student].[MILITARY_FAMILY_CODE]='AC'
+UPDATE [Student]
+    SET [Student].[MILITARY_FAMILY_CODE]='Active'
 
 FROM
     [rev].[EPC_STU] AS [Student]
@@ -76,9 +74,15 @@ FROM
     ON
     [StuParent].[PARENT_GU]=[Parent].[PARENT_GU]
 
+    INNER JOIN
+    [APS].[LookupTable]('K12.Demographics','MILITARY_FAMILY_CODE') AS [Lookup]
+
+    ON
+    [Lookup].[VALUE_CODE]='Active'
+
 WHERE
     [Parent].[ACTIVE_MILITARY]='Y'
-*/
+
 
 SELECT
     [Student].[STUDENT_GU]
