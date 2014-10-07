@@ -44,6 +44,9 @@ ALTER PROC [APS].[CreateLCEBilingualModelsAndHours](
 AS
 BEGIN
 
+SET NOCOUNT ON
+SET ANSI_WARNINGS OFF
+
 /*
 -- use these if you rip the SQL out to run independently
 -- This Also gives an example of what data to pass to test and get details for 40th day 20114
@@ -263,55 +266,28 @@ SET
 	SecondHour = 1
 WHERE
 	(
-	GRADE <= '150' --5th grade
-	AND (
-			(
-			ELL IS NOT NULL
-			AND (
-					(TeacherESL IS NOT NULL -- SHould be TeacherESL
-					AND (COALESCE(ALSES,ALSED) IS NOT NULL) 
-					)
-				OR 
-					(
-					TeacherBilingual = 1 
-					AND(COALESCE(ALSMA, ALSSC, ALSSS) IS NOT NULL)
-					)
+		(
+		ELL IS NOT NULL
+		AND (
+				(TeacherESL IS NOT NULL -- SHould be TeacherESL
+				AND (COALESCE(ALSES,ALSED) IS NOT NULL) 
+				)
+			OR 
+				(
+				TeacherBilingual = 1 
+				AND(COALESCE(ALSMA, ALSSC, ALSSS, ALSOT) IS NOT NULL)
 				)
 			)
-			OR
-			(
-				(ELL IS NULL)
-				AND (COALESCE(ALSMA, ALSSC, ALSSS) IS NOT NULL)
-				AND TeacherBilingual = 1
-			)
+		)
+		OR
+		(
+			(ELL IS NULL)
+			AND (COALESCE(ALSMA, ALSSC, ALSSS, ALSOT) IS NOT NULL)
+			AND TeacherBilingual = 1
 		)
 	)
-	OR
-	(
-	GRADE > '150' -- > 5th grade
-	AND (
-			(
-			ELL IS NOT NULL
-			AND (
-					(
-					TeacherESL = 1
-					AND COALESCE(ALSES,ALSED) IS NOT NULL 
-					)
-					OR 
-					(
-					TeacherBilingual = 1
-					AND COALESCE(ALSMA, ALSSC, ALSSS, ALSOT) IS NOT NULL
-					)
-				)
-			)
-			OR
-			(
-				(ELL IS NULL)
-				AND COALESCE(ALSMA, ALSSC, ALSSS, ALSOT) IS NOT NULL
-				AND TeacherBilingual = 1
-			)
-		)
-	)
+	
+
 
 
 -- ------------------------------------------------------------------------------------------------------
@@ -532,6 +508,37 @@ WHERE
 
 
 -- ------------------------------------------------------------------------------------------------------
+-- Exception Rule: If not in 2way dual and not PHLOTE and not ELL then 0 hrs
+-- ------------------------------------------------------------------------------------------------------
+
+UPDATE
+	Detail
+SET
+	TotalHours = 0
+FROM
+	@BEPDetail AS Detail
+
+	LEFT JOIN
+
+	(
+	-- one record per kid	
+	SELECT
+		STUDENT_GU
+		-- see if they have any dual courses
+		,ISNULL(SUM(CASE WHEN ALS2W IS NOT NULL THEN 1 ELSE 0 END),0) AS DualSum		
+	FROM
+		@BEPDetail
+	GROUP BY
+		STUDENT_GU
+	) AS Has2Way
+	ON
+	Detail.STUDENT_GU = Has2Way.STUDENT_GU
+WHERE
+	Has2Way.STUDENT_GU IS NULL
+	AND Detail.PHLOTE IS NULL
+	AND Detail.ELL IS NULL
+
+-- ------------------------------------------------------------------------------------------------------
 -- Exception Rule: If ELL And Maitenance and 1 hour => change to 2
 -- ------------------------------------------------------------------------------------------------------
 UPDATE
@@ -545,7 +552,7 @@ WHERE
 
 
 -- ------------------------------------------------------------------------------------------------------
--- Exception Rule: If FEP And Maintenance or Transition change model to Enrichment
+-- Exception Rule: If (FEP or not ELL) And Maintenance or Transition change model to Enrichment
 -- ------------------------------------------------------------------------------------------------------
 UPDATE
 	@BEPDetail
@@ -553,11 +560,15 @@ SET
 	[Bilingual Model] = 'ENRIC'
 WHERE
 	[Bilingual Model] IN ('MAINT', 'TRANS')
-	AND FEP IS NOT NULL 
-
+	AND 
+		(
+		FEP IS NOT NULL 
+		OR
+		ELL IS NULL
+		)
 
 -- ------------------------------------------------------------------------------------------------------
--- Exception Rule: If FEP And Enrichment and 3 total hours, reduce to 2
+-- Exception Rule: If FEP or Non-ELL And Enrichment and 3 total hours, reduce to 2
 -- ------------------------------------------------------------------------------------------------------
 UPDATE
 	@BEPDetail
@@ -632,7 +643,7 @@ BEGIN
 	UPDATE
 		CurrentBEP
 	SET
-		EXIT_DATE = @BEPRangeFrom
+		EXIT_DATE = DATEADD(day, -1,@BEPRangeFrom) -- Day before
 	FROM
 		rev.EPC_STU_PGM_ELL_BEP AS CurrentBEP
 
@@ -656,7 +667,7 @@ BEGIN
 		)
 	SELECT
 		NEWID()
-		,@asOfDate
+		,@BEPRangeFrom
 		,StudentBEP.*
 	FROM
 		(
@@ -674,7 +685,7 @@ BEGIN
 	COMMIT
 END -- END IF
 
-
+--DT-1000 slaitnederC ffatS
 
 
 -- ------------------------------------------------------------------------------------------------------
@@ -682,59 +693,8 @@ END -- END IF
 -- Output (When Applicable)
 -- ------------------------------------------------------------------------------------------------------
 -- ------------------------------------------------------------------------------------------------------
-IF @Output = 'Student'
-	BEGIN
-	-- ** Kids with hours (one per kid) **
-	SELECT
-		Organization.ORGANIZATION_NAME AS School
-		,BasicStudent.SIS_NUMBER
-		,BasicStudent.LAST_NAME
-		,BasicStudent.FIRST_NAME
-		,GradeLevel.VALUE_DESCRIPTION AS GRADE
-		,TotalHours
-		,[Bilingual Model]
-	FROM
-		(
-		SELECT
-			DISTINCT
-			STUDENT_GU
-			,TotalHours
-			,[Bilingual Model]
-		FROM
-			@BEPDetail 
-		WHERE
-			TotalHours!=0
-			OR [Bilingual Model] != ''
-		)AS BEP
-		INNER JOIN
-		APS.PrimaryEnrollmentsAsOf(GETDATE()) AS Enroll
-		ON
-		BEP.STUDENT_GU = Enroll.STUDENT_GU
 
-		INNER JOIN
-		APS.BasicStudent
-		ON
-		BEP.STUDENT_GU = BasicStudent.STUDENT_GU
-
-		INNER JOIN
-		rev.REV_ORGANIZATION_YEAR AS OrgYear
-		ON
-		Enroll.ORGANIZATION_YEAR_GU = OrgYear.ORGANIZATION_YEAR_GU
-
-		INNER JOIN
-		rev.REV_ORGANIZATION AS Organization
-		ON
-		OrgYear.ORGANIZATION_GU = Organization.ORGANIZATION_GU
-
-		LEFT JOIN
-		APS.LookupTable('k12','Grade') AS GradeLevel
-		ON
-		Enroll.GRADE = GradeLevel.VALUE_CODE
-	ORDER BY
-		Organization.ORGANIZATION_NAME
-		,GradeLevel.LIST_ORDER
-	END
-ELSE IF @Output = 'Detail'
+IF @Output = 'Detail'
 	BEGIN
 	--/* **Detail Data**
 	SELECT
@@ -823,6 +783,60 @@ ELSE IF @Output = 'Detail'
 		,DCM.COURSE_ID
 	--*/
 	END
+-- -----------------------------------------------------------------------------------------------------
+ELSE IF @Output = 'Student'
+	BEGIN
+	-- ** Kids with hours (one per kid) **
+	SELECT
+		Organization.ORGANIZATION_NAME AS School
+		,BasicStudent.SIS_NUMBER
+		,BasicStudent.LAST_NAME
+		,BasicStudent.FIRST_NAME
+		,GradeLevel.VALUE_DESCRIPTION AS GRADE
+		,TotalHours
+		,[Bilingual Model]
+	FROM
+		(
+		SELECT
+			DISTINCT
+			STUDENT_GU
+			,TotalHours
+			,[Bilingual Model]
+		FROM
+			@BEPDetail 
+		WHERE
+			TotalHours!=0
+			OR [Bilingual Model] != ''
+		)AS BEP
+		INNER JOIN
+		APS.PrimaryEnrollmentsAsOf(GETDATE()) AS Enroll
+		ON
+		BEP.STUDENT_GU = Enroll.STUDENT_GU
+
+		INNER JOIN
+		APS.BasicStudent
+		ON
+		BEP.STUDENT_GU = BasicStudent.STUDENT_GU
+
+		INNER JOIN
+		rev.REV_ORGANIZATION_YEAR AS OrgYear
+		ON
+		Enroll.ORGANIZATION_YEAR_GU = OrgYear.ORGANIZATION_YEAR_GU
+
+		INNER JOIN
+		rev.REV_ORGANIZATION AS Organization
+		ON
+		OrgYear.ORGANIZATION_GU = Organization.ORGANIZATION_GU
+
+		LEFT JOIN
+		APS.LookupTable('k12','Grade') AS GradeLevel
+		ON
+		Enroll.GRADE = GradeLevel.VALUE_CODE
+	ORDER BY
+		Organization.ORGANIZATION_NAME
+		,GradeLevel.LIST_ORDER
+	END
+-- -----------------------------------------------------------------------------------------------------
 ELSE IF @Output = 'Totals'
 	BEGIN
 	-- ** Groups by Schools
@@ -878,5 +892,8 @@ ELSE IF @Output = 'Totals'
 		,[Bilingual Model] + ' - ' + CONVERT(NVARCHAR,TotalHours)
 
 	END -- endif
+
+SET NOCOUNT OFF
+SET ANSI_WARNINGS ON
 
 END -- END SRPOC
