@@ -1,4 +1,12 @@
+/* $Revision$
+ * $LastChangedBy$
+ * $LastChangedDate$
+ *
+ * Information needed on Bilingual Students for Totalling Purposes
+ * **NOTE** This is used in a report
+ */
 DECLARE @asOfDate DATE = GETDATE()
+DECLARE @School VARCHAR(64) = '%'
 
 SELECT
 	Organization.ORGANIZATION_NAME AS School
@@ -55,4 +63,4 @@ FROM
 	ON
 	BEP.PROGRAM_CODE = BEPProgramCode.VALUE_CODE
 WHERE
-	OrgYear.ORGANIZATION_GU LIKE '%'
+	OrgYear.ORGANIZATION_GU LIKE @School
