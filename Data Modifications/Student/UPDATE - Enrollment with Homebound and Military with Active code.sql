@@ -13,18 +13,67 @@
  *
  */
 
-USE ST_Release
 BEGIN TRAN
-
 --uncomment this parts to run the update
-UPDATE
-    [rev].[EPC_STU_ENROLL]
+UPDATE 
+    [Enroll]
+    SET [Enroll].[HOMEBOUND]='Y'
 
-SET
-[HOMEBOUND]='Y'
+FROM
+    [rev].[EPC_STU_ENROLL] AS [Enroll]
+
+    INNER JOIN
+    [rev].[EPC_STU_SCH_YR] AS [StudentSchoolYear]
+
+    ON
+    [Enroll].[STUDENT_SCHOOL_YEAR_GU]=[StudentSchoolYear].[STUDENT_SCHOOL_YEAR_GU]
+
+    INNER JOIN
+    [rev].[REV_YEAR] AS [Year]
+
+    ON
+    [StudentSchoolYear].[YEAR_GU]=[Year].[YEAR_GU]
+
+    INNER JOIN
+    [rev].[EPC_STU] AS [Student]
+
+    ON
+    [StudentSchoolYear].[STUDENT_GU]=[Student].[STUDENT_GU]
 
 WHERE
-    [ENR_USER_DD_4]='HOME'
+    LOWER([Enroll].[ENR_USER_DD_4])='home'
+    AND [Year].[SCHOOL_YEAR]=2014
+    AND [Year].[EXTENSION]='R'
+
+UPDATE 
+    [StudentSchoolYear]
+    SET [StudentSchoolYear].[HOMEBOUND]='Y'
+
+FROM
+    [rev].[EPC_STU_ENROLL] AS [Enroll]
+
+    INNER JOIN
+    [rev].[EPC_STU_SCH_YR] AS [StudentSchoolYear]
+
+    ON
+    [Enroll].[STUDENT_SCHOOL_YEAR_GU]=[StudentSchoolYear].[STUDENT_SCHOOL_YEAR_GU]
+
+    INNER JOIN
+    [rev].[REV_YEAR] AS [Year]
+
+    ON
+    [StudentSchoolYear].[YEAR_GU]=[Year].[YEAR_GU]
+
+    INNER JOIN
+    [rev].[EPC_STU] AS [Student]
+
+    ON
+    [StudentSchoolYear].[STUDENT_GU]=[Student].[STUDENT_GU]
+
+WHERE
+    LOWER([Enroll].[ENR_USER_DD_4])='home'
+    AND [Year].[SCHOOL_YEAR]=2014
+    AND [Year].[EXTENSION]='R'
 
 SELECT
     [Student].[STUDENT_GU]
@@ -40,24 +89,28 @@ FROM
     [Enroll].[STUDENT_SCHOOL_YEAR_GU]=[StudentSchoolYear].[STUDENT_SCHOOL_YEAR_GU]
 
     INNER JOIN
+    [rev].[REV_YEAR] AS [Year]
+
+    ON
+    [StudentSchoolYear].[YEAR_GU]=[Year].[YEAR_GU]
+
+    INNER JOIN
     [rev].[EPC_STU] AS [Student]
 
     ON
     [StudentSchoolYear].[STUDENT_GU]=[Student].[STUDENT_GU]
 
 WHERE
-    [Enroll].[ENR_USER_DD_4]='HOME'
+    LOWER([Enroll].[ENR_USER_DD_4])='home'
+    AND [Year].[SCHOOL_YEAR]=2014
+    AND [Year].[EXTENSION]='R'
 
-ROLLBACK
+COMMIT
 
-
-USE ST_Release
 BEGIN TRAN
-
 --uncomment this part to run the update
-
 UPDATE [Student]
-    SET [Student].[MILITARY_FAMILY_CODE]='Active'
+    SET [Student].[MILITARY_FAMILY_CODE]='AC'
 
 FROM
     [rev].[EPC_STU] AS [Student]
@@ -73,12 +126,6 @@ FROM
 
     ON
     [StuParent].[PARENT_GU]=[Parent].[PARENT_GU]
-
-    INNER JOIN
-    [APS].[LookupTable]('K12.Demographics','MILITARY_FAMILY_CODE') AS [Lookup]
-
-    ON
-    [Lookup].[VALUE_CODE]='Active'
 
 WHERE
     [Parent].[ACTIVE_MILITARY]='Y'
