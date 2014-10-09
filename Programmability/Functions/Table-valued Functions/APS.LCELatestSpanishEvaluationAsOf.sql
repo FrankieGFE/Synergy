@@ -1,10 +1,8 @@
-
-/*
- * Debbie Ann Chavez
- * 9/3/2014
- * 
+/* $Revision$
+ * $LastChangedBy$
+ * $LastChangedDate$
  */
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[LCELatestSpanishEvaluationAsOf]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[LCELatestSpanishEvaluationAsOf]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
 	EXEC('CREATE FUNCTION APS.LCELatestSpanishEvaluationAsOf()RETURNS TABLE AS RETURN (SELECT 0 AS DUMMY)')
 GO
 
@@ -16,7 +14,7 @@ GO
  *
  * #param DATETIME @asOfDate Date to pull Test Score data from
  * 
- * #return TABLE per student, test information on the latest applicable test
+ * #return TABLE per qualifying student, with most recent spanish assesment information for that student.
  */
  
 ALTER FUNCTION APS.LCELatestSpanishEvaluationAsOf(@asOfDate DATETIME)
@@ -55,7 +53,7 @@ FROM
 		StudentTest.STUDENT_TEST_GU = StudentTestPart.STUDENT_TEST_GU
 	
 	WHERE
-		TestDefinition.TEST_TYPE = 'ASSES' -- Spanish Assessments
+		TestDefinition.TEST_TYPE = 'ALTSP' -- Spanish Assessments
 		AND StudentTest.ADMIN_DATE <= @asOfDate
 		AND StudentTestPart.PERFORMANCE_LEVEL != 'INCOM'  -- If a test has an incomplete performance level, do not use it
 	) AS ELLTests
