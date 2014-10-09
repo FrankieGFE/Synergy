@@ -24,17 +24,34 @@ RETURNS TABLE
 AS
 RETURN	
 SELECT
-	Enroll.*
-	,History.ENTRY_DATE
-	,History.EXIT_DATE
-	,History.EXIT_REASON
-	,History.STU_PGM_ELL_HIS_GU
+	ALLHistory.STUDENT_GU
+	,ALLHistory.ORGANIZATION_YEAR_GU
+	,ALLHistory.STUDENT_SCHOOL_YEAR_GU
+	,ALLHistory.ENROLLMENT_GU
+	,ALLHistory.ENTER_DATE
+	,ALLHistory.LEAVE_DATE
+	,ALLHistory.GRADE
+	,ALLHistory.STU_PGM_ELL_HIS_GU
+	,ALLHistory.ENTRY_DATE
+	,ALLHistory.EXIT_DATE
+	,ALLHistory.EXIT_REASON
 FROM
-	rev.EPC_STU_PGM_ELL_HIS AS History
-
-	INNER JOIN
-	APS.PrimaryEnrollmentsAsOf(@asOfDate) AS Enroll
-	ON 
-	History.STUDENT_GU = Enroll.STUDENT_GU
-WHERE
-	@asOfDate BETWEEN History.ENTRY_DATE AND COALESCE(History.EXIT_DATE, CONVERT(DATE, GETDATE()))
+	(
+	SELECT
+		Enroll.*
+		,History.ENTRY_DATE
+		,History.EXIT_DATE
+		,History.EXIT_REASON
+		,History.STU_PGM_ELL_HIS_GU
+		,ROW_NUMBER() OVER (PARTITION BY Enroll.STUDENT_GU ORDER BY ENTRY_DATE DESC) AS RN
+	FROM
+		rev.EPC_STU_PGM_ELL_HIS AS History
+		INNER JOIN
+		APS.PrimaryEnrollmentsAsOf(@asOfDate) AS Enroll
+		ON 
+		History.STUDENT_GU = Enroll.STUDENT_GU
+	WHERE
+		@asOfDate BETWEEN History.ENTRY_DATE AND COALESCE(History.EXIT_DATE, @asOfDate)
+	) AS ALLHistory
+WHERE 
+	RN=1

@@ -24,10 +24,14 @@ SELECT
 	,BEPProgramCode.VALUE_DESCRIPTION AS BEPProgramDescription
 	,BEP.PROGRAM_INTENSITY AS BEPHours
 
-	,LatestEvaluation.ADMIN_DATE AS TestDate
-	,LatestEvaluation.TEST_NAME AS Test
-	,PerformanceLevel.VALUE_DESCRIPTION AS TEstPerfomanceLevel
+	,LatestEvaluation.ADMIN_DATE AS EnglishEvalDate
+	,LatestEvaluation.TEST_NAME AS EnglishEval
+	,PerformanceLevel.VALUE_DESCRIPTION AS EnglishEvalPerformanceLevel
 
+	,SpanishEval.ADMIN_DATE AS SpanishEvalDate
+	,SpanishEval.TEST_NAME AS SpanishEval
+	,SpanishPerformanceLevel.VALUE_DESCRIPTION AS SpanishEvalPerformanceLevel
+	
 	,Schedule.COURSE_ID AS CourseID
 	,Schedule.COURSE_TITLE AS Course
 	,Schedule.SECTION_ID AS SectionID
@@ -125,6 +129,16 @@ FROM
 	APS.LookupTable('K12.TestInfo','Performance_Levels') AS PerformanceLevel
 	ON
 	LatestEvaluation.PERFORMANCE_LEVEL = PerformanceLevel.VALUE_CODE
+
+	LEFT JOIN
+	APS.LCELatestSpanishEvaluationAsOf(@asOfDate) AS SpanishEval
+	ON
+	BEP.STUDENT_GU = SpanishEval.STUDENT_GU
+
+	LEFT JOIN
+	APS.LookupTable('K12.TestInfo','Performance_Levels') AS SpanishPerformanceLevel
+	ON
+	SpanishEval.PERFORMANCE_LEVEL = SpanishPerformanceLevel.VALUE_CODE
 WHERE
 	Schedule.ORGANIZATION_GU LIKE @School
 ORDER BY
