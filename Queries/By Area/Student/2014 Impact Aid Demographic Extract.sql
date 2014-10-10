@@ -1,3 +1,20 @@
+/**
+ * 
+ * $LastChangedBy: Gary Corbaley
+ * $LastChangedDate: 10/10/2014
+ *
+ * Request By: Andy Gutierrez
+ * InitialRequestDate: 10/02/2014
+ * 
+ * Initial Request: Pull student demographics for Impact Aid request.  
+ *
+ * Definition: This script starts by getting each student's School of Record and their enrollment details, then includes basic student information SPED and parent details.
+ *
+ * Tables Referenced: EPC_STU, REV_PERSON, EPC_STU_SCH_YR, REV_ORGANIZATION_YEAR, REV_YEAR
+ *
+ */
+
+
 
 
 ------------------------------------
