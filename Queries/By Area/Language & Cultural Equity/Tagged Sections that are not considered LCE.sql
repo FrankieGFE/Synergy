@@ -10,6 +10,7 @@
  */
 
 DECLARE @AsOfDate DATE = GETDATE()
+		,@School VARCHAR(128) = '%'
 
 SELECT
 	*
@@ -49,7 +50,7 @@ FROM
 			,COUNT(Schedule.STUDENT_GU) AS StudentCount
 			,SUM(CASE WHEN ELL.STUDENT_GU IS NULL THEN 0 ELSE 1 END) AS ELLStudentCount
 		FROM
-			APS.ScheduleAsOf(@asOfDate) AS Schedule
+			APS.ScheduleAsOf(@AsOfDate) AS Schedule
 			-- This joins limits this to only sections that have been tagged.
 			INNER JOIN
 			rev.UD_SECTION_TAG AS Tag
@@ -58,7 +59,7 @@ FROM
 			AND Tag.TAG LIKE 'ALS%'
 
 			LEFT JOIN
-			APS.ELLAsOf(@asOfDate) AS ELL
+			APS.ELLAsOf(@AsOfDate) AS ELL
 			ON
 			Schedule.STUDENT_GU = ELL.STUDENT_GU
 		--/*
@@ -129,7 +130,23 @@ FROM
 
 	) AS PivotedSectionData
 WHERE
-	ORGANIZATION_GU LIKE '%' -- Needed if its going to turn into a report.
+	ORGANIZATION_GU LIKE @School -- Needed if its going to turn into a report.
+	AND NOT(
+		-- If ONLY sheltered or ELD is set, then disregard
+		(
+		ALSSH = 1
+		OR
+		ALSED = 1
+		)
+		AND ALS2W = 0
+		AND ALSMP = 0
+		AND ALSMA = 0
+		AND ALSLA = 0
+		AND ALSES = 0
+		AND ALSSC = 0
+		AND ALSSS = 0
+		AND ALSOT = 0
+	)
 ORDER BY
 	ORGANIZATION_NAME
 	,TERM_CODE
