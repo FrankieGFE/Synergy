@@ -6,6 +6,11 @@
  *
  */
 
+ /***************************************************************************************************************
+ *Pulls all Sections and any Tags associated with the section.  (Right now we only have LCE tags)
+ ****************************************************************************************************************/
+
+
  IF NOT EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[APS].[SectionsAndAllTags]'))
 	EXEC ('CREATE VIEW APS.SectionsAndAllTags AS SELECT 0 AS DUMMY')
 GO
