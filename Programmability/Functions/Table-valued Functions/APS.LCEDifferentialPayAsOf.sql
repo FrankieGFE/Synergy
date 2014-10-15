@@ -3,7 +3,7 @@
 /**
  * $Revision: 1 $
  * $LastChangedBy: e104090 $
- * $LastChangedDate: 2014-10-015  $
+ * $LastChangedDate: 2014-10-15  $
  *
  */
 
@@ -33,6 +33,7 @@ SELECT
 	,Section
 	,CourseTitle
 
+	--All the tags for each section
 	,[ALSMA], [ALSMP],[ALS2W], [ALSED], [ALSSC], [ALSSS], [ALSSH], [ALSLA], [ALSES], [ALSOT], [ALSNV]
 
 	,TeacherBilingual
@@ -53,6 +54,7 @@ SELECT
 	,Section
 	,CourseTitle
 
+	--All the tags for each section
 	,[ALSMA], [ALSMP],[ALS2W], [ALSED], [ALSSC], [ALSSS], [ALSSH], [ALSLA], [ALSES], [ALSOT], [ALSNV]
 
 	,TeacherBilingual
