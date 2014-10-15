@@ -18,8 +18,9 @@ SELECT
 	,Person.LAST_NAME
 	,Person.FIRST_NAME
 	,Person.MIDDLE_NAME
-	,Student.CLASS_OF
-	,GradeLevel.VALUE_DESCRIPTION AS GradeLevel
+	,COALESCE(CONVERT(VARCHAR(4),Student.CLASS_OF),'') AS CLASS_OF
+	,COALESCE(GradeLevel.VALUE_DESCRIPTION,'') AS GradeLevel
+	,GradeLevel.LIST_ORDER AS GradeOrder
 	,COALESCE(CourseHistoryGrouped.EarnedCredit,0) AS EarnedCredits
 	,Waivers.TotalWaiver
 	,CASE WHEN SPEDStudent.STUDENT_GU IS NOT NULL THEN 'Y' ELSE '' END AS SPED
@@ -94,5 +95,5 @@ WHERE
 	OrgYear.YEAR_GU = @Year
 	AND OrgYear.ORGANIZATION_GU LIKE @School
 	AND SSY.STATUS IS NULL --Active SSY's Only--
-	AND SSY.GRADE LIKE @Grade
-	AND Student.CLASS_OF LIKE @ClassOf
+	AND COALESCE(SSY.GRADE,'') LIKE @Grade
+	AND COALESCE(CONVERT(VARCHAR(4),Student.CLASS_OF),'') LIKE @ClassOf
