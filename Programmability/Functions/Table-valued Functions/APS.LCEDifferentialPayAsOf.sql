@@ -7,12 +7,12 @@
  *
  */
 
- /*********************************************************************************************************************************
+ /***************************************************************************************************************************************
  THIS FUNCTION PULLS ALL TEACHERS FOR DIFF PAY THAT HAVE AN ESL OR BILINGUAL ENDORSEMENT
  *DIFF PAY TYPE VALUE IS NULL WHEN CLASS DOES NOT MEET CRITERIA (TAGS OR ENDORSEMENTS) FOR PAYMENT (A OR B)
- **********************************************************************************************************************************/
+ ****************************************************************************************************************************************/
  
-
+ 
 -- Removing function if it exists
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[LCEDifferentialPayAsOf]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
 	EXEC('CREATE FUNCTION APS.LCEDifferentialPayAsOf() RETURNS TABLE AS RETURN (SELECT 0 AS DUMMY)')
@@ -40,7 +40,8 @@ SELECT
 	,TeacherESL
 	,BilingualStudent
 	,ESLStudent
-	,PayDifferentialType
+	,PotentialTypeA
+	,PotentialTypeB
 
 FROM
 (
@@ -64,7 +65,7 @@ SELECT
 	,BilingualStudent
 	,ESLStudent
 		
---Differential Pay Types
+	--Differential Pay Types
 	,CASE 
 		-- Diff Pay A are ESL Only teachers... must have an ESL endorsement and at least one qualified student. No waivers permitted
 		WHEN MAX(TeacherTESOL) = 1 
@@ -74,8 +75,11 @@ SELECT
 			--added where classes are tagged ELD, ESL or Sheltered Content for ESL
 			AND (CASE WHEN ALSED = 'ALSED' OR ALSSH = 'ALSSH' OR ALSES = 'ALSES'  THEN 1 ELSE 0 END) = 1
 			THEN 'A'
+		ELSE NULL
+				END AS PotentialTypeA
 
-		-- Diff Pay B are Bilingual teachers Only teachers... must have an Bilingual endorsement and at least one qualified student. No waivers permitted
+	-- Diff Pay B are Bilingual teachers Only teachers... must have an Bilingual endorsement and at least one qualified student. No waivers permitted
+	,CASE	
 		WHEN MAX(TeacherBilingual) = 1 
 			AND SUM(BilingualStudent) > 0 
 			AND MAX(TeacherBilingualWaiverOnly) != 1 
@@ -84,7 +88,7 @@ SELECT
 			AND (CASE WHEN ALSMA = 'ALSMA' OR ALSMP = 'ALSMP' OR ALS2W = 'ALS2W' OR ALSSC = 'ALSSC' OR ALSSS = 'ALSSS' OR ALSLA = 'ALSLA' OR ALSOT = 'ALSOT' OR ALSNV = 'ALSNV' THEN 1 ELSE 0 END)= 1
 			THEN 'B'
 	ELSE NULL
-				END AS PayDifferentialType
+				END AS PotentialTypeB
 
 FROM
 
@@ -93,7 +97,7 @@ FROM
 		
 				ORGANIZATION_NAME AS School
 				,Staff.BADGE_NUM AS Badge
-				,LAST_NAME + ',' + FIRST_NAME + ISNULL(+' ' +MIDDLE_NAME,'') AS TeacherName
+				,LAST_NAME + ',' + FIRST_NAME + COALESCE(' ' +MIDDLE_NAME,'') AS TeacherName
 				
 				,Schedules.COURSE_ID AS Course
 				,Schedules.SECTION_ID AS Section
@@ -102,13 +106,12 @@ FROM
 				--All the tags for each section
 				,[ALSMA], [ALSMP],[ALS2W], [ALSED], [ALSSC], [ALSSS], [ALSSH], [ALSLA], [ALSES], [ALSOT], [ALSNV]
 				
-				,CASE WHEN Endorsed.ElementaryBilingual=1 OR Endorsed.SecondaryBilingual=1 THEN 1 ELSE 0 END AS TeacherBilingual
-				,CASE WHEN Endorsed.ElementaryESL = 1 OR Endorsed.SecondaryESL = 1 THEN 1 ELSE 0 END AS  TeacherESL
-				,CASE WHEN Endorsed.ElementaryTESOL = 1 OR Endorsed.SecondaryTESOL = 1 THEN 1 ELSE 0 END AS TeacherTESOL
-				,CASE WHEN Endorsed.ElementaryTESOLWaiverOnly = 1 or Endorsed.SecondaryTESOLWaiverOnly=1 THEN 1 ELSE 0 END AS TeacherTESOLWaiverOnly
-				,CASE WHEN Endorsed.ElementaryBilingualWaiverOnly=1 OR Endorsed.SecondaryBilingualWaiverOnly=1 THEN 1 ELSE 0 END AS TeacherBilingualWaiverOnly
-
-
+				,CASE WHEN (Endorsed.ElementaryBilingual=1 AND SchoolType.SCHOOL_TYPE IN (1,2)) OR (Endorsed.SecondaryBilingual=1 AND SchoolType.SCHOOL_TYPE IN (2,3,4)) THEN 1 ELSE 0 END AS TeacherBilingual				
+				,CASE WHEN (Endorsed.ElementaryESL=1 AND SchoolType.SCHOOL_TYPE IN (1,2)) OR (Endorsed.SecondaryESL=1 AND SchoolType.SCHOOL_TYPE IN (2,3,4)) THEN 1 ELSE 0 END AS TeacherESL
+				,CASE WHEN (Endorsed.ElementaryTESOL=1 AND SchoolType.SCHOOL_TYPE IN (1,2)) OR (Endorsed.SecondaryTESOL=1 AND SchoolType.SCHOOL_TYPE IN (2,3,4)) THEN 1 ELSE 0 END AS TeacherTESOL
+				,CASE WHEN (Endorsed.ElementaryTESOLWaiverOnly=1 AND SchoolType.SCHOOL_TYPE IN (1,2)) OR (Endorsed.SecondaryTESOLWaiverOnly=1 AND SchoolType.SCHOOL_TYPE IN (2,3,4)) THEN 1 ELSE 0 END AS TeacherTESOLWaiverOnly
+				,CASE WHEN (Endorsed.ElementaryBilingualWaiverOnly=1 AND SchoolType.SCHOOL_TYPE IN (1,2)) OR (Endorsed.SecondaryBilingualWaiverOnly=1 AND SchoolType.SCHOOL_TYPE IN (2,3,4)) THEN 1 ELSE 0 END AS TeacherBilingualWaiverOnly
+				
 				--Identify which students are Bilingual, if student exists in BEP table then bilingual
 				,SUM(CASE WHEN BEP.STUDENT_GU IS NOT NULL THEN 1 ELSE 0 END) AS BilingualStudent
 
@@ -156,7 +159,7 @@ FROM
 			BEP.STUDENT_GU = Schedules.STUDENT_GU
 
 			/***********************************************************************************************
-			*Get additional data, school name, badge number, teacher name		
+			*Get additional data, school name, badge number, teacher name, school type		
 			***********************************************************************************************/	
 	
 			INNER JOIN 
@@ -174,16 +177,21 @@ FROM
 			ON
 			Staff.STAFF_GU = AllStaff.STAFF_GU
 
+			INNER JOIN
+			rev.EPC_SCH_YR_OPT AS SchoolType
+			ON
+			SchoolType.ORGANIZATION_YEAR_GU = Schedules.ORGANIZATION_YEAR_GU
+
+
 			/**********************************************************************************************
 			*	Get one record per School and Section
 			**********************************************************************************************/
-
-	
+				
 
 			GROUP BY 
 				ORGANIZATION_NAME 
 				,Staff.BADGE_NUM 
-				,LAST_NAME + ',' + FIRST_NAME + ISNULL(+' ' +MIDDLE_NAME,'') 
+				,LAST_NAME + ',' + FIRST_NAME + COALESCE(' ' +MIDDLE_NAME,'') 
 			
 				,Schedules.COURSE_ID
 				,Schedules.SECTION_ID
@@ -191,11 +199,11 @@ FROM
 
 				,[ALSMA], [ALSMP],[ALS2W], [ALSED], [ALSSC], [ALSSS], [ALSSH], [ALSLA], [ALSES], [ALSOT], [ALSNV]
 
-				,CASE WHEN Endorsed.ElementaryBilingual=1 OR Endorsed.SecondaryBilingual=1 THEN 1 ELSE 0 END 
-				,CASE WHEN Endorsed.ElementaryESL = 1 OR Endorsed.SecondaryESL = 1 THEN 1 ELSE 0 END 
-				,CASE WHEN Endorsed.ElementaryTESOL = 1 OR Endorsed.SecondaryTESOL = 1 THEN 1 ELSE 0 END 
-				,CASE WHEN Endorsed.ElementaryTESOLWaiverOnly = 1 or Endorsed.SecondaryTESOLWaiverOnly=1 THEN 1 ELSE 0 END 
-				,CASE WHEN Endorsed.ElementaryBilingualWaiverOnly=1 OR Endorsed.SecondaryBilingualWaiverOnly=1 THEN 1 ELSE 0 END 
+				,CASE WHEN (Endorsed.ElementaryBilingual=1 AND SchoolType.SCHOOL_TYPE IN (1,2)) OR (Endorsed.SecondaryBilingual=1 AND SchoolType.SCHOOL_TYPE IN (2,3,4)) THEN 1 ELSE 0 END 		
+				,CASE WHEN (Endorsed.ElementaryESL=1 AND SchoolType.SCHOOL_TYPE IN (1,2)) OR (Endorsed.SecondaryESL=1 AND SchoolType.SCHOOL_TYPE IN (2,3,4)) THEN 1 ELSE 0 END 
+				,CASE WHEN (Endorsed.ElementaryTESOL=1 AND SchoolType.SCHOOL_TYPE IN (1,2)) OR (Endorsed.SecondaryTESOL=1 AND SchoolType.SCHOOL_TYPE IN (2,3,4)) THEN 1 ELSE 0 END 
+				,CASE WHEN (Endorsed.ElementaryTESOLWaiverOnly=1 AND SchoolType.SCHOOL_TYPE IN (1,2)) OR (Endorsed.SecondaryTESOLWaiverOnly=1 AND SchoolType.SCHOOL_TYPE IN (2,3,4)) THEN 1 ELSE 0 END 
+				,CASE WHEN (Endorsed.ElementaryBilingualWaiverOnly=1 AND SchoolType.SCHOOL_TYPE IN (1,2)) OR (Endorsed.SecondaryBilingualWaiverOnly=1 AND SchoolType.SCHOOL_TYPE IN (2,3,4)) THEN 1 ELSE 0 END
 
 
 ) AS AllSectionsEndorsed
