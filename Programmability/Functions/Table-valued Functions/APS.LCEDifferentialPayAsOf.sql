@@ -71,7 +71,6 @@ SELECT
 		WHEN MAX(TeacherTESOL) = 1 
 			AND SUM(ESLStudent) > 0 
 			AND MAX(TeacherTESOLWaiverOnly) != 1 
-			AND (MAX(TeacherBilingual) = 0 OR SUM(BilingualStudent) = 0) 
 			--added where classes are tagged ELD, ESL or Sheltered Content for ESL
 			AND (CASE WHEN ALSED = 'ALSED' OR ALSSH = 'ALSSH' OR ALSES = 'ALSES'  THEN 1 ELSE 0 END) = 1
 			THEN 'A'
@@ -83,9 +82,8 @@ SELECT
 		WHEN MAX(TeacherBilingual) = 1 
 			AND SUM(BilingualStudent) > 0 
 			AND MAX(TeacherBilingualWaiverOnly) != 1 
-			AND (MAX(TeacherTESOL) = 0 OR SUM(ESLStudent) = 0) 
 			--added where classes are not tagged ELD, ESL or Sheltered Content for Bilingual
-			AND (CASE WHEN ALSMA = 'ALSMA' OR ALSMP = 'ALSMP' OR ALS2W = 'ALS2W' OR ALSSC = 'ALSSC' OR ALSSS = 'ALSSS' OR ALSLA = 'ALSLA' OR ALSOT = 'ALSOT' OR ALSNV = 'ALSNV' THEN 1 ELSE 0 END)= 1
+			AND (CASE WHEN ((ALSMA = 'ALSMA') OR (ALSMP = 'ALSMP') OR (ALS2W = 'ALS2W') OR (ALSSC = 'ALSSC') OR (ALSSS = 'ALSSS') OR (ALSLA = 'ALSLA') OR (ALSOT = 'ALSOT') OR (ALSNV = 'ALSNV')) THEN 1 ELSE 0 END)= 1
 			THEN 'B'
 	ELSE NULL
 				END AS PotentialTypeB
