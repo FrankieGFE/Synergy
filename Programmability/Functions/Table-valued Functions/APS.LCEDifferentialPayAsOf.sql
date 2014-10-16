@@ -29,6 +29,7 @@ SELECT
 	School
 	,Badge
 	,TeacherName
+	,PrimaryTeacher
 	,Course
 	,Section
 	,CourseTitle
@@ -51,6 +52,7 @@ SELECT
 	School
 	,Badge
 	,TeacherName
+	,PrimaryTeacher
 	,Course
 	,Section
 	,CourseTitle
@@ -73,8 +75,8 @@ SELECT
 			AND MAX(TeacherTESOLWaiverOnly) != 1 
 			--added where classes are tagged ELD, ESL or Sheltered Content for ESL
 			AND (CASE WHEN ALSED = 'ALSED' OR ALSSH = 'ALSSH' OR ALSES = 'ALSES'  THEN 1 ELSE 0 END) = 1
-			THEN 'A'
-		ELSE NULL
+			THEN 1
+		ELSE 0
 				END AS PotentialTypeA
 
 	-- Diff Pay B are Bilingual teachers Only teachers... must have an Bilingual endorsement and at least one qualified student. No waivers permitted
@@ -84,8 +86,8 @@ SELECT
 			AND MAX(TeacherBilingualWaiverOnly) != 1 
 			--added where classes are not tagged ELD, ESL or Sheltered Content for Bilingual
 			AND (CASE WHEN ((ALSMA = 'ALSMA') OR (ALSMP = 'ALSMP') OR (ALS2W = 'ALS2W') OR (ALSSC = 'ALSSC') OR (ALSSS = 'ALSSS') OR (ALSLA = 'ALSLA') OR (ALSOT = 'ALSOT') OR (ALSNV = 'ALSNV')) THEN 1 ELSE 0 END)= 1
-			THEN 'B'
-	ELSE NULL
+			THEN 1
+	ELSE 0
 				END AS PotentialTypeB
 
 FROM
@@ -96,7 +98,8 @@ FROM
 				ORGANIZATION_NAME AS School
 				,Staff.BADGE_NUM AS Badge
 				,LAST_NAME + ',' + FIRST_NAME + COALESCE(' ' +MIDDLE_NAME,'') AS TeacherName
-				
+				,PRIMARY_TEACHER AS PrimaryTeacher
+
 				,Schedules.COURSE_ID AS Course
 				,Schedules.SECTION_ID AS Section
 				,Schedules.COURSE_TITLE AS CourseTitle
@@ -191,6 +194,7 @@ FROM
 				ORGANIZATION_NAME 
 				,Staff.BADGE_NUM 
 				,LAST_NAME + ',' + FIRST_NAME + COALESCE(' ' +MIDDLE_NAME,'') 
+				,PRIMARY_TEACHER
 			
 				,Schedules.COURSE_ID
 				,Schedules.SECTION_ID
@@ -211,6 +215,7 @@ GROUP BY
 			School
 			,Badge
 			,TeacherName
+			,PrimaryTeacher
 			,Course
 			,Section
 			,CourseTitle
