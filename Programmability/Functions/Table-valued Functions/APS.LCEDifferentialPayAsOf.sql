@@ -106,6 +106,7 @@ FROM
 				--All the tags for each section
 				,[ALSMA], [ALSMP],[ALS2W], [ALSED], [ALSSC], [ALSSS], [ALSSH], [ALSLA], [ALSES], [ALSOT], [ALSNV]
 				
+				--Endorsements need to be seperated by School Type for Elementary and Secondary
 				,CASE WHEN (Endorsed.ElementaryBilingual=1 AND SchoolType.SCHOOL_TYPE IN (1,2)) OR (Endorsed.SecondaryBilingual=1 AND SchoolType.SCHOOL_TYPE IN (2,3,4)) THEN 1 ELSE 0 END AS TeacherBilingual				
 				,CASE WHEN (Endorsed.ElementaryESL=1 AND SchoolType.SCHOOL_TYPE IN (1,2)) OR (Endorsed.SecondaryESL=1 AND SchoolType.SCHOOL_TYPE IN (2,3,4)) THEN 1 ELSE 0 END AS TeacherESL
 				,CASE WHEN (Endorsed.ElementaryTESOL=1 AND SchoolType.SCHOOL_TYPE IN (1,2)) OR (Endorsed.SecondaryTESOL=1 AND SchoolType.SCHOOL_TYPE IN (2,3,4)) THEN 1 ELSE 0 END AS TeacherTESOL
