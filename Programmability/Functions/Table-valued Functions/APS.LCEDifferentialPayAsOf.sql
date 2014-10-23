@@ -38,7 +38,9 @@ SELECT
 	,[ALSMA], [ALSMP],[ALS2W], [ALSED], [ALSSC], [ALSSS], [ALSSH], [ALSLA], [ALSES], [ALSOT], [ALSNV]
 
 	,TeacherBilingual
-	,TeacherESL
+	
+	--use this as temporary because Teacher Endorsements is showing ESL 1 for teachers with no TESOL
+	,TeacherTESOL AS TeacherESL
 	,BilingualStudent
 	,ESLStudent
 	,PotentialTypeA
@@ -73,8 +75,8 @@ SELECT
 		WHEN MAX(TeacherTESOL) = 1 
 			AND SUM(ESLStudent) > 0 
 			AND MAX(TeacherTESOLWaiverOnly) != 1 
-			--added where classes are tagged ELD, ESL or Sheltered Content for ESL
-			AND (CASE WHEN ALSED = 'ALSED' OR ALSSH = 'ALSSH' OR ALSES = 'ALSES'  THEN 1 ELSE 0 END) = 1
+			--added where classes are tagged ESL for ESL
+			AND (CASE WHEN ALSES = 'ALSES'  THEN 1 ELSE 0 END) = 1
 			THEN 1
 		ELSE 0
 				END AS PotentialTypeA
@@ -97,7 +99,7 @@ FROM
 		
 				ORGANIZATION_NAME AS School
 				,Staff.BADGE_NUM AS Badge
-				,LAST_NAME + ',' + FIRST_NAME + COALESCE(' ' +MIDDLE_NAME,'') AS TeacherName
+				,LAST_NAME + ', '+ FIRST_NAME + COALESCE(' ' +MIDDLE_NAME,'') AS TeacherName
 				,PRIMARY_TEACHER AS PrimaryTeacher
 
 				,Schedules.COURSE_ID AS Course
@@ -193,7 +195,7 @@ FROM
 			GROUP BY 
 				ORGANIZATION_NAME 
 				,Staff.BADGE_NUM 
-				,LAST_NAME + ',' + FIRST_NAME + COALESCE(' ' +MIDDLE_NAME,'') 
+				,LAST_NAME + ', '+ FIRST_NAME + COALESCE(' ' +MIDDLE_NAME,'') 
 				,PRIMARY_TEACHER
 			
 				,Schedules.COURSE_ID
