@@ -1,0 +1,1154 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/9/2014 4:20:20 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="AZLT-MMELARCODE"
+  DTS:CreatorName="XNOVAHQ\MMelarcode"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{E83B627D-F8E8-4911-A1E1-AF19D370B748}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SPED-Services-Level"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{F136A5F8-28B9-4F2B-A7AA-69B1E540C85B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DB Connection]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{BA1AFA1C-7D8E-481A-B32C-9BE8E1CCD766}"
+      DTS:ObjectName="DB Connection">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=APSExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-SPED-Services-Level-{BA1AFA1C-7D8E-481A-B32C-9BE8E1CCD766}azlt-mmelarcode\sql2012.STDemo808_2012;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA18tsXWAShEu39NgC3mjhaAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAB4zfLn7nM2C1PoVTeHRUNZAAAAAASAAACgAAAAEAAAAJVuMA4x+B7tHF7T3RGeWmIwAAAALC2hGrTJAZKSIMeZCqtKWWSBrQAXBq0rxfsVsi9fwANsda9BIAkQr6LDARdN/ZcqFAAAABKQ3zUfisDgWQrF3fmAIygNeRPL</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ServiceLevels]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{4B0E886B-9716-430E-91BD-11246A3D1B18}"
+      DTS:ObjectName="ServiceLevels">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis\Files\Export\SPED\SPED-ServiceLevels.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="122"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CaseManager"
+              DTS:DTSID="{78871036-2BC8-4C8D-8ACC-C3CBE09E904E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="120"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CMType"
+              DTS:DTSID="{80584898-4027-4102-9067-0D19CF8CD2D0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="122"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student"
+              DTS:DTSID="{5AEDBD4D-6650-421C-8DDA-98AF50C78216}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SisNumber"
+              DTS:DTSID="{7C3F0396-5A30-4C5A-A11A-22E03419B9D5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="School"
+              DTS:DTSID="{90C158E3-0DDC-49CC-A0D2-7824BA5F26D5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Grade"
+              DTS:DTSID="{929A0EAC-B0F7-465D-9D99-CD957A9B97A6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ServiceLevel"
+              DTS:DTSID="{BA5DC230-1992-4426-A1A1-F3B1AA026B21}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Services]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{DEF41440-1CD0-4A9A-80F4-438F9DC30F40}"
+      DTS:ObjectName="Services">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis\Files\Export\SPED\SPED-Services.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="122"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student"
+              DTS:DTSID="{FFA14C36-C028-4ED1-B13F-5D3B2DD9C089}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SisNumber"
+              DTS:DTSID="{C07B2202-13D3-474F-89B7-1510F399B57F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="School"
+              DTS:DTSID="{52692221-534B-470F-8C98-04797C9DF1C4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Grade"
+              DTS:DTSID="{BB3D24EB-A397-4A00-B84E-697A7BD5D119}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Service"
+              DTS:DTSID="{8796E17B-D624-4316-875A-61B198EDB4F9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="5"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Minutes"
+              DTS:DTSID="{E0BD6BE4-2283-45D9-A4B4-6910453A8D73}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Frequency"
+              DTS:DTSID="{FF056765-CF6C-4CA8-ABF2-582A8715030B}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\SPED ServiceLevels"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{CB2A0A87-227E-4709-8F43-523C92890A75}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SPED ServiceLevels"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\SPED ServiceLevels\DB Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">-- List (union) of the service level from Current IEPs and service level from NM state reporting 40th day snapshot
+-- TomMG
+select  cm.LAST_NAME+', '+cm.FIRST_NAME   [CaseManager]
+      , rl.ROLE_NAME_LARGE                [CMType]
+      , per.LAST_NAME+', '+per.FIRST_NAME [Student]
+      , stu.SIS_NUMBER                    [SisNumber]
+      , org.ORGANIZATION_NAME             [School]
+      , grd.Grade                         [Grade]
+      , lvl.SrvLvl                        [ServiceLevel]
+from rev.EP_STU                           spedstu
+inner join rev.EPC_STU                    stu on (stu.STUDENT_GU = spedstu.STUDENT_GU)
+inner join rev.REV_PERSON                 per on (per.PERSON_GU = stu.STUDENT_GU)
+inner join rev.EPC_STU_YR                 syr on (syr.STUDENT_GU = stu.STUDENT_GU)
+inner join rev.EPC_STU_SCH_YR             ssy on (ssy.STUDENT_SCHOOL_YEAR_GU = syr.STU_SCHOOL_YEAR_GU)
+inner join rev.REV_ORGANIZATION_YEAR      oyr on (oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU)
+inner join rev.REV_ORGANIZATION           org on (org.ORGANIZATION_GU = oyr.ORGANIZATION_GU)
+inner join rev.EP_STUDENT_IEP             iep on (iep.STUDENT_GU = stu.STUDENT_GU)
+inner join rev.EP_AZ_IEP_LRE              lre on (lre.IEP_GU = iep.IEP_GU)
+inner join rev.EP_STUDENT_TEAM            st  on (st.STUDENT_GU = stu.STUDENT_GU)
+inner join rev.REV_ROLE                   rl  on (rl.ROLE_GU = st.ROLE_GU and rl.ROLE_TYPE = 'CASE_MANAGER')
+inner join rev.REV_PERSON                 cm  on (cm.PERSON_GU = st.STAFF_GU)
+left outer join rev.EP_STUDENT_SPECIAL_ED sse on (sse.STUDENT_GU = stu.STUDENT_GU)
+left outer join (select VALUE_CODE, VALUE_DESCRIPTION Grade from rev.REV_BOD_LOOKUP_VALUES
+                 where LOOKUP_DEF_GU in (select LOOKUP_DEF_GU from rev.REV_BOD_LOOKUP_DEF
+                 where LOOKUP_NAMESPACE = 'K12' and LOOKUP_DEF_CODE = 'GRADE'))
+                 grd on (grd.VALUE_CODE = ssy.GRADE)
+left outer join (select VALUE_CODE, VALUE_DESCRIPTION SrvLvl from rev.REV_BOD_LOOKUP_VALUES
+                 where LOOKUP_DEF_GU in (select LOOKUP_DEF_GU from rev.REV_BOD_LOOKUP_DEF
+                 where LOOKUP_NAMESPACE = 'K12.SpecialEd.IEP' and LOOKUP_DEF_CODE = 'LEVEL_INTEGRATION'))
+                 lvl on (lvl.VALUE_CODE = lre.LEVEL_INTEGRATION)
+where syr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+      and sse.EXIT_DATE is null and iep.IEP_STATUS = 'CU'
+union all
+select  cm.LAST_NAME+', '+cm.FIRST_NAME   [CaseManager]
+      , rl.ROLE_NAME_LARGE                [CMType]
+      , per.LAST_NAME+', '+per.FIRST_NAME [Student]
+      , stu.SIS_NUMBER                    [SisNumber]
+      , org.ORGANIZATION_NAME             [School]
+      , grd.Grade                         [Grade]
+      , lvl.SrvLvl                        [ServiceLevel]
+from rev.EPC_STU stu
+inner join rev.REV_PERSON                 per on (per.PERSON_GU = stu.STUDENT_GU)
+inner join rev.EPC_STU_YR                 syr on (syr.STUDENT_GU = stu.STUDENT_GU)
+inner join rev.EPC_STU_SCH_YR             ssy on (ssy.STUDENT_SCHOOL_YEAR_GU = syr.STU_SCHOOL_YEAR_GU)
+inner join rev.REV_ORGANIZATION_YEAR      oyr on (oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU)
+inner join rev.REV_ORGANIZATION           org on (org.ORGANIZATION_GU = oyr.ORGANIZATION_GU)
+inner join rev.REV_YEAR                   yr  on (yr.YEAR_GU = syr.YEAR_GU)
+inner join rev.EPC_NM_STU_SPED_RPT        sr  on (sr.STUDENT_GU = stu.STUDENT_GU and sr.SCHOOL_YEAR = yr.SCHOOL_YEAR and sr.SNAPSHOT_TYPE = '1')
+inner join rev.EP_STUDENT_TEAM            st  on (st.STUDENT_GU = stu.STUDENT_GU)
+inner join rev.REV_ROLE                   rl  on (rl.ROLE_GU = st.ROLE_GU and rl.ROLE_TYPE = 'CASE_MANAGER')
+inner join rev.REV_PERSON                 cm  on (cm.PERSON_GU = st.STAFF_GU)
+left outer join rev.EP_STUDENT_SPECIAL_ED sse on (sse.STUDENT_GU = stu.STUDENT_GU)
+left outer join (select VALUE_CODE, VALUE_DESCRIPTION Grade from rev.REV_BOD_LOOKUP_VALUES
+                 where LOOKUP_DEF_GU in (select LOOKUP_DEF_GU from rev.REV_BOD_LOOKUP_DEF
+                 where LOOKUP_NAMESPACE = 'K12' and LOOKUP_DEF_CODE = 'GRADE'))
+                 grd on (grd.VALUE_CODE = ssy.GRADE)
+left outer join (select VALUE_CODE, VALUE_DESCRIPTION SrvLvl from rev.REV_BOD_LOOKUP_VALUES
+                 where LOOKUP_DEF_GU in (select LOOKUP_DEF_GU from rev.REV_BOD_LOOKUP_DEF
+                 where LOOKUP_NAMESPACE = 'K12.SpecialEd.IEP' and LOOKUP_DEF_CODE = 'LEVEL_INTEGRATION'))
+                 lvl on (lvl.VALUE_CODE = sr.LEVEL_INTEGRATION)
+where syr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+      and sse.EXIT_DATE is null and stu.STUDENT_GU not in (select STUDENT_GU from rev.EP_STUDENT_IEP where IEP_STATUS = 'CU')
+order by CaseManager,CMType,Student,SisNumber</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\SPED ServiceLevels\DB Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[CaseManager]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].ExternalColumns[CaseManager]"
+                      length="122"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[CaseManager]"
+                      name="CaseManager"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[CMType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].ExternalColumns[CMType]"
+                      length="120"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[CMType]"
+                      name="CMType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[Student]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student]"
+                      length="122"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[Student]"
+                      name="Student"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[SisNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SisNumber]"
+                      length="20"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[SisNumber]"
+                      name="SisNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[School]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].ExternalColumns[School]"
+                      length="100"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[School]"
+                      name="School"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[Grade]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Grade]"
+                      length="600"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[Grade]"
+                      name="Grade"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[ServiceLevel]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ServiceLevel]"
+                      length="600"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[ServiceLevel]"
+                      name="ServiceLevel"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].ExternalColumns[CaseManager]"
+                      dataType="wstr"
+                      length="122"
+                      name="CaseManager" />
+                    <externalMetadataColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].ExternalColumns[CMType]"
+                      dataType="wstr"
+                      length="120"
+                      name="CMType" />
+                    <externalMetadataColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student]"
+                      dataType="wstr"
+                      length="122"
+                      name="Student" />
+                    <externalMetadataColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SisNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="SisNumber" />
+                    <externalMetadataColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].ExternalColumns[School]"
+                      dataType="wstr"
+                      length="100"
+                      name="School" />
+                    <externalMetadataColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Grade]"
+                      dataType="wstr"
+                      length="600"
+                      name="Grade" />
+                    <externalMetadataColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ServiceLevel]"
+                      dataType="wstr"
+                      length="600"
+                      name="ServiceLevel" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output].Columns[CaseManager]"
+                      dataType="wstr"
+                      length="122"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output].Columns[CaseManager]"
+                      name="CaseManager" />
+                    <outputColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output].Columns[CMType]"
+                      dataType="wstr"
+                      length="120"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output].Columns[CMType]"
+                      name="CMType" />
+                    <outputColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output].Columns[Student]"
+                      dataType="wstr"
+                      length="122"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output].Columns[Student]"
+                      name="Student" />
+                    <outputColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output].Columns[SisNumber]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output].Columns[SisNumber]"
+                      name="SisNumber" />
+                    <outputColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output].Columns[School]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output].Columns[School]"
+                      name="School" />
+                    <outputColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output].Columns[Grade]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output].Columns[Grade]"
+                      name="Grade" />
+                    <outputColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output].Columns[ServiceLevel]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output].Columns[ServiceLevel]"
+                      name="ServiceLevel" />
+                    <outputColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\SPED ServiceLevels\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\SPED ServiceLevels\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ServiceLevels]"
+                  connectionManagerRefId="Package.ConnectionManagers[ServiceLevels]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].Columns[CaseManager]"
+                      cachedDataType="wstr"
+                      cachedLength="122"
+                      cachedName="CaseManager"
+                      externalMetadataColumnId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CaseManager]"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[CaseManager]" />
+                    <inputColumn
+                      refId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].Columns[CMType]"
+                      cachedDataType="wstr"
+                      cachedLength="120"
+                      cachedName="CMType"
+                      externalMetadataColumnId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CMType]"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[CMType]" />
+                    <inputColumn
+                      refId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].Columns[Student]"
+                      cachedDataType="wstr"
+                      cachedLength="122"
+                      cachedName="Student"
+                      externalMetadataColumnId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student]"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[Student]" />
+                    <inputColumn
+                      refId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].Columns[SisNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="SisNumber"
+                      externalMetadataColumnId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SisNumber]"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[SisNumber]" />
+                    <inputColumn
+                      refId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].Columns[School]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="School"
+                      externalMetadataColumnId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[School]"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[School]" />
+                    <inputColumn
+                      refId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].Columns[Grade]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="Grade"
+                      externalMetadataColumnId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Grade]"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[Grade]" />
+                    <inputColumn
+                      refId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].Columns[ServiceLevel]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="ServiceLevel"
+                      externalMetadataColumnId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ServiceLevel]"
+                      lineageId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output].Columns[ServiceLevel]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CaseManager]"
+                      dataType="wstr"
+                      length="122"
+                      name="CaseManager" />
+                    <externalMetadataColumn
+                      refId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CMType]"
+                      dataType="wstr"
+                      length="120"
+                      name="CMType" />
+                    <externalMetadataColumn
+                      refId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student]"
+                      dataType="wstr"
+                      length="122"
+                      name="Student" />
+                    <externalMetadataColumn
+                      refId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SisNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="SisNumber" />
+                    <externalMetadataColumn
+                      refId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[School]"
+                      dataType="wstr"
+                      length="100"
+                      name="School" />
+                    <externalMetadataColumn
+                      refId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Grade]"
+                      dataType="wstr"
+                      length="600"
+                      name="Grade" />
+                    <externalMetadataColumn
+                      refId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ServiceLevel]"
+                      dataType="wstr"
+                      length="600"
+                      name="ServiceLevel" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\SPED ServiceLevels.Paths[OLE DB Source Output]"
+              endId="Package\SPED ServiceLevels\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\SPED ServiceLevels\DB Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SPED Services"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{3C8F996A-4A2D-4E34-A77B-39E797FF9FF0}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SPED Services"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\SPED Services\DB Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">-- List (union) of the services from Current IEPs and services from NM state reporting 40th day snapshot
+select  per.LAST_NAME+', '+per.FIRST_NAME [Student]
+       , stu.SIS_NUMBER                   [SisNumber]
+       , org.ORGANIZATION_NAME            [School]
+       , grd.Grade                        [Grade]
+       , srv.SERVICE_DESCRIPTION          [Service]
+       , isv.NUM_MINUTES                  [Minutes]
+       , frq.Frequency                    [Frequency]
+from rev.EP_STU                           spedstu
+inner join rev.EPC_STU                    stu on (stu.STUDENT_GU = spedstu.STUDENT_GU)
+inner join rev.REV_PERSON                 per on (per.PERSON_GU = stu.STUDENT_GU)
+inner join rev.EPC_STU_YR                 syr on (syr.STUDENT_GU = stu.STUDENT_GU)
+inner join rev.EPC_STU_SCH_YR             ssy on (ssy.STUDENT_SCHOOL_YEAR_GU = syr.STU_SCHOOL_YEAR_GU)
+inner join rev.REV_ORGANIZATION_YEAR      oyr on (oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU)
+inner join rev.REV_ORGANIZATION           org on (org.ORGANIZATION_GU = oyr.ORGANIZATION_GU)
+inner join rev.EP_STUDENT_IEP             iep on (iep.STUDENT_GU = stu.STUDENT_GU)
+inner join rev.EP_STU_IEP_SERVICE         isv on (isv.IEP_GU = iep.IEP_GU)
+inner join rev.EP_SPECIAL_ED_SERVICE      srv on (srv.SERVICE_GU = isv.SERVICE_GU)
+left outer join rev.EP_STUDENT_SPECIAL_ED sse on (sse.STUDENT_GU = stu.STUDENT_GU)
+left outer join (select VALUE_CODE, VALUE_DESCRIPTION Grade from rev.REV_BOD_LOOKUP_VALUES
+                 where LOOKUP_DEF_GU in (select LOOKUP_DEF_GU from rev.REV_BOD_LOOKUP_DEF
+                 where LOOKUP_NAMESPACE = 'K12' and LOOKUP_DEF_CODE = 'GRADE'))
+                 grd on (grd.VALUE_CODE = ssy.GRADE)
+left outer join (select VALUE_CODE, VALUE_DESCRIPTION Frequency from rev.REV_BOD_LOOKUP_VALUES
+                 where LOOKUP_DEF_GU in (select LOOKUP_DEF_GU from rev.REV_BOD_LOOKUP_DEF
+                 where LOOKUP_NAMESPACE = 'K12.SpecialEd.IEP' and LOOKUP_DEF_CODE = 'SERVICE_FREQUENCY'))
+                 frq on (frq.VALUE_CODE = isv.FREQUENCY_UNIT_DD)
+where syr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+       and sse.EXIT_DATE is null and iep.IEP_STATUS = 'CU'
+union all
+select  per.LAST_NAME+', '+per.FIRST_NAME [Student]
+      , stu.SIS_NUMBER                    [SisNumber]
+      , org.ORGANIZATION_NAME             [School]
+      , grd.Grade                         [Grade]
+      , srv.[Service]                     [Service]
+      , srsv.SERVICE_FREQ                 [Minutes]
+      , frq.Frequency                     [Frequency]
+from rev.EPC_STU stu
+inner join rev.REV_PERSON                 per  on (per.PERSON_GU = stu.STUDENT_GU)
+inner join rev.EPC_STU_YR                 syr  on (syr.STUDENT_GU = stu.STUDENT_GU)
+inner join rev.EPC_STU_SCH_YR             ssy  on (ssy.STUDENT_SCHOOL_YEAR_GU = syr.STU_SCHOOL_YEAR_GU)
+inner join rev.REV_ORGANIZATION_YEAR      oyr  on (oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU)
+inner join rev.REV_ORGANIZATION           org  on (org.ORGANIZATION_GU = oyr.ORGANIZATION_GU)
+inner join rev.REV_YEAR                   yr   on (yr.YEAR_GU = syr.YEAR_GU)
+inner join rev.EPC_NM_STU_SPED_RPT        sr   on (sr.STUDENT_GU = stu.STUDENT_GU and sr.SCHOOL_YEAR = yr.SCHOOL_YEAR and sr.SNAPSHOT_TYPE = '1')
+inner join rev.EPC_NM_STU_SPED_RPT_SRV    srsv on (srsv.STU_SPED_RPT_GU = sr.STU_SPED_RPT_GU)
+left outer join rev.EP_STUDENT_SPECIAL_ED sse  on (sse.STUDENT_GU = stu.STUDENT_GU)
+left outer join (select VALUE_CODE, VALUE_DESCRIPTION Grade from rev.REV_BOD_LOOKUP_VALUES
+                 where LOOKUP_DEF_GU in (select LOOKUP_DEF_GU from rev.REV_BOD_LOOKUP_DEF
+                 where LOOKUP_NAMESPACE = 'K12' and LOOKUP_DEF_CODE = 'GRADE'))
+                 grd on (grd.VALUE_CODE = ssy.GRADE)
+left outer join (select VALUE_CODE, VALUE_DESCRIPTION "Service" from rev.REV_BOD_LOOKUP_VALUES
+                 where LOOKUP_DEF_GU in (select LOOKUP_DEF_GU from rev.REV_BOD_LOOKUP_DEF
+                 where LOOKUP_NAMESPACE = 'K12.SpecialEd.IEP' and LOOKUP_DEF_CODE = 'SPED_SERVICE'))
+                 srv on (srv.VALUE_CODE = srsv.SERVICE_CODE)
+left outer join (select VALUE_CODE, VALUE_DESCRIPTION Frequency from rev.REV_BOD_LOOKUP_VALUES
+                 where LOOKUP_DEF_GU in (select LOOKUP_DEF_GU from rev.REV_BOD_LOOKUP_DEF
+                 where LOOKUP_NAMESPACE = 'K12.SpecialEd.IEP' and LOOKUP_DEF_CODE = 'SERVICE_FREQUENCY'))
+                 frq on (frq.VALUE_CODE = srsv.SERVICE_CYCLE)
+where syr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+      and sse.EXIT_DATE is null and stu.STUDENT_GU not in (select STUDENT_GU from rev.EP_STUDENT_IEP where IEP_STATUS = 'CU')
+order by Student,SisNumber,"Service"</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\SPED Services\DB Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[Student]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student]"
+                      length="122"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[Student]"
+                      name="Student"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[SisNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SisNumber]"
+                      length="20"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[SisNumber]"
+                      name="SisNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[School]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].ExternalColumns[School]"
+                      length="100"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[School]"
+                      name="School"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[Grade]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Grade]"
+                      length="600"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[Grade]"
+                      name="Grade"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[Service]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Service]"
+                      length="600"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[Service]"
+                      name="Service"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[Minutes]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Minutes]"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[Minutes]"
+                      name="Minutes"
+                      precision="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[Frequency]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Frequency]"
+                      length="600"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[Frequency]"
+                      name="Frequency"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student]"
+                      dataType="wstr"
+                      length="122"
+                      name="Student" />
+                    <externalMetadataColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SisNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="SisNumber" />
+                    <externalMetadataColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].ExternalColumns[School]"
+                      dataType="wstr"
+                      length="100"
+                      name="School" />
+                    <externalMetadataColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Grade]"
+                      dataType="wstr"
+                      length="600"
+                      name="Grade" />
+                    <externalMetadataColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Service]"
+                      dataType="wstr"
+                      length="600"
+                      name="Service" />
+                    <externalMetadataColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Minutes]"
+                      dataType="numeric"
+                      name="Minutes"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Frequency]"
+                      dataType="wstr"
+                      length="600"
+                      name="Frequency" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output].Columns[Student]"
+                      dataType="wstr"
+                      length="122"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output].Columns[Student]"
+                      name="Student" />
+                    <outputColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output].Columns[SisNumber]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output].Columns[SisNumber]"
+                      name="SisNumber" />
+                    <outputColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output].Columns[School]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output].Columns[School]"
+                      name="School" />
+                    <outputColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output].Columns[Grade]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output].Columns[Grade]"
+                      name="Grade" />
+                    <outputColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output].Columns[Service]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output].Columns[Service]"
+                      name="Service" />
+                    <outputColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output].Columns[Minutes]"
+                      dataType="numeric"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output].Columns[Minutes]"
+                      name="Minutes"
+                      precision="5" />
+                    <outputColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output].Columns[Frequency]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output].Columns[Frequency]"
+                      name="Frequency" />
+                    <outputColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\SPED Services\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\SPED Services\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Services]"
+                  connectionManagerRefId="Package.ConnectionManagers[Services]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].Columns[Student]"
+                      cachedDataType="wstr"
+                      cachedLength="122"
+                      cachedName="Student"
+                      externalMetadataColumnId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student]"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[Student]" />
+                    <inputColumn
+                      refId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].Columns[SisNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="SisNumber"
+                      externalMetadataColumnId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SisNumber]"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[SisNumber]" />
+                    <inputColumn
+                      refId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].Columns[School]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="School"
+                      externalMetadataColumnId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[School]"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[School]" />
+                    <inputColumn
+                      refId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].Columns[Grade]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="Grade"
+                      externalMetadataColumnId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Grade]"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[Grade]" />
+                    <inputColumn
+                      refId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].Columns[Service]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="Service"
+                      externalMetadataColumnId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Service]"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[Service]" />
+                    <inputColumn
+                      refId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].Columns[Minutes]"
+                      cachedDataType="numeric"
+                      cachedName="Minutes"
+                      cachedPrecision="5"
+                      externalMetadataColumnId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Minutes]"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[Minutes]" />
+                    <inputColumn
+                      refId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].Columns[Frequency]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="Frequency"
+                      externalMetadataColumnId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Frequency]"
+                      lineageId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output].Columns[Frequency]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student]"
+                      dataType="wstr"
+                      length="122"
+                      name="Student" />
+                    <externalMetadataColumn
+                      refId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SisNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="SisNumber" />
+                    <externalMetadataColumn
+                      refId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[School]"
+                      dataType="wstr"
+                      length="100"
+                      name="School" />
+                    <externalMetadataColumn
+                      refId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Grade]"
+                      dataType="wstr"
+                      length="600"
+                      name="Grade" />
+                    <externalMetadataColumn
+                      refId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Service]"
+                      dataType="wstr"
+                      length="600"
+                      name="Service" />
+                    <externalMetadataColumn
+                      refId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Minutes]"
+                      dataType="numeric"
+                      name="Minutes"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Frequency]"
+                      dataType="wstr"
+                      length="600"
+                      name="Frequency" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\SPED Services.Paths[OLE DB Source Output]"
+              endId="Package\SPED Services\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\SPED Services\DB Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{CD4F1400-C995-484E-9A71-16C3B5F7A054}"
+      DTS:From="Package\SPED Services"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\SPED ServiceLevels" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="151,44"
+          Id="Package\SPED ServiceLevels"
+          TopLeft="5.5,137.688679245283" />
+        <NodeLayout
+          Size="151,44"
+          Id="Package\SPED Services"
+          TopLeft="5.5,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="80.8584905660377,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,88.2641509433962"
+              Start="0,0"
+              End="0,80.7641509433962">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,80.7641509433962" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

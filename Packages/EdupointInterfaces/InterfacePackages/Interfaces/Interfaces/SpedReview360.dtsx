@@ -1,0 +1,2047 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/22/2014 4:50:58 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="AZLT-MMELARCODE"
+  DTS:CreatorName="XNOVAHQ\MMelarcode"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{BA2B10AB-D360-41ED-9903-A7092BD040FD}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SpedReview360"
+  DTS:PackageType="5"
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{51009837-4312-4566-B427-7D39750CA73F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DB Connection]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{C45D960A-9323-4B0E-B54E-E72CB777D45F}"
+      DTS:ObjectName="DB Connection">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=APSExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-SpedReview360-{C45D960A-9323-4B0E-B54E-E72CB777D45F}azlt-mmelarcode\sql2012.STDemo808_2012;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA18tsXWAShEu39NgC3mjhaAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACVlRCs4wltswtwOurAOncuAAAAAASAAACgAAAAEAAAAEMTZE2hJaWRqagxUJR+6wUwAAAAiTy8WnzqVNt74uosKZDMiWMNEpfLM5oToqc7nFFyWJJYEH4DG6g0KWIgYpV5dIJJFAAAAK3VfUGcQHbZROrmQvxPMmaz36Wy</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Students]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{797ABC90-0821-461E-80A7-B335718E2739}"
+      DTS:ObjectName="Students">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::OutputfilePath] + "SpedReview360.txt"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\180-speddb.aps.edu.actd\TIENET Share\SpedReview360.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student ID Number"
+              DTS:DTSID="{7B04701C-6E63-490A-9E72-0E19EB383807}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student Last Name"
+              DTS:DTSID="{29B5FC15-4D97-4E5C-AE53-DB4DD93BBCA9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student First Name"
+              DTS:DTSID="{FD531194-0CFB-423D-B55E-6F33FA0544B7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DOB"
+              DTS:DTSID="{799DD758-76B7-4D10-92F7-9A6931C7C401}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Gender"
+              DTS:DTSID="{F46ED4FB-3E34-48D9-AE72-16D12841FA1F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Ethnicity 1"
+              DTS:DTSID="{CBBF1C6A-0DA7-446D-BA88-63607787E284}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Ethnicity 2"
+              DTS:DTSID="{F734AC70-AD35-4001-9A8F-8F2BD12718A6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Ethnicity 3"
+              DTS:DTSID="{FE6B0401-445D-462A-9F88-F444BF484383}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Ethnicity 4"
+              DTS:DTSID="{8D9CA9EC-46FA-4E02-9C51-D55DE5547FF7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Ethnicity 5"
+              DTS:DTSID="{A46E93A2-EEF7-4ACE-A7A3-9A9C2D10B825}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HispanicIndicator"
+              DTS:DTSID="{244E89C3-E6F1-47D3-8427-32F4E5214AFC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ESL Status"
+              DTS:DTSID="{3A52CC63-0C70-4622-B3CA-74CE150571AC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Bilingual Status"
+              DTS:DTSID="{3CAB5C49-3EC9-4865-BF21-E84FDB412ACD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IEP Date"
+              DTS:DTSID="{2D05B0AD-0F69-47E9-9081-62BA96FDD350}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Primary Disability"
+              DTS:DTSID="{54819278-EE9E-41AA-9507-181D174053C2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Secondary Disability"
+              DTS:DTSID="{8D66BDFD-1C7B-44EB-BFF5-D54E37C6825D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="3"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Registered Location"
+              DTS:DTSID="{5A87107B-56D0-4955-BBA0-F8DB15A0AF1D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Grade"
+              DTS:DTSID="{19B207E0-C35A-4B50-83BF-01F6F795A0FE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Primary Parent Type"
+              DTS:DTSID="{0B32B2C0-3C7D-45E1-8FB0-DDA50BA559EC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Primary Parent Last Name"
+              DTS:DTSID="{8923F648-D473-4781-9162-D87E432CC21D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Primary Parent First Name"
+              DTS:DTSID="{9E1FC2B5-ACE6-4A86-83E0-B8160C3138C7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Primary Parent Address"
+              DTS:DTSID="{FEB3F68B-AAD3-43B3-916D-14592089BFB9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Primary Parent City"
+              DTS:DTSID="{A3CED6AF-338A-43C8-8045-3D3BEB755150}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Primary Parent State"
+              DTS:DTSID="{9ADB83B3-E6E5-4F2F-91ED-5F6BE4DC8A77}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="6"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Primary Parent Zip"
+              DTS:DTSID="{A537841C-2A9D-4EB8-9776-79C358BBA9F0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="12"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Primary Parent Home Phone #"
+              DTS:DTSID="{16880C96-A83D-49C8-BAB7-0F9CC8E457A8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="12"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Home Phone #"
+              DTS:DTSID="{C724DAB7-61D6-456B-8595-471016A0910C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="12"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Primary Parent Work Phone #"
+              DTS:DTSID="{838B332F-0FAC-4D70-B38B-52B14B6EBE3F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Secondary Parent Type"
+              DTS:DTSID="{D399327A-A7A1-4065-9785-C933CB139650}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Secondary Parent Last Name"
+              DTS:DTSID="{8ECCF809-F7C2-459C-86EE-B1FD873860AE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Secondary Parent First Name"
+              DTS:DTSID="{310909CB-4B0D-4D3C-BAF7-B9DEB5DD0A98}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Secondary Parent Address"
+              DTS:DTSID="{03D23306-5417-432B-A310-910D5BF17EAD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Secondary Parent City"
+              DTS:DTSID="{1D571369-4C1C-4A4D-8373-2A58E6AAC0DA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Secondary Parent State"
+              DTS:DTSID="{AE8BB2DF-9DCE-4318-84B9-F3C63763BE30}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="6"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Secondary Parent Zip"
+              DTS:DTSID="{B6313363-3E11-43D1-8315-A45AB935C86C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="12"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Secondary Parent Home Phone #"
+              DTS:DTSID="{8F7C360B-2B44-46A6-8687-34218C81F31C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="12"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Secondary Parent Work Phone #"
+              DTS:DTSID="{5318D74B-6015-47A9-AC16-39F58B0D9D60}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FileCreatedDate"
+              DTS:DTSID="{523ED092-B803-4B73-99F2-88DC04F8496F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Concurrent"
+              DTS:DTSID="{F0130BB1-52CC-4CA8-92AA-54B100D8F421}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EDDDAC02-110B-4C49-826E-F7026C734586}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="OutputfilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\180-speddb.aps.edu.actd\TIENET Share\</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Sped Review 360 Student Data"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{9AD202BA-82B8-4A1D-BB80-7F92D4DE09EA}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sped Review 360 Student Data"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Sped Review 360 Student Data\DB Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--&lt;APS - Special Education - Review360-MAP&gt;
+; with EthList AS
+(
+select   ROW_NUMBER() over (partition by s.student_gu order by s.student_gu) rn
+       , s.STUDENT_GU
+	   , ethl.ETHNIC_CODE
+	   , es.ALT_CODE_2
+from   rev.epc_stu                          s
+       join rev.REV_PERSON_SECONDRY_ETH_LST ethl ON ethl.PERSON_GU = s.STUDENT_GU 
+	   left join rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') es on es.VALUE_CODE = ethl.ETHNIC_CODE
+), Parent AS
+(
+SELECT   
+        stu.STUDENT_GU
+      , ROW_NUMBER() OVER(PARTITION BY stu.STUDENT_GU ORDER BY stupar.ORDERBY) PGNum
+	  , rel.VALUE_DESCRIPTION Relation
+	  , par.FIRST_NAME
+	  , par.LAST_NAME
+      , LEFT(phone.H,3) + '-'+ SUBSTRING(phone.H,4,3) + '-' + RIGHT(phone.H,4) HomePhone
+      , LEFT(phone.W,3) + '-'+ SUBSTRING(phone.W,4,3) + '-' + RIGHT(phone.W,4) WorkPhone
+      , hadr.ADDRESS
+	  , hadr.CITY
+	  , hadr.STATE
+	  , hadr.ZIP_5
+FROM  rev.EPC_STU_PARENT   stupar
+      JOIN rev.REV_PERSON  par    ON par.PERSON_GU = stupar.PARENT_GU 
+      JOIN rev.EPC_STU     stu    ON stu.STUDENT_GU = stupar.STUDENT_GU
+      JOIN rev.REV_ADDRESS hadr   ON hadr.ADDRESS_GU = par.HOME_ADDRESS_GU
+	  LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'RELATION_TYPE') rel ON rel.VALUE_CODE = stupar.RELATION_TYPE
+      LEFT JOIN (SELECT phn.PERSON_GU, phn.PHONE, phn.PHONE_TYPE FROM rev.REV_PERSON_PHONE phn) pl
+                 PIVOT (min(phone) FOR phone_type in ([H], [W])) phone ON phone.PERSON_GU = par.PERSON_GU
+)
+SELECT 
+        stu.SIS_NUMBER                               AS [Student ID Number]
+      , per.LAST_NAME                                AS [Student Last Name]
+      , per.FIRST_NAME                               AS [Student First Name]
+      , CONVERT(VARCHAR(10), per.BIRTH_DATE, 101)    AS [DOB]
+      , per.GENDER                                   AS [Gender]
+      , LEFT(el1.ALT_CODE_2,1)                       AS [Ethnicity 1]
+      , LEFT(el2.ALT_CODE_2,1)                       AS [Ethnicity 2]
+      , LEFT(el3.ALT_CODE_2,1)                       AS [Ethnicity 3]
+      , LEFT(el4.ALT_CODE_2,1)                       AS [Ethnicity 4]
+      , LEFT(el5.ALT_CODE_2,1)                       AS [Ethnicity 5]
+      , per.HISPANIC_INDICATOR                       AS [HispanicIndicator]
+      , ''                                           AS [ESL Status] --NULL (TBD)
+      , ''                                           AS [Bilingual Status] --NULL (TBD)
+      , CONVERT(VARCHAR(10), sped.next_iep_date,101) AS [IEP Date]
+      , sped.PRIMARY_DISABILITY_CODE                 AS [Primary Disability]
+      , sped.SECONDARY_DISABILITY_CODE               AS [Secondary Disability]
+      , RIGHT('000' + sch.SCHOOL_CODE, 3)            AS [Registered Location]
+      , grd.VALUE_DESCRIPTION                        AS [Grade]
+      , p1.Relation                                  AS [Primary Parent Type]
+      , p1.LAST_NAME                                 AS [Primary Parent Last Name]
+      , p1.FIRST_NAME                                AS [Primary Parent First Name]
+      , p1.ADDRESS                                   AS [Primary Parent Address]
+      , p1.CITY                                      AS [Primary Parent City]
+      , p1.STATE                                     AS [Primary Parent State]
+      , p1.ZIP_5                                     AS [Primary Parent Zip]
+      , p1.HomePhone                                 AS [Primary Parent Home Phone #]
+      , LEFT(per.PRIMARY_PHONE,3) + '-' +
+	    SUBSTRING(per.PRIMARY_PHONE,4,3) + '-' +
+		RIGHT(per.PRIMARY_PHONE,4)                   AS [Home Phone #]
+      , p1.WorkPhone                                 AS [Primary Parent Work Phone #]
+      , p2.Relation                                  AS [Secondary Parent Type]
+      , p2.LAST_NAME                                 AS [Secondary Parent Last Name]
+      , p2.FIRST_NAME                                AS [Secondary Parent First Name]
+      , p2.ADDRESS                                   AS [Secondary Parent Address]
+      , p2.CITY                                      AS [Secondary Parent City]
+      , p2.STATE                                     AS [Secondary Parent State]
+      , p2.ZIP_5                                     AS [Secondary Parent Zip]
+      , p2.HomePhone                                 AS [Secondary Parent Home Phone #]
+      , p2.WorkPhone                                 AS [Secondary Parent Work Phone #]
+	  , CONVERT(VARCHAR(10),GETDATE(),101)           AS [FileCreatedDate]
+	  , ssy.EXCLUDE_ADA_ADM                          AS [Concurrent]
+FROM  rev.EPC_STU                         stu
+      JOIN rev.EPC_STU_SCH_YR             ssy  ON ssy.STUDENT_GU           = stu.STUDENT_GU
+                                                  AND ssy.STATUS is null
+      JOIN rev.REV_ORGANIZATION_YEAR      oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
+                                                  AND oyr.YEAR_GU          = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+      JOIN rev.EPC_SCH                    sch  ON sch.ORGANIZATION_GU      = oyr.ORGANIZATION_GU
+      JOIN rev.REV_PERSON                 per  ON per.PERSON_GU            = stu.STUDENT_GU
+	  LEFT JOIN rev.EP_STUDENT_SPECIAL_ED sped ON sped.STUDENT_GU          = stu.STUDENT_GU
+	  LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd ON grd.VALUE_CODE = ssy.GRADE
+	  -- Ethnicity
+      LEFT JOIN EthList                   el1  ON el1.STUDENT_GU            = stu.STUDENT_GU and el1.rn = 1
+      LEFT JOIN EthList                   el2  ON el2.STUDENT_GU            = stu.STUDENT_GU and el2.rn = 2
+      LEFT JOIN EthList                   el3  ON el3.STUDENT_GU            = stu.STUDENT_GU and el3.rn = 3
+      LEFT JOIN EthList                   el4  ON el4.STUDENT_GU            = stu.STUDENT_GU and el4.rn = 4
+      LEFT JOIN EthList                   el5  ON el5.STUDENT_GU            = stu.STUDENT_GU and el5.rn = 5
+	  -- Parent 1
+	  LEFT JOIN Parent                    p1   ON p1.STUDENT_GU             = stu.STUDENT_GU and p1.PGNum = 1
+	  -- Parent 2
+	  LEFT JOIN Parent                    p2   ON p2.STUDENT_GU             = stu.STUDENT_GU and p2.PGNum = 2</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Sped Review 360 Student Data\DB Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Student ID Number]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student ID Number]"
+                      length="20"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Student ID Number]"
+                      name="Student ID Number"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Student Last Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student Last Name]"
+                      length="60"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Student Last Name]"
+                      name="Student Last Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Student First Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student First Name]"
+                      length="60"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Student First Name]"
+                      name="Student First Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[DOB]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[DOB]"
+                      length="10"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[DOB]"
+                      name="DOB"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Gender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      length="5"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Ethnicity 1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Ethnicity 1]"
+                      length="1"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Ethnicity 1]"
+                      name="Ethnicity 1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Ethnicity 2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Ethnicity 2]"
+                      length="1"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Ethnicity 2]"
+                      name="Ethnicity 2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Ethnicity 3]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Ethnicity 3]"
+                      length="1"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Ethnicity 3]"
+                      name="Ethnicity 3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Ethnicity 4]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Ethnicity 4]"
+                      length="1"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Ethnicity 4]"
+                      name="Ethnicity 4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Ethnicity 5]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Ethnicity 5]"
+                      length="1"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Ethnicity 5]"
+                      name="Ethnicity 5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[HispanicIndicator]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[HispanicIndicator]"
+                      length="5"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[HispanicIndicator]"
+                      name="HispanicIndicator"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[ESL Status]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ESL Status]"
+                      length="1"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[ESL Status]"
+                      name="ESL Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Bilingual Status]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Bilingual Status]"
+                      length="1"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Bilingual Status]"
+                      name="Bilingual Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[IEP Date]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[IEP Date]"
+                      length="10"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[IEP Date]"
+                      name="IEP Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Disability]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Disability]"
+                      length="5"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Disability]"
+                      name="Primary Disability"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Disability]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Disability]"
+                      length="5"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Disability]"
+                      name="Secondary Disability"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Registered Location]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Registered Location]"
+                      length="3"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Registered Location]"
+                      name="Registered Location"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Grade]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Grade]"
+                      length="600"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Grade]"
+                      name="Grade"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent Type]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Parent Type]"
+                      length="600"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent Type]"
+                      name="Primary Parent Type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent Last Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Parent Last Name]"
+                      length="60"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent Last Name]"
+                      name="Primary Parent Last Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent First Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Parent First Name]"
+                      length="60"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent First Name]"
+                      name="Primary Parent First Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent Address]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Parent Address]"
+                      length="50"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent Address]"
+                      name="Primary Parent Address"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent City]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Parent City]"
+                      length="50"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent City]"
+                      name="Primary Parent City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent State]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Parent State]"
+                      length="5"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent State]"
+                      name="Primary Parent State"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent Zip]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Parent Zip]"
+                      length="6"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent Zip]"
+                      name="Primary Parent Zip"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent Home Phone #]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Parent Home Phone #]"
+                      length="12"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent Home Phone #]"
+                      name="Primary Parent Home Phone #"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Home Phone #]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Home Phone #]"
+                      length="12"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Home Phone #]"
+                      name="Home Phone #"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent Work Phone #]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Parent Work Phone #]"
+                      length="12"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent Work Phone #]"
+                      name="Primary Parent Work Phone #"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent Type]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Parent Type]"
+                      length="600"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent Type]"
+                      name="Secondary Parent Type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent Last Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Parent Last Name]"
+                      length="60"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent Last Name]"
+                      name="Secondary Parent Last Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent First Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Parent First Name]"
+                      length="60"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent First Name]"
+                      name="Secondary Parent First Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent Address]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Parent Address]"
+                      length="50"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent Address]"
+                      name="Secondary Parent Address"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent City]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Parent City]"
+                      length="50"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent City]"
+                      name="Secondary Parent City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent State]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Parent State]"
+                      length="5"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent State]"
+                      name="Secondary Parent State"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent Zip]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Parent Zip]"
+                      length="6"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent Zip]"
+                      name="Secondary Parent Zip"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent Home Phone #]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Parent Home Phone #]"
+                      length="12"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent Home Phone #]"
+                      name="Secondary Parent Home Phone #"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent Work Phone #]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Parent Work Phone #]"
+                      length="12"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent Work Phone #]"
+                      name="Secondary Parent Work Phone #"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[FileCreatedDate]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[FileCreatedDate]"
+                      length="10"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[FileCreatedDate]"
+                      name="FileCreatedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Concurrent]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Concurrent]"
+                      length="5"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Concurrent]"
+                      name="Concurrent"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student ID Number]"
+                      dataType="wstr"
+                      length="20"
+                      name="Student ID Number" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Student Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student First Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Student First Name" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[DOB]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="DOB" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="5"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Ethnicity 1]"
+                      dataType="wstr"
+                      length="1"
+                      name="Ethnicity 1" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Ethnicity 2]"
+                      dataType="wstr"
+                      length="1"
+                      name="Ethnicity 2" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Ethnicity 3]"
+                      dataType="wstr"
+                      length="1"
+                      name="Ethnicity 3" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Ethnicity 4]"
+                      dataType="wstr"
+                      length="1"
+                      name="Ethnicity 4" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Ethnicity 5]"
+                      dataType="wstr"
+                      length="1"
+                      name="Ethnicity 5" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[HispanicIndicator]"
+                      dataType="wstr"
+                      length="5"
+                      name="HispanicIndicator" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ESL Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ESL Status" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Bilingual Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Bilingual Status" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[IEP Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="IEP Date" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Disability]"
+                      dataType="wstr"
+                      length="5"
+                      name="Primary Disability" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Disability]"
+                      dataType="wstr"
+                      length="5"
+                      name="Secondary Disability" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Registered Location]"
+                      dataType="wstr"
+                      length="3"
+                      name="Registered Location" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Grade]"
+                      dataType="wstr"
+                      length="600"
+                      name="Grade" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Parent Type]"
+                      dataType="wstr"
+                      length="600"
+                      name="Primary Parent Type" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Parent Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Primary Parent Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Parent First Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Primary Parent First Name" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Parent Address]"
+                      dataType="wstr"
+                      length="50"
+                      name="Primary Parent Address" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Parent City]"
+                      dataType="wstr"
+                      length="50"
+                      name="Primary Parent City" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Parent State]"
+                      dataType="wstr"
+                      length="5"
+                      name="Primary Parent State" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Parent Zip]"
+                      dataType="wstr"
+                      length="6"
+                      name="Primary Parent Zip" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Parent Home Phone #]"
+                      dataType="wstr"
+                      length="12"
+                      name="Primary Parent Home Phone #" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Home Phone #]"
+                      dataType="wstr"
+                      length="12"
+                      name="Home Phone #" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Parent Work Phone #]"
+                      dataType="wstr"
+                      length="12"
+                      name="Primary Parent Work Phone #" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Parent Type]"
+                      dataType="wstr"
+                      length="600"
+                      name="Secondary Parent Type" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Parent Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Secondary Parent Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Parent First Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Secondary Parent First Name" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Parent Address]"
+                      dataType="wstr"
+                      length="50"
+                      name="Secondary Parent Address" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Parent City]"
+                      dataType="wstr"
+                      length="50"
+                      name="Secondary Parent City" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Parent State]"
+                      dataType="wstr"
+                      length="5"
+                      name="Secondary Parent State" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Parent Zip]"
+                      dataType="wstr"
+                      length="6"
+                      name="Secondary Parent Zip" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Parent Home Phone #]"
+                      dataType="wstr"
+                      length="12"
+                      name="Secondary Parent Home Phone #" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Parent Work Phone #]"
+                      dataType="wstr"
+                      length="12"
+                      name="Secondary Parent Work Phone #" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[FileCreatedDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="FileCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Concurrent]"
+                      dataType="wstr"
+                      length="5"
+                      name="Concurrent" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Student ID Number]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Student ID Number]"
+                      name="Student ID Number" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Student Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Student Last Name]"
+                      name="Student Last Name" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Student First Name]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Student First Name]"
+                      name="Student First Name" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[DOB]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[DOB]"
+                      name="DOB" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Ethnicity 1]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Ethnicity 1]"
+                      name="Ethnicity 1" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Ethnicity 2]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Ethnicity 2]"
+                      name="Ethnicity 2" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Ethnicity 3]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Ethnicity 3]"
+                      name="Ethnicity 3" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Ethnicity 4]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Ethnicity 4]"
+                      name="Ethnicity 4" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Ethnicity 5]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Ethnicity 5]"
+                      name="Ethnicity 5" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[HispanicIndicator]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[HispanicIndicator]"
+                      name="HispanicIndicator" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[ESL Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[ESL Status]"
+                      name="ESL Status" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Bilingual Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Bilingual Status]"
+                      name="Bilingual Status" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[IEP Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[IEP Date]"
+                      name="IEP Date" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Disability]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Disability]"
+                      name="Primary Disability" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Disability]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Disability]"
+                      name="Secondary Disability" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Registered Location]"
+                      dataType="wstr"
+                      length="3"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Registered Location]"
+                      name="Registered Location" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Grade]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Grade]"
+                      name="Grade" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Parent Type]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Parent Type]"
+                      name="Primary Parent Type" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Parent Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Parent Last Name]"
+                      name="Primary Parent Last Name" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Parent First Name]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Parent First Name]"
+                      name="Primary Parent First Name" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Parent Address]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Parent Address]"
+                      name="Primary Parent Address" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Parent City]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Parent City]"
+                      name="Primary Parent City" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Parent State]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Parent State]"
+                      name="Primary Parent State" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Parent Zip]"
+                      dataType="wstr"
+                      length="6"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Parent Zip]"
+                      name="Primary Parent Zip" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Parent Home Phone #]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Parent Home Phone #]"
+                      name="Primary Parent Home Phone #" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Home Phone #]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Home Phone #]"
+                      name="Home Phone #" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Parent Work Phone #]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Parent Work Phone #]"
+                      name="Primary Parent Work Phone #" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Parent Type]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Parent Type]"
+                      name="Secondary Parent Type" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Parent Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Parent Last Name]"
+                      name="Secondary Parent Last Name" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Parent First Name]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Parent First Name]"
+                      name="Secondary Parent First Name" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Parent Address]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Parent Address]"
+                      name="Secondary Parent Address" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Parent City]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Parent City]"
+                      name="Secondary Parent City" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Parent State]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Parent State]"
+                      name="Secondary Parent State" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Parent Zip]"
+                      dataType="wstr"
+                      length="6"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Parent Zip]"
+                      name="Secondary Parent Zip" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Parent Home Phone #]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Parent Home Phone #]"
+                      name="Secondary Parent Home Phone #" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Parent Work Phone #]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Parent Work Phone #]"
+                      name="Secondary Parent Work Phone #" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[FileCreatedDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[FileCreatedDate]"
+                      name="FileCreatedDate" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Concurrent]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[Concurrent]"
+                      name="Concurrent" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Sped Review 360 Student Data\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Sped Review 360 Student Data\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Students]"
+                  connectionManagerRefId="Package.ConnectionManagers[Students]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Student ID Number]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Student ID Number"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student ID Number]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Student ID Number]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Student Last Name]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Student Last Name"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student Last Name]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Student Last Name]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Student First Name]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Student First Name"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student First Name]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Student First Name]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[DOB]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="DOB"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DOB]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[DOB]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Ethnicity 1]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="Ethnicity 1"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Ethnicity 1]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Ethnicity 1]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Ethnicity 2]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="Ethnicity 2"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Ethnicity 2]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Ethnicity 2]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Ethnicity 3]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="Ethnicity 3"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Ethnicity 3]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Ethnicity 3]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Ethnicity 4]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="Ethnicity 4"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Ethnicity 4]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Ethnicity 4]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Ethnicity 5]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="Ethnicity 5"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Ethnicity 5]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Ethnicity 5]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[HispanicIndicator]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="HispanicIndicator"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[HispanicIndicator]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[HispanicIndicator]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[ESL Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="ESL Status"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ESL Status]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[ESL Status]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Bilingual Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Bilingual Status"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Bilingual Status]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Bilingual Status]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[IEP Date]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="IEP Date"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[IEP Date]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[IEP Date]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Primary Disability]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Primary Disability"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Disability]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Disability]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Secondary Disability]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Secondary Disability"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Disability]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Disability]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Registered Location]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="Registered Location"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Registered Location]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Registered Location]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Grade]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="Grade"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Grade]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Grade]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Primary Parent Type]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="Primary Parent Type"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Parent Type]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent Type]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Primary Parent Last Name]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Primary Parent Last Name"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Parent Last Name]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent Last Name]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Primary Parent First Name]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Primary Parent First Name"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Parent First Name]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent First Name]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Primary Parent Address]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Primary Parent Address"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Parent Address]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent Address]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Primary Parent City]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Primary Parent City"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Parent City]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent City]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Primary Parent State]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Primary Parent State"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Parent State]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent State]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Primary Parent Zip]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="Primary Parent Zip"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Parent Zip]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent Zip]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Primary Parent Home Phone #]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="Primary Parent Home Phone #"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Parent Home Phone #]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent Home Phone #]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Home Phone #]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="Home Phone #"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Home Phone #]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Home Phone #]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Primary Parent Work Phone #]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="Primary Parent Work Phone #"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Parent Work Phone #]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Primary Parent Work Phone #]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Secondary Parent Type]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="Secondary Parent Type"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Parent Type]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent Type]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Secondary Parent Last Name]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Secondary Parent Last Name"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Parent Last Name]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent Last Name]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Secondary Parent First Name]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Secondary Parent First Name"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Parent First Name]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent First Name]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Secondary Parent Address]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Secondary Parent Address"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Parent Address]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent Address]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Secondary Parent City]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Secondary Parent City"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Parent City]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent City]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Secondary Parent State]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Secondary Parent State"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Parent State]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent State]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Secondary Parent Zip]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="Secondary Parent Zip"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Parent Zip]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent Zip]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Secondary Parent Home Phone #]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="Secondary Parent Home Phone #"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Parent Home Phone #]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent Home Phone #]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Secondary Parent Work Phone #]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="Secondary Parent Work Phone #"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Parent Work Phone #]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Parent Work Phone #]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[FileCreatedDate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="FileCreatedDate"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FileCreatedDate]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[FileCreatedDate]" />
+                    <inputColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].Columns[Concurrent]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Concurrent"
+                      externalMetadataColumnId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Concurrent]"
+                      lineageId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output].Columns[Concurrent]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student ID Number]"
+                      dataType="wstr"
+                      length="20"
+                      name="Student ID Number" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Student Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student First Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Student First Name" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DOB]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="DOB" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="5"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Ethnicity 1]"
+                      dataType="wstr"
+                      length="1"
+                      name="Ethnicity 1" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Ethnicity 2]"
+                      dataType="wstr"
+                      length="1"
+                      name="Ethnicity 2" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Ethnicity 3]"
+                      dataType="wstr"
+                      length="1"
+                      name="Ethnicity 3" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Ethnicity 4]"
+                      dataType="wstr"
+                      length="1"
+                      name="Ethnicity 4" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Ethnicity 5]"
+                      dataType="wstr"
+                      length="1"
+                      name="Ethnicity 5" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[HispanicIndicator]"
+                      dataType="wstr"
+                      length="5"
+                      name="HispanicIndicator" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ESL Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ESL Status" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Bilingual Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Bilingual Status" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[IEP Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="IEP Date" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Disability]"
+                      dataType="wstr"
+                      length="5"
+                      name="Primary Disability" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Disability]"
+                      dataType="wstr"
+                      length="5"
+                      name="Secondary Disability" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Registered Location]"
+                      dataType="wstr"
+                      length="3"
+                      name="Registered Location" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Grade]"
+                      dataType="wstr"
+                      length="600"
+                      name="Grade" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Parent Type]"
+                      dataType="wstr"
+                      length="600"
+                      name="Primary Parent Type" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Parent Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Primary Parent Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Parent First Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Primary Parent First Name" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Parent Address]"
+                      dataType="wstr"
+                      length="50"
+                      name="Primary Parent Address" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Parent City]"
+                      dataType="wstr"
+                      length="50"
+                      name="Primary Parent City" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Parent State]"
+                      dataType="wstr"
+                      length="5"
+                      name="Primary Parent State" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Parent Zip]"
+                      dataType="wstr"
+                      length="6"
+                      name="Primary Parent Zip" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Parent Home Phone #]"
+                      dataType="wstr"
+                      length="12"
+                      name="Primary Parent Home Phone #" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Home Phone #]"
+                      dataType="wstr"
+                      length="12"
+                      name="Home Phone #" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Parent Work Phone #]"
+                      dataType="wstr"
+                      length="12"
+                      name="Primary Parent Work Phone #" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Parent Type]"
+                      dataType="wstr"
+                      length="600"
+                      name="Secondary Parent Type" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Parent Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Secondary Parent Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Parent First Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Secondary Parent First Name" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Parent Address]"
+                      dataType="wstr"
+                      length="50"
+                      name="Secondary Parent Address" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Parent City]"
+                      dataType="wstr"
+                      length="50"
+                      name="Secondary Parent City" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Parent State]"
+                      dataType="wstr"
+                      length="5"
+                      name="Secondary Parent State" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Parent Zip]"
+                      dataType="wstr"
+                      length="6"
+                      name="Secondary Parent Zip" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Parent Home Phone #]"
+                      dataType="wstr"
+                      length="12"
+                      name="Secondary Parent Home Phone #" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Parent Work Phone #]"
+                      dataType="wstr"
+                      length="12"
+                      name="Secondary Parent Work Phone #" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FileCreatedDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="FileCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Concurrent]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Concurrent" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Sped Review 360 Student Data.Paths[OLE DB Source Output]"
+              endId="Package\Sped Review 360 Student Data\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Sped Review 360 Student Data\DB Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="227,42"
+          Id="Package\Sped Review 360 Student Data"
+          TopLeft="5.5,5.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sped Review 360 Student Data">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="126,42"
+          Id="Package\Sped Review 360 Student Data\DB Query"
+          TopLeft="29.5,5.5" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Sped Review 360 Student Data\Flat File Destination"
+          TopLeft="5.50000000000001,107.5" />
+        <EdgeLayout
+          Id="Package\Sped Review 360 Student Data.Paths[OLE DB Source Output]"
+          TopLeft="92.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sped Review 360 Student Data\DB Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
