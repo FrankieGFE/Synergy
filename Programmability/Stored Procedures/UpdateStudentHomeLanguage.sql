@@ -37,15 +37,15 @@ BEGIN
 BEGIN TRANSACTION
 
 	UPDATE rev.EPC_STU
-		SET HOME_LANGUAGE = UPDATESELECT.HOME_LANGUAGE, HOME_LANGUAGE_DATE = GETDATE()
+		SET HOME_LANGUAGE = UPDATESELECT.HOME_LANGUAGE, HOME_LANGUAGE_DATE = UPDATESELECT.DATE_ASSIGNED
 
 	FROM
 	(
 	
 	SELECT 
 		STUDENT.STUDENT_GU
-		--'54' ARE FOR STUDENTS IN THE STUDENT TABLE THAT DO NOT HAVE AN HLS RECORD
-		,CASE WHEN STURECORD.STUDENT_GU IS NULL THEN '54' ELSE STURECORD.LANGUAGE_CODE END AS HOME_LANGUAGE
+		,STURECORD.LANGUAGE_CODE AS HOME_LANGUAGE
+		,DATE_ASSIGNED
 	FROM
 		rev.EPC_STU AS STUDENT
 
@@ -54,6 +54,7 @@ BEGIN TRANSACTION
 		SELECT
 			ALLHLS.STUDENT_GU
 			,ALLHLS.LANGUAGE_CODE 
+			,DATE_ASSIGNED
 		FROM
 
 --THIS PULLS ALL STUDENTS THAT HAVE NON ENGLISH RECORDS FOR THEIR MOST RECENT HLS RECORD
@@ -62,6 +63,7 @@ BEGIN TRANSACTION
 			SELECT
 				STUDENT_GU
 				 ,LANGUAGE_CODE
+				 ,DATE_ASSIGNED
 			 FROM
 				(
 				SELECT
@@ -69,12 +71,14 @@ BEGIN TRANSACTION
                      ,LANGUAGE_CODE
                      ,LANGCOUNT
                      ,ROW_NUMBER() OVER (PARTITION BY STUDENT_GU ORDER BY LANGCOUNT DESC, LANGUAGE_CODE ASC) AS RN
+					 ,DATE_ASSIGNED
 				FROM
                      (
                      SELECT
                            STUDENT_GU
                            ,LANGUAGE_CODE
                            ,COUNT(*) AS LANGCOUNT
+						   ,DATE_ASSIGNED
                      FROM
                            (
                            SELECT
@@ -93,6 +97,7 @@ BEGIN TRANSACTION
                                                 ,Q4_OTHER_LANG_UNDERSTOOD
                                                 ,Q5_OTHER_LANG_COMMUNICATED
                                                 ,ROW_NUMBER() OVER (PARTITION BY STUDENT_GU ORDER BY DATE_ASSIGNED DESC) AS RN
+												,DATE_ASSIGNED
                                          FROM
                                                 rev.UD_HLS_HISTORY
                                          ) AS HLS
@@ -113,6 +118,7 @@ BEGIN TRANSACTION
                      GROUP BY
                            STUDENT_GU
                            ,LANGUAGE_CODE
+						   ,DATE_ASSIGNED
                      ) AS GROUPS
               ) AS RNGROUPS
 		WHERE
@@ -124,6 +130,7 @@ UNION
               SELECT
                      STUDENT_GU
                      ,'00' 
+					 ,DATE_ASSIGNED
               FROM
                      (
                      SELECT
@@ -133,6 +140,7 @@ UNION
                            ,Q3_LANGUAGES_SPOKEN
                            ,Q4_OTHER_LANG_UNDERSTOOD
                            ,Q5_OTHER_LANG_COMMUNICATED
+						   ,DATE_ASSIGNED
                      FROM
                            (
                            SELECT
@@ -143,6 +151,7 @@ UNION
                                   ,Q4_OTHER_LANG_UNDERSTOOD
                                   ,Q5_OTHER_LANG_COMMUNICATED
                                   ,ROW_NUMBER() OVER (PARTITION BY STUDENT_GU ORDER BY DATE_ASSIGNED DESC) AS RN
+								  ,DATE_ASSIGNED
                            FROM
                                   rev.UD_HLS_HISTORY
                            ) AS RawHLS
