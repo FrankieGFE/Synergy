@@ -45,6 +45,7 @@ SELECT
 	,ESLStudent
 	,PotentialTypeA
 	,PotentialTypeB
+	,ORGANIZATION_GU
 
 FROM
 (
@@ -76,7 +77,7 @@ SELECT
 			AND SUM(ESLStudent) > 0 
 			AND MAX(TeacherTESOLWaiverOnly) != 1 
 			--added where classes are tagged ESL for ESL
-			AND (CASE WHEN ALSES = 'ALSES'  THEN 1 ELSE 0 END) = 1
+			AND (CASE WHEN ALSES = 'ESL'  THEN 1 ELSE 0 END) = 1
 			THEN 1
 		ELSE 0
 				END AS PotentialTypeA
@@ -87,10 +88,11 @@ SELECT
 			AND SUM(BilingualStudent) > 0 
 			AND MAX(TeacherBilingualWaiverOnly) != 1 
 			--added where classes are not tagged ELD, ESL or Sheltered Content for Bilingual
-			AND (CASE WHEN ((ALSMA = 'ALSMA') OR (ALSMP = 'ALSMP') OR (ALS2W = 'ALS2W') OR (ALSSC = 'ALSSC') OR (ALSSS = 'ALSSS') OR (ALSLA = 'ALSLA') OR (ALSOT = 'ALSOT') OR (ALSNV = 'ALSNV')) THEN 1 ELSE 0 END)= 1
+			AND (CASE WHEN ((ALSMA = 'Math') OR (ALSMP = 'Maintenance') OR (ALS2W = '2-Way Dual') OR (ALSSC = 'Science') OR (ALSSS = 'Soc. Studies') OR (ALSLA = 'Lang. Arts') OR (ALSOT = 'Other') OR (ALSNV = 'Navajo')) THEN 1 ELSE 0 END)= 1
 			THEN 1
 	ELSE 0
 				END AS PotentialTypeB
+	,ORGANIZATION_GU
 
 FROM
 
@@ -107,7 +109,17 @@ FROM
 				,Schedules.COURSE_TITLE AS CourseTitle
 
 				--All the tags for each section
-				,[ALSMA], [ALSMP],[ALS2W], [ALSED], [ALSSC], [ALSSS], [ALSSH], [ALSLA], [ALSES], [ALSOT], [ALSNV]
+				,CASE WHEN ALSMA IS NULL THEN '' ELSE 'Math' END AS ALSMA
+				,CASE WHEN ALSMP IS NULL THEN '' ELSE 'Maintenance' END AS ALSMP
+				,CASE WHEN ALS2W IS NULL THEN '' ELSE '2-Way Dual' END AS ALS2W
+				,CASE WHEN ALSED IS NULL THEN '' ELSE 'ELD' END AS ALSED
+				,CASE WHEN ALSSC IS NULL THEN '' ELSE 'Science' END AS ALSSC
+				,CASE WHEN ALSSS IS NULL THEN '' ELSE 'Soc. Studies' END AS ALSSS
+				,CASE WHEN ALSSH IS NULL THEN '' ELSE 'Sheltered' END AS ALSSH
+				,CASE WHEN ALSLA IS NULL THEN '' ELSE 'Lang. Arts' END AS ALSLA
+				,CASE WHEN ALSES IS NULL THEN '' ELSE 'ESL' END AS ALSES
+				,CASE WHEN ALSOT IS NULL THEN '' ELSE 'Other' END AS ALSOT
+				,CASE WHEN ALSNV IS NULL THEN '' ELSE 'Navajo' END AS ALSNV
 				
 				--Endorsements need to be seperated by School Type for Elementary and Secondary
 				,CASE WHEN (Endorsed.ElementaryBilingual=1 AND SchoolType.SCHOOL_TYPE IN (1,2)) OR (Endorsed.SecondaryBilingual=1 AND SchoolType.SCHOOL_TYPE IN (2,3,4)) THEN 1 ELSE 0 END AS TeacherBilingual				
@@ -121,6 +133,8 @@ FROM
 
 				--Identify which students are ESL, if student is ELL then ESL
 				,SUM(CASE WHEN  ELL.STUDENT_GU IS NOT NULL THEN 1 ELSE 0 END) AS ESLStudent
+
+				,Organization.ORGANIZATION_GU
 
 		 FROM
 	
@@ -202,7 +216,17 @@ FROM
 				,Schedules.SECTION_ID
 				,Schedules.COURSE_TITLE
 
-				,[ALSMA], [ALSMP],[ALS2W], [ALSED], [ALSSC], [ALSSS], [ALSSH], [ALSLA], [ALSES], [ALSOT], [ALSNV]
+				,CASE WHEN ALSMA IS NULL THEN '' ELSE 'Math' END 
+				,CASE WHEN ALSMP IS NULL THEN '' ELSE 'Maintenance' END 
+				,CASE WHEN ALS2W IS NULL THEN '' ELSE '2-Way Dual' END 
+				,CASE WHEN ALSED IS NULL THEN '' ELSE 'ELD' END 
+				,CASE WHEN ALSSC IS NULL THEN '' ELSE 'Science' END 
+				,CASE WHEN ALSSS IS NULL THEN '' ELSE 'Soc. Studies' END 
+				,CASE WHEN ALSSH IS NULL THEN '' ELSE 'Sheltered' END 
+				,CASE WHEN ALSLA IS NULL THEN '' ELSE 'Lang. Arts' END 
+				,CASE WHEN ALSES IS NULL THEN '' ELSE 'ESL' END 
+				,CASE WHEN ALSOT IS NULL THEN '' ELSE 'Other' END 
+				,CASE WHEN ALSNV IS NULL THEN '' ELSE 'Navajo' END 
 
 				,CASE WHEN (Endorsed.ElementaryBilingual=1 AND SchoolType.SCHOOL_TYPE IN (1,2)) OR (Endorsed.SecondaryBilingual=1 AND SchoolType.SCHOOL_TYPE IN (2,3,4)) THEN 1 ELSE 0 END 		
 				,CASE WHEN (Endorsed.ElementaryESL=1 AND SchoolType.SCHOOL_TYPE IN (1,2)) OR (Endorsed.SecondaryESL=1 AND SchoolType.SCHOOL_TYPE IN (2,3,4)) THEN 1 ELSE 0 END 
@@ -210,6 +234,7 @@ FROM
 				,CASE WHEN (Endorsed.ElementaryTESOLWaiverOnly=1 AND SchoolType.SCHOOL_TYPE IN (1,2)) OR (Endorsed.SecondaryTESOLWaiverOnly=1 AND SchoolType.SCHOOL_TYPE IN (2,3,4)) THEN 1 ELSE 0 END 
 				,CASE WHEN (Endorsed.ElementaryBilingualWaiverOnly=1 AND SchoolType.SCHOOL_TYPE IN (1,2)) OR (Endorsed.SecondaryBilingualWaiverOnly=1 AND SchoolType.SCHOOL_TYPE IN (2,3,4)) THEN 1 ELSE 0 END
 
+				,Organization.ORGANIZATION_GU
 
 ) AS AllSectionsEndorsed
 
@@ -230,6 +255,7 @@ GROUP BY
 			,TeacherTESOL
 			,BilingualStudent
 			,ESLStudent
+			,ORGANIZATION_GU
 
 ) AS PotentialDiffPay
 
