@@ -17,6 +17,7 @@
  */
 BEGIN TRANSACTION
 
+-- Wiping staff information
 UPDATE
 	Staff
 SET
@@ -24,13 +25,13 @@ SET
 	,HIRE_DATE = NULL
 	,EXIT_CODE = NULL
 	,EXIT_DATE = NULL
-	,FTE = NULL
-	,DISTRICT_PERSONNEL = 'N'
+	,FTE = NULL -- unusre if this affects anything
+	--,DISTRICT_PERSONNEL = 'N'  -- Probably don't want to do this one
 	,ABBREV_NAME = NULL
 	,YEARS_IN_DIST = NULL
 	,YEARS_OF_ED_SRVC = NULL
-	,EXCLUDE_FROM_STATE_RPT = 'N'
-	,EXCLUDE_PARENTVUE = 'N'
+	--,EXCLUDE_FROM_STATE_RPT = 'N' -- This one is also suspect
+	--,EXCLUDE_PARENTVUE = 'N' -- As is this one
 FROM
 	rev.EPC_STAFF AS Staff
 	INNER JOIN
@@ -52,6 +53,16 @@ SET
 	,AKA_SUFFIX = NULL
 	,HISPANIC_INDICATOR	= NULL
 	,RESOLVED_ETHNICITY_RACE	= NULL	--(Will also require removing RACE indicators from person-to-race many-to-many table
+	,MAIL_ADDRESS_GU = NULL -- This delinks adresses from the staff member.  It does not remove the adress, as it may be used by other persons.
+	,HOME_ADDRESS_GU = NULL -- This delinks adresses from the staff member.  It does not remove the adress, as it may be used by other persons.
+
+	-- This phone stuff may "come back" based on the LDAP sync, but we can do an initial wipe... I guess
+	,PRIMARY_PHONE = NULL
+	,PRIMARY_PHONE_EXTN = NULL
+	,PRIMARY_PHONE_TYPE = NULL
+	,PRIMARY_PHONE_LISTED = 'N'
+	,PRIMARY_PHONE_CONTACT = 'N'
+
 FROM
 	rev.EPC_STAFF AS Staff
 	INNER JOIN
@@ -59,6 +70,8 @@ FROM
 	ON
 	Staff.STAFF_GU = Person.PERSON_GU
 
+
+-- Removing race flags
 DELETE
 	Race
 FROM
@@ -67,5 +80,20 @@ FROM
 	rev.REV_PERSON_SECONDRY_ETH_LST AS Race
 	ON
 	Staff.STAFF_GU = Race.PERSON_GU
+
+--removing employement history.
+DELETE FROM
+	rev.EPC_STAFF_EMP_HIS
+
+
+--removing phone numbers (even thosugh many may "come back")
+DELETE
+	Phone
+FROM
+	rev.REV_PERSON_PHONE AS Phone
+	INNER JOIN
+	rev.EPC_STAFF AS Staff
+	ON
+	Phone.PERSON_GU = Staff.STAFF_GU
 
 ROLLBACK

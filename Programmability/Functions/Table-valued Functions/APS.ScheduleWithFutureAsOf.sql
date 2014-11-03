@@ -30,6 +30,22 @@ SELECT
 	,CourseMaster.COURSE_TITLE
 	,CourseMaster.CREDIT
 	-- I am sure we will want to add more Course Level info here (Dual credit... etc.)
+	,CourseMaster.DEPARTMENT
+	,CourseMaster.GRADE_RANGE_LOW
+	,CourseMaster.GRADE_RANGE_HIGH
+	,CourseMaster.COURSE_HISTORY_TYPE
+	,CourseMaster.ACADEMIC_TYPE
+	,CourseMaster.SUBJECT_AREA_1
+	,CourseMaster.SUBJECT_AREA_2
+	,CourseMaster.SUBJECT_AREA_3
+	,CourseMaster.SUBJECT_AREA_4
+	,CourseMaster.SUBJECT_AREA_5
+	,CourseMaster.PROGRAM_3Y
+	,CourseMaster.PROGRAM_4Y
+	,CourseMaster.ONLINE_COURSE
+	,CourseMaster.DISTANCE_LEARNING
+	,CourseMaster.AP_INDICATOR
+	,CourseMaster.COURSE_DURATION
 FROM
 	APS.BasicSchedule
 	INNER JOIN
