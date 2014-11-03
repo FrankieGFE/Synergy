@@ -7,6 +7,7 @@
  */
 DECLARE @YearGu UNIQUEIDENTIFIER
 		,@School VARCHAR(128) = '%'
+		,@asOfDate DATE = GETDATE()
 SELECT 
 	@YearGu = YEAR_GU
 FROM
@@ -27,7 +28,7 @@ SELECT
 	,Section.SECTION_ID
 	,SectionAndStaff.PRIMARY_TEACHER
 FROM
-	APS.SectionsAndAllStaffAssigned AS SectionAndStaff
+	APS.SectionsAndAllStaffAssignedAsOf(@asOfDate) AS SectionAndStaff
 	INNER JOIN
 	rev.EPC_SCH_YR_SECT AS Section
 	ON
