@@ -143,7 +143,7 @@ FROM
 			*  Identify which sections are LCE Classes
 			***********************************************************************************************/
 	
-			APS.SectionsAndAllStaffAssigned AS AllStaff
+			APS.SectionsAndAllStaffAssignedAsOf(@AsOfDate) AS AllStaff
 			INNER JOIN
 			APS.LCETeacherEndorsementsAsOf (@AsOfDate) AS Endorsed
 			ON
