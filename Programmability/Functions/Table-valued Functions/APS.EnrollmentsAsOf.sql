@@ -36,6 +36,7 @@ RETURN
 		,Enrollment.GRADE
 		,Enrollment.ENTER_DATE
 		,Enrollment.LEAVE_DATE
+		,Enrollment.EXCLUDE_ADA_ADM
 	FROM
 		--YearDates and OrgYears help us focus our search 
 		APS.YearDates

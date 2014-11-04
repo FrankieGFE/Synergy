@@ -22,6 +22,8 @@ SELECT
 	,[Class].[SECTION_GU]
 	,[Class].[ENTER_DATE] AS [COURSE_ENTER_DATE]
 	,[Class].[LEAVE_DATE] AS [COURSE_LEAVE_DATE]
+	,Class.TXP_ACK_ADD
+	,Class.TXP_ACK_DROP
 	
 	-- Section information
 	,[Section].[ORGANIZATION_YEAR_GU]
