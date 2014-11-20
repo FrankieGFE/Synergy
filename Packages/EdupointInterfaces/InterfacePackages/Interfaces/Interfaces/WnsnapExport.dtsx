@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="WnsnapExport"
   DTS:PackageType="5"
-  DTS:VersionBuild="50"
-  DTS:VersionGUID="{2E9C6712-0965-4AFC-AA68-810887DBDD64}">
+  DTS:VersionBuild="51"
+  DTS:VersionGUID="{7E181C83-7B35-4212-84B4-934CFABF5313}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -28,7 +28,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA18tsXWAShEu39NgC3mjhaAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAIOQBjulIN1K99/frolw9TAAAAAASAAACgAAAAEAAAAD3JbX/AyJHMliYMidUep6swAAAAqZQsnZnFsZ5dj53hsYjOvv3segVR7RG2/GknkQp2P7wWLBrVIuIUDmVXTuZ6Fd8aFAAAAMnm0F7cXpffRKuK6ZAoY2wcIPOz</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA+01QtbErW02A7Mibbu7hcQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACekWFfyc4qWyvMr2PVIrSBAAAAAASAAACgAAAAEAAAAC+klyb1J3wGF8f+zE1W54swAAAAO22plc3Aumn0v7MYT8X3+RM61XaJjUGWXF+qQ4Rq146QqK5S+9Fg8ta47Kh17hqrFAAAAA7JmRp7Bokwh9UHGAl5xxRTU5uX</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -378,7 +378,11 @@ SELECT
      , per.PRIMARY_PHONE                                        AS [Student Home Phone Number]
      , REPLACE(CONVERT(VARCHAR(10), per.BIRTH_DATE,1), '/', '') AS [Student Birthdate]
      , 'A'                                                      AS [Active Student Indicator]
-     , sch.SCHOOL_CODE                                          AS [SOR School Number]
+     , CASE 
+	   WHEN sch.SCHOOL_CODE IN ('035','058') THEN [OtherSchool].[SCHOOL_CODE]
+	   ELSE [sch].[SCHOOL_CODE]
+	   END
+	  AS [SOR School Number]
      , pnm.pname                                                AS [Parent Name]
      , hmt.TeacherName                                          AS [Homeroom Teacher]
 	 , stu.STATE_STUDENT_NUMBER                                 AS [StudentStateID]
@@ -402,6 +406,26 @@ FROM rev.EPC_STU                    stu
      LEFT JOIN rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') eth on eth.VALUE_CODE = per.RESOLVED_ETHNICITY_RACE
 	 LEFT JOIN HispanicRaceCode     hrc  ON hrc.PERSON_GU = stu.STUDENT_GU and hrc.rno = 1
 	 LEFT JOIN HomeRoomPrdTeacher   hmt  ON hmt.STUDENT_GU = stu.STUDENT_GU and hmt.rn = 1
+	 LEFT JOIN
+	 (
+	   SELECT
+		  [Enroll].[STUDENT_GU]
+		  ,[School].[SCHOOL_CODE]
+	   FROM
+		  [APS].[PrimaryEnrollmentsAsOf](GETDATE()) AS [Enroll]
+
+		  INNER JOIN
+		  [rev].[REV_ORGANIZATION_YEAR] AS [OrgYear]
+		  ON
+		  [Enroll].[ORGANIZATION_YEAR_GU]=[OrgYear].[ORGANIZATION_YEAR_GU]
+
+		  INNER JOIN
+		  [rev].[EPC_SCH] AS [School]
+		  ON
+		  [OrgYear].[ORGANIZATION_GU]=[School].[ORGANIZATION_GU]
+	 ) AS [OtherSchool]
+	 ON
+	 [stu].[STUDENT_GU]=[OtherSchool].[STUDENT_GU]
 	 -- to select only 1 reguler school enrollment
 WHERE sch.SCHOOL_CODE NOT IN ('510')
       -- to exclude those students who have a summar school enrollment
@@ -427,7 +451,11 @@ SELECT
      , per.PRIMARY_PHONE                                        AS [Student Home Phone Number]
      , REPLACE(CONVERT(VARCHAR(10), per.BIRTH_DATE,1), '/', '') AS [Student Birthdate]
      , 'A'                                                      AS [Active Student Indicator]
-     , sch.SCHOOL_CODE                                          AS [SOR School Number]
+     , CASE 
+	   WHEN sch.SCHOOL_CODE IN ('035','058') THEN [OtherSchool].[SCHOOL_CODE]
+	   ELSE [sch].[SCHOOL_CODE]
+	   END
+	  AS [SOR School Number]
      , pnm.pname                                                AS [Parent Name]
      , hmt.TeacherName                                          AS [Homeroom Teacher]
      , stu.STATE_STUDENT_NUMBER                                 AS [StudentStateID]
@@ -451,6 +479,26 @@ FROM rev.EPC_STU                    stu
      LEFT JOIN rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') eth on eth.VALUE_CODE = per.RESOLVED_ETHNICITY_RACE
 	 LEFT JOIN HispanicRaceCode     hrc  ON hrc.PERSON_GU = stu.STUDENT_GU and hrc.rno = 1
 	 LEFT JOIN HomeRoomPrdTeacher   hmt  ON hmt.STUDENT_GU = stu.STUDENT_GU and hmt.rn = 1
+	 LEFT JOIN
+	 (
+	   SELECT
+		  [Enroll].[STUDENT_GU]
+		  ,[School].[SCHOOL_CODE]
+	   FROM
+		  [APS].[PrimaryEnrollmentsAsOf](GETDATE()) AS [Enroll]
+
+		  INNER JOIN
+		  [rev].[REV_ORGANIZATION_YEAR] AS [OrgYear]
+		  ON
+		  [Enroll].[ORGANIZATION_YEAR_GU]=[OrgYear].[ORGANIZATION_YEAR_GU]
+
+		  INNER JOIN
+		  [rev].[EPC_SCH] AS [School]
+		  ON
+		  [OrgYear].[ORGANIZATION_GU]=[School].[ORGANIZATION_GU]
+	 ) AS [OtherSchool]
+	 ON
+	 [stu].[STUDENT_GU]=[OtherSchool].[STUDENT_GU]
 
 WHERE sch.SCHOOL_CODE NOT IN ('510')</property>
                 <property
