@@ -316,6 +316,49 @@ FROM
 ----------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------	
+--THIS IS NEEDED TO WIPE OUT THE TELEPHONE NUMBER THAT IS BROUGHT IN WITH LDAP NIGHTLY
+
+
+UPDATE rev.REV_PERSON
+	SET
+	PRIMARY_PHONE = NULL
+	,PRIMARY_PHONE_EXTN = NULL
+	,PRIMARY_PHONE_TYPE = NULL
+	,PRIMARY_PHONE_LISTED = 'N'
+	,PRIMARY_PHONE_CONTACT = 'N'
+
+/*
+SELECT 
+
+	PRIMARY_PHONE 
+	,PRIMARY_PHONE_EXTN 
+	,PRIMARY_PHONE_TYPE 
+	,PRIMARY_PHONE_LISTED 
+	,PRIMARY_PHONE_CONTACT 
+*/
+
+FROM
+	rev.EPC_STAFF AS STAFF
+	INNER JOIN
+	rev.REV_PERSON AS PERSON
+	ON 
+	STAFF_GU = PERSON_GU
+	
+	WHERE PRIMARY_PHONE IS NOT NULL
+
+
+DELETE
+	Phone
+FROM
+	rev.REV_PERSON_PHONE AS Phone
+	INNER JOIN
+	rev.EPC_STAFF AS Staff
+	ON
+	Phone.PERSON_GU = Staff.STAFF_GU
+
+----------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------	
 
 --Validation Check to see how many records will be processed, 0 = INSERT AND UPDATE, 1 = ROLLBACK - WILL NOT - UPDATE/INSERT
 IF @ValidateOnly = 0
