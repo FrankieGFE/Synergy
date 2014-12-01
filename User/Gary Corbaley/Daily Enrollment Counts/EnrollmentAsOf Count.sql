@@ -15,7 +15,9 @@
 	SELECT
 		[School].[SCHOOL_CODE]
 		,[Organization].[ORGANIZATION_NAME] AS [School]
-		--,[Grades].[ALT_CODE_1] AS [Grade]
+		,[Grades].[VALUE_DESCRIPTION] AS [Grade]
+		,[LEVEL_INTEGRATION].[VALUE_DESCRIPTION] AS [SPED FUNDING LEVEL]
+		--,[SPED_REPORT].[LEVEL_INTEGRATION]
 		,COUNT ([EnrollmentsAsOf].[ENROLLMENT_GU]) AS ENROLL_COUNT
 	FROM
 		APS.PrimaryEnrollmentsAsOf(GETDATE()) AS [EnrollmentsAsOf]
@@ -48,12 +50,37 @@
 		INNER JOIN 
 		rev.EPC_SCH AS [School] -- Contains the School Code / Number
 		ON 
-		[OrgYear].[ORGANIZATION_GU] = [School].[ORGANIZATION_GU]		
-	
+		[OrgYear].[ORGANIZATION_GU] = [School].[ORGANIZATION_GU]	
+		
+		LEFT OUTER JOIN
+		APS.LookupTable('K12','Grade') AS [Grades]
+		ON
+		[StudentSchoolYear].[GRADE] = [Grades].[VALUE_CODE]	
+		
+		INNER JOIN
+		APS.BasicStudent AS [STUDENT]
+		ON
+		[StudentSchoolYear].[STUDENT_GU] = [STUDENT].[STUDENT_GU]
+		
+		INNER JOIN
+		rev.EPC_NM_STU_SPED_RPT AS [SPED_REPORT]
+		ON
+		[STUDENT].[STUDENT_GU] = [SPED_REPORT].[STUDENT_GU]
+		
+		LEFT OUTER JOIN
+		APS.LookupTable ('K12.SpecialEd.IEP', 'LEVEL_INTEGRATION') AS [LEVEL_INTEGRATION]
+		ON
+		[SPED_REPORT].[LEVEL_INTEGRATION] = [LEVEL_INTEGRATION].[VALUE_CODE]
+		
+	WHERE
+		[SPED_REPORT].[LEVEL_INTEGRATION] IN (3,4)
+		
 	GROUP BY
 		[School].[SCHOOL_CODE]
 		,[Organization].[ORGANIZATION_NAME]
-		--,[Grades].[ALT_CODE_1]
+		,[Grades].[VALUE_DESCRIPTION]
+		,[LEVEL_INTEGRATION].[VALUE_DESCRIPTION]
+		--,[SPED_REPORT].[LEVEL_INTEGRATION]
 		
 	ORDER BY
 		[School].[SCHOOL_CODE]
