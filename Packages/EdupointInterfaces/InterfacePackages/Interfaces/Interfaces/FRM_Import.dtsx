@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="FRM_Import"
   DTS:PackageType="5"
-  DTS:VersionBuild="98"
-  DTS:VersionGUID="{F5D4F92C-BBF1-4BA8-AF2E-22FA87840ADB}">
+  DTS:VersionBuild="100"
+  DTS:VersionGUID="{25F5D5D1-13FD-4B20-BC22-9303311BDA9E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -30,7 +30,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA+01QtbErW02A7Mibbu7hcQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAA8xOejGhIWgz0n7qMT5hRqAAAAAASAAACgAAAAEAAAAEDARX0/joo6YU1YsExn+w8wAAAA/CVVahPPNwbSY8xLgekkKSegWxNOYFU1CFEvZ+Hz8rivDekpV5jBQL0KFBgEuMRqFAAAABT7lLq7aLROJdxHxcQ8mh5pxUnL</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA+01QtbErW02A7Mibbu7hcQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABO6gzsDJL/R6piwxvblaZrAAAAAASAAACgAAAAEAAAAEBGZ4lD2mwo0w7l9jGTwdswAAAAZxvmYxzHnfLfztKvw6NZ51KgT+ovQNye/VqPs4Jo8xql08smNdjC1Jzt6BvuxmKgFAAAABGumUjnp3DDk9kksQ+NGjArdRsw</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -537,63 +537,6 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyVersion("1.0.0.0")> 
 <Assembly: AssemblyFileVersion("1.0.0.0")> ]]></ProjectItem>
           <ProjectItem
-            Name="ScriptMain.vb"
-            Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services Script Task
-' Write scripts using Microsoft Visual Basic 2008.
-' The ScriptMain is the entry point class of the script.
-
-Imports System
-Imports System.Data
-Imports System.Math
-Imports System.IO
-Imports Microsoft.SqlServer.Dts.Runtime
-
-<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
-<System.CLSCompliantAttribute(False)> _
-Partial Public Class ScriptMain
-	Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
-
-	Enum ScriptResults
-		Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
-		Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
-	End Enum
-	
-
-	' The execution engine calls this method when the task executes.
-	' To access the object model, use the Dts property. Connections, variables, events,
-	' and logging features are available as members of the Dts property as shown in the following examples.
-	'
-	' To reference a variable, call Dts.Variables("MyCaseSensitiveVariableName").Value
-	' To post a log entry, call Dts.Log("This is my log text", 999, Nothing)
-	' To fire an event, call Dts.Events.FireInformation(99, "test", "hit the help message", "", 0, True)
-	'
-	' To use the connections collection use something like the following:
-	' ConnectionManager cm = Dts.Connections.Add("OLEDB")
-	' cm.ConnectionString = "Data Source=localhost;Initial Catalog=AdventureWorks;Provider=SQLNCLI10;Integrated Security=SSPI;Auto Translate=False;"
-	'
-	' Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
-	' 
-	' To open Help, press F1.
-
-	Public Sub Main()
-        Dim fileLoc, fileName As String
-        If Dts.Variables.Contains("User::TempFilePath") = True AndAlso _
-        Dts.Variables.Contains("User::TempFileName") = True Then
-            fileLoc = CStr(Dts.Variables("User::TempFilePath").Value)
-            fileName = CStr(Dts.Variables.Item("User::TempFileName").Value)
-            If File.Exists(fileLoc + fileName) Then
-                Dts.Variables.Item("User::ImportFileExists").Value = True
-            Else
-                Dts.Variables.Item("User::ImportFileExists").Value = False
-            End If
-            Dts.TaskResult = ScriptResults.Success
-        Else
-            Dts.TaskResult = ScriptResults.Failure
-        End If
-	End Sub
-
-End Class]]></ProjectItem>
-          <ProjectItem
             Name="My Project\Settings.settings"
             Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
 <SettingsFile xmlns="uri:settings" CurrentProfile="(Default)" GeneratedClassNamespace="$safeprojectname" GeneratedClassName="MySettings">
@@ -823,6 +766,63 @@ End Class]]></ProjectItem>
 		<msb:Project Include="st_4f6a8623157d48a6906b7441822d58bc.vbproj"/>
 	</msb:ItemGroup>
 </c:Project>]]></ProjectItem>
+          <ProjectItem
+            Name="ScriptMain.vb"
+            Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services Script Task
+' Write scripts using Microsoft Visual Basic 2008.
+' The ScriptMain is the entry point class of the script.
+
+Imports System
+Imports System.Data
+Imports System.Math
+Imports System.IO
+Imports Microsoft.SqlServer.Dts.Runtime
+
+<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
+<System.CLSCompliantAttribute(False)> _
+Partial Public Class ScriptMain
+	Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+
+	Enum ScriptResults
+		Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
+		Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+	End Enum
+	
+
+	' The execution engine calls this method when the task executes.
+	' To access the object model, use the Dts property. Connections, variables, events,
+	' and logging features are available as members of the Dts property as shown in the following examples.
+	'
+	' To reference a variable, call Dts.Variables("MyCaseSensitiveVariableName").Value
+	' To post a log entry, call Dts.Log("This is my log text", 999, Nothing)
+	' To fire an event, call Dts.Events.FireInformation(99, "test", "hit the help message", "", 0, True)
+	'
+	' To use the connections collection use something like the following:
+	' ConnectionManager cm = Dts.Connections.Add("OLEDB")
+	' cm.ConnectionString = "Data Source=localhost;Initial Catalog=AdventureWorks;Provider=SQLNCLI10;Integrated Security=SSPI;Auto Translate=False;"
+	'
+	' Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+	' 
+	' To open Help, press F1.
+
+	Public Sub Main()
+        Dim fileLoc, fileName As String
+        If Dts.Variables.Contains("User::TempFilePath") = True AndAlso _
+        Dts.Variables.Contains("User::TempFileName") = True Then
+            fileLoc = CStr(Dts.Variables("User::TempFilePath").Value)
+            fileName = CStr(Dts.Variables.Item("User::TempFileName").Value)
+            If File.Exists(fileLoc + fileName) Then
+                Dts.Variables.Item("User::ImportFileExists").Value = True
+            Else
+                Dts.Variables.Item("User::ImportFileExists").Value = False
+            End If
+            Dts.TaskResult = ScriptResults.Success
+        Else
+            Dts.TaskResult = ScriptResults.Failure
+        End If
+	End Sub
+
+End Class]]></ProjectItem>
           <ProjectItem
             Name="My Project\Resources.resx"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -1194,7 +1194,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
       <DTS:ObjectData>
         <ExecuteProcessData
           Executable="C:\Windows\System32\cmd.exe"
-          Arguments="/C net use P: &quot;\\172.27.0.24\apssisfiles&quot; APSsis@DiBs /USER:fans\apssis &amp; echo F | xcopy &quot;P:\WINSNAPI&quot; &quot;\\SMAXDBPROD.aps.edu.actd\Sync\&quot; /F /Y &amp; echo F | xcopy &quot;P:\WINSNAPI&quot; &quot;\\syntempssis.aps.edu.actd\Files\Import\Food Services\FRM\WINSNAPI.TXT&quot; /F /Y &amp; net use P: /delete /yes &amp; exit /b" />
+          Arguments="/C net use P: &quot;\\172.27.0.24\apssisfiles&quot; APSsis@DiBs /USER:fans\apssis &amp; echo F | xcopy &quot;P:\WINSNAPI&quot; &quot;\\syntempssis.aps.edu.actd\Files\Import\Food Services\FRM\WINSNAPI.TXT&quot; /F /Y &amp; net use P: /delete /yes" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -1984,14 +1984,14 @@ where t.studentGU is null</property>
           <paths>
             <path
               refId="Package\StudentID not found and invalid frm codes.Paths[OLE DB Source Output1]"
-              endId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input]"
-              name="OLE DB Source Output"
-              startId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\StudentID not found and invalid frm codes.Paths[OLE DB Source Output]"
               endId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input]"
               name="OLE DB Source Output"
               startId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\StudentID not found and invalid frm codes.Paths[OLE DB Source Output]"
+              endId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -2362,7 +2362,7 @@ where t.studentGU is null</property>
     design-time-name="Package\StudentID not found and invalid frm codes">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="181,44"
           Id="Package\StudentID not found and invalid frm codes\InvalidFRMCodes"
@@ -2381,32 +2381,6 @@ where t.studentGU is null</property>
           TopLeft="342.594339622641,10.3301886792453" />
         <EdgeLayout
           Id="Package\StudentID not found and invalid frm codes.Paths[OLE DB Source Output1]"
-          TopLeft="425.952830188679,54.2547169811321">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="59.8867924528302,59.8867924528302"
-              Start="0,0"
-              End="59.8867924528302,52.3867924528302">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,29.9245283018868" />
-                  <mssgle:LineSegment
-                    End="59.8867924528302,29.9245283018868" />
-                  <mssgle:LineSegment
-                    End="59.8867924528302,52.3867924528302" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\StudentID not found and invalid frm codes.Paths[OLE DB Source Output]"
           TopLeft="74.8962264150943,49.4245283018868">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -2428,7 +2402,37 @@ where t.studentGU is null</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\StudentID not found and invalid frm codes.Paths[OLE DB Source Output]"
+          TopLeft="425.952830188679,54.2547169811321">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="59.8867924528302,59.8867924528302"
+              Start="0,0"
+              End="59.8867924528302,52.3867924528302">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.9245283018868" />
+                  <mssgle:LineSegment
+                    End="59.8867924528302,29.9245283018868" />
+                  <mssgle:LineSegment
+                    End="59.8867924528302,52.3867924528302" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="WnsnapExport"
   DTS:PackageType="5"
-  DTS:VersionBuild="51"
-  DTS:VersionGUID="{7E181C83-7B35-4212-84B4-934CFABF5313}">
+  DTS:VersionBuild="52"
+  DTS:VersionGUID="{3FAAC08D-646C-4B56-90AC-81137C7CF3ED}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -28,7 +28,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA+01QtbErW02A7Mibbu7hcQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACekWFfyc4qWyvMr2PVIrSBAAAAAASAAACgAAAAEAAAAC+klyb1J3wGF8f+zE1W54swAAAAO22plc3Aumn0v7MYT8X3+RM61XaJjUGWXF+qQ4Rq146QqK5S+9Fg8ta47Kh17hqrFAAAAA7JmRp7Bokwh9UHGAl5xxRTU5uX</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA+01QtbErW02A7Mibbu7hcQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAtqf7/lcTbxQ85Id31Vt5aAAAAAASAAACgAAAAEAAAAH4ph/bjYaFWRuEZuiw1oHkwAAAAjhGZFuojP87XnCk7PaUxnmqTIOqoHRxAhT6BiG2mCDnwV1y4y2NHKuxDeM8BA6xbFAAAAPBnyLHN+DlRF0yakr6Gfsm3k3P2</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -379,7 +379,7 @@ SELECT
      , REPLACE(CONVERT(VARCHAR(10), per.BIRTH_DATE,1), '/', '') AS [Student Birthdate]
      , 'A'                                                      AS [Active Student Indicator]
      , CASE 
-	   WHEN sch.SCHOOL_CODE IN ('035','058') THEN [OtherSchool].[SCHOOL_CODE]
+	   WHEN sch.SCHOOL_CODE IN ('035','058') AND ([OtherSchool].[SCHOOL_CODE] IS NOT NULL) THEN [OtherSchool].[SCHOOL_CODE]
 	   ELSE [sch].[SCHOOL_CODE]
 	   END
 	  AS [SOR School Number]
@@ -452,7 +452,7 @@ SELECT
      , REPLACE(CONVERT(VARCHAR(10), per.BIRTH_DATE,1), '/', '') AS [Student Birthdate]
      , 'A'                                                      AS [Active Student Indicator]
      , CASE 
-	   WHEN sch.SCHOOL_CODE IN ('035','058') THEN [OtherSchool].[SCHOOL_CODE]
+	   WHEN sch.SCHOOL_CODE IN ('035','058') AND ([OtherSchool].[SCHOOL_CODE] IS NOT NULL) THEN [OtherSchool].[SCHOOL_CODE]
 	   ELSE [sch].[SCHOOL_CODE]
 	   END
 	  AS [SOR School Number]
