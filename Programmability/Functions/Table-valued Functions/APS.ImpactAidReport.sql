@@ -15,7 +15,7 @@
 --DECLARE @AsOfDate DATETIME = GETDATE()
 --DECLARE @Grade AS VARCHAR(2) = NULL
 
-CREATE FUNCTION APS.ImpactAidReport(@SchoolGu VARCHAR(MAX), @YearGu VARCHAR(MAX), @AsOfDate DATETIME, @Grade AS VARCHAR(2))
+ALTER FUNCTION APS.ImpactAidReport(@SchoolGu VARCHAR(MAX), @YearGu VARCHAR(MAX), @AsOfDate DATETIME, @Grade AS VARCHAR(2) = NULL )
 RETURNS TABLE
 AS
 RETURN
@@ -190,7 +190,7 @@ FROM
     
     -- Calculated ELL
     LEFT JOIN
-    APS.ELLCalculatedAsOf (@AsOfDate) AS [ELL]
+    APS.ELLAsOf (@AsOfDate) AS [ELL]
     ON
     [STUDENT].[STUDENT_GU] = [ELL].[STUDENT_GU]
     
