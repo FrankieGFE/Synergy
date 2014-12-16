@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DataDirector"
   DTS:PackageType="5"
-  DTS:VersionBuild="36"
-  DTS:VersionGUID="{F2C0A6AE-4863-497B-AE55-FC4F6B9C3BA2}">
+  DTS:VersionBuild="37"
+  DTS:VersionGUID="{B980BD69-E390-4956-AA75-116B9E7EC47A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -28,7 +28,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA+01QtbErW02A7Mibbu7hcQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABZbTyghGu97NhJ8b477n+uAAAAAASAAACgAAAAEAAAABlya3Rr/0RahxoLfuB+F/kQAAAAopfOtzlc0/i+U7BsFinFwRQAAACimdxLMDlfmzQaFEyRNFCgC9K0mg</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAChvjbeeG5kCuh13QhlaowgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAS5uQnLSlIAkTCd+0nytJQAAAAAASAAACgAAAAEAAAAOGb660GGVuA7gbgKSj8sNoQAAAANMOEknsXdnEODl+WWXpnUBQAAAClRvXpoZQ2e1etLbTUYe87XqGL3A</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -43,7 +43,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA+01QtbErW02A7Mibbu7hcQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABrU1qxn3kLmf1iYNaVVLsaAAAAAASAAACgAAAAEAAAADFiQTCAAtuw2tI9WpHt5osQAAAA78JQ8jxkW+N2+v79Zcfz9hQAAAD8I6oGPQ/btiwhWIFwnu8SrdHfUw</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAChvjbeeG5kCuh13QhlaowgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACab7KazHxImNwQTK1t/IOgAAAAAASAAACgAAAAEAAAANzv3dBzKFUokmMoVGFD8v4QAAAAJ3RqUl3jkDVT/D6WTIbkxRQAAABIUMM4rHsyCS6XdLXi3rKs6dKMMw</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -146,7 +146,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA+01QtbErW02A7Mibbu7hcQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAC12dJw6FhWjtG2SY1CFtyEAAAAAASAAACgAAAAEAAAAKiPpkpnJED+nk8fr1wb+hYwAAAAsap7zVawCPWNJatbnFEEdcrrG84HxYpzwbiMc3LUFFOQ3LackXkHtMOHlpKheb8zFAAAANYzYvJncCMAJL3yKx7rE+3ho5c/</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAChvjbeeG5kCuh13QhlaowgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABGdcWiqqtcjcREK5exdJVIAAAAAASAAACgAAAAEAAAADk4VRYOd/JDc4ZgMJAyK84wAAAAXt3ANGh/TtiNzsDLQjR+cUS/jZhknjqm/huNYJhuDYnrwtJ43Np4ac0JBj5aEdUbFAAAAIdqMKAzkciB1XJCPt4e6o5u0JwL</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -2132,8 +2132,8 @@ FROM     rev.EPC_STU                    stu
          JOIN rev.EPC_STAFF_SCH_YR      stfy ON stfy.STAFF_SCHOOL_YEAR_GU  = sect.STAFF_SCHOOL_YEAR_GU
          JOIN rev.EPC_STAFF             stf  ON stf.STAFF_GU               = stfy.STAFF_GU
          LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grade ON grade.VALUE_CODE = ssyr.GRADE
---WHERE    (cls.LEAVE_DATE IS NULL OR cls.LEAVE_DATE &gt;= GETDATE())
---          AND cls.ENTER_DATE &lt;= GETDATE()
+WHERE    (cls.LEAVE_DATE IS NULL OR cls.LEAVE_DATE &gt;= GETDATE())
+          AND cls.ENTER_DATE &lt;= GETDATE()
 ORDER BY stu.SIS_NUMBER, sect.PERIOD_BEGIN</property>
                 <property
                   dataType="System.String"
@@ -3547,7 +3547,7 @@ WHERE
     design-time-name="Package\Courses">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="174,42"
           Id="Package\Courses\Flat File Destination"
@@ -3575,9 +3575,7 @@ WHERE
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -3587,7 +3585,7 @@ WHERE
     design-time-name="Package\Demographics - Students">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="174,42"
           Id="Package\Demographics - Students\Flat File Destination"
@@ -3627,9 +3625,7 @@ WHERE
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -3647,7 +3643,7 @@ WHERE
     design-time-name="Package\Schedule - Roster">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="174,42"
           Id="Package\Schedule - Roster\Flat File Destination"
@@ -3675,9 +3671,7 @@ WHERE
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -3695,49 +3689,47 @@ WHERE
     design-time-name="Package\Schools">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="174,42"
           Id="Package\Schools\Flat File Destination"
-          TopLeft="9,96" />
+          TopLeft="252,137" />
         <NodeLayout
           Size="126,42"
           Id="Package\Schools\DB Query"
-          TopLeft="NaN,NaN" />
+          TopLeft="236,27" />
         <EdgeLayout
           Id="Package\Schools.Paths[OLE DB Source Output]"
-          TopLeft="NaN,NaN">
+          TopLeft="299,69">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="NaN,NaN"
+              EndConnector="40,68"
               Start="0,0"
-              End="NaN,NaN">
+              End="40,60.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,NaN" />
+                    End="0,30" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,NaN"
-                    Point2="0,NaN"
-                    Point3="-4,NaN" />
+                    Point1="0,30"
+                    Point2="0,34"
+                    Point3="4,34" />
                   <mssgle:LineSegment
-                    End="NaN,NaN" />
+                    End="36,34" />
                   <mssgle:CubicBezierSegment
-                    Point1="NaN,NaN"
-                    Point2="NaN,NaN"
-                    Point3="NaN,NaN" />
+                    Point1="36,34"
+                    Point2="40,34"
+                    Point3="40,38" />
                   <mssgle:LineSegment
-                    End="NaN,NaN" />
+                    End="40,60.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
