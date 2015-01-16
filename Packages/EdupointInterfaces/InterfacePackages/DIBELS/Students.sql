@@ -24,7 +24,7 @@ SELECT
         org.ORGANIZATION_NAME                                         AS [Institution]
       , stu.STATE_STUDENT_NUMBER                                      AS [State ID]
       , stu.SIS_NUMBER                                                AS [District ID]
-      , sch.SCHOOL_CODE                                               AS [School ID]
+      , ''                                                            AS [School ID]
       , 'K3'+stu.STATE_STUDENT_NUMBER                                 AS [K-3 Plus ID]
       , per.LAST_NAME                                                 AS [Student Last Name]
       , per.FIRST_NAME                                                AS [Student First Name]
@@ -33,6 +33,7 @@ SELECT
       , grd.VALUE_DESCRIPTION                                         AS [Grade]
       , crs.COURSE_TITLE                                              AS [Homeroom]
       , CONVERT(VARCHAR(10), per.BIRTH_DATE,101)                      AS [DOB]
+	  , ''                                                            AS [Student Email]
       , per.GENDER                                                    AS [Gender]
       , CASE WHEN per.RESOLVED_ETHNICITY_RACE = '__HIS' THEN 'H'
              WHEN per.RESOLVED_ETHNICITY_RACE = '__TWO' THEN 'M'
