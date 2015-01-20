@@ -13,19 +13,72 @@ set @SchYr = (select school_year from rev.SIF_22_Common_CurrentYear)
   join rev.EPC_STU               s    on s.STUDENT_GU = srpt.STUDENT_GU
   JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU           = s.STUDENT_GU
                                          AND ssy.STATUS is NULL
-  JOIN rev.REV_ORGANIZATION_YEAR  oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
+  JOIN rev.REV_ORGANIZATION_YEAR  oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU  
   JOIN rev.REV_YEAR               yr   ON yr.YEAR_GU               = oyr.YEAR_GU
                                           and yr.SCHOOL_YEAR       = @SchYr
 										  and yr.EXTENSION         = @SchExt
    LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd on grd.VALUE_CODE = ssy.GRADE
    WHERE grd.value_description in ('K', '01','02','03')
 )
+
 SELECT
         org.ORGANIZATION_NAME                                         AS [Institution]
       , stu.STATE_STUDENT_NUMBER                                      AS [State ID]
       , stu.SIS_NUMBER                                                AS [District ID]
       , ''                                                            AS [School ID]
-      , 'K3'+stu.STATE_STUDENT_NUMBER                                 AS [K-3 Plus ID]
+/*K-3 Plus schools reporting Student State Number by Sean McMurray 1/20/2015*/
+      , CASE WHEN org.ORGANIZATION_NAME = 'A. Montoya Elementary School'             THEN 'K3' + stu.STATE_STUDENT_NUMBER
+	         WHEN org.ORGANIZATION_NAME = 'Acoma Elementary School'                  THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Alvarado Elementary School'               THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Apache Elementary School'                 THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Arroyo Del Oso Elementary School'         THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Atrisco Elementary School'                THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Bandelier Elementary School'              THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Chamiza Elementary School'                THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Chaparral Elementary School'              THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Collett Park Elementary School'           THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Comanche Elementary School'               THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Coronado Elementary School'               THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Corrales Elementary School'				 THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Dennis Chavez Elementary School'          THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Desert Willow Family Elementary School'   THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Double Eagle Elementary School'           THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'E.G. Ross Elementary School'              THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME LIKE '%Georgia%'                             THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Governor Bent Elementary School'          THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Griegos Primary School'                   THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Hubert Humphrey Elementary School'        THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Inez Elementary School'                   THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'John Baker Elementary School'             THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Manzano Mesa Elementary School'           THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Marie M. Hughes Elementary School'        THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Mark Twain Elementary School'             THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Matheson Park Elementary School'          THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'McCollum Elementary School'               THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Monte Vista Elementary School'            THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Montezuma Elementary School'              THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Navajo Elementary School'                 THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'North Star Elementary School'             THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Onate Elementary School'                  THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Osuna Elementary School'                  THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Pajarito Elementary School'               THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Petroglyph Elementary School'             THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Seven Bar Elementary School'              THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'S.Y. Jackson Elementary School'           THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'San Antonio Elementary School'            THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Sandia Base Elementary School'            THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Sierra Vista Elementary School'           THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Sombra Del Monte Elementary School'       THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Sunset View School'                       THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'The Family School'                        THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME	= 'Tierra Antigua Elementary School'         THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Zia Elementary School'                    THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 WHEN org.ORGANIZATION_NAME = 'Zuni Elementary'                          THEN 'K3' + stu.STATE_STUDENT_NUMBER
+			 ELSE ''
+	    END                                                           AS [K-3 Plus ID]
+
+
+
       , per.LAST_NAME                                                 AS [Student Last Name]
       , per.FIRST_NAME                                                AS [Student First Name]
       , per.MIDDLE_NAME                                               AS [Middle Name]
