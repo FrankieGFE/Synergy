@@ -1,168 +1,11 @@
 
 
+DECLARE @DEPARTMENT VARCHAR(10)  = 'Sci', @SUBJECTAREA1 VARCHAR(10) --= 'Sci',@SUBJECTAREA2 VARCHAR(10) = 'Sci'
+DECLARE @SCHOOL VARCHAR(128) = '423D03F7-AE39-47D8-BF90-E5F07FED8265'
 
-
-; WITH 
--- From Student School Year [EPC_STU_SCH_YR]
-SSY_ENROLLMENTS AS
-(
-SELECT
-	[StudentSchoolYear].[STUDENT_GU]
-	,[StudentSchoolYear].[ORGANIZATION_YEAR_GU]
-	,[Organization].[ORGANIZATION_GU]
-	,[Grades].[VALUE_DESCRIPTION] AS [GRADE]
-	,[Grades].[LIST_ORDER]
-	,[School].[SCHOOL_CODE]
-	,[Organization].[ORGANIZATION_NAME] AS [SCHOOL_NAME]
-	,[StudentSchoolYear].[ENTER_DATE]
-	,[StudentSchoolYear].[LEAVE_DATE]
-	,[StudentSchoolYear].[EXCLUDE_ADA_ADM]
-	,[StudentSchoolYear].[ACCESS_504]
-	,CASE WHEN [StudentSchoolYear].[EXCLUDE_ADA_ADM] = 2 THEN 'CONCURRENT'
-		WHEN [StudentSchoolYear].[EXCLUDE_ADA_ADM] = 1 THEN 'NO ADA/ADM'
-		ELSE '' END AS [CONCURRENT]
-	,[RevYear].[SCHOOL_YEAR]
-	,[RevYear].[EXTENSION]
-FROM
-	rev.EPC_STU_SCH_YR AS [StudentSchoolYear]
-	
-	INNER JOIN 
-	rev.REV_ORGANIZATION_YEAR AS [OrgYear] -- Links between School and Year
-	ON 
-	[StudentSchoolYear].[ORGANIZATION_YEAR_GU] = [OrgYear].[ORGANIZATION_YEAR_GU]
-	
-	INNER JOIN 
-	rev.REV_ORGANIZATION AS [Organization] -- Contains the School Name
-	ON 
-	[OrgYear].[ORGANIZATION_GU] = [Organization].[ORGANIZATION_GU]
-	
-	INNER JOIN 
-	rev.REV_YEAR AS [RevYear] -- Contains the School Year
-	ON 
-	[OrgYear].[YEAR_GU] = [RevYear].[YEAR_GU]
-	
-	LEFT OUTER JOIN
-	APS.LookupTable('K12','Grade') AS [Grades]
-	ON
-	[StudentSchoolYear].[GRADE] = [Grades].[VALUE_CODE]
-	
-	INNER JOIN 
-	rev.EPC_SCH AS [School] -- Contains the School Code / Number
-	ON 
-	[Organization].[ORGANIZATION_GU] = [School].[ORGANIZATION_GU]
-)
-
---From Student Enrollment [EPC_STU_ENROLL]
-, DETAIL_ENROLLMENTS AS
-(
-SELECT
-	[StudentSchoolYear].[STUDENT_GU]
-	,[StudentSchoolYear].[ORGANIZATION_YEAR_GU]
-	,[Organization].[ORGANIZATION_GU]
-	,[Grades].[VALUE_DESCRIPTION] AS [GRADE]
-	,[Grades].[LIST_ORDER]
-	,[School].[SCHOOL_CODE]
-	,[Organization].[ORGANIZATION_NAME] AS [SCHOOL_NAME]
-	,[StudentSchoolYear].[ENTER_DATE]
-	,[StudentSchoolYear].[LEAVE_DATE]
-	,[EnrollmentDetails].[EXCLUDE_ADA_ADM]
-	,[StudentSchoolYear].[ACCESS_504]
-	,CASE WHEN [StudentSchoolYear].[EXCLUDE_ADA_ADM] = 2 THEN 'CONCURRENT'
-		WHEN [StudentSchoolYear].[EXCLUDE_ADA_ADM] = 1 THEN 'NO ADA/ADM'
-		ELSE '' END AS [CONCURRENT]
-	,[RevYear].[SCHOOL_YEAR]
-	,[RevYear].[EXTENSION]
-	--[EnrollmentDetails].*
-FROM
-	rev.EPC_STU_ENROLL AS [EnrollmentDetails]
-		
-	LEFT OUTER JOIN
-	rev.EPC_STU_SCH_YR AS [StudentSchoolYear]	
-	ON
-	[EnrollmentDetails].[STUDENT_SCHOOL_YEAR_GU] = [StudentSchoolYear].[STUDENT_SCHOOL_YEAR_GU]
-	
-	INNER JOIN 
-	rev.REV_ORGANIZATION_YEAR AS [OrgYear] -- Links between School and Year
-	ON 
-	[StudentSchoolYear].[ORGANIZATION_YEAR_GU] = [OrgYear].[ORGANIZATION_YEAR_GU]
-	
-	INNER JOIN 
-	rev.REV_ORGANIZATION AS [Organization] -- Contains the School Name
-	ON 
-	[OrgYear].[ORGANIZATION_GU] = [Organization].[ORGANIZATION_GU]
-	
-	INNER JOIN 
-	rev.REV_YEAR AS [RevYear] -- Contains the School Year
-	ON 
-	[OrgYear].[YEAR_GU] = [RevYear].[YEAR_GU]
-	
-	LEFT OUTER JOIN
-	APS.LookupTable('K12','Grade') AS [Grades]
-	ON
-	[StudentSchoolYear].[GRADE] = [Grades].[VALUE_CODE]
-	
-	INNER JOIN 
-	rev.EPC_SCH AS [School] -- Contains the School Code / Number
-	ON 
-	[Organization].[ORGANIZATION_GU] = [School].[ORGANIZATION_GU]
-)
-
+;WITH
 -- From School of Record [EPC_STU_YR]
-, SOR_ENROLLMENTS AS
-(
-SELECT
-	[StudentSchoolYear].[STUDENT_GU]
-	,[StudentSchoolYear].[ORGANIZATION_YEAR_GU]
-	,[Organization].[ORGANIZATION_GU]
-	,[Grades].[VALUE_DESCRIPTION] AS [GRADE]
-	,[Grades].[LIST_ORDER]
-	,[School].[SCHOOL_CODE]
-	,[Organization].[ORGANIZATION_NAME] AS [SCHOOL_NAME]
-	,[StudentSchoolYear].[ENTER_DATE]
-	,[StudentSchoolYear].[LEAVE_DATE]
-	,[StudentSchoolYear].[EXCLUDE_ADA_ADM]
-	,[StudentSchoolYear].[ACCESS_504]
-	,CASE WHEN [StudentSchoolYear].[EXCLUDE_ADA_ADM] = 2 THEN 'CONCURRENT'
-		WHEN [StudentSchoolYear].[EXCLUDE_ADA_ADM] = 1 THEN 'NO ADA/ADM'
-		ELSE '' END AS [CONCURRENT]
-	,[RevYear].[SCHOOL_YEAR]
-	,[RevYear].[EXTENSION]
-FROM
-	rev.EPC_STU_YR AS [StudentYear] -- School of record
-	
-	INNER JOIN
-	rev.EPC_STU_SCH_YR AS [StudentSchoolYear]
-	ON
-	[StudentYear].[STU_SCHOOL_YEAR_GU] = [StudentSchoolYear].[STUDENT_SCHOOL_YEAR_GU]
-	
-	INNER JOIN 
-	rev.REV_ORGANIZATION_YEAR AS [OrgYear] -- Links between School and Year
-	ON 
-	[StudentSchoolYear].[ORGANIZATION_YEAR_GU] = [OrgYear].[ORGANIZATION_YEAR_GU]
-	
-	INNER JOIN 
-	rev.REV_ORGANIZATION AS [Organization] -- Contains the School Name
-	ON 
-	[OrgYear].[ORGANIZATION_GU] = [Organization].[ORGANIZATION_GU]
-	
-	INNER JOIN 
-	rev.REV_YEAR AS [RevYear] -- Contains the School Year
-	ON 
-	[StudentYear].[YEAR_GU] = [RevYear].[YEAR_GU]
-	
-	LEFT OUTER JOIN
-	APS.LookupTable('K12','Grade') AS [Grades]
-	ON
-	[StudentSchoolYear].[GRADE] = [Grades].[VALUE_CODE]
-	
-	INNER JOIN 
-	rev.EPC_SCH AS [School] -- Contains the School Code / Number
-	ON 
-	[Organization].[ORGANIZATION_GU] = [School].[ORGANIZATION_GU]
-)
-
--- From School of Record [EPC_STU_YR]
-, ASOF_ENROLLMENTS AS
+ASOF_ENROLLMENTS AS
 (
 SELECT
 	[StudentSchoolYear].[STUDENT_GU]
@@ -348,16 +191,152 @@ FROM
 	
 )
 
-
-SELECT
-	*
+SELECT --DISTINCT
+	--[DISTRICT_COURSE].[COURSE_GU]
+	--[DISTRICT_COURSE].[COURSE_ID]
+	--,[SECTION_SCHOOL_YEAR].[SECTION_ID]
+	--[DISTRICT_COURSE].[COURSE_TITLE]
+	--,[DISTRICT_COURSE].[DEPARTMENT] AS [COURSE_DEPARTMENT]
+	--,[DISTRICT_COURSE].[SUBJECT_AREA_1]
+	--,[DISTRICT_COURSE].[SUBJECT_AREA_2]
+	--,[DISTRICT_COURSE].[SUBJECT_AREA_3]
+	--,[DISTRICT_COURSE].[SUBJECT_AREA_4]
+	--,[DISTRICT_COURSE].[SUBJECT_AREA_5]
+	--,[DISTRICT_COURSE].[STATE_COURSE_CODE]
+	
+	--,[SECTION_SCHOOL_YEAR].[SECTION_GU]
+	--,[COURSE_SCHOOL_YEAR].[SCHOOL_YEAR_COURSE_GU]
+	--,[STAFF].[STAFF_GU]
+	
+	--,[Organization].[ORGANIZATION_NAME] AS [School Name]
+	--,[OrgYear].[ORGANIZATION_GU]
+	--[PERSON].[FIRST_NAME]
+	--,[PERSON].[LAST_NAME]
+	--,[PERSON].[EMAIL]	
+	
+	--,[DISTRICT_COURSE].[COURSE_TITLE]
+	--,[PERSON].[JOB_TITLE]
+	--,[PERSON].[PRIMARY_PHONE]
+	--,SUBSTRING([STAFF].[BADGE_NUM],2,99) AS [BADGE_NUM]
+	--,[STAFF].[STATE_ID]
+	--,CASE WHEN [ALL_STAFF_SCH_YR].[PRIMARY_STAFF] = 1 THEN 'Y' ELSE 'N' END AS [PRIMARY_STAFF]
+	--,[STAFF_SCHOOL_YEAR].*
+	--,[SECTION_SCHOOL_YEAR].*
+	
+	[STUDENT_DETAILS].[FIRST_NAME]
+	,[STUDENT_DETAILS].[LAST_NAME]
+	,[STUDENT_DETAILS].[SIS_NUMBER]
+	,[STUDENT_DETAILS].[BIRTH_DATE]
+	
+	,[ASOF_ENROLLMENTS].[GRADE]
+	
+	,[PERSON].[FIRST_NAME] +' '+ [PERSON].[LAST_NAME] +' '+ CONVERT(VARCHAR,[SECTION_SCHOOL_YEAR].[SECTION_ID]) AS [CLASS NAME]	
+	
 FROM
-	SSY_ENROLLMENTS AS [ENROLLMENTS]
+	rev.[EPC_CRS] AS [DISTRICT_COURSE]
 	
 	INNER JOIN
-	STUDENT_DETAILS AS [STUDENT]
-	ON
-	[ENROLLMENTS].[STUDENT_GU] = [STUDENT].[STUDENT_GU]
+    rev.[EPC_SCH_YR_CRS] AS [COURSE_SCHOOL_YEAR]
+    ON
+    [DISTRICT_COURSE].[COURSE_GU] = [COURSE_SCHOOL_YEAR].[COURSE_GU]
+    
+    INNER JOIN
+    rev.[EPC_SCH_YR_SECT] AS [SECTION_SCHOOL_YEAR]
+    ON
+    [SECTION_SCHOOL_YEAR].[SCHOOL_YEAR_COURSE_GU] = [COURSE_SCHOOL_YEAR].[SCHOOL_YEAR_COURSE_GU]
+    
+    --INNER JOIN
+    --rev.[EPC_STAFF_SCH_YR] AS [STAFF_SCHOOL_YEAR]
+    --ON
+    --[SECTION_SCHOOL_YEAR].[STAFF_SCHOOL_YEAR_GU] = [STAFF_SCHOOL_YEAR].[STAFF_SCHOOL_YEAR_GU]
+    
+    -- Get both primary and secodary staff
+    INNER JOIN
+    (
+    SELECT
+		[STAFF_SCHOOL_YEAR_GU]
+		,[STAFF_GU]
+		,[ORGANIZATION_YEAR_GU]
+		,1 AS [PRIMARY_STAFF]
+	FROM
+		rev.[EPC_STAFF_SCH_YR] AS [STAFF_SCHOOL_YEAR]
+		
+	UNION ALL
+		
+	SELECT
+		[STAFF_SCHOOL_YEAR].[STAFF_SCHOOL_YEAR_GU]
+		,[STAFF_SCHOOL_YEAR].[STAFF_GU]
+		,[STAFF_SCHOOL_YEAR].[ORGANIZATION_YEAR_GU]
+		,0 AS [PRIMARY_STAFF]
+	FROM
+		rev.[EPC_SCH_YR_SECT_STF] AS [SECONDARY_STAFF]
+		
+		INNER JOIN
+		rev.[EPC_STAFF_SCH_YR] AS [STAFF_SCHOOL_YEAR]
+		ON
+		[SECONDARY_STAFF].[STAFF_SCHOOL_YEAR_GU] = [STAFF_SCHOOL_YEAR].[STAFF_SCHOOL_YEAR_GU]
+    ) AS [ALL_STAFF_SCH_YR]
+    ON
+   [SECTION_SCHOOL_YEAR].[STAFF_SCHOOL_YEAR_GU] = [ALL_STAFF_SCH_YR].[STAFF_SCHOOL_YEAR_GU]
+    
+    INNER JOIN 
+	rev.REV_ORGANIZATION_YEAR AS [OrgYear] -- Links between School and Year
+	ON 
+	[ALL_STAFF_SCH_YR].[ORGANIZATION_YEAR_GU] = [OrgYear].[ORGANIZATION_YEAR_GU]
+    
+    INNER JOIN 
+	rev.REV_ORGANIZATION AS [Organization] -- Contains the School Name
+	ON 
+	[OrgYear].[ORGANIZATION_GU] = [Organization].[ORGANIZATION_GU]
+	
+	LEFT JOIN 
+	rev.REV_YEAR AS [RevYear] -- Contains the School Year
+	ON 
+	[OrgYear].[YEAR_GU] = [RevYear].[YEAR_GU]
+    
+    INNER JOIN
+    rev.[EPC_STAFF] AS [STAFF]
+    ON
+    [ALL_STAFF_SCH_YR].[STAFF_GU] = [STAFF].[STAFF_GU]
+    
+    INNER JOIN
+    rev.[REV_PERSON] AS [PERSON]
+    ON
+    [STAFF].[STAFF_GU] = [PERSON].[PERSON_GU]
+    
+    INNER JOIN
+    APS.ScheduleAsOf(GETDATE()) AS [SCHEDULE]
+    ON
+    [SECTION_SCHOOL_YEAR].[SECTION_GU] = [SCHEDULE].[SECTION_GU]
+    
+    INNER JOIN
+    STUDENT_DETAILS AS [STUDENT_DETAILS]
+    ON
+    [SCHEDULE].[STUDENT_GU] = [STUDENT_DETAILS].[STUDENT_GU]
+    
+    INNER JOIN
+    ASOF_ENROLLMENTS AS [ASOF_ENROLLMENTS]
+    ON
+    [STUDENT_DETAILS].[STUDENT_GU] = [ASOF_ENROLLMENTS].[STUDENT_GU]
+    
 	
 WHERE
-	[ENROLLMENTS].[STUDENT_GU] = '22F34695-F1C3-4B80-BB9D-689B3890B81E'
+	[DISTRICT_COURSE].[INACTIVE] = 'N'
+	AND [RevYear].[YEAR_GU] = '26f066a3-abfc-4edb-b397-43412edabc8b'
+	--AND [RevYear].[EXTENSION] = 'R'
+		
+	AND [OrgYear].[ORGANIZATION_GU] LIKE @SCHOOL
+	--AND [STAFF].[STATE_ID] = '32614'
+	
+	AND [PERSON].[LAST_NAME] != 'Not Found'
+	
+	--AND [SECTION_SCHOOL_YEAR].[PERIOD_BEGIN] = 1
+	
+	--AND [Organization].[ORGANIZATION_NAME] LIKE 'Eubank Elementary School'
+	
+ORDER BY
+	[SECTION_SCHOOL_YEAR].[SECTION_ID]
+	--[Organization].[ORGANIZATION_NAME]
+	--,[PERSON].[LAST_NAME]
+	
+	

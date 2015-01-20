@@ -1,77 +1,40 @@
+/**
+ * 
+ * $LastChangedBy: Gary Corbaley
+ * $LastChangedDate: 01/21/2014
+ *
+ * Request By: Andy Gutierrez
+ * InitialRequestDate: 01/20/2014
+ * 
+ * Initial Request: Please look it over and start framing SQL script to pull the data that is obvious to you, we can discuss the other data with Tom.
+ *
+ * Description: Start with getting all student's primary enrollments and student details, and then join in SPED and ELL stats, next get each students ELA teacher, and lastly get their SBA scores.
+ * One Record Per School
+ *
+ * Note: Script can take over a minute to run.
+ *
+ * Tables Referenced:
+ */
 
-
-DECLARE @SchoolGu VARCHAR = '%' -- '%7048BAD5-19EE-489A-A51E-05E4CE55DD7E%' --'%'
+DECLARE @SchoolGu VARCHAR(MAX) = '%' -- '%7048BAD5-19EE-489A-A51E-05E4CE55DD7E%' --'%'
 DECLARE @YearGu uniqueidentifier = '26F066A3-ABFC-4EDB-B397-43412EDABC8B'
-DECLARE @Grade AS VARCHAR(2) = '%'
+DECLARE @AsOfDate DATETIME = GETDATE()
+DECLARE @Grade AS VARCHAR(2) = NULL
 
-------------------------------------
--- DEFINE WITH CLAUSES COPIED FROM EDUPOINT SCRIPTS
-
-; WITH ParentNames AS -- Get parent names -- code copied from Edupoint
-(
-SELECT
-   PNm.STUDENT_GU
-, ROW_NUMBER() OVER(PARTITION BY PNm.STUDENT_GU order by PNm.STUDENT_GU) rno
-, Parents = STUFF(  COALESCE(', ' + Pnm.[1], '')
-                   + COALESCE(', ' + Pnm.[2], '') 
-                   + COALESCE(', ' + Pnm.[3], '') 
-                   + COALESCE(', ' + Pnm.[4], '') 
-                   , 1, 1,'')
-FROM
-  (
-    SELECT 
-        stu.STUDENT_GU
-      , COALESCE(spar.ORDERBY, (ROW_NUMBER() OVER(PARTITION BY spar.STUDENT_GU order by spar.STUDENT_GU))) rn
-      , pper.FIRST_NAME + ' ' +  pper.LAST_NAME [pname]
-    FROM rev.EPC_STU stu
-    JOIN rev.EPC_STU_PARENT spar ON spar.STUDENT_GU = stu.STUDENT_GU AND spar.CONTACT_ALLOWED = 'Y'
-    JOIN rev.REV_PERSON pper     ON pper.PERSON_GU  = spar.PARENT_GU
-  ) 
-  pn PIVOT (min(pname) for rn in ([1], [2], [3], [4])) PNm
-)
-
---Ethnicity code -- copy from Edupoint
-, EthCodes AS 
-(
-select 
-  pvt.PERSON_GU
-, ROW_NUMBER() OVER(PARTITION by pvt.PERSON_GU order by pvt.person_gu) rno
-, (select e.ALT_CODE_3 from  rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') e where e.VALUE_CODE = pvt.[1]) as Race1
-, (select e.ALT_CODE_3 from  rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') e where e.VALUE_CODE = pvt.[2]) as Race2
-, (select e.ALT_CODE_3 from  rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') e where e.VALUE_CODE = pvt.[3]) as Race3
-, (select e.ALT_CODE_3 from  rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') e where e.VALUE_CODE = pvt.[4]) as Race4
-, (select e.ALT_CODE_3 from  rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') e where e.VALUE_CODE = pvt.[5]) as Race5
-from 
-  (select
-       ROW_NUMBER() OVER(PARTITION by seth.PERSON_GU order by seth.Ethnic_code) rn
-    ,  seth.PERSON_GU
-    , seth.ETHNIC_CODE
-   from rev.REV_PERSON_SECONDRY_ETH_LST seth
-  ) pt
-   pivot (min(ETHNIC_CODE) FOR rn in ([1],[2],[3],[4],[5])) pvt
-)
-
--- FRM History --- need to find out what this is
-, FRMHistory AS
-(
-SELECT
-      ROW_NUMBER() OVER (PARTITION BY stu.student_gu order by f.ENTER_DATE,stu.STUDENT_gu) rn
-    , stu.STUDENT_GU
-                , f.FRM_CODE
-    FROM rev.EPC_STU stu
-                LEFT JOIN rev.EPC_STU_PGM_FRM_HIS f on f.STUDENT_GU = stu.STUDENT_GU
-                AND f.ENTER_DATE is not null and (f.EXIT_DATE is null or f.EXIT_DATE > getdate())
-)
+CREATE FUNCTION APS.LCEDifferentialPayAsOf(@AsOfDate DATETIME)
+RETURNS TABLE
+AS
+RETURN
 
 ------------------------------------------------------------------------------
 -- DEFINE MAIN SELECT
 
 
-SELECT DISTINCT --TOP 1000
+SELECT DISTINCT
 	[SCHOOL].[SCHOOL_CODE]
 	,[Organization].[ORGANIZATION_NAME] AS [SCHOOL_NAME]
-	,[Organization].[ORGANIZATION_GU]
-	,[RevYear].[YEAR_GU]
+	,[OrgYear].[ORGANIZATION_GU]
+	,[OrgYear].[YEAR_GU]
 	,[TEACHER_PERSON].[LAST_NAME] + ', ' + [TEACHER_PERSON].[FIRST_NAME] AS [HOMEROOM_TEACHER]
 	,[STUDENT].[SIS_NUMBER]
 	,[STUDENT].[STATE_STUDENT_NUMBER]
@@ -103,7 +66,6 @@ SELECT DISTINCT --TOP 1000
     ,[CurrentSPED].[PRIMARY_DISABILITY_CODE]
     ,CASE WHEN [CurrentSPED].[PRIMARY_DISABILITY_CODE] != 'GI' AND [CurrentSPED].[PRIMARY_DISABILITY_CODE] IS NOT NULL THEN 'Y' ELSE 'N' END AS [SPED_STATUS]
     ,CASE WHEN [CurrentSPED].[PRIMARY_DISABILITY_CODE] = 'GI' OR [CurrentSPED].[SECONDARY_DISABILITY_CODE] = 'GI' THEN 'Y' ELSE 'N' END AS [GIFTED_STATUS]
-    --,[CurrentSPED].*
     ,[EPC_STU].[GRID_CODE]
     
     ,[STUDENT].[MAIL_ADDRESS]
@@ -112,12 +74,9 @@ SELECT DISTINCT --TOP 1000
     ,[STUDENT].[MAIL_STATE]
     ,[STUDENT].[MAIL_ZIP]
     
-    --,[PARENT_NAMES].[Parents]
-    --,[PARENT_PERSON].[FIRST_NAME] + ' ' + [PARENT_PERSON].[LAST_NAME] AS [PARENT_NAME]
     ,[PARENT_NAMES].[Parents]
     ,[STUDENT_SCHOOL_YEAR].[ENTER_DATE]
     
-    --,[STUDENT_PARENT].*
     ,CASE WHEN [PARENT_EXTRA_DETAILS].[ACTIVE_MILITARY] IS NOT NULL THEN [PARENT_PERSON].[FIRST_NAME] + ' ' + [PARENT_PERSON].[LAST_NAME] END AS [PARENT_NAME]
     ,[PARENT_EXTRA_DETAILS].[ACTIVE_MILITARY]
     ,[PARENT_EXTRA_DETAILS].[BRANCH_OF_SERVICE]
@@ -141,49 +100,58 @@ FROM
 	ON
 	[StudentYear].[STU_SCHOOL_YEAR_GU] = [STUDENT_SCHOOL_YEAR].[STUDENT_SCHOOL_YEAR_GU]
 	
-	INNER JOIN 
-	rev.REV_ORGANIZATION_YEAR AS [OrgYear] -- Links between School and Year
+	-- Get a specific school or all of them in a given school year
+	INNER HASH JOIN 
+	(
+	SELECT
+		*
+	FROM
+		rev.REV_ORGANIZATION_YEAR AS [OrgYear] -- Links between School and Year		
+	WHERE
+		[OrgYear].[ORGANIZATION_GU] LIKE @SchoolGu
+		AND [OrgYear].[YEAR_GU] = @YearGu
+	) AS [OrgYear] -- Links between School and Year
 	ON 
 	[STUDENT_SCHOOL_YEAR].[ORGANIZATION_YEAR_GU] = [OrgYear].[ORGANIZATION_YEAR_GU]
 	
+	-- Get school name
 	INNER JOIN 
 	rev.REV_ORGANIZATION AS [Organization] -- Contains the School Name
 	ON 
 	[OrgYear].[ORGANIZATION_GU] = [Organization].[ORGANIZATION_GU]
 	
-	-- Get the school year
-	LEFT JOIN 
-	rev.REV_YEAR AS [RevYear] -- Contains the School Year
-	ON 
-	[OrgYear].[YEAR_GU] = [RevYear].[YEAR_GU]
-
+	-- Get the school number
 	INNER JOIN
 	rev.[EPC_SCH] AS [SCHOOL]
 	ON
 	[OrgYear].[ORGANIZATION_GU] = [SCHOOL].[ORGANIZATION_GU]
 	
-	LEFT OUTER JOIN
+	-- Translate grade codes into values
+	INNER JOIN
 	APS.LookupTable('K12','Grade') AS [Grades]
 	ON
 	[STUDENT_SCHOOL_YEAR].[GRADE] = [Grades].[VALUE_CODE]
 	
 	----------------------------------------------------
 	-- HOME ROOM INFO
-	LEFT OUTER JOIN
+	LEFT OUTER HASH JOIN
 	rev.[EPC_SCH_YR_SECT] AS [SECTION_SCHOOL_YEAR]
     ON
     [STUDENT_SCHOOL_YEAR].[HOMEROOM_SECTION_GU] = [SECTION_SCHOOL_YEAR].[SECTION_GU]
     
+    -- Cross over between section and staff
     INNER JOIN
 	rev.[EPC_STAFF_SCH_YR] AS [STAFF_SCHOOL_YEAR]
 	ON
 	[SECTION_SCHOOL_YEAR].[STAFF_SCHOOL_YEAR_GU] = [STAFF_SCHOOL_YEAR].[STAFF_SCHOOL_YEAR_GU]
     
+    -- Get Staff list
     INNER JOIN
 	rev.[EPC_STAFF] AS [STAFF]
 	ON
 	[STAFF_SCHOOL_YEAR].[STAFF_GU] = [STAFF].[STAFF_GU]
     
+    -- Get staff's personal details
 	INNER JOIN
 	rev.[REV_PERSON] AS [TEACHER_PERSON]
 	ON
@@ -196,17 +164,20 @@ FROM
 	ON
 	[StudentYear].[STUDENT_GU] = [STUDENT].[STUDENT_GU]
 	
+	-- Get student info
 	INNER JOIN
 	rev.EPC_STU AS [EPC_STU]
 	ON
 	[STUDENT].[STUDENT_GU] = [EPC_STU].[STUDENT_GU]
 	
-	INNER JOIN
+	-- Get student personal details
+	INNER HASH JOIN
 	rev.REV_PERSON AS [PERSON]
 	ON
 	[STUDENT].[STUDENT_GU] = [PERSON].[PERSON_GU]
 	
-	LEFT JOIN
+	-- Special ED Info
+	LEFT HASH JOIN
     (
     SELECT
                *
@@ -216,14 +187,15 @@ FROM
                 NEXT_IEP_DATE IS NOT NULL
                 AND (
                             EXIT_DATE IS NULL 
-                            OR EXIT_DATE >= CONVERT(DATE, GETDATE())
+                            OR EXIT_DATE >= CONVERT(DATE,@AsOfDate)
                             )
     ) AS [CurrentSPED]
     ON
     [STUDENT].[STUDENT_GU] = [CurrentSPED].[STUDENT_GU]
     
+    -- Calculated ELL
     LEFT JOIN
-    APS.ELLCalculatedAsOf (GETDATE()) AS [ELL]
+    APS.ELLCalculatedAsOf (@AsOfDate) AS [ELL]
     ON
     [STUDENT].[STUDENT_GU] = [ELL].[STUDENT_GU]
     
@@ -239,41 +211,91 @@ FROM
 	[ELL_PGM].[LANGUAGE_TO_HOME] = [Contact_Language].[VALUE_CODE]
 	
 	-- Get concatenated list of parent names
-	LEFT JOIN
-	ParentNames AS [PARENT_NAMES]
+	LEFT HASH JOIN
+	(
+	SELECT
+	   PNm.STUDENT_GU
+	, ROW_NUMBER() OVER(PARTITION BY PNm.STUDENT_GU order by PNm.STUDENT_GU) rno
+	, Parents = STUFF(  COALESCE(', ' + Pnm.[1], '')
+					   + COALESCE(', ' + Pnm.[2], '') 
+					   + COALESCE(', ' + Pnm.[3], '') 
+					   + COALESCE(', ' + Pnm.[4], '') 
+					   , 1, 1,'')
+	FROM
+	  (
+		SELECT 
+			stu.STUDENT_GU
+		  , COALESCE(spar.ORDERBY, (ROW_NUMBER() OVER(PARTITION BY spar.STUDENT_GU order by spar.STUDENT_GU))) rn
+		  , pper.FIRST_NAME + ' ' +  pper.LAST_NAME [pname]
+		FROM rev.EPC_STU stu
+		JOIN rev.EPC_STU_PARENT spar ON spar.STUDENT_GU = stu.STUDENT_GU AND spar.CONTACT_ALLOWED = 'Y'
+		JOIN rev.REV_PERSON pper     ON pper.PERSON_GU  = spar.PARENT_GU
+	  ) 
+	  pn PIVOT (min(pname) for rn in ([1], [2], [3], [4])) PNm
+	) AS [PARENT_NAMES]
 	ON
 	[STUDENT].[STUDENT_GU] = [PARENT_NAMES].[STUDENT_GU] 
 	AND [PARENT_NAMES].[rno] = 1
 	
 	-- Get a list of ethnic codes pivoted into 5 columns
-	LEFT JOIN
-	EthCodes AS [ETHNIC_CODES]
+	LEFT HASH JOIN
+	(
+	select 
+	  pvt.PERSON_GU
+	, ROW_NUMBER() OVER(PARTITION by pvt.PERSON_GU order by pvt.person_gu) rno
+	, (select e.ALT_CODE_3 from  rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') e where e.VALUE_CODE = pvt.[1]) as Race1
+	, (select e.ALT_CODE_3 from  rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') e where e.VALUE_CODE = pvt.[2]) as Race2
+	, (select e.ALT_CODE_3 from  rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') e where e.VALUE_CODE = pvt.[3]) as Race3
+	, (select e.ALT_CODE_3 from  rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') e where e.VALUE_CODE = pvt.[4]) as Race4
+	, (select e.ALT_CODE_3 from  rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') e where e.VALUE_CODE = pvt.[5]) as Race5
+	from 
+	  (select
+		   ROW_NUMBER() OVER(PARTITION by seth.PERSON_GU order by seth.Ethnic_code) rn
+		,  seth.PERSON_GU
+		, seth.ETHNIC_CODE
+	   from rev.REV_PERSON_SECONDRY_ETH_LST seth
+	  ) pt
+	   pivot (min(ETHNIC_CODE) FOR rn in ([1],[2],[3],[4],[5])) pvt
+	) AS [ETHNIC_CODES]
 	ON
 	[STUDENT].[STUDENT_GU] = [ETHNIC_CODES].[PERSON_GU]
 	AND [ETHNIC_CODES].[rno] = 1
 	
-	LEFT JOIN
-	FRMHistory AS [FRMHistory]
+	-- Get lunch status history
+	LEFT HASH JOIN
+	(
+	SELECT
+		  ROW_NUMBER() OVER (PARTITION BY stu.student_gu order by f.ENTER_DATE,stu.STUDENT_gu) rn
+		, stu.STUDENT_GU
+					, f.FRM_CODE
+		FROM rev.EPC_STU stu
+					LEFT JOIN rev.EPC_STU_PGM_FRM_HIS f on f.STUDENT_GU = stu.STUDENT_GU
+					AND f.ENTER_DATE is not null and (f.EXIT_DATE is null or f.EXIT_DATE > @AsOfDate)
+	) AS [FRMHistory]
 	ON
 	[STUDENT].[STUDENT_GU] = [FRMHistory].[STUDENT_GU]
 	AND [FRMHistory].[rn] = 1
 	
+	-- Get student parents
 	LEFT JOIN
 	rev.[EPC_STU_PARENT] AS [STUDENT_PARENT]
 	ON
 	[STUDENT].[STUDENT_GU] = [STUDENT_PARENT].[STUDENT_GU]
 	AND [STUDENT_PARENT].[LIVES_WITH] = 'Y'
 	
+	-- Get parent info
 	LEFT JOIN
 	rev.EPC_PARENT AS [PARENT]
 	ON
 	[STUDENT_PARENT].[PARENT_GU] = [PARENT].[PARENT_GU]
 	
+	-- Get parent personal details
 	LEFT JOIN
 	rev.REV_PERSON AS [PARENT_PERSON]
 	ON
 	[STUDENT_PARENT].[PARENT_GU] = [PARENT_PERSON].[PERSON_GU]
 	
+	-- Get parent extra details
 	LEFT JOIN
 	rev.[UD_PARENT] AS [PARENT_EXTRA_DETAILS]
 	ON
@@ -286,16 +308,6 @@ FROM
 	[PARENT_PERSON].[WORK_ADDRESS_GU] = [WORK_ADDRESS].[ADDRESS_GU]
 	
 WHERE
-	--[STUDENT_SCHOOL_YEAR].[ENTER_DATE] <= GETDATE()
-	[Organization].[ORGANIZATION_GU] LIKE @SchoolGu
-	--AND [RevYear].[SCHOOL_YEAR] = '2014'
-	--AND [RevYear].[EXTENSION] = 'R'
-	AND [RevYear].[YEAR_GU] LIKE @YearGu
+	[STUDENT_SCHOOL_YEAR].[ENTER_DATE] <= @AsOfDate
 	AND [Grades].[VALUE_DESCRIPTION] NOT IN ('P1','P2','PK')
-	AND [Grades].[VALUE_DESCRIPTION] LIKE @Grade
-	
-	--AND [PARENT_EXTRA_DETAILS].[FEDERAL_EMPLOYER] IS NOT NULL
-	
-	--AND [CurrentSPED].[SECONDARY_DISABILITY_CODE] IS NOT NULL
-	
-	--AND [STUDENT].[SIS_NUMBER] = '970100615' -- 956 1016     --'970034817' -- 960 70472
+	AND [Grades].[VALUE_DESCRIPTION] = COALESCE(@Grade,[Grades].[VALUE_DESCRIPTION])

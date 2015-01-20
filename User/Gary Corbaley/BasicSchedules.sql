@@ -32,6 +32,7 @@ SELECT
 	
 	-- School Course information
 	,[SchoolYearCourse].[COURSE_GU]
+	,[SchoolYearCourse].*
 	
 	-- Organization information
 	,[OrgYear].[ORGANIZATION_GU]

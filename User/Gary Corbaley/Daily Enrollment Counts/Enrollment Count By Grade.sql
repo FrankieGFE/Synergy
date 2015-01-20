@@ -13,18 +13,21 @@ USE [PR]
  
 --Change the variable @Today if you want to check another member day
 DECLARE 
-		@Today DATE = GETDATE()
-		--@Today DATE = '2014-08-14 00:00:00.000'
+		--@Today DATE = GETDATE()
+		@Today DATE = '2015-01-13 00:00:00.000'
 		,@MemberDay INT 
 		,@CurrentSchoolYear INT
 		,@DayLastYear DATE
 		
 --Set variables
-SET @MemberDay = APS.MemberDayFromDate(1, @Today)
+SET @MemberDay = 115 --APS.MemberDayFromDate(1, @Today)
 SET @CurrentSchoolYear = APS.SchoolYearFromDate(@Today)
-SET @DayLastYear = APS.DateFromMemberDayAndSchoolYear(1,@CurrentSchoolYear-1,@MemberDay)
+SET @DayLastYear = APS.DateFromMemberDayAndSchoolYear(1,2014,@MemberDay)
 	
-
+	
+SELECT @MemberDay, @CurrentSchoolYear, 	@DayLastYear
+	
+/*
 SELECT
 	[SYNERGY_COUNTS].SCHOOL_CODE
 	,[SYNERGY_COUNTS].School
@@ -187,3 +190,5 @@ FROM
 	AND [SYNERGY_COUNTS].[Grade] = [SMAX_COUNTS].[GRDE] COLLATE Latin1_General_BIN
 	
 ORDER BY [SYNERGY_COUNTS].SCHOOL_CODE
+
+*/
