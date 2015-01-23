@@ -5,6 +5,8 @@
 
 	Pull Grade Differences from Student Grades in Synergy (Not Gradebook)
 
+	RUN ON EXPERIMENT!!!!!!!!!!!!!!!!!!!!!!! : )  It reads across to ST_Production from SYNSECONDDB
+
 */
 
 
