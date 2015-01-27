@@ -1,13 +1,4 @@
 
-
-
-
-
-
-
-
-
-
 ;WITH
 -- From School of Record [EPC_STU_YR]
 ASOF_ENROLLMENTS AS
