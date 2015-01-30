@@ -240,7 +240,8 @@ SELECT
       , per.MIDDLE_NAME                           AS [MiddleInitial]
       , stu.SIS_NUMBER                            AS [StudentID]
       , lorg.ORGANIZATION_NAME                    AS [LastLocation]
-      , grd.VALUE_DESCRIPTION                     AS [GradeLevel]
+	  --CHANGED FOR PRE-PRINTED CARDS WITH GRADE AHEAD
+      , grd.ALT_CODE_SIF                     AS [GradeLevel]
       , per.GENDER                                AS [Gender]
       , shlng.VALUE_DESCRIPTION                   AS [PHLOTE_Q1]
       , CONVERT(VARCHAR(10), per.BIRTH_DATE, 101) AS [DateOfBirth]

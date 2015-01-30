@@ -32,6 +32,7 @@ BEGIN
 
 -- First, The ones we need to add to ELL Transactions
 -- ----------------------------------------------------------------------------------
+
 BEGIN TRANSACTION
 
 INSERT INTO
@@ -70,13 +71,15 @@ FROM
 WHERE
 	(
 	ELL.STUDENT_GU IS NULL
-	OR ELL.LEAVE_DATE IS NOT NULL
+	--WHY IS THIS HERE???
+	--OR ELL.LEAVE_DATE IS NOT NULL
 	)
 	AND PHLOTE.STUDENT_GU IS NOT NULL
 
 -- Then the onese we need to close. We may need to 
 -- join in MostRecent ELL To get the STU_PGM_ELL_HIS_GU (for the record we are actually going to update)
 -- ----------------------------------------------------------------------------------
+
 
 UPDATE 
 	EllHistory
@@ -110,6 +113,8 @@ FROM
 WHERE
 	CalculatedELL.STUDENT_GU IS NULL
 
+
+
 --Validation Check to see how many records will be processed, 0 = INSERT AND UPDATE, 1 = ROLLBACK - WILL NOT - UPDATE/INSERT
 IF @ValidateOnly = 0
 	BEGIN
@@ -119,6 +124,7 @@ ELSE
 	BEGIN
 		ROLLBACK
 	END
+		
 
 -- Lastly, need to update(or create) all the ELL records to match most recent ELL History
 -- This needs to be done outside other transaction (can't have transactions within
