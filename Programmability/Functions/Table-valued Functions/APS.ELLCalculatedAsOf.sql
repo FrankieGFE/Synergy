@@ -26,6 +26,15 @@ AS
 RETURN	
 SELECT
 	Enroll.*
+	/*
+	Enroll.STUDENT_GU
+	,Enroll.ORGANIZATION_YEAR_GU
+	,Enroll.STUDENT_SCHOOL_YEAR_GU
+	,Enroll.ENROLLMENT_GU
+	,Enroll.GRADE
+	,Enroll.ENTER_DATE
+	,Enroll.LEAVE_DATE
+	*/
 	,Assessment.ADMIN_DATE
 	,Assessment.PERFORMANCE_LEVEL
 	,Assessment.TEST_GU
