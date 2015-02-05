@@ -408,6 +408,7 @@ SELECT
       , lbho.VALUE_DESCRIPTION                    AS [PHLOTE_Q31]
       , ltho.VALUE_DESCRIPTION                    AS [PHLOTE_Q41]
       , lbat.VALUE_DESCRIPTION                    AS [PHLOTE_Q51]
+
       , ''                                        AS [blank01]
       , ''                                        AS [blank02]
       , ''                                        AS [blank03]
@@ -456,7 +457,30 @@ FROM  rev.EPC_STU                     stu
       JOIN rev.REV_PERSON             per  ON per.PERSON_GU            = stu.STUDENT_GU
       LEFT JOIN rev.REV_ADDRESS       hadr ON hadr.ADDRESS_GU          = per.HOME_ADDRESS_GU
       LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd on grd.VALUE_CODE = ssy.GRADE
-      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'LANGUAGE') shlng on shlng.VALUE_CODE = stu.HOME_LANGUAGE
+	   --APSPHLOTE
+	  LEFT JOIN 
+	  (
+	  SELECT * FROM
+	(
+SELECT 
+	ROW_NUMBER() OVER (PARTITION BY STUDENT_GU ORDER BY DATE_ASSIGNED DESC) AS RN
+	,STUDENT_GU
+	,DATE_ASSIGNED
+	,Q1_LANGUAGE_SPOKEN_MOST
+	,Q2_CHILD_FIRST_LANGUAGE
+	,Q3_LANGUAGES_SPOKEN
+	,Q4_OTHER_LANG_UNDERSTOOD
+	,Q5_OTHER_LANG_COMMUNICATED
+ FROM 
+	rev.UD_HLS_HISTORY AS HLS
+) AS T1
+WHERE
+	RN =1
+	) AS APSPHLOTE
+ON
+	  APSPHLOTE.STUDENT_GU = stu.STUDENT_GU
+
+     LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'LANGUAGE') shlng on shlng.VALUE_CODE = APSPHLOTE.Q1_LANGUAGE_SPOKEN_MOST
       LEFT JOIN rev.UD_STU            ustu ON ustu.STUDENT_GU          = stu.STUDENT_GU
       --Student Race
       LEFT JOIN StuRacesR             src1 ON src1.PERSON_GU           = stu.STUDENT_GU and src1.rn = 1
@@ -477,10 +501,11 @@ FROM  rev.EPC_STU                     stu
       LEFT JOIN rev.EPC_STU_PHYSICIAN phy  ON phy.STUDENT_GU           = stu.STUDENT_GU
       --ELL
       LEFT JOIN rev.EPC_STU_PGM_ELL   ell  ON ell.STUDENT_GU           = stu.STUDENT_GU
-      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'LANGUAGE') lfst on lfst.VALUE_CODE = ell.LANGUAGE_FIRST_LEARN
-      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'LANGUAGE') lbho on lbho.VALUE_CODE = ell.LANGUAGE_BY_HOME
-      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'LANGUAGE') ltho on ltho.VALUE_CODE = ell.LANGUAGE_TO_HOME
-      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'LANGUAGE') lbat on lbat.VALUE_CODE = ell.LANGUAGE_BY_ADULT_HOME
+
+      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'LANGUAGE') lfst on lfst.VALUE_CODE = APSPHLOTE.Q2_CHILD_FIRST_LANGUAGE
+      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'LANGUAGE') lbho on lbho.VALUE_CODE = APSPHLOTE.Q3_LANGUAGES_SPOKEN
+      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'LANGUAGE') ltho on ltho.VALUE_CODE = APSPHLOTE.Q4_OTHER_LANG_UNDERSTOOD
+      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'LANGUAGE') lbat on lbat.VALUE_CODE = APSPHLOTE.Q5_OTHER_LANG_COMMUNICATED
       -- Siblings
       LEFT JOIN ##TempSiblings              s1   ON s1.SIS_Number = stu.SIS_NUMBER and s1.orderby = 1
       LEFT JOIN ##TempSiblings              s2   ON s2.SIS_Number = stu.SIS_NUMBER and s2.orderby = 2 
