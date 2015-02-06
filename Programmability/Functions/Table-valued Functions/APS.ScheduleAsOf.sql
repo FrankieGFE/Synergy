@@ -25,7 +25,8 @@ RETURNS TABLE
 AS
 RETURN	
 SELECT
-	BasicSchedule.*
+	ORG.ORGANIZATION_NAME
+	,SIS_NUMBER
 	,CourseMaster.COURSE_ID
 	,CourseMaster.COURSE_TITLE
 	,CourseMaster.CREDIT
@@ -46,12 +47,21 @@ SELECT
 	,CourseMaster.DISTANCE_LEARNING
 	,CourseMaster.AP_INDICATOR
 	,CourseMaster.COURSE_DURATION
-
+	,BasicSchedule.*
 FROM
 	APS.BasicSchedule
 	INNER JOIN
 	rev.EPC_CRS AS CourseMaster
 	ON
 	BasicSchedule.COURSE_GU = CourseMaster.COURSE_GU
+	INNER JOIN
+	rev.REV_ORGANIZATION AS ORG
+	ON
+	BasicSchedule.ORGANIZATION_GU = ORG.ORGANIZATION_GU
+	INNER JOIN
+	rev.EPC_STU AS STU
+	ON
+	STU.STUDENT_GU = BasicSchedule.STUDENT_GU
+	
 WHERE
 	@asOfDate BETWEEN BasicSchedule.COURSE_ENTER_DATE AND COALESCE(BasicSchedule.COURSE_LEAVE_DATE, @asOfDate)
