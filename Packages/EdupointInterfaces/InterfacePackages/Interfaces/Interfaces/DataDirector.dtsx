@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DataDirector"
   DTS:PackageType="5"
-  DTS:VersionBuild="38"
-  DTS:VersionGUID="{A7730AC8-CF12-40B3-B575-31C4E0C3532A}">
+  DTS:VersionBuild="33"
+  DTS:VersionGUID="{7B044A34-5DCC-4920-8E3C-DC59EC04887C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -28,7 +28,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAvnZPKA7ItkKNXTwWHTikAgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACmc7NAfc/96+4v+u2CGRKEAAAAAASAAACgAAAAEAAAAGIq1xggDzZLN/13gDHAT8MQAAAAPriMzeEs5x4x7SwIGozpAhQAAAB/7JOm4YLHpCtqCjXDresd6laMVw</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATfkXZn6/lkS9hYhRl0pqHQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAB/7KWWfZy0D1/Bo+ox6mYaAAAAAASAAACgAAAAEAAAACxruyjbUr6oUzEc9tk2AM4QAAAATfyjvNos1fFGMeGJNpCQRBQAAACJi9mhd4GLCDFFvGEF48jAhokN5Q</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -39,7 +39,12 @@
       DTS:ObjectName="180-smaxods-01.HELPER.lincinq">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=180-smaxods-01;User ID=lincinq;Initial Catalog=HELPER;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=180-smaxods-01;User ID=lincinq;Initial Catalog=HELPER;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATfkXZn6/lkS9hYhRl0pqHQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAC0CdRA7gLyQ9mQbSFKpst/AAAAAASAAACgAAAAEAAAAH/kobsAjkjQSZefPX1AAu0QAAAAwcyXr7RwMVi0rxb2ZR2tTRQAAADKu+52Y3s7FWsb3CWQO64gTAB6NA</DTS:Password>
+        </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -137,7 +142,12 @@
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:Retain="True"
-          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=DataDirectorExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-DataDirector-{7A97132F-F7AE-4385-8693-808B12170BB4}azlt-mmelarcode\sql2012.STDemo808_2012;" />
+          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=DataDirectorExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-DataDirector-{7A97132F-F7AE-4385-8693-808B12170BB4}azlt-mmelarcode\sql2012.STDemo808_2012;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATfkXZn6/lkS9hYhRl0pqHQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAC9ueg7pp9dy+uoD7Z3blMdAAAAAASAAACgAAAAEAAAAIr2jIKjczRAp209Fx2e27gwAAAA6R0uM5FAnFBVpywrhUzF6SuKIqucb/zu0697m/e9w6nf+yNE4mD6MKKnXKN3ZAkVFAAAADR5gZR6GsZBPTWzPsFE8s5ttFxZ</DTS:Password>
+        </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -2799,9 +2809,8 @@ order by org.ORGANIZATION_NAME, sch.SCHOOL_CODE</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT * FROM [APS].[SynergyDataDirectorUser]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--SELECT * FROM [APS].[SynergyDataDirectorUser]
 
-/*
 SELECT DISTINCT
 	[Lawson_Staff].[STAFF_CODE]
 	,[Lawson_Staff].LOCATION
@@ -2875,9 +2884,7 @@ LEFT JOIN
 
 WHERE
 	SYNERGYLOCATIONS.SCHOOL_CODE IS NOT NULL
-	OR LOCATION = '1'
-
-*/</property>
+	OR LOCATION = '1'</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -3537,7 +3544,7 @@ WHERE
     design-time-name="Package\Courses">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="174,42"
           Id="Package\Courses\Flat File Destination"
@@ -3565,7 +3572,9 @@ WHERE
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -3679,47 +3688,49 @@ WHERE
     design-time-name="Package\Schools">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="174,42"
           Id="Package\Schools\Flat File Destination"
-          TopLeft="252,137" />
+          TopLeft="9,96" />
         <NodeLayout
           Size="126,42"
           Id="Package\Schools\DB Query"
-          TopLeft="236,27" />
+          TopLeft="NaN,NaN" />
         <EdgeLayout
           Id="Package\Schools.Paths[OLE DB Source Output]"
-          TopLeft="299,69">
+          TopLeft="NaN,NaN">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="40,68"
+              EndConnector="NaN,NaN"
               Start="0,0"
-              End="40,60.5">
+              End="NaN,NaN">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,30" />
+                    End="0,NaN" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,30"
-                    Point2="0,34"
-                    Point3="4,34" />
+                    Point1="0,NaN"
+                    Point2="0,NaN"
+                    Point3="-4,NaN" />
                   <mssgle:LineSegment
-                    End="36,34" />
+                    End="NaN,NaN" />
                   <mssgle:CubicBezierSegment
-                    Point1="36,34"
-                    Point2="40,34"
-                    Point3="40,38" />
+                    Point1="NaN,NaN"
+                    Point2="NaN,NaN"
+                    Point3="NaN,NaN" />
                   <mssgle:LineSegment
-                    End="40,60.5" />
+                    End="NaN,NaN" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

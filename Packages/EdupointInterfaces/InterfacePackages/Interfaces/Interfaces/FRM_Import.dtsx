@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="FRM_Import"
   DTS:PackageType="5"
-  DTS:VersionBuild="100"
-  DTS:VersionGUID="{25F5D5D1-13FD-4B20-BC22-9303311BDA9E}">
+  DTS:VersionBuild="97"
+  DTS:VersionGUID="{159C4440-529E-4822-B638-B9929FC82215}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -26,11 +26,11 @@
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:Retain="True"
-          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=FoodServicesImport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-FRM_Import;">
+          DTS:ConnectionString="Data Source=synseconddb.aps.edu.actd;User ID=FoodServicesImport;Initial Catalog=ST_Experiment;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-FRM_Import;">
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA+01QtbErW02A7Mibbu7hcQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABO6gzsDJL/R6piwxvblaZrAAAAAASAAACgAAAAEAAAAEBGZ4lD2mwo0w7l9jGTwdswAAAAZxvmYxzHnfLfztKvw6NZ51KgT+ovQNye/VqPs4Jo8xql08smNdjC1Jzt6BvuxmKgFAAAABGumUjnp3DDk9kksQ+NGjArdRsw</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATfkXZn6/lkS9hYhRl0pqHQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABV+aN1sgPjtjeF/gMlUY/QAAAAAASAAACgAAAAEAAAACdC/U3+RpGnVCmKg7yG/iswAAAASzQIc+K4cQR5m7FBmn8CEnZFvxnXpn0E/1jpgEPiNSOJNFMiV/9qSaa/qW+gzEplFAAAAJws0AS+NMM46j1gHiCRFFwel3A7</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -306,7 +306,7 @@
       DTS:CreationName=""
       DTS:DTSID="{95D625B9-E847-4D54-A87F-BB17F6297632}"
       DTS:EvaluateAsExpression="True"
-      DTS:Expression="&quot;IF OBJECT_ID('tempdb..##TempFRMImport') IS NOT NULL DROP TABLE ##TempFRMImport&#xA;CREATE TABLE ##TempFRMImport(&#xA;   SIS_Number  NVARCHAR(20) null&#xA; , FRMCode     NVARCHAR(05) null&#xA; , SchoolCode  NVARCHAR(20) null&#xA; , LastName    NVARCHAR(30) null&#xA; , FirstName   NVARCHAR(30) null&#xA; , StatusCode  NVARCHAR(20) null&#xA;)&#xA;&#xA;&#xA;BULK INSERT ##TempFRMImport&#xA;    FROM '&quot;+ @[User::TempFilePath] + @[User::TempFileName] +&quot;'&#xA;    WITH&#xA;    (&#xA;    FIELDTERMINATOR = ','&#xA;    )&#xA;alter table ##TempFRMImport add StudentGU  uniqueidentifier null&#xA;alter table ##TempFRMImport add CurrentFRM NVARCHAR(05)     null&#xA;&#xA;-- drop leading zeros in sis_number&#xA;update ##TempFRMImport&#xA;       set ##tempFRMImport.SIS_Number = convert(int, SIS_Number)&#xA;&#xA;--&#xA;&#xA;update ##TempFRMImport&#xA;&#xA;set ##tempFRMImport.StudentGU = stu.student_gu&#xA;  , ##tempFRMImport.CurrentFRM = frm.FRM_CODE&#xA;from ##TempFRMImport t&#xA;left join rev.EPC_STU stu on stu.SIS_NUMBER = t.SIS_Number&#xA;left join rev.EPC_STU_PGM_FRM frm on frm.STUDENT_GU = stu.STUDENT_GU&#xA;&#xA;&quot;"
+      DTS:Expression="&quot;IF OBJECT_ID('tempdb..##TempFRMImport') IS NOT NULL DROP TABLE ##TempFRMImport&#xA;CREATE TABLE ##TempFRMImport(&#xA;   SIS_Number  NVARCHAR(20) null&#xA; , FRMCode     NVARCHAR(05) null&#xA; , SchoolCode  NVARCHAR(20) null&#xA; , LastName    NVARCHAR(30) null&#xA; , FirstName   NVARCHAR(30) null&#xA; , StatusCode  NVARCHAR(20) null&#xA;)&#xA;&#xA;&#xA;BULK INSERT ##TempFRMImport&#xA;    FROM '&quot;+ @[User::TempFilePath] + @[User::TempFileName] +&quot;'&#xA;    WITH&#xA;    (&#xA;    FIELDTERMINATOR = ','&#xA;    )&#xA;alter table ##TempFRMImport add StudentGU  uniqueidentifier null&#xA;alter table ##TempFRMImport add CurrentFRM NVARCHAR(05)     null&#xA;&#xA;-- drop leading zeros in sis_number&#xA;update ##TempFRMImport&#xA;       set ##tempFRMImport.SIS_Number = convert(int, SIS_Number)&#xA;&#xA;--&#xA;&#xA;update ##TempFRMImport&#xA;&#xA;set ##tempFRMImport.StudentGU = stu.STUDENT_GU&#xA;  , ##tempFRMImport.CurrentFRM = frm.FRM_CODE&#xA;from ##TempFRMImport t&#xA;left join rev.EPC_STU stu on stu.SIS_NUMBER = t.SIS_Number&#xA;left join rev.EPC_STU_PGM_FRM frm on frm.STUDENT_GU = stu.STUDENT_GU&#xA;&quot;"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="LoadTempTable">
@@ -339,12 +339,11 @@ update ##TempFRMImport
 
 update ##TempFRMImport
 
-set ##tempFRMImport.StudentGU = stu.student_gu
+set ##tempFRMImport.StudentGU = stu.STUDENT_GU
   , ##tempFRMImport.CurrentFRM = frm.FRM_CODE
 from ##TempFRMImport t
 left join rev.EPC_STU stu on stu.SIS_NUMBER = t.SIS_Number
 left join rev.EPC_STU_PGM_FRM frm on frm.STUDENT_GU = stu.STUDENT_GU
-
 </DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
@@ -536,6 +535,63 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyVersion("1.0.0.0")> 
 <Assembly: AssemblyFileVersion("1.0.0.0")> ]]></ProjectItem>
+          <ProjectItem
+            Name="ScriptMain.vb"
+            Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services Script Task
+' Write scripts using Microsoft Visual Basic 2008.
+' The ScriptMain is the entry point class of the script.
+
+Imports System
+Imports System.Data
+Imports System.Math
+Imports System.IO
+Imports Microsoft.SqlServer.Dts.Runtime
+
+<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
+<System.CLSCompliantAttribute(False)> _
+Partial Public Class ScriptMain
+	Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+
+	Enum ScriptResults
+		Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
+		Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+	End Enum
+	
+
+	' The execution engine calls this method when the task executes.
+	' To access the object model, use the Dts property. Connections, variables, events,
+	' and logging features are available as members of the Dts property as shown in the following examples.
+	'
+	' To reference a variable, call Dts.Variables("MyCaseSensitiveVariableName").Value
+	' To post a log entry, call Dts.Log("This is my log text", 999, Nothing)
+	' To fire an event, call Dts.Events.FireInformation(99, "test", "hit the help message", "", 0, True)
+	'
+	' To use the connections collection use something like the following:
+	' ConnectionManager cm = Dts.Connections.Add("OLEDB")
+	' cm.ConnectionString = "Data Source=localhost;Initial Catalog=AdventureWorks;Provider=SQLNCLI10;Integrated Security=SSPI;Auto Translate=False;"
+	'
+	' Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+	' 
+	' To open Help, press F1.
+
+	Public Sub Main()
+        Dim fileLoc, fileName As String
+        If Dts.Variables.Contains("User::TempFilePath") = True AndAlso _
+        Dts.Variables.Contains("User::TempFileName") = True Then
+            fileLoc = CStr(Dts.Variables("User::TempFilePath").Value)
+            fileName = CStr(Dts.Variables.Item("User::TempFileName").Value)
+            If File.Exists(fileLoc + fileName) Then
+                Dts.Variables.Item("User::ImportFileExists").Value = True
+            Else
+                Dts.Variables.Item("User::ImportFileExists").Value = False
+            End If
+            Dts.TaskResult = ScriptResults.Success
+        Else
+            Dts.TaskResult = ScriptResults.Failure
+        End If
+	End Sub
+
+End Class]]></ProjectItem>
           <ProjectItem
             Name="My Project\Settings.settings"
             Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
@@ -766,63 +822,6 @@ End Class]]></ProjectItem>
 		<msb:Project Include="st_4f6a8623157d48a6906b7441822d58bc.vbproj"/>
 	</msb:ItemGroup>
 </c:Project>]]></ProjectItem>
-          <ProjectItem
-            Name="ScriptMain.vb"
-            Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services Script Task
-' Write scripts using Microsoft Visual Basic 2008.
-' The ScriptMain is the entry point class of the script.
-
-Imports System
-Imports System.Data
-Imports System.Math
-Imports System.IO
-Imports Microsoft.SqlServer.Dts.Runtime
-
-<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
-<System.CLSCompliantAttribute(False)> _
-Partial Public Class ScriptMain
-	Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
-
-	Enum ScriptResults
-		Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
-		Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
-	End Enum
-	
-
-	' The execution engine calls this method when the task executes.
-	' To access the object model, use the Dts property. Connections, variables, events,
-	' and logging features are available as members of the Dts property as shown in the following examples.
-	'
-	' To reference a variable, call Dts.Variables("MyCaseSensitiveVariableName").Value
-	' To post a log entry, call Dts.Log("This is my log text", 999, Nothing)
-	' To fire an event, call Dts.Events.FireInformation(99, "test", "hit the help message", "", 0, True)
-	'
-	' To use the connections collection use something like the following:
-	' ConnectionManager cm = Dts.Connections.Add("OLEDB")
-	' cm.ConnectionString = "Data Source=localhost;Initial Catalog=AdventureWorks;Provider=SQLNCLI10;Integrated Security=SSPI;Auto Translate=False;"
-	'
-	' Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
-	' 
-	' To open Help, press F1.
-
-	Public Sub Main()
-        Dim fileLoc, fileName As String
-        If Dts.Variables.Contains("User::TempFilePath") = True AndAlso _
-        Dts.Variables.Contains("User::TempFileName") = True Then
-            fileLoc = CStr(Dts.Variables("User::TempFilePath").Value)
-            fileName = CStr(Dts.Variables.Item("User::TempFileName").Value)
-            If File.Exists(fileLoc + fileName) Then
-                Dts.Variables.Item("User::ImportFileExists").Value = True
-            Else
-                Dts.Variables.Item("User::ImportFileExists").Value = False
-            End If
-            Dts.TaskResult = ScriptResults.Success
-        Else
-            Dts.TaskResult = ScriptResults.Failure
-        End If
-	End Sub
-
-End Class]]></ProjectItem>
           <ProjectItem
             Name="My Project\Resources.resx"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -1194,7 +1193,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
       <DTS:ObjectData>
         <ExecuteProcessData
           Executable="C:\Windows\System32\cmd.exe"
-          Arguments="/C net use P: &quot;\\172.27.0.24\apssisfiles&quot; APSsis@DiBs /USER:fans\apssis &amp; echo F | xcopy &quot;P:\WINSNAPI&quot; &quot;\\syntempssis.aps.edu.actd\Files\Import\Food Services\FRM\WINSNAPI.TXT&quot; /F /Y &amp; net use P: /delete /yes" />
+          Arguments="/C net use P: &quot;\\172.27.0.24\apssisfiles&quot; APSsis@DiBs /USER:fans\apssis &amp; echo F | xcopy &quot;P:\WINSNAPI&quot; &quot;\\SMAXDBPROD.aps.edu.actd\Sync\&quot; /F /Y &amp; echo F | xcopy &quot;P:\WINSNAPI&quot; &quot;\\syntempssis.aps.edu.actd\Files\Import\Food Services\FRM\WINSNAPI.TXT&quot; /F /Y &amp; net use P: /delete /yes &amp; exit /b" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -1984,14 +1983,14 @@ where t.studentGU is null</property>
           <paths>
             <path
               refId="Package\StudentID not found and invalid frm codes.Paths[OLE DB Source Output1]"
-              endId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input]"
-              name="OLE DB Source Output"
-              startId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\StudentID not found and invalid frm codes.Paths[OLE DB Source Output]"
               endId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input]"
               name="OLE DB Source Output"
               startId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\StudentID not found and invalid frm codes.Paths[OLE DB Source Output]"
+              endId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -2013,7 +2012,7 @@ where t.studentGU is null</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{0D457872-C1A3-4995-9408-1B3493AE9B52}"
-          SQLTask:SqlStatementSource="-- APS FRM Import&#xA;--&#xA;-- Update exit date for rows in temp table = N, Status = 1 and prev FRM Code != N&#xA;--&#xA;update rev.EPC_STU_PGM_FRM_HIS &#xA;  set EXIT_DATE = getdate()&#xA;  , CHANGE_DATE_TIME_STAMP = getdate()&#xA;from ##TempFRMImport t&#xA;join rev.EPC_STU             stu  on stu.SIS_NUMBER  = t.SIS_Number&#xA;join rev.EPC_STU_PGM_FRM     frm  on frm.STUDENT_GU  = stu.STUDENT_GU&#xA;join rev.EPC_STU_PGM_FRM_HIS frmh on frmh.STUDENT_GU = stu.STUDENT_GU&#xA;where /* t.StatusCode = '1'&#xA;      and t.FRMCode = 'N'&#xA;&#x9;  and t.CurrentFRM != 'N' */&#xA;&#x9; t.CurrentFRM!=frm.FRM_CODE&#xA;&#x9;  and frmh.EXIT_DATE is null&#xA;&#x9;  and exists (select l.value_code from rev.SIF_22_Common_GetLookupValues('K12.ProgramInfo', 'FRM_CODE') l where l.VALUE_CODE = t.FRMcode)&#xA;--&#xA;-- Insert row for rows in temp table = N, Status = 1 and prev FRM Code != N or null with FRM code = N&#xA;--&#xA;insert rev.EPC_STU_PGM_FRM_HIS&#xA;      (STU_PGM_FRM_HIS_GU&#xA;      ,STUDENT_GU&#xA;      ,FRM_CODE&#xA;      ,ENTER_DATE&#xA;&#x9;  ,ADD_DATE_TIME_STAMP&#xA;&#x9;  )&#xA;select&#xA;       newid()&#xA;&#x9; , t.studentGU&#xA;&#x9; , t.FRMCode&#xA;&#x9; , getdate()&#xA;&#x9; , getdate() &#xA;from ##TempFRMImport t&#xA;where t.StatusCode = '1'&#xA;      and t.FRMCode = 'N' &#xA;&#x9;  and (t.CurrentFRM != 'N' or t.CurrentFRM is null)&#xA;&#x9;  and t.studentGU is not null&#xA;&#x9;  and exists (select l.value_code from rev.SIF_22_Common_GetLookupValues('K12.ProgramInfo', 'FRM_CODE') l where l.VALUE_CODE = t.FRMcode)&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="-- APS FRM Import&#xA;--&#xA;-- Update exit date for rows in temp table = N, Status = 1 and prev FRM Code != N&#xA;--&#xA;update rev.EPC_STU_PGM_FRM_HIS &#xA;  set EXIT_DATE = getdate()&#xA;  , CHANGE_DATE_TIME_STAMP = getdate()&#xA;from ##TempFRMImport t&#xA;join rev.EPC_STU             stu  on stu.SIS_NUMBER  = t.SIS_Number&#xA;join rev.EPC_STU_PGM_FRM     frm  on frm.STUDENT_GU  = stu.STUDENT_GU&#xA;join rev.EPC_STU_PGM_FRM_HIS frmh on frmh.STUDENT_GU = stu.STUDENT_GU&#xA;where t.StatusCode = '1'&#xA;      and t.FRMCode = 'N'&#xA;&#x9;  and t.CurrentFRM != 'N'&#xA;&#x9;  and frmh.EXIT_DATE is null&#xA;&#x9;  and exists (select l.value_code from rev.SIF_22_Common_GetLookupValues('K12.ProgramInfo', 'FRM_CODE') l where l.VALUE_CODE = t.FRMcode)&#xA;--&#xA;-- Insert row for rows in temp table = N, Status = 1 and prev FRM Code != N or null with FRM code = N&#xA;--&#xA;insert rev.EPC_STU_PGM_FRM_HIS&#xA;      (STU_PGM_FRM_HIS_GU&#xA;      ,STUDENT_GU&#xA;      ,FRM_CODE&#xA;      ,ENTER_DATE&#xA;&#x9;  ,ADD_DATE_TIME_STAMP&#xA;&#x9;  )&#xA;select&#xA;       newid()&#xA;&#x9; , t.studentGU&#xA;&#x9; , t.FRMCode&#xA;&#x9; , getdate()&#xA;&#x9; , getdate() &#xA;from ##TempFRMImport t&#xA;where t.StatusCode = '1'&#xA;      and t.FRMCode = 'N'&#xA;&#x9;  and (t.CurrentFRM != 'N' or t.CurrentFRM is null OR t.CurrentFRM!=t.FRMCode)&#xA;&#x9;  and t.studentGU is not null&#xA;&#x9;  and exists (select l.value_code from rev.SIF_22_Common_GetLookupValues('K12.ProgramInfo', 'FRM_CODE') l where l.VALUE_CODE = t.FRMcode)&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -2033,7 +2032,7 @@ where t.studentGU is null</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{0D457872-C1A3-4995-9408-1B3493AE9B52}"
-          SQLTask:SqlStatementSource="-- APS FRM Import&#xA;--&#xA;-- Update exit date for rows in temp table != N, Status = 1 &#xA;--&#xA;update rev.EPC_STU_PGM_FRM_HIS &#xA;  set EXIT_DATE = getdate()&#xA;  , CHANGE_DATE_TIME_STAMP = getdate()&#xA;from ##TempFRMImport t&#xA;join rev.EPC_STU             stu  on stu.SIS_NUMBER  = t.SIS_Number&#xA;join rev.EPC_STU_PGM_FRM     frm  on frm.STUDENT_GU  = stu.STUDENT_GU&#xA;join rev.EPC_STU_PGM_FRM_HIS frmh on frmh.STUDENT_GU = stu.STUDENT_GU&#xA;where /* t.StatusCode = '1'&#xA;      and t.FRMCode != 'N' */&#xA;&#x9;  t.FRMCode!=frm.FRM_CODE&#xA;&#x9;  and frmh.EXIT_DATE is null&#xA;&#x9;  and exists (select l.value_code from rev.SIF_22_Common_GetLookupValues('K12.ProgramInfo', 'FRM_CODE') l where l.VALUE_CODE = t.FRMcode)&#xA;--&#xA;-- Insert row for rows in temp table != N, Status = 1 &#xA;--&#xA;insert rev.EPC_STU_PGM_FRM_HIS&#xA;      (STU_PGM_FRM_HIS_GU&#xA;      ,STUDENT_GU&#xA;      ,FRM_CODE&#xA;      ,ENTER_DATE&#xA;&#x9;  ,ADD_DATE_TIME_STAMP&#xA;&#x9;  )&#xA;select&#xA;       newid()&#xA;&#x9; , t.studentGU&#xA;&#x9; , t.FRMCode&#xA;&#x9; , getdate()&#xA;&#x9; , getdate() &#xA;from ##TempFRMImport t&#xA;where t.StatusCode = '1'&#xA;      and t.FRMCode != 'N'&#xA;&#x9;  and t.StudentGU is not NULL&#xA;&#x9;  and exists (select l.value_code from rev.SIF_22_Common_GetLookupValues('K12.ProgramInfo', 'FRM_CODE') l where l.VALUE_CODE = t.FRMcode)&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="-- APS FRM Import&#xA;--&#xA;-- Update exit date for rows in temp table != N, Status = 1 &#xA;--&#xA;update rev.EPC_STU_PGM_FRM_HIS &#xA;  set EXIT_DATE = getdate()&#xA;  , CHANGE_DATE_TIME_STAMP = getdate()&#xA;from ##TempFRMImport t&#xA;join rev.EPC_STU             stu  on stu.SIS_NUMBER  = t.SIS_Number&#xA;join rev.EPC_STU_PGM_FRM     frm  on frm.STUDENT_GU  = stu.STUDENT_GU&#xA;join rev.EPC_STU_PGM_FRM_HIS frmh on frmh.STUDENT_GU = stu.STUDENT_GU&#xA;where t.StatusCode = '1'&#xA;      and t.FRMCode != 'N'&#xA;&#x9;  and frmh.EXIT_DATE is null&#xA;&#x9;  and exists (select l.value_code from rev.SIF_22_Common_GetLookupValues('K12.ProgramInfo', 'FRM_CODE') l where l.VALUE_CODE = t.FRMcode)&#xA;--&#xA;-- Insert row for rows in temp table != N, Status = 1 &#xA;--&#xA;insert rev.EPC_STU_PGM_FRM_HIS&#xA;      (STU_PGM_FRM_HIS_GU&#xA;      ,STUDENT_GU&#xA;      ,FRM_CODE&#xA;      ,ENTER_DATE&#xA;&#x9;  ,ADD_DATE_TIME_STAMP&#xA;&#x9;  )&#xA;select&#xA;       newid()&#xA;&#x9; , t.studentGU&#xA;&#x9; , t.FRMCode&#xA;&#x9; , getdate()&#xA;&#x9; , getdate() &#xA;from ##TempFRMImport t&#xA;where t.StatusCode = '1'&#xA;      and t.FRMCode != 'N'&#xA;&#x9;  and t.StudentGU is not NULL&#xA;&#x9;  and exists (select l.value_code from rev.SIF_22_Common_GetLookupValues('K12.ProgramInfo', 'FRM_CODE') l where l.VALUE_CODE = t.FRMcode)&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -2126,7 +2125,7 @@ where t.studentGU is null</property>
           Id="Package\Copy Source File"
           TopLeft="314,13" />
         <NodeLayout
-          Size="239,42"
+          Size="278,44"
           Id="Package\Create TempTable and Load Data"
           TopLeft="5.5,78.7830188679245" />
         <NodeLayout
@@ -2155,30 +2154,18 @@ where t.studentGU is null</property>
           TopLeft="5.5,225.349056603774" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="125,120.783018867924">
+          TopLeft="144.254716981132,122.707547169811">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="19.5,31.2830188679245"
+              EndConnector="0,29.3584905660377"
               Start="0,0"
-              End="19.5,23.7830188679245">
+              End="0,21.8584905660377">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,11.6415094339622" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,11.6415094339622"
-                    Point2="0,15.6415094339622"
-                    Point3="4,15.6415094339622" />
-                  <mssgle:LineSegment
-                    End="15.5,15.6415094339622" />
-                  <mssgle:CubicBezierSegment
-                    Point1="15.5,15.6415094339622"
-                    Point2="19.5,15.6415094339622"
-                    Point3="19.5,19.6415094339622" />
-                  <mssgle:LineSegment
-                    End="19.5,23.7830188679245" />
+                    End="0,21.8584905660377" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2215,9 +2202,9 @@ where t.studentGU is null</property>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-9,31.2830188679245"
+              EndConnector="10.5,31.2830188679245"
               Start="0,0"
-              End="-9,23.7830188679245">
+              End="10.5,23.7830188679245">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -2226,22 +2213,22 @@ where t.studentGU is null</property>
                   <mssgle:CubicBezierSegment
                     Point1="0,11.6415094339622"
                     Point2="0,15.6415094339622"
-                    Point3="-4,15.6415094339622" />
+                    Point3="4,15.6415094339622" />
                   <mssgle:LineSegment
-                    End="-5,15.6415094339622" />
+                    End="6.5,15.6415094339622" />
                   <mssgle:CubicBezierSegment
-                    Point1="-5,15.6415094339622"
-                    Point2="-9,15.6415094339622"
-                    Point3="-9,19.6415094339622" />
+                    Point1="6.5,15.6415094339622"
+                    Point2="10.5,15.6415094339622"
+                    Point3="10.5,19.6415094339622" />
                   <mssgle:LineSegment
-                    End="-9,23.7830188679245" />
+                    End="10.5,23.7830188679245" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-12.5,20.6415094339622,16,16"
+              BoundingBox="-2.75,20.6415094339622,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2362,7 +2349,7 @@ where t.studentGU is null</property>
     design-time-name="Package\StudentID not found and invalid frm codes">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="181,44"
           Id="Package\StudentID not found and invalid frm codes\InvalidFRMCodes"
@@ -2381,34 +2368,6 @@ where t.studentGU is null</property>
           TopLeft="342.594339622641,10.3301886792453" />
         <EdgeLayout
           Id="Package\StudentID not found and invalid frm codes.Paths[OLE DB Source Output1]"
-          TopLeft="74.8962264150943,49.4245283018868">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="89.3207547169811,50.9433962264151"
-              Start="0,0"
-              End="89.3207547169811,43.4433962264151">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,25.4716981132076" />
-                  <mssgle:LineSegment
-                    End="89.3207547169811,25.4716981132076" />
-                  <mssgle:LineSegment
-                    End="89.3207547169811,43.4433962264151" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\StudentID not found and invalid frm codes.Paths[OLE DB Source Output]"
           TopLeft="425.952830188679,54.2547169811321">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -2430,9 +2389,33 @@ where t.studentGU is null</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\StudentID not found and invalid frm codes.Paths[OLE DB Source Output]"
+          TopLeft="74.8962264150943,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="89.3207547169811,50.9433962264151"
+              Start="0,0"
+              End="89.3207547169811,43.4433962264151">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.4716981132076" />
+                  <mssgle:LineSegment
+                    End="89.3207547169811,25.4716981132076" />
+                  <mssgle:LineSegment
+                    End="89.3207547169811,43.4433962264151" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
