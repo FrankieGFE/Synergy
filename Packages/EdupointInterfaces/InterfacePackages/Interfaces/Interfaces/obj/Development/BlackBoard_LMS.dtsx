@@ -1,0 +1,2355 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/3/2014 10:11:55 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="AZLT-MMELARCODE"
+  DTS:CreatorName="XNOVAHQ\MMelarcode"
+  DTS:DTSID="{40935A60-62B4-4195-9332-B729187E9A85}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="BlackBoard_LMS"
+  DTS:PackageType="5"
+  DTS:VersionBuild="45"
+  DTS:VersionGUID="{0BC4E72D-762F-437A-AD58-58534D4FF3FE}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DB Connection]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{FF7FEAA6-8F8B-4126-89E2-82439C35EE28}"
+      DTS:ObjectName="DB Connection">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=BlackboardExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-BlackBoard_LMS;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[RolesStudents]"
+      DTS:CreationName="FLATFILE"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{80F67A6D-0857-48A4-97E4-6F83CA30E132}"
+      DTS:ObjectName="RolesStudents">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::OutputFilePath]+ @[User::FileRolesStudents]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="RaggedRight"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\Blackboard\ROLES_STUDENTS.TXT">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DataRow"
+              DTS:DTSID="{7038939A-F8E7-4F3E-AF9A-F3B90B63367D}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[UsersParents]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{14CC58DC-C178-4858-93B4-C21A52F4C994}"
+      DTS:ObjectName="UsersParents">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::OutputFilePath] +  @[User::FileUsersParents]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="RaggedRight"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\Blackboard\USERS_PARENT.TXT">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DataRow"
+              DTS:DTSID="{454D2EB8-B86B-4F4A-9CAA-6E070BEF6317}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[UsersStudents]"
+      DTS:CreationName="FLATFILE"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{B11A026C-D647-4C40-9CC8-5DBB8B885B09}"
+      DTS:ObjectName="UsersStudents">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::OutputFilePath]+ @[User::FileUsersStudents]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="RaggedRight"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\Blackboard\USERS_STUDENTS.TXT">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DataRow"
+              DTS:DTSID="{26F71D07-DBAB-4DF8-9780-58C01906839C}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{05EE0C8B-E6D4-43F4-A699-0A871DCEB724}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileRolesStudents">
+      <DTS:VariableValue
+        DTS:DataType="8">ROLES_STUDENTS.TXT</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BD7E1635-2007-401A-83B0-20604CDA1989}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileUsersParents">
+      <DTS:VariableValue
+        DTS:DataType="8">USERS_PARENT.TXT</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{32C37BA3-AC73-4DF3-9AB6-103C1BB7B3F1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileUsersStudents">
+      <DTS:VariableValue
+        DTS:DataType="8">USERS_STUDENTS.TXT</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{670E999F-9D0E-4749-A55D-3A53E751FAE2}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;***FileFooter|&quot;+ ((DT_WSTR, 10) @[User::FooterRowCount])+&quot;|&quot;&#xA;+ RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;hh&quot;, GETDATE() ), 2)+&quot;:&quot;&#xA;+ RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;mi&quot;, GETDATE() ), 2)+&quot;:&quot;&#xA;+ RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;ss&quot;, GETDATE() ), 2)+ &quot; &quot;&#xA;+ RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;month&quot;, GETDATE() ), 2)+&quot;/&quot;&#xA;+ RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;day&quot;, GETDATE() ), 2)+&quot;/&quot;&#xA;+ RIGHT(&quot;0&quot; + (DT_WSTR,4)DATEPART(&quot;year&quot;, GETDATE() ),4)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FooterRow">
+      <DTS:VariableValue
+        DTS:DataType="8">***FileFooter|0|09:06:08 01/23/2015</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{96F185BE-B48F-44C7-97EB-1D9EA1B4FEBC}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;***FileFooter|&quot;+ ((DT_WSTR, 10) @[User::FooterRowCount2])+&quot;|&quot;&#xA;+ RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;hh&quot;, GETDATE() ), 2)+&quot;:&quot;&#xA;+ RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;mi&quot;, GETDATE() ), 2)+&quot;:&quot;&#xA;+ RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;ss&quot;, GETDATE() ), 2)+ &quot; &quot;&#xA;+ RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;month&quot;, GETDATE() ), 2)+&quot;/&quot;&#xA;+ RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;day&quot;, GETDATE() ), 2)+&quot;/&quot;&#xA;+ RIGHT(&quot;0&quot; + (DT_WSTR,4)DATEPART(&quot;year&quot;, GETDATE() ),4)&#xA;+&quot;||||||&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FooterRow2">
+      <DTS:VariableValue
+        DTS:DataType="8">***FileFooter|0|09:06:08 01/23/2015||||||</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8DA88669-A1CA-478B-9FD7-C0293B2669B4}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FooterRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8C264748-995E-4528-B489-9219394774DB}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FooterRowCount2">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C02A8EC6-E9EF-4F68-8724-E2B24A0F5D63}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;SELECT '&quot; +  @[User::FooterRow] + &quot;' as Footer&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FooterRowQuery">
+      <DTS:VariableValue
+        DTS:DataType="8">SELECT '***FileFooter|0|09:06:08 01/23/2015' as Footer</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C39BBF77-3E50-4290-AE0B-48C489D23DB1}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;SELECT '&quot; +  @[User::FooterRow2] + &quot;' as Footer&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FooterRowQuery2">
+      <DTS:VariableValue
+        DTS:DataType="8">SELECT '***FileFooter|0|09:06:08 01/23/2015||||||' as Footer</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{19B6F938-31AB-4484-B9E2-9DA3F94D4152}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="OutputFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\syntempssis.aps.edu.actd\Files\Export\Blackboard\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1CB50F08-A8EB-478C-A467-4C26E7EEFFAC}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Variable">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute Process Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute Process Task"
+      DTS:DTSID="{721C361B-2F35-4C01-AF8C-F1B5D5898779}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute Process Task"
+      DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecuteProcessData
+          Executable="C:\Windows\System32\cmd.exe"
+          Arguments="/C cd /d &quot;d:\files\export\blackboard&quot; &amp; ftp -s:blackboard ftp.aps.edu &amp; exit /b" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Footer - RolesStudents"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2CC275E4-0E14-47FC-A918-6E9A10E79E29}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Footer - RolesStudents"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Footer - RolesStudents\DB Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable">User::FooterRowQuery</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Footer - RolesStudents\DB Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Footer - RolesStudents\DB Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Footer - RolesStudents\DB Query.Outputs[OLE DB Source Output].Columns[Footer]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Footer - RolesStudents\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Footer]"
+                      length="150"
+                      lineageId="Package\Footer - RolesStudents\DB Query.Outputs[OLE DB Source Output].Columns[Footer]"
+                      name="Footer"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Footer - RolesStudents\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Footer]"
+                      codePage="1252"
+                      dataType="str"
+                      length="35"
+                      name="Footer" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Footer - RolesStudents\DB Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Footer - RolesStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Footer - RolesStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Footer - RolesStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Footer - RolesStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Footer - RolesStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[Footer]"
+                      codePage="1252"
+                      dataType="str"
+                      length="35"
+                      lineageId="Package\Footer - RolesStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[Footer]"
+                      name="Footer" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Footer - RolesStudents\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">false</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Footer - RolesStudents\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[RolesStudents]"
+                  connectionManagerRefId="Package.ConnectionManagers[RolesStudents]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Footer - RolesStudents\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Footer - RolesStudents\Flat File Destination.Inputs[Flat File Destination Input].Columns[Footer]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="Footer"
+                      externalMetadataColumnId="Package\Footer - RolesStudents\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DataRow]"
+                      lineageId="Package\Footer - RolesStudents\DB Query.Outputs[OLE DB Source Output].Columns[Footer]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Footer - RolesStudents\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DataRow]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="DataRow" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Footer - RolesStudents.Paths[OLE DB Source Output]"
+              endId="Package\Footer - RolesStudents\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Footer - RolesStudents\DB Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Footer - UserStudents"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{ED160A81-8DC3-4D9A-8D26-5A30551EA9FA}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Footer - UserStudents"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Footer - UserStudents\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">false</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Footer - UserStudents\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[UsersStudents]"
+                  connectionManagerRefId="Package.ConnectionManagers[UsersStudents]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Footer - UserStudents\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Footer - UserStudents\Flat File Destination.Inputs[Flat File Destination Input].Columns[Footer]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Footer"
+                      externalMetadataColumnId="Package\Footer - UserStudents\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DataRow]"
+                      lineageId="Package\Footer - UserStudents\Query.Outputs[OLE DB Source Output].Columns[Footer]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Footer - UserStudents\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DataRow]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="DataRow" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Footer - UserStudents\Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable">User::FooterRowQuery2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Footer - UserStudents\Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Footer - UserStudents\Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Footer - UserStudents\Query.Outputs[OLE DB Source Output].Columns[Footer]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Footer - UserStudents\Query.Outputs[OLE DB Source Output].ExternalColumns[Footer]"
+                      length="500"
+                      lineageId="Package\Footer - UserStudents\Query.Outputs[OLE DB Source Output].Columns[Footer]"
+                      name="Footer"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Footer - UserStudents\Query.Outputs[OLE DB Source Output].ExternalColumns[Footer]"
+                      codePage="1252"
+                      dataType="str"
+                      length="41"
+                      name="Footer" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Footer - UserStudents\Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Footer - UserStudents\Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Footer - UserStudents\Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Footer - UserStudents\Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Footer - UserStudents\Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Footer - UserStudents\Query.Outputs[OLE DB Source Error Output].Columns[Footer]"
+                      codePage="1252"
+                      dataType="str"
+                      length="41"
+                      lineageId="Package\Footer - UserStudents\Query.Outputs[OLE DB Source Error Output].Columns[Footer]"
+                      name="Footer" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Footer - UserStudents.Paths[OLE DB Source Output]"
+              endId="Package\Footer - UserStudents\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Footer - UserStudents\Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Header - RolesStudents"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{F792C362-DE65-4F86-92B4-B052D563776F}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Header - RolesStudents"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Header - RolesStudents\DB Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select 'EXTERNAL_PERSON_KEY|ROLE_ID' as header</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Header - RolesStudents\DB Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Header - RolesStudents\DB Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Header - RolesStudents\DB Query.Outputs[OLE DB Source Output].Columns[header]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Header - RolesStudents\DB Query.Outputs[OLE DB Source Output].ExternalColumns[header]"
+                      length="27"
+                      lineageId="Package\Header - RolesStudents\DB Query.Outputs[OLE DB Source Output].Columns[header]"
+                      name="header"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Header - RolesStudents\DB Query.Outputs[OLE DB Source Output].ExternalColumns[header]"
+                      codePage="1252"
+                      dataType="str"
+                      length="27"
+                      name="header" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Header - RolesStudents\DB Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Header - RolesStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[header]"
+                      codePage="1252"
+                      dataType="str"
+                      length="27"
+                      lineageId="Package\Header - RolesStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[header]"
+                      name="header" />
+                    <outputColumn
+                      refId="Package\Header - RolesStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Header - RolesStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Header - RolesStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Header - RolesStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Header - RolesStudents\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Header - RolesStudents\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[RolesStudents]"
+                  connectionManagerRefId="Package.ConnectionManagers[RolesStudents]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Header - RolesStudents\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Header - RolesStudents\Flat File Destination.Inputs[Flat File Destination Input].Columns[header]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="27"
+                      cachedName="header"
+                      externalMetadataColumnId="Package\Header - RolesStudents\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DataRow]"
+                      lineageId="Package\Header - RolesStudents\DB Query.Outputs[OLE DB Source Output].Columns[header]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Header - RolesStudents\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DataRow]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="DataRow" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Header - RolesStudents.Paths[OLE DB Source Output]"
+              endId="Package\Header - RolesStudents\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Header - RolesStudents\DB Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Header - UsersStudents"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{55D1ECF8-8A93-4DE5-B463-CED810CF419D}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Header - UsersStudents"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Header - UsersStudents\DB Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select 'SYSTEM_ROLE|INSTITUTION_ROLE|EXTERNAL_PERSON_KEY|USER_ID|PASSWORD|FIRSTNAME|MIDDLENAME|LASTNAME|STUDENT_ID' as DataRow</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Header - UsersStudents\DB Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Header - UsersStudents\DB Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Header - UsersStudents\DB Query.Outputs[OLE DB Source Output].Columns[DataRow]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Header - UsersStudents\DB Query.Outputs[OLE DB Source Output].ExternalColumns[DataRow]"
+                      length="106"
+                      lineageId="Package\Header - UsersStudents\DB Query.Outputs[OLE DB Source Output].Columns[DataRow]"
+                      name="DataRow"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Header - UsersStudents\DB Query.Outputs[OLE DB Source Output].ExternalColumns[DataRow]"
+                      codePage="1252"
+                      dataType="str"
+                      length="106"
+                      name="DataRow" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Header - UsersStudents\DB Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Header - UsersStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[DataRow]"
+                      codePage="1252"
+                      dataType="str"
+                      length="106"
+                      lineageId="Package\Header - UsersStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[DataRow]"
+                      name="DataRow" />
+                    <outputColumn
+                      refId="Package\Header - UsersStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Header - UsersStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Header - UsersStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Header - UsersStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Header - UsersStudents\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Header - UsersStudents\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[UsersStudents]"
+                  connectionManagerRefId="Package.ConnectionManagers[UsersStudents]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Header - UsersStudents\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Header - UsersStudents\Flat File Destination.Inputs[Flat File Destination Input].Columns[DataRow]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="106"
+                      cachedName="DataRow"
+                      externalMetadataColumnId="Package\Header - UsersStudents\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DataRow]"
+                      lineageId="Package\Header - UsersStudents\DB Query.Outputs[OLE DB Source Output].Columns[DataRow]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Header - UsersStudents\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DataRow]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="DataRow" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Header - UsersStudents.Paths[OLE DB Source Output]"
+              endId="Package\Header - UsersStudents\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Header - UsersStudents\DB Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Roles Students"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{0FDE655F-8016-4D05-9BF1-9B28701730E6}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Roles Students"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Roles Students\DB Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--&lt;APS - Blackboard - Roles_Students&gt;
+--Header row - EXTERNAL_PERSON_KEY|ROLE_ID
+--Must have a footer in the output like below with ***FileFooter|(only data row count)|run date time
+--***FileFooter|92018|17:35:21 04/01/2014
+SELECT 
+     stu.SIS_NUMBER + '|' +        
+     ltrim(rtrim(sch.SCHOOL_CODE)) + '_' + org.ORGANIZATION_NAME as DataRow
+
+
+FROM rev.EPC_STU stu
+JOIN rev.EPC_STU_SCH_YR ssyr        ON ssyr.STUDENT_GU = stu.STUDENT_GU
+                                       AND ssyr.STATUS IS NULL
+                                       AND ssyr.LEAVE_DATE IS NULL 
+JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
+                                       AND oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+JOIN rev.REV_ORGANIZATION org       ON org.ORGANIZATION_GU = oyr.ORGANIZATION_GU
+JOIN rev.EPC_SCH sch                ON sch.ORGANIZATION_GU = org.ORGANIZATION_GU</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Roles Students\DB Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Roles Students\DB Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Roles Students\DB Query.Outputs[OLE DB Source Output].Columns[DataRow]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Roles Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[DataRow]"
+                      length="142"
+                      lineageId="Package\Roles Students\DB Query.Outputs[OLE DB Source Output].Columns[DataRow]"
+                      name="DataRow"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Roles Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[DataRow]"
+                      dataType="wstr"
+                      length="142"
+                      name="DataRow" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Roles Students\DB Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Roles Students\DB Query.Outputs[OLE DB Source Error Output].Columns[DataRow]"
+                      dataType="wstr"
+                      length="142"
+                      lineageId="Package\Roles Students\DB Query.Outputs[OLE DB Source Error Output].Columns[DataRow]"
+                      name="DataRow" />
+                    <outputColumn
+                      refId="Package\Roles Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Roles Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Roles Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Roles Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Roles Students\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">false</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Roles Students\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[RolesStudents]"
+                  connectionManagerRefId="Package.ConnectionManagers[RolesStudents]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Roles Students\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Roles Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[DataRow]"
+                      cachedDataType="wstr"
+                      cachedLength="142"
+                      cachedName="DataRow"
+                      externalMetadataColumnId="Package\Roles Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DataRow]"
+                      lineageId="Package\Roles Students\DB Query.Outputs[OLE DB Source Output].Columns[DataRow]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Roles Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DataRow]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="DataRow" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Roles Students\Row Count"
+              componentClassID="{E2697D8C-70DA-42B2-8208-A19CE3A9FE41}"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts the rows in a dataset."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::FooterRowCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Roles Students\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Roles Students\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Roles Students\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Roles Students.Paths[OLE DB Source Output]"
+              endId="Package\Roles Students\Row Count.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Roles Students\DB Query.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Roles Students.Paths[Row Count Output 1]"
+              endId="Package\Roles Students\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Roles Students\Row Count.Outputs[Row Count Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\UsersParents"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{F85739F3-DC1B-408A-8A22-B1638D918B0C}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="UsersParents"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\UsersParents\DB Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--&lt;APS - Blackboard - Users Parents&gt;
+--Header row - SYSTEM_ROLE|INSTITUTION_ROLE|EXTERNAL_PERSON_KEY|USER_ID|PASSWORD|FIRSTNAME|LASTNAME
+--No Footer record/row required
+
+SELECT
+'SYSTEM_ROLE|INSTITUTION_ROLE|EXTERNAL_PERSON_KEY|USER_ID|PASSWORD|FIRSTNAME|LASTNAME' as DataRow
+UNION ALL
+SELECT 
+     'Observer|Observer|'+
+     'P' + stu.SIS_NUMBER + '|' +
+     'p' + stu.SIS_NUMBER + '|' +
+     'p' + stu.SIS_NUMBER + '|' +
+	 'Obs' + cast(row_number() over(order by stu.sis_number) as varchar(10)) +'|' +
+	 'Obs' + cast(row_number() over(order by stu.sis_number) as varchar(10))
+
+FROM rev.EPC_STU stu
+JOIN rev.EPC_STU_SCH_YR ssyr        ON ssyr.STUDENT_GU = stu.STUDENT_GU
+                                       AND ssyr.STATUS IS NULL
+                                       AND ssyr.LEAVE_DATE IS NULL 
+JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
+                                       AND oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\UsersParents\DB Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\UsersParents\DB Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\UsersParents\DB Query.Outputs[OLE DB Source Output].Columns[DataRow]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UsersParents\DB Query.Outputs[OLE DB Source Output].ExternalColumns[DataRow]"
+                      length="111"
+                      lineageId="Package\UsersParents\DB Query.Outputs[OLE DB Source Output].Columns[DataRow]"
+                      name="DataRow"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\UsersParents\DB Query.Outputs[OLE DB Source Output].ExternalColumns[DataRow]"
+                      dataType="wstr"
+                      length="111"
+                      name="DataRow" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\UsersParents\DB Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\UsersParents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\UsersParents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\UsersParents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\UsersParents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\UsersParents\DB Query.Outputs[OLE DB Source Error Output].Columns[DataRow]"
+                      dataType="wstr"
+                      length="111"
+                      lineageId="Package\UsersParents\DB Query.Outputs[OLE DB Source Error Output].Columns[DataRow]"
+                      name="DataRow" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\UsersParents\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\UsersParents\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[UsersParents]"
+                  connectionManagerRefId="Package.ConnectionManagers[UsersParents]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\UsersParents\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\UsersParents\Flat File Destination.Inputs[Flat File Destination Input].Columns[DataRow]"
+                      cachedDataType="wstr"
+                      cachedLength="111"
+                      cachedName="DataRow"
+                      externalMetadataColumnId="Package\UsersParents\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DataRow]"
+                      lineageId="Package\UsersParents\DB Query.Outputs[OLE DB Source Output].Columns[DataRow]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\UsersParents\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DataRow]"
+                      dataType="wstr"
+                      length="1000"
+                      name="DataRow" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\UsersParents.Paths[OLE DB Source Output]"
+              endId="Package\UsersParents\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\UsersParents\DB Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\UserStudents"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{F12C6CEC-644C-4D40-AA7F-85C5D31F6BC6}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="UserStudents"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\UserStudents\DB Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--&lt;APS - Blackboard - Users_Students&gt;
+--Header row - SYSTEM_ROLE|INSTITUTION_ROLE|EXTERNAL_PERSON_KEY|USER_ID|PASSWORD|FIRSTNAME|MIDDLENAME|LASTNAME|STUDENT_ID
+--Must have a footer in the output - Three asterisks, ‘FileFooter’, |, data row count, |, time file created, date MM/DD/YYYY||||||?
+--***FileFooter|92043|17:35:38 04/01/2014||||||
+SELECT 
+     'None|Student|' +
+     stu.SIS_NUMBER + '|' +
+     stu.SIS_NUMBER + '|' +
+     stu.SIS_NUMBER + '|' +
+	 per.FIRST_NAME + '|' +
+	 COALESCE(per.MIDDLE_NAME, '') + '|' +
+	 per.LAST_NAME + '|' +
+	 COALESCE(stu.STATE_STUDENT_NUMBER , '999999999') as DataRow
+
+
+
+FROM rev.EPC_STU stu
+JOIN rev.EPC_STU_SCH_YR ssyr        ON ssyr.STUDENT_GU = stu.STUDENT_GU
+                                       AND ssyr.STATUS IS NULL
+                                       AND ssyr.LEAVE_DATE IS NULL 
+JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
+                                       AND oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+JOIN rev.REV_ORGANIZATION org       ON org.ORGANIZATION_GU = oyr.ORGANIZATION_GU
+JOIN rev.EPC_SCH sch                ON sch.ORGANIZATION_GU = org.ORGANIZATION_GU
+JOIN rev.REV_PERSON     per         ON per.PERSON_GU = stu.STUDENT_GU</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\UserStudents\DB Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\UserStudents\DB Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\UserStudents\DB Query.Outputs[OLE DB Source Output].Columns[DataRow]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UserStudents\DB Query.Outputs[OLE DB Source Output].ExternalColumns[DataRow]"
+                      length="239"
+                      lineageId="Package\UserStudents\DB Query.Outputs[OLE DB Source Output].Columns[DataRow]"
+                      name="DataRow"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\UserStudents\DB Query.Outputs[OLE DB Source Output].ExternalColumns[DataRow]"
+                      dataType="wstr"
+                      length="239"
+                      name="DataRow" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\UserStudents\DB Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\UserStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[DataRow]"
+                      dataType="wstr"
+                      length="239"
+                      lineageId="Package\UserStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[DataRow]"
+                      name="DataRow" />
+                    <outputColumn
+                      refId="Package\UserStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\UserStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\UserStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\UserStudents\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\UserStudents\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">false</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\UserStudents\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[UsersStudents]"
+                  connectionManagerRefId="Package.ConnectionManagers[UsersStudents]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\UserStudents\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\UserStudents\Flat File Destination.Inputs[Flat File Destination Input].Columns[DataRow]"
+                      cachedDataType="wstr"
+                      cachedLength="239"
+                      cachedName="DataRow"
+                      externalMetadataColumnId="Package\UserStudents\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DataRow]"
+                      lineageId="Package\UserStudents\DB Query.Outputs[OLE DB Source Output].Columns[DataRow]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\UserStudents\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DataRow]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="DataRow" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\UserStudents\Row Count"
+              componentClassID="{E2697D8C-70DA-42B2-8208-A19CE3A9FE41}"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts the rows in a dataset."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::FooterRowCount2</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\UserStudents\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\UserStudents\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\UserStudents\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\UserStudents.Paths[OLE DB Source Output]"
+              endId="Package\UserStudents\Row Count.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\UserStudents\DB Query.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\UserStudents.Paths[Row Count Output 1]"
+              endId="Package\UserStudents\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\UserStudents\Row Count.Outputs[Row Count Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{F737C673-19C3-4286-9187-2B31FB1D6875}"
+      DTS:From="Package\Header - RolesStudents"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Roles Students" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{0091D538-1337-4CED-8E5B-6DB9F68D37B8}"
+      DTS:From="Package\Roles Students"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Footer - RolesStudents" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{163F55B9-7EF4-4199-8361-E0C941436BB3}"
+      DTS:From="Package\Footer - RolesStudents"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\UsersParents" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{38B05B60-2F35-4C0C-8C64-AA5A36B93D93}"
+      DTS:From="Package\UsersParents"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Header - UsersStudents" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{0F015049-69B0-4648-B597-07D88B553E21}"
+      DTS:From="Package\Header - UsersStudents"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\UserStudents" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{A3BC1938-8250-4904-BF2E-21A3807E7C39}"
+      DTS:From="Package\UserStudents"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Footer - UserStudents" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{5FF6EFD7-7602-4D6E-B375-0254241B28C7}"
+      DTS:From="Package\Footer - UserStudents"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Execute Process Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Execute Process Task"
+          TopLeft="40.5,471" />
+        <NodeLayout
+          Size="193,44"
+          Id="Package\Footer - RolesStudents"
+          TopLeft="28,139.235849056604" />
+        <NodeLayout
+          Size="193,44"
+          Id="Package\Footer - UserStudents"
+          TopLeft="28,406.896226415094" />
+        <NodeLayout
+          Size="193,44"
+          Id="Package\Header - RolesStudents"
+          TopLeft="28,5.5" />
+        <NodeLayout
+          Size="193,44"
+          Id="Package\Header - UsersStudents"
+          TopLeft="28,272.971698113208" />
+        <NodeLayout
+          Size="193,44"
+          Id="Package\Roles Students"
+          TopLeft="28,72.3679245283019" />
+        <NodeLayout
+          Size="193,44"
+          Id="Package\UsersParents"
+          TopLeft="28,206.103773584906" />
+        <NodeLayout
+          Size="193,44"
+          Id="Package\UserStudents"
+          TopLeft="28,339.839622641509" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="124.339622641509,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,22.9433962264151"
+              Start="0,0"
+              End="0,15.4433962264151">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.4433962264151" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="124.339622641509,116.292452830189">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,22.9433962264151"
+              Start="0,0"
+              End="0,15.4433962264151">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.4433962264151" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="124.339622641509,183.160377358491">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,22.9433962264151"
+              Start="0,0"
+              End="0,15.4433962264151">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.4433962264151" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="124.339622641509,250.028301886792">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,22.9433962264151"
+              Start="0,0"
+              End="0,15.4433962264151">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.4433962264151" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="124.339622641509,316.896226415094">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,22.9433962264151"
+              Start="0,0"
+              End="0,15.4433962264151">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.4433962264151" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="124.339622641509,383.764150943396">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.1320754716981"
+              Start="0,0"
+              End="0,15.6320754716981">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.6320754716981" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="28,428.896226415094">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12.5,63.103773584906"
+              Start="0,0"
+              End="5,63.103773584906">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,59.103773584906" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,59.103773584906"
+                    Point2="-22.5,63.103773584906"
+                    Point3="-18.5,63.103773584906" />
+                  <mssgle:LineSegment
+                    End="5,63.103773584906" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Footer - RolesStudents">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="172,44"
+          Id="Package\Footer - RolesStudents\Flat File Destination"
+          TopLeft="38.4811320754717,101.349056603774" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Footer - RolesStudents\DB Query"
+          TopLeft="5.5,5.5" />
+        <EdgeLayout
+          Id="Package\Footer - RolesStudents.Paths[OLE DB Source Output]"
+          TopLeft="73.3867924528302,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="50.9433962264151,51.9245283018868"
+              Start="0,0"
+              End="50.9433962264151,44.4245283018868">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.9622641509434" />
+                  <mssgle:LineSegment
+                    End="50.9433962264151,25.9622641509434" />
+                  <mssgle:LineSegment
+                    End="50.9433962264151,44.4245283018868" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Footer - RolesStudents\DB Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Footer - UserStudents">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171.735849056604,43.9245283018868"
+          Id="Package\Footer - UserStudents\Flat File Destination"
+          TopLeft="56.4056603773585,84.3679245283019" />
+        <NodeLayout
+          Size="148.754716981133,43.9245283018868"
+          Id="Package\Footer - UserStudents\Query"
+          TopLeft="5.5,5.5" />
+        <EdgeLayout
+          Id="Package\Footer - UserStudents.Paths[OLE DB Source Output]"
+          TopLeft="79.877358490566,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="62.377358490566,34.9433962264151"
+              Start="0,0"
+              End="62.377358490566,27.4433962264151">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.4716981132075" />
+                  <mssgle:LineSegment
+                    End="62.377358490566,17.4716981132075" />
+                  <mssgle:LineSegment
+                    End="62.377358490566,27.4433962264151" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Header - RolesStudents">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171.735849056604,43.9245283018868"
+          Id="Package\Header - RolesStudents\Flat File Destination"
+          TopLeft="34.4811320754717,90.3301886792453" />
+        <NodeLayout
+          Size="135.773584905661,43.9245283018868"
+          Id="Package\Header - RolesStudents\DB Query"
+          TopLeft="5.5,5.5" />
+        <EdgeLayout
+          Id="Package\Header - RolesStudents.Paths[OLE DB Source Output]"
+          TopLeft="73.3867924528302,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="46.9433962264151,40.9056603773585"
+              Start="0,0"
+              End="46.9433962264151,33.4056603773585">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.4528301886792" />
+                  <mssgle:LineSegment
+                    End="46.9433962264151,20.4528301886792" />
+                  <mssgle:LineSegment
+                    End="46.9433962264151,33.4056603773585" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Header - UsersStudents">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171.735849056604,43.9245283018868"
+          Id="Package\Header - UsersStudents\Flat File Destination"
+          TopLeft="74.4056603773585,172.216981132075" />
+        <NodeLayout
+          Size="148.754716981133,43.9245283018868"
+          Id="Package\Header - UsersStudents\DB Query"
+          TopLeft="5.5,5.5" />
+        <EdgeLayout
+          Id="Package\Header - UsersStudents.Paths[OLE DB Source Output]"
+          TopLeft="79.877358490566,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="80.377358490566,122.792452830189"
+              Start="0,0"
+              End="80.377358490566,115.292452830189">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.3962264150943" />
+                  <mssgle:LineSegment
+                    End="80.377358490566,61.3962264150943" />
+                  <mssgle:LineSegment
+                    End="80.377358490566,115.292452830189" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Roles Students">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="172,44"
+          Id="Package\Roles Students\Flat File Destination"
+          TopLeft="5.5,137.311320754717" />
+        <NodeLayout
+          Size="172,44"
+          Id="Package\Roles Students\DB Query"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="172,44"
+          Id="Package\Roles Students\Row Count"
+          TopLeft="5.5,71.3867924528302" />
+        <EdgeLayout
+          Id="Package\Roles Students.Paths[Row Count Output 1]"
+          TopLeft="91.3490566037736,115.311320754717">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,22"
+              Start="0,0"
+              End="0,14.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Roles Students.Paths[OLE DB Source Output]"
+          TopLeft="91.3490566037736,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,21.9622641509434"
+              Start="0,0"
+              End="0,14.4622641509434">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.4622641509434" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Roles Students\DB Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\UsersParents">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171.735849056604,43.9245283018868"
+          Id="Package\UsersParents\Flat File Destination"
+          TopLeft="62.4056603773585,99.9150943396226" />
+        <NodeLayout
+          Size="148.754716981133,43.9245283018868"
+          Id="Package\UsersParents\DB Query"
+          TopLeft="5.5,5.5" />
+        <EdgeLayout
+          Id="Package\UsersParents.Paths[OLE DB Source Output]"
+          TopLeft="79.877358490566,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="68.377358490566,50.4905660377358"
+              Start="0,0"
+              End="68.377358490566,42.9905660377358">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.2452830188679" />
+                  <mssgle:LineSegment
+                    End="68.377358490566,25.2452830188679" />
+                  <mssgle:LineSegment
+                    End="68.377358490566,42.9905660377358" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\UserStudents">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171.735849056604,43.9245283018868"
+          Id="Package\UserStudents\Flat File Destination"
+          TopLeft="60.4433962264151,161.235849056604" />
+        <NodeLayout
+          Size="148.754716981133,43.9245283018868"
+          Id="Package\UserStudents\DB Query"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="135.773584905661,43.9245283018868"
+          Id="Package\UserStudents\Row Count"
+          TopLeft="52.4433962264151,79.3490566037736" />
+        <EdgeLayout
+          Id="Package\UserStudents.Paths[Row Count Output 1]"
+          TopLeft="120.330188679245,123.27358490566">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="25.9622641509434,37.9622641509434"
+              Start="0,0"
+              End="25.9622641509434,30.4622641509434">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.9811320754717" />
+                  <mssgle:LineSegment
+                    End="25.9622641509434,18.9811320754717" />
+                  <mssgle:LineSegment
+                    End="25.9622641509434,30.4622641509434" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\UserStudents.Paths[OLE DB Source Output]"
+          TopLeft="79.877358490566,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="40.4528301886792,29.9245283018868"
+              Start="0,0"
+              End="40.4528301886792,22.4245283018868">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.9433962264151" />
+                  <mssgle:LineSegment
+                    End="40.4528301886792,14.9433962264151" />
+                  <mssgle:LineSegment
+                    End="40.4528301886792,22.4245283018868" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

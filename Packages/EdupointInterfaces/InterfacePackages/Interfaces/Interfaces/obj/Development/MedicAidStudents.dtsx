@@ -1,0 +1,2904 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/1/2014 8:57:56 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="AZLT-MMELARCODE"
+  DTS:CreatorName="XNOVAHQ\MMelarcode"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{A054DC6E-B7DF-42D3-A86A-D03FEBC557C2}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="MedicAidStudents"
+  DTS:PackageType="5"
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{639944DF-2BB4-4850-8C5D-B53E5BB6CE3C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[APS_StudentData]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{295F226D-6E14-40D9-8FD6-5D51C4233493}"
+      DTS:ObjectName="APS_StudentData">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::OutputFilePath] + @[User::OutputFileName] 
++"_"
++ RIGHT("0" + (DT_WSTR,4)DATEPART("year", GETDATE() ),4) 
++ RIGHT("0" + (DT_WSTR,2)DATEPART("month", GETDATE() ), 2)
++ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
++".csv"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis\Files\Export\Medicaid\APS_StudentData_20150123.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="District CD"
+              DTS:DTSID="{5539CAAF-AFED-4B9F-8A5C-24518412992D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="School CD"
+              DTS:DTSID="{AAA4AB8F-A511-430F-A3AA-0CACA186F07D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="School Name"
+              DTS:DTSID="{2DACAE2C-8EFC-46B9-888D-08251C9FE024}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student ID"
+              DTS:DTSID="{DC4BC3C3-943E-495D-8121-A582DA9F665E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Medicaid ID"
+              DTS:DTSID="{FF1317C4-BB91-4470-B05F-2D021BCE5208}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Last Name"
+              DTS:DTSID="{A729E87B-9C14-4F10-B4AE-8980CE48145C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="First Name"
+              DTS:DTSID="{E19B94FE-C334-472F-9552-BE5352D2D19C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Middle Name"
+              DTS:DTSID="{8CCDF443-4A5F-4DAD-9897-3D0FEEA8EA3D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DOB (MM/DD/YYYY)"
+              DTS:DTSID="{B6CB9206-7664-4155-8F5A-F34B7A702D2F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SSN"
+              DTS:DTSID="{84AFBF34-A58F-458D-952C-071982081D60}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Gender CD"
+              DTS:DTSID="{250FDB1E-F618-4013-AFC5-6584B3AAD4FF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student Address1"
+              DTS:DTSID="{8603EEA6-21A1-4484-8904-531016B2577A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student Address2"
+              DTS:DTSID="{1D633323-9621-45E5-8927-819804A7B467}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="City"
+              DTS:DTSID="{C620396E-7FD7-4811-B518-E0572BFAD54E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="State"
+              DTS:DTSID="{1C890479-031E-4B86-8B1C-75A72C9B600D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="6"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Zip Code"
+              DTS:DTSID="{58285672-8628-44E1-90B4-6DFD2922D04C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Primary Diagnosis CD"
+              DTS:DTSID="{C894BFDE-096F-40B0-8177-72424F4D1904}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Secondary Diagnosis CD"
+              DTS:DTSID="{AE4C8B31-D8C4-4EFA-A5DA-F62E43B8A05D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Tertiary Diagnosis CD"
+              DTS:DTSID="{B9308E9B-FBBC-4750-84B2-8B1758607252}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Fourth Diagnosis CD"
+              DTS:DTSID="{B8D7E657-0C44-4EE4-B42A-BA3722F29134}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IEP Start Date"
+              DTS:DTSID="{A64F596D-B700-4854-B2EE-40B124B41366}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IEP End Date"
+              DTS:DTSID="{55836750-A38A-4FAC-8C3D-8CA428A4D954}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PCP Prescription Start Date"
+              DTS:DTSID="{F6101D6D-6423-4F25-891A-D3A9155D41EA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PCP Prescription End Date"
+              DTS:DTSID="{01BF9BB1-007F-4CD5-BB25-274233AAE09C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PCP Prescription Exempt(E)/In Process(P)"
+              DTS:DTSID="{1AF58D92-AFD5-4733-9D68-6391E79E4A31}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PCP Last Name"
+              DTS:DTSID="{D6D0E8DE-ECB7-4E42-908B-ACDBC843EE01}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PCP First Name"
+              DTS:DTSID="{172CB5FF-F95B-4982-9E0F-E934AD249C1D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Audiology on IEP?"
+              DTS:DTSID="{5DBFF537-8325-40FA-B3EC-CD31DB73419C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Case Management on IEP?"
+              DTS:DTSID="{6539A024-F87B-4B79-839F-B93F34E6165D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Mental Health-Counseling on IEP?"
+              DTS:DTSID="{CCB2C572-C83D-4654-9865-EA46E24E90F9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Nursing Services on IEP?"
+              DTS:DTSID="{C3E2754B-444C-43EB-9F8B-D226798CCDE0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Nutritional Services on IEP?"
+              DTS:DTSID="{CD4E1989-0648-4CAF-9A71-2E8EE544A51B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Occupational Therapy on IEP?"
+              DTS:DTSID="{35CF7468-2763-4106-B5A6-4616C9B6F920}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Physical Therapy on IEP?"
+              DTS:DTSID="{60A7138D-026B-4C76-BC0A-D73B968FF64E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Speech Therapy on IEP?"
+              DTS:DTSID="{FDA2A503-298D-47C9-8014-E6B3E1909D7A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Special Transportation on IEP?"
+              DTS:DTSID="{6164983D-2F2D-472B-9706-D29530DE1F2C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Parent Consent"
+              DTS:DTSID="{064B68A7-03EC-4B7D-B4EA-9B9DAE807B46}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MHC Hours"
+              DTS:DTSID="{72DF1A5B-5E5A-4E8A-9594-F6BC8E0EFC52}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="OT Hours"
+              DTS:DTSID="{439F869F-10A6-4D13-8EF7-6A75574E1908}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PT Hours"
+              DTS:DTSID="{6272DE4E-4840-446D-9488-11DE67EBC544}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SP Hours"
+              DTS:DTSID="{39CDB512-E268-4306-BB43-D3F345185343}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MHC Frequency"
+              DTS:DTSID="{94E0BB18-E19D-41BB-A1C7-C92A3B7A7049}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="OT Frequency"
+              DTS:DTSID="{A98F4F0B-2B2C-4E7F-8718-E7A0158D2592}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PT Frequency"
+              DTS:DTSID="{A15AB1A8-34CB-4EB7-9E94-094AB2DEEE40}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SP Frequency"
+              DTS:DTSID="{E9E257F0-BCB9-4735-BE50-8DF8A578197D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Inactive?"
+              DTS:DTSID="{F2BAB052-A0E0-4FC1-B18F-6E87547206BC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Override Ind"
+              DTS:DTSID="{1B63CD3A-4FD3-4595-9401-84DB5A2D4333}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DB Connection]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{34ED5BE9-A489-42D6-9683-E0EDB70D1E99}"
+      DTS:ObjectName="DB Connection">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=APSExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-MedicAidStudents-{34ED5BE9-A489-42D6-9683-E0EDB70D1E99}azlt-mmelarcode\sql2012.STDemo808_2012;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[\\syntempssis\Files\Export\Medicaid]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{74380708-6B12-4D74-9217-38EDCF37BA2B}"
+      DTS:ObjectName="\\syntempssis\Files\Export\Medicaid">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="2"
+          DTS:ConnectionString="\\syntempssis\Files\Export\Medicaid\" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8E18A1F6-24D8-4B8A-8E0A-8F6549F21CCE}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="OutputFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">APS_StudentData</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BE5DCE28-9A06-4A1B-970B-692CEBC129CD}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="OutputFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\syntempssis\Files\Export\Medicaid\</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Delete Files"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Delete old files"
+      DTS:DTSID="{136A75EF-4B72-4969-84F5-780AAC2784FC}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete Files"
+      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="DeleteDirectoryContent"
+          TaskSourcePath="{74380708-6B12-4D74-9217-38EDCF37BA2B}" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\MedicAid Students"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{47E51692-B491-40DB-9722-ACBD0F2A0574}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="MedicAid Students"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\MedicAid Students\DB Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--&lt;APS Medicaid System – Student/Physician (PCP)&gt;
+--Only Active students with completed IEPs
+
+DECLARE  @vDistrict_Number VARCHAR(20)
+SET @vDistrict_Number = (SELECT CONVERT(xml,[VALUE]).value('(/ROOT/SIS/@DISTRICT_NUMBER)[1]','varchar(20)') AS DISTRICT_NUMBER
+                         FROM rev.REV_APPLICATION  WHERE [KEY] = 'REV_INSTALL_CONSTANT')
+; with SpedStudents AS
+(
+SELECT
+         stu.STUDENT_GU
+	   , ROW_NUMBER() over (partition by stu.student_gu order by stu.student_gu) rn
+	   , iep.PRIMARY_DISABILITY_CODE
+	   , iep.SECONDARY_DISABILITY_CODE
+	   , iep.TERTIARY_DISABILITY_CODE
+	   , iep.QUATERNARY_DISABILITY_CODE
+	   , iep.IEP_DATE
+	   , iep.NEXT_IEP_DATE
+	   , au.au_min
+	   , au.au_freq
+	   , sw.sw_min
+	   , sw.sw_freq
+	   , sh.sh_min
+	   , sh.sh_freq
+	   , ot.ot_min
+	   , ot.ot_freq
+	   , pt.pt_min
+	   , pt.pt_freq
+	   , ss.ss_min
+	   , ss.ss_freq
+	   , CASE WHEN (aiep.SERV_TRANSPORT_YN = 'Y' and aiep.SERV_TRANSPORT_ADULT_YN = 'Y') THEN 'Y' ELSE 'N' END SplTrans
+	   , iep.PARENT_CONSENT
+	   , sped.MEDI_CARE_NUMBER
+FROM   rev.EPC_STU                    stu
+       JOIN rev.EPC_STU_SCH_YR        ssy   ON ssy.STUDENT_GU = stu.STUDENT_GU
+                                               and ssy.STATUS is NULL
+                                               and ssy.EXCLUDE_ADA_ADM is null --exclude concurrent enrollment
+       JOIN rev.REV_ORGANIZATION_YEAR oyr   ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
+                                               and oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+       JOIN rev.EP_STUDENT_SPECIAL_ED sped  ON sped.STUDENT_GU = stu.STUDENT_GU
+       JOIN rev.EP_STUDENT_IEP        iep   ON iep.STUDENT_GU = sped.STUDENT_GU 
+                                               and iep.IEP_STATUS = 'CU' 
+					                           and iep.IEP_VALID = 'Y' 
+											   --and iep.PRIMARY_DISABILITY_CODE != 'GI'
+       -- Special Transportation on IEP
+       -- This will need to be determined by the drop downs the Services Tab.  Both will need to be YES to be included for Medicaid billing.
+       LEFT JOIN rev.EP_AZ_STUDENT_IEP aiep ON aiep.IEP_GU = iep.IEP_GU
+									           and iep.NEXT_IEP_DATE &lt;= getdate()
+        -- AU - Audiology on IEP
+        LEFT JOIN
+		   (
+		     select 
+			     row_number() over(partition by iep.student_gu order by iep.student_gu) rn
+               , iep.STUDENT_GU
+	           , ieps.NUM_MINUTES au_min
+	           , freq.VALUE_DESCRIPTION au_freq
+			 from  rev.EP_STUDENT_IEP        iep   
+			       JOIN rev.EP_STU_IEP_SERVICE ieps ON ieps.IEP_GU = iep.IEP_GU 
+	               JOIN rev.EP_SPECIAL_ED_SERVICE isrv ON (isrv.SERVICE_GU = ieps.SERVICE_GU
+															   )
+                   LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.SpecialEd.IEP', 'SERVICE_FREQUENCY') freq on freq.VALUE_CODE = ieps.FREQUENCY_UNIT_DD
+				   JOIN rev.EP_SPECIAL_ED_SERVICE ssrv on ssrv.SERVICE_GU = ieps.SERVICE_GU and ssrv.STATE_REPORTING_CODE = 'AU'
+			 where iep.IEP_STATUS = 'CU' 
+                   and iep.IEP_VALID = 'Y' 
+		   ) au on au.student_gu = stu.STUDENT_GU and au.rn = 1
+          -- SW - Mental Health-Counseling on IEP - Social Work Services
+          LEFT JOIN
+		   (
+		     select 
+			     row_number() over(partition by iep.student_gu order by iep.student_gu) rn
+               , iep.STUDENT_GU
+	           , ieps.NUM_MINUTES sw_min
+	           , freq.VALUE_DESCRIPTION sw_freq
+			 from  rev.EP_STUDENT_IEP        iep   
+			       JOIN rev.EP_STU_IEP_SERVICE ieps ON ieps.IEP_GU = iep.IEP_GU 
+	               JOIN rev.EP_SPECIAL_ED_SERVICE isrv ON (isrv.SERVICE_GU = ieps.SERVICE_GU
+															   )
+                   LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.SpecialEd.IEP', 'SERVICE_FREQUENCY') freq on freq.VALUE_CODE = ieps.FREQUENCY_UNIT_DD
+                   JOIN rev.EP_SPECIAL_ED_SERVICE ssrv on ssrv.SERVICE_GU = ieps.SERVICE_GU and ssrv.STATE_REPORTING_CODE = 'SW'
+			 where iep.IEP_STATUS = 'CU' 
+                   and iep.IEP_VALID = 'Y' 
+		   ) sw on sw.student_gu = stu.STUDENT_GU and sw.rn = 1
+          -- SH - Nursing Services on IEP
+		  -- Nursing Services will be included on the service schedule under “School Health” with code “SH”
+		  LEFT JOIN
+		   (
+		     select 
+			     row_number() over(partition by iep.student_gu order by iep.student_gu) rn
+               , iep.STUDENT_GU
+	           , ieps.NUM_MINUTES sh_min
+	           , freq.VALUE_DESCRIPTION sh_freq
+			 from  rev.EP_STUDENT_IEP        iep   
+			       JOIN rev.EP_STU_IEP_SERVICE ieps ON ieps.IEP_GU = iep.IEP_GU 
+	               JOIN rev.EP_SPECIAL_ED_SERVICE isrv ON (isrv.SERVICE_GU = ieps.SERVICE_GU
+															   )
+                   LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.SpecialEd.IEP', 'SERVICE_FREQUENCY') freq on freq.VALUE_CODE = ieps.FREQUENCY_UNIT_DD
+				   JOIN rev.EP_SPECIAL_ED_SERVICE ssrv on ssrv.SERVICE_GU = ieps.SERVICE_GU and ssrv.STATE_REPORTING_CODE = 'SH'
+			 where iep.IEP_STATUS = 'CU' 
+                   and iep.IEP_VALID = 'Y' 
+		   ) sh on sh.student_gu = stu.STUDENT_GU and sh.rn = 1
+          -- OT - Occupational Therapy on IEP
+          LEFT JOIN
+		   (
+		     select 
+			     row_number() over(partition by iep.student_gu order by iep.student_gu) rn
+               , iep.STUDENT_GU
+	           , ieps.NUM_MINUTES ot_min
+	           , freq.VALUE_DESCRIPTION ot_freq
+			 from  rev.EP_STUDENT_IEP        iep   
+			       JOIN rev.EP_STU_IEP_SERVICE ieps ON ieps.IEP_GU = iep.IEP_GU 
+	               JOIN rev.EP_SPECIAL_ED_SERVICE isrv ON (isrv.SERVICE_GU = ieps.SERVICE_GU
+															   )
+                   LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.SpecialEd.IEP', 'SERVICE_FREQUENCY') freq on freq.VALUE_CODE = ieps.FREQUENCY_UNIT_DD
+				   JOIN rev.EP_SPECIAL_ED_SERVICE ssrv on ssrv.SERVICE_GU = ieps.SERVICE_GU and ssrv.STATE_REPORTING_CODE = 'OT'
+			 where iep.IEP_STATUS = 'CU' 
+                   and iep.IEP_VALID = 'Y' 
+		   ) ot on ot.student_gu = stu.STUDENT_GU and ot.rn = 1
+           -- PT - Physical Therapy on IEP
+          LEFT JOIN
+		   (
+		     select 
+			     row_number() over(partition by iep.student_gu order by iep.student_gu) rn
+               , iep.STUDENT_GU
+	           , ieps.NUM_MINUTES pt_min
+	           , freq.VALUE_DESCRIPTION pt_freq
+			 from  rev.EP_STUDENT_IEP        iep   
+			       JOIN rev.EP_STU_IEP_SERVICE ieps ON ieps.IEP_GU = iep.IEP_GU 
+	               JOIN rev.EP_SPECIAL_ED_SERVICE isrv ON (isrv.SERVICE_GU = ieps.SERVICE_GU
+															   )
+                   LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.SpecialEd.IEP', 'SERVICE_FREQUENCY') freq on freq.VALUE_CODE = ieps.FREQUENCY_UNIT_DD
+				   JOIN rev.EP_SPECIAL_ED_SERVICE ssrv on ssrv.SERVICE_GU = ieps.SERVICE_GU and ssrv.STATE_REPORTING_CODE = 'PT'
+			 where iep.IEP_STATUS = 'CU' 
+                   and iep.IEP_VALID = 'Y' 
+		   ) pt on pt.student_gu = stu.STUDENT_GU and pt.rn = 1
+           -- SS - SO - Speech Therapy and Speech Only on IEP
+          LEFT JOIN
+		   (
+		     select 
+			     row_number() over(partition by iep.student_gu order by iep.student_gu) rn
+               , iep.STUDENT_GU
+	           , ieps.NUM_MINUTES ss_min
+	           , freq.VALUE_DESCRIPTION ss_freq
+			 from  rev.EP_STUDENT_IEP        iep   
+			       JOIN rev.EP_STU_IEP_SERVICE ieps ON ieps.IEP_GU = iep.IEP_GU 
+	               JOIN rev.EP_SPECIAL_ED_SERVICE isrv ON (isrv.SERVICE_GU = ieps.SERVICE_GU
+															   )
+                   LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.SpecialEd.IEP', 'SERVICE_FREQUENCY') freq on freq.VALUE_CODE = ieps.FREQUENCY_UNIT_DD
+				   JOIN rev.EP_SPECIAL_ED_SERVICE ssrv on ssrv.SERVICE_GU = ieps.SERVICE_GU and ssrv.STATE_REPORTING_CODE IN ( 'SS', 'SO')
+			 where iep.IEP_STATUS = 'CU' 
+                   and iep.IEP_VALID = 'Y' 
+		   ) ss on ss.student_gu = stu.STUDENT_GU and ss.rn = 1
+)
+-- From SE
+SELECT
+   @vDistrict_Number                         AS [District CD]
+ , sch.SCHOOL_CODE                           AS [School CD]
+ , org.ORGANIZATION_NAME                     AS [School Name]
+ , stu.SIS_NUMBER                            AS [Student ID]
+ , ss.MEDI_CARE_NUMBER                       AS [Medicaid ID] ---??
+ , per.LAST_NAME                             AS [Last Name]
+ , per.FIRST_NAME                            AS [First Name]
+ , per.MIDDLE_NAME                           AS [Middle Name]
+ , CONVERT(VARCHAR(10), per.birth_date, 101) AS [DOB (MM/DD/YYYY)]
+ , ''                                        AS [SSN]
+ , per.GENDER                                AS [Gender CD]
+ , hadr.ADDRESS                              AS [Student Address1]
+ , hadr.ADDRESS2                             AS [Student Address2]
+ , hadr.CITY                                 AS [City]
+ , hadr.STATE                                AS [State]
+ , hadr.ZIP_5                                AS [Zip Code]
+ , ss.PRIMARY_DISABILITY_CODE                AS [Primary Diagnosis CD]
+ , ss.SECONDARY_DISABILITY_CODE              AS [Secondary Diagnosis CD]
+ , ss.TERTIARY_DISABILITY_CODE               AS [Tertiary Diagnosis CD]
+ , ss.QUATERNARY_DISABILITY_CODE             AS [Fourth Diagnosis CD]
+ , CONVERT(VARCHAR(10),ss.IEP_DATE,101)      AS [IEP Start Date]
+ , CONVERT(VARCHAR(10),ss.NEXT_IEP_DATE,101) AS [IEP End Date]
+ , '' AS [PCP Prescription Start Date]
+ , '' AS [PCP Prescription End Date]
+ , '' AS [PCP Prescription Exempt(E)/In Process(P)]
+ , '' AS [PCP Last Name]
+ , '' AS [PCP First Name]
+ , CASE WHEN ss.au_min is not null THEN 'Y' ELSE 'N' END AS [Audiology on IEP?]
+ , ''                                                    AS [Case Management on IEP?]
+ , CASE WHEN ss.sw_min is not null THEN 'Y' ELSE 'N' END AS [Mental Health-Counseling on IEP?]
+ , CASE WHEN ss.sw_min is not null THEN 'Y' ELSE 'N' END AS [Nursing Services on IEP?]
+ , ''                                                    AS [Nutritional Services on IEP?]
+ , CASE WHEN ss.ot_min is not null THEN 'Y' ELSE 'N' END AS [Occupational Therapy on IEP?]
+ , CASE WHEN ss.pt_min is not null THEN 'Y' ELSE 'N' END AS [Physical Therapy on IEP?]
+ , CASE WHEN ss.ss_min is not null THEN 'Y' ELSE 'N' END AS [Speech Therapy on IEP?]
+ , ss.SplTrans                                           AS [Special Transportation on IEP?]
+ , ss.PARENT_CONSENT                                     AS [Parent Consent]
+ , COALESCE(CAST(CAST((ss.sw_min/60) as numeric(6,2)) as varchar(10)),'')  AS [MHC Hours]
+ , COALESCE(CAST(CAST((ss.ot_min/60) as numeric(6,2)) as varchar(10)),'')  AS [OT Hours]
+ , COALESCE(CAST(CAST((ss.pt_min/60) as numeric(6,2)) as varchar(10)),'')  AS [PT Hours]
+ , COALESCE(CAST(CAST((ss.ss_min/60) as numeric(6,2)) as varchar(10)),'')  AS [SP Hours]
+ , ss.sw_freq                                            AS [MHC Frequency]
+ , ss.ot_freq                                            AS [OT Frequency]
+ , ss.pt_freq                                            AS [PT Frequency]
+ , ss.ss_freq                                            AS [SP Frequency]
+ , ''                                                    AS [Inactive?]
+ , ''                                                    AS [Override Ind]
+FROM rev.EPC_STU               stu
+JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
+                                       and ssy.STATUS is NULL
+                                       and ssy.EXCLUDE_ADA_ADM is null --exclude concurrent enrollment
+JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
+                                       and oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+JOIN rev.REV_ORGANIZATION      org  ON org.ORGANIZATION_GU = oyr.ORGANIZATION_GU
+JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU 
+JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
+LEFT JOIN rev.REV_ADDRESS      hadr ON hadr.ADDRESS_GU = per.HOME_ADDRESS_GU
+-- SpedStudents
+JOIN SpedStudents              ss   ON ss.STUDENT_GU = stu.STUDENT_GU
+
+-- only if have a Y in any one of the following
+where
+ (
+     ss.au_min is not null
+  or ss.sw_min is not null
+  or ss.sw_min is not null
+  or ss.ot_min is not null
+  or ss.pt_min is not null
+  or ss.ss_min is not null
+)
+-- From SIS
+UNION
+SELECT
+   @vDistrict_Number                         AS [District CD]
+ , sch.SCHOOL_CODE                           AS [School CD]
+ , org.ORGANIZATION_NAME                     AS [School Name]
+ , stu.SIS_NUMBER AS [Student ID]
+ , ''                                        AS [Medicaid ID] ---??
+ , per.LAST_NAME                             AS [Last Name]
+ , per.FIRST_NAME                            AS [First Name]
+ , per.MIDDLE_NAME                           AS [Middle Name]
+ , CONVERT(VARCHAR(10), per.birth_date, 101) AS [DOB (MM/DD/YYYY)]
+ , ''                                        AS [SSN]
+ , per.GENDER                                AS [Gender CD]
+ , hadr.ADDRESS                              AS [Student Address1]
+ , hadr.ADDRESS2                             AS [Student Address2]
+ , hadr.CITY                                 AS [City]
+ , hadr.STATE                                AS [State]
+ , hadr.ZIP_5                                AS [Zip Code]
+ , srpt.DISABILITY_PRIMARY                   AS [Primary Diagnosis CD]
+ , srpt.DISABILITY_SECONDARY                 AS [Secondary Diagnosis CD]
+ , srpt.DISABILITY_TERTIARY                  AS [Tertiary Diagnosis CD]
+ , srpt.DISABILITY_QUATERNARY                AS [Fourth Diagnosis CD]
+ , CONVERT(VARCHAR(10), srpt.LAST_IEP_DATE,101)  AS [IEP Start Date]
+ , CONVERT(VARCHAR(10), dateadd(day,-1,(dateadd(year,1,srpt.LAST_IEP_DATE))),101) AS [IEP End Date]
+ , '' AS [PCP Prescription Start Date]
+ , '' AS [PCP Prescription End Date]
+ , '' AS [PCP Prescription Exempt(E)/In Process(P)]
+ , '' AS [PCP Last Name]
+ , '' AS [PCP First Name]
+ , CASE WHEN au.SERVICE_CODE is not null THEN 'Y' ELSE 'N' END AS [Audiology on IEP?]
+ , '' AS [Case Management on IEP?]
+ , CASE WHEN ps.SERVICE_CODE is not null THEN 'Y' ELSE 'N' END AS [Mental Health-Counseling on IEP?]
+ , CASE WHEN sh.SERVICE_CODE is not null THEN 'Y' ELSE 'N' END AS [Nursing Services on IEP?]
+ , '' AS [Nutritional Services on IEP?]
+ , CASE WHEN ot.SERVICE_CODE is not null THEN 'Y' ELSE 'N' END AS [Occupational Therapy on IEP?]
+ , CASE WHEN pt.SERVICE_CODE is not null THEN 'Y' ELSE 'N' END AS [Physical Therapy on IEP?]
+ , CASE WHEN ss.SERVICE_CODE is not null THEN 'Y' ELSE 'N' END AS [Speech Therapy on IEP?]
+ , COALESCE(transp.trans,'')                                   AS [Special Transportation on IEP?]
+ , '' AS [Parent Consent]
+ , COALESCE(CAST(CAST(ps.SERVICE_FREQ/60 as numeric (6,2)) as varchar(10)),'') AS [MHC Hours]
+ , COALESCE(CAST(CAST(ot.SERVICE_FREQ/60 as numeric (6,2)) as varchar(10)),'') AS [OT Hours]
+ , COALESCE(CAST(CAST(pt.SERVICE_FREQ/60 as numeric (6,2)) as varchar(10)),'') AS [PT Hours]
+ , COALESCE(CAST(CAST(ss.SERVICE_FREQ/60 as numeric (6,2)) as varchar(10)),'') AS [SP Hours]
+ , COALESCE(ps.VALUE_DESCRIPTION,'') AS [MHC Frequency]
+ , COALESCE(ot.VALUE_DESCRIPTION,'') AS [OT Frequency]
+ , COALESCE(pt.VALUE_DESCRIPTION,'') AS [PT Frequency]
+ , COALESCE(ss.VALUE_DESCRIPTION,'') AS [SP Frequency]
+ , '' AS [Inactive?]
+ , '' AS [Override Ind]
+
+
+
+FROM rev.EPC_STU               stu
+JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
+                                       and ssy.STATUS is NULL
+                                       and ssy.EXCLUDE_ADA_ADM is null --exclude concurrent enrollment
+JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
+                                       and oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+JOIN rev.REV_ORGANIZATION      org  ON org.ORGANIZATION_GU = oyr.ORGANIZATION_GU
+JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU 
+JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
+LEFT JOIN rev.REV_ADDRESS      hadr ON hadr.ADDRESS_GU = per.HOME_ADDRESS_GU
+-- Join on SPED snapshot for 40th day
+JOIN rev.EPC_NM_STU_SPED_RPT srpt  ON srpt.STUDENT_GU = stu.STUDENT_GU
+                                           AND srpt.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
+										   AND srpt.SNAPSHOT_TYPE = 1 -- Select only the 40th day for now
+-- AU - Audiology on IEP
+LEFT JOIN 
+(
+select 
+	     row_number() over(partition by rp.student_gu order by rp.snapshot_type) rn
+       , rp.STUDENT_GU
+       , ssrv.STU_SPED_RPT_GU
+	   , ssrv.SERVICE_CODE
+	   , ssrv.SERVICE_FREQ
+	   , ssrv.SERVICE_CYCLE
+	   , freq.VALUE_DESCRIPTION
+from 
+rev.EPC_NM_STU_SPED_RPT_SRV ssrv 
+JOIN rev.EPC_NM_STU_SPED_RPT rp on rp.STU_SPED_RPT_GU = ssrv.STU_SPED_RPT_GU
+LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.SpecialEd.IEP', 'SERVICE_FREQUENCY') freq on freq.VALUE_CODE = ssrv.SERVICE_CYCLE
+where ssrv.SERVICE_CODE = 'AU'
+) au on au.STUDENT_GU = stu.STUDENT_GU and au.rn = 1
+-- ?? Case Management on IEP
+-- PS - Mental Health-Counseling on IEP – This should be SW for Social Work
+LEFT JOIN 
+(
+select 
+	     row_number() over(partition by rp.student_gu order by rp.snapshot_type) rn
+       , rp.STUDENT_GU
+       , ssrv.STU_SPED_RPT_GU
+	   , ssrv.SERVICE_CODE
+	   , ssrv.SERVICE_FREQ
+	   , ssrv.SERVICE_CYCLE
+	   , freq.VALUE_DESCRIPTION
+from 
+rev.EPC_NM_STU_SPED_RPT_SRV ssrv 
+JOIN rev.EPC_NM_STU_SPED_RPT rp on rp.STU_SPED_RPT_GU = ssrv.STU_SPED_RPT_GU
+LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.SpecialEd.IEP', 'SERVICE_FREQUENCY') freq on freq.VALUE_CODE = ssrv.SERVICE_CYCLE
+where ssrv.SERVICE_CODE = 'SW'
+) ps on ps.STUDENT_GU = stu.STUDENT_GU and ps.rn = 1
+-- SH Nursing Services on IEP
+LEFT JOIN 
+(
+select 
+	     row_number() over(partition by rp.student_gu order by rp.snapshot_type) rn
+       , rp.STUDENT_GU
+       , ssrv.STU_SPED_RPT_GU
+	   , ssrv.SERVICE_CODE
+	   , ssrv.SERVICE_FREQ
+	   , ssrv.SERVICE_CYCLE
+	   , freq.VALUE_DESCRIPTION
+from 
+rev.EPC_NM_STU_SPED_RPT_SRV ssrv 
+JOIN rev.EPC_NM_STU_SPED_RPT rp on rp.STU_SPED_RPT_GU = ssrv.STU_SPED_RPT_GU
+LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.SpecialEd.IEP', 'SERVICE_FREQUENCY') freq on freq.VALUE_CODE = ssrv.SERVICE_CYCLE
+where ssrv.SERVICE_CODE = 'SH'
+) sh on sh.STUDENT_GU = stu.STUDENT_GU and sh.rn = 1
+-- ?? Nutritional Services on IEP
+-- OT - Occupational Therapy on IEP
+LEFT JOIN 
+(
+select 
+	     row_number() over(partition by rp.student_gu order by rp.snapshot_type) rn
+       , rp.STUDENT_GU
+       , ssrv.STU_SPED_RPT_GU
+	   , ssrv.SERVICE_CODE
+	   , ssrv.SERVICE_FREQ
+	   , ssrv.SERVICE_CYCLE
+	   , freq.VALUE_DESCRIPTION
+from 
+rev.EPC_NM_STU_SPED_RPT_SRV ssrv 
+JOIN rev.EPC_NM_STU_SPED_RPT rp on rp.STU_SPED_RPT_GU = ssrv.STU_SPED_RPT_GU
+LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.SpecialEd.IEP', 'SERVICE_FREQUENCY') freq on freq.VALUE_CODE = ssrv.SERVICE_CYCLE
+where ssrv.SERVICE_CODE = 'OT'
+) ot on ot.STUDENT_GU = stu.STUDENT_GU and ot.rn = 1
+-- PT - Physical Therapy on IEP
+LEFT JOIN 
+(
+select 
+	     row_number() over(partition by rp.student_gu order by rp.snapshot_type) rn
+       , rp.STUDENT_GU
+       , ssrv.STU_SPED_RPT_GU
+	   , ssrv.SERVICE_CODE
+	   , ssrv.SERVICE_FREQ
+	   , ssrv.SERVICE_CYCLE
+	   , freq.VALUE_DESCRIPTION
+from 
+rev.EPC_NM_STU_SPED_RPT_SRV ssrv 
+JOIN rev.EPC_NM_STU_SPED_RPT rp on rp.STU_SPED_RPT_GU = ssrv.STU_SPED_RPT_GU
+LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.SpecialEd.IEP', 'SERVICE_FREQUENCY') freq on freq.VALUE_CODE = ssrv.SERVICE_CYCLE
+where ssrv.SERVICE_CODE = 'PT'
+) pt on pt.STUDENT_GU = stu.STUDENT_GU and pt.rn = 1
+-- SS Speech Therapy on IEP
+LEFT JOIN 
+(
+select 
+	     row_number() over(partition by rp.student_gu order by rp.snapshot_type) rn
+       , rp.STUDENT_GU
+       , ssrv.STU_SPED_RPT_GU
+	   , ssrv.SERVICE_CODE
+	   , ssrv.SERVICE_FREQ
+	   , ssrv.SERVICE_CYCLE
+	   , freq.VALUE_DESCRIPTION
+from 
+rev.EPC_NM_STU_SPED_RPT_SRV ssrv 
+JOIN rev.EPC_NM_STU_SPED_RPT rp on rp.STU_SPED_RPT_GU = ssrv.STU_SPED_RPT_GU
+LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.SpecialEd.IEP', 'SERVICE_FREQUENCY') freq on freq.VALUE_CODE = ssrv.SERVICE_CYCLE
+where ssrv.SERVICE_CODE IN ('SS', 'SO')
+) SS on ss.STUDENT_GU = stu.STUDENT_GU and ss.rn = 1
+-- Special Transportation on IEP
+-- This will need to be determined by the drop downs the Services Tab.  Both will need to be YES to be included for Medicaid billing.  
+LEFT JOIN 
+(
+select
+  row_number() over(partition by iep.student_gu order by iep.student_gu) rn
+  , iep.STUDENT_GU
+  , CASE WHEN (aiep.SERV_TRANSPORT_YN = 'Y' and aiep.SERV_TRANSPORT_ADULT_YN = 'Y') THEN 'Y' ELSE 'N' END trans
+from rev.ep_student_iep iep
+join rev.EP_AZ_STUDENT_IEP aiep on aiep.IEP_GU = iep.IEP_GU
+where iep.IEP_STATUS = 'CU' and iep.IEP_VALID = 'Y'
+
+) transp on transp.student_gu = stu.STUDENT_GU and transp.rn = 1
+
+WHERE stu.STUDENT_GU NOT IN (select student_gu from rev.EP_STUDENT_IEP iep  
+                             where iep.IEP_STATUS = 'CU' 
+					               and iep.IEP_VALID = 'Y')
+      and 
+	  (
+	       au.SERVICE_CODE is not null
+        or ps.SERVICE_CODE is not null 
+        or sh.SERVICE_CODE is not null
+        or ot.SERVICE_CODE is not null
+        or pt.SERVICE_CODE is not null
+        or ss.SERVICE_CODE is not null
+	  )</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MedicAid Students\DB Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[District CD]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[District CD]"
+                      length="20"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[District CD]"
+                      name="District CD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[School CD]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[School CD]"
+                      length="20"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[School CD]"
+                      name="School CD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[School Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[School Name]"
+                      length="100"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[School Name]"
+                      name="School Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Student ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student ID]"
+                      length="20"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Student ID]"
+                      name="Student ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Medicaid ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Medicaid ID]"
+                      length="20"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Medicaid ID]"
+                      name="Medicaid ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Last Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Last Name]"
+                      length="60"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Last Name]"
+                      name="Last Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[First Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[First Name]"
+                      length="60"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[First Name]"
+                      name="First Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Middle Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Middle Name]"
+                      length="20"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Middle Name]"
+                      name="Middle Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[DOB (MM/DD/YYYY)]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[DOB (MM/DD/YYYY)]"
+                      length="10"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[DOB (MM/DD/YYYY)]"
+                      name="DOB (MM/DD/YYYY)"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[SSN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SSN]"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[SSN]"
+                      name="SSN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Gender CD]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Gender CD]"
+                      length="5"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Gender CD]"
+                      name="Gender CD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Student Address1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student Address1]"
+                      length="50"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Student Address1]"
+                      name="Student Address1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Student Address2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student Address2]"
+                      length="50"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Student Address2]"
+                      name="Student Address2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[City]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      length="50"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[State]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      length="5"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[State]"
+                      name="State"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Zip Code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Zip Code]"
+                      length="6"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Zip Code]"
+                      name="Zip Code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Primary Diagnosis CD]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Diagnosis CD]"
+                      length="5"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Primary Diagnosis CD]"
+                      name="Primary Diagnosis CD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Diagnosis CD]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Diagnosis CD]"
+                      length="5"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Diagnosis CD]"
+                      name="Secondary Diagnosis CD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Tertiary Diagnosis CD]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Tertiary Diagnosis CD]"
+                      length="5"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Tertiary Diagnosis CD]"
+                      name="Tertiary Diagnosis CD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Fourth Diagnosis CD]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Fourth Diagnosis CD]"
+                      length="5"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Fourth Diagnosis CD]"
+                      name="Fourth Diagnosis CD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[IEP Start Date]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[IEP Start Date]"
+                      length="10"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[IEP Start Date]"
+                      name="IEP Start Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[IEP End Date]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[IEP End Date]"
+                      length="10"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[IEP End Date]"
+                      name="IEP End Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PCP Prescription Start Date]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PCP Prescription Start Date]"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PCP Prescription Start Date]"
+                      name="PCP Prescription Start Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PCP Prescription End Date]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PCP Prescription End Date]"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PCP Prescription End Date]"
+                      name="PCP Prescription End Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PCP Prescription Exempt(E)/In Process(P)]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PCP Prescription Exempt(E)/In Process(P)]"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PCP Prescription Exempt(E)/In Process(P)]"
+                      name="PCP Prescription Exempt(E)/In Process(P)"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PCP Last Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PCP Last Name]"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PCP Last Name]"
+                      name="PCP Last Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PCP First Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PCP First Name]"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PCP First Name]"
+                      name="PCP First Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Audiology on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Audiology on IEP?]"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Audiology on IEP?]"
+                      name="Audiology on IEP?"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Case Management on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Case Management on IEP?]"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Case Management on IEP?]"
+                      name="Case Management on IEP?"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Mental Health-Counseling on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Mental Health-Counseling on IEP?]"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Mental Health-Counseling on IEP?]"
+                      name="Mental Health-Counseling on IEP?"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Nursing Services on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Nursing Services on IEP?]"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Nursing Services on IEP?]"
+                      name="Nursing Services on IEP?"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Nutritional Services on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Nutritional Services on IEP?]"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Nutritional Services on IEP?]"
+                      name="Nutritional Services on IEP?"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Occupational Therapy on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Occupational Therapy on IEP?]"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Occupational Therapy on IEP?]"
+                      name="Occupational Therapy on IEP?"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Physical Therapy on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Physical Therapy on IEP?]"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Physical Therapy on IEP?]"
+                      name="Physical Therapy on IEP?"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Speech Therapy on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Speech Therapy on IEP?]"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Speech Therapy on IEP?]"
+                      name="Speech Therapy on IEP?"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Special Transportation on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Special Transportation on IEP?]"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Special Transportation on IEP?]"
+                      name="Special Transportation on IEP?"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Parent Consent]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Parent Consent]"
+                      length="5"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Parent Consent]"
+                      name="Parent Consent"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[MHC Hours]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[MHC Hours]"
+                      length="10"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[MHC Hours]"
+                      name="MHC Hours"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[OT Hours]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[OT Hours]"
+                      length="10"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[OT Hours]"
+                      name="OT Hours"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PT Hours]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PT Hours]"
+                      length="10"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PT Hours]"
+                      name="PT Hours"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[SP Hours]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SP Hours]"
+                      length="10"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[SP Hours]"
+                      name="SP Hours"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[MHC Frequency]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[MHC Frequency]"
+                      length="600"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[MHC Frequency]"
+                      name="MHC Frequency"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[OT Frequency]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[OT Frequency]"
+                      length="600"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[OT Frequency]"
+                      name="OT Frequency"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PT Frequency]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PT Frequency]"
+                      length="600"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PT Frequency]"
+                      name="PT Frequency"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[SP Frequency]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SP Frequency]"
+                      length="600"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[SP Frequency]"
+                      name="SP Frequency"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Inactive?]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Inactive?]"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Inactive?]"
+                      name="Inactive?"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Override Ind]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Override Ind]"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Override Ind]"
+                      name="Override Ind"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[District CD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="District CD" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[School CD]"
+                      dataType="wstr"
+                      length="20"
+                      name="School CD" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[School Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="School Name" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="Student ID" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Medicaid ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="Medicaid ID" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[First Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="First Name" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Middle Name]"
+                      dataType="wstr"
+                      length="20"
+                      name="Middle Name" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[DOB (MM/DD/YYYY)]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="DOB (MM/DD/YYYY)" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SSN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="SSN" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Gender CD]"
+                      dataType="wstr"
+                      length="5"
+                      name="Gender CD" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student Address1]"
+                      dataType="wstr"
+                      length="50"
+                      name="Student Address1" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student Address2]"
+                      dataType="wstr"
+                      length="50"
+                      name="Student Address2" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="50"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      dataType="wstr"
+                      length="5"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Zip Code]"
+                      dataType="wstr"
+                      length="6"
+                      name="Zip Code" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Diagnosis CD]"
+                      dataType="wstr"
+                      length="5"
+                      name="Primary Diagnosis CD" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Secondary Diagnosis CD]"
+                      dataType="wstr"
+                      length="5"
+                      name="Secondary Diagnosis CD" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Tertiary Diagnosis CD]"
+                      dataType="wstr"
+                      length="5"
+                      name="Tertiary Diagnosis CD" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Fourth Diagnosis CD]"
+                      dataType="wstr"
+                      length="5"
+                      name="Fourth Diagnosis CD" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[IEP Start Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="IEP Start Date" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[IEP End Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="IEP End Date" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PCP Prescription Start Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="PCP Prescription Start Date" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PCP Prescription End Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="PCP Prescription End Date" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PCP Prescription Exempt(E)/In Process(P)]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="PCP Prescription Exempt(E)/In Process(P)" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PCP Last Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="PCP Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PCP First Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="PCP First Name" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Audiology on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Audiology on IEP?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Case Management on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Case Management on IEP?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Mental Health-Counseling on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Mental Health-Counseling on IEP?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Nursing Services on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Nursing Services on IEP?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Nutritional Services on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Nutritional Services on IEP?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Occupational Therapy on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Occupational Therapy on IEP?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Physical Therapy on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Physical Therapy on IEP?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Speech Therapy on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Speech Therapy on IEP?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Special Transportation on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Special Transportation on IEP?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Parent Consent]"
+                      dataType="wstr"
+                      length="5"
+                      name="Parent Consent" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[MHC Hours]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="MHC Hours" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[OT Hours]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="OT Hours" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PT Hours]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="PT Hours" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SP Hours]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="SP Hours" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[MHC Frequency]"
+                      dataType="wstr"
+                      length="600"
+                      name="MHC Frequency" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[OT Frequency]"
+                      dataType="wstr"
+                      length="600"
+                      name="OT Frequency" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PT Frequency]"
+                      dataType="wstr"
+                      length="600"
+                      name="PT Frequency" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SP Frequency]"
+                      dataType="wstr"
+                      length="600"
+                      name="SP Frequency" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Inactive?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Inactive?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Override Ind]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Override Ind" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[District CD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[District CD]"
+                      name="District CD" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[School CD]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[School CD]"
+                      name="School CD" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[School Name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[School Name]"
+                      name="School Name" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Student ID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Student ID]"
+                      name="Student ID" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Medicaid ID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Medicaid ID]"
+                      name="Medicaid ID" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Last Name]"
+                      name="Last Name" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[First Name]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[First Name]"
+                      name="First Name" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Middle Name]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Middle Name]"
+                      name="Middle Name" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[DOB (MM/DD/YYYY)]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[DOB (MM/DD/YYYY)]"
+                      name="DOB (MM/DD/YYYY)" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[SSN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[SSN]"
+                      name="SSN" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Gender CD]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Gender CD]"
+                      name="Gender CD" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Student Address1]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Student Address1]"
+                      name="Student Address1" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Student Address2]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Student Address2]"
+                      name="Student Address2" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[City]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[State]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[State]"
+                      name="State" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Zip Code]"
+                      dataType="wstr"
+                      length="6"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Zip Code]"
+                      name="Zip Code" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Diagnosis CD]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Diagnosis CD]"
+                      name="Primary Diagnosis CD" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Diagnosis CD]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Secondary Diagnosis CD]"
+                      name="Secondary Diagnosis CD" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Tertiary Diagnosis CD]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Tertiary Diagnosis CD]"
+                      name="Tertiary Diagnosis CD" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Fourth Diagnosis CD]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Fourth Diagnosis CD]"
+                      name="Fourth Diagnosis CD" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[IEP Start Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[IEP Start Date]"
+                      name="IEP Start Date" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[IEP End Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[IEP End Date]"
+                      name="IEP End Date" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PCP Prescription Start Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PCP Prescription Start Date]"
+                      name="PCP Prescription Start Date" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PCP Prescription End Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PCP Prescription End Date]"
+                      name="PCP Prescription End Date" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PCP Prescription Exempt(E)/In Process(P)]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PCP Prescription Exempt(E)/In Process(P)]"
+                      name="PCP Prescription Exempt(E)/In Process(P)" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PCP Last Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PCP Last Name]"
+                      name="PCP Last Name" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PCP First Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PCP First Name]"
+                      name="PCP First Name" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Audiology on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Audiology on IEP?]"
+                      name="Audiology on IEP?" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Case Management on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Case Management on IEP?]"
+                      name="Case Management on IEP?" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Mental Health-Counseling on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Mental Health-Counseling on IEP?]"
+                      name="Mental Health-Counseling on IEP?" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Nursing Services on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Nursing Services on IEP?]"
+                      name="Nursing Services on IEP?" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Nutritional Services on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Nutritional Services on IEP?]"
+                      name="Nutritional Services on IEP?" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Occupational Therapy on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Occupational Therapy on IEP?]"
+                      name="Occupational Therapy on IEP?" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Physical Therapy on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Physical Therapy on IEP?]"
+                      name="Physical Therapy on IEP?" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Speech Therapy on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Speech Therapy on IEP?]"
+                      name="Speech Therapy on IEP?" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Special Transportation on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Special Transportation on IEP?]"
+                      name="Special Transportation on IEP?" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Parent Consent]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Parent Consent]"
+                      name="Parent Consent" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[MHC Hours]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[MHC Hours]"
+                      name="MHC Hours" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[OT Hours]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[OT Hours]"
+                      name="OT Hours" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PT Hours]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PT Hours]"
+                      name="PT Hours" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[SP Hours]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[SP Hours]"
+                      name="SP Hours" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[MHC Frequency]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[MHC Frequency]"
+                      name="MHC Frequency" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[OT Frequency]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[OT Frequency]"
+                      name="OT Frequency" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PT Frequency]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PT Frequency]"
+                      name="PT Frequency" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[SP Frequency]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[SP Frequency]"
+                      name="SP Frequency" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Inactive?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Inactive?]"
+                      name="Inactive?" />
+                    <outputColumn
+                      refId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Override Ind]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Override Ind]"
+                      name="Override Ind" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\MedicAid Students\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MedicAid Students\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[APS_StudentData]"
+                  connectionManagerRefId="Package.ConnectionManagers[APS_StudentData]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[District CD]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="District CD"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[District CD]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[District CD]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[School CD]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="School CD"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[School CD]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[School CD]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[School Name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="School Name"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[School Name]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[School Name]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Student ID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Student ID"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student ID]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Student ID]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Medicaid ID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Medicaid ID"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Medicaid ID]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Medicaid ID]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Last Name]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Last Name"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Last Name]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Last Name]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[First Name]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="First Name"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[First Name]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[First Name]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Middle Name]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Middle Name"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Middle Name]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Middle Name]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[DOB (MM/DD/YYYY)]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="DOB (MM/DD/YYYY)"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DOB (MM/DD/YYYY)]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[DOB (MM/DD/YYYY)]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[SSN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="SSN"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SSN]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[SSN]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Gender CD]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Gender CD"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Gender CD]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Gender CD]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Student Address1]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Student Address1"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student Address1]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Student Address1]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Student Address2]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Student Address2"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student Address2]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Student Address2]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[City]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[City]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[State]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="State"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[State]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[State]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Zip Code]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="Zip Code"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Zip Code]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Zip Code]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Primary Diagnosis CD]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Primary Diagnosis CD"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Diagnosis CD]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Primary Diagnosis CD]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Secondary Diagnosis CD]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Secondary Diagnosis CD"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Diagnosis CD]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Secondary Diagnosis CD]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Tertiary Diagnosis CD]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Tertiary Diagnosis CD"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Tertiary Diagnosis CD]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Tertiary Diagnosis CD]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Fourth Diagnosis CD]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Fourth Diagnosis CD"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Fourth Diagnosis CD]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Fourth Diagnosis CD]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[IEP Start Date]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="IEP Start Date"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[IEP Start Date]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[IEP Start Date]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[IEP End Date]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="IEP End Date"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[IEP End Date]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[IEP End Date]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[PCP Prescription Start Date]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="PCP Prescription Start Date"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PCP Prescription Start Date]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PCP Prescription Start Date]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[PCP Prescription End Date]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="PCP Prescription End Date"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PCP Prescription End Date]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PCP Prescription End Date]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[PCP Prescription Exempt(E)/In Process(P)]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="PCP Prescription Exempt(E)/In Process(P)"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PCP Prescription Exempt(E)/In Process(P)]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PCP Prescription Exempt(E)/In Process(P)]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[PCP Last Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="PCP Last Name"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PCP Last Name]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PCP Last Name]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[PCP First Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="PCP First Name"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PCP First Name]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PCP First Name]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Audiology on IEP?]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Audiology on IEP?"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Audiology on IEP?]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Audiology on IEP?]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Case Management on IEP?]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Case Management on IEP?"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Case Management on IEP?]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Case Management on IEP?]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Mental Health-Counseling on IEP?]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Mental Health-Counseling on IEP?"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Mental Health-Counseling on IEP?]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Mental Health-Counseling on IEP?]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Nursing Services on IEP?]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Nursing Services on IEP?"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Nursing Services on IEP?]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Nursing Services on IEP?]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Nutritional Services on IEP?]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Nutritional Services on IEP?"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Nutritional Services on IEP?]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Nutritional Services on IEP?]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Occupational Therapy on IEP?]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Occupational Therapy on IEP?"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Occupational Therapy on IEP?]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Occupational Therapy on IEP?]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Physical Therapy on IEP?]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Physical Therapy on IEP?"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Physical Therapy on IEP?]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Physical Therapy on IEP?]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Speech Therapy on IEP?]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Speech Therapy on IEP?"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Speech Therapy on IEP?]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Speech Therapy on IEP?]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Special Transportation on IEP?]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Special Transportation on IEP?"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Special Transportation on IEP?]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Special Transportation on IEP?]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Parent Consent]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Parent Consent"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Parent Consent]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Parent Consent]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[MHC Hours]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="MHC Hours"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MHC Hours]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[MHC Hours]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[OT Hours]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="OT Hours"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[OT Hours]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[OT Hours]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[PT Hours]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="PT Hours"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PT Hours]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PT Hours]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[SP Hours]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="SP Hours"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SP Hours]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[SP Hours]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[MHC Frequency]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="MHC Frequency"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MHC Frequency]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[MHC Frequency]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[OT Frequency]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="OT Frequency"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[OT Frequency]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[OT Frequency]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[PT Frequency]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="PT Frequency"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PT Frequency]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[PT Frequency]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[SP Frequency]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="SP Frequency"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SP Frequency]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[SP Frequency]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Inactive?]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Inactive?"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Inactive?]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Inactive?]" />
+                    <inputColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Override Ind]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Override Ind"
+                      externalMetadataColumnId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Override Ind]"
+                      lineageId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output].Columns[Override Ind]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[District CD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="District CD" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[School CD]"
+                      dataType="wstr"
+                      length="20"
+                      name="School CD" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[School Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="School Name" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="Student ID" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Medicaid ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Medicaid ID" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[First Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="First Name" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Middle Name]"
+                      dataType="wstr"
+                      length="20"
+                      name="Middle Name" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DOB (MM/DD/YYYY)]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="DOB (MM/DD/YYYY)" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SSN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="SSN" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Gender CD]"
+                      dataType="wstr"
+                      length="5"
+                      name="Gender CD" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student Address1]"
+                      dataType="wstr"
+                      length="50"
+                      name="Student Address1" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student Address2]"
+                      dataType="wstr"
+                      length="50"
+                      name="Student Address2" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="50"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[State]"
+                      dataType="wstr"
+                      length="5"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Zip Code]"
+                      dataType="wstr"
+                      length="6"
+                      name="Zip Code" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Diagnosis CD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Primary Diagnosis CD" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Secondary Diagnosis CD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Secondary Diagnosis CD" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Tertiary Diagnosis CD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Tertiary Diagnosis CD" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Fourth Diagnosis CD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Fourth Diagnosis CD" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[IEP Start Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="IEP Start Date" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[IEP End Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="IEP End Date" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PCP Prescription Start Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="PCP Prescription Start Date" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PCP Prescription End Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="PCP Prescription End Date" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PCP Prescription Exempt(E)/In Process(P)]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="PCP Prescription Exempt(E)/In Process(P)" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PCP Last Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="PCP Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PCP First Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="PCP First Name" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Audiology on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Audiology on IEP?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Case Management on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Case Management on IEP?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Mental Health-Counseling on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Mental Health-Counseling on IEP?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Nursing Services on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Nursing Services on IEP?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Nutritional Services on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Nutritional Services on IEP?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Occupational Therapy on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Occupational Therapy on IEP?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Physical Therapy on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Physical Therapy on IEP?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Speech Therapy on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Speech Therapy on IEP?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Special Transportation on IEP?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Special Transportation on IEP?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Parent Consent]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Parent Consent" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MHC Hours]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="MHC Hours" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[OT Hours]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="OT Hours" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PT Hours]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="PT Hours" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SP Hours]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="SP Hours" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MHC Frequency]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="MHC Frequency" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[OT Frequency]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="OT Frequency" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PT Frequency]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="PT Frequency" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SP Frequency]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="SP Frequency" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Inactive?]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Inactive?" />
+                    <externalMetadataColumn
+                      refId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Override Ind]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Override Ind" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\MedicAid Students.Paths[OLE DB Source Output]"
+              endId="Package\MedicAid Students\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\MedicAid Students\DB Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{8CDCE891-3745-4071-AA20-9DB57C501791}"
+      DTS:From="Package\Delete Files"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\MedicAid Students" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="135,42"
+          Id="Package\Delete Files"
+          TopLeft="69,44" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\MedicAid Students"
+          TopLeft="47.5,197.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="133.75,86">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,111.5"
+              Start="0,0"
+              End="0,104">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,104" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\MedicAid Students">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="174,42"
+          Id="Package\MedicAid Students\Flat File Destination"
+          TopLeft="5.50000000000001,107.5" />
+        <NodeLayout
+          Size="126,42"
+          Id="Package\MedicAid Students\DB Query"
+          TopLeft="16.5,5.5" />
+        <EdgeLayout
+          Id="Package\MedicAid Students.Paths[OLE DB Source Output]"
+          TopLeft="79.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="13,60"
+              Start="0,0"
+              End="13,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="4,30" />
+                  <mssgle:LineSegment
+                    End="9,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="9,30"
+                    Point2="13,30"
+                    Point3="13,34" />
+                  <mssgle:LineSegment
+                    End="13,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\MedicAid Students\DB Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
