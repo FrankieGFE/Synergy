@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Naviance"
   DTS:PackageType="5"
-  DTS:VersionBuild="9"
-  DTS:VersionGUID="{F156AF42-E5EE-4CB9-9E7E-9384DC9B0C27}">
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{0DFD4EF6-C941-4AFB-951C-97D834CF5DE7}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -202,12 +202,7 @@
       DTS:ObjectName="DB Connection">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=SynergyDBDC;User ID=APSExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Naviance-{87198604-9B56-4BE3-9146-EF5748F3CE94}azlt-mmelarcode\sql2012.STDemo808_2012;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATfkXZn6/lkS9hYhRl0pqHQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAA0qGw9OSJPcL+RU7Wa40jgAAAAAASAAACgAAAAEAAAAFV+av6t7LZveaK5BXvcbyQwAAAAuz5vTJWpw5ton8Av/W60GNj3AJEGCjvRe4bIM2zIPNjs+LN+SsBPoLcHOaaJjLU/FAAAAOe7z2WIHELtToaQ7puF1VHxJdzq</DTS:Password>
-        </DTS:ConnectionManager>
+          DTS:ConnectionString="Data Source=SynergyDBDC;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Naviance-{87198604-9B56-4BE3-9146-EF5748F3CE94}azlt-mmelarcode\sql2012.STDemo808_2012;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -2750,7 +2745,24 @@ WHERE  ssy.STATUS IS NULL
 )
 SELECT
    stu.SIS_NUMBER                                             AS [Student_ID]
- , stu.EXPECTED_GRADUATION_YEAR                               AS [Class_Year]
+ , CASE WHEN GRADE='12' AND EXPECTED_GRADUATION_YEAR IS NULL THEN SCHOOL_YEAR
+        WHEN GRADE='11' AND EXPECTED_GRADUATION_YEAR IS NULL THEN SCHOOL_YEAR+1
+		WHEN GRADE='10' AND EXPECTED_GRADUATION_YEAR IS NULL THEN SCHOOL_YEAR+2
+		WHEN GRADE='9'  AND EXPECTED_GRADUATION_YEAR IS NULL THEN SCHOOL_YEAR+3
+		WHEN GRADE='8'  AND EXPECTED_GRADUATION_YEAR IS NULL THEN SCHOOL_YEAR+4
+		WHEN GRADE='7'  AND EXPECTED_GRADUATION_YEAR IS NULL THEN SCHOOL_YEAR+5
+		WHEN GRADE='6'  AND EXPECTED_GRADUATION_YEAR IS NULL THEN SCHOOL_YEAR+6
+		WHEN GRADE='5'  AND EXPECTED_GRADUATION_YEAR IS NULL THEN SCHOOL_YEAR+7
+		WHEN GRADE='4'  AND EXPECTED_GRADUATION_YEAR IS NULL THEN SCHOOL_YEAR+8
+		WHEN GRADE='3'  AND EXPECTED_GRADUATION_YEAR IS NULL THEN SCHOOL_YEAR+9
+		WHEN GRADE='2'  AND EXPECTED_GRADUATION_YEAR IS NULL THEN SCHOOL_YEAR+10
+		WHEN GRADE='1'  AND EXPECTED_GRADUATION_YEAR IS NULL THEN SCHOOL_YEAR+11
+		WHEN GRADE='K'  AND EXPECTED_GRADUATION_YEAR IS NULL THEN SCHOOL_YEAR+12
+		WHEN GRADE='PK' AND EXPECTED_GRADUATION_YEAR IS NULL THEN SCHOOL_YEAR+13
+		WHEN GRADE='P2' AND EXPECTED_GRADUATION_YEAR IS NULL THEN SCHOOL_YEAR+14
+		WHEN GRADE='P1' AND EXPECTED_GRADUATION_YEAR IS NULL THEN SCHOOL_YEAR+15
+	ELSE EXPECTED_GRADUATION_YEAR
+	END                                                       AS [Class_Year]
  , per.LAST_NAME                                              AS [Last Name]
  , sch.SCHOOL_CODE                                            AS [Campus ID]
  , per.FIRST_NAME                                             AS [First Name]
@@ -2777,6 +2789,7 @@ JOIN rev.EPC_STU_SCH_YR               ssyr  ON ssyr.STUDENT_GU            = stu.
                                                AND ssyr.STATUS              IS NULL
 JOIN rev.REV_ORGANIZATION_YEAR        oyr   ON oyr.ORGANIZATION_YEAR_GU   = ssyr.ORGANIZATION_YEAR_GU
                                                AND oyr.YEAR_GU            = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+JOIN rev.REV_YEAR AS YEARS                  ON YEARS.YEAR_GU              =OYR.YEAR_GU
 JOIN rev.REV_ORGANIZATION             org   ON org.ORGANIZATION_GU        = oyr.ORGANIZATION_GU
 JOIN rev.EPC_SCH                      sch   ON sch.ORGANIZATION_GU        = org.ORGANIZATION_GU
 JOIN rev.REV_PERSON                   per   ON per.PERSON_GU              = stu.STUDENT_GU
@@ -2846,7 +2859,7 @@ WHERE tblgrd.VALUE_DESCRIPTION in ('06','07','08','09','10','11','12')</property
                       externalMetadataColumnId="Package\Student\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Class_Year]"
                       lineageId="Package\Student\DB Query.Outputs[OLE DB Source Output].Columns[Class_Year]"
                       name="Class_Year"
-                      precision="4"
+                      precision="5"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Student\DB Query.Outputs[OLE DB Source Output].Columns[Last Name]"
@@ -3035,7 +3048,7 @@ WHERE tblgrd.VALUE_DESCRIPTION in ('06','07','08','09','10','11','12')</property
                       refId="Package\Student\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Class_Year]"
                       dataType="numeric"
                       name="Class_Year"
-                      precision="4" />
+                      precision="5" />
                     <externalMetadataColumn
                       refId="Package\Student\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Last Name]"
                       dataType="wstr"
@@ -3144,7 +3157,7 @@ WHERE tblgrd.VALUE_DESCRIPTION in ('06','07','08','09','10','11','12')</property
                       dataType="numeric"
                       lineageId="Package\Student\DB Query.Outputs[OLE DB Source Error Output].Columns[Class_Year]"
                       name="Class_Year"
-                      precision="4" />
+                      precision="5" />
                     <outputColumn
                       refId="Package\Student\DB Query.Outputs[OLE DB Source Error Output].Columns[Last Name]"
                       dataType="wstr"
@@ -3311,7 +3324,7 @@ WHERE tblgrd.VALUE_DESCRIPTION in ('06','07','08','09','10','11','12')</property
                       refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].Columns[Class_Year]"
                       cachedDataType="numeric"
                       cachedName="Class_Year"
-                      cachedPrecision="4"
+                      cachedPrecision="5"
                       externalMetadataColumnId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Class_Year]"
                       lineageId="Package\Student\DB Query.Outputs[OLE DB Source Output].Columns[Class_Year]" />
                     <inputColumn
@@ -4326,7 +4339,7 @@ WHERE not exists (select h.course_id from rev.EPC_STU_CRS_HIS h where h.student_
     design-time-name="Package\Student">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="172,44"
           Id="Package\Student\Flat File Destination"
@@ -4358,14 +4371,20 @@ WHERE not exists (select h.course_id from rev.EPC_STU_CRS_HIS h where h.student_
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Student\DB Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\StudentCourse">
     <LayoutInfo>
