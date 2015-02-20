@@ -1,6 +1,6 @@
 /**
  * 
- * $LastChangedBy: Gary Corbaley
+ * $LastChangedBy: DEBBIE ANN CHAVEZ
  * $LastChangedDate$
  *
  * 
@@ -39,7 +39,7 @@ SELECT
 --	,Section.CREDIT  Section level credit values are often wrong.
 	
 	-- School Course information
-	,[SchoolYearCourse].[COURSE_GU]
+	,CASE WHEN Class.TEACHER_AIDE='Y' THEN TEACHERAIDE.COURSE_GU ELSE [SchoolYearCourse].[COURSE_GU] END AS COURSE_GU
 	
 	-- Organization information
 	,[OrgYear].[ORGANIZATION_GU]
@@ -61,6 +61,7 @@ FROM
 	-- Get all Scheduled Sections
 	INNER JOIN 
 	rev.[EPC_SCH_YR_SECT] AS [Section]
+
 	ON [Class].[SECTION_GU] = [Section].[SECTION_GU]
 	
 	-- Get all Courses for Each School Year
@@ -84,3 +85,18 @@ FROM
 	rev.[EPC_STU_SCH_YR] AS [StudentSchoolYear] -- Contains Grade and Start Date 	
 	ON
 	[Class].[STUDENT_SCHOOL_YEAR_GU] = [StudentSchoolYear].[STUDENT_SCHOOL_YEAR_GU]
+
+
+	-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	--READ SCHOOL SETUP TO GET TEACHER AIDE COURSE NUMBER (INSTEAD OF CLASS COURSE NUMBER) FOR SCHOOL AND SCHOOL YEAR
+	LEFT JOIN
+	rev.EPC_SCH_YR_OPT AS SYOPT
+	ON
+	SYOPT.ORGANIZATION_YEAR_GU = Section.ORGANIZATION_YEAR_GU
+
+	LEFT JOIN
+	rev.EPC_SCH_YR_CRS AS TEACHERAIDE
+	ON
+	TEACHERAIDE.SCHOOL_YEAR_COURSE_GU = SYOPT.SCHOOL_YEAR_COURSE_GU
+
+	---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
