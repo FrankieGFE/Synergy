@@ -7,6 +7,7 @@
  * This View pulls one record per student class (schedule)with pertinenet informaiton
  * and a lot of GU's for linking purposes
  */
+ 
 
 IF NOT EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[APS].[BasicSchedule]'))
 	EXEC ('CREATE VIEW APS.BasicSchedule AS SELECT 0 AS DUMMY')
@@ -89,14 +90,16 @@ FROM
 
 	-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	--READ SCHOOL SETUP TO GET TEACHER AIDE COURSE NUMBER (INSTEAD OF CLASS COURSE NUMBER) FOR SCHOOL AND SCHOOL YEAR
-	LEFT JOIN
+	LEFT HASH JOIN
 	rev.EPC_SCH_YR_OPT AS SYOPT
 	ON
 	SYOPT.ORGANIZATION_YEAR_GU = Section.ORGANIZATION_YEAR_GU
 
-	LEFT JOIN
+	LEFT HASH JOIN
 	rev.EPC_SCH_YR_CRS AS TEACHERAIDE
 	ON
 	TEACHERAIDE.SCHOOL_YEAR_COURSE_GU = SYOPT.SCHOOL_YEAR_COURSE_GU
 
 	---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	GO
