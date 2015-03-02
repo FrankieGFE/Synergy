@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SPED Technology Student Data"
   DTS:PackageType="5"
-  DTS:VersionBuild="3"
-  DTS:VersionGUID="{57395077-028A-4805-8580-C63CE8B38F17}">
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{E103335A-3A16-4CFD-A35A-2015F7978F7C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -201,10 +201,10 @@
                   description="Specifies whether the data will overwrite or append to the destination file."
                   name="Overwrite">true</property>
                 <property
-                  dataType="System.Null"
+                  dataType="System.String"
                   description="Specifies the text to write to the destination file before any data is written."
                   expressionType="Notify"
-                  name="Header" />
+                  name="Header">[Student ID].[State ID].[Last Name].[First Name].[Middle Name].[Date of Birth].[Gender].[Race1].[Race2].[Race3].[Race4].[Race5].[Hispanic].[School Year]</property>
               </properties>
               <connections>
                 <connection
@@ -960,13 +960,13 @@ WHERE ssy.ENTER_DATE &lt;= GETDATE()</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="152,42"
-          Id="Package\Data Flow Task\OLE DB Source"
-          TopLeft="112,55" />
-        <NodeLayout
           Size="174,42"
           Id="Package\Data Flow Task\Flat File Destination"
           TopLeft="195,153" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Data Flow Task\OLE DB Source"
+          TopLeft="112,55" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
           TopLeft="188,97">
