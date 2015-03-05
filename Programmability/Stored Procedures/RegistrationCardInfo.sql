@@ -162,6 +162,7 @@ SELECT
      , stupar.LIVES_WITH
      , p.EMPLOYER
      , phone.W PHONE
+	 , phone.C CELL
      , upar.FEDERAL_EMPLOYER
      , upar.ACTIVE_MILITARY
      , upar.MILITARY_RANK
@@ -182,8 +183,11 @@ FROM rev.EPC_STU_PARENT             stupar
      LEFT JOIN rev.REV_ADDRESS      madr ON madr.ADDRESS_GU          = par.MAIL_ADDRESS_GU
      LEFT JOIN rev.UD_PARENT        upar ON upar.PARENT_GU           = p.PARENT_GU
      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'RELATION_TYPE') rel on rel.VALUE_CODE = stupar.RELATION_TYPE 
-     LEFT JOIN (SELECT phn.PERSON_GU, phn.PHONE, phn.PHONE_TYPE FROM rev.REV_PERSON_PHONE phn where phn.CONTACT_PHONE = 'Y' ) pl
-                      PIVOT (min(phone) FOR phone_type in ([W])) phone ON phone.PERSON_GU = par.PERSON_GU
+     LEFT JOIN (
+	 SELECT phn.PERSON_GU, phn.PHONE, phn.PHONE_TYPE FROM rev.REV_PERSON_PHONE phn 
+	 --where phn.CONTACT_PHONE = 'Y' 
+	 ) pl
+                      PIVOT (min(phone) FOR phone_type in ([W], [C])) phone ON phone.PERSON_GU = par.PERSON_GU
 
 ), EmgContactsR AS
 (
@@ -282,6 +286,7 @@ SELECT
       , p1.LIVES_WITH                             AS [Primary_Family_Lives_With_1]
       , p1.EMPLOYER                               AS [Primary_Parent1_Employer_1]
       , p1.PHONE                                  AS [Primary_Family_HoH1_WorkPhone_1]
+	  ,p1.CELL										AS [Primary_Family_HoH1_CellPhone_1]
       , p1.FEDERAL_EMPLOYER                       AS [Primary_Family_HoH1_FederalEmploy_1]
       , p1.ACTIVE_MILITARY                        AS [Primary_Family_HoH1_Military_1]
       , p1.MILITARY_RANK                          AS [Primary_Family_HoH1_Rank_1]
@@ -307,6 +312,7 @@ SELECT
       , p2.LIVES_WITH                             AS [Parent2_Lives_With_2]
       , p2.EMPLOYER                               AS [Parent2_Employer_2]
       , p2.PHONE                                  AS [Primary_Family_HoH2_WorkPhone_2]
+	    ,p2.CELL										AS [Primary_Family_HoH2_CellPhone_2]
       , p2.FEDERAL_EMPLOYER                       AS [Parent2_FederalEmploy_2]
       , p2.ACTIVE_MILITARY                        AS [Primary_Family_HoH2_Military_2]
       , p2.MILITARY_RANK                          AS [Parent2_MilitaryRank_2]
@@ -332,6 +338,7 @@ SELECT
       , p3.LIVES_WITH                             AS [Secondary_Family_Lives_With_3]
       , p3.EMPLOYER                               AS [Parent3_Employer_3]
       , p3.PHONE                                  AS [Secondary_Family_HoH1_WorkPhone_3]
+	    ,p3.CELL										AS [Primary_Family_HoH3_CellPhone_3]
       , p3.FEDERAL_EMPLOYER                       AS [Secondary_Family_HoH1_FederalEmploy_3]
       , p3.ACTIVE_MILITARY                        AS [Secondary_Family_HoH1_Military_3]
       , p3.MILITARY_RANK                          AS [Parent3_MilitaryRank_3]
@@ -357,6 +364,7 @@ SELECT
       , p4.LIVES_WITH                             AS [Parent4_LivesWith_4]
       , p4.EMPLOYER                               AS [Parent4_Employer_4]
       , p4.PHONE                                  AS [Secondary_Family_HoH2_WorkPhone_4]
+	    ,p4.CELL										AS [Primary_Family_HoH4_CellPhone_4]
       , p4.FEDERAL_EMPLOYER                       AS [Secondary_Family_HoH2_FederalEmploy_4]
       , p4.ACTIVE_MILITARY                        AS [Secondary_Family_HoH2_Military_4]
       , p4.MILITARY_RANK                          AS [Parent4_MilitaryRank_4]
