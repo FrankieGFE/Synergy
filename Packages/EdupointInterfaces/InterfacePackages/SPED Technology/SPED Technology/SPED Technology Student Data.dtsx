@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SPED Technology Student Data"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{DF5BBC69-569D-45F2-8C82-913BC6426EAF}">
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{6DC73974-42AC-457B-8D7B-04B03A67BACB}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -569,7 +569,13 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">; with ConcEnr AS
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--&lt;APS - Capital Master Planning (CMP) Geocode File&gt;
+--Only active students in current school year at the time of each pull 
+--(no future dated Enter Date enrollments)
+--Column headers are from the sample output file not SpecDoc
+--
+--Concurrent Enrollment
+; with ConcEnr AS
 (
 SELECT
 ROW_NUMBER() over (partition by stu.student_gu order by stu.student_gu) rn
