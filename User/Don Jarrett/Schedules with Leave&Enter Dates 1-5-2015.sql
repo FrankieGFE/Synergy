@@ -1,8 +1,8 @@
 BEGIN TRAN
-/*
+
 DELETE FROM
     [rev].[EPC_STU_CLASS]
-*/
+/*
 SELECT
     [Org].[ORGANIZATION_NAME]
     ,[Student].[SIS_NUMBER]
@@ -10,7 +10,7 @@ SELECT
     ,[Course].[COURSE_TITLE]
     ,[Section].[SECTION_ID]
     ,[Class].[ENTER_DATE]
-    ,[Class].[LEAVE_DATE]
+    ,[Class].[LEAVE_DATE]*/
 FROM
     [rev].[EPC_STU_CLASS] AS [Class]
 
@@ -52,9 +52,8 @@ FROM
 WHERE
     [Class].[ENTER_DATE] BETWEEN '2015-01-01' AND '2015-01-31'
     AND [Class].[LEAVE_DATE]=[Class].[ENTER_DATE]
-    
 
-
+/*
 SELECT
     [Org].[ORGANIZATION_NAME]
     ,[Student].[SIS_NUMBER]
@@ -66,13 +65,13 @@ SELECT
     ,[Class].[LEAVE_DATE]
     --,[Class].[SECTION_GU]
     --,ROW_NUMBER() OVER (PARTITION BY [Student].[STUDENT_GU],[Class].[SECTION_GU] ORDER BY [Class].[ENTER_DATE]) AS [RN]
-/*UPDATE
+*/UPDATE
     [Class]
 
 SET
     [ENTER_DATE]='2015-01-05'
     ,[CHANGE_ID_STAMP]='D31C8E29-6CFB-43BB-B597-AA36480983F2'
-    ,[CHANGE_DATE_TIME_STAMP]=CAST(GETDATE() AS DATE)*/
+    ,[CHANGE_DATE_TIME_STAMP]=CAST(GETDATE() AS DATE)
 FROM
     [rev].[EPC_STU_CLASS] AS [Class]
 
@@ -144,3 +143,4 @@ ORDER BY
     --,[Class].[SECTION_GU]*/
 
 ROLLBACK
+
