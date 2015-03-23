@@ -241,7 +241,7 @@ SELECT
         CONVERT(VARCHAR(10), GETDATE(), 101)      AS [Today]
       , per.LAST_NAME                             AS [LastName]
       , per.FIRST_NAME                            AS [FirstName]
-      , per.MIDDLE_NAME                           AS [MiddleInitial]
+      , LEFT(per.MIDDLE_NAME,1)     AS [MiddleInitial]
       , stu.SIS_NUMBER                            AS [StudentID]
       , lorg.ORGANIZATION_NAME                    AS [LastLocation]
 	  --CHANGED FOR PRE-PRINTED CARDS WITH GRADE AHEAD
