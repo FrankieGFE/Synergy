@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SPED Technology Student Data"
   DTS:PackageType="5"
-  DTS:VersionBuild="16"
-  DTS:VersionGUID="{2A45A9C9-53BC-4E8A-A281-F4860B437AEC}">
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{319A1ABE-82D4-41E9-84F7-D9087BCF6107}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -784,11 +784,11 @@ JOIN rev.EPC_SCH sch ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
 Select
 pvt.PERSON_GU
 ,ROW_NUMBER() OVER(PARTITION by pvt.PERSON_GU order by pvt.person_gu) rno
-,(select e.ALT_CODE_3 from APS.LookupTable('Revelation', 'Ethnicity') e where e.VALUE_CODE = pvt.[1]) as Race1
-,(select e.ALT_CODE_3 from APS.LookupTable('Revelation', 'Ethnicity') e where e.VALUE_CODE = pvt.[2]) as Race2
-,(select e.ALT_CODE_3 from APS.LookupTable('Revelation', 'Ethnicity') e where e.VALUE_CODE = pvt.[3]) as Race3
-,(select e.ALT_CODE_3 from APS.LookupTable('Revelation', 'Ethnicity') e where e.VALUE_CODE = pvt.[4]) as Race4
-,(select e.ALT_CODE_3 from APS.LookupTable('Revelation', 'Ethnicity') e where e.VALUE_CODE = pvt.[5]) as Race5
+,(select e.VALUE_DESCRIPTION from APS.LookupTable('Revelation', 'Ethnicity') e where e.VALUE_CODE = pvt.[1]) as Race1
+,(select e.VALUE_DESCRIPTION from APS.LookupTable('Revelation', 'Ethnicity') e where e.VALUE_CODE = pvt.[2]) as Race2
+,(select e.VALUE_DESCRIPTION from APS.LookupTable('Revelation', 'Ethnicity') e where e.VALUE_CODE = pvt.[3]) as Race3
+,(select e.VALUE_DESCRIPTION from APS.LookupTable('Revelation', 'Ethnicity') e where e.VALUE_CODE = pvt.[4]) as Race4
+,(select e.VALUE_DESCRIPTION from APS.LookupTable('Revelation', 'Ethnicity') e where e.VALUE_CODE = pvt.[5]) as Race5
 from
 	(select 
 		ROW_NUMBER() OVER(PARTITION by seth.PERSON_GU order by seth.Ethnic_code) rn
@@ -1109,27 +1109,27 @@ WHERE ssy.ENTER_DATE &lt;=GETDATE()</property>
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Race]"
                       dataType="wstr"
-                      length="100"
+                      length="600"
                       name="Race" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Race2]"
                       dataType="wstr"
-                      length="100"
+                      length="600"
                       name="Race2" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Race3]"
                       dataType="wstr"
-                      length="100"
+                      length="600"
                       name="Race3" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Race4]"
                       dataType="wstr"
-                      length="100"
+                      length="600"
                       name="Race4" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Race5]"
                       dataType="wstr"
-                      length="100"
+                      length="600"
                       name="Race5" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Student Hispanic Indicator]"
@@ -1200,31 +1200,31 @@ WHERE ssy.ENTER_DATE &lt;=GETDATE()</property>
                     <outputColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Race]"
                       dataType="wstr"
-                      length="100"
+                      length="600"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Race]"
                       name="Race" />
                     <outputColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Race2]"
                       dataType="wstr"
-                      length="100"
+                      length="600"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Race2]"
                       name="Race2" />
                     <outputColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Race3]"
                       dataType="wstr"
-                      length="100"
+                      length="600"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Race3]"
                       name="Race3" />
                     <outputColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Race4]"
                       dataType="wstr"
-                      length="100"
+                      length="600"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Race4]"
                       name="Race4" />
                     <outputColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Race5]"
                       dataType="wstr"
-                      length="100"
+                      length="600"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Race5]"
                       name="Race5" />
                     <outputColumn
@@ -1294,13 +1294,13 @@ WHERE ssy.ENTER_DATE &lt;=GETDATE()</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="152,42"
-          Id="Package\Data Flow Task\OLE DB Source"
-          TopLeft="112,55" />
-        <NodeLayout
           Size="174,42"
           Id="Package\Data Flow Task\Flat File Destination"
           TopLeft="200,146" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Data Flow Task\OLE DB Source"
+          TopLeft="112,55" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
           TopLeft="188,97">
