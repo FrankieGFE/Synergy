@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SPED Technology Student Data"
   DTS:PackageType="5"
-  DTS:VersionBuild="13"
-  DTS:VersionGUID="{15595F27-937E-4B79-B743-AF325C233AF3}">
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{61E85CE7-1EE6-44F6-842E-2F4C3D609F1A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -654,7 +654,7 @@
                       cachedLength="600"
                       cachedName="Student Current SOR Enrollment Grade Level"
                       externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student Current SOR Enrollment Grade Level]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Student Current SOR Enrollment Grade Level]" />
+                      lineageId="Package\Data Flow Task\99:invalid" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -765,151 +765,157 @@
                   description="The SQL command to be executed."
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--&lt;APS - Capital Master Planning (CMP) Geocode File&gt;
---Only active students in current school year at the time of each pull 
+--Only active students in current school year at the time of each pull
 --(no future dated Enter Date enrollments)
 --Column headers are from the sample output file not SpecDoc
---
+
+
 --Concurrent Enrollment
-; with ConcEnr AS
+;with ConcEnr AS
 (
 SELECT
 ROW_NUMBER() over (partition by stu.student_gu order by stu.student_gu) rn
-, stu.STUDENT_GU
-, sch.SCHOOL_CODE
-, STUFF((SELECT [*]= ', ' + sch1.SCHOOL_CODE 
-                    FROM rev.EPC_STU               stu1
-                    JOIN rev.EPC_STU_SCH_YR        ssy1  ON ssy1.STUDENT_GU = stu1.STUDENT_GU
-                                                           and ssy1.STATUS is NULL
-									                       and ssy1.EXCLUDE_ADA_ADM is not null --only concurrent enrollment
-                    JOIN rev.REV_ORGANIZATION_YEAR oyr1  ON oyr1.ORGANIZATION_YEAR_GU = ssy1.ORGANIZATION_YEAR_GU
-                                                           and oyr1.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
-                    JOIN rev.EPC_SCH               sch1  ON sch1.ORGANIZATION_GU = oyr1.ORGANIZATION_GU 
-					where stu1.STUDENT_GU = stu.STUDENT_GU
-	                FOR XML PATH('')
-	     ),1,1,'')
-			AS ConcSchools
-FROM rev.EPC_STU               stu
-JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
-                                       and ssy.STATUS is NULL
-									   and ssy.EXCLUDE_ADA_ADM is not null --only concurrent enrollment
-JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
-                                       and oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
-JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU 
+,stu.STUDENT_GU
+,sch.SCHOOL_CODE
+,STUFF((SELECT[*]=',' + sch1.SCHOOL_CODE
+	FROM rev.EPC_STU         stu1
+	JOIN rev.EPC_STU_SCH_YR  ssy1 ON ssy1.STUDENT_GU = stu1.STUDENT_GU
+		and ssy1.STATUS is NULL
+			and ssy1.EXCLUDE_ADA_ADM is not NULL --only concurrent enrollment
+	JOIN rev.REV_ORGANIZATION_YEAR    oyr1  ON oyr1.ORGANIZATION_YEAR_GU = ssy1.ORGANIZATION_YEAR_GU
+		and oyr1.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+	JOIN rev.EPC_SCH         sch1 ON sch1.ORGANIZATION_GU = oyr1.ORGANIZATION_GU
+		where stu1.STUDENT_GU = stu.STUDENT_GU
+		FOR XML PATH('')
+	),1,1,'')
+		AS ConcSchools
+
+FROM rev.EPC_STU        stu
+JOIN rev.EPC_STU_SCH_YR     ssy ON ssy.STUDENT_GU = stu.STUDENT_GU
+	and ssy.STATUS is NULL
+		and ssy.EXCLUDE_ADA_ADM is not null --only concurrent enrollment
+JOIN rev.REV_ORGANIZATION_YEAR   oyr ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
+	and oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+JOIN rev.EPC_SCH sch ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
 )
---Ethnicity code
-, EthCodes AS 
+
+--ETHNICITY Code
+,EthCodes AS
 (
-select 
-  pvt.PERSON_GU
-, ROW_NUMBER() OVER(PARTITION by pvt.PERSON_GU order by pvt.person_gu) rno
-, (select e.ALT_CODE_3 from  rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') e where e.VALUE_CODE = pvt.[1]) as Race1
-, (select e.ALT_CODE_3 from  rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') e where e.VALUE_CODE = pvt.[2]) as Race2
-, (select e.ALT_CODE_3 from  rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') e where e.VALUE_CODE = pvt.[3]) as Race3
-, (select e.ALT_CODE_3 from  rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') e where e.VALUE_CODE = pvt.[4]) as Race4
-, (select e.ALT_CODE_3 from  rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') e where e.VALUE_CODE = pvt.[5]) as Race5
-from 
-  (select
-       ROW_NUMBER() OVER(PARTITION by seth.PERSON_GU order by seth.Ethnic_code) rn
-    ,  seth.PERSON_GU
-    , seth.ETHNIC_CODE
-   from rev.REV_PERSON_SECONDRY_ETH_LST seth
-  ) pt
-   pivot (min(ETHNIC_CODE) FOR rn in ([1],[2],[3],[4],[5])) pvt
+Select
+pvt.PERSON_GU
+,ROW_NUMBER() OVER(PARTITION by pvt.PERSON_GU order by pvt.person_gu) rno
+,(select e.ALT_CODE_3 from APS.LookupTable('Revelation', 'Ethnicity') e where e.VALUE_CODE = pvt.[1]) as Race1
+,(select e.ALT_CODE_3 from APS.LookupTable('Revelation', 'Ethnicity') e where e.VALUE_CODE = pvt.[2]) as Race2
+,(select e.ALT_CODE_3 from APS.LookupTable('Revelation', 'Ethnicity') e where e.VALUE_CODE = pvt.[3]) as Race3
+,(select e.ALT_CODE_3 from APS.LookupTable('Revelation', 'Ethnicity') e where e.VALUE_CODE = pvt.[4]) as Race4
+,(select e.ALT_CODE_3 from APS.LookupTable('Revelation', 'Ethnicity') e where e.VALUE_CODE = pvt.[5]) as Race5
+from
+	(select 
+		ROW_NUMBER() OVER(PARTITION by seth.PERSON_GU order by seth.Ethnic_code) rn
+		,seth.PERSON_GU
+		,seth.ETHNIC_CODE
+		from rev.REV_PERSON_SECONDRY_ETH_LST seth
+		)pt
+		pivot (min(ETHNIC_CODE) FOR rn in ([1],[2],[3],[4],[5])) pvt
 )
+
+
 --ParentNames
-, ParentNames AS
+,ParentNames AS
 (
 SELECT
-   PNm.STUDENT_GU
- , ROW_NUMBER() OVER(PARTITION BY PNm.STUDENT_GU order by PNm.STUDENT_GU) rno
- , Parents = STUFF(  COALESCE(', ' + Pnm.[1], '')
-                   + COALESCE(', ' + Pnm.[2], '') 
-                   + COALESCE(', ' + Pnm.[3], '') 
-                   + COALESCE(', ' + Pnm.[4], '') 
-                   , 1, 1,'')
+	PNm.STUDENT_GU
+	,ROW_NUMBER() OVER(PARTITION BY PNm.STUDENT_GU order by PNm.STUDENT_GU) rno
+	,Parents = STUFF( COALESCE(','+Pnm.[1],'')
+			 + COALESCE(','+Pnm.[2],'')
+			 + COALESCE(','+Pnm.[3],'')
+			 + COALESCE(','+Pnm.[4],'')
+			 ,1,1,'')
 FROM
-  (
-    SELECT 
-        stu.STUDENT_GU
-      , COALESCE(spar.ORDERBY, (ROW_NUMBER() OVER(PARTITION BY spar.STUDENT_GU order by spar.STUDENT_GU))) rn
-      , pper.FIRST_NAME + ' ' +  pper.LAST_NAME [pname]
-    FROM rev.EPC_STU stu
-    JOIN rev.EPC_STU_PARENT spar ON spar.STUDENT_GU = stu.STUDENT_GU AND spar.CONTACT_ALLOWED = 'Y'
-    JOIN rev.REV_PERSON pper     ON pper.PERSON_GU  = spar.PARENT_GU
-  ) 
-  pn PIVOT (min(pname) for rn in ([1], [2], [3], [4])) PNm
-)
---StudentSecPhone
-, StuSecPhone AS
 (
 SELECT
-  ROW_NUMBER() OVER (PARTITION BY phn.person_gu order by phn.phone_type) rn
-, stu.STUDENT_GU
-, phn.PHONE
+	stu.STUDENT_GU
+	,COALESCE(spar.ORDERBY, (ROW_NUMBER() OVER(PARTITION BY spar.STUDENT_GU order by spar.STUDENT_GU))) rn
+	,pper.FIRST_NAME+''+pper.LAST_NAME[pname]
+	FROM rev.EPC_STU stu
+	JOIN rev.EPC_STU_PARENT spar ON spar.STUDENT_GU = stu.STUDENT_GU AND spar.Contact_ALLOWED='Y'
+	JOIN rev.REV_PERSON pper ON pper.PERSON_GU = spar.PARENT_GU
+)
+pn PIVOT (min(pname) for rn in ([1],[2],[3],[4])) PNm
+)
 
 
+--StudentSecPhone
+,StuSecPhone AS
+(
+SELECT
+	ROW_NUMBER() OVER (PARTITION BY phn.person_gu order by phn.phone_type) rn
+	,stu.STUDENT_GU
+	,phn.PHONE
 FROM rev.REV_PERSON_PHONE phn
-JOIN rev.EPC_STU               stu   ON stu.STUDENT_GU           = phn.PERSON_GU
-JOIN rev.EPC_STU_SCH_YR        ssyr  ON ssyr.STUDENT_GU          = stu.STUDENT_GU 
-JOIN rev.REV_ORGANIZATION_YEAR oyr   ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
-                                        AND oyr.YEAR_GU          = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
-JOIN rev.REV_PERSON            per   ON per.PERSON_GU            = phn.PERSON_GU
+JOIN rev.EPC_STU         stu ON stu.STUDENT_GU = phn.PERSON_GU
+JOIN rev.EPC_STU_SCH_YR  ssyr ON ssyr.STUDENT_GU = stu.STUDENT_GU
+JOIN rev.REV_ORGANIZATION_YEAR  oyr ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU	
+	AND oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+JOIN rev.REV_PERSON per ON per.PERSON_GU = phn.PERSON_GU
 WHERE phn.PRIMARY_PHONE = 'N'
 ), FRMHistory AS
 (
 SELECT
-      ROW_NUMBER() OVER (PARTITION BY stu.student_gu order by f.ENTER_DATE,stu.STUDENT_gu) rn
-    , stu.STUDENT_GU
-	, f.FRM_CODE
-    FROM rev.EPC_STU stu
-	LEFT JOIN rev.EPC_STU_PGM_FRM_HIS f on f.STUDENT_GU = stu.STUDENT_GU
-	AND f.ENTER_DATE is not null and (f.EXIT_DATE is null or f.EXIT_DATE &gt; getdate())
+	ROW_NUMBER() OVER (PARTITION BY stu.student_gu order by f.ENTER_DATE, stu.STUDENT_gu) rn
+	,stu.STUDENT_GU
+		,f.FRM_CODE
+	FROM rev.EPC_STU stu
+		LEFT JOIN rev.EPC_STU_PGM_FRM_HIS f on f.STUDENT_GU = stu.STUDENT_GU
+		AND f.ENTER_DATE is not null and (f.EXIT_DATE is null or f.EXIT_DATE&gt; getdate())
 )
-SELECT
-   stu.SIS_NUMBER                            AS [Student ID Number]
- , stu.STATE_STUDENT_NUMBER                  AS [State ID Number]
- , per.LAST_NAME                             AS [Student Last Name]
- , per.FIRST_NAME                            AS [Student First Name]
- , per.MIDDLE_NAME                           AS [Student Middle Name]
- , CONVERT(VARCHAR(8), per.BIRTH_DATE,112)   AS [Student Birthdate]
- , per.GENDER                                AS [Student Gender]
- , grd.VALUE_DESCRIPTION                     AS [Student Current SOR Enrollment Grade Level]
- , rcd.Race1                                 AS [Race]
- , rcd.Race2                                 AS [Race2]
- , rcd.Race3                                 AS [Race3]
- , rcd.Race4                                 AS [Race4]
- , rcd.Race5                                 AS [Race5]
- , per.HISPANIC_INDICATOR                    AS [Student Hispanic Indicator]
- , '2014'                                    AS [School Year]
+SELECT 
+	stu.SIS_NUMBER                    AS [Student ID Number]
+	,stu.STATE_STUDENT_NUMBER         AS [State ID Number]
+	,per.LAST_NAME                    AS [Student Last Name]
+	,per.FIRST_NAME                   AS [Student First Name]
+	,per.MIDDLE_NAME                  AS [Student Middle Name]
+	,CONVERT(VARCHAR(8), per.BIRTH_DATE,101)       AS [Student Birthdate]
+	,per.GENDER                       AS [Student Gender]
+	,rcd.Race1                        AS [Race]
+	,rcd.Race2                        AS [Race2]
+	,rcd.Race3                        AS [Race3]
+	,rcd.Race4                        AS [Race4]
+	,rcd.Race5                        AS [Race5]
+	,per.HISPANIC_INDICATOR           AS [Student Hispanic Indicator]
+	,'2014'                           AS [School Year]
 
-FROM rev.EPC_STU               stu
-JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
-                                       and ssy.STATUS is NULL
-									   and ssy.EXCLUDE_ADA_ADM is null --exclude concurrent enrollment
-JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
-                                       and oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
-JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU 
-JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
-LEFT JOIN rev.REV_ADDRESS      hadr ON hadr.ADDRESS_GU = per.HOME_ADDRESS_GU
-LEFT JOIN rev.REV_ADDRESS      madr ON madr.ADDRESS_GU = per.MAIL_ADDRESS_GU
+FROM rev.EPC_STU   stu
+JOIN rev.EPC_STU_SCH_YR ssy ON ssy.STUDENT_GU = stu.STUDENT_GU	
+	AND ssy.STATUS is NULL
+		and ssy.EXCLUDE_ADA_ADM is null --exclude concurrent enrollment
+JOIN rev.REV_ORGANIZATION_YEAR oyr ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU	
+	AND oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+JOIN rev.EPC_SCH sch ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
+JOIN rev.REV_PERSON per ON per.PERSON_GU = stu.STUDENT_GU
+LEFT JOIN rev.REV_ADDRESS hadr ON hadr.ADDRESS_GU = per.HOME_ADDRESS_GU
+LEFT JOIN rev.REV_ADDRESS madr ON madr.ADDRESS_GU = per.MAIL_ADDRESS_GU
 LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12','GRADE') grd on grd.VALUE_CODE = ssy.GRADE
 LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.AddressInfo','STREET_TYPE') hatyp on hatyp.VALUE_CODE = hadr.STREET_TYPE
-LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12','LANGUAGE') lang ON lang.VALUE_CODE = stu.HOME_LANGUAGE
+LEFT JOIN rev.SIF_22_COMMON_GetLookupValues('K12','LANGUAGE') lang ON lang.VALUE_CODE = stu.HOME_LANGUAGE
+
+
 --FRM
-LEFT JOIN FRMHistory           frm  ON frm.STUDENT_GU = stu.STUDENT_GU and frm.rn = 1
+LEFT JOIN FRMHistory frm ON frm.STUDENT_GU = stu.STUDENT_GU and frm.rn=1
 --Disability
 LEFT JOIN rev.EP_STUDENT_SPECIAL_ED sped ON sped.STUDENT_GU = stu.STUDENT_GU
 --ELL
-LEFT JOIN rev.EPC_STU_PGM_ELL  ell  ON ell.STUDENT_GU = stu.STUDENT_GU
+LEFT JOIN rev.EPC_STU_PGM_ELL ell ON ell.STUDENT_GU = stu.STUDENT_GU
 --Concurrent Enrollment
-LEFT JOIN ConcEnr              cnr  ON cnr.STUDENT_GU = stu.STUDENT_GU and cnr.rn = 1
---Ethnicity code
-LEFT JOIN EthCodes             rcd  ON rcd.PERSON_GU = stu.STUDENT_GU and rcd.rno = 1
---ParentNames
-LEFT JOIN ParentNames          pnm  ON pnm.STUDENT_GU = stu.STUDENT_GU and pnm.rno = 1
+LEFT JOIN ConcEnr cnr ON cnr.STUDENT_GU = stu.STUDENT_GU and cnr.rn=1
+--Ethnicity Code
+LEFT JOIN EthCodes rcd ON rcd.PERSON_GU = stu.STUDENT_GU and rcd.rno=1
+--Parent Names
+LEFT JOIN ParentNames pnm ON pnm.STUDENT_GU = stu.STUDENT_GU and pnm.rno=1
 --StuSecPhone
-LEFT JOIN StuSecPhone          sph  ON sph.STUDENT_GU = stu.STUDENT_GU and sph.rn = 1
-WHERE ssy.ENTER_DATE &lt;= GETDATE()</property>
+LEFT JOIN StuSecPhone sph ON sph.STUDENT_GU = stu.STUDENT_GU and sph.rn=1
+WHERE ssy.ENTER_DATE &lt;=GETDATE()</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1087,16 +1093,6 @@ WHERE ssy.ENTER_DATE &lt;= GETDATE()</property>
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Student First Name]"
                       name="Student First Name"
                       truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Student Current SOR Enrollment Grade Level]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Student Current SOR Enrollment Grade Level]"
-                      length="600"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Student Current SOR Enrollment Grade Level]"
-                      name="Student Current SOR Enrollment Grade Level"
-                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1172,11 +1168,6 @@ WHERE ssy.ENTER_DATE &lt;= GETDATE()</property>
                       dataType="wstr"
                       length="60"
                       name="Student First Name" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Student Current SOR Enrollment Grade Level]"
-                      dataType="wstr"
-                      length="600"
-                      name="Student Current SOR Enrollment Grade Level" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1227,12 +1218,6 @@ WHERE ssy.ENTER_DATE &lt;= GETDATE()</property>
                       length="5"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Student Gender]"
                       name="Student Gender" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Student Current SOR Enrollment Grade Level]"
-                      dataType="wstr"
-                      length="600"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Student Current SOR Enrollment Grade Level]"
-                      name="Student Current SOR Enrollment Grade Level" />
                     <outputColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Race]"
                       dataType="wstr"
@@ -1328,7 +1313,7 @@ WHERE ssy.ENTER_DATE &lt;= GETDATE()</property>
     design-time-name="Package\Data Flow Task">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="152,42"
           Id="Package\Data Flow Task\OLE DB Source"
@@ -1368,7 +1353,9 @@ WHERE ssy.ENTER_DATE &lt;= GETDATE()</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="35,44.5,16,16"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
