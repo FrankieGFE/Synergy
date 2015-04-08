@@ -8,7 +8,14 @@ SELECT DISTINCT
 	,REPLACE([STAFF].[BADGE_NUM],'e','') AS [Staff Member SIS ID]
 	,[STAFF_PERSON].[FIRST_NAME] AS [First Name]
 	,[STAFF_PERSON].[LAST_NAME] AS [Last Name]
-	,[STAFF].[TYPE]
+	,CASE 
+		WHEN [STAFF].[TYPE] = 'TE' THEN 'Teacher'
+		WHEN [STAFF].[TYPE] = 'DA' THEN 'DistrictAdministrator'
+		WHEN [STAFF].[TYPE] = 'SA' THEN 'SchoolAdministrator'
+		WHEN [STAFF].[TYPE] = 'SCA' THEN 'SchoolAdministrator'
+		WHEN [STAFF].[TYPE] = 'ED' THEN 'Teacher'
+		ELSE 'Coordinator'
+	END AS [Role]
 	,[STAFF_PERSON].[EMAIL]
 	,[STAFF_PERSON].[EMAIL] AS [User Name]
 	,'teacher' AS [Password]
@@ -47,3 +54,12 @@ FROM
 	rev.EPC_SCH AS [School] -- Contains the School Code / Number
 	ON 
 	[OrgYear].[ORGANIZATION_GU] = [School].[ORGANIZATION_GU]
+	
+	INNER JOIN 
+	rev.REV_YEAR AS [RevYear] -- Contains the School Year
+	ON 
+	[OrgYear].[YEAR_GU] = [RevYear].[YEAR_GU]
+	
+WHERE
+	[RevYear].[SCHOOL_YEAR] = '2014'
+	--AND [RevYear].[EXTENSION] = 'R'

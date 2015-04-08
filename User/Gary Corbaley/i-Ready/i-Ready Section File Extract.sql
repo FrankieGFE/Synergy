@@ -22,6 +22,7 @@ SELECT
 	,CASE WHEN [StudentSchoolYear].[EXCLUDE_ADA_ADM] = 2 THEN 'CONCURRENT'
 		WHEN [StudentSchoolYear].[EXCLUDE_ADA_ADM] = 1 THEN 'NO ADA/ADM'
 		ELSE '' END AS [CONCURRENT]
+	,[OrgYear].[YEAR_GU]
 	,[RevYear].[SCHOOL_YEAR]
 	,[RevYear].[EXTENSION]
 FROM
@@ -303,19 +304,24 @@ FROM
 
 --------------------------------------------------------------------------------------------------------------------
 
+--SELECT
+--	ROW_NUMBER() OVER (PARTITION BY [School ID], [Section ID] ORDER BY [Name]) AS RN
+--	,*
+--FROM
+--(
 SELECT DISTINCT
 	'nm-albuq87774' AS [Client ID]
-	,[ENROLLMENTS].[SCHOOL_CODE] AS [School ID]
+	,[School].[SCHOOL_CODE] AS [School ID]
 	
-	,CONVERT(VARCHAR,[SCHEDULE].[COURSE_ID]) + '-' + CONVERT(VARCHAR,[SCHEDULE].[SECTION_ID]) + '-' + LEFT([SCHEDULE].[COURSE_TITLE],4) AS [Section ID]
-	,[SCHEDULE].[COURSE_TITLE] AS [Name]
+	,CONVERT(VARCHAR,[School].[SCHOOL_CODE]) + '-' + CONVERT(VARCHAR,[SCHEDULE].[SECTION_ID]) AS [Section ID]
+	,CONVERT(VARCHAR,[SCHEDULE].[COURSE_ID]) + '-' + [SCHEDULE].[COURSE_TITLE] + '-' + CONVERT(VARCHAR,[SCHEDULE].[SECTION_ID]) AS [Name]
 	
 	,CASE WHEN [Course Grades].[VALUE_DESCRIPTION] = 'K' THEN '0' ELSE [Course Grades].[VALUE_DESCRIPTION] END AS [Grade Level]
 	--,[Course Grades].[VALUE_DESCRIPTION] AS [Grade Level]
 	
 	,[SCHEDULE].[TERM_CODE] AS [Term]
 	,'' AS [Code]
-	,[ENROLLMENTS].[SCHOOL_NAME] AS [Location]
+	,[SCHEDULE].[ORGANIZATION_NAME] AS [Location]
 	,'' AS [Partner ID]
 	,'' AS [Action]
 	,[SCHEDULE].[COURSE_TITLE] AS [Course Name]
@@ -376,12 +382,33 @@ FROM
 	SCHEDULE AS [SCHEDULE]
 	ON
 	[ENROLLMENTS].[STUDENT_GU] = [SCHEDULE].[STUDENT_GU]
+	AND [ENROLLMENTS].[YEAR_GU] = [SCHEDULE].[YEAR_GU]
 	
 	LEFT OUTER JOIN
 	APS.LookupTable('K12','Grade') AS [Course Grades]
 	ON
 	[SCHEDULE].[GRADE_RANGE_LOW] = [Course Grades].[VALUE_CODE]
 	
+	INNER JOIN 
+	rev.EPC_SCH AS [School] -- Contains the School Code / Number
+	ON 
+	[SCHEDULE].[ORGANIZATION_GU] = [School].[ORGANIZATION_GU]
+	
+	
+	
 WHERE
 	[ENROLLMENTS].[GRADE] IN ('K','01','02','03','04','05','06','07','08')
 	AND [SCHEDULE].[PRIMARY_STAFF] = 1
+	
+	--AND [SCHEDULE].[COURSE_ID] IN ('11504000','00052015')
+	
+	--AND [ENROLLMENTS].[SCHOOL_CODE] = '405'
+	
+--ORDER BY
+--	[ENROLLMENTS].[SCHOOL_CODE]
+--	,[SCHEDULE].[SECTION_ID]
+
+--) [STUFF]
+
+--ORDER BY
+--	[Section ID]
