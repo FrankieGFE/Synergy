@@ -304,11 +304,32 @@ FROM
 
 --------------------------------------------------------------------------------------------------------------------
 
---SELECT
---	ROW_NUMBER() OVER (PARTITION BY [School ID], [Section ID] ORDER BY [Name]) AS RN
---	,*
---FROM
---(
+SELECT
+	[Client ID]
+	,[School ID]
+	,[Section ID]
+	,[Name]
+	,[Grade Level]
+	,[Term]
+	,[Code]
+	,[Location]
+	,[Partner ID]
+	,[Action]
+	,[Course Name]
+	,[Subject]
+	,[Reserved1]
+	,[Reserved2]
+	,[Reserved3]
+	,[Reserved4]
+	,[Reserved5]
+	,[Reserved6]
+	,[Reserved7]
+	,[Reserved8]
+	--,[Reserved9]
+	--,[Reserved10]
+	
+FROM
+(
 SELECT DISTINCT
 	'nm-albuq87774' AS [Client ID]
 	,[School].[SCHOOL_CODE] AS [School ID]
@@ -366,6 +387,8 @@ SELECT DISTINCT
 	,'' AS [Reserved9]
 	,'' AS [Reserved10]
 	
+	,ROW_NUMBER() OVER (PARTITION BY [School].[SCHOOL_CODE], [SCHEDULE].[SECTION_ID] ORDER BY [SCHEDULE].[SECTION_ID] DESC) AS RN
+	
 	
 	--,[SCHEDULE].[BADGE_NUM] AS [Staff Member SIS ID]
 	--,[SCHEDULE].*
@@ -408,7 +431,10 @@ WHERE
 --	[ENROLLMENTS].[SCHOOL_CODE]
 --	,[SCHEDULE].[SECTION_ID]
 
---) [STUFF]
+) [STUFF]
+
+WHERE
+	[RN] = 1
 
 --ORDER BY
 --	[Section ID]

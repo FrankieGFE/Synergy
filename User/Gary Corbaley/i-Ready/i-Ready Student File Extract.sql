@@ -230,6 +230,40 @@ FROM
 --------------------------------------------------------------------------------------------------------------------
 
 SELECT
+	[Client ID]
+	,[School ID]
+	,[Student SIS ID]
+	,[Student Number]
+	,[First Name]
+	,[Last Name]
+	,[Grade Level]
+	,[User Name]
+	,[Password]
+	,[DOB]
+	,[Ethnicity]
+	,[Hispanic]
+	,[Gender]
+	,[Economically Disadvantaged]
+	,[English Learner]
+	,[Special Education]
+	,[Migrant]
+	,[Math Developmental Level]
+	,[English Developmental Level]
+	,[Partner ID]
+	,[Action]
+	,[RTI Level]
+	,[Gifted / Talented]
+	,[Reserved1]
+	,[Reserved2]
+	,[Reserved3]
+	,[Reserved4]
+	,[Reserved5]
+	,[Reserved6]
+	,[Reserved7]
+	,[Reserved8]
+FROM
+(
+SELECT DISTINCT
 	'nm-albuq87774' AS [Client ID]
 	,[ENROLLMENTS].[SCHOOL_CODE] AS [School ID]
 	,[STUDENT].[STATE_STUDENT_NUMBER] AS [Student SIS ID]
@@ -237,7 +271,7 @@ SELECT
 	,[STUDENT].[FIRST_NAME] AS [First Name]
 	,[STUDENT].[LAST_NAME] as [Last Name]
 	,CASE WHEN [ENROLLMENTS].[GRADE] = 'K' THEN '0' ELSE [ENROLLMENTS].[GRADE] END AS [Grade Level]
-	,LEFT([STUDENT].[FIRST_NAME],1) + LEFT([STUDENT].[LAST_NAME],1) + RIGHT(CONVERT(VARCHAR,[STUDENT].[SIS_NUMBER]),5) AS [User Name]
+	,LEFT([STUDENT].[FIRST_NAME],1) + LEFT([STUDENT].[LAST_NAME],1) + '-' + CONVERT(VARCHAR,[STUDENT].[SIS_NUMBER]) AS [User Name]
 	,'student' AS [Password]
 	,CONVERT(VARCHAR(4),YEAR([STUDENT].[BIRTH_DATE])) + '-' + RIGHT('000'+CONVERT(VARCHAR(2),DATEPART(MM,[STUDENT].[BIRTH_DATE])),2) + '-' + RIGHT('000'+CONVERT(VARCHAR(2),DATEPART(DD,[STUDENT].[BIRTH_DATE])),2) AS [DOB]
 	,CASE 
@@ -259,7 +293,7 @@ SELECT
 	,'' AS [Partner ID]
 	,'' AS [Action]
 	,'' AS [RTI Level]
-	,[STUDENT].[GIFTED_STATUS] AS [Gifted / Talented]
+	,CASE WHEN [STUDENT].[GIFTED_STATUS] = 'Y' THEN 'true' ELSE 'false' END AS [Gifted / Talented]
 	,'' AS [Reserved1]
 	,'' AS [Reserved2]
 	,'' AS [Reserved3]
@@ -268,6 +302,8 @@ SELECT
 	,'' AS [Reserved6]
 	,'' AS [Reserved7]
 	,'' AS [Reserved8]
+	
+	,ROW_NUMBER() OVER (PARTITION BY [STUDENT].[STATE_STUDENT_NUMBER] ORDER BY [STUDENT].[STATE_STUDENT_NUMBER] DESC) AS RN
 	
 FROM
 	ASOF_ENROLLMENTS AS [ENROLLMENTS]
@@ -279,3 +315,10 @@ FROM
 	
 WHERE
 	[ENROLLMENTS].[GRADE] IN ('K','01','02','03','04','05','06','07','08')
+	AND [STUDENT].[STATE_STUDENT_NUMBER] IS NOT NULL
+	--AND [STUDENT].[STATE_STUDENT_NUMBER] IN ('848128641','745685594')
+	
+) AS [STUFF]
+
+WHERE
+	[RN] = 1

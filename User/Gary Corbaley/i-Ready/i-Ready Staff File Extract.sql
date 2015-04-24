@@ -1,7 +1,29 @@
 
 
-
-
+SELECT
+	[Client ID]
+	,[School ID]
+	,[Staff Member SIS ID]
+	,[First Name]
+	,[Last Name]
+	,[Role]
+	,[EMAIL]
+	,[User Name]
+	,[Password]
+	,[Partner ID]
+	,[Action]
+	,[Reserved1]
+	,[Reserved2]
+	,[Reserved3]
+	,[Reserved4]
+	,[Reserved5]
+	,[Reserved6]
+	,[Reserved7]
+	,[Reserved8]
+	,[Reserved9]
+	,[Reserved10]
+FROM
+(
 SELECT DISTINCT
 	'nm-albuq87774' AS [Client ID]
 	,[School].[SCHOOL_CODE] AS [School ID]
@@ -31,6 +53,7 @@ SELECT DISTINCT
 	,'' AS [Reserved8]
 	,'' AS [Reserved9]
 	,'' AS [Reserved10]
+	,ROW_NUMBER() OVER (PARTITION BY REPLACE([STAFF].[BADGE_NUM],'e',''), [STAFF_PERSON].[FIRST_NAME] ORDER BY [STAFF_PERSON].[LAST_NAME] DESC) AS RN
 	
 FROM
 	rev.[EPC_STAFF_SCH_YR] AS [STAFF_SCHOOL_YEAR]
@@ -63,3 +86,13 @@ FROM
 WHERE
 	[RevYear].[SCHOOL_YEAR] = '2014'
 	--AND [RevYear].[EXTENSION] = 'R'
+	AND [STAFF_PERSON].[FIRST_NAME] != 'Teacher'
+	AND [STAFF_PERSON].[EMAIL] IS NOT NULL
+	AND ISNUMERIC(REPLACE([STAFF].[BADGE_NUM],'e','')) = 1
+	AND LEFT(REPLACE([STAFF].[BADGE_NUM],'e',''),1) != '9'
+	AND REPLACE([STAFF].[BADGE_NUM],'e','') NOT IN ('222222222','666666666','777777777','888888888','999999999')
+) AS [SUB1]
+
+WHERE
+	[RN] = 1
+	

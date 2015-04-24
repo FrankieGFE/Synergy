@@ -324,34 +324,34 @@ SELECT DISTINCT
 	--,[SCHEDULE].[COURSE_TITLE] AS [Course Name]
 	--,[SCHEDULE].[SUBJECT_AREA_1] AS [Subject]
 	
-	,[STUDENT].[STATE_STUDENT_NUMBER] AS [Student SIS ID]
-	,[STUDENT].[SIS_NUMBER] AS [Student Number]
-	,[STUDENT].[FIRST_NAME] AS [First Name]
-	,[STUDENT].[LAST_NAME] as [Last Name]
-	,CASE WHEN [ENROLLMENTS].[GRADE] = 'K' THEN '0' ELSE [ENROLLMENTS].[GRADE] END AS [Grade Level]
-	,LEFT([STUDENT].[FIRST_NAME],1) + LEFT([STUDENT].[LAST_NAME],1) + RIGHT(CONVERT(VARCHAR,[STUDENT].[SIS_NUMBER]),5) AS [User Name]
-	,'student' AS [Password]
-	,CONVERT(VARCHAR(4),YEAR([STUDENT].[BIRTH_DATE])) + '-' + RIGHT('000'+CONVERT(VARCHAR(2),DATEPART(MM,[STUDENT].[BIRTH_DATE])),2) + '-' + RIGHT('000'+CONVERT(VARCHAR(2),DATEPART(DD,[STUDENT].[BIRTH_DATE])),2) AS [DOB]
-	,CASE 
-		WHEN [STUDENT].[RACE_1] = 'Native American' THEN 1
-		WHEN [STUDENT].[RACE_1] = 'Asian' THEN 2
-		WHEN [STUDENT].[RACE_1] = 'African-American' THEN 3
-		WHEN [STUDENT].[RACE_1] = 'Pacific Islander' THEN 4
-		WHEN [STUDENT].[RACE_1] = 'White' THEN 5
-		ELSE 6		
-	END AS [Ethnicity]
-	,CASE WHEN [STUDENT].[HISPANIC_INDICATOR] = 'Y' THEN 'true' ELSE 'false' END AS [Hispanic]
-	,CASE WHEN [STUDENT].[GENDER] = 'M' THEN 'Male' ELSE 'Female' END AS [Gender]
-	,CASE WHEN [STUDENT].[FRM_CODE] IS NOT NULL THEN 'true' ELSE 'false' END AS [Economically Disadvantaged]
-	,CASE WHEN [STUDENT].[ELL_STATUS] = 'Y' THEN 'true' ELSE 'false' END AS [English Learner]
-	,CASE WHEN [STUDENT].[SPED_STATUS] = 'Y' THEN 'true' ELSE 'false' END AS [Special Education]
-	,'' AS [Migrant]
-	,'' AS [Math Developmental Level]
-	,'' AS [English Developmental Level]
-	,'' AS [Partner ID]
-	,'' AS [Action]
-	,'' AS [RTI Level]
-	,[STUDENT].[GIFTED_STATUS] AS [Gifted / Talented]
+	--,[STUDENT].[STATE_STUDENT_NUMBER] AS [Student SIS ID]
+	--,[STUDENT].[SIS_NUMBER] AS [Student Number]
+	--,[STUDENT].[FIRST_NAME] AS [First Name]
+	--,[STUDENT].[LAST_NAME] as [Last Name]
+	--,CASE WHEN [ENROLLMENTS].[GRADE] = 'K' THEN '0' ELSE [ENROLLMENTS].[GRADE] END AS [Grade Level]
+	--,LEFT([STUDENT].[FIRST_NAME],1) + LEFT([STUDENT].[LAST_NAME],1) + RIGHT(CONVERT(VARCHAR,[STUDENT].[SIS_NUMBER]),5) AS [User Name]
+	--,'student' AS [Password]
+	--,CONVERT(VARCHAR(4),YEAR([STUDENT].[BIRTH_DATE])) + '-' + RIGHT('000'+CONVERT(VARCHAR(2),DATEPART(MM,[STUDENT].[BIRTH_DATE])),2) + '-' + RIGHT('000'+CONVERT(VARCHAR(2),DATEPART(DD,[STUDENT].[BIRTH_DATE])),2) AS [DOB]
+	--,CASE 
+	--	WHEN [STUDENT].[RACE_1] = 'Native American' THEN 1
+	--	WHEN [STUDENT].[RACE_1] = 'Asian' THEN 2
+	--	WHEN [STUDENT].[RACE_1] = 'African-American' THEN 3
+	--	WHEN [STUDENT].[RACE_1] = 'Pacific Islander' THEN 4
+	--	WHEN [STUDENT].[RACE_1] = 'White' THEN 5
+	--	ELSE 6		
+	--END AS [Ethnicity]
+	--,CASE WHEN [STUDENT].[HISPANIC_INDICATOR] = 'Y' THEN 'true' ELSE 'false' END AS [Hispanic]
+	--,CASE WHEN [STUDENT].[GENDER] = 'M' THEN 'Male' ELSE 'Female' END AS [Gender]
+	--,CASE WHEN [STUDENT].[FRM_CODE] IS NOT NULL THEN 'true' ELSE 'false' END AS [Economically Disadvantaged]
+	--,CASE WHEN [STUDENT].[ELL_STATUS] = 'Y' THEN 'true' ELSE 'false' END AS [English Learner]
+	--,CASE WHEN [STUDENT].[SPED_STATUS] = 'Y' THEN 'true' ELSE 'false' END AS [Special Education]
+	--,'' AS [Migrant]
+	--,'' AS [Math Developmental Level]
+	--,'' AS [English Developmental Level]
+	--,'' AS [Partner ID]
+	--,'' AS [Action]
+	--,'' AS [RTI Level]
+	--,[STUDENT].[GIFTED_STATUS] AS [Gifted / Talented]
 	,'' AS [Reserved1]
 	,'' AS [Reserved2]
 	,'' AS [Reserved3]
@@ -394,6 +394,7 @@ FROM
 WHERE
 	[ENROLLMENTS].[GRADE] IN ('K','01','02','03','04','05','06','07','08')
 	AND [SCHEDULE].[PRIMARY_STAFF] = 1
+	AND [STUDENT].[STATE_STUDENT_NUMBER] IS NOT NULL
 	
 ORDER BY
 	[STUDENT].[STATE_STUDENT_NUMBER]
