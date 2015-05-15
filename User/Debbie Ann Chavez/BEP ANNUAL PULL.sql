@@ -12,10 +12,10 @@ SELECT
 	,CONVERT(INT,ROUND(COALESCE(CAST([Intermediate] AS DECIMAL)/NULLIF(CAST(Beginning + [Intermediate] + Proficient AS DECIMAL),0),0) * 100,0)) AS IPercentage
 	,Proficient
 	,CONVERT(INT,ROUND(COALESCE(CAST(Proficient AS DECIMAL)/NULLIF (CAST(Beginning + [Intermediate] + Proficient AS DECIMAL),0),0) * 100,0)) AS PPercentage
-
+*/
 FROM
 (
-*/
+
 SELECT 
 *
 	FROM
