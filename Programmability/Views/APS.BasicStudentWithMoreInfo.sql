@@ -14,7 +14,7 @@ IF NOT EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[APS].[Basi
 	EXEC ('CREATE VIEW APS.BasicStudentWithMoreInfo AS SELECT 0 AS DUMMY')
 GO
 
-CREATE VIEW APS.BasicStudentWithMoreInfo AS
+ALTER VIEW APS.BasicStudentWithMoreInfo AS
 
 SELECT
 	-- Basic Student Demographics	
