@@ -2,7 +2,7 @@
 
 
 DECLARE @SchoolGu VARCHAR = '%'
-DECLARE @AsOfDate DATETIME = GETDATE()
+DECLARE @AsOfDate DATETIME = '08/13/2015' --GETDATE()
 DECLARE @Grade AS VARCHAR(2) = '08'
 DECLARE @Buisness AS VARCHAR(1) = 'Y'
 DECLARE @University AS VARCHAR(1) = 'N'
@@ -44,6 +44,11 @@ FROM
 	rev.REV_ORGANIZATION AS [Organization] -- Contains the School Name
 	ON 
 	[OrgYear].[ORGANIZATION_GU] = [Organization].[ORGANIZATION_GU]
+	
+	--INNER JOIN 
+	--rev.REV_YEAR AS [RevYear] -- Contains the School Year
+	--ON 
+	--[OrgYear].[YEAR_GU] = [RevYear].[YEAR_GU]
 	
 	INNER JOIN
 	rev.[EPC_SCH] AS [SCHOOL] -- Contains School Code
@@ -125,12 +130,14 @@ FROM
 	AND [PARENT_NAMES].[rno] = 1
 	
 WHERE
-	[Organization].[ORGANIZATION_GU] LIKE @SchoolGu
-	AND [Grades].[VALUE_DESCRIPTION] LIKE @Grade
-	--AND [Grades].[VALUE_DESCRIPTION] IN ('09','10','11','12')
-	--AND [School].[SCHOOL_CODE] = '452'
-	--AND [Organization].[ORGANIZATION_NAME] LIKE 'Roos%'
-	AND [Student].[MAIL_ZIP] IN ('87123','87112','87111','87108','87106')
+	--[Organization].[ORGANIZATION_GU] LIKE @SchoolGu
+	--[RevYear].[SCHOOL_YEAR] = '2014'
+	--AND [Grades].[VALUE_DESCRIPTION] LIKE @Grade
+	[Grades].[VALUE_DESCRIPTION] IN ('09','10','11')
+	--AND [School].[SCHOOL_CODE] IN ('452','407','427','485','440','435','420','418','455','448')
+	AND [School].[SCHOOL_CODE] IN ('514','560','530','515','550')
+	--AND [Organization].[ORGANIZATION_NAME] LIKE '%Sandia%'
+	--AND [Student].[MAIL_ZIP] IN ('87123','87112','87111','87108','87106')
 	
 --	--- EXCEPTIONS
 	AND ([STUDENT_EXCEPTIONS].[EXCLUDE_BUSINESS] IS NULL OR [STUDENT_EXCEPTIONS].[EXCLUDE_BUSINESS] != @Buisness OR @Buisness = 'N')

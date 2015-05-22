@@ -6,11 +6,15 @@
  * Request By: Debbie Chavez
  * InitialRequestDate: 4/29/2015
  * 
- * This script will pull detail demographic information for all students in the system
+ * This script will pull detail demographic information for all students in the system. Demographic inforamtion includes Addresses, Phone Number Home Language Race Codes, Parent Names, and SPED ELL and Economic Status
  * One Record Per Student
  */
 
+IF NOT EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[APS].[BasicStudentWithMoreInfo]'))
+	EXEC ('CREATE VIEW APS.BasicStudentWithMoreInfo AS SELECT 0 AS DUMMY')
+GO
 
+ALTER VIEW APS.BasicStudentWithMoreInfo AS
 
 SELECT
 	-- Basic Student Demographics	
@@ -42,7 +46,7 @@ SELECT
                    + RIGHT([PERSON].[PRIMARY_PHONE],4) AS [PRIMARY_PHONE]
     
     -- Most Recent Lunch Status
-    ,[FRMHistory].[FRM_CODE]
+    ,[FRMHistory].[FRM_CODE] AS [LUNCH_STATUS]
     
     -- Most Recent ELL Status
     ,CASE WHEN [ELL_PGM].[PROGRAM_CODE] = '1' AND [ELL_PGM].[EXIT_DATE] IS NULL THEN 'Y' ELSE 'N' END AS [ELL_STATUS]

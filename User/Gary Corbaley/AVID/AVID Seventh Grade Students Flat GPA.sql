@@ -32,10 +32,10 @@ SELECT -- DISTINCT --TOP 972
 	
 	--,[Students].[FRST_NME]
 	--,[Students].[LST_NME]
-	--,[Enrollments].[SCH_YR]
+	,[Enrollments].[SCH_YR]
 	--,[Enrollments].[SCH_NBR]
 	--,[School].[SCH_NME]
-	--,[Enrollments].[GRDE]
+	,[Enrollments].[GRDE]
 	--,[Students].[GENDER]
 	--,[Students].[Race]
 	--,[Students].[FRPL]
@@ -157,7 +157,7 @@ FROM
 		APS.BasicGPA
 	WHERE
 		--ENR_GRDE IN ('06','07','08')
-		ENR_GRDE > '08'
+		ENR_GRDE = '09'
 		AND SCH_YR = 2014
 	GROUP BY
 		DST_NBR
