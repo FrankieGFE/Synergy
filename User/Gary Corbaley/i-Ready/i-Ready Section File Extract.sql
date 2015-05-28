@@ -324,7 +324,7 @@ SELECT
 	,[Reserved5]
 	,[Reserved6]
 	,[Reserved7]
-	,[Reserved8]
+	--,[Reserved8]
 	--,[Reserved9]
 	--,[Reserved10]
 	
