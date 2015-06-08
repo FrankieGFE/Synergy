@@ -21,6 +21,7 @@ SELECT
 	,Student.SIS_NUMBER AS [StudentNumber]
 	,Person.LAST_NAME + ', ' + Person.FIRST_NAME AS Name
 	,HomeLanguage.VALUE_DESCRIPTION AS HomeLanguage
+	,Student.STUDENT_GU
 FROM
 	APS.PrimaryEnrollmentsAsOf(@AsOfDate) AS Enroll
 	INNER JOIN
