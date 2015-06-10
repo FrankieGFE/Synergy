@@ -46,6 +46,8 @@ JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATI
                                        and oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
 JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU 
 )
+
+
 -- Only Summer Enrollments
 , OSumEnr AS
 (
@@ -64,6 +66,8 @@ join rev.rev_year               yr   ON yr.year_gu        = oyr.YEAR_GU
 									   and yr.EXTENSION   = 'S'
 JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU 
 )
+
+
 -- Only primary active enrollment
 SELECT 
    @vDistrict_Number                        AS [DistrictNumber]
@@ -96,7 +100,8 @@ JOIN rev.REV_ORGANIZATION      org  ON org.ORGANIZATION_GU = oyr.ORGANIZATION_GU
 JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
 JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
 LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12','GRADE') grd on grd.VALUE_CODE = ssy.GRADE 
-where not exists (select s.STUDENT_GU from OSumEnr s where s.STUDENT_GU = stu.STUDENT_GU and s.STATUS is null and s.EXCLUDE_ADA_ADM is null)
+
+--where not exists (select s.STUDENT_GU from OSumEnr s where s.STUDENT_GU = stu.STUDENT_GU and s.STATUS is null and s.EXCLUDE_ADA_ADM is null)
 -- Only concurrent active enrollment if no primary active enrollment is there
 
 UNION
@@ -132,8 +137,11 @@ JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
 JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
 LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12','GRADE') grd on grd.VALUE_CODE = ssy.GRADE 
 --where we have no active primary enrollment
+
 WHERE not exists(select s.STUDENT_GU from AllEnrollments s where s.STUDENT_GU = stu.STUDENT_GU and s.STATUS is null and s.EXCLUDE_ADA_ADM is null)
-      and not exists (select s.STUDENT_GU from OSumEnr s where s.STUDENT_GU = stu.STUDENT_GU and s.STATUS is null and s.EXCLUDE_ADA_ADM is null)
+      --and not exists (select s.STUDENT_GU from OSumEnr s where s.STUDENT_GU = stu.STUDENT_GU and s.STATUS is null and s.EXCLUDE_ADA_ADM is null)
+
+
 -- Only Summer Enrollments
 UNION
 SELECT 
@@ -169,6 +177,8 @@ JOIN rev.REV_ORGANIZATION      org  ON org.ORGANIZATION_GU = oyr.ORGANIZATION_GU
 JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
 JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
 LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12','GRADE') grd on grd.VALUE_CODE = ssy.GRADE 
+
+
 
 END --END STORED PROCEDURE
 GO
