@@ -174,6 +174,25 @@ AND
 ( rev.EPC_STU.HOME_LANGUAGE IS NULL
 OR rev.EPC_STU.HOME_LANGUAGE != UPDATESELECT.HOME_LANGUAGE)
 
+--------------------------------------------------------------------------------------------------------------------------------------------
+UPDATE rev.EPC_STU
+	SET HOME_LANGUAGE = '54'
+
+FROM 
+APS.PrimaryEnrollmentDetailsAsOf(GETDATE()) AS PRIM
+LEFT JOIN
+APS.LCEMostRecentHLSAsOf(GETDATE()) AS HLS
+ON
+PRIM.STUDENT_GU = HLS.STUDENT_GU
+LEFT JOIN
+APS.BasicStudent AS BS
+ON
+PRIM.STUDENT_GU = BS.STUDENT_GU
+
+WHERE
+HLS.STUDENT_GU IS NULL
+AND PRIM.STUDENT_GU = rev.EPC_STU.STUDENT_GU
+----------------------------------------------------------------------------------------------------------------------------------------------
 
 
 --Validation Check to see how many records will be processed, 0 = INSERT-WILL UPDATE, 1 = ROLLBACK-WILL NOT UPDATE
