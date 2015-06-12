@@ -104,6 +104,7 @@ left join (SELECT VALUE_CODE, LIST_ORDER,ALT_CODE_3
            WHERE  def.LOOKUP_NAMESPACE  = 'Revelation'
                   AND def.LOOKUP_DEF_CODE   = 'ETHNICITY') r on r.VALUE_CODE = seth.ETHNIC_CODE
 )
+/*
 SELECT 
   S.SIS_NUMBER                 AS [STUDENT ID NUMBER]
 , SP.FIRST_NAME                AS [FIRST NAME]
@@ -176,6 +177,7 @@ AND exists (select sc.student_gu from StuClasses sc where sc.STUDENT_GU = s.STUD
 	 and not exists (select ss.student_gu from SummarSchoolStu ss where ss.STUDENT_GU = s.STUDENT_GU)
 -- Only Summer School enrollments
 UNION
+*/
 SELECT 
   S.SIS_NUMBER                 AS [STUDENT ID NUMBER]
 , SP.FIRST_NAME                AS [FIRST NAME]
@@ -291,7 +293,7 @@ JOIN rev.EPC_STU_YR            AS SY     ON SY.STU_SCHOOL_YEAR_GU   = SSY.STUDEN
 JOIN rev.REV_ORGANIZATION_YEAR AS OY     ON OY.ORGANIZATION_YEAR_GU = SSY.ORGANIZATION_YEAR_GU
 JOIN rev.REV_YEAR              AS Y      ON Y.YEAR_GU               = SY.YEAR_GU 
                                             AND y.SCHOOL_YEAR       = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear) + 1
-											AND y.EXTENSION         = 'R'
+											AND y.EXTENSION         IN ('R', 'N')
 JOIN rev.REV_ORGANIZATION      AS O      ON O.ORGANIZATION_GU       = OY.ORGANIZATION_GU 
 JOIN rev.EPC_SCH               AS SCH    ON SCH.ORGANIZATION_GU     = O.ORGANIZATION_GU 
 LEFT JOIN rev.EPC_STU_PGM_ELL  AS ell    ON ell.STUDENT_GU          = s.STUDENT_GU 
@@ -312,3 +314,4 @@ left join RaceCodes            as r4     on r4.STUDENT_GU           = s.STUDENT_
 left join RaceCodes            as r5     on r5.STUDENT_GU           = s.STUDENT_GU and r5.rn =5
 -------------------
 WHERE SCH.SCHOOL_CODE IS NOT NULL
+
