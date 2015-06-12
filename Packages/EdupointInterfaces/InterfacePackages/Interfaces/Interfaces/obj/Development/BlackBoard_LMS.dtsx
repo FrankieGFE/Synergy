@@ -6,8 +6,8 @@
   DTS:CreatorComputerName="AZLT-MMELARCODE"
   DTS:CreationDate="4/3/2014 10:11:55 AM"
   DTS:PackageType="5"
-  DTS:VersionBuild="49"
-  DTS:VersionGUID="{7A6CD393-ABD8-4ECC-B626-80938D52B064}"
+  DTS:VersionBuild="51"
+  DTS:VersionGUID="{4537E657-083A-4F5E-B894-A3265D53B72C}"
   DTS:LastModifiedProductVersion="11.0.2100.60"
   DTS:LocaleID="1033"
   DTS:ObjectName="BlackBoard_LMS"
@@ -27,7 +27,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAmsyWuLEdQkWEQkzaBXeLYwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABnHnmQAmw8/lkIZlRw7QHNAAAAAASAAACgAAAAEAAAAMa7QaWCW1QjLKTVsKgcPlAwAAAAIHNlVrtPc7EITHayqUiXXtnaoEThrKQxtfhokpZi9qWjQZ+prZhQLoUHrTWd/h9GFAAAAGMRndtINKCu2Xy0o7u15u2mImNd</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAmsyWuLEdQkWEQkzaBXeLYwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACtIUyQGskjGSma1iPgRDh4AAAAAASAAACgAAAAEAAAAO6aWSWX3X0CW9RlWvyMrDYwAAAAXN37oX+fQmpKnxdgTpUx2nrjZO9MfrQ9SusRd4I8Be1+P4GTvgcitZg133yLnUCfFAAAAPzUfAG6z7529ZQT/pCL/4rNC4TA</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -161,7 +161,7 @@
       DTS:DTSID="{670E999F-9D0E-4749-A55D-3A53E751FAE2}"
       DTS:CreationName="">
       <DTS:VariableValue
-        DTS:DataType="8">***FileFooter|0|09:27:18 06/12/2015</DTS:VariableValue>
+        DTS:DataType="8">***FileFooter|0|09:49:32 06/12/2015</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:Expression="&quot;***FileFooter|&quot;+ ((DT_WSTR, 10) @[User::FooterRowCount2])+&quot;|&quot;&#xA;+ RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;hh&quot;, GETDATE() ), 2)+&quot;:&quot;&#xA;+ RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;mi&quot;, GETDATE() ), 2)+&quot;:&quot;&#xA;+ RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;ss&quot;, GETDATE() ), 2)+ &quot; &quot;&#xA;+ RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;month&quot;, GETDATE() ), 2)+&quot;/&quot;&#xA;+ RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;day&quot;, GETDATE() ), 2)+&quot;/&quot;&#xA;+ RIGHT(&quot;0&quot; + (DT_WSTR,4)DATEPART(&quot;year&quot;, GETDATE() ),4)&#xA;+&quot;||||||&quot;"
@@ -172,7 +172,7 @@
       DTS:DTSID="{96F185BE-B48F-44C7-97EB-1D9EA1B4FEBC}"
       DTS:CreationName="">
       <DTS:VariableValue
-        DTS:DataType="8">***FileFooter|0|09:27:18 06/12/2015||||||</DTS:VariableValue>
+        DTS:DataType="8">***FileFooter|0|09:49:32 06/12/2015||||||</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:Namespace="User"
@@ -201,7 +201,7 @@
       DTS:DTSID="{C02A8EC6-E9EF-4F68-8724-E2B24A0F5D63}"
       DTS:CreationName="">
       <DTS:VariableValue
-        DTS:DataType="8">SELECT '***FileFooter|0|09:27:18 06/12/2015' as Footer</DTS:VariableValue>
+        DTS:DataType="8">SELECT '***FileFooter|0|09:49:32 06/12/2015' as Footer</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:Expression="&quot;SELECT '&quot; +  @[User::FooterRow2] + &quot;' as Footer&quot;"
@@ -212,7 +212,7 @@
       DTS:DTSID="{C39BBF77-3E50-4290-AE0B-48C489D23DB1}"
       DTS:CreationName="">
       <DTS:VariableValue
-        DTS:DataType="8">SELECT '***FileFooter|0|09:27:18 06/12/2015||||||' as Footer</DTS:VariableValue>
+        DTS:DataType="8">SELECT '***FileFooter|0|09:49:32 06/12/2015||||||' as Footer</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:Namespace="User"
@@ -1313,7 +1313,7 @@ JOIN rev.EPC_STU_SCH_YR ssyr        ON ssyr.STUDENT_GU = stu.STUDENT_GU
                                        AND ssyr.STATUS IS NULL
                                        AND ssyr.LEAVE_DATE IS NULL 
 JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
-                                       AND oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)</property>
+                                       AND oyr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)</property>
                 <property
                   name="SqlCommandVariable"
                   dataType="System.String"
@@ -1520,7 +1520,7 @@ JOIN rev.EPC_STU_SCH_YR ssyr        ON ssyr.STUDENT_GU = stu.STUDENT_GU
                                        AND ssyr.STATUS IS NULL
                                        AND ssyr.LEAVE_DATE IS NULL 
 JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
-                                       AND oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+                                       AND oyr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
 JOIN rev.REV_ORGANIZATION org       ON org.ORGANIZATION_GU = oyr.ORGANIZATION_GU
 JOIN rev.EPC_SCH sch                ON sch.ORGANIZATION_GU = org.ORGANIZATION_GU
 JOIN rev.REV_PERSON     per         ON per.PERSON_GU = stu.STUDENT_GU</property>
@@ -2233,13 +2233,13 @@ JOIN rev.REV_PERSON     per         ON per.PERSON_GU = stu.STUDENT_GU</property>
     design-time-name="Package\UsersParents">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="171.735849056604,43.9245283018868"
+          Size="172,44"
           Id="Package\UsersParents\Flat File Destination"
           TopLeft="62.4056603773585,99.9150943396226" />
         <NodeLayout
-          Size="148.754716981133,43.9245283018868"
+          Size="148.8,44"
           Id="Package\UsersParents\DB Query"
           TopLeft="5.5,5.5" />
         <EdgeLayout
@@ -2265,29 +2265,35 @@ JOIN rev.REV_PERSON     per         ON per.PERSON_GU = stu.STUDENT_GU</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\UsersParents\DB Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\UserStudents">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="171.735849056604,43.9245283018868"
+          Size="172,44"
           Id="Package\UserStudents\Flat File Destination"
           TopLeft="60.4433962264151,161.235849056604" />
         <NodeLayout
-          Size="135.773584905661,43.9245283018868"
+          Size="136,44"
           Id="Package\UserStudents\Row Count"
           TopLeft="52.4433962264151,79.3490566037736" />
         <NodeLayout
-          Size="148.754716981133,43.9245283018868"
+          Size="148.8,44"
           Id="Package\UserStudents\DB Query"
           TopLeft="5.5,5.5" />
         <EdgeLayout
@@ -2313,9 +2319,7 @@ JOIN rev.REV_PERSON     per         ON per.PERSON_GU = stu.STUDENT_GU</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2341,13 +2345,19 @@ JOIN rev.REV_PERSON     per         ON per.PERSON_GU = stu.STUDENT_GU</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\UserStudents\DB Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
