@@ -31,7 +31,7 @@ JOIN rev.EPC_STU_SCH_YR ssyr        ON ssyr.STUDENT_SCHOOL_YEAR_GU = syr.STU_SCH
 JOIN rev.EPC_STU stu                ON stu.STUDENT_GU = syr.STUDENT_GU
 JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU 
 JOIN rev.REV_ORGANIZATION org       ON org.ORGANIZATION_GU = oyr.ORGANIZATION_GU
-JOIN rev.REV_YEAR yr                ON yr.YEAR_GU = oyr.YEAR_GU and yr.SCHOOL_YEAR = (SELECT SCHOOL_YEAR FROM rev.SIF_22_Common_CurrentYear)
+JOIN rev.REV_YEAR yr                ON yr.YEAR_GU = oyr.YEAR_GU and yr.SCHOOL_YEAR >= (SELECT SCHOOL_YEAR FROM rev.SIF_22_Common_CurrentYear)
 JOIN (
       SELECT   
            stu.STUDENT_GU
@@ -63,7 +63,7 @@ JOIN (
    JOIN rev.EPC_STU_YR            AS SY  ON SY.STU_SCHOOL_YEAR_GU   = SSY.STUDENT_SCHOOL_YEAR_GU
    JOIN rev.REV_ORGANIZATION_YEAR AS OY  ON OY.ORGANIZATION_YEAR_GU = SSY.ORGANIZATION_YEAR_GU
    JOIN rev.REV_YEAR              AS Y   ON Y.YEAR_GU               = SY.YEAR_GU 
-                                            AND y.SCHOOL_YEAR       = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
+                                            AND y.SCHOOL_YEAR       >= (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
    JOIN rev.EPC_STU_CLASS         cls    ON cls.STUDENT_SCHOOL_YEAR_GU  = ssy.STUDENT_SCHOOL_YEAR_GU
    JOIN rev.EPC_SCH_YR_SECT       sec    ON cls.SECTION_GU              = sec.SECTION_GU
    JOIN rev.EPC_SCH_YR_CRS        sycrs  ON sycrs.SCHOOL_YEAR_COURSE_GU = sec.SCHOOL_YEAR_COURSE_GU
@@ -149,7 +149,7 @@ JOIN rev.EPC_STU_SCH_YR        AS SSY    ON SSY.STUDENT_GU          = S.STUDENT_
 JOIN rev.EPC_STU_YR            AS SY     ON SY.STU_SCHOOL_YEAR_GU   = SSY.STUDENT_SCHOOL_YEAR_GU
 JOIN rev.REV_ORGANIZATION_YEAR AS OY     ON OY.ORGANIZATION_YEAR_GU = SSY.ORGANIZATION_YEAR_GU
 JOIN rev.REV_YEAR              AS Y      ON Y.YEAR_GU               = SY.YEAR_GU 
-                                            AND y.SCHOOL_YEAR       = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
+                                            AND y.SCHOOL_YEAR       >= (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
 											AND y.EXTENSION         = 'R'
 JOIN rev.REV_ORGANIZATION      AS O      ON O.ORGANIZATION_GU       = OY.ORGANIZATION_GU 
 JOIN rev.EPC_SCH               AS SCH    ON SCH.ORGANIZATION_GU     = O.ORGANIZATION_GU
@@ -243,7 +243,7 @@ left join RaceCodes            as r4     on r4.STUDENT_GU           = s.STUDENT_
 left join RaceCodes            as r5     on r5.STUDENT_GU           = s.STUDENT_GU and r5.rn =5
 -------------------
 WHERE SCH.SCHOOL_CODE IS NOT NULL
-AND exists (select sc.student_gu from StuClasses sc where sc.STUDENT_GU = s.STUDENT_GU and rn = 1)
+--AND exists (select sc.student_gu from StuClasses sc where sc.STUDENT_GU = s.STUDENT_GU and rn = 1)
 -- Next Years Regular Students
 UNION
 SELECT 
