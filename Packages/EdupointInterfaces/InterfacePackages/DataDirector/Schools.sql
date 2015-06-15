@@ -8,7 +8,7 @@ FROM     rev.REV_ORGANIZATION           org
          JOIN rev.EPC_SCH               sch  on sch.ORGANIZATION_GU       = org.ORGANIZATION_GU
          JOIN rev.REV_ORGANIZATION_YEAR oyr  on oyr.ORGANIZATION_GU       = org.ORGANIZATION_GU
          JOIN rev.REV_YEAR              yr   on yr.YEAR_GU                = oyr.YEAR_GU
-                                                and yr.SCHOOL_YEAR        = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
+                                                AND yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
          JOIN rev.EPC_SCH_YR_OPT        sopt on sopt.ORGANIZATION_YEAR_GU = oyr.ORGANIZATION_YEAR_GU
          LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') lowgrd on lowgrd.VALUE_CODE = 
                                                                      (select min(cast(G.GRADE as int)) from rev.EPC_SCH_GRADE G WHERE G.ORGANIZATION_YEAR_GU = oyr.ORGANIZATION_YEAR_GU)

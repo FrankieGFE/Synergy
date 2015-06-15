@@ -17,7 +17,7 @@ FROM     rev.EPC_STU                    stu
                                                 AND ssyr.STATUS IS NULL
          JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU   = ssyr.ORGANIZATION_YEAR_GU
          JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = oyr.YEAR_GU 
-                                                AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
+                                                AND yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
          JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU        = oyr.ORGANIZATION_GU
          JOIN rev.EPC_STU_CLASS         cls  ON cls.STUDENT_SCHOOL_YEAR_GU = ssyr.STUDENT_SCHOOL_YEAR_GU
          JOIN rev.EPC_SCH_YR_SECT       sect ON sect.SECTION_GU            = cls.SECTION_GU
