@@ -1,0 +1,1840 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/26/2014 2:49:24 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="046-CHAVEZDEB-L"
+  DTS:CreatorName="APS\e104090"
+  DTS:DTSID="{E2142298-E3EF-41F4-8AD6-EB6774A4FFB2}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="HayesPersonnelandStaff"
+  DTS:PackageType="5"
+  DTS:VersionBuild="25"
+  DTS:VersionGUID="{A49DB648-2D6D-44EE-AED9-2274528F5B3B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[180-SMAXODS-01.HELPER.lincinq]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2B413FAD-0DD4-4070-B8BA-28DA0740A97A}"
+      DTS:ObjectName="180-SMAXODS-01.HELPER.lincinq">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=180-SMAXODS-01.aps.edu.actd;User ID=lincinq;Initial Catalog=HELPER;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAeucieSOrKUa3zWkVeXgCHAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABTGcbE38E3fcezGM5FxZzfAAAAAASAAACgAAAAEAAAAM4efcbFq0XCYJY3SZPfVz4QAAAAcPPcnbdA/a3tuDJHSSHTJBQAAACj6DWf8+EpU9JAFn0p0LgcYvEcOg</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[180-SMAXODS-01.Lawson.lincinq]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1721E27E-F60C-4C71-810A-69105D06EB49}"
+      DTS:ObjectName="180-SMAXODS-01.Lawson.lincinq">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=180-SMAXODS-01.aps.edu.actd;User ID=lincinq;Initial Catalog=Lawson;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAeucieSOrKUa3zWkVeXgCHAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADhPQCoEhNR/+Ot85Git2EOAAAAAASAAACgAAAAEAAAAJigQU7pMLfXw8f6VZ3VdLcQAAAAE2J72XVGsMCkqm7w64v1ahQAAAAYSbCgG8xh9omB014qcPiIfFrELg</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ASTCourses.csv]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{8E62D705-8BF8-4AEE-85BE-BB1FF558D6B0}"
+      DTS:ObjectName="ASTCourses.csv">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\030-tipweb\e$\EVADATA\Upload\ASTCourses.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CourseID"
+              DTS:DTSID="{51105654-5492-42EC-B5AD-DDE3909A3355}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CourseShort"
+              DTS:DTSID="{17BA4A41-DF74-4693-8AF0-FE7DB179A4F2}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ASTInstructorSchedules.csv]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{2A229CF5-5040-4ACF-959F-853E29712383}"
+      DTS:ObjectName="ASTInstructorSchedules.csv">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\030-tipweb\e$\EVADATA\Upload\ASTInstructorSchedules.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LocationGivenID"
+              DTS:DTSID="{FFB855CD-9F93-4FAF-ACD8-713A3CDAC27C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PersonnelGivenID"
+              DTS:DTSID="{0F970479-6C71-42B8-B720-F192FCDF0EBA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="54"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ClassGivenID"
+              DTS:DTSID="{CCA5E851-FBA2-486E-8784-F77FFDBA0BEF}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="Hayes Personnel File"
+      DTS:DTSID="{6D6C86D7-3A99-478D-9352-0975822CFEED}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\Hayes\ASTPersonnel.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LocationGivenID"
+              DTS:DTSID="{F9BD5612-C0A7-44D5-BCB1-92A0F13671F1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PersonnelGivenID"
+              DTS:DTSID="{9B7CE472-E227-4038-9810-48B7BACF67F7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="15"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FirstName"
+              DTS:DTSID="{1FA10676-97AA-4B04-8D04-833F4834A213}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LastName"
+              DTS:DTSID="{B67A116B-F528-4921-B47F-ECA3E85E5A04}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager 1]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{9667D94C-C8B2-411C-9DB9-6D7C3D5A4674}"
+      DTS:ObjectName="Flat File Connection Manager 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\030-tipweb\e$\EVADATA\Upload\ASTStaff.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LocationGivenID"
+              DTS:DTSID="{380EDEE2-623C-4905-8825-715494286606}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="7"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PersonnelGivenID"
+              DTS:DTSID="{7D8F82F0-B381-46F1-90EF-7D923AE6467C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="15"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FirstName"
+              DTS:DTSID="{387AA276-4381-45EE-853D-C3D1BF4AED84}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LastName"
+              DTS:DTSID="{481DC8DF-6BB5-46EB-A1FA-A8011837FDA4}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager 2]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="Hayes AST Staff File"
+      DTS:DTSID="{7C75B1EC-7EE0-4F8D-AAB7-B2D1128A6B7C}"
+      DTS:ObjectName="Flat File Connection Manager 2">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\030-tipweb\e$\EVADATA\Upload\ASTPersonnel.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LocationGivenID"
+              DTS:DTSID="{7D4B47CD-1968-42D2-A9EA-75C9F7FF4C61}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PersonnelGivenID"
+              DTS:DTSID="{577EFC11-D0B7-4255-AEA6-AC001C4B1BC4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="15"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FirstName"
+              DTS:DTSID="{AA2C5C39-1026-4D3D-B9C5-05BD3E77ACDB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LastName"
+              DTS:DTSID="{3DBE65BD-AA80-49BC-983C-8EF648758792}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[synergydbdc.aps.edu.actd.ST_Production.HayesExport]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{B4C6A9F5-03A6-4551-BF94-D9404867CD7E}"
+      DTS:ObjectName="synergydbdc.aps.edu.actd.ST_Production.HayesExport">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=HayesExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAeucieSOrKUa3zWkVeXgCHAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAj04Elx6ft+qcUazBmnAVNAAAAAASAAACgAAAAEAAAADLvcV0r+Pl4qluabpFHAnYwAAAAQrGbx/VWs66w8DhuLMXBbssIRQxMdrVe35lYxvADXqQyOLRamKcrQ948/7ODFtKLFAAAAH68IynJ9V58ceqVrMc+35e+lIw1</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:LogProviders>
+    <DTS:LogProvider
+      DTS:ConfigString="180-SMAXODS-01.HELPER.lincinq"
+      DTS:CreationName="DTS.LogProviderSQLServer.3"
+      DTS:Description="Writes log entries for events to a SQL Server database"
+      DTS:DTSID="{B77FD50C-BC78-41BA-A25D-D1EF2FE408D3}"
+      DTS:ObjectName="SSIS log provider for SQL Server">
+      <DTS:ObjectData>
+        <InnerObject />
+      </DTS:ObjectData>
+    </DTS:LogProvider>
+  </DTS:LogProviders>
+  <DTS:Variables />
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="1">
+    <DTS:Property
+      DTS:DataType="8"
+      DTS:Name="EventFilter">2,7,OnError,13,OnInformation</DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnError"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnInformation"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:SelectedLogProviders>
+      <DTS:SelectedLogProvider
+        DTS:InstanceID="{B77FD50C-BC78-41BA-A25D-D1EF2FE408D3}" />
+    </DTS:SelectedLogProviders>
+  </DTS:LoggingOptions>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Courses"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{E0374BEA-1252-4100-AD2C-6200FDBD5455}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Courses"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Courses\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Courses\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ASTCourses.csv]"
+                  connectionManagerRefId="Package.ConnectionManagers[ASTCourses.csv]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Courses\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Courses\Flat File Destination.Inputs[Flat File Destination Input].Columns[CourseID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="CourseID"
+                      externalMetadataColumnId="Package\Courses\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CourseID]"
+                      lineageId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Output].Columns[CourseID]" />
+                    <inputColumn
+                      refId="Package\Courses\Flat File Destination.Inputs[Flat File Destination Input].Columns[CourseShort]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="CourseShort"
+                      externalMetadataColumnId="Package\Courses\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CourseShort]"
+                      lineageId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Output].Columns[CourseShort]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Courses\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CourseID]"
+                      dataType="wstr"
+                      length="20"
+                      name="CourseID" />
+                    <externalMetadataColumn
+                      refId="Package\Courses\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CourseShort]"
+                      dataType="wstr"
+                      length="30"
+                      name="CourseShort" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Courses\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+    *
+FROM
+    [EVASourcedb].[ASTCourses]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Courses\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[synergydbdc.aps.edu.actd.ST_Production.HayesExport]"
+                  connectionManagerRefId="Package.ConnectionManagers[synergydbdc.aps.edu.actd.ST_Production.HayesExport]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Output].Columns[CourseID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CourseID]"
+                      length="20"
+                      lineageId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Output].Columns[CourseID]"
+                      name="CourseID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Output].Columns[CourseShort]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CourseShort]"
+                      length="30"
+                      lineageId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Output].Columns[CourseShort]"
+                      name="CourseShort"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CourseID]"
+                      dataType="wstr"
+                      length="20"
+                      name="CourseID" />
+                    <externalMetadataColumn
+                      refId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CourseShort]"
+                      dataType="wstr"
+                      length="30"
+                      name="CourseShort" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CourseID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CourseID]"
+                      name="CourseID" />
+                    <outputColumn
+                      refId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CourseShort]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CourseShort]"
+                      name="CourseShort" />
+                    <outputColumn
+                      refId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Courses.Paths[OLE DB Source Output]"
+              endId="Package\Courses\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Courses\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\InstructorSchedules"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{3C1EF431-301D-417A-AB01-8F5A95E2293A}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="InstructorSchedules"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\InstructorSchedules\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\InstructorSchedules\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ASTInstructorSchedules.csv]"
+                  connectionManagerRefId="Package.ConnectionManagers[ASTInstructorSchedules.csv]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\InstructorSchedules\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\InstructorSchedules\Flat File Destination.Inputs[Flat File Destination Input].Columns[LocationGivenID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="LocationGivenID"
+                      externalMetadataColumnId="Package\InstructorSchedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LocationGivenID]"
+                      lineageId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationGivenID]" />
+                    <inputColumn
+                      refId="Package\InstructorSchedules\Flat File Destination.Inputs[Flat File Destination Input].Columns[PersonnelGivenID]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="PersonnelGivenID"
+                      externalMetadataColumnId="Package\InstructorSchedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PersonnelGivenID]"
+                      lineageId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersonnelGivenID]" />
+                    <inputColumn
+                      refId="Package\InstructorSchedules\Flat File Destination.Inputs[Flat File Destination Input].Columns[ClassGivenID]"
+                      cachedDataType="wstr"
+                      cachedLength="54"
+                      cachedName="ClassGivenID"
+                      externalMetadataColumnId="Package\InstructorSchedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ClassGivenID]"
+                      lineageId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClassGivenID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\InstructorSchedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LocationGivenID]"
+                      dataType="wstr"
+                      length="20"
+                      name="LocationGivenID" />
+                    <externalMetadataColumn
+                      refId="Package\InstructorSchedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PersonnelGivenID]"
+                      dataType="wstr"
+                      length="10"
+                      name="PersonnelGivenID" />
+                    <externalMetadataColumn
+                      refId="Package\InstructorSchedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ClassGivenID]"
+                      dataType="wstr"
+                      length="54"
+                      name="ClassGivenID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\InstructorSchedules\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+    *
+FROM
+    [EVASourcedb].[ASTInstructorSchedules]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\InstructorSchedules\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[synergydbdc.aps.edu.actd.ST_Production.HayesExport]"
+                  connectionManagerRefId="Package.ConnectionManagers[synergydbdc.aps.edu.actd.ST_Production.HayesExport]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationGivenID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LocationGivenID]"
+                      length="20"
+                      lineageId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationGivenID]"
+                      name="LocationGivenID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersonnelGivenID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PersonnelGivenID]"
+                      length="10"
+                      lineageId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersonnelGivenID]"
+                      name="PersonnelGivenID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClassGivenID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClassGivenID]"
+                      length="54"
+                      lineageId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClassGivenID]"
+                      name="ClassGivenID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LocationGivenID]"
+                      dataType="wstr"
+                      length="20"
+                      name="LocationGivenID" />
+                    <externalMetadataColumn
+                      refId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PersonnelGivenID]"
+                      dataType="wstr"
+                      length="10"
+                      name="PersonnelGivenID" />
+                    <externalMetadataColumn
+                      refId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClassGivenID]"
+                      dataType="wstr"
+                      length="54"
+                      name="ClassGivenID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LocationGivenID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LocationGivenID]"
+                      name="LocationGivenID" />
+                    <outputColumn
+                      refId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PersonnelGivenID]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PersonnelGivenID]"
+                      name="PersonnelGivenID" />
+                    <outputColumn
+                      refId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClassGivenID]"
+                      dataType="wstr"
+                      length="54"
+                      lineageId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClassGivenID]"
+                      name="ClassGivenID" />
+                    <outputColumn
+                      refId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\InstructorSchedules.Paths[OLE DB Source Output]"
+              endId="Package\InstructorSchedules\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\InstructorSchedules\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Personnel File"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{42E46381-A513-4D66-B6A3-E19B6AAC5AB3}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Personnel File"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Personnel File\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Personnel File\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager 2]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager 2]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Personnel File\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Personnel File\Flat File Destination.Inputs[Flat File Destination Input].Columns[LocationGivenID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="LocationGivenID"
+                      externalMetadataColumnId="Package\Personnel File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LocationGivenID]"
+                      lineageId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationGivenID]" />
+                    <inputColumn
+                      refId="Package\Personnel File\Flat File Destination.Inputs[Flat File Destination Input].Columns[PersonnelGivenID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="7"
+                      cachedName="PersonnelGivenID"
+                      externalMetadataColumnId="Package\Personnel File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PersonnelGivenID]"
+                      lineageId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersonnelGivenID]" />
+                    <inputColumn
+                      refId="Package\Personnel File\Flat File Destination.Inputs[Flat File Destination Input].Columns[FirstName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Personnel File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\Personnel File\Flat File Destination.Inputs[Flat File Destination Input].Columns[LastName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\Personnel File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Personnel File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LocationGivenID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="LocationGivenID" />
+                    <externalMetadataColumn
+                      refId="Package\Personnel File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PersonnelGivenID]"
+                      dataType="numeric"
+                      name="PersonnelGivenID"
+                      precision="9" />
+                    <externalMetadataColumn
+                      refId="Package\Personnel File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Personnel File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="LastName" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Personnel File\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[APS].[HayesASTPersonnel]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [LocationGivenID]
+      ,UPPER([PersonnelGivenID]) AS [PersonnelGivenID]
+      ,[FirstName]
+      ,[LastName]
+  FROM [Lawson].[APS].[HayesASTPersonnel]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Personnel File\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[180-SMAXODS-01.Lawson.lincinq]"
+                  connectionManagerRefId="Package.ConnectionManagers[180-SMAXODS-01.Lawson.lincinq]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationGivenID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LocationGivenID]"
+                      length="30"
+                      lineageId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationGivenID]"
+                      name="LocationGivenID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersonnelGivenID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PersonnelGivenID]"
+                      length="7"
+                      lineageId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersonnelGivenID]"
+                      name="PersonnelGivenID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      length="15"
+                      lineageId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      length="30"
+                      lineageId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LocationGivenID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="LocationGivenID" />
+                    <externalMetadataColumn
+                      refId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PersonnelGivenID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="7"
+                      name="PersonnelGivenID" />
+                    <externalMetadataColumn
+                      refId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="LastName" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LocationGivenID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LocationGivenID]"
+                      name="LocationGivenID" />
+                    <outputColumn
+                      refId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PersonnelGivenID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="7"
+                      lineageId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PersonnelGivenID]"
+                      name="PersonnelGivenID" />
+                    <outputColumn
+                      refId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Personnel File.Paths[OLE DB Source Output]"
+              endId="Package\Personnel File\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Personnel File\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Staff File"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{5330E4F3-6674-42C7-A2E1-9D3BAE858BB6}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Staff File"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Staff File\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Staff File\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager 1]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Staff File\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Staff File\Flat File Destination.Inputs[Flat File Destination Input].Columns[LocationGivenID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="LocationGivenID"
+                      externalMetadataColumnId="Package\Staff File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LocationGivenID]"
+                      lineageId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationGivenID]" />
+                    <inputColumn
+                      refId="Package\Staff File\Flat File Destination.Inputs[Flat File Destination Input].Columns[PersonnelGivenID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="7"
+                      cachedName="PersonnelGivenID"
+                      externalMetadataColumnId="Package\Staff File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PersonnelGivenID]"
+                      lineageId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersonnelGivenID]" />
+                    <inputColumn
+                      refId="Package\Staff File\Flat File Destination.Inputs[Flat File Destination Input].Columns[FirstName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Staff File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\Staff File\Flat File Destination.Inputs[Flat File Destination Input].Columns[LastName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\Staff File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Staff File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LocationGivenID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="LocationGivenID" />
+                    <externalMetadataColumn
+                      refId="Package\Staff File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PersonnelGivenID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="7"
+                      name="PersonnelGivenID" />
+                    <externalMetadataColumn
+                      refId="Package\Staff File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Staff File\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="LastName" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Staff File\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [LocationGivenID]
+      ,UPPER([PersonnelGivenID]) AS [PersonnelGivenID]
+      ,[FirstName]
+      ,[LastName]
+  FROM [Lawson].[APS].[HayesASTStaff]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Staff File\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[180-SMAXODS-01.Lawson.lincinq]"
+                  connectionManagerRefId="Package.ConnectionManagers[180-SMAXODS-01.Lawson.lincinq]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationGivenID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LocationGivenID]"
+                      length="30"
+                      lineageId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationGivenID]"
+                      name="LocationGivenID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersonnelGivenID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PersonnelGivenID]"
+                      length="7"
+                      lineageId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].Columns[PersonnelGivenID]"
+                      name="PersonnelGivenID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      length="15"
+                      lineageId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      length="30"
+                      lineageId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LocationGivenID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="LocationGivenID" />
+                    <externalMetadataColumn
+                      refId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PersonnelGivenID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="7"
+                      name="PersonnelGivenID" />
+                    <externalMetadataColumn
+                      refId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="LastName" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LocationGivenID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LocationGivenID]"
+                      name="LocationGivenID" />
+                    <outputColumn
+                      refId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PersonnelGivenID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="7"
+                      lineageId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PersonnelGivenID]"
+                      name="PersonnelGivenID" />
+                    <outputColumn
+                      refId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Staff File.Paths[OLE DB Source Output]"
+              endId="Package\Staff File\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Staff File\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{56D955DC-52E2-4497-A20A-195C11118827}"
+      DTS:From="Package\Personnel File"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Staff File" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{C2E517B6-BE8E-4CC7-8328-30E2922A63DB}"
+      DTS:From="Package\Staff File"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Courses" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{5C34969A-1DA5-44A8-8E32-FA30E101EBB3}"
+      DTS:From="Package\Courses"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\InstructorSchedules" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="118,42"
+          Id="Package\Courses"
+          TopLeft="131,262" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\InstructorSchedules"
+          TopLeft="111,345" />
+        <NodeLayout
+          Size="146,42"
+          Id="Package\Personnel File"
+          TopLeft="108,107" />
+        <NodeLayout
+          Size="122,42"
+          Id="Package\Staff File"
+          TopLeft="122,186" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="182,149">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37"
+              Start="0,0"
+              End="0,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="186.5,228">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34"
+              Start="0,0"
+              End="0,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="190,304">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8,41"
+              Start="0,0"
+              End="8,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.5"
+                    Point2="0,20.5"
+                    Point3="4,20.5" />
+                  <mssgle:LineSegment
+                    End="4,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4,20.5"
+                    Point2="8,20.5"
+                    Point3="8,24.5" />
+                  <mssgle:LineSegment
+                    End="8,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Courses">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Courses\OLE DB Source"
+          TopLeft="93,44" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Courses\Flat File Destination"
+          TopLeft="141,175" />
+        <EdgeLayout
+          Id="Package\Courses.Paths[OLE DB Source Output]"
+          TopLeft="169,86">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="59,89"
+              Start="0,0"
+              End="59,81.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,40.5"
+                    Point2="0,44.5"
+                    Point3="4,44.5" />
+                  <mssgle:LineSegment
+                    End="55,44.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="55,44.5"
+                    Point2="59,44.5"
+                    Point3="59,48.5" />
+                  <mssgle:LineSegment
+                    End="59,81.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Courses\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\InstructorSchedules">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="152,42"
+          Id="Package\InstructorSchedules\OLE DB Source"
+          TopLeft="102,53" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\InstructorSchedules\Flat File Destination"
+          TopLeft="109,169" />
+        <EdgeLayout
+          Id="Package\InstructorSchedules.Paths[OLE DB Source Output]"
+          TopLeft="178,95">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="18,74"
+              Start="0,0"
+              End="18,66.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33"
+                    Point2="0,37"
+                    Point3="4,37" />
+                  <mssgle:LineSegment
+                    End="14,37" />
+                  <mssgle:CubicBezierSegment
+                    Point1="14,37"
+                    Point2="18,37"
+                    Point3="18,41" />
+                  <mssgle:LineSegment
+                    End="18,66.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\InstructorSchedules\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Personnel File">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Personnel File\Flat File Destination"
+          TopLeft="102,128" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Personnel File\OLE DB Source"
+          TopLeft="115,58" />
+        <EdgeLayout
+          Id="Package\Personnel File.Paths[OLE DB Source Output]"
+          TopLeft="190,100">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Personnel File\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Staff File">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Staff File\Flat File Destination"
+          TopLeft="214,228" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Staff File\OLE DB Source"
+          TopLeft="163,88" />
+        <EdgeLayout
+          Id="Package\Staff File.Paths[OLE DB Source Output]"
+          TopLeft="239,130">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="62,98"
+              Start="0,0"
+              End="62,90.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,45"
+                    Point2="0,49"
+                    Point3="4,49" />
+                  <mssgle:LineSegment
+                    End="58,49" />
+                  <mssgle:CubicBezierSegment
+                    Point1="58,49"
+                    Point2="62,49"
+                    Point3="62,53" />
+                  <mssgle:LineSegment
+                    End="62,90.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Staff File\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
