@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DataDirector"
   DTS:PackageType="5"
-  DTS:VersionBuild="38"
-  DTS:VersionGUID="{A7730AC8-CF12-40B3-B575-31C4E0C3532A}">
+  DTS:VersionBuild="37"
+  DTS:VersionGUID="{AD4596A2-E176-435D-AD1D-86E5564B92A1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -28,7 +28,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAvnZPKA7ItkKNXTwWHTikAgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAtf39OBkML1L+kSEdT6i7fAAAAAASAAACgAAAAEAAAAFwuDenebuQ7PPiDoo0f93AQAAAAbN4CjtpGP/YNMIJU5OY3uxQAAABOxpb7Q4YW/Ea9vXf6m1WG5JXr/g</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADJhJB9JFoXdQi92RDdGmsPAAAAAASAAACgAAAAEAAAAOgjYNL839pQI7+3+biS0swQAAAAcnCprnX8Hh54LFBGnrPuShQAAACdf7s2p8TxbJKZ8zvKZ57dsYSiAA</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -137,7 +137,12 @@
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:Retain="True"
-          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=DataDirectorExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-DataDirector-{7A97132F-F7AE-4385-8693-808B12170BB4}azlt-mmelarcode\sql2012.STDemo808_2012;" />
+          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=DataDirectorExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-DataDirector-{7A97132F-F7AE-4385-8693-808B12170BB4}azlt-mmelarcode\sql2012.STDemo808_2012;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADAgpl7Z/vCGXOC6Ik0smfZAAAAAASAAACgAAAAEAAAALZnG6bLdxx+uwuxNI7KT0kwAAAANclzOLJMmVETYRlxUphrqSFeaSoM6U/uCcAe7blAkeEWOpwuzq7ChTyniwpDVBwbFAAAAMqZ7S9sxQnASKFqY64YNR3KidOK</DTS:Password>
+        </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -2122,8 +2127,8 @@ FROM     rev.EPC_STU                    stu
          JOIN rev.EPC_STAFF_SCH_YR      stfy ON stfy.STAFF_SCHOOL_YEAR_GU  = sect.STAFF_SCHOOL_YEAR_GU
          JOIN rev.EPC_STAFF             stf  ON stf.STAFF_GU               = stfy.STAFF_GU
          LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grade ON grade.VALUE_CODE = ssyr.GRADE
-WHERE    (cls.LEAVE_DATE IS NULL OR cls.LEAVE_DATE &gt;= GETDATE())
-          AND cls.ENTER_DATE &lt;= GETDATE()
+--WHERE    (cls.LEAVE_DATE IS NULL OR cls.LEAVE_DATE &gt;= GETDATE())
+--          AND cls.ENTER_DATE &lt;= GETDATE()
 ORDER BY stu.SIS_NUMBER, sect.PERIOD_BEGIN</property>
                 <property
                   dataType="System.String"
@@ -2799,9 +2804,8 @@ order by org.ORGANIZATION_NAME, sch.SCHOOL_CODE</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT * FROM [APS].[SynergyDataDirectorUser]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--SELECT * FROM [APS].[SynergyDataDirectorUser]
 
-/*
 SELECT DISTINCT
 	[Lawson_Staff].[STAFF_CODE]
 	,[Lawson_Staff].LOCATION
@@ -2875,9 +2879,7 @@ LEFT JOIN
 
 WHERE
 	SYNERGYLOCATIONS.SCHOOL_CODE IS NOT NULL
-	OR LOCATION = '1'
-
-*/</property>
+	OR LOCATION = '1'</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -3571,6 +3573,14 @@ WHERE
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Courses\DB Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Demographics - Students">
     <LayoutInfo>
@@ -3683,37 +3693,25 @@ WHERE
         <NodeLayout
           Size="174,42"
           Id="Package\Schools\Flat File Destination"
-          TopLeft="252,137" />
+          TopLeft="9,96" />
         <NodeLayout
           Size="126,42"
           Id="Package\Schools\DB Query"
-          TopLeft="236,27" />
+          TopLeft="32,4" />
         <EdgeLayout
           Id="Package\Schools.Paths[OLE DB Source Output]"
-          TopLeft="299,69">
+          TopLeft="95.5,46">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="40,68"
+              EndConnector="0,50"
               Start="0,0"
-              End="40,60.5">
+              End="0,42.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,30" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,30"
-                    Point2="0,34"
-                    Point3="4,34" />
-                  <mssgle:LineSegment
-                    End="36,34" />
-                  <mssgle:CubicBezierSegment
-                    Point1="36,34"
-                    Point2="40,34"
-                    Point3="40,38" />
-                  <mssgle:LineSegment
-                    End="40,60.5" />
+                    End="0,42.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3725,6 +3723,14 @@ WHERE
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Schools\DB Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\User">
     <LayoutInfo>

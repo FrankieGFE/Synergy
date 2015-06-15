@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DataDirector"
   DTS:PackageType="5"
-  DTS:VersionBuild="33"
-  DTS:VersionGUID="{7B044A34-5DCC-4920-8E3C-DC59EC04887C}">
+  DTS:VersionBuild="37"
+  DTS:VersionGUID="{AD4596A2-E176-435D-AD1D-86E5564B92A1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -28,7 +28,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATfkXZn6/lkS9hYhRl0pqHQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAB/7KWWfZy0D1/Bo+ox6mYaAAAAAASAAACgAAAAEAAAACxruyjbUr6oUzEc9tk2AM4QAAAATfyjvNos1fFGMeGJNpCQRBQAAACJi9mhd4GLCDFFvGEF48jAhokN5Q</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADXIYZ/MaWDP9eI8WksF3rQAAAAAASAAACgAAAAEAAAAJTVxhSIPgDdgk2W4deibEIQAAAAgpXkZigeBqBDaOVnihf7rBQAAAA4uYv1uO7kKUrJ60n9BVUjBIuN7w</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -39,12 +39,7 @@
       DTS:ObjectName="180-smaxods-01.HELPER.lincinq">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=180-smaxods-01;User ID=lincinq;Initial Catalog=HELPER;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATfkXZn6/lkS9hYhRl0pqHQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAC0CdRA7gLyQ9mQbSFKpst/AAAAAASAAACgAAAAEAAAAH/kobsAjkjQSZefPX1AAu0QAAAAwcyXr7RwMVi0rxb2ZR2tTRQAAADKu+52Y3s7FWsb3CWQO64gTAB6NA</DTS:Password>
-        </DTS:ConnectionManager>
+          DTS:ConnectionString="Data Source=180-smaxods-01;User ID=lincinq;Initial Catalog=HELPER;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -146,7 +141,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATfkXZn6/lkS9hYhRl0pqHQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAC9ueg7pp9dy+uoD7Z3blMdAAAAAASAAACgAAAAEAAAAIr2jIKjczRAp209Fx2e27gwAAAA6R0uM5FAnFBVpywrhUzF6SuKIqucb/zu0697m/e9w6nf+yNE4mD6MKKnXKN3ZAkVFAAAADR5gZR6GsZBPTWzPsFE8s5ttFxZ</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACwoBHKCv6KnrYmhgijTMUFAAAAAASAAACgAAAAEAAAAEEdWbhbQK5QLuaGLkCr5ZUwAAAAoz5FnsdWaX7sS4XucSqC9PvJuG2GYzCs/xsb/aNEUISDDGmTpF4dzY2sPgc2ADJGFAAAACUPbxxtwwoU2MK8QZbaLjN84NfB</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -2132,8 +2127,8 @@ FROM     rev.EPC_STU                    stu
          JOIN rev.EPC_STAFF_SCH_YR      stfy ON stfy.STAFF_SCHOOL_YEAR_GU  = sect.STAFF_SCHOOL_YEAR_GU
          JOIN rev.EPC_STAFF             stf  ON stf.STAFF_GU               = stfy.STAFF_GU
          LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grade ON grade.VALUE_CODE = ssyr.GRADE
-WHERE    (cls.LEAVE_DATE IS NULL OR cls.LEAVE_DATE &gt;= GETDATE())
-          AND cls.ENTER_DATE &lt;= GETDATE()
+--WHERE    (cls.LEAVE_DATE IS NULL OR cls.LEAVE_DATE &gt;= GETDATE())
+--          AND cls.ENTER_DATE &lt;= GETDATE()
 ORDER BY stu.SIS_NUMBER, sect.PERIOD_BEGIN</property>
                 <property
                   dataType="System.String"
@@ -3544,7 +3539,7 @@ WHERE
     design-time-name="Package\Courses">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="174,42"
           Id="Package\Courses\Flat File Destination"
@@ -3572,14 +3567,20 @@ WHERE
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Courses\DB Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Demographics - Students">
     <LayoutInfo>
@@ -3688,7 +3689,7 @@ WHERE
     design-time-name="Package\Schools">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="174,42"
           Id="Package\Schools\Flat File Destination"
@@ -3696,46 +3697,40 @@ WHERE
         <NodeLayout
           Size="126,42"
           Id="Package\Schools\DB Query"
-          TopLeft="NaN,NaN" />
+          TopLeft="32,4" />
         <EdgeLayout
           Id="Package\Schools.Paths[OLE DB Source Output]"
-          TopLeft="NaN,NaN">
+          TopLeft="95.5,46">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="NaN,NaN"
+              EndConnector="0,50"
               Start="0,0"
-              End="NaN,NaN">
+              End="0,42.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,NaN" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,NaN"
-                    Point2="0,NaN"
-                    Point3="-4,NaN" />
-                  <mssgle:LineSegment
-                    End="NaN,NaN" />
-                  <mssgle:CubicBezierSegment
-                    Point1="NaN,NaN"
-                    Point2="NaN,NaN"
-                    Point3="NaN,NaN" />
-                  <mssgle:LineSegment
-                    End="NaN,NaN" />
+                    End="0,42.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Schools\DB Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\User">
     <LayoutInfo>
