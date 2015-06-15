@@ -43,7 +43,7 @@ FROM  rev.EPC_STU                    stu
                                               AND ssy.STATUS             IS NULL
       JOIN rev.REV_ORGANIZATION_YEAR oyr   ON oyr.ORGANIZATION_YEAR_GU   = ssy.ORGANIZATION_YEAR_GU
       JOIN rev.REV_YEAR              yr    ON yr.YEAR_GU                 = oyr.YEAR_GU 
-                                              and yr.SCHOOL_YEAR         IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+                                              and yr.YEAR_GU         IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
       JOIN rev.EPC_SCH               sch   ON sch.ORGANIZATION_GU        = oyr.ORGANIZATION_GU
       LEFT JOIN (
                        SELECT   
