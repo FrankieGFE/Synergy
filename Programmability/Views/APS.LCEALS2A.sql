@@ -25,9 +25,9 @@ SELECT
 	,[Received ESL Prior Quarter]
 	,COALESCE([Received ESL Prior Quarter]*100/NULLIF([Req ESL Prior],0),0) *1.0  AS PriorPercent
 
-	,CREQ AS [Year Ago 5/22/2014 Req ESL]
-	,CREC AS [Year Ago 5/22/2014 Received ESL]
-	,CURP AS [Year Ago 5/22/2014 Percent]
+	,YAREQ AS [Year Ago 5/22/2014 Req ESL]
+	,YAREC AS [Year Ago 5/22/2014 Received ESL]
+	,YAPER AS [Year Ago 5/22/2014 Percent]
 
 	
  FROM 
@@ -63,9 +63,9 @@ LEFT JOIN
 (SELECT 
 	CLUSTER
 	,SCHOOL
-	,CREQ
-	,CREC
-	,CURP
+	,YAREQ
+	,YAREC
+	,YAPER
 FROM
             dbo.[LCE_REQ_ESL] AS ALS
 
