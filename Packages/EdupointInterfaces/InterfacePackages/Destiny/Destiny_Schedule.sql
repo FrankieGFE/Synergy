@@ -179,6 +179,7 @@ FROM   rev.EPC_STU                          stu
        JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssy.YEAR_GU
                                             AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
                                             AND yr.EXTENSION   = 'S'
+											AND yr.EXTENSION   = 'N'
        JOIN rev.REV_ORGANIZATION            org  ON org.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
        JOIN rev.EPC_SCH                     sch  ON sch.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
        JOIN rev.EPC_STU_CLASS               cls  ON cls.STUDENT_SCHOOL_YEAR_GU     = ssy.STUDENT_SCHOOL_YEAR_GU
