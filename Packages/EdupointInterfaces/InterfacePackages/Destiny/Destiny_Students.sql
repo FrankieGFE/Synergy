@@ -52,7 +52,7 @@ FROM   rev.EPC_STU                          stu
 											AND ssyr.EXCLUDE_ADA_ADM is null
      JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
      JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssyr.YEAR_GU
-                                            AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
+                                            AND yr.SCHOOL_YEAR = (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
                                             AND yr.EXTENSION   = 'S'
 ), SummerTchName AS
 (
@@ -66,7 +66,7 @@ FROM   rev.EPC_STU                          stu
 												    AND ssy.EXCLUDE_ADA_ADM is null
        JOIN rev.REV_ORGANIZATION_YEAR       oyr  ON oyr.ORGANIZATION_YEAR_GU       = ssy.ORGANIZATION_YEAR_GU
       JOIN rev.REV_YEAR                     yr   ON yr.YEAR_GU = ssy.YEAR_GU
-                                                   AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
+                                                   AND yr.SCHOOL_YEAR = (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
                                                    AND yr.EXTENSION   = 'S'
        JOIN rev.REV_ORGANIZATION            org  ON org.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
        JOIN rev.EPC_SCH                     sch  ON sch.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
@@ -111,7 +111,7 @@ FROM rev.EPC_STU                    stu
 											AND ssyr.EXCLUDE_ADA_ADM is null
      JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
      JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssyr.YEAR_GU
-                                            AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
+                                            AND yr.SCHOOL_YEAR = (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
                                             AND yr.EXTENSION   = 'R'
      JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
      JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
@@ -151,7 +151,7 @@ FROM rev.EPC_STU                    stu
 											AND ssyr.EXCLUDE_ADA_ADM is null
      JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
      JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssyr.YEAR_GU
-                                            AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
+                                            AND yr.SCHOOL_YEAR = (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
                                             AND yr.EXTENSION   = 'S'
      JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
      JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
