@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="WnsnapExport"
   DTS:PackageType="5"
-  DTS:VersionBuild="55"
-  DTS:VersionGUID="{5B1EF97C-F308-4CDF-842E-4B454B377AF4}">
+  DTS:VersionBuild="54"
+  DTS:VersionGUID="{F636DCE7-0BAC-4A6A-B754-5672A9E4A90A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -389,8 +389,8 @@ FROM rev.EPC_STU                    stu
      JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
                                             and ssy.STATUS is NULL
                                             and ssy.EXCLUDE_ADA_ADM is null --exclude concurrent enrollment
-											and ssy.SUMMER_WITHDRAWL_CODE is null -- exclude summer withdrawal
-											and ssy.SUMMER_WITHDRAWL_DATE is null -- exclude summer withdrawal
+											/*and ssy.SUMMER_WITHDRAWL_CODE is null -- exclude summer withdrawal
+											and ssy.SUMMER_WITHDRAWL_DATE is null -- exclude summer withdrawal*/
      JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
      JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = oyr.YEAR_GU
                                             and yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
@@ -463,8 +463,8 @@ FROM rev.EPC_STU                    stu
                                             and ssy.STATUS is NULL
                                             and ssy.EXCLUDE_ADA_ADM is null --exclude concurrent enrollment
 											and ssy.LEAVE_DATE is null
-											and ssy.SUMMER_WITHDRAWL_CODE is null -- exclude summer withdrawal
-											and ssy.SUMMER_WITHDRAWL_DATE is null -- exclude summer withdrawal
+											/*and ssy.SUMMER_WITHDRAWL_CODE is null -- exclude summer withdrawal
+											and ssy.SUMMER_WITHDRAWL_DATE is null -- exclude summer withdrawal*/
      JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
      JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = oyr.YEAR_GU
                                             and yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
@@ -1328,12 +1328,12 @@ WHERE sch.SCHOOL_CODE NOT IN ('510')</property>
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="174,42"
-          Id="Package\WinSnap Students Export\DB Query"
-          TopLeft="5.50000000000001,5.5" />
-        <NodeLayout
-          Size="174,42"
           Id="Package\WinSnap Students Export\Flat File Destination"
           TopLeft="5.50000000000001,107.5" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\WinSnap Students Export\DB Query"
+          TopLeft="5.50000000000001,5.5" />
         <EdgeLayout
           Id="Package\WinSnap Students Export.Paths[OLE DB Source Output]"
           TopLeft="92.5,47.5">
