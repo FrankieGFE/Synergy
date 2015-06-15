@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Destiny"
   DTS:PackageType="5"
-  DTS:VersionBuild="49"
-  DTS:VersionGUID="{0C4D7AD5-84EC-4D02-A03F-88A3F99F5E5C}">
+  DTS:VersionBuild="50"
+  DTS:VersionGUID="{7710E9C7-6E21-40D5-A1B0-386972503E68}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -30,7 +30,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAC7rQCJ4n9jO1mFJZoblmnuAAAAAASAAACgAAAAEAAAAEoMDWXR0hrYA/4CoXEBVxwwAAAACblmHnYVznuaNai86LtGHQtT9vunp2IkvKLasx7+VGA4yiyE68JyjprghLqV8yV8FAAAAIFMntvZgNrmu7Ek77JHGuZCrpft</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACgHSJWdLsnipRvPdWW9iidAAAAAASAAACgAAAAEAAAADAWTTMN+zdVHV4dKr+Fjt0wAAAAZSS1fl5BZ1nbLIbKLv2YDf35piAylsyMsYHC3ikr4NUnBfBwrMxFtn56r15/TotqFAAAAEChHyGHdFSP3N7MF3TIrN1JnSAF</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -472,6 +472,46 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyVersion("1.0.0.0")> 
 <Assembly: AssemblyFileVersion("1.0.0.0")> ]]></ProjectItem>
           <ProjectItem
+            Name="ScriptMain.vb"
+            Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services Script Task
+' Write scripts using Microsoft Visual Basic 2008.
+' The ScriptMain is the entry point class of the script.
+
+Imports System
+Imports System.Data
+Imports System.Math
+Imports System.IO
+Imports Microsoft.SqlServer.Dts.Runtime
+
+<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
+<System.CLSCompliantAttribute(False)> _
+Partial Public Class ScriptMain
+	Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+
+	Enum ScriptResults
+		Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
+		Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+	End Enum
+	
+    Public Sub Main()
+        Dim fileLoc, fileName As String
+        If Dts.Variables.Contains("User::LibraryHomeroomFilePath") = True AndAlso _
+        Dts.Variables.Contains("User::LibraryHomeroomFile") = True Then
+            fileLoc = CStr(Dts.Variables("User::LibraryHomeroomFilePath").Value)
+            fileName = CStr(Dts.Variables.Item("User::LibraryHomeroomFile").Value)
+            If File.Exists(fileLoc + fileName) Then
+                Dts.Variables.Item("User::FileExists").Value = True
+            Else
+                Dts.Variables.Item("User::FileExists").Value = False
+            End If
+            Dts.TaskResult = ScriptResults.Success
+        Else
+            Dts.TaskResult = ScriptResults.Failure
+        End If
+    End Sub
+
+End Class]]></ProjectItem>
+          <ProjectItem
             Name="st_d07338d79e1e421b9e45e24fedae6a55.vbproj"
             Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="utf-16"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -701,46 +741,6 @@ End Class]]></ProjectItem>
 		<msb:Project Include="st_d07338d79e1e421b9e45e24fedae6a55.vbproj"/>
 	</msb:ItemGroup>
 </c:Project>]]></ProjectItem>
-          <ProjectItem
-            Name="ScriptMain.vb"
-            Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services Script Task
-' Write scripts using Microsoft Visual Basic 2008.
-' The ScriptMain is the entry point class of the script.
-
-Imports System
-Imports System.Data
-Imports System.Math
-Imports System.IO
-Imports Microsoft.SqlServer.Dts.Runtime
-
-<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
-<System.CLSCompliantAttribute(False)> _
-Partial Public Class ScriptMain
-	Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
-
-	Enum ScriptResults
-		Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
-		Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
-	End Enum
-	
-    Public Sub Main()
-        Dim fileLoc, fileName As String
-        If Dts.Variables.Contains("User::LibraryHomeroomFilePath") = True AndAlso _
-        Dts.Variables.Contains("User::LibraryHomeroomFile") = True Then
-            fileLoc = CStr(Dts.Variables("User::LibraryHomeroomFilePath").Value)
-            fileName = CStr(Dts.Variables.Item("User::LibraryHomeroomFile").Value)
-            If File.Exists(fileLoc + fileName) Then
-                Dts.Variables.Item("User::FileExists").Value = True
-            Else
-                Dts.Variables.Item("User::FileExists").Value = False
-            End If
-            Dts.TaskResult = ScriptResults.Success
-        Else
-            Dts.TaskResult = ScriptResults.Failure
-        End If
-    End Sub
-
-End Class]]></ProjectItem>
           <ProjectItem
             Name="My Project\Resources.resx"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -2205,7 +2205,7 @@ FROM   rev.EPC_STU                          stu
                                                     and ssy.STATUS is NULL
 												    AND ssy.EXCLUDE_ADA_ADM is null
        JOIN rev.REV_ORGANIZATION_YEAR       oyr  ON oyr.ORGANIZATION_YEAR_GU       = ssy.ORGANIZATION_YEAR_GU
-	                                                and oyr.YEAR_GU                = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+	                                                and oyr.YEAR_GU                = (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
        JOIN rev.REV_ORGANIZATION            org  ON org.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
        JOIN rev.EPC_SCH                     sch  ON sch.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
        JOIN rev.EPC_STU_CLASS               cls  ON cls.STUDENT_SCHOOL_YEAR_GU     = ssy.STUDENT_SCHOOL_YEAR_GU
