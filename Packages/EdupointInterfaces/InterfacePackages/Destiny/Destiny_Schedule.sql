@@ -18,7 +18,7 @@ select
 from rev.SIF_22_TermInfo() t 
      join rev.REV_ORGANIZATION_YEAR oyr on oyr.ORGANIZATION_GU = t.OrgGU
      join rev.REV_YEAR              y   on y.YEAR_GU = oyr.YEAR_GU 
-                                              and y.YEAR_GU = (select year_gu from rev.SIF_22_Common_CurrentYearGU)
+                                              and y.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
 ---
 IF OBJECT_ID('tempdb..##SummerTerms') IS NOT NULL DROP TABLE ##SummerTerms
 CREATE TABLE ##SummerTerms(
@@ -38,8 +38,8 @@ select
        , tdef.EVENT_DATE
 from rev.rev_organization      org
 join rev.REV_ORGANIZATION_YEAR oyr   on oyr.ORGANIZATION_GU = org.ORGANIZATION_GU
-join rev.REV_YEAR              yr    on yr.SCHOOL_YEAR = (select school_year from rev.SIF_22_Common_CurrentYear)
-                                        and yr.EXTENSION = 'S'
+join rev.REV_YEAR              yr    on yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+                                      
                                                                   and yr.YEAR_GU = oyr.YEAR_GU
 join rev.EPC_SCH_YR_TRM_DEF    tdef  on tdef.ORGANIZATION_YEAR_GU = oyr.ORGANIZATION_YEAR_GU
 join rev.EPC_SCH_YR_TRM_CODES  tcd   on tcd.SCHOOL_YEAR_TRM_DEF_GU = tdef.SCHOOL_YEAR_TRM_DEF_GU
@@ -63,8 +63,8 @@ select
        , tdef.EVENT_DATE
 from rev.rev_organization      org
 join rev.REV_ORGANIZATION_YEAR oyr   on oyr.ORGANIZATION_GU = org.ORGANIZATION_GU
-join rev.REV_YEAR              yr    on yr.SCHOOL_YEAR = (select school_year from rev.SIF_22_Common_CurrentYear)+1
-                                        and yr.EXTENSION = 'N'
+join rev.REV_YEAR              yr    on yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+          
                                                                   and yr.YEAR_GU = oyr.YEAR_GU
 join rev.EPC_SCH_YR_TRM_DEF    tdef  on tdef.ORGANIZATION_YEAR_GU = oyr.ORGANIZATION_YEAR_GU
 join rev.EPC_SCH_YR_TRM_CODES  tcd   on tcd.SCHOOL_YEAR_TRM_DEF_GU = tdef.SCHOOL_YEAR_TRM_DEF_GU
@@ -84,10 +84,10 @@ join rev.EPC_SCH_ATT_CAL_OPT   acalo on acalo.ORG_YEAR_GU = oyr.ORGANIZATION_YEA
                                                                            AND ssyr.EXCLUDE_ADA_ADM is null
      JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
      JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssyr.YEAR_GU
-                                            AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
-                                            AND yr.EXTENSION   = 'S'
+                                            AND yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+                    
 )
-SELECT 
+SELECT DISTINCT
 
    sch.SCHOOL_CODE                   AS [Sch #]
 , crs.COURSE_TITLE                  AS [Course Name]
@@ -122,8 +122,8 @@ FROM   rev.EPC_STU                          stu
                                                     and ssy.STATUS is NULL
        JOIN rev.REV_ORGANIZATION_YEAR       oyr  ON oyr.ORGANIZATION_YEAR_GU       = ssy.ORGANIZATION_YEAR_GU
        JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssy.YEAR_GU
-                                            AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
-                                            AND yr.EXTENSION   = 'R'
+                                            AND yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+                                    
        JOIN rev.REV_ORGANIZATION            org  ON org.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
        JOIN rev.EPC_SCH                     sch  ON sch.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
        JOIN rev.EPC_STU_CLASS               cls  ON cls.STUDENT_SCHOOL_YEAR_GU     = ssy.STUDENT_SCHOOL_YEAR_GU
@@ -177,9 +177,8 @@ FROM   rev.EPC_STU                          stu
                                                     and ssy.STATUS is NULL
        JOIN rev.REV_ORGANIZATION_YEAR       oyr  ON oyr.ORGANIZATION_YEAR_GU       = ssy.ORGANIZATION_YEAR_GU
        JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssy.YEAR_GU
-                                            AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
-                                            AND yr.EXTENSION   = 'S'
-											AND yr.EXTENSION   = 'N'
+                                            AND yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+                                            
        JOIN rev.REV_ORGANIZATION            org  ON org.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
        JOIN rev.EPC_SCH                     sch  ON sch.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
        JOIN rev.EPC_STU_CLASS               cls  ON cls.STUDENT_SCHOOL_YEAR_GU     = ssy.STUDENT_SCHOOL_YEAR_GU
@@ -231,8 +230,7 @@ FROM   rev.EPC_STU                          stu
                                                     and ssy.STATUS is NULL
        JOIN rev.REV_ORGANIZATION_YEAR       oyr  ON oyr.ORGANIZATION_YEAR_GU       = ssy.ORGANIZATION_YEAR_GU
        JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssy.YEAR_GU
-                                            AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)+1
-                                            AND yr.EXTENSION   = 'N'
+                                            AND yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
        JOIN rev.REV_ORGANIZATION            org  ON org.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
        JOIN rev.EPC_SCH                     sch  ON sch.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
        JOIN rev.EPC_STU_CLASS               cls  ON cls.STUDENT_SCHOOL_YEAR_GU     = ssy.STUDENT_SCHOOL_YEAR_GU
