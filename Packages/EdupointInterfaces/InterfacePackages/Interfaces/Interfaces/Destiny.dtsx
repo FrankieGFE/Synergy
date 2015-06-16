@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Destiny"
   DTS:PackageType="5"
-  DTS:VersionBuild="56"
-  DTS:VersionGUID="{68CFB93E-EC3C-4706-8911-B5605A34448B}">
+  DTS:VersionBuild="57"
+  DTS:VersionGUID="{5BEDAD90-B23B-4BEA-BA01-CF900EFB0A2F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -30,7 +30,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADU/toMjmY8d/vL8D+RWTJ9AAAAAASAAACgAAAAEAAAAPTJHIeHBS2Rgrumibq17AcwAAAAIhuirSgN6FSGuZaO8F50AdWSwcKzThZCbOefBUgObvDffP0eln+VY68i+mVM9ZyYFAAAACqRxr1LlUFmotJUA1YMg8Fln8Z9</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADwjgVyuTUVvqJNQLiLT6bFAAAAAASAAACgAAAAEAAAAKatURyx0ugBWU1LzzFMnGMwAAAASx7eCqSsp8G/dtbsGODszMiIy7UybiWnS8GGTXUEmKLC89sL0RoXgJ6Hi8vUBjfmFAAAACi6bK151HLC2/FZRt2RqI/Deefv</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -472,6 +472,46 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyVersion("1.0.0.0")> 
 <Assembly: AssemblyFileVersion("1.0.0.0")> ]]></ProjectItem>
           <ProjectItem
+            Name="ScriptMain.vb"
+            Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services Script Task
+' Write scripts using Microsoft Visual Basic 2008.
+' The ScriptMain is the entry point class of the script.
+
+Imports System
+Imports System.Data
+Imports System.Math
+Imports System.IO
+Imports Microsoft.SqlServer.Dts.Runtime
+
+<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
+<System.CLSCompliantAttribute(False)> _
+Partial Public Class ScriptMain
+	Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+
+	Enum ScriptResults
+		Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
+		Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+	End Enum
+	
+    Public Sub Main()
+        Dim fileLoc, fileName As String
+        If Dts.Variables.Contains("User::LibraryHomeroomFilePath") = True AndAlso _
+        Dts.Variables.Contains("User::LibraryHomeroomFile") = True Then
+            fileLoc = CStr(Dts.Variables("User::LibraryHomeroomFilePath").Value)
+            fileName = CStr(Dts.Variables.Item("User::LibraryHomeroomFile").Value)
+            If File.Exists(fileLoc + fileName) Then
+                Dts.Variables.Item("User::FileExists").Value = True
+            Else
+                Dts.Variables.Item("User::FileExists").Value = False
+            End If
+            Dts.TaskResult = ScriptResults.Success
+        Else
+            Dts.TaskResult = ScriptResults.Failure
+        End If
+    End Sub
+
+End Class]]></ProjectItem>
+          <ProjectItem
             Name="st_d07338d79e1e421b9e45e24fedae6a55.vbproj"
             Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="utf-16"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -701,46 +741,6 @@ End Class]]></ProjectItem>
 		<msb:Project Include="st_d07338d79e1e421b9e45e24fedae6a55.vbproj"/>
 	</msb:ItemGroup>
 </c:Project>]]></ProjectItem>
-          <ProjectItem
-            Name="ScriptMain.vb"
-            Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services Script Task
-' Write scripts using Microsoft Visual Basic 2008.
-' The ScriptMain is the entry point class of the script.
-
-Imports System
-Imports System.Data
-Imports System.Math
-Imports System.IO
-Imports Microsoft.SqlServer.Dts.Runtime
-
-<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
-<System.CLSCompliantAttribute(False)> _
-Partial Public Class ScriptMain
-	Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
-
-	Enum ScriptResults
-		Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
-		Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
-	End Enum
-	
-    Public Sub Main()
-        Dim fileLoc, fileName As String
-        If Dts.Variables.Contains("User::LibraryHomeroomFilePath") = True AndAlso _
-        Dts.Variables.Contains("User::LibraryHomeroomFile") = True Then
-            fileLoc = CStr(Dts.Variables("User::LibraryHomeroomFilePath").Value)
-            fileName = CStr(Dts.Variables.Item("User::LibraryHomeroomFile").Value)
-            If File.Exists(fileLoc + fileName) Then
-                Dts.Variables.Item("User::FileExists").Value = True
-            Else
-                Dts.Variables.Item("User::FileExists").Value = False
-            End If
-            Dts.TaskResult = ScriptResults.Success
-        Else
-            Dts.TaskResult = ScriptResults.Failure
-        End If
-    End Sub
-
-End Class]]></ProjectItem>
           <ProjectItem
             Name="My Project\Resources.resx"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -2179,7 +2179,7 @@ WHERE (cls.LEAVE_DATE IS NULL OR cls.LEAVE_DATE &gt;= GETDATE())
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">---&lt;APS - Destiny&gt;
 ; with StuPhones AS
 (
-  
+  SELECT
            phn.PHONE
 		 , phn.PHONE_TYPE
 		 , phn.PRIMARY_PHONE
@@ -2213,92 +2213,8 @@ FROM   rev.EPC_STU                          stu
        JOIN rev.REV_PERSON                  stfp ON stfp.PERSON_GU                 = stfy.STAFF_GU
        LEFT JOIN rev.EPC_SCH_YR_SECT_MET_DY smdy ON smdy.SECTION_GU                = sect.SECTION_GU
 	   LEFT JOIN rev.EPC_SCH_YR_MET_DY      symd ON symd.SCH_YR_MET_DY_GU          = smdy.SCH_YR_MET_DY_GU
-	   JOIN ##LibSchHomeroom                lhm  ON lhm.SCHOOL_CODE                = sch.SCHOOL_CODE 
-	                                                and lhm.HOMEROOM_PERIOD_NUMBER = CAST(sect.PERIOD_BEGIN as char(02))
-	   JOIN ##Terms                         trms ON trms.OrgGu                     = oyr.ORGANIZATION_GU
-	                                                AND trms.TermCode              = sect.TERM_CODE 
---WHERE (cls.LEAVE_DATE IS NULL OR cls.LEAVE_DATE &gt;= GETDATE())
---       AND cls.ENTER_DATE &lt;= GETDATE()
---	   AND GETDATE() between trms.TermStart and trms.TermEnd
-), OnlySummer AS
-(
-  SELECT
-     stu.student_gu
-  FROM rev.EPC_STU                  stu
-     JOIN rev.EPC_STU_SCH_YR        ssyr ON ssyr.STUDENT_GU = stu.STUDENT_GU
-                                            AND ssyr.STATUS IS NULL
-											AND ssyr.EXCLUDE_ADA_ADM is null
-     JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
-     JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssyr.YEAR_GU
-                                            AND yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
-), SummerTchName AS
-(
-SELECT   stu.STUDENT_GU
-       , row_number() over (partition by stu.student_gu order by stu.student_gu, symd.orderby) rn  
-       , sect.PERIOD_BEGIN                      AS Period
-       , stfp.LAST_NAME + ', ' + stfp.FIRST_NAME AS TeacherName
-FROM   rev.EPC_STU                          stu
-       JOIN rev.EPC_STU_SCH_YR              ssy  ON ssy.STUDENT_GU                 = stu.STUDENT_GU
-                                                    and ssy.STATUS is NULL
-												    AND ssy.EXCLUDE_ADA_ADM is null
-       JOIN rev.REV_ORGANIZATION_YEAR       oyr  ON oyr.ORGANIZATION_YEAR_GU       = ssy.ORGANIZATION_YEAR_GU
-      JOIN rev.REV_YEAR                     yr   ON yr.YEAR_GU = ssy.YEAR_GU
-                                                   AND yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
-       JOIN rev.REV_ORGANIZATION            org  ON org.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
-       JOIN rev.EPC_SCH                     sch  ON sch.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
-       JOIN rev.EPC_STU_CLASS               cls  ON cls.STUDENT_SCHOOL_YEAR_GU     = ssy.STUDENT_SCHOOL_YEAR_GU
-       JOIN rev.EPC_SCH_YR_SECT             sect ON sect.SECTION_GU                = cls.SECTION_GU
-       JOIN rev.EPC_SCH_YR_CRS              scrs ON scrs.SCHOOL_YEAR_COURSE_GU     = sect.SCHOOL_YEAR_COURSE_GU
-       JOIN rev.EPC_STAFF_SCH_YR            stfy ON stfy.STAFF_SCHOOL_YEAR_GU      = sect.STAFF_SCHOOL_YEAR_GU
-       JOIN rev.REV_PERSON                  stfp ON stfp.PERSON_GU                 = stfy.STAFF_GU
-       LEFT JOIN rev.EPC_SCH_YR_SECT_MET_DY smdy ON smdy.SECTION_GU                = sect.SECTION_GU
-	   LEFT JOIN rev.EPC_SCH_YR_MET_DY      symd ON symd.SCH_YR_MET_DY_GU          = smdy.SCH_YR_MET_DY_GU
-	   JOIN ##LibSchHomeroom                lhm  ON lhm.SCHOOL_CODE                = sch.SCHOOL_CODE 
-	                                                and lhm.HOMEROOM_PERIOD_NUMBER = CAST(sect.PERIOD_BEGIN as char(02))
-	   JOIN ##SummerTerms                   trms ON trms.OrgGu                     = oyr.ORGANIZATION_GU
-	                                                AND trms.TermCode              = sect.TERM_CODE 
-
-)
+	   
 -- Only Regular enrollments
-SELECT DISTINCT 
-         stu.SIS_NUMBER           AS [ID Number]
-       , sch.SCHOOL_CODE          AS [School Number]
-       , stu.STATE_STUDENT_NUMBER AS [State ID]
-       , per.LAST_NAME            AS [Last Name]
-       , per.FIRST_NAME           AS [First Name]
-       , per.MIDDLE_NAME          AS [Middle Name]
-       , per.GENDER               AS [Gender]
-       , grade.VALUE_DESCRIPTION  AS [Grade]
-       , tnm.TeacherName          AS [Full Name]
-       , stu.USER_CODE_1          AS [Prior ID Number]
-       , ''                       AS [BirthDate]
-       , CASE WHEN madr.STREET_EXTRA is not null then replace(madr.ADDRESS,madr.STREET_EXTRA,'')
-	          ELSE madr.ADDRESS
-		 END                      AS [Address 1]
-       , madr.STREET_EXTRA        AS [Address 2]
-       , madr.city                AS [City]
-       , madr.STATE               AS [State]
-       , madr.ZIP_5               AS [ZIP Code]
-       , p1.PHONE                 AS [Telephone1]
-       , p2.PHONE                 AS [Telephone2]
-FROM rev.EPC_STU                    stu
-     JOIN rev.EPC_STU_SCH_YR        ssyr ON ssyr.STUDENT_GU = stu.STUDENT_GU
-                                            AND ssyr.STATUS IS NULL
-											AND ssyr.EXCLUDE_ADA_ADM is null
-     JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
-     JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssyr.YEAR_GU
-                                            AND yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
-     JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
-     JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
-     LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grade ON grade.VALUE_CODE = ssyr.GRADE
-     LEFT JOIN rev.REV_ADDRESS      madr ON madr.ADDRESS_GU = COALESCE(per.MAIL_ADDRESS_GU, per.HOME_ADDRESS_GU)
-	 LEFT JOIN StuPhones            p1   ON p1.STUDENT_GU = stu.STUDENT_GU and p1.rn = 1
-	 LEFT JOIN StuPhones            p2   ON p2.STUDENT_GU = stu.STUDENT_GU and p2.rn = 2
-	 LEFT JOIN TeacherName          tnm  ON tnm.STUDENT_GU = stu.STUDENT_GU and tnm.rn = 1
-	 LEFT JOIN OnlySummer         Summer ON Summer.STUDENT_GU = stu.STUDENT_GU
-WHERE summer.STUDENT_GU is null
--- Only Summer
-UNION
 SELECT 
          stu.SIS_NUMBER           AS [ID Number]
        , sch.SCHOOL_CODE          AS [School Number]
@@ -2320,6 +2236,8 @@ SELECT
        , madr.ZIP_5               AS [ZIP Code]
        , p1.PHONE                 AS [Telephone1]
        , p2.PHONE                 AS [Telephone2]
+       , yr.SCHOOL_YEAR
+       , yr.EXTENSION
 FROM rev.EPC_STU                    stu
      JOIN rev.EPC_STU_SCH_YR        ssyr ON ssyr.STUDENT_GU = stu.STUDENT_GU
                                             AND ssyr.STATUS IS NULL
@@ -2333,7 +2251,7 @@ FROM rev.EPC_STU                    stu
      LEFT JOIN rev.REV_ADDRESS      madr ON madr.ADDRESS_GU = COALESCE(per.MAIL_ADDRESS_GU, per.HOME_ADDRESS_GU)
 	 LEFT JOIN StuPhones            p1   ON p1.STUDENT_GU = stu.STUDENT_GU and p1.rn = 1
 	 LEFT JOIN StuPhones            p2   ON p2.STUDENT_GU = stu.STUDENT_GU and p2.rn = 2
-	 LEFT JOIN SummerTchName        tnm  ON tnm.STUDENT_GU = stu.STUDENT_GU and tnm.rn = 1</property>
+	 LEFT JOIN TeacherName          tnm  ON tnm.STUDENT_GU = stu.STUDENT_GU and tnm.rn = 1</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
