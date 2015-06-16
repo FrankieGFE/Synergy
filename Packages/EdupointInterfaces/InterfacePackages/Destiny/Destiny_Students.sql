@@ -13,7 +13,7 @@
                                                 AND ssyr.STATUS IS NULL
 												AND ssyr.EXCLUDE_ADA_ADM is null
          JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
-                                                AND oyr.YEAR_GU = (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+                                                AND oyr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
 ) , TeacherName AS
 (
 SELECT   stu.STUDENT_GU
@@ -25,7 +25,7 @@ FROM   rev.EPC_STU                          stu
                                                     and ssy.STATUS is NULL
 												    AND ssy.EXCLUDE_ADA_ADM is null
        JOIN rev.REV_ORGANIZATION_YEAR       oyr  ON oyr.ORGANIZATION_YEAR_GU       = ssy.ORGANIZATION_YEAR_GU
-	                                                and oyr.YEAR_GU                = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+	                                                and oyr.YEAR_GU                IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
        JOIN rev.REV_ORGANIZATION            org  ON org.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
        JOIN rev.EPC_SCH                     sch  ON sch.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
        JOIN rev.EPC_STU_CLASS               cls  ON cls.STUDENT_SCHOOL_YEAR_GU     = ssy.STUDENT_SCHOOL_YEAR_GU
@@ -52,8 +52,7 @@ FROM   rev.EPC_STU                          stu
 											AND ssyr.EXCLUDE_ADA_ADM is null
      JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
      JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssyr.YEAR_GU
-                                            AND yr.SCHOOL_YEAR = (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
-                                            AND yr.EXTENSION   = 'S'
+                                            AND yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
 ), SummerTchName AS
 (
 SELECT   stu.STUDENT_GU
@@ -66,8 +65,7 @@ FROM   rev.EPC_STU                          stu
 												    AND ssy.EXCLUDE_ADA_ADM is null
        JOIN rev.REV_ORGANIZATION_YEAR       oyr  ON oyr.ORGANIZATION_YEAR_GU       = ssy.ORGANIZATION_YEAR_GU
       JOIN rev.REV_YEAR                     yr   ON yr.YEAR_GU = ssy.YEAR_GU
-                                                   AND yr.SCHOOL_YEAR = (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
-                                                   AND yr.EXTENSION   = 'S'
+                                                   AND yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
        JOIN rev.REV_ORGANIZATION            org  ON org.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
        JOIN rev.EPC_SCH                     sch  ON sch.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
        JOIN rev.EPC_STU_CLASS               cls  ON cls.STUDENT_SCHOOL_YEAR_GU     = ssy.STUDENT_SCHOOL_YEAR_GU
@@ -84,7 +82,7 @@ FROM   rev.EPC_STU                          stu
 
 )
 -- Only Regular enrollments
-SELECT 
+SELECT DISTINCT 
          stu.SIS_NUMBER           AS [ID Number]
        , sch.SCHOOL_CODE          AS [School Number]
        , stu.STATE_STUDENT_NUMBER AS [State ID]
@@ -111,8 +109,7 @@ FROM rev.EPC_STU                    stu
 											AND ssyr.EXCLUDE_ADA_ADM is null
      JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
      JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssyr.YEAR_GU
-                                            AND yr.SCHOOL_YEAR = (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
-                                            AND yr.EXTENSION   = 'R'
+                                            AND yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
      JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
      JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grade ON grade.VALUE_CODE = ssyr.GRADE
@@ -151,8 +148,7 @@ FROM rev.EPC_STU                    stu
 											AND ssyr.EXCLUDE_ADA_ADM is null
      JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
      JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssyr.YEAR_GU
-                                            AND yr.SCHOOL_YEAR = (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
-                                            AND yr.EXTENSION   = 'S'
+                                            AND yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
      JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
      JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grade ON grade.VALUE_CODE = ssyr.GRADE
