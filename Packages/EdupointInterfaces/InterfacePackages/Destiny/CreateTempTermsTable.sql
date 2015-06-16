@@ -18,6 +18,6 @@ select
 from rev.SIF_22_TermInfo() t 
      join rev.REV_ORGANIZATION_YEAR oyr on oyr.ORGANIZATION_GU = t.OrgGU
      join rev.REV_YEAR              y   on y.YEAR_GU = oyr.YEAR_GU 
-	                                       and y.YEAR_GU = (select year_gu from rev.SIF_22_Common_CurrentYearGU)
+	                                       and y.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
 --select * from ##Terms
  
