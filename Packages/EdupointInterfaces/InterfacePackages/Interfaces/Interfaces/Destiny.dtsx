@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Destiny"
   DTS:PackageType="5"
-  DTS:VersionBuild="57"
-  DTS:VersionGUID="{5BEDAD90-B23B-4BEA-BA01-CF900EFB0A2F}">
+  DTS:VersionBuild="58"
+  DTS:VersionGUID="{09793331-5810-4CCB-8088-90BC93DB14DE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -30,7 +30,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADwjgVyuTUVvqJNQLiLT6bFAAAAAASAAACgAAAAEAAAAKatURyx0ugBWU1LzzFMnGMwAAAASx7eCqSsp8G/dtbsGODszMiIy7UybiWnS8GGTXUEmKLC89sL0RoXgJ6Hi8vUBjfmFAAAACi6bK151HLC2/FZRt2RqI/Deefv</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADwvVgWSa82XW9PbXvvUsE/AAAAAASAAACgAAAAEAAAAIRaB3MXsHhThgPTN2DlAUAwAAAAQjkWKue6ZroZOgOtx256OnAZZnLnIHbc7P+KT3fHHlwDOBYSwoj6XrnMHpHv0R9oFAAAACYkX9KzsDgVe8zOBwrXccfoEO5a</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -472,46 +472,6 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyVersion("1.0.0.0")> 
 <Assembly: AssemblyFileVersion("1.0.0.0")> ]]></ProjectItem>
           <ProjectItem
-            Name="ScriptMain.vb"
-            Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services Script Task
-' Write scripts using Microsoft Visual Basic 2008.
-' The ScriptMain is the entry point class of the script.
-
-Imports System
-Imports System.Data
-Imports System.Math
-Imports System.IO
-Imports Microsoft.SqlServer.Dts.Runtime
-
-<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
-<System.CLSCompliantAttribute(False)> _
-Partial Public Class ScriptMain
-	Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
-
-	Enum ScriptResults
-		Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
-		Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
-	End Enum
-	
-    Public Sub Main()
-        Dim fileLoc, fileName As String
-        If Dts.Variables.Contains("User::LibraryHomeroomFilePath") = True AndAlso _
-        Dts.Variables.Contains("User::LibraryHomeroomFile") = True Then
-            fileLoc = CStr(Dts.Variables("User::LibraryHomeroomFilePath").Value)
-            fileName = CStr(Dts.Variables.Item("User::LibraryHomeroomFile").Value)
-            If File.Exists(fileLoc + fileName) Then
-                Dts.Variables.Item("User::FileExists").Value = True
-            Else
-                Dts.Variables.Item("User::FileExists").Value = False
-            End If
-            Dts.TaskResult = ScriptResults.Success
-        Else
-            Dts.TaskResult = ScriptResults.Failure
-        End If
-    End Sub
-
-End Class]]></ProjectItem>
-          <ProjectItem
             Name="st_d07338d79e1e421b9e45e24fedae6a55.vbproj"
             Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="utf-16"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -741,6 +701,46 @@ End Class]]></ProjectItem>
 		<msb:Project Include="st_d07338d79e1e421b9e45e24fedae6a55.vbproj"/>
 	</msb:ItemGroup>
 </c:Project>]]></ProjectItem>
+          <ProjectItem
+            Name="ScriptMain.vb"
+            Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services Script Task
+' Write scripts using Microsoft Visual Basic 2008.
+' The ScriptMain is the entry point class of the script.
+
+Imports System
+Imports System.Data
+Imports System.Math
+Imports System.IO
+Imports Microsoft.SqlServer.Dts.Runtime
+
+<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
+<System.CLSCompliantAttribute(False)> _
+Partial Public Class ScriptMain
+	Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+
+	Enum ScriptResults
+		Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
+		Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+	End Enum
+	
+    Public Sub Main()
+        Dim fileLoc, fileName As String
+        If Dts.Variables.Contains("User::LibraryHomeroomFilePath") = True AndAlso _
+        Dts.Variables.Contains("User::LibraryHomeroomFile") = True Then
+            fileLoc = CStr(Dts.Variables("User::LibraryHomeroomFilePath").Value)
+            fileName = CStr(Dts.Variables.Item("User::LibraryHomeroomFile").Value)
+            If File.Exists(fileLoc + fileName) Then
+                Dts.Variables.Item("User::FileExists").Value = True
+            Else
+                Dts.Variables.Item("User::FileExists").Value = False
+            End If
+            Dts.TaskResult = ScriptResults.Success
+        Else
+            Dts.TaskResult = ScriptResults.Failure
+        End If
+    End Sub
+
+End Class]]></ProjectItem>
           <ProjectItem
             Name="My Project\Resources.resx"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -2213,7 +2213,7 @@ FROM   rev.EPC_STU                          stu
        JOIN rev.REV_PERSON                  stfp ON stfp.PERSON_GU                 = stfy.STAFF_GU
        LEFT JOIN rev.EPC_SCH_YR_SECT_MET_DY smdy ON smdy.SECTION_GU                = sect.SECTION_GU
 	   LEFT JOIN rev.EPC_SCH_YR_MET_DY      symd ON symd.SCH_YR_MET_DY_GU          = smdy.SCH_YR_MET_DY_GU
-	   
+)	   
 -- Only Regular enrollments
 SELECT 
          stu.SIS_NUMBER           AS [ID Number]
@@ -2468,6 +2468,26 @@ FROM rev.EPC_STU                    stu
                       lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Telephone2]"
                       name="Telephone2"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[SCHOOL_YEAR]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SCHOOL_YEAR]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[SCHOOL_YEAR]"
+                      name="SCHOOL_YEAR"
+                      precision="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[EXTENSION]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[EXTENSION]"
+                      length="5"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[EXTENSION]"
+                      name="EXTENSION"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -2562,6 +2582,16 @@ FROM rev.EPC_STU                    stu
                       dataType="wstr"
                       length="10"
                       name="Telephone2" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SCHOOL_YEAR]"
+                      dataType="numeric"
+                      name="SCHOOL_YEAR"
+                      precision="4" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[EXTENSION]"
+                      dataType="wstr"
+                      length="5"
+                      name="EXTENSION" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -2678,6 +2708,18 @@ FROM rev.EPC_STU                    stu
                       length="10"
                       lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Telephone2]"
                       name="Telephone2" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[SCHOOL_YEAR]"
+                      dataType="numeric"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[SCHOOL_YEAR]"
+                      name="SCHOOL_YEAR"
+                      precision="4" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[EXTENSION]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[EXTENSION]"
+                      name="EXTENSION" />
                     <outputColumn
                       refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
