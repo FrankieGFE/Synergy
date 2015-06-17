@@ -1,0 +1,3415 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/25/2014 11:35:30 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="AZLT-MMELARCODE"
+  DTS:CreatorName="XNOVAHQ\MMelarcode"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{6FEA0FBD-E0A1-48F0-95AD-BE543E6593CD}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Destiny"
+  DTS:PackageType="5"
+  DTS:VersionBuild="67"
+  DTS:VersionGUID="{CB2A2348-6313-44FC-A733-39E4A726F88F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Db Connection]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{C5E0F161-A028-427F-8EC9-778AEE20C211}"
+      DTS:ObjectName="Db Connection">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Retain="True"
+          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=DestinyExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Destiny-{C5E0F161-A028-427F-8EC9-778AEE20C211}azlt-mmelarcode\sql2012.STDemo808_2012;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADAawbCLnU4rAEQUn5xjZeFAAAAAASAAACgAAAAEAAAAEpfZZRLhzWl4HbIH8d005EwAAAApAnkCfIlIljuGejY0mFGVA1IFC83bX/8tgigabR/WRETHzPHIzeCx3/Pp25mX6sBFAAAAHNkggVokbQbcsOTMsdeO29aJl8Z</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LibraryHomeRoomSourceFile]"
+      DTS:CreationName="FLATFILE"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{0ADD629A-252A-4446-B021-25292FB2AE62}"
+      DTS:ObjectName="LibraryHomeRoomSourceFile">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::LibraryHomeroomFilePath]+ @[User::LibraryHomeroomFile]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\Destiny\LibrarySchoolHomeroom.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SCH_NBR"
+              DTS:DTSID="{BA7BFE53-C188-4B54-8BB3-7F77032EEA45}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HomeRoomPeriod"
+              DTS:DTSID="{D63151A6-06CB-4923-B42B-1537AE9B0794}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Schedules]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{421DA621-E412-469C-8D78-8467D7BF9EF4}"
+      DTS:ObjectName="Schedules">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\Destiny\SCHEDULE.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Sch #"
+              DTS:DTSID="{CD7A3C25-EC84-4714-8A84-BA172151A869}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Course Name"
+              DTS:DTSID="{C0A942F3-CCD0-45D4-8EF9-F676603B37D4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Course #"
+              DTS:DTSID="{E2015DCB-23CC-4F97-B7A3-AC4108CFC042}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Section"
+              DTS:DTSID="{BF00E727-E491-44C7-BE0E-55DEC3EC743A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Employee Num"
+              DTS:DTSID="{4C91B906-ABAA-4B91-B42D-3BB813F43C48}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Period"
+              DTS:DTSID="{315F39C3-E8B8-43EE-ADB2-7787F0CFE077}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student ID"
+              DTS:DTSID="{B495B813-F25C-4936-9522-E0670F309367}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Dept"
+              DTS:DTSID="{1125188E-4D97-4071-AD64-20A422659F1C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="303"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Cycle Days"
+              DTS:DTSID="{073C254F-C0E6-4BDB-A304-7B93B6E05E6B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Class Start Day"
+              DTS:DTSID="{C83D13B0-35AF-4BC1-AB67-F18DFF48C8DD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Class End Date"
+              DTS:DTSID="{2D5440D5-58B1-44D4-8144-2A2EC06EA429}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Students]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{67F2B495-FDCE-4E8E-A1E2-41C18BD6A84F}"
+      DTS:ObjectName="Students">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\Destiny\STUDENT.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ID Number"
+              DTS:DTSID="{DD4B346E-9318-4CF5-A9F2-36D7F69CD1D3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="School Number"
+              DTS:DTSID="{EE25B38A-4B64-45EA-BA28-72AB7866F1DC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="State ID"
+              DTS:DTSID="{2E1CA594-87FF-4276-A682-944E42DE1E12}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Last Name"
+              DTS:DTSID="{3A7ACB04-EAEF-493E-858B-42763CD027E0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="First Name"
+              DTS:DTSID="{FBF18049-0E54-4408-BD56-DBDDC70319CE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Middle Name"
+              DTS:DTSID="{4DBA6071-1B1D-40BF-8F96-70EFA3A52869}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Gender"
+              DTS:DTSID="{2AF79F55-9F35-400A-B0B1-8836354D67E3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Grade"
+              DTS:DTSID="{13C8961F-AB63-471B-934C-A3AB648EC1CF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="122"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Full Name"
+              DTS:DTSID="{FD7AEA20-525B-4FA8-817A-AD890924A144}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Prior ID Number"
+              DTS:DTSID="{947B34B7-4678-4724-9FF6-A5A267FD1159}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BirthDate"
+              DTS:DTSID="{82DAA3CA-6DA1-4618-AFD0-C8BED9B903BE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4000"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Address 1"
+              DTS:DTSID="{5F005AAC-2817-4A21-BA5C-40092A53EAEB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Address 2"
+              DTS:DTSID="{1FDA9A37-AE25-45B6-B291-3CAA0AFDE7D9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="City"
+              DTS:DTSID="{25AF451D-03AD-4EF7-87E7-1631DDF487F8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="State"
+              DTS:DTSID="{9C3D7E65-D72C-45F5-9B01-B455A00323FB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="6"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ZIP Code"
+              DTS:DTSID="{E59195A9-1F15-42C3-A598-D2E17DCDE415}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Telephone1"
+              DTS:DTSID="{D123D7E7-031F-446E-B520-0EEA0E6E2B4A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Telephone2"
+              DTS:DTSID="{53928ADA-B869-4305-B562-DECD2D2E33A9}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{92878637-F32D-4AFB-9C50-9307082FAE56}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileExists">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{508859F8-8635-42CA-B998-6415D44F5151}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="LibraryHomeroomFile">
+      <DTS:VariableValue
+        DTS:DataType="8">LibrarySchoolHomeroom.txt</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{51674686-9F8D-4DA3-A6E5-859B63A4422E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="LibraryHomeroomFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\syntempssis.aps.edu.actd\Files\Export\Destiny\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{41B4FE77-DD73-4F71-8F8D-5461EED0D631}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TempLibraryHomeRoomTable">
+      <DTS:VariableValue
+        DTS:DataType="8">##LibSchHomeroom</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Check If LibrarySource file Exists"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ScriptTask.ScriptTask, Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Script Task"
+      DTS:DTSID="{1DE3861F-8ACF-476B-B9E4-6FA58E98A7F6}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ScriptTask.ScriptTask, Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Check If LibrarySource file Exists"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ScriptProject
+          Name="ST_d07338d79e1e421b9e45e24fedae6a55"
+          VSTAMajorVersion="3"
+          VSTAMinorVersion="0"
+          Language="VisualBasic"
+          ReadOnlyVariables="User::LibraryHomeroomFile,User::LibraryHomeroomFilePath"
+          ReadWriteVariables="User::FileExists">
+          <ProjectItem
+            Name="My Project\AssemblyInfo.vb"
+            Encoding="UTF8"><![CDATA[Imports System
+Imports System.Reflection
+Imports System.Runtime.InteropServices
+
+' General Information about an assembly is controlled through the following 
+' set of attributes. Change these attribute values to modify the information
+' associated with an assembly.
+
+' Review the values of the assembly attributes
+
+<Assembly: AssemblyTitle("ST_fb523b4f308343a0b06249a5b9af95e9.vbproj")> 
+<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyCompany("Microsoft")> 
+<Assembly: AssemblyProduct("ST_fb523b4f308343a0b06249a5b9af95e9.vbproj")> 
+<Assembly: AssemblyCopyright("Copyright @ Microsoft 2013")> 
+<Assembly: AssemblyTrademark("")> 
+<Assembly: CLSCompliant(True)> 
+
+<Assembly: ComVisible(False)> 
+
+'The following GUID is for the ID of the typelib if this project is exposed to COM
+<Assembly: Guid("d358df53-12b4-42f7-a6f7-bedddf6e6059")> 
+
+' Version information for an assembly consists of the following four values:
+'
+'      Major Version
+'      Minor Version 
+'      Build Number
+'      Revision
+'
+' You can specify all the values or you can default the Build and Revision Numbers 
+' by using the '*' as shown below:
+' <Assembly: AssemblyVersion("1.0.*")>
+
+<Assembly: AssemblyVersion("1.0.0.0")> 
+<Assembly: AssemblyFileVersion("1.0.0.0")> ]]></ProjectItem>
+          <ProjectItem
+            Name="ScriptMain.vb"
+            Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services Script Task
+' Write scripts using Microsoft Visual Basic 2008.
+' The ScriptMain is the entry point class of the script.
+
+Imports System
+Imports System.Data
+Imports System.Math
+Imports System.IO
+Imports Microsoft.SqlServer.Dts.Runtime
+
+<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
+<System.CLSCompliantAttribute(False)> _
+Partial Public Class ScriptMain
+	Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+
+	Enum ScriptResults
+		Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
+		Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+	End Enum
+	
+    Public Sub Main()
+        Dim fileLoc, fileName As String
+        If Dts.Variables.Contains("User::LibraryHomeroomFilePath") = True AndAlso _
+        Dts.Variables.Contains("User::LibraryHomeroomFile") = True Then
+            fileLoc = CStr(Dts.Variables("User::LibraryHomeroomFilePath").Value)
+            fileName = CStr(Dts.Variables.Item("User::LibraryHomeroomFile").Value)
+            If File.Exists(fileLoc + fileName) Then
+                Dts.Variables.Item("User::FileExists").Value = True
+            Else
+                Dts.Variables.Item("User::FileExists").Value = False
+            End If
+            Dts.TaskResult = ScriptResults.Success
+        Else
+            Dts.TaskResult = ScriptResults.Failure
+        End If
+    End Sub
+
+End Class]]></ProjectItem>
+          <ProjectItem
+            Name="st_d07338d79e1e421b9e45e24fedae6a55.vbproj"
+            Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- This section defines project-level properties.
+
+       Configuration - Specifies whether the default configuration is Release or Debug.
+       Platform - Specifies what CPU the output of this project can run on.
+       OutputType - Must be "Library" for VSTA.
+       NoStandardLibraries - Set to "false" for VSTA.
+       RootNamespace - In C#, this specifies the namespace given to new files.
+                       In Visual Basic, all objects are wrapped in this namespace at runtime.
+       AssemblyName - Name of the output assembly.
+  -->
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ST_fb523b4f308343a0b06249a5b9af95e9.vbproj</RootNamespace>
+    <AssemblyName>st_d07338d79e1e421b9e45e24fedae6a55</AssemblyName>
+    <StartupObject></StartupObject>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>Off</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <ProjectGuid>{E0DE8A46-D49A-466D-ACAC-7D7CB97AA9C6}</ProjectGuid>
+  </PropertyGroup>
+  <!-- This section defines properties that are set when the "Debug" configuration is
+       selected.
+
+       DebugSymbols - If true, create symbols (.pdb). If false, do not create symbols.
+       Optimize - If true, optimize the build output. If false, do not optimize.
+       OutputPath - Output path of the project relative to the project file.
+       EnableUnmanagedDebugging - If true, starting the debugger will attach both managed and unmanaged debuggers.
+       DefineConstants - Constants defined for the preprocessor.
+       Warning Level - Warning level for the compiler.
+  -->
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DefineConstants></DefineConstants>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <!-- This section defines properties that are set when the "Release" configuration is
+       selected.
+
+       DebugSymbols - If true, create symbols (.pdb). If false, do not create symbols.
+       Optimize - If true, optimize the build output. If false, do not optimize.
+       OutputPath - Output path of the project relative to the project file.
+       EnableUnmanagedDebugging - If true, starting the debugger will attach both managed and unmanaged debuggers.
+       DefineConstants - Constants defined for the preprocessor.
+       Warning Level - Warning level for the compiler.
+  -->
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DefineConstants></DefineConstants>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <!-- This section enables pre- and post-build steps. However,
+       it is recommended that MSBuild tasks be used instead of these properties.
+  -->
+  <PropertyGroup>
+    <PreBuildEvent></PreBuildEvent>
+    <PostBuildEvent></PostBuildEvent>
+  </PropertyGroup>
+  <!-- This sections specifies references for the project. -->
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=11.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+  <!-- Visual Basic supports Importing namespaces (equivalent to using statements in C#).-->
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <!-- This section defines the user source files that are part of the
+       project.
+
+       Compile - Specifies a source file to compile.
+       EmbeddedResource - Specifies a .resx file for embedded resources.
+       None - Specifies a file that is not to be passed to the compiler (for instance,
+              a text file or XML file).
+       AppDesigner - Specifies the directory where the application properties files can
+                     be found.
+  -->
+  <ItemGroup>
+    <AppDesigner Include="My Project\" />
+    <Compile Include="My Project\AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ScriptMain.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <!-- Include the default configuration information and metadata files for the add-in.
+         These files are copied to the build output directory when the project is
+         built, and the path to the configuration file is passed to add-in on the command
+         line when debugging.
+    -->
+  </ItemGroup>
+  <!-- Include the build rules for a VB project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="vb" TemplatesPath="" DebugInfoExeName="#HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VisualStudio\9.0\InstallDir#\devenv.exe" />
+        <Host Name="SSIS_ScriptTask" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST110</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+</Project>]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Settings.settings"
+            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)" GeneratedClassNamespace="$safeprojectname" GeneratedClassName="MySettings">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Settings.Designer.vb"
+            Encoding="UTF8"><![CDATA['------------------------------------------------------------------------------
+' <autogenerated>
+'     This code was generated by a tool.
+'
+'     Changes to this file may cause incorrect behavior and will be lost if
+'     the code is regenerated.
+' </autogenerated>
+'------------------------------------------------------------------------------
+
+Option Strict Off
+Option Explicit On
+
+
+
+Partial Friend NotInheritable Class MySettings
+    Inherits System.Configuration.ApplicationSettingsBase
+
+    Private Shared m_Value As MySettings
+
+    Private Shared m_SyncObject As Object = New Object
+
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Public Shared ReadOnly Property Value() As MySettings
+        Get
+            If (MySettings.m_Value Is Nothing) Then
+                System.Threading.Monitor.Enter(MySettings.m_SyncObject)
+                If (MySettings.m_Value Is Nothing) Then
+                    Try
+                        MySettings.m_Value = New MySettings
+                    Finally
+                        System.Threading.Monitor.Exit(MySettings.m_SyncObject)
+                    End Try
+                End If
+            End If
+            Return MySettings.m_Value
+        End Get
+    End Property
+End Class]]></ProjectItem>
+          <ProjectItem
+            Name="Project"
+            Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:ProjectId>{CF0AB735-6575-4021-9BBA-76CF3F97DECC}</msb:ProjectId>
+		<msb:NoContent>Reference;Import;Folder</msb:NoContent>
+		<msb:Language>msBuild</msb:Language>
+		<msb:DisplayName>st_d07338d79e1e421b9e45e24fedae6a55</msb:DisplayName>
+		<msb:CodeName>st_d07338d79e1e421b9e45e24fedae6a55</msb:CodeName>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:File Include="My Project\Settings.Designer.vb"/>
+		<msb:File Include="My Project\Resources.Designer.vb"/>
+		<msb:File Include="My Project\AssemblyInfo.vb"/>
+		<msb:File Include="My Project\Resources.resx"/>
+		<msb:File Include="My Project\Settings.settings"/>
+		<msb:File Include="ScriptMain.vb"/>
+		<msb:Project Include="st_d07338d79e1e421b9e45e24fedae6a55.vbproj"/>
+	</msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Resources.resx"
+            Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Resources.Designer.vb"
+            Encoding="UTF8"><![CDATA['------------------------------------------------------------------------------
+' <autogenerated>
+'     This code was generated by a tool.
+'
+'     Changes to this file may cause incorrect behavior and will be lost if
+'     the code is regenerated.
+' </autogenerated>
+'------------------------------------------------------------------------------
+
+Option Strict Off
+Option Explicit On
+
+
+Namespace My.Resources
+    
+    '''<summary>
+    '''   A strongly-typed resource class, for looking up localized strings, etc.
+    '''</summary>
+    'This class was auto-generated by the Strongly Typed Resource Builder
+    'class via a tool like ResGen or Visual Studio.NET.
+    'To add or remove a member, edit your .ResX file then rerun ResGen
+    'with the /str option, or rebuild your VS project.
+    Class MyResources
+        
+        Private Shared _resMgr As System.Resources.ResourceManager
+        
+        Private Shared _resCulture As System.Globalization.CultureInfo
+        
+        Friend Sub New()
+            MyBase.New
+        End Sub
+        
+        '''<summary>
+        '''   Returns the cached ResourceManager instance used by this class.
+        '''</summary>
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Shared ReadOnly Property ResourceManager() As System.Resources.ResourceManager
+            Get
+                If (_resMgr Is Nothing) Then
+                    Dim temp As System.Resources.ResourceManager = New System.Resources.ResourceManager("My.Resources.MyResources", GetType(MyResources).Assembly)
+                    _resMgr = temp
+                End If
+                Return _resMgr
+            End Get
+        End Property
+        
+        '''<summary>
+        '''   Overrides the current thread's CurrentUICulture property for all
+        '''   resource lookups using this strongly typed resource class.
+        '''</summary>
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Shared Property Culture() As System.Globalization.CultureInfo
+            Get
+                Return _resCulture
+            End Get
+            Set
+                _resCulture = value
+            End Set
+        End Property
+    End Class
+End Namespace]]></ProjectItem>
+          <BinaryItem
+            Name="st_d07338d79e1e421b9e45e24fedae6a55.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDADO0qFMAAAAAAAAAAOAAAiELAQsAABwAAAAIAAAAAAAAPjsA
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACAAAAAAgAAAAAAAAIAQIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAOw6AABPAAAAAEAAAEAEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAARBsAAAAgAAAAHAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAEAEAAAAQAAAAAYAAAAeAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAJAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAAAg
+OwAAAAAAAEgAAAACAAUAVCQAAJgWAAABAAAAAAAAAJsjAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CKAEAAAoqHgIoBAAACiqmcwYAAAqAAQAABHMHAAAKgAIA
+AARzCAAACoADAAAEcwkAAAqABAAABCoAABMwAQALAAAAAQAAEX4BAAAEbwoAAAoqABMwAQALAAAA
+AgAAEX4CAAAEbwsAAAoqABMwAQALAAAAAwAAEX4DAAAEbwwAAAoqABMwAQALAAAABAAAEX4EAAAE
+bw0AAAoqABMwAgANAAAABQAAEQIDKBEAAAooEgAACioAAAATMAEABwAAAAYAABECKBMAAAoqABMw
+AQALAAAABwAAEdAFAAACKBQAAAoqABMwAQAHAAAACAAAEQIoFQAACioAEzABABAAAAAJAAARAowB
+AAAbLQYoAQAAKyoCKhMwAgAQAAAACgAAEQMSAP4VAgAAGwaBAgAAGyoeAigXAAAKKhMwAgAoAAAA
+CwAAEQJ7GQAACm8aAAAKCweMAwAAGy0SKAIAACsLAnsZAAAKB28bAAAKBypKAigXAAAKAnMcAAAK
+fRkAAAoqAB4CKBcAAAoqEzACAC0AAAAMAAARfgYAAAQtIHIBAABw0AcAAAIoFAAACm8eAAAKcx8A
+AAoLB4AGAAAEfgYAAAQqAAAAEzABAAYAAAANAAARfgcAAAQqAAAeAoAHAAAEKkJzFwAACigRAAAK
+gAkAAAQqAAAAHgIoIAAACiobMAEAPwAAAA4AABF+CAAABC0yfgkAAAQoEQAACighAAAKfggAAAQt
+HHMWAAAGgAgAAATeEH4JAAAEKBEAAAooIgAACtx+CAAABCoAARAAAAIAHQAMKQAQAAAAAB4CKCQA
+AAoqEzACAN8AAAAPAAARAm8lAAAKbyYAAApyMwAAcG8nAAAKObgAAAACbyUAAApvJgAACnJvAABw
+bycAAAo5ngAAAAJvJQAACm8mAAAKcjMAAHBvKAAACm8pAAAKKCoAAAoKAm8lAAAKbyYAAApybwAA
+cG8oAAAKbykAAAooKgAACgsGBygrAAAKKCwAAAosIgJvJQAACm8mAAAKcqMAAHBvKAAACheMIQAA
+AW8tAAAKKyACbyUAAApvJgAACnKjAABwbygAAAoWjCEAAAFvLQAACgJvJQAAChZvLgAACisMAm8l
+AAAKF28uAAAKKrQAAADOyu++AQAAAJEAAABsU3lzdGVtLlJlc291cmNlcy5SZXNvdXJjZVJlYWRl
+ciwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlU
+b2tlbj1iNzdhNWM1NjE5MzRlMDg5I1N5c3RlbS5SZXNvdXJjZXMuUnVudGltZVJlc291cmNlU2V0
+AgAAAAAAAAAAAAAAUEFEUEFEULQAAAAAQlNKQgEAAQAAAAAADAAAAHY0LjAuMzAzMTkAAAAABQBs
+AAAA3AcAACN+AABICAAAtAkAACNTdHJpbmdzAAAAAPwRAADIAAAAI1VTAMQSAAAQAAAAI0dVSUQA
+AADUEgAAxAMAACNCbG9iAAAAAAAAAAIAAAFXHaIJCQ8AAAD6JTMAFgAAAQAAAC4AAAAKAAAADAAA
+ABkAAAAEAAAAOwAAAAIAAAA2AAAADwAAAAQAAAAIAAAACQAAAAkAAAABAAAABQAAAAEAAAADAAAA
+AwAAAAIAAAAAAIwJAQAAAAAACgBgATYBCgCUAXYBBgCkAZ0BCgD8ATYBBgB6Ap0BCgD8AtICBgAy
+AyEDBgBfA0oDDgDGA7EDEgBFBBwEBgBmBJ0BDgCZBIMEDgCyBIMEDgDfBMcEBgAJBfYECgBIBSEF
+CgBgBRMADgCVBXgFBgDKBaoFBgDoBZ0BBgAMBp0BCgAlBhMABgBpBkoGBgCPBn0GBgC2BqUGBgDJ
+BvYEEgDmBhwEFgA/Bx8HFgBgBx8HCgByByEFBgB+B50BBgCWB4wHBgCiB50BBgC5B50BEgDPBxwE
+BgAwCKoFBgBQCKoFBgCICG4IBgChCH0GBgC+CEoGBgDMCH0GBgDnCH0GBgACCX0GBgAbCX0GBgA0
+CX0GBgBRCX0GAAAAAAEAAAAAAAEAAQAAAAAAKQA3AAUAAQABAAAAAABlADcACQABAAIAAAEQAHAA
+NwANAAEAAwAFAQAAegAAAA0ABQAIAAUBAACIAAAADQAFAA8AAAAAAKMArwANAAYAEQAAARAA5wDy
+ACUACAAVAAEAAAAdAfIAKQAKABgAAgEAACgBAAAtAAoAGgAxAL8BIAAxAOgBLQAxAAoCOgAxAC8C
+RwAhAAsDkAARAEIDnQARAGsDoQARAN4DvwARAOYDwwAGBmsE2QBWgHME3ABWgHsE3ABQIAAAAAAG
+GHABEwABAFggAAAAAAYYcAETAAEAYCAAAAAAERirARcAAQCMIAAAAAATCLIBGwABAKQgAAAAABMI
+2AEoAAEAvCAAAAAAEwgBAjUAAQDUIAAAAAATCB8CQgABAOwgAAAAAEYCZQJjAAEACCEAAAAARgJu
+AmgAAgAcIQAAAACDAH8CbAACADQhAAAAAEYChwJxAAIASCEAAAAAEQCQAngAAgBkIQAAAAABAK4C
+gAADAIAhAAAAAAYYcAETAAQAiCEAAAAAAwjCAosABAC8IQAAAAAGGHABEwAEANAhAAAAAAMYcAET
+AAQA2CEAAAAAFgh3A6UABAAUIgAAAAAWCIsDqgAEACgiAAAAABYIlwOvAAQAMCIAAAAAERirARcA
+BQBEIgAAAAAGGHABEwAFAEwiAAAAABYI8wPGAAUAqCIAAAAABhhwARMABQCwIgAAAAAGAGEEEwAF
+AAAAAQBsAgAAAQClAgAAAQClAgAAAQCjAwkAcAETAGEAcAHqAHEAcAH5ABEAcAETAHkAcAETACQA
+cAETACwAcAETADQAcAETADwAcAETACQAwgKLACwAwgKLADQAwgKLADwAwgKLAIEAcAETAIkAcAET
+AJEAcAFIAZkA2QWTARkAZQJjABkAbgJoACkA+gWgARkAhwJxAKkAFgawARkAcAETALEAcAHAAUQA
+CwOQAEwA8wOLAEwAQAY9AkwAcAETALkAcAFMAikAmAZXAjkAcAFcAkkAcAETAMkAvgZ4AskAxAZ4
+AtEAcAETAFEAcAETAFEA+AaCAtkASQeHAuEAVwdjAOEAaQeMAukA8wOSAvEAhwKWAvkAhQebAgEB
+mwehAukAQAamAtkAqgerAhEBcAFMAhkBcAETACEBcAGrAikBcAETADEBcAFIATkBcAFIAUEBcAFI
+AUkBcAFIAVEBcAFIAVkBcAFIAWEBcAFIAWkBcAFIAXEBcAFIAQgALADgAAgAMADlACkAgwBNAS4A
+wwGCAy4A2wGCAy4AuwFiAy4AkwG+Ai4AmwHdAi4AswFRAi4A0wFRAi4AiwG1Ai4AywGyAy4AowEl
+Ay4AqwEyAy4A6wBRAi4AewFcA0AAKwDlAEAAEwDwAEMAEwDwAEMAGwD/AEkAgwBrAWMAGwD/AGMA
+EwDwAGkAgwBeAYAAKwDlAIMAcwDlAIMAGwD/AIMAewDlAIkAgwB/AaAAKwDlAKMAwwDIAaMAEwDw
+AMAAKwDlAMMAEwDwAMMA6wBRAskAEwBvAuAAKwDlAOkAEwBvAgABKwDlAAABEwDwAAkBGwHlACAB
+KwDlACABEwDwACMBgwHlACMBewFRAkABKwDlAEABEwDwAGABEwDwAGABKwDlAIABKwDlAKABKwDl
+AMABKwDlAMABEwDwAOABKwDlAAACEwDwAAACKwDlADQBOQE+AUMBmAGcAacBrAG7AbsBQwJjAmoC
+fQKwAgQAAQAGAAUABwAGAAgACAAAAJQBTwAAAE0CVAAAAPwBWQAAAFkCXgAAABUDmAAAADIDtQAA
+AKkDugAAAKMDywACAAQAAwACAAUABQACAAYABwACAAcACQACAA8ACwACABIADQACABMADwABABQA
+DwACABcAEQB1AHUAiAAYAR8BJgEtASoCMQIEgAAAAQAAAAAAAAAAAAAAAABoCQAABAAAAAAAAAAA
+AAAAAQAKAAAAAAAKAAAAAAAAAAAAAAAKABMAAAAAAAQAAAAAAAAAAAAAAAEAnQEAAAAACwAAAAAA
+AAAAAAAA0AD9AwAAAAALAAAAAAAAAAAAAADQAAAHAAAAAAAAAAABAAAA8QcAAAUABAAGAAQACgAJ
+AAAAEAAMAKMCAAAQABkAowIAAAAAGwCjAi0AtgEtADgCAAAAPE1vZHVsZT4AbXNjb3JsaWIATWlj
+cm9zb2Z0LlZpc3VhbEJhc2ljAE15QXBwbGljYXRpb24AU1RfZmI1MjNiNGYzMDgzNDNhMGIwNjI0
+OWE1YjlhZjk1ZTkudmJwcm9qLk15AE15Q29tcHV0ZXIATXlQcm9qZWN0AE15V2ViU2VydmljZXMA
+VGhyZWFkU2FmZU9iamVjdFByb3ZpZGVyYDEATXlSZXNvdXJjZXMAU1RfZmI1MjNiNGYzMDgzNDNh
+MGIwNjI0OWE1YjlhZjk1ZTkudmJwcm9qLk15LlJlc291cmNlcwBNeVNldHRpbmdzAFNUX2ZiNTIz
+YjRmMzA4MzQzYTBiMDYyNDlhNWI5YWY5NWU5LnZicHJvagBTY3JpcHRNYWluAFNjcmlwdFJlc3Vs
+dHMATWljcm9zb2Z0LlZpc3VhbEJhc2ljLkFwcGxpY2F0aW9uU2VydmljZXMAQXBwbGljYXRpb25C
+YXNlAC5jdG9yAE1pY3Jvc29mdC5WaXN1YWxCYXNpYy5EZXZpY2VzAENvbXB1dGVyAFN5c3RlbQBP
+YmplY3QALmNjdG9yAGdldF9Db21wdXRlcgBtX0NvbXB1dGVyT2JqZWN0UHJvdmlkZXIAZ2V0X0Fw
+cGxpY2F0aW9uAG1fQXBwT2JqZWN0UHJvdmlkZXIAVXNlcgBnZXRfVXNlcgBtX1VzZXJPYmplY3RQ
+cm92aWRlcgBnZXRfV2ViU2VydmljZXMAbV9NeVdlYlNlcnZpY2VzT2JqZWN0UHJvdmlkZXIAQXBw
+bGljYXRpb24AV2ViU2VydmljZXMARXF1YWxzAG8AR2V0SGFzaENvZGUAVHlwZQBHZXRUeXBlAFRv
+U3RyaW5nAENyZWF0ZV9fSW5zdGFuY2VfXwBUAGluc3RhbmNlAERpc3Bvc2VfX0luc3RhbmNlX18A
+Z2V0X0dldEluc3RhbmNlAE1pY3Jvc29mdC5WaXN1YWxCYXNpYy5NeVNlcnZpY2VzLkludGVybmFs
+AENvbnRleHRWYWx1ZWAxAG1fQ29udGV4dABHZXRJbnN0YW5jZQBTeXN0ZW0uUmVzb3VyY2VzAFJl
+c291cmNlTWFuYWdlcgBfcmVzTWdyAFN5c3RlbS5HbG9iYWxpemF0aW9uAEN1bHR1cmVJbmZvAF9y
+ZXNDdWx0dXJlAGdldF9SZXNvdXJjZU1hbmFnZXIAZ2V0X0N1bHR1cmUAc2V0X0N1bHR1cmUAVmFs
+dWUAQ3VsdHVyZQBTeXN0ZW0uQ29uZmlndXJhdGlvbgBBcHBsaWNhdGlvblNldHRpbmdzQmFzZQBt
+X1ZhbHVlAG1fU3luY09iamVjdABnZXRfVmFsdWUATWljcm9zb2Z0LlNxbFNlcnZlci5TY3JpcHRU
+YXNrAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlRhc2tzLlNjcmlwdFRhc2sAVlNUQVJUU2NyaXB0
+T2JqZWN0TW9kZWxCYXNlAE1haW4ARW51bQB2YWx1ZV9fAFN1Y2Nlc3MARmFpbHVyZQBTeXN0ZW0u
+Q29tcG9uZW50TW9kZWwARWRpdG9yQnJvd3NhYmxlQXR0cmlidXRlAEVkaXRvckJyb3dzYWJsZVN0
+YXRlAFN5c3RlbS5Db2RlRG9tLkNvbXBpbGVyAEdlbmVyYXRlZENvZGVBdHRyaWJ1dGUAU3lzdGVt
+LkRpYWdub3N0aWNzAERlYnVnZ2VySGlkZGVuQXR0cmlidXRlAE1pY3Jvc29mdC5WaXN1YWxCYXNp
+Yy5Db21waWxlclNlcnZpY2VzAFN0YW5kYXJkTW9kdWxlQXR0cmlidXRlAEhpZGVNb2R1bGVOYW1l
+QXR0cmlidXRlAFN5c3RlbS5Db21wb25lbnRNb2RlbC5EZXNpZ24ASGVscEtleXdvcmRBdHRyaWJ1
+dGUAU3lzdGVtLlJ1bnRpbWUuQ29tcGlsZXJTZXJ2aWNlcwBSdW50aW1lSGVscGVycwBHZXRPYmpl
+Y3RWYWx1ZQBSdW50aW1lVHlwZUhhbmRsZQBHZXRUeXBlRnJvbUhhbmRsZQBBY3RpdmF0b3IAQ3Jl
+YXRlSW5zdGFuY2UATXlHcm91cENvbGxlY3Rpb25BdHRyaWJ1dGUAc2V0X1ZhbHVlAFN5c3RlbS5S
+dW50aW1lLkludGVyb3BTZXJ2aWNlcwBDb21WaXNpYmxlQXR0cmlidXRlAFN5c3RlbS5SZWZsZWN0
+aW9uAEFzc2VtYmx5AGdldF9Bc3NlbWJseQBTeXN0ZW0uVGhyZWFkaW5nAE1vbml0b3IARW50ZXIA
+RXhpdABEZWJ1Z2dlck5vblVzZXJDb2RlQXR0cmlidXRlAFNjcmlwdE9iamVjdE1vZGVsAGdldF9E
+dHMATWljcm9zb2Z0LlNxbFNlcnZlci5NYW5hZ2VkRFRTAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRz
+LlJ1bnRpbWUAVmFyaWFibGVzAGdldF9WYXJpYWJsZXMAQ29udGFpbnMAVmFyaWFibGUAZ2V0X0l0
+ZW0AQ29udmVyc2lvbnMAU3RyaW5nAENvbmNhdABTeXN0ZW0uSU8ARmlsZQBFeGlzdHMAQm9vbGVh
+bgBzZXRfVGFza1Jlc3VsdABDTFNDb21wbGlhbnRBdHRyaWJ1dGUAU1NJU1NjcmlwdFRhc2tFbnRy
+eVBvaW50QXR0cmlidXRlAFNUX2ZiNTIzYjRmMzA4MzQzYTBiMDYyNDlhNWI5YWY5NWU5LnZicHJv
+ai5SZXNvdXJjZXMucmVzb3VyY2VzAENvbXBpbGF0aW9uUmVsYXhhdGlvbnNBdHRyaWJ1dGUAUnVu
+dGltZUNvbXBhdGliaWxpdHlBdHRyaWJ1dGUAU3lzdGVtLlJ1bnRpbWUuVmVyc2lvbmluZwBUYXJn
+ZXRGcmFtZXdvcmtBdHRyaWJ1dGUAQXNzZW1ibHlGaWxlVmVyc2lvbkF0dHJpYnV0ZQBHdWlkQXR0
+cmlidXRlAEFzc2VtYmx5VHJhZGVtYXJrQXR0cmlidXRlAEFzc2VtYmx5Q29weXJpZ2h0QXR0cmli
+dXRlAEFzc2VtYmx5UHJvZHVjdEF0dHJpYnV0ZQBBc3NlbWJseUNvbXBhbnlBdHRyaWJ1dGUAQXNz
+ZW1ibHlEZXNjcmlwdGlvbkF0dHJpYnV0ZQBBc3NlbWJseVRpdGxlQXR0cmlidXRlAHN0X2QwNzMz
+OGQ3OWUxZTQyMWI5ZTQ1ZTI0ZmVkYWU2YTU1AHN0X2QwNzMzOGQ3OWUxZTQyMWI5ZTQ1ZTI0ZmVk
+YWU2YTU1LmRsbAAAMU0AeQAuAFIAZQBzAG8AdQByAGMAZQBzAC4ATQB5AFIAZQBzAG8AdQByAGMA
+ZQBzAAA7VQBzAGUAcgA6ADoATABpAGIAcgBhAHIAeQBIAG8AbQBlAHIAbwBvAG0ARgBpAGwAZQBQ
+AGEAdABoAAAzVQBzAGUAcgA6ADoATABpAGIAcgBhAHIAeQBIAG8AbQBlAHIAbwBvAG0ARgBpAGwA
+ZQAAIVUAcwBlAHIAOgA6AEYAaQBsAGUARQB4AGkAcwB0AHMAAAAAAJ2mrTjZ20dGiq4jafSdQ9IA
+CLd6XFYZNOCJCLA/X38R1Qo6AyAAAQMAAAEEAAASDAcGFRIYARIMBAAAEggHBhUSGAESCAQAABIR
+BwYVEhgBEhEEAAASFAcGFRIYARIUBAgAEgwECAASCAQIABIRBAgAEhQEIAECHAMgAAgEIAASFQMg
+AA4CHgAHEAEBHgAeAAcwAQEBEB4AAhMABCAAEwAHBhUSGQETAAQoABMAAwYSHQMGEiEEAAASHQQA
+ABIhBQABARIhBAgAEh0ECAASIQMGEiACBhwEAAASIAQIABIgCImEXc2AgMyRAgYIAwYRKAQAAAAA
+BAEAAAAFIAEBETUIAQABAAAAAAAFIAIBDg4YAQAKTXlUZW1wbGF0ZQgxMC4wLjAuMAAABhUSGAES
+DAYVEhgBEggGFRIYARIRBhUSGAESFAQHARIMBAcBEggEBwESEQQHARIUBCABAQ4QAQALTXkuQ29t
+cHV0ZXIAAAwBAAdNeS5Vc2VyAAATAQAOTXkuQXBwbGljYXRpb24AABMBAA5NeS5XZWJTZXJ2aWNl
+cwAABAABHBwDBwECAwcBCAYAARIVEVEEBwESFQMHAQ4FEAEAHgAECgEeAAQHAR4AByAEAQ4ODg5h
+AQA0U3lzdGVtLldlYi5TZXJ2aWNlcy5Qcm90b2NvbHMuU29hcEh0dHBDbGllbnRQcm90b2NvbBJD
+cmVhdGVfX0luc3RhbmNlX18TRGlzcG9zZV9fSW5zdGFuY2VfXwAAAAYVEhgBEwAGFRIZARMABAoB
+EwAFIAEBEwAIBwMTABMAEwAEIAEBAgUBAAAAAAQgABJhBiACAQ4SYQYHAhIdEh0EBwESIQgBAAIA
+AAAAAAQAAQEcBAcBEiAEIAASbQQgABJxBSABEnUcAyAAHAQAAQ4cBQACDg4OBAABAg4EIAEBHAQg
+AQEIBAcCDg4IAQAIAAAAAAAeAQABAFQCFldyYXBOb25FeGNlcHRpb25UaHJvd3MBRwEAGi5ORVRG
+cmFtZXdvcmssVmVyc2lvbj12NC4wAQBUDhRGcmFtZXdvcmtEaXNwbGF5TmFtZRAuTkVUIEZyYW1l
+d29yayA0DAEABzEuMC4wLjAAACkBACRkMzU4ZGY1My0xMmI0LTQyZjctYTZmNy1iZWRkZGY2ZTYw
+NTkAAAUBAAEAAB8BABpDb3B5cmlnaHQgQCBNaWNyb3NvZnQgMjAxMwAALwEAKlNUX2ZiNTIzYjRm
+MzA4MzQzYTBiMDYyNDlhNWI5YWY5NWU5LnZicHJvagAADgEACU1pY3Jvc29mdAAAAAAAFDsAAAAA
+AAAAAAAALjsAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA7AAAAAAAAAAAAAAAAX0NvckRsbE1h
+aW4AbXNjb3JlZS5kbGwAAAAAAP8lACAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB
+ABAAAAAYAACAAAAAAAAAAAAAAAAAAAABAAEAAAAwAACAAAAAAAAAAAAAAAAAAAABAAAAAABIAAAA
+WEAAAOgDAAAAAAAAAAAAAOgDNAAAAFYAUwBfAFYARQBSAFMASQBPAE4AXwBJAE4ARgBPAAAAAAC9
+BO/+AAABAAAAAQAAAAAAAAABAAAAAAA/AAAAAAAAAAQAAAACAAAAAAAAAAAAAAAAAAAARAAAAAEA
+VgBhAHIARgBpAGwAZQBJAG4AZgBvAAAAAAAkAAQAAABUAHIAYQBuAHMAbABhAHQAaQBvAG4AAAAA
+AAAAsARIAwAAAQBTAHQAcgBpAG4AZwBGAGkAbABlAEkAbgBmAG8AAAAkAwAAAQAwADAAMAAwADAA
+NABiADAAAAA0AAoAAQBDAG8AbQBwAGEAbgB5AE4AYQBtAGUAAAAAAE0AaQBjAHIAbwBzAG8AZgB0
+AAAAgAArAAEARgBpAGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4AAAAAAFMAVABfAGYAYgA1ADIA
+MwBiADQAZgAzADAAOAAzADQAMwBhADAAYgAwADYAMgA0ADkAYQA1AGIAOQBhAGYAOQA1AGUAOQAu
+AHYAYgBwAHIAbwBqAAAAAAAwAAgAAQBGAGkAbABlAFYAZQByAHMAaQBvAG4AAAAAADEALgAwAC4A
+MAAuADAAAABwACgAAQBJAG4AdABlAHIAbgBhAGwATgBhAG0AZQAAAHMAdABfAGQAMAA3ADMAMwA4
+AGQANwA5AGUAMQBlADQAMgAxAGIAOQBlADQANQBlADIANABmAGUAZABhAGUANgBhADUANQAuAGQA
+bABsAAAAXAAbAAEATABlAGcAYQBsAEMAbwBwAHkAcgBpAGcAaAB0AAAAQwBvAHAAeQByAGkAZwBo
+AHQAIABAACAATQBpAGMAcgBvAHMAbwBmAHQAIAAyADAAMQAzAAAAAAB4ACgAAQBPAHIAaQBnAGkA
+bgBhAGwARgBpAGwAZQBuAGEAbQBlAAAAcwB0AF8AZAAwADcAMwAzADgAZAA3ADkAZQAxAGUANAAy
+ADEAYgA5AGUANAA1AGUAMgA0AGYAZQBkAGEAZQA2AGEANQA1AC4AZABsAGwAAAB4ACsAAQBQAHIA
+bwBkAHUAYwB0AE4AYQBtAGUAAAAAAFMAVABfAGYAYgA1ADIAMwBiADQAZgAzADAAOAAzADQAMwBh
+ADAAYgAwADYAMgA0ADkAYQA1AGIAOQBhAGYAOQA1AGUAOQAuAHYAYgBwAHIAbwBqAAAAAAA0AAgA
+AQBQAHIAbwBkAHUAYwB0AFYAZQByAHMAaQBvAG4AAAAxAC4AMAAuADAALgAwAAAAOAAIAAEAQQBz
+AHMAZQBtAGIAbAB5ACAAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4AMAAuADAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAwAAABAOwAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
+        </ScriptProject>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create Temp TermsTable"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{81CDFC49-CBCD-4E3C-8BA5-28FC36065207}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Temp TermsTable"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C5E0F161-A028-427F-8EC9-778AEE20C211}"
+          SQLTask:SqlStatementSource="---&lt;APS - Destiny --Schedule&gt;&#xA;&#xA;IF OBJECT_ID('tempdb..##Terms') IS NOT NULL DROP TABLE ##Terms&#xA;CREATE TABLE ##Terms(&#xA;   OrgGu uniqueidentifier null&#xA;   , SchYr varchar(4) null&#xA;   , TermCode varchar(4) null&#xA;   , TermStart smalldatetime&#xA;   , TermEnd smalldatetime&#xA;)&#xA;--&#xA;insert into ##Terms&#xA;select &#xA;       t.OrgGU&#xA;     , t.SchoolYear&#xA;       , t.TermCode&#xA;       , TermBegin&#xA;       , TermEnd&#xA;from rev.SIF_22_TermInfo() t &#xA;     join rev.REV_ORGANIZATION_YEAR oyr on oyr.ORGANIZATION_GU = t.OrgGU&#xA;     join rev.REV_YEAR              y   on y.YEAR_GU = oyr.YEAR_GU &#xA;                                              and y.YEAR_GU = (select year_gu from rev.SIF_22_Common_CurrentYearGU)&#xA;---&#xA;IF OBJECT_ID('tempdb..##SummerTerms') IS NOT NULL DROP TABLE ##SummerTerms&#xA;CREATE TABLE ##SummerTerms(&#xA;     OrgGu uniqueidentifier null&#xA;   , SchYr varchar(4) null&#xA;   , TermCode varchar(4) null&#xA;   , TermStart smalldatetime&#xA;   , TermEnd smalldatetime&#xA;)&#xA;--&#xA;insert into ##SummerTerms&#xA;select &#xA;       org.ORGANIZATION_GU&#xA;     , yr.SCHOOL_YEAR&#xA;       , tcd.TERM_CODE&#xA;       , acalo.START_DATE&#xA;       , tdef.EVENT_DATE&#xA;from rev.rev_organization      org&#xA;join rev.REV_ORGANIZATION_YEAR oyr   on oyr.ORGANIZATION_GU = org.ORGANIZATION_GU&#xA;join rev.REV_YEAR              yr    on yr.SCHOOL_YEAR = (select school_year from rev.SIF_22_Common_CurrentYear)&#xA;                                        and yr.EXTENSION = 'S'&#xA;                                                                  and yr.YEAR_GU = oyr.YEAR_GU&#xA;join rev.EPC_SCH_YR_TRM_DEF    tdef  on tdef.ORGANIZATION_YEAR_GU = oyr.ORGANIZATION_YEAR_GU&#xA;join rev.EPC_SCH_YR_TRM_CODES  tcd   on tcd.SCHOOL_YEAR_TRM_DEF_GU = tdef.SCHOOL_YEAR_TRM_DEF_GU&#xA;join rev.EPC_SCH_ATT_CAL_OPT   acalo on acalo.ORG_YEAR_GU = oyr.ORGANIZATION_YEAR_GU&#xA;--------&#xA;IF OBJECT_ID('tempdb..##JumpStartTerms') IS NOT NULL DROP TABLE ##JumpStartTerms&#xA;CREATE TABLE ##JumpStartTerms(&#xA;     OrgGu uniqueidentifier null&#xA;   , SchYr varchar(4) null&#xA;   , TermCode varchar(4) null&#xA;   , TermStart smalldatetime&#xA;   , TermEnd smalldatetime&#xA;)&#xA;--&#xA;insert into ##JumpStartTerms&#xA;select &#xA;       org.ORGANIZATION_GU&#xA;     , yr.SCHOOL_YEAR&#xA;       , tcd.TERM_CODE&#xA;       , acalo.START_DATE&#xA;       , tdef.EVENT_DATE&#xA;from rev.rev_organization      org&#xA;join rev.REV_ORGANIZATION_YEAR oyr   on oyr.ORGANIZATION_GU = org.ORGANIZATION_GU&#xA;join rev.REV_YEAR              yr    on yr.SCHOOL_YEAR = (select school_year from rev.SIF_22_Common_CurrentYear)+1&#xA;                                        and yr.EXTENSION = 'N'&#xA;                                                                  and yr.YEAR_GU = oyr.YEAR_GU&#xA;join rev.EPC_SCH_YR_TRM_DEF    tdef  on tdef.ORGANIZATION_YEAR_GU = oyr.ORGANIZATION_YEAR_GU&#xA;join rev.EPC_SCH_YR_TRM_CODES  tcd   on tcd.SCHOOL_YEAR_TRM_DEF_GU = tdef.SCHOOL_YEAR_TRM_DEF_GU&#xA;join rev.EPC_SCH_ATT_CAL_OPT   acalo on acalo.ORG_YEAR_GU = oyr.ORGANIZATION_YEAR_GU" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Drop TempTable"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EAEA7916-9052-427E-A005-B33BBB5EA99D}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Drop TempTable"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C5E0F161-A028-427F-8EC9-778AEE20C211}"
+          SQLTask:SqlStatementSource="IF OBJECT_ID('tempdb..##LibSchHomeroom') IS NOT NULL DROP TABLE ##LibSchHomeroom&#xA;&#xA;IF OBJECT_ID('tempdb..##Terms') IS NOT NULL DROP TABLE ##Terms" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute Process Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute Process Task"
+      DTS:DTSID="{5C414E28-0BC4-405D-A9D8-139A8CEBFA21}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute Process Task"
+      DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecuteProcessData
+          Executable="C:\Windows\System32\cmd.exe"
+          Arguments="/C net use P: /delete /yes &amp; net use P: &quot;\\030-destinyapp\FSC-Patron&quot; d3stiny /USER:030-destinyapp\Patronxfer &amp; echo F | xcopy &quot;\\syntempssis.aps.edu.actd\Files\Export\Destiny\STUDENT.CSV&quot; &quot;P:\STUDENT.CSV&quot; /D /F /Y &amp; echo F | xcopy &quot;\\syntempssis.aps.edu.actd\Files\Export\Destiny\SCHEDULE.CSV&quot; &quot;P:\SCHEDULE.CSV&quot; /D /F /Y &amp; net use P: /delete /yes &amp; EXIT /B" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FED09BF0-F96F-4E67-97E6-1B3E70CDA43C}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C5E0F161-A028-427F-8EC9-778AEE20C211}"
+          SQLTask:SqlStatementSource="--&lt;APS - Destiny - LibrarySchoolHomeroom helper file&gt;&#xA;-- Addendum file to be joined - Fixed rows from a temp table&#xA;IF OBJECT_ID('tempdb..##LibSchHomeroom') IS NOT NULL DROP TABLE ##LibSchHomeroom&#xA;CREATE TABLE ##LibSchHomeroom(&#xA;   [SCHOOL_CODE]                    NVARCHAR(50) null&#xA; , [HOMEROOM_PERIOD_NUMBER]         NVARCHAR(50) null&#xA; )" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Temp LibraryHomeroom"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{EAC56F44-A12F-4E0D-B55A-99B052DB7D98}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Temp LibraryHomeroom"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File"
+              componentClassID="{D23FD76B-F51D-420F-BBCB-19CBF6AC1AB4}"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="Library Hoemroom Source File"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LibraryHomeRoomSourceFile]"
+                  connectionManagerRefId="Package.ConnectionManagers[LibraryHomeRoomSourceFile]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Output].Columns[SCH_NBR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Output].ExternalColumns[SCH_NBR]"
+                      length="50"
+                      lineageId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Output].Columns[SCH_NBR]"
+                      name="SCH_NBR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Output].Columns[HomeRoomPeriod]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Output].ExternalColumns[HomeRoomPeriod]"
+                      length="50"
+                      lineageId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Output].Columns[HomeRoomPeriod]"
+                      name="HomeRoomPeriod"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Output].ExternalColumns[SCH_NBR]"
+                      dataType="wstr"
+                      length="50"
+                      name="SCH_NBR" />
+                    <externalMetadataColumn
+                      refId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Output].ExternalColumns[HomeRoomPeriod]"
+                      dataType="wstr"
+                      length="50"
+                      name="HomeRoomPeriod" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Temp LibraryHomeroom\Load TempTable"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Load TempTable"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable">User::TempLibraryHomeRoomTable</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Temp LibraryHomeroom\Load TempTable.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Db Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[Db Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Temp LibraryHomeroom\Load TempTable.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Temp LibraryHomeroom\Load TempTable.Inputs[OLE DB Destination Input].Columns[SCH_NBR]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="SCH_NBR"
+                      externalMetadataColumnId="Package\Load Temp LibraryHomeroom\Load TempTable.Inputs[OLE DB Destination Input].ExternalColumns[SCHOOL_CODE]"
+                      lineageId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Output].Columns[SCH_NBR]" />
+                    <inputColumn
+                      refId="Package\Load Temp LibraryHomeroom\Load TempTable.Inputs[OLE DB Destination Input].Columns[HomeRoomPeriod]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="HomeRoomPeriod"
+                      externalMetadataColumnId="Package\Load Temp LibraryHomeroom\Load TempTable.Inputs[OLE DB Destination Input].ExternalColumns[HOMEROOM_PERIOD_NUMBER]"
+                      lineageId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Output].Columns[HomeRoomPeriod]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Temp LibraryHomeroom\Load TempTable.Inputs[OLE DB Destination Input].ExternalColumns[SCHOOL_CODE]"
+                      dataType="wstr"
+                      length="50"
+                      name="SCHOOL_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Temp LibraryHomeroom\Load TempTable.Inputs[OLE DB Destination Input].ExternalColumns[HOMEROOM_PERIOD_NUMBER]"
+                      dataType="wstr"
+                      length="50"
+                      name="HOMEROOM_PERIOD_NUMBER" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Temp LibraryHomeroom\Load TempTable.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Temp LibraryHomeroom\Load TempTable.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Temp LibraryHomeroom\Load TempTable.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Temp LibraryHomeroom\Load TempTable.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Temp LibraryHomeroom\Load TempTable.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Temp LibraryHomeroom\Load TempTable.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Temp LibraryHomeroom.Paths[Flat File Source Output]"
+              endId="Package\Load Temp LibraryHomeroom\Load TempTable.Inputs[OLE DB Destination Input]"
+              name="Flat File Source Output"
+              startId="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Schedules"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{DEA16315-474D-41C4-BBAB-632A08A34BF1}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Schedules"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Schedules\DB Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">;with  OnlySummer AS
+(
+  SELECT
+     stu.student_gu
+  FROM rev.EPC_STU                  stu
+     JOIN rev.EPC_STU_SCH_YR        ssyr ON ssyr.STUDENT_GU = stu.STUDENT_GU
+                                            AND ssyr.STATUS IS NULL
+                                                                           AND ssyr.EXCLUDE_ADA_ADM is null
+     JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
+     JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssyr.YEAR_GU
+                                            AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
+                                            AND yr.EXTENSION   = 'S'
+)
+SELECT 
+
+   sch.SCHOOL_CODE                   AS [Sch #]
+, crs.COURSE_TITLE                  AS [Course Name]
+, crs.COURSE_ID                     AS [Course #]
+, sect.SECTION_ID                   AS [Section]
+, 'E'+RIGHT('000000000'+ replace(lower(stf.badge_num),'e',''),9)
+    AS [Employee Num]
+, sect.PERIOD_BEGIN                 AS [Period]
+, stu.SIS_NUMBER                    AS [Student ID]
+, crs.SUBJECT_AREA_1                AS [Dept]
+, CASE WHEN NOT EXISTS           
+         (SELECT symd.MEET_DAY_CODE 
+       FROM rev.EPC_SCH_YR_SECT_MET_DY sysmd
+       JOIN rev.EPC_SCH_YR_MET_DY      symd ON symd.SCH_YR_MET_DY_GU = sysmd.SCH_YR_MET_DY_GU
+       WHERE sysmd.SECTION_GU = sect.SECTION_GU
+      )
+  THEN 'M,T,W,R,F'   
+  ELSE               
+         STUFF((SELECT [*]=', '+(LEFT(symd.MEET_DAY_CODE,1))  
+                FROM rev.EPC_SCH_YR_SECT sec    
+                JOIN rev.EPC_SCH_YR_SECT_MET_DY sysmd ON sysmd.SECTION_GU      = sec.SECTION_GU
+                JOIN rev.EPC_SCH_YR_MET_DY      symd  ON symd.SCH_YR_MET_DY_GU = sysmd.SCH_YR_MET_DY_GU
+                WHERE sec.SECTION_GU  = sect.SECTION_GU       
+                ORDER BY symd.ORDERBY    
+                FOR XML PATH('')
+               ),1,2,'')    
+  END                                        AS [Cycle Days]
+, CONVERT(VARCHAR(10), trms.TermStart, 101) AS [Class Start Day]
+, CONVERT(VARCHAR(10), trms.TermEnd, 101)   AS [Class End Date]
+FROM   rev.EPC_STU                          stu
+       JOIN rev.EPC_STU_SCH_YR              ssy  ON ssy.STUDENT_GU                 = stu.STUDENT_GU
+                                                    and ssy.STATUS is NULL
+       JOIN rev.REV_ORGANIZATION_YEAR       oyr  ON oyr.ORGANIZATION_YEAR_GU       = ssy.ORGANIZATION_YEAR_GU
+       JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssy.YEAR_GU
+                                            AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
+                                            AND yr.EXTENSION   = 'R'
+       JOIN rev.REV_ORGANIZATION            org  ON org.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
+       JOIN rev.EPC_SCH                     sch  ON sch.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
+       JOIN rev.EPC_STU_CLASS               cls  ON cls.STUDENT_SCHOOL_YEAR_GU     = ssy.STUDENT_SCHOOL_YEAR_GU
+       JOIN rev.EPC_SCH_YR_SECT             sect ON sect.SECTION_GU                = cls.SECTION_GU
+       JOIN rev.EPC_SCH_YR_CRS              scrs ON scrs.SCHOOL_YEAR_COURSE_GU     = sect.SCHOOL_YEAR_COURSE_GU
+       JOIN rev.EPC_CRS                     crs  ON crs.COURSE_GU                  = scrs.COURSE_GU
+       JOIN rev.EPC_STAFF_SCH_YR            stfy ON stfy.STAFF_SCHOOL_YEAR_GU      = sect.STAFF_SCHOOL_YEAR_GU
+          JOIN rev.EPC_STAFF                   stf  ON stf.STAFF_GU                   = stfy.STAFF_GU
+       JOIN rev.REV_PERSON                  stfp ON stfp.PERSON_GU                 = stfy.STAFF_GU
+          JOIN ##Terms                         trms ON trms.OrgGu                     = oyr.ORGANIZATION_GU
+                                                       AND trms.TermCode              = sect.TERM_CODE 
+       LEFT JOIN OnlySummer               Summer ON Summer.STUDENT_GU = stu.STUDENT_GU
+WHERE (cls.LEAVE_DATE IS NULL OR cls.LEAVE_DATE &gt;= GETDATE())
+       AND cls.ENTER_DATE &lt;= GETDATE()
+          AND GETDATE() between trms.TermStart and trms.TermEnd
+       AND summer.STUDENT_GU is null
+---------------------------------------- Summer Term Enrollments ------------------------------------
+UNION 
+SELECT 
+
+   sch.SCHOOL_CODE                   AS [Sch #]
+, crs.COURSE_TITLE                  AS [Course Name]
+, crs.COURSE_ID                     AS [Course #]
+, sect.SECTION_ID                   AS [Section]
+, 'E'+RIGHT('000000000'+ replace(lower(stf.badge_num),'e',''),9)
+    AS [Employee Num]
+, sect.PERIOD_BEGIN                 AS [Period]
+, stu.SIS_NUMBER                    AS [Student ID]
+, crs.SUBJECT_AREA_1                AS [Dept]
+, CASE WHEN NOT EXISTS           
+         (SELECT symd.MEET_DAY_CODE 
+       FROM rev.EPC_SCH_YR_SECT_MET_DY sysmd
+       JOIN rev.EPC_SCH_YR_MET_DY      symd ON symd.SCH_YR_MET_DY_GU = sysmd.SCH_YR_MET_DY_GU
+       WHERE sysmd.SECTION_GU = sect.SECTION_GU
+      )
+  THEN 'M,T,W,R,F'   
+  ELSE               
+         STUFF((SELECT [*]=', '+(LEFT(symd.MEET_DAY_CODE,1))  
+                FROM rev.EPC_SCH_YR_SECT sec    
+                JOIN rev.EPC_SCH_YR_SECT_MET_DY sysmd ON sysmd.SECTION_GU      = sec.SECTION_GU
+                JOIN rev.EPC_SCH_YR_MET_DY      symd  ON symd.SCH_YR_MET_DY_GU = sysmd.SCH_YR_MET_DY_GU
+                WHERE sec.SECTION_GU  = sect.SECTION_GU       
+                ORDER BY symd.ORDERBY    
+                FOR XML PATH('')
+               ),1,2,'')    
+  END                                        AS [Cycle Days]
+, CONVERT(VARCHAR(10), trms.TermStart, 101) AS [Class Start Day]
+, CONVERT(VARCHAR(10), trms.TermEnd, 101)   AS [Class End Date]
+FROM   rev.EPC_STU                          stu
+       JOIN rev.EPC_STU_SCH_YR              ssy  ON ssy.STUDENT_GU                 = stu.STUDENT_GU
+                                                    and ssy.STATUS is NULL
+       JOIN rev.REV_ORGANIZATION_YEAR       oyr  ON oyr.ORGANIZATION_YEAR_GU       = ssy.ORGANIZATION_YEAR_GU
+       JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssy.YEAR_GU
+                                            AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
+                                            AND yr.EXTENSION   = 'S'
+       JOIN rev.REV_ORGANIZATION            org  ON org.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
+       JOIN rev.EPC_SCH                     sch  ON sch.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
+       JOIN rev.EPC_STU_CLASS               cls  ON cls.STUDENT_SCHOOL_YEAR_GU     = ssy.STUDENT_SCHOOL_YEAR_GU
+       JOIN rev.EPC_SCH_YR_SECT             sect ON sect.SECTION_GU                = cls.SECTION_GU
+       JOIN rev.EPC_SCH_YR_CRS              scrs ON scrs.SCHOOL_YEAR_COURSE_GU     = sect.SCHOOL_YEAR_COURSE_GU
+       JOIN rev.EPC_CRS                     crs  ON crs.COURSE_GU                  = scrs.COURSE_GU
+       JOIN rev.EPC_STAFF_SCH_YR            stfy ON stfy.STAFF_SCHOOL_YEAR_GU      = sect.STAFF_SCHOOL_YEAR_GU
+          JOIN rev.EPC_STAFF                   stf  ON stf.STAFF_GU                   = stfy.STAFF_GU
+       JOIN rev.REV_PERSON                  stfp ON stfp.PERSON_GU                 = stfy.STAFF_GU
+          JOIN ##SummerTerms                   trms ON trms.OrgGu                     = oyr.ORGANIZATION_GU
+                                                       AND trms.TermCode              = sect.TERM_CODE 
+WHERE (cls.LEAVE_DATE IS NULL OR cls.LEAVE_DATE &gt;= GETDATE())
+
+------------------------------------------------ Jump Start Enrollments ---------------------------------------
+
+UNION 
+SELECT 
+
+   sch.SCHOOL_CODE                   AS [Sch #]
+, crs.COURSE_TITLE                  AS [Course Name]
+, crs.COURSE_ID                     AS [Course #]
+, sect.SECTION_ID                   AS [Section]
+, 'E'+RIGHT('000000000'+ replace(lower(stf.badge_num),'e',''),9)
+    AS [Employee Num]
+, sect.PERIOD_BEGIN                 AS [Period]
+, stu.SIS_NUMBER                    AS [Student ID]
+, crs.SUBJECT_AREA_1                AS [Dept]
+, CASE WHEN NOT EXISTS           
+         (SELECT symd.MEET_DAY_CODE 
+       FROM rev.EPC_SCH_YR_SECT_MET_DY sysmd
+       JOIN rev.EPC_SCH_YR_MET_DY      symd ON symd.SCH_YR_MET_DY_GU = sysmd.SCH_YR_MET_DY_GU
+       WHERE sysmd.SECTION_GU = sect.SECTION_GU
+      )
+  THEN 'M,T,W,R,F'   
+  ELSE               
+         STUFF((SELECT [*]=', '+(LEFT(symd.MEET_DAY_CODE,1))  
+                FROM rev.EPC_SCH_YR_SECT sec    
+                JOIN rev.EPC_SCH_YR_SECT_MET_DY sysmd ON sysmd.SECTION_GU      = sec.SECTION_GU
+                JOIN rev.EPC_SCH_YR_MET_DY      symd  ON symd.SCH_YR_MET_DY_GU = sysmd.SCH_YR_MET_DY_GU
+                WHERE sec.SECTION_GU  = sect.SECTION_GU       
+                ORDER BY symd.ORDERBY    
+                FOR XML PATH('')
+               ),1,2,'')    
+  END                                        AS [Cycle Days]
+, CONVERT(VARCHAR(10), trms.TermStart, 101) AS [Class Start Day]
+, CONVERT(VARCHAR(10), trms.TermEnd, 101)   AS [Class End Date]
+FROM   rev.EPC_STU                          stu
+       JOIN rev.EPC_STU_SCH_YR              ssy  ON ssy.STUDENT_GU                 = stu.STUDENT_GU
+                                                    and ssy.STATUS is NULL
+       JOIN rev.REV_ORGANIZATION_YEAR       oyr  ON oyr.ORGANIZATION_YEAR_GU       = ssy.ORGANIZATION_YEAR_GU
+       JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssy.YEAR_GU
+                                            AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)+1
+                                            AND yr.EXTENSION   = 'N'
+       JOIN rev.REV_ORGANIZATION            org  ON org.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
+       JOIN rev.EPC_SCH                     sch  ON sch.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
+       JOIN rev.EPC_STU_CLASS               cls  ON cls.STUDENT_SCHOOL_YEAR_GU     = ssy.STUDENT_SCHOOL_YEAR_GU
+       JOIN rev.EPC_SCH_YR_SECT             sect ON sect.SECTION_GU                = cls.SECTION_GU
+       JOIN rev.EPC_SCH_YR_CRS              scrs ON scrs.SCHOOL_YEAR_COURSE_GU     = sect.SCHOOL_YEAR_COURSE_GU
+       JOIN rev.EPC_CRS                     crs  ON crs.COURSE_GU                  = scrs.COURSE_GU
+       JOIN rev.EPC_STAFF_SCH_YR            stfy ON stfy.STAFF_SCHOOL_YEAR_GU      = sect.STAFF_SCHOOL_YEAR_GU
+          JOIN rev.EPC_STAFF                   stf  ON stf.STAFF_GU                   = stfy.STAFF_GU
+       JOIN rev.REV_PERSON                  stfp ON stfp.PERSON_GU                 = stfy.STAFF_GU
+          JOIN ##JumpStartTerms                trms ON trms.OrgGu                     = oyr.ORGANIZATION_GU
+                                                       AND trms.TermCode              = sect.TERM_CODE 
+
+
+WHERE (cls.LEAVE_DATE IS NULL OR cls.LEAVE_DATE &gt;= GETDATE())
+       AND cls.ENTER_DATE &lt;= GETDATE()
+          AND GETDATE() between trms.TermStart and trms.TermEnd</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Schedules\DB Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Db Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[Db Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Sch #]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Sch #]"
+                      length="20"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Sch #]"
+                      name="Sch #"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Course Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Course Name]"
+                      length="50"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Course Name]"
+                      name="Course Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Course #]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Course #]"
+                      length="20"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Course #]"
+                      name="Course #"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Section]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Section]"
+                      length="30"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Section]"
+                      name="Section"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Employee Num]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Employee Num]"
+                      length="10"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Employee Num]"
+                      name="Employee Num"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Period]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Period]"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Period]"
+                      name="Period"
+                      precision="3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Student ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student ID]"
+                      length="20"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Student ID]"
+                      name="Student ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Dept]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Dept]"
+                      length="5"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Dept]"
+                      name="Dept"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Cycle Days]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Cycle Days]"
+                      length="50"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Cycle Days]"
+                      name="Cycle Days"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Class Start Day]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Class Start Day]"
+                      length="10"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Class Start Day]"
+                      name="Class Start Day"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Class End Date]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Class End Date]"
+                      length="10"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Class End Date]"
+                      name="Class End Date"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Sch #]"
+                      dataType="wstr"
+                      length="20"
+                      name="Sch #" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Course Name]"
+                      dataType="wstr"
+                      length="50"
+                      name="Course Name" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Course #]"
+                      dataType="wstr"
+                      length="20"
+                      name="Course #" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Section]"
+                      dataType="wstr"
+                      length="30"
+                      name="Section" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Employee Num]"
+                      dataType="wstr"
+                      length="10"
+                      name="Employee Num" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Period]"
+                      dataType="numeric"
+                      name="Period"
+                      precision="3" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="Student ID" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Dept]"
+                      dataType="wstr"
+                      length="5"
+                      name="Dept" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Cycle Days]"
+                      dataType="nText"
+                      name="Cycle Days" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Class Start Day]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Class Start Day" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Class End Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Class End Date" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Sch #]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Sch #]"
+                      name="Sch #" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Course Name]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Course Name]"
+                      name="Course Name" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Course #]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Course #]"
+                      name="Course #" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Section]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Section]"
+                      name="Section" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Employee Num]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Employee Num]"
+                      name="Employee Num" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Period]"
+                      dataType="numeric"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Period]"
+                      name="Period"
+                      precision="3" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Student ID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Student ID]"
+                      name="Student ID" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Dept]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Dept]"
+                      name="Dept" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Cycle Days]"
+                      dataType="nText"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Cycle Days]"
+                      name="Cycle Days" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Class Start Day]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Class Start Day]"
+                      name="Class Start Day" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Class End Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Class End Date]"
+                      name="Class End Date" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Schedules\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Schedules\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Schedules]"
+                  connectionManagerRefId="Package.ConnectionManagers[Schedules]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].Columns[Sch #]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Sch #"
+                      externalMetadataColumnId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Sch #]"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Sch #]" />
+                    <inputColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].Columns[Course Name]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Course Name"
+                      externalMetadataColumnId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Course Name]"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Course Name]" />
+                    <inputColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].Columns[Course #]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Course #"
+                      externalMetadataColumnId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Course #]"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Course #]" />
+                    <inputColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].Columns[Section]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Section"
+                      externalMetadataColumnId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Section]"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Section]" />
+                    <inputColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].Columns[Employee Num]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Employee Num"
+                      externalMetadataColumnId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Employee Num]"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Employee Num]" />
+                    <inputColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].Columns[Period]"
+                      cachedDataType="numeric"
+                      cachedName="Period"
+                      cachedPrecision="3"
+                      externalMetadataColumnId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Period]"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Period]" />
+                    <inputColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].Columns[Student ID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Student ID"
+                      externalMetadataColumnId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student ID]"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Student ID]" />
+                    <inputColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].Columns[Dept]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Dept"
+                      externalMetadataColumnId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Dept]"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Dept]" />
+                    <inputColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].Columns[Cycle Days]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Cycle Days"
+                      externalMetadataColumnId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Cycle Days]"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Cycle Days]" />
+                    <inputColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].Columns[Class Start Day]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Class Start Day"
+                      externalMetadataColumnId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Class Start Day]"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Class Start Day]" />
+                    <inputColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].Columns[Class End Date]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Class End Date"
+                      externalMetadataColumnId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Class End Date]"
+                      lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].Columns[Class End Date]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Sch #]"
+                      dataType="wstr"
+                      length="20"
+                      name="Sch #" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Course Name]"
+                      dataType="wstr"
+                      length="50"
+                      name="Course Name" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Course #]"
+                      dataType="wstr"
+                      length="20"
+                      name="Course #" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Section]"
+                      dataType="wstr"
+                      length="30"
+                      name="Section" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Employee Num]"
+                      dataType="wstr"
+                      length="10"
+                      name="Employee Num" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Period]"
+                      dataType="numeric"
+                      name="Period"
+                      precision="3" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="Student ID" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Dept]"
+                      dataType="wstr"
+                      length="5"
+                      name="Dept" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Cycle Days]"
+                      dataType="nText"
+                      name="Cycle Days" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Class Start Day]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Class Start Day" />
+                    <externalMetadataColumn
+                      refId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Class End Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Class End Date" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Schedules.Paths[OLE DB Source Output]"
+              endId="Package\Schedules\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Schedules\DB Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Students"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{F0829776-1F98-47B7-85A1-0067BC3F8CE3}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Students"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Students\DB Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">---&lt;APS - Destiny&gt;
+; with StuPhones AS
+(
+  SELECT
+           phn.PHONE
+		 , phn.PHONE_TYPE
+		 , phn.PRIMARY_PHONE
+		 , stu.STUDENT_GU
+		 , ROW_NUMBER() OVER (partition by stu.student_gu order by stu.student_gu, phn.Primary_Phone desc) rn
+  FROM   rev.REV_PERSON_PHONE           phn
+         JOIN rev.EPC_STU               stu  ON stu.STUDENT_GU = phn.PERSON_GU
+         JOIN rev.EPC_STU_SCH_YR        ssyr ON ssyr.STUDENT_GU = stu.STUDENT_GU
+                                                AND ssyr.STATUS IS NULL
+												AND ssyr.EXCLUDE_ADA_ADM is null
+         JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
+                                                AND oyr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+) , TeacherName AS
+(
+SELECT   stu.STUDENT_GU
+       , row_number() over (partition by stu.student_gu order by stu.student_gu, symd.orderby) rn  
+       , sect.PERIOD_BEGIN                      AS Period
+       , stfp.LAST_NAME + ', ' + stfp.FIRST_NAME AS TeacherName
+FROM   rev.EPC_STU                          stu
+       JOIN rev.EPC_STU_SCH_YR              ssy  ON ssy.STUDENT_GU                 = stu.STUDENT_GU
+                                                    and ssy.STATUS is NULL
+												    AND ssy.EXCLUDE_ADA_ADM is null
+       JOIN rev.REV_ORGANIZATION_YEAR       oyr  ON oyr.ORGANIZATION_YEAR_GU       = ssy.ORGANIZATION_YEAR_GU
+	                                                and oyr.YEAR_GU                IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+       JOIN rev.REV_ORGANIZATION            org  ON org.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
+       JOIN rev.EPC_SCH                     sch  ON sch.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
+       JOIN rev.EPC_STU_CLASS               cls  ON cls.STUDENT_SCHOOL_YEAR_GU     = ssy.STUDENT_SCHOOL_YEAR_GU
+       JOIN rev.EPC_SCH_YR_SECT             sect ON sect.SECTION_GU                = cls.SECTION_GU
+       JOIN rev.EPC_SCH_YR_CRS              scrs ON scrs.SCHOOL_YEAR_COURSE_GU     = sect.SCHOOL_YEAR_COURSE_GU
+       JOIN rev.EPC_STAFF_SCH_YR            stfy ON stfy.STAFF_SCHOOL_YEAR_GU      = sect.STAFF_SCHOOL_YEAR_GU
+       JOIN rev.REV_PERSON                  stfp ON stfp.PERSON_GU                 = stfy.STAFF_GU
+       LEFT JOIN rev.EPC_SCH_YR_SECT_MET_DY smdy ON smdy.SECTION_GU                = sect.SECTION_GU
+	   LEFT JOIN rev.EPC_SCH_YR_MET_DY      symd ON symd.SCH_YR_MET_DY_GU          = smdy.SCH_YR_MET_DY_GU
+)	   
+-- Only Regular enrollments
+SELECT 
+         stu.SIS_NUMBER           AS [ID Number]
+       , sch.SCHOOL_CODE          AS [School Number]
+       , stu.STATE_STUDENT_NUMBER AS [State ID]
+       , per.LAST_NAME            AS [Last Name]
+       , per.FIRST_NAME           AS [First Name]
+       , per.MIDDLE_NAME          AS [Middle Name]
+       , per.GENDER               AS [Gender]
+       , grade.VALUE_DESCRIPTION  AS [Grade]
+       , tnm.TeacherName          AS [Full Name]
+       , stu.USER_CODE_1          AS [Prior ID Number]
+       , ''                       AS [BirthDate]
+       , CASE WHEN madr.STREET_EXTRA is not null then replace(madr.ADDRESS,madr.STREET_EXTRA,'')
+	          ELSE madr.ADDRESS
+		 END                      AS [Address 1]
+       , madr.STREET_EXTRA        AS [Address 2]
+       , madr.city                AS [City]
+       , madr.STATE               AS [State]
+       , madr.ZIP_5               AS [ZIP Code]
+       , p1.PHONE                 AS [Telephone1]
+       , p2.PHONE                 AS [Telephone2]
+       , yr.SCHOOL_YEAR
+       , yr.EXTENSION
+FROM rev.EPC_STU                    stu
+     JOIN rev.EPC_STU_SCH_YR        ssyr ON ssyr.STUDENT_GU = stu.STUDENT_GU
+                                            AND ssyr.STATUS IS NULL
+											AND ssyr.EXCLUDE_ADA_ADM is null
+     JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
+     JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssyr.YEAR_GU
+                                            AND yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+     JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
+     JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
+     LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grade ON grade.VALUE_CODE = ssyr.GRADE
+     LEFT JOIN rev.REV_ADDRESS      madr ON madr.ADDRESS_GU = COALESCE(per.MAIL_ADDRESS_GU, per.HOME_ADDRESS_GU)
+	 LEFT JOIN StuPhones            p1   ON p1.STUDENT_GU = stu.STUDENT_GU and p1.rn = 1
+	 LEFT JOIN StuPhones            p2   ON p2.STUDENT_GU = stu.STUDENT_GU and p2.rn = 2
+	 LEFT JOIN TeacherName          tnm  ON tnm.STUDENT_GU = stu.STUDENT_GU and tnm.rn = 1</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Students\DB Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Db Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[Db Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Students\DB Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ID Number]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ID Number]"
+                      length="20"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ID Number]"
+                      name="ID Number"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[School Number]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[School Number]"
+                      length="20"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[School Number]"
+                      name="School Number"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[State ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[State ID]"
+                      length="20"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[State ID]"
+                      name="State ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Last Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Last Name]"
+                      length="60"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Last Name]"
+                      name="Last Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[First Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[First Name]"
+                      length="60"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[First Name]"
+                      name="First Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Middle Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Middle Name]"
+                      length="20"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Middle Name]"
+                      name="Middle Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Gender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      length="5"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Grade]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Grade]"
+                      length="600"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Grade]"
+                      name="Grade"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Full Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Full Name]"
+                      length="122"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Full Name]"
+                      name="Full Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Prior ID Number]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Prior ID Number]"
+                      length="10"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Prior ID Number]"
+                      name="Prior ID Number"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[BirthDate]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[BirthDate]"
+                      length="1"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[BirthDate]"
+                      name="BirthDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Address 1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Address 1]"
+                      length="4000"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Address 1]"
+                      name="Address 1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Address 2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Address 2]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Address 2]"
+                      name="Address 2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[City]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[State]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      length="5"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[State]"
+                      name="State"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ZIP Code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ZIP Code]"
+                      length="6"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ZIP Code]"
+                      name="ZIP Code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Telephone1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Telephone1]"
+                      length="10"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Telephone1]"
+                      name="Telephone1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Telephone2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Telephone2]"
+                      length="10"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Telephone2]"
+                      name="Telephone2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[SCHOOL_YEAR]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SCHOOL_YEAR]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[SCHOOL_YEAR]"
+                      name="SCHOOL_YEAR"
+                      precision="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[EXTENSION]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[EXTENSION]"
+                      length="5"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[EXTENSION]"
+                      name="EXTENSION"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ID Number]"
+                      dataType="wstr"
+                      length="20"
+                      name="ID Number" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[School Number]"
+                      dataType="wstr"
+                      length="20"
+                      name="School Number" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[State ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="State ID" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[First Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="First Name" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Middle Name]"
+                      dataType="wstr"
+                      length="20"
+                      name="Middle Name" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="5"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Grade]"
+                      dataType="wstr"
+                      length="600"
+                      name="Grade" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Full Name]"
+                      dataType="wstr"
+                      length="122"
+                      name="Full Name" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Prior ID Number]"
+                      dataType="wstr"
+                      length="10"
+                      name="Prior ID Number" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[BirthDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="BirthDate" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Address 1]"
+                      dataType="wstr"
+                      length="4000"
+                      name="Address 1" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Address 2]"
+                      dataType="wstr"
+                      length="50"
+                      name="Address 2" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="50"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      dataType="wstr"
+                      length="5"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ZIP Code]"
+                      dataType="wstr"
+                      length="6"
+                      name="ZIP Code" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Telephone1]"
+                      dataType="wstr"
+                      length="10"
+                      name="Telephone1" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Telephone2]"
+                      dataType="wstr"
+                      length="10"
+                      name="Telephone2" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SCHOOL_YEAR]"
+                      dataType="numeric"
+                      name="SCHOOL_YEAR"
+                      precision="4" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[EXTENSION]"
+                      dataType="wstr"
+                      length="5"
+                      name="EXTENSION" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ID Number]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ID Number]"
+                      name="ID Number" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[School Number]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[School Number]"
+                      name="School Number" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[State ID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[State ID]"
+                      name="State ID" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Last Name]"
+                      name="Last Name" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[First Name]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[First Name]"
+                      name="First Name" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Middle Name]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Middle Name]"
+                      name="Middle Name" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Grade]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Grade]"
+                      name="Grade" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Full Name]"
+                      dataType="wstr"
+                      length="122"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Full Name]"
+                      name="Full Name" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Prior ID Number]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Prior ID Number]"
+                      name="Prior ID Number" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[BirthDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[BirthDate]"
+                      name="BirthDate" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Address 1]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Address 1]"
+                      name="Address 1" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Address 2]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Address 2]"
+                      name="Address 2" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[City]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[State]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[State]"
+                      name="State" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ZIP Code]"
+                      dataType="wstr"
+                      length="6"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ZIP Code]"
+                      name="ZIP Code" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Telephone1]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Telephone1]"
+                      name="Telephone1" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Telephone2]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Telephone2]"
+                      name="Telephone2" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[SCHOOL_YEAR]"
+                      dataType="numeric"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[SCHOOL_YEAR]"
+                      name="SCHOOL_YEAR"
+                      precision="4" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[EXTENSION]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[EXTENSION]"
+                      name="EXTENSION" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Students\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Students\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Students]"
+                  connectionManagerRefId="Package.ConnectionManagers[Students]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[ID Number]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="ID Number"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ID Number]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ID Number]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[School Number]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="School Number"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[School Number]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[School Number]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[State ID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="State ID"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[State ID]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[State ID]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Last Name]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Last Name"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Last Name]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Last Name]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[First Name]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="First Name"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[First Name]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[First Name]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Middle Name]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Middle Name"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Middle Name]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Middle Name]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Grade]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="Grade"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Grade]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Grade]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Full Name]"
+                      cachedDataType="wstr"
+                      cachedLength="122"
+                      cachedName="Full Name"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Full Name]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Full Name]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Prior ID Number]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Prior ID Number"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Prior ID Number]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Prior ID Number]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[BirthDate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="BirthDate"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BirthDate]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[BirthDate]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Address 1]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="Address 1"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Address 1]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Address 1]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Address 2]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Address 2"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Address 2]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Address 2]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[City]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[City]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[State]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="State"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[State]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[State]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[ZIP Code]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="ZIP Code"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ZIP Code]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ZIP Code]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Telephone1]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Telephone1"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Telephone1]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Telephone1]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[Telephone2]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Telephone2"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Telephone2]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[Telephone2]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ID Number]"
+                      dataType="wstr"
+                      length="20"
+                      name="ID Number" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[School Number]"
+                      dataType="wstr"
+                      length="20"
+                      name="School Number" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[State ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="State ID" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[First Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="First Name" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Middle Name]"
+                      dataType="wstr"
+                      length="20"
+                      name="Middle Name" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="5"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Grade]"
+                      dataType="wstr"
+                      length="600"
+                      name="Grade" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Full Name]"
+                      dataType="wstr"
+                      length="122"
+                      name="Full Name" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Prior ID Number]"
+                      dataType="wstr"
+                      length="10"
+                      name="Prior ID Number" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BirthDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="BirthDate" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Address 1]"
+                      dataType="wstr"
+                      length="4000"
+                      name="Address 1" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Address 2]"
+                      dataType="wstr"
+                      length="50"
+                      name="Address 2" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="50"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[State]"
+                      dataType="wstr"
+                      length="5"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ZIP Code]"
+                      dataType="wstr"
+                      length="6"
+                      name="ZIP Code" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Telephone1]"
+                      dataType="wstr"
+                      length="10"
+                      name="Telephone1" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Telephone2]"
+                      dataType="wstr"
+                      length="10"
+                      name="Telephone2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Students.Paths[OLE DB Source Output]"
+              endId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Students\DB Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{805C683E-E9DB-4EB7-AF9D-69472DCAAA47}"
+      DTS:From="Package\Load Temp LibraryHomeroom"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Create Temp TermsTable" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{ADD1B4B1-8E7E-4D00-B3D8-8D79CAB0B999}"
+      DTS:From="Package\Students"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Schedules" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{77EB292B-87B3-4713-AF23-BA1EC71A191F}"
+      DTS:From="Package\Create Temp TermsTable"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Students" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{E8191B37-597D-4D30-88EC-3A9CD91A53CB}"
+      DTS:From="Package\Schedules"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Drop TempTable" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{03C528FE-D77B-40F0-BBDC-8CC0D0581218}"
+      DTS:From="Package\Check If LibrarySource file Exists"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Execute SQL Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{DE9E759A-03BB-4223-99AE-5200999BB091}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Load Temp LibraryHomeroom" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{F86FD288-4B68-4D31-AC09-01478681CFC1}"
+      DTS:From="Package\Drop TempTable"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Execute Process Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="262,44"
+          Id="Package\Check If LibrarySource file Exists"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="262,44"
+          Id="Package\Create Temp TermsTable"
+          TopLeft="7.5,208.556603773585" />
+        <NodeLayout
+          Size="262,44"
+          Id="Package\Drop TempTable"
+          TopLeft="7.5,439.952830188679" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Execute Process Task"
+          TopLeft="50,526" />
+        <NodeLayout
+          Size="262,44"
+          Id="Package\Execute SQL Task"
+          TopLeft="5.5,67.6132075471699" />
+        <NodeLayout
+          Size="262,44"
+          Id="Package\Load Temp LibraryHomeroom"
+          TopLeft="7.5,136.330188679245" />
+        <NodeLayout
+          Size="262,42"
+          Id="Package\Schedules"
+          TopLeft="7.5,362.820754716981" />
+        <NodeLayout
+          Size="262,44"
+          Id="Package\Students"
+          TopLeft="7.5,285.688679245283" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="138.292452830189,180.254716981132">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.3018867924528"
+              Start="0,0"
+              End="0,20.8018867924528">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.8018867924528" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="138.5,329.688679245283">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.132075471698"
+              Start="0,0"
+              End="0,25.632075471698">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.632075471698" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="138.292452830189,252.481132075472">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.2075471698114"
+              Start="0,0"
+              End="0,25.7075471698114">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.7075471698114" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="138.5,404.820754716981">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.132075471698"
+              Start="0,0"
+              End="0,27.632075471698">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.632075471698" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="136.292452830189,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,18.1886792452831"
+              Start="0,0"
+              End="0,10.6886792452831">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.6886792452831" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="136.292452830189,111.537735849057">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="2,24.7924528301887"
+              Start="0,0"
+              End="2,17.2924528301887">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.4150943396227" />
+                  <mssgle:LineSegment
+                    End="2,12.4150943396227" />
+                  <mssgle:LineSegment
+                    End="2,17.2924528301887" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="139.75,483.952830188679">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.047169811321"
+              Start="0,0"
+              End="0,34.547169811321">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.547169811321" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Temp LibraryHomeroom">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="170,44"
+          Id="Package\Load Temp LibraryHomeroom\Load TempTable"
+          TopLeft="51.4245283018868,118.330188679245" />
+        <NodeLayout
+          Size="220,44"
+          Id="Package\Load Temp LibraryHomeroom\Library Hoemroom Source File"
+          TopLeft="5.5,5.5" />
+        <EdgeLayout
+          Id="Package\Load Temp LibraryHomeroom.Paths[Flat File Source Output]"
+          TopLeft="115.311320754717,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="20.9811320754717,68.9056603773585"
+              Start="0,0"
+              End="20.9811320754717,61.4056603773585">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.4528301886792" />
+                  <mssgle:LineSegment
+                    End="20.9811320754717,34.4528301886792" />
+                  <mssgle:LineSegment
+                    End="20.9811320754717,61.4056603773585" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Schedules">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149,44"
+          Id="Package\Schedules\DB Query"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="172,44"
+          Id="Package\Schedules\Flat File Destination"
+          TopLeft="79.3490566037736,116.330188679245" />
+        <EdgeLayout
+          Id="Package\Schedules.Paths[OLE DB Source Output]"
+          TopLeft="79.877358490566,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="85.3207547169811,66.9056603773585"
+              Start="0,0"
+              End="85.3207547169811,59.4056603773585">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.4339622641509" />
+                  <mssgle:LineSegment
+                    End="85.3207547169811,33.4339622641509" />
+                  <mssgle:LineSegment
+                    End="85.3207547169811,59.4056603773585" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Schedules\DB Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Students">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149,44"
+          Id="Package\Students\DB Query"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="172,44"
+          Id="Package\Students\Flat File Destination"
+          TopLeft="37.4622641509434,80.4056603773585" />
+        <EdgeLayout
+          Id="Package\Students.Paths[OLE DB Source Output]"
+          TopLeft="79.877358490566,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="43.4339622641509,30.9811320754717"
+              Start="0,0"
+              End="43.4339622641509,23.4811320754717">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.4716981132075" />
+                  <mssgle:LineSegment
+                    End="43.4339622641509,15.4716981132075" />
+                  <mssgle:LineSegment
+                    End="43.4339622641509,23.4811320754717" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Students\DB Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
