@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Destiny"
   DTS:PackageType="5"
-  DTS:VersionBuild="62"
-  DTS:VersionGUID="{6BA99F1C-8B48-4CA9-87E4-2A6AF34E033B}">
+  DTS:VersionBuild="63"
+  DTS:VersionGUID="{54F27F21-D891-4B06-A177-EDCE1626A221}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -30,7 +30,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADog6uWz3p4k4sVa3u2cWypAAAAAASAAACgAAAAEAAAAJq0Cme18DVMqwz9k7dlDgAwAAAAGJ6O3ymnuhwqrSSyXE0YX55WtDSsouzjJisy1Bhs8Kj2VueBO0TlvciINTEs8lsJFAAAAF7T1yc6k5LW5yYSOciki51Nvadp</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADvb56uphtDH+T0JWqgQAryAAAAAASAAACgAAAAEAAAAPOge8YZifM0CvISJ5Hr4V8wAAAASn4uq0i0+QBZNfY7yPqR1u/t7fqlsW7Thi7VId8/H1gJZLNZ1UilNELYMX9DdZtYFAAAAPF9Mnl0vsAwBB0blPLpBYEj6F+c</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -472,6 +472,46 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyVersion("1.0.0.0")> 
 <Assembly: AssemblyFileVersion("1.0.0.0")> ]]></ProjectItem>
           <ProjectItem
+            Name="ScriptMain.vb"
+            Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services Script Task
+' Write scripts using Microsoft Visual Basic 2008.
+' The ScriptMain is the entry point class of the script.
+
+Imports System
+Imports System.Data
+Imports System.Math
+Imports System.IO
+Imports Microsoft.SqlServer.Dts.Runtime
+
+<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
+<System.CLSCompliantAttribute(False)> _
+Partial Public Class ScriptMain
+	Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+
+	Enum ScriptResults
+		Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
+		Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+	End Enum
+	
+    Public Sub Main()
+        Dim fileLoc, fileName As String
+        If Dts.Variables.Contains("User::LibraryHomeroomFilePath") = True AndAlso _
+        Dts.Variables.Contains("User::LibraryHomeroomFile") = True Then
+            fileLoc = CStr(Dts.Variables("User::LibraryHomeroomFilePath").Value)
+            fileName = CStr(Dts.Variables.Item("User::LibraryHomeroomFile").Value)
+            If File.Exists(fileLoc + fileName) Then
+                Dts.Variables.Item("User::FileExists").Value = True
+            Else
+                Dts.Variables.Item("User::FileExists").Value = False
+            End If
+            Dts.TaskResult = ScriptResults.Success
+        Else
+            Dts.TaskResult = ScriptResults.Failure
+        End If
+    End Sub
+
+End Class]]></ProjectItem>
+          <ProjectItem
             Name="st_d07338d79e1e421b9e45e24fedae6a55.vbproj"
             Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="utf-16"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -701,46 +741,6 @@ End Class]]></ProjectItem>
 		<msb:Project Include="st_d07338d79e1e421b9e45e24fedae6a55.vbproj"/>
 	</msb:ItemGroup>
 </c:Project>]]></ProjectItem>
-          <ProjectItem
-            Name="ScriptMain.vb"
-            Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services Script Task
-' Write scripts using Microsoft Visual Basic 2008.
-' The ScriptMain is the entry point class of the script.
-
-Imports System
-Imports System.Data
-Imports System.Math
-Imports System.IO
-Imports Microsoft.SqlServer.Dts.Runtime
-
-<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
-<System.CLSCompliantAttribute(False)> _
-Partial Public Class ScriptMain
-	Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
-
-	Enum ScriptResults
-		Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
-		Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
-	End Enum
-	
-    Public Sub Main()
-        Dim fileLoc, fileName As String
-        If Dts.Variables.Contains("User::LibraryHomeroomFilePath") = True AndAlso _
-        Dts.Variables.Contains("User::LibraryHomeroomFile") = True Then
-            fileLoc = CStr(Dts.Variables("User::LibraryHomeroomFilePath").Value)
-            fileName = CStr(Dts.Variables.Item("User::LibraryHomeroomFile").Value)
-            If File.Exists(fileLoc + fileName) Then
-                Dts.Variables.Item("User::FileExists").Value = True
-            Else
-                Dts.Variables.Item("User::FileExists").Value = False
-            End If
-            Dts.TaskResult = ScriptResults.Success
-        Else
-            Dts.TaskResult = ScriptResults.Failure
-        End If
-    End Sub
-
-End Class]]></ProjectItem>
           <ProjectItem
             Name="My Project\Resources.resx"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -1480,7 +1480,84 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">;with  OnlySummer AS
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">---&lt;APS - Destiny --Schedule&gt;
+
+IF OBJECT_ID('tempdb..##Terms') IS NOT NULL DROP TABLE ##Terms
+CREATE TABLE ##Terms(
+   OrgGu uniqueidentifier null
+   , SchYr varchar(4) null
+   , TermCode varchar(4) null
+   , TermStart smalldatetime
+   , TermEnd smalldatetime
+)
+--
+insert into ##Terms
+select 
+       t.OrgGU
+     , t.SchoolYear
+       , t.TermCode
+       , TermBegin
+       , TermEnd
+from rev.SIF_22_TermInfo() t 
+     join rev.REV_ORGANIZATION_YEAR oyr on oyr.ORGANIZATION_GU = t.OrgGU
+     join rev.REV_YEAR              y   on y.YEAR_GU = oyr.YEAR_GU 
+                                              and y.YEAR_GU = (select year_gu from rev.SIF_22_Common_CurrentYearGU)
+---
+IF OBJECT_ID('tempdb..##SummerTerms') IS NOT NULL DROP TABLE ##SummerTerms
+CREATE TABLE ##SummerTerms(
+     OrgGu uniqueidentifier null
+   , SchYr varchar(4) null
+   , TermCode varchar(4) null
+   , TermStart smalldatetime
+   , TermEnd smalldatetime
+)
+--
+insert into ##SummerTerms
+select 
+       org.ORGANIZATION_GU
+     , yr.SCHOOL_YEAR
+       , tcd.TERM_CODE
+       , acalo.START_DATE
+       , tdef.EVENT_DATE
+from rev.rev_organization      org
+join rev.REV_ORGANIZATION_YEAR oyr   on oyr.ORGANIZATION_GU = org.ORGANIZATION_GU
+join rev.REV_YEAR              yr    on yr.SCHOOL_YEAR = (select school_year from rev.SIF_22_Common_CurrentYear)
+                                        and yr.EXTENSION = 'S'
+                                                                  and yr.YEAR_GU = oyr.YEAR_GU
+join rev.EPC_SCH_YR_TRM_DEF    tdef  on tdef.ORGANIZATION_YEAR_GU = oyr.ORGANIZATION_YEAR_GU
+join rev.EPC_SCH_YR_TRM_CODES  tcd   on tcd.SCHOOL_YEAR_TRM_DEF_GU = tdef.SCHOOL_YEAR_TRM_DEF_GU
+join rev.EPC_SCH_ATT_CAL_OPT   acalo on acalo.ORG_YEAR_GU = oyr.ORGANIZATION_YEAR_GU
+--------
+IF OBJECT_ID('tempdb..##JumpStartTerms') IS NOT NULL DROP TABLE ##JumpStartTerms
+CREATE TABLE ##JumpStartTerms(
+     OrgGu uniqueidentifier null
+   , SchYr varchar(4) null
+   , TermCode varchar(4) null
+   , TermStart smalldatetime
+   , TermEnd smalldatetime
+)
+--
+insert into ##JumpStartTerms
+select 
+       org.ORGANIZATION_GU
+     , yr.SCHOOL_YEAR
+       , tcd.TERM_CODE
+       , acalo.START_DATE
+       , tdef.EVENT_DATE
+from rev.rev_organization      org
+join rev.REV_ORGANIZATION_YEAR oyr   on oyr.ORGANIZATION_GU = org.ORGANIZATION_GU
+join rev.REV_YEAR              yr    on yr.SCHOOL_YEAR = (select school_year from rev.SIF_22_Common_CurrentYear)+1
+                                        and yr.EXTENSION = 'N'
+                                                                  and yr.YEAR_GU = oyr.YEAR_GU
+join rev.EPC_SCH_YR_TRM_DEF    tdef  on tdef.ORGANIZATION_YEAR_GU = oyr.ORGANIZATION_YEAR_GU
+join rev.EPC_SCH_YR_TRM_CODES  tcd   on tcd.SCHOOL_YEAR_TRM_DEF_GU = tdef.SCHOOL_YEAR_TRM_DEF_GU
+join rev.EPC_SCH_ATT_CAL_OPT   acalo on acalo.ORG_YEAR_GU = oyr.ORGANIZATION_YEAR_GU
+
+
+
+
+----------------------------------------------------- Regular Enrollments -------------------------------------
+;with  OnlySummer AS
 (
   SELECT
      stu.student_gu
@@ -3101,7 +3178,7 @@ FROM rev.EPC_STU                    stu
           Id="Package\Load Temp LibraryHomeroom"
           TopLeft="7.5,136.330188679245" />
         <NodeLayout
-          Size="128,42"
+          Size="262,42"
           Id="Package\Schedules"
           TopLeft="7.5,362.820754716981" />
         <NodeLayout
@@ -3136,26 +3213,14 @@ FROM rev.EPC_STU                    stu
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-67,33.132075471698"
+              EndConnector="0,33.132075471698"
               Start="0,0"
-              End="-67,25.632075471698">
+              End="0,25.632075471698">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,12.566037735849" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,12.566037735849"
-                    Point2="0,16.566037735849"
-                    Point3="-4,16.566037735849" />
-                  <mssgle:LineSegment
-                    End="-63,16.566037735849" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-63,16.566037735849"
-                    Point2="-67,16.566037735849"
-                    Point3="-67,20.566037735849" />
-                  <mssgle:LineSegment
-                    End="-67,25.632075471698" />
+                    End="0,25.632075471698" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3188,30 +3253,18 @@ FROM rev.EPC_STU                    stu
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="71.5,404.820754716981">
+          TopLeft="138.5,404.820754716981">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="67,35.132075471698"
+              EndConnector="0,35.132075471698"
               Start="0,0"
-              End="67,27.632075471698">
+              End="0,27.632075471698">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,13.566037735849" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,13.566037735849"
-                    Point2="0,17.566037735849"
-                    Point3="4,17.566037735849" />
-                  <mssgle:LineSegment
-                    End="63,17.566037735849" />
-                  <mssgle:CubicBezierSegment
-                    Point1="63,17.566037735849"
-                    Point2="67,17.566037735849"
-                    Point3="67,21.566037735849" />
-                  <mssgle:LineSegment
-                    End="67,27.632075471698" />
+                    End="0,27.632075471698" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
