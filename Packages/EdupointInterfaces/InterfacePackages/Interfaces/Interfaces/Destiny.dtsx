@@ -12,8 +12,9 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Destiny"
   DTS:PackageType="5"
-  DTS:VersionBuild="64"
-  DTS:VersionGUID="{EDD88858-FC1E-42CC-AC6F-892212B510CA}">
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="66"
+  DTS:VersionGUID="{BEC5BDF2-1806-46F6-812C-2C58C636F93B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,8 +30,7 @@
           DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=DestinyExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Destiny-{4EE11650-10E3-439E-8F17-74FFF1685779}azlt-mmelarcode\sql2012.STDemo808_2012;">
           <DTS:Password
             DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAD0+isoxQeumbQpil7NXafMAAAAAASAAACgAAAAEAAAADILK9imCYDu3AtUqz8KBDEwAAAAYZDB+B8U5IMqgktZzlhG7G3POyXh1wMBgyWZs4VzoCAQs+xk5+VpQzkgznNtXqziFAAAAJGqaGG0ifPt0xzZKWmv1mdlOaUZ</DTS:Password>
+            Sensitive="1"></DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -1112,7 +1112,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{4EE11650-10E3-439E-8F17-74FFF1685779}"
-          SQLTask:SqlStatementSource="--&lt;APS - Destiny - TempTerms file&gt;&#xA;IF OBJECT_ID('tempdb..##Terms') IS NOT NULL DROP TABLE ##Terms&#xA;CREATE TABLE ##Terms(&#xA;   OrgGu uniqueidentifier null&#xA;   , SchYr varchar(4) null&#xA;   , TermCode varchar(4) null&#xA;   , TermStart smalldatetime&#xA;   , TermEnd smalldatetime&#xA;)&#xA;--&#xA;insert into ##Terms&#xA;select &#xA;       t.OrgGU&#xA;     , t.SchoolYear&#xA;&#x9; , t.TermCode&#xA;&#x9; , TermBegin&#xA;&#x9; , TermEnd&#xA;from rev.SIF_22_TermInfo() t &#xA;     join rev.REV_ORGANIZATION_YEAR oyr on oyr.ORGANIZATION_GU = t.OrgGU&#xA;     join rev.REV_YEAR              y   on y.YEAR_GU = oyr.YEAR_GU &#xA;&#x9;                                       and y.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)&#xA;--select * from ##Terms&#xA; " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="---&lt;APS - Destiny --Schedule&gt;&#xA;&#xA;IF OBJECT_ID('tempdb..##Terms') IS NOT NULL DROP TABLE ##Terms&#xA;CREATE TABLE ##Terms(&#xA;   OrgGu uniqueidentifier null&#xA;   , SchYr varchar(4) null&#xA;   , TermCode varchar(4) null&#xA;   , TermStart smalldatetime&#xA;   , TermEnd smalldatetime&#xA;)&#xA;--&#xA;insert into ##Terms&#xA;select &#xA;       t.OrgGU&#xA;     , t.SchoolYear&#xA;       , t.TermCode&#xA;       , TermBegin&#xA;       , TermEnd&#xA;from rev.SIF_22_TermInfo() t &#xA;     join rev.REV_ORGANIZATION_YEAR oyr on oyr.ORGANIZATION_GU = t.OrgGU&#xA;     join rev.REV_YEAR              y   on y.YEAR_GU = oyr.YEAR_GU &#xA;                                              and y.YEAR_GU = (select year_gu from rev.SIF_22_Common_CurrentYearGU)&#xA;---&#xA;IF OBJECT_ID('tempdb..##SummerTerms') IS NOT NULL DROP TABLE ##SummerTerms&#xA;CREATE TABLE ##SummerTerms(&#xA;     OrgGu uniqueidentifier null&#xA;   , SchYr varchar(4) null&#xA;   , TermCode varchar(4) null&#xA;   , TermStart smalldatetime&#xA;   , TermEnd smalldatetime&#xA;)&#xA;--&#xA;insert into ##SummerTerms&#xA;select &#xA;       org.ORGANIZATION_GU&#xA;     , yr.SCHOOL_YEAR&#xA;       , tcd.TERM_CODE&#xA;       , acalo.START_DATE&#xA;       , tdef.EVENT_DATE&#xA;from rev.rev_organization      org&#xA;join rev.REV_ORGANIZATION_YEAR oyr   on oyr.ORGANIZATION_GU = org.ORGANIZATION_GU&#xA;join rev.REV_YEAR              yr    on yr.SCHOOL_YEAR = (select school_year from rev.SIF_22_Common_CurrentYear)&#xA;                                        and yr.EXTENSION = 'S'&#xA;                                                                  and yr.YEAR_GU = oyr.YEAR_GU&#xA;join rev.EPC_SCH_YR_TRM_DEF    tdef  on tdef.ORGANIZATION_YEAR_GU = oyr.ORGANIZATION_YEAR_GU&#xA;join rev.EPC_SCH_YR_TRM_CODES  tcd   on tcd.SCHOOL_YEAR_TRM_DEF_GU = tdef.SCHOOL_YEAR_TRM_DEF_GU&#xA;join rev.EPC_SCH_ATT_CAL_OPT   acalo on acalo.ORG_YEAR_GU = oyr.ORGANIZATION_YEAR_GU&#xA;--------&#xA;IF OBJECT_ID('tempdb..##JumpStartTerms') IS NOT NULL DROP TABLE ##JumpStartTerms&#xA;CREATE TABLE ##JumpStartTerms(&#xA;     OrgGu uniqueidentifier null&#xA;   , SchYr varchar(4) null&#xA;   , TermCode varchar(4) null&#xA;   , TermStart smalldatetime&#xA;   , TermEnd smalldatetime&#xA;)&#xA;--&#xA;insert into ##JumpStartTerms&#xA;select &#xA;       org.ORGANIZATION_GU&#xA;     , yr.SCHOOL_YEAR&#xA;       , tcd.TERM_CODE&#xA;       , acalo.START_DATE&#xA;       , tdef.EVENT_DATE&#xA;from rev.rev_organization      org&#xA;join rev.REV_ORGANIZATION_YEAR oyr   on oyr.ORGANIZATION_GU = org.ORGANIZATION_GU&#xA;join rev.REV_YEAR              yr    on yr.SCHOOL_YEAR = (select school_year from rev.SIF_22_Common_CurrentYear)+1&#xA;                                        and yr.EXTENSION = 'N'&#xA;                                                                  and yr.YEAR_GU = oyr.YEAR_GU&#xA;join rev.EPC_SCH_YR_TRM_DEF    tdef  on tdef.ORGANIZATION_YEAR_GU = oyr.ORGANIZATION_YEAR_GU&#xA;join rev.EPC_SCH_YR_TRM_CODES  tcd   on tcd.SCHOOL_YEAR_TRM_DEF_GU = tdef.SCHOOL_YEAR_TRM_DEF_GU&#xA;join rev.EPC_SCH_ATT_CAL_OPT   acalo on acalo.ORG_YEAR_GU = oyr.ORGANIZATION_YEAR_GU" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
