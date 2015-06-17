@@ -14,7 +14,7 @@
 DECLARE @School VARCHAR = '%'
 DECLARE @AsOfDate DATETIME = GETDATE()
 DECLARE @Grade AS VARCHAR(2) = '05'
-DECLARE @Buisness AS VARCHAR(1) = 'N'
+DECLARE @Buisness AS VARCHAR(1) = 'Y'
 DECLARE @University AS VARCHAR(1) = 'N'
 DECLARE @Military AS VARCHAR(1) = 'N'
 
@@ -37,7 +37,7 @@ SELECT
     ,CASE WHEN [Student].[MAIL_CITY] IS NULL THEN [Student].[HOME_CITY] ELSE [Student].[MAIL_CITY] END AS [CITY]
     ,CASE WHEN [Student].[MAIL_STATE] IS NULL THEN [Student].[HOME_STATE] ELSE [Student].[MAIL_STATE] END AS [STATE]
     ,CASE WHEN [Student].[MAIL_ZIP] IS NULL THEN [Student].[HOME_ZIP] ELSE [Student].[MAIL_ZIP] END AS [ZIP]
-	--,[PARENT_NAMES].[Parents]
+	,[Student].[Parents]
 FROM
 	APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS [Enrollments]
 	
@@ -88,9 +88,9 @@ WHERE
 	--[Enrollments].[ORGANIZATION_GU] LIKE @School
 	--AND [Enrollments].[GRADE] LIKE @Grade
 	
-	[Enrollments].[GRADE] IN ('05')
+	[Enrollments].[GRADE] IN ('08')
 	--AND [Enrollments].[SCHOOL_CODE] IN ('452','407','427','485','440','435','420','418','455','448')
-	--AND [Enrollments].[SCHOOL_CODE] IN ('514','560','530','515','550')
+	AND [Enrollments].[SCHOOL_CODE] IN ('470','460','416','413','427')
 	
 	--[Enrollments].[GRADE] IN ('09')
 	--AND [School].[SCHOOL_CODE] IN ('452','407','427','485','440','435','420','418','455','448')

@@ -1,6 +1,6 @@
 
 
-DECLARE @SchoolYear NUMERIC = 2013, @Extension NVARCHAR(1) = 'S', @onDate DATE
+DECLARE @SchoolYear NUMERIC = 2015, @Extension NVARCHAR(1) = 'N', @onDate DATE
 
 
 	DECLARE @FINAL_DATE DATETIME
@@ -45,8 +45,8 @@ DECLARE @SchoolYear NUMERIC = 2013, @Extension NVARCHAR(1) = 'S', @onDate DATE
 		-- Only for given callendar extension
 		AND SynYear.EXTENSION = @Extension	
 		
-SET @FirstDay = '06/04/2014' 
-SET @LastDay = '07/10/2014'
+SET @FirstDay = '06/03/2015' 
+SET @LastDay = '07/24/2015'
 
 	-- Define the keyword [qHolidays] to select all the holidays between the start and end dates for the requested school year.	
 ;WITH [qHolidays] AS (SELECT CAL_DATE FROM rev.EPC_ATT_CAL	WHERE ATT_CAL_TYPE_GU = @CalTypeGu AND CAL_DATE BETWEEN @FirstDay AND @LastDay AND HOLIDAY IN ('Hol'))	
@@ -131,7 +131,7 @@ SELECT
 FROM
 	[qMemberDays]
 WHERE
-	[CALENDAR_DAY] != '07/25/2014'
+	[CALENDAR_DAY] != '07/25/2015'
 	AND [isMemberDay] = 'TRUE'
 	
 OPTION (maxrecursion 365)
@@ -190,8 +190,8 @@ FROM
 			
 		
 	WHERE
-		[RevYear].[SCHOOL_YEAR] = '2013'
-		AND [RevYear].[EXTENSION] = 'S'
+		[RevYear].[SCHOOL_YEAR] = '2015'
+		AND [RevYear].[EXTENSION] = 'N'
 		AND [StudentSchoolYear].[NO_SHOW_STUDENT] = 'N'
 		AND [SCHOOL_YEAR_OPTION].[SCHOOL_TYPE] = 1
 	) AS [SS_STUDENTS]
