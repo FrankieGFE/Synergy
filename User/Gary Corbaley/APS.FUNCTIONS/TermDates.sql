@@ -14,7 +14,9 @@
  * Tables and Functions Referenced: APS.YearDates, EPC_SCH, REV_ORGANIZATION, REV_ORGANIZATION_YEAR, REV_YEAR, EPC_SCH_ATT_CAL_OPT, EPC_SCH_ATT_CAL, EPC_SCH_YR_TRM_DEF, EPC_SCH_YR_TRM_CODES, 
  */
 
-CREATE VIEW [APS].[TermDates] AS
+CREATE FUNCTION [APS].[TermDates]
+RETURNS TABLE
+AS
 
 DECLARE @retTerms TABLE 
 (
@@ -141,6 +143,7 @@ close schoolDefs
 deallocate schoolDefs
 
 -- Return the List of Term Definitions and add the school year and school name for user readability
+RETURN
 SELECT
 	[RevYear].[SCHOOL_YEAR]
 	,[RevYear].[EXTENSION]
