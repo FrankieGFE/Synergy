@@ -125,11 +125,11 @@ declare @SchRunGrade int = 0
 IF MONTH(GETDATE()) < 6 -- IN SPRING GET CURRENT YEAR GU THEN ADD 1 TO STUDENT GRADES
 BEGIN
 	SET @SchRunYearGU = (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
-	SET @SchRunGrade = 1 -- GRADE + 1
+	SET @SchRunGrade = 10 -- GRADE + 1
 END
 IF MONTH(GETDATE()) BETWEEN 6 AND 8 -- IN SUMMER GET NEXT YEAR GU THEN ADD 0 TO STUDENT GRADES
 BEGIN
-	SELECT '08/30/' + CONVERT(VARCHAR(4),YEAR(GETDATE()))
+	--SELECT '08/30/' + CONVERT(VARCHAR(4),YEAR(GETDATE()))
 	SET @SchRunYearGU = (SELECT YEAR_GU FROM APS.YearDates WHERE CONVERT(DATE,'08/30/' + CONVERT(VARCHAR(4),YEAR(GETDATE()))) BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
 	SET @SchRunGrade = 0 -- GRADE + 0
 END
@@ -262,7 +262,7 @@ SELECT
       , stu.SIS_NUMBER                            AS [StudentID]
       , lorg.ORGANIZATION_NAME                    AS [LastLocation]
 	  --CHANGED FOR PRE-PRINTED CARDS WITH GRADE AHEAD
-      , grd.ALT_CODE_SIF                     AS [GradeLevel]
+      , grd_next.[VALUE_DESCRIPTION]			  AS [GradeLevel]
       , per.GENDER                                AS [Gender]
       , shlng.VALUE_DESCRIPTION                   AS [PHLOTE_Q1]
       , CONVERT(VARCHAR(10), per.BIRTH_DATE, 101) AS [DateOfBirth]
@@ -480,7 +480,8 @@ FROM  rev.EPC_STU                     stu
       LEFT JOIN rev.EPC_SCH           schr ON schr.ORGANIZATION_GU     = ssy.SCHOOL_RESIDENCE_GU
       JOIN rev.REV_PERSON             per  ON per.PERSON_GU            = stu.STUDENT_GU
       LEFT JOIN rev.REV_ADDRESS       hadr ON hadr.ADDRESS_GU          = per.HOME_ADDRESS_GU
-      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd on grd.VALUE_CODE = ssy.GRADE
+      LEFT JOIN APS.LookupTable('K12', 'GRADE') grd on grd.VALUE_CODE  = ssy.GRADE
+      LEFT JOIN APS.LookupTable('K12', 'GRADE') grd_next on grd.LIST_ORDER  = grd_next.[LIST_ORDER] + @SchRunGrade
 	   --APSPHLOTE
 	  LEFT JOIN 
 	  (
