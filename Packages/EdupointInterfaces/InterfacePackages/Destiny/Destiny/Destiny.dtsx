@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Destiny"
   DTS:PackageType="5"
-  DTS:VersionBuild="67"
-  DTS:VersionGUID="{CB2A2348-6313-44FC-A733-39E4A726F88F}">
+  DTS:VersionBuild="68"
+  DTS:VersionGUID="{3EB32205-4A8F-41B0-89F5-52945A3E087C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -30,7 +30,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABUd4bsNYS8Q9PGQeAOSAWSAAAAAASAAACgAAAAEAAAAA4Jnxeee14oiY09jTgO/cYwAAAAvBhFJ+s78uDC5h27Sssu6OjGyJ824rk4DKhcczJRdMxuQICnSSEjId82HHSwwkIiFAAAAJIK/wdf5pDBZ8hTNaeE3qP2bN7q</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADLOBCnJachAm6R6Hy+l/GhAAAAAASAAACgAAAAEAAAAPYHIqwj0CHVzJGI2KUEDDMwAAAAMME7+f7xQq+BpSudQPCIFhMC53prkP5sAScG2XA1UyHfb4FKdXkJ/5hwbI9qyM8VFAAAAPPKNn+yBmxSH6v0sFZhTxZLGFJf</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -472,6 +472,46 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyVersion("1.0.0.0")> 
 <Assembly: AssemblyFileVersion("1.0.0.0")> ]]></ProjectItem>
           <ProjectItem
+            Name="ScriptMain.vb"
+            Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services Script Task
+' Write scripts using Microsoft Visual Basic 2008.
+' The ScriptMain is the entry point class of the script.
+
+Imports System
+Imports System.Data
+Imports System.Math
+Imports System.IO
+Imports Microsoft.SqlServer.Dts.Runtime
+
+<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
+<System.CLSCompliantAttribute(False)> _
+Partial Public Class ScriptMain
+	Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+
+	Enum ScriptResults
+		Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
+		Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+	End Enum
+	
+    Public Sub Main()
+        Dim fileLoc, fileName As String
+        If Dts.Variables.Contains("User::LibraryHomeroomFilePath") = True AndAlso _
+        Dts.Variables.Contains("User::LibraryHomeroomFile") = True Then
+            fileLoc = CStr(Dts.Variables("User::LibraryHomeroomFilePath").Value)
+            fileName = CStr(Dts.Variables.Item("User::LibraryHomeroomFile").Value)
+            If File.Exists(fileLoc + fileName) Then
+                Dts.Variables.Item("User::FileExists").Value = True
+            Else
+                Dts.Variables.Item("User::FileExists").Value = False
+            End If
+            Dts.TaskResult = ScriptResults.Success
+        Else
+            Dts.TaskResult = ScriptResults.Failure
+        End If
+    End Sub
+
+End Class]]></ProjectItem>
+          <ProjectItem
             Name="st_d07338d79e1e421b9e45e24fedae6a55.vbproj"
             Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="utf-16"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -701,46 +741,6 @@ End Class]]></ProjectItem>
 		<msb:Project Include="st_d07338d79e1e421b9e45e24fedae6a55.vbproj"/>
 	</msb:ItemGroup>
 </c:Project>]]></ProjectItem>
-          <ProjectItem
-            Name="ScriptMain.vb"
-            Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services Script Task
-' Write scripts using Microsoft Visual Basic 2008.
-' The ScriptMain is the entry point class of the script.
-
-Imports System
-Imports System.Data
-Imports System.Math
-Imports System.IO
-Imports Microsoft.SqlServer.Dts.Runtime
-
-<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
-<System.CLSCompliantAttribute(False)> _
-Partial Public Class ScriptMain
-	Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
-
-	Enum ScriptResults
-		Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
-		Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
-	End Enum
-	
-    Public Sub Main()
-        Dim fileLoc, fileName As String
-        If Dts.Variables.Contains("User::LibraryHomeroomFilePath") = True AndAlso _
-        Dts.Variables.Contains("User::LibraryHomeroomFile") = True Then
-            fileLoc = CStr(Dts.Variables("User::LibraryHomeroomFilePath").Value)
-            fileName = CStr(Dts.Variables.Item("User::LibraryHomeroomFile").Value)
-            If File.Exists(fileLoc + fileName) Then
-                Dts.Variables.Item("User::FileExists").Value = True
-            Else
-                Dts.Variables.Item("User::FileExists").Value = False
-            End If
-            Dts.TaskResult = ScriptResults.Success
-        Else
-            Dts.TaskResult = ScriptResults.Failure
-        End If
-    End Sub
-
-End Class]]></ProjectItem>
           <ProjectItem
             Name="My Project\Resources.resx"
             Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -1480,180 +1480,62 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">;with  OnlySummer AS
-(
-  SELECT
-     stu.student_gu
-  FROM rev.EPC_STU                  stu
-     JOIN rev.EPC_STU_SCH_YR        ssyr ON ssyr.STUDENT_GU = stu.STUDENT_GU
-                                            AND ssyr.STATUS IS NULL
-                                                                           AND ssyr.EXCLUDE_ADA_ADM is null
-     JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
-     JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssyr.YEAR_GU
-                                            AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
-                                            AND yr.EXTENSION   = 'S'
-)
-SELECT 
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT --top 100
+	[ENROLLMENTS].[SCHOOL_CODE]			AS [Sch #]
+	--,[ENROLLMENTS].[SCHOOL_NAME]		
+	,[Schedule].[COURSE_TITLE]			AS [Course Name]
+	,[Schedule].[COURSE_ID]				AS [Course #]
+	,[Schedule].[SECTION_ID]			AS [Section]
+	,[Schedule].[PRIMARY_STAFF]			AS [Employee Num]
+	,[Schedule].[PERIOD_BEGIN]			AS [Period]
+	,[STUDENT].[SIS_NUMBER]				AS [Student ID]
+	,[Schedule].[SUBJECT_AREA_1]		AS [Dept]
+	, CASE WHEN NOT EXISTS           
+			 (SELECT symd.MEET_DAY_CODE 
+		   FROM rev.EPC_SCH_YR_SECT_MET_DY sysmd
+		   JOIN rev.EPC_SCH_YR_MET_DY      symd ON symd.SCH_YR_MET_DY_GU = sysmd.SCH_YR_MET_DY_GU
+		   WHERE sysmd.SECTION_GU = [Schedule].[SECTION_GU]
+		  )
+	THEN 'M,T,W,R,F'   
+	ELSE               
+			 STUFF((SELECT [*]=', '+(LEFT(symd.MEET_DAY_CODE,1))  
+					FROM rev.EPC_SCH_YR_SECT sec    
+					JOIN rev.EPC_SCH_YR_SECT_MET_DY sysmd ON sysmd.SECTION_GU      = sec.SECTION_GU
+					JOIN rev.EPC_SCH_YR_MET_DY      symd  ON symd.SCH_YR_MET_DY_GU = sysmd.SCH_YR_MET_DY_GU
+					WHERE sec.SECTION_GU  = [Schedule].[SECTION_GU]    
+					ORDER BY symd.ORDERBY    
+					FOR XML PATH('')
+				   ),1,2,'')    
+	END                                 AS [Cycle Days]
+	,CONVERT(VARCHAR(10),[TERMDATES].[TermBegin],101)		AS [Class Start Day]
+	,CONVERT(VARCHAR(10),[TERMDATES].[TermEnd],101)				AS [Class End Date]
+  
+  --,[Schedule].[ORGANIZATION_YEAR_GU]
+  --,[Schedule].*
+  --,[TERMINFO].*
+  --,[Section].*
+	
+FROM
+	APS.StudentEnrollmentDetails AS [ENROLLMENTS]	
 
-   sch.SCHOOL_CODE                   AS [Sch #]
-, crs.COURSE_TITLE                  AS [Course Name]
-, crs.COURSE_ID                     AS [Course #]
-, sect.SECTION_ID                   AS [Section]
-, 'E'+RIGHT('000000000'+ replace(lower(stf.badge_num),'e',''),9)
-    AS [Employee Num]
-, sect.PERIOD_BEGIN                 AS [Period]
-, stu.SIS_NUMBER                    AS [Student ID]
-, crs.SUBJECT_AREA_1                AS [Dept]
-, CASE WHEN NOT EXISTS           
-         (SELECT symd.MEET_DAY_CODE 
-       FROM rev.EPC_SCH_YR_SECT_MET_DY sysmd
-       JOIN rev.EPC_SCH_YR_MET_DY      symd ON symd.SCH_YR_MET_DY_GU = sysmd.SCH_YR_MET_DY_GU
-       WHERE sysmd.SECTION_GU = sect.SECTION_GU
-      )
-  THEN 'M,T,W,R,F'   
-  ELSE               
-         STUFF((SELECT [*]=', '+(LEFT(symd.MEET_DAY_CODE,1))  
-                FROM rev.EPC_SCH_YR_SECT sec    
-                JOIN rev.EPC_SCH_YR_SECT_MET_DY sysmd ON sysmd.SECTION_GU      = sec.SECTION_GU
-                JOIN rev.EPC_SCH_YR_MET_DY      symd  ON symd.SCH_YR_MET_DY_GU = sysmd.SCH_YR_MET_DY_GU
-                WHERE sec.SECTION_GU  = sect.SECTION_GU       
-                ORDER BY symd.ORDERBY    
-                FOR XML PATH('')
-               ),1,2,'')    
-  END                                        AS [Cycle Days]
-, CONVERT(VARCHAR(10), trms.TermStart, 101) AS [Class Start Day]
-, CONVERT(VARCHAR(10), trms.TermEnd, 101)   AS [Class End Date]
-FROM   rev.EPC_STU                          stu
-       JOIN rev.EPC_STU_SCH_YR              ssy  ON ssy.STUDENT_GU                 = stu.STUDENT_GU
-                                                    and ssy.STATUS is NULL
-       JOIN rev.REV_ORGANIZATION_YEAR       oyr  ON oyr.ORGANIZATION_YEAR_GU       = ssy.ORGANIZATION_YEAR_GU
-       JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssy.YEAR_GU
-                                            AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
-                                            AND yr.EXTENSION   = 'R'
-       JOIN rev.REV_ORGANIZATION            org  ON org.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
-       JOIN rev.EPC_SCH                     sch  ON sch.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
-       JOIN rev.EPC_STU_CLASS               cls  ON cls.STUDENT_SCHOOL_YEAR_GU     = ssy.STUDENT_SCHOOL_YEAR_GU
-       JOIN rev.EPC_SCH_YR_SECT             sect ON sect.SECTION_GU                = cls.SECTION_GU
-       JOIN rev.EPC_SCH_YR_CRS              scrs ON scrs.SCHOOL_YEAR_COURSE_GU     = sect.SCHOOL_YEAR_COURSE_GU
-       JOIN rev.EPC_CRS                     crs  ON crs.COURSE_GU                  = scrs.COURSE_GU
-       JOIN rev.EPC_STAFF_SCH_YR            stfy ON stfy.STAFF_SCHOOL_YEAR_GU      = sect.STAFF_SCHOOL_YEAR_GU
-          JOIN rev.EPC_STAFF                   stf  ON stf.STAFF_GU                   = stfy.STAFF_GU
-       JOIN rev.REV_PERSON                  stfp ON stfp.PERSON_GU                 = stfy.STAFF_GU
-          JOIN ##Terms                         trms ON trms.OrgGu                     = oyr.ORGANIZATION_GU
-                                                       AND trms.TermCode              = sect.TERM_CODE 
-       LEFT JOIN OnlySummer               Summer ON Summer.STUDENT_GU = stu.STUDENT_GU
-WHERE (cls.LEAVE_DATE IS NULL OR cls.LEAVE_DATE &gt;= GETDATE())
-       AND cls.ENTER_DATE &lt;= GETDATE()
-          AND GETDATE() between trms.TermStart and trms.TermEnd
-       AND summer.STUDENT_GU is null
----------------------------------------- Summer Term Enrollments ------------------------------------
-UNION 
-SELECT 
-
-   sch.SCHOOL_CODE                   AS [Sch #]
-, crs.COURSE_TITLE                  AS [Course Name]
-, crs.COURSE_ID                     AS [Course #]
-, sect.SECTION_ID                   AS [Section]
-, 'E'+RIGHT('000000000'+ replace(lower(stf.badge_num),'e',''),9)
-    AS [Employee Num]
-, sect.PERIOD_BEGIN                 AS [Period]
-, stu.SIS_NUMBER                    AS [Student ID]
-, crs.SUBJECT_AREA_1                AS [Dept]
-, CASE WHEN NOT EXISTS           
-         (SELECT symd.MEET_DAY_CODE 
-       FROM rev.EPC_SCH_YR_SECT_MET_DY sysmd
-       JOIN rev.EPC_SCH_YR_MET_DY      symd ON symd.SCH_YR_MET_DY_GU = sysmd.SCH_YR_MET_DY_GU
-       WHERE sysmd.SECTION_GU = sect.SECTION_GU
-      )
-  THEN 'M,T,W,R,F'   
-  ELSE               
-         STUFF((SELECT [*]=', '+(LEFT(symd.MEET_DAY_CODE,1))  
-                FROM rev.EPC_SCH_YR_SECT sec    
-                JOIN rev.EPC_SCH_YR_SECT_MET_DY sysmd ON sysmd.SECTION_GU      = sec.SECTION_GU
-                JOIN rev.EPC_SCH_YR_MET_DY      symd  ON symd.SCH_YR_MET_DY_GU = sysmd.SCH_YR_MET_DY_GU
-                WHERE sec.SECTION_GU  = sect.SECTION_GU       
-                ORDER BY symd.ORDERBY    
-                FOR XML PATH('')
-               ),1,2,'')    
-  END                                        AS [Cycle Days]
-, CONVERT(VARCHAR(10), trms.TermStart, 101) AS [Class Start Day]
-, CONVERT(VARCHAR(10), trms.TermEnd, 101)   AS [Class End Date]
-FROM   rev.EPC_STU                          stu
-       JOIN rev.EPC_STU_SCH_YR              ssy  ON ssy.STUDENT_GU                 = stu.STUDENT_GU
-                                                    and ssy.STATUS is NULL
-       JOIN rev.REV_ORGANIZATION_YEAR       oyr  ON oyr.ORGANIZATION_YEAR_GU       = ssy.ORGANIZATION_YEAR_GU
-       JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssy.YEAR_GU
-                                            AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
-                                            AND yr.EXTENSION   = 'S'
-       JOIN rev.REV_ORGANIZATION            org  ON org.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
-       JOIN rev.EPC_SCH                     sch  ON sch.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
-       JOIN rev.EPC_STU_CLASS               cls  ON cls.STUDENT_SCHOOL_YEAR_GU     = ssy.STUDENT_SCHOOL_YEAR_GU
-       JOIN rev.EPC_SCH_YR_SECT             sect ON sect.SECTION_GU                = cls.SECTION_GU
-       JOIN rev.EPC_SCH_YR_CRS              scrs ON scrs.SCHOOL_YEAR_COURSE_GU     = sect.SCHOOL_YEAR_COURSE_GU
-       JOIN rev.EPC_CRS                     crs  ON crs.COURSE_GU                  = scrs.COURSE_GU
-       JOIN rev.EPC_STAFF_SCH_YR            stfy ON stfy.STAFF_SCHOOL_YEAR_GU      = sect.STAFF_SCHOOL_YEAR_GU
-          JOIN rev.EPC_STAFF                   stf  ON stf.STAFF_GU                   = stfy.STAFF_GU
-       JOIN rev.REV_PERSON                  stfp ON stfp.PERSON_GU                 = stfy.STAFF_GU
-          JOIN ##SummerTerms                   trms ON trms.OrgGu                     = oyr.ORGANIZATION_GU
-                                                       AND trms.TermCode              = sect.TERM_CODE 
-WHERE (cls.LEAVE_DATE IS NULL OR cls.LEAVE_DATE &gt;= GETDATE())
-
------------------------------------------------- Jump Start Enrollments ---------------------------------------
-
-UNION 
-SELECT 
-
-   sch.SCHOOL_CODE                   AS [Sch #]
-, crs.COURSE_TITLE                  AS [Course Name]
-, crs.COURSE_ID                     AS [Course #]
-, sect.SECTION_ID                   AS [Section]
-, 'E'+RIGHT('000000000'+ replace(lower(stf.badge_num),'e',''),9)
-    AS [Employee Num]
-, sect.PERIOD_BEGIN                 AS [Period]
-, stu.SIS_NUMBER                    AS [Student ID]
-, crs.SUBJECT_AREA_1                AS [Dept]
-, CASE WHEN NOT EXISTS           
-         (SELECT symd.MEET_DAY_CODE 
-       FROM rev.EPC_SCH_YR_SECT_MET_DY sysmd
-       JOIN rev.EPC_SCH_YR_MET_DY      symd ON symd.SCH_YR_MET_DY_GU = sysmd.SCH_YR_MET_DY_GU
-       WHERE sysmd.SECTION_GU = sect.SECTION_GU
-      )
-  THEN 'M,T,W,R,F'   
-  ELSE               
-         STUFF((SELECT [*]=', '+(LEFT(symd.MEET_DAY_CODE,1))  
-                FROM rev.EPC_SCH_YR_SECT sec    
-                JOIN rev.EPC_SCH_YR_SECT_MET_DY sysmd ON sysmd.SECTION_GU      = sec.SECTION_GU
-                JOIN rev.EPC_SCH_YR_MET_DY      symd  ON symd.SCH_YR_MET_DY_GU = sysmd.SCH_YR_MET_DY_GU
-                WHERE sec.SECTION_GU  = sect.SECTION_GU       
-                ORDER BY symd.ORDERBY    
-                FOR XML PATH('')
-               ),1,2,'')    
-  END                                        AS [Cycle Days]
-, CONVERT(VARCHAR(10), trms.TermStart, 101) AS [Class Start Day]
-, CONVERT(VARCHAR(10), trms.TermEnd, 101)   AS [Class End Date]
-FROM   rev.EPC_STU                          stu
-       JOIN rev.EPC_STU_SCH_YR              ssy  ON ssy.STUDENT_GU                 = stu.STUDENT_GU
-                                                    and ssy.STATUS is NULL
-       JOIN rev.REV_ORGANIZATION_YEAR       oyr  ON oyr.ORGANIZATION_YEAR_GU       = ssy.ORGANIZATION_YEAR_GU
-       JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = ssy.YEAR_GU
-                                            AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)+1
-                                            AND yr.EXTENSION   = 'N'
-       JOIN rev.REV_ORGANIZATION            org  ON org.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
-       JOIN rev.EPC_SCH                     sch  ON sch.ORGANIZATION_GU            = oyr.ORGANIZATION_GU
-       JOIN rev.EPC_STU_CLASS               cls  ON cls.STUDENT_SCHOOL_YEAR_GU     = ssy.STUDENT_SCHOOL_YEAR_GU
-       JOIN rev.EPC_SCH_YR_SECT             sect ON sect.SECTION_GU                = cls.SECTION_GU
-       JOIN rev.EPC_SCH_YR_CRS              scrs ON scrs.SCHOOL_YEAR_COURSE_GU     = sect.SCHOOL_YEAR_COURSE_GU
-       JOIN rev.EPC_CRS                     crs  ON crs.COURSE_GU                  = scrs.COURSE_GU
-       JOIN rev.EPC_STAFF_SCH_YR            stfy ON stfy.STAFF_SCHOOL_YEAR_GU      = sect.STAFF_SCHOOL_YEAR_GU
-          JOIN rev.EPC_STAFF                   stf  ON stf.STAFF_GU                   = stfy.STAFF_GU
-       JOIN rev.REV_PERSON                  stfp ON stfp.PERSON_GU                 = stfy.STAFF_GU
-          JOIN ##JumpStartTerms                trms ON trms.OrgGu                     = oyr.ORGANIZATION_GU
-                                                       AND trms.TermCode              = sect.TERM_CODE 
-
-
-WHERE (cls.LEAVE_DATE IS NULL OR cls.LEAVE_DATE &gt;= GETDATE())
-       AND cls.ENTER_DATE &lt;= GETDATE()
-          AND GETDATE() between trms.TermStart and trms.TermEnd</property>
+	INNER JOIN
+	APS.StudentScheduleDetails AS [Schedule]
+	ON
+	[ENROLLMENTS].[STUDENT_GU] = [Schedule].[STUDENT_GU]
+	AND [ENROLLMENTS].[YEAR_GU] = [Schedule].[YEAR_GU]
+	
+	INNER JOIN
+	APS.BasicStudent AS [STUDENT]
+	ON
+	[ENROLLMENTS].[STUDENT_GU] = [STUDENT].[STUDENT_GU]
+	
+	LEFT OUTER JOIN
+	APS.TermDatesAsOF(GETDATE()) AS [TERMDATES]
+	ON
+	[Schedule].[ORGANIZATION_YEAR_GU] = [TERMDATES].[OrgYearGu]
+	
+WHERE
+	[ENROLLMENTS].[YEAR_GU] IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1826,8 +1708,7 @@ WHERE (cls.LEAVE_DATE IS NULL OR cls.LEAVE_DATE &gt;= GETDATE())
                       name="Section" />
                     <externalMetadataColumn
                       refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Employee Num]"
-                      dataType="wstr"
-                      length="10"
+                      dataType="i4"
                       name="Employee Num" />
                     <externalMetadataColumn
                       refId="Package\Schedules\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Period]"
@@ -1893,8 +1774,7 @@ WHERE (cls.LEAVE_DATE IS NULL OR cls.LEAVE_DATE &gt;= GETDATE())
                       name="Section" />
                     <outputColumn
                       refId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Employee Num]"
-                      dataType="wstr"
-                      length="10"
+                      dataType="i4"
                       lineageId="Package\Schedules\DB Query.Outputs[OLE DB Source Error Output].Columns[Employee Num]"
                       name="Employee Num" />
                     <outputColumn
