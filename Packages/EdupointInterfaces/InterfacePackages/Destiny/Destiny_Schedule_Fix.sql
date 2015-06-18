@@ -36,6 +36,8 @@ SELECT --top 100
   --,[Schedule].*
   --,[TERMINFO].*
   --,[Section].*
+  
+  --,[Schedule].[TERM_CODE]
 	
 FROM
 	APS.StudentEnrollmentDetails AS [ENROLLMENTS]	
@@ -55,6 +57,7 @@ FROM
 	APS.TermDatesAsOF(GETDATE()) AS [TERMDATES]
 	ON
 	[Schedule].[ORGANIZATION_YEAR_GU] = [TERMDATES].[OrgYearGu]
+	AND [Schedule].[TERM_CODE] = [TERMDATES].[TermCode]
 	
 WHERE
 	[ENROLLMENTS].[YEAR_GU] IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
