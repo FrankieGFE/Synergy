@@ -119,6 +119,27 @@ row_number() over (partition by t.sis_number order by sn) dn
 ;
 
 -----------
+-- GET YEAR GU DEPENDING ON THE CURRENT MONTH
+declare @SchRunYearGU uniqueidentifier
+declare @SchRunGrade int = 0
+IF MONTH(GETDATE()) < 6 -- IN SPRING GET CURRENT YEAR GU THEN ADD 1 TO STUDENT GRADES
+BEGIN
+	SET @SchRunYearGU = (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+	SET @SchRunGrade = 1 -- GRADE + 1
+END
+IF MONTH(GETDATE()) BETWEEN 6 AND 8 -- IN SUMMER GET NEXT YEAR GU THEN ADD 0 TO STUDENT GRADES
+BEGIN
+	SELECT '08/30/' + CONVERT(VARCHAR(4),YEAR(GETDATE()))
+	SET @SchRunYearGU = (SELECT YEAR_GU FROM APS.YearDates WHERE CONVERT(DATE,'08/30/' + CONVERT(VARCHAR(4),YEAR(GETDATE()))) BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+	SET @SchRunGrade = 0 -- GRADE + 0
+END
+IF MONTH(GETDATE()) > 8 -- IN THE FALL GET CURRENT YEAR GU AND ADD 0 TO STUDENT GRADES
+BEGIN
+	--SELECT '08/30/' + CONVERT(VARCHAR(4),YEAR(GETDATE()))
+	SET @SchRunYearGU = (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+	SET @SchRunGrade = 0 -- GRADE + 0
+END
+
 declare @SchRunYear INT = (select school_year from rev.SIF_22_Common_CurrentYear)
 declare @SchRunExt  CHAR(1) = 'R'
 ;with StuRacesR AS
@@ -130,8 +151,7 @@ declare @SchRunExt  CHAR(1) = 'R'
        join rev.EPC_STU                s  on s.STUDENT_GU = ethlist.PERSON_GU
        join rev.EPC_STU_SCH_YR         sy on sy.STUDENT_GU = s.student_gu
        join rev.REV_YEAR               y  on y.YEAR_GU = sy.YEAR_GU 
-                                             and y.SCHOOL_YEAR = @SchRunYear 
-                                             and y.EXTENSION = @SchRunExt
+                                             AND y.YEAR_GU = @SchRunYearGU
        left join rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') edes on edes.VALUE_CODE = ethlist.ETHNIC_CODE
 ), ParentContactR AS
 (
@@ -176,8 +196,7 @@ FROM rev.EPC_STU_PARENT             stupar
      JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU 
      JOIN rev.REV_ORGANIZATION      org  ON org.ORGANIZATION_GU      = oyr.ORGANIZATION_GU
      JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU               = oyr.YEAR_GU 
-                                         and yr.SCHOOL_YEAR          = @SchRunYear
-										 and yr.EXTENSION            = @SchRunExt
+                                         AND yr.YEAR_GU = @SchRunYearGU
      JOIN rev.EPC_PARENT            p    ON p.PARENT_GU              = stupar.PARENT_GU
      LEFT JOIN rev.REV_ADDRESS      hadr ON hadr.ADDRESS_GU          = par.HOME_ADDRESS_GU
      LEFT JOIN rev.REV_ADDRESS      madr ON madr.ADDRESS_GU          = par.MAIL_ADDRESS_GU
@@ -212,8 +231,7 @@ FROM rev.EPC_STU_EMG_CONTACT        ec
      JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU 
      JOIN rev.REV_ORGANIZATION      org  ON org.ORGANIZATION_GU      = oyr.ORGANIZATION_GU
      JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU               = oyr.YEAR_GU 
-                                         and yr.SCHOOL_YEAR          = @SchRunYear
-										 and yr.EXTENSION            = @SchRunExt
+                                         AND yr.YEAR_GU = @SchRunYearGU
      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.Emergency', 'RELATIONSHIP') rel on rel.VALUE_CODE = ec.RELATIONSHIP_DD
 ), ParentWorkPhone AS
 (
@@ -232,8 +250,7 @@ FROM rev.EPC_STU_PARENT             stupar
      JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU 
      JOIN rev.REV_ORGANIZATION      org  ON org.ORGANIZATION_GU      = oyr.ORGANIZATION_GU
      JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU               = oyr.YEAR_GU 
-                                         and yr.SCHOOL_YEAR          = @SchRunYear
-										 and yr.EXTENSION            = @SchRunExt
+                                         AND yr.YEAR_GU = @SchRunYearGU
      LEFT JOIN rev.REV_PERSON_PHOne pphw ON pphw.PERSON_GU           = stupar.PARENT_GU 
 	                                                                   and pphw.PHONE_TYPE = 'W'
 )
@@ -456,8 +473,7 @@ FROM  rev.EPC_STU                     stu
                                               AND ssy.STATUS is NULL
       JOIN rev.REV_ORGANIZATION_YEAR  oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
       JOIN rev.REV_YEAR               yr   ON yr.YEAR_GU               = oyr.YEAR_GU
-                                              AND yr.SCHOOL_YEAR       = @SchRunYear
-                                              AND yr.EXTENSION         = @SchRunExt
+                                              AND yr.YEAR_GU = @SchRunYearGU
       JOIN rev.EPC_SCH                sch  ON sch.ORGANIZATION_GU      = oyr.ORGANIZATION_GU
 	  JOIN rev.REV_ORGANIZATION       org  ON org.ORGANIZATION_GU      = oyr.ORGANIZATION_GU
 	  LEFT JOIN rev.REV_ORGANIZATION  lorg ON lorg.ORGANIZATION_GU     = ssy.LAST_SCHOOL_GU
