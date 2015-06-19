@@ -43,15 +43,15 @@ SELECT
 		,ROW_NUMBER() OVER (PARTITION BY SIS_NUMBER ORDER BY STATUS DESC) AS RN
  FROM 
 APS.LCEStudentsAndProvidersAsOf('2015-05-22') AS ESL
-
 ) AS T1
 WHERE RN =1
+AND [STATUS] != 'Parent Refused'
 GROUP BY 
 	ORGANIZATION_NAME
 
 )AS ESL
 -------------------------------------------------------------------------------------------------
-
+--PRIOR ESL STUDENTS
 LEFT JOIN
 (
 SELECT 
@@ -69,6 +69,7 @@ APS.LCEStudentsAndProvidersAsOf('2015-03-15') AS ESL
 
 ) AS T1
 WHERE RN =1
+AND [STATUS] != 'Parent Refused'
 GROUP BY 
 	ORGANIZATION_NAME
 ) AS T1
