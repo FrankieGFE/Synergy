@@ -139,6 +139,7 @@ BEGIN
 	SET @SchRunYearGU = (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
 	SET @SchRunGrade = 0 -- GRADE + 0
 END
+--------------------------------------------------------------
 
 declare @SchRunYear INT = (select school_year from rev.SIF_22_Common_CurrentYear)
 declare @SchRunExt  CHAR(1) = 'R'
