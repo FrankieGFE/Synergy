@@ -79,8 +79,37 @@ APS.LCEMostRecentHLSAsOf('2015-05-22') AS HLS
 ON
 HLS.STUDENT_GU = PE.STUDENT_GU
 
+----------------------COUNT ONLY THE ELL STUDENTS IN THE ESL REPORT----------------------------
 LEFT JOIN
-APS.ELLAsOf('2015-05-22') AS ELL
+(
+	SELECT 
+		ELLALL.* 
+	FROM 
+	APS.ELLAsOf('2015-05-22') AS ELLALL
+	INNER JOIN
+	rev.EPC_STU AS STU
+	ON
+	ELLALL.STUDENT_GU = STU.STUDENT_GU
+
+	INNER JOIN
+	(
+	SELECT 
+			*
+	FROM 
+	(
+	SELECT 
+			*
+			,ROW_NUMBER() OVER (PARTITION BY SIS_NUMBER ORDER BY STATUS DESC) AS RN
+	 FROM 
+	APS.LCEStudentsAndProvidersAsOf('2015-05-22')
+
+	) AS T1
+	WHERE RN =1
+	) AS ESLNODUPS
+	ON
+	STU.SIS_NUMBER = ESLNODUPS.SIS_NUMBER
+) AS ELL
+
 ON
 ELL.STUDENT_GU = PE.STUDENT_GU
 
@@ -98,7 +127,7 @@ LEFT JOIN
 		SELECT 
 			ORG.ORGANIZATION_NAME
 			,GRADES.VALUE_DESCRIPTION AS GRADE
-			,SIS_NUMBER
+			,STU.SIS_NUMBER
 			,PERS.LAST_NAME
 			,PERS.FIRST_NAME
 			,TESTS.TEST_NAME
@@ -113,6 +142,27 @@ LEFT JOIN
 			rev.EPC_STU AS STU
 			ON
 			STU.STUDENT_GU = TESTS.STUDENT_GU
+			------------------------------------------------------------------------------------
+			--GET ONLY KINDER WAPTS IN THE ESL REPORT
+			INNER JOIN
+			(
+						SELECT 
+					*
+			FROM 
+			(
+			SELECT 
+					*
+					,ROW_NUMBER() OVER (PARTITION BY SIS_NUMBER ORDER BY STATUS DESC) AS RN
+			 FROM 
+			APS.LCEStudentsAndProvidersAsOf('2015-05-22')
+
+			) AS T1
+			WHERE RN =1
+			) AS ESL
+			ON
+			ESL.SIS_NUMBER = STU.SIS_NUMBER
+			----------------------------------------------------------------------------------------
+
 			INNER JOIN
 			rev.REV_PERSON AS PERS
 			ON
@@ -197,7 +247,22 @@ LEFT JOIN
 		LCE.STUDENT_GU = STU.STUDENT_GU
 
 		INNER JOIN
-		APS.LCEStudentsAndProvidersAsOf('2015-05-22') AS ESL
+		(
+		SELECT 
+		*
+			FROM 
+			(
+			SELECT 
+					*
+					,ROW_NUMBER() OVER (PARTITION BY SIS_NUMBER ORDER BY STATUS DESC) AS RN
+			 FROM 
+			APS.LCEStudentsAndProvidersAsOf('2015-05-22')
+
+			) AS T1
+			WHERE RN =1
+		 ) AS ESL
+
+
 		ON
 		ESL.SIS_NUMBER = STU.SIS_NUMBER
 		--------------------------------------------------------------------------------------------------
