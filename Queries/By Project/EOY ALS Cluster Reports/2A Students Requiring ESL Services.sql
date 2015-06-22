@@ -94,6 +94,7 @@ FROM
 
 ON YAGO.SCHOOL = ESL.ORGANIZATION_NAME
 
+-------------------------------------------------------------------------------------------------
 
 	INNER JOIN
 	rev.EPC_SCH AS SCHOOL
