@@ -1,7 +1,7 @@
 /**
  * 
  * $LastChangedBy: Gary Corbaley
- * $LastChangedDate: 06/19/2015
+ * $LastChangedDate: 06/22/2015
  *
  * Request By: Andy Gutierrez
  * InitialRequestDate: 06/19/2015
@@ -17,7 +17,7 @@ IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[E
 	EXEC ('CREATE PROCEDURE [APS].EmergencyCardInfo AS SELECT 0')
 GO
 
-CREATE PROCEDURE [APS].EmergencyCardInfo
+ALTER PROCEDURE [APS].EmergencyCardInfo
 
 AS
 BEGIN
@@ -52,6 +52,7 @@ SELECT
 	,[STUDENT].[FIRST_NAME]	
 	,[STUDENT].[MIDDLE_NAME]
 	,[STUDENT].[GENDER]
+	,grd_next.[VALUE_DESCRIPTION] AS [GRADE]
 	,[ENROLLMENTS].[ENTER_DATE]
 	,[STUDENT].[BIRTH_DATE]
 	,[STUDENT].[HOME_ADDRESS]
@@ -69,6 +70,9 @@ FROM
 	APS.BasicStudentWithMoreInfo AS [STUDENT]
 	ON
 	[ENROLLMENTS].[STUDENT_GU] = [STUDENT].[STUDENT_GU]
+	
+	LEFT JOIN APS.LookupTable('K12', 'GRADE') grd on grd.VALUE_DESCRIPTION  = [ENROLLMENTS].[GRADE]
+    LEFT JOIN APS.LookupTable('K12', 'GRADE') grd_next on grd.LIST_ORDER  = grd_next.[LIST_ORDER] + @SchRunGrade
 	
 WHERE
 	[ENROLLMENTS].[YEAR_GU] = @SchRunYearGU
