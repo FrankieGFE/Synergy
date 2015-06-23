@@ -227,7 +227,7 @@ LEFT JOIN
 			STU.STUDENT_GU
 			,CASE WHEN VALUE_DESCRIPTION = 'Beginning' THEN 'Entering'
 				  WHEN VALUE_DESCRIPTION = 'Early Intermediate' THEN 'Emerging'
-				 -- WHEN VALUE_DESCRIPTION = 'ELL' THEN 'Entering'
+				  WHEN (VALUE_DESCRIPTION = 'ELL' AND ESL.SIS_NUMBER = 970096942) THEN 'Entering'
 				  WHEN VALUE_DESCRIPTION = 'Intermediate' THEN 'Developing'
 				  WHEN VALUE_DESCRIPTION = 'LEP' THEN 'Emerging'
 				  WHEN VALUE_DESCRIPTION = 'NEP' THEN 'Entering'
