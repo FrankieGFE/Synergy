@@ -46,6 +46,7 @@ APS.LCEStudentsAndProvidersAsOf('2015-05-22') AS ESL
 ) AS T1
 WHERE RN =1
 AND [STATUS] != 'Parent Refused'
+AND GRADE NOT IN ('P1', 'P2', 'PK', 'T1', 'T2', 'T3', 'T4', 'C1', 'C2', 'C3', 'C4')
 GROUP BY 
 	ORGANIZATION_NAME
 
@@ -70,6 +71,7 @@ APS.LCEStudentsAndProvidersAsOf('2015-03-15') AS ESL
 ) AS T1
 WHERE RN =1
 AND [STATUS] != 'Parent Refused'
+AND GRADE NOT IN ('P1', 'P2', 'PK', 'T1', 'T2', 'T3', 'T4', 'C1', 'C2', 'C3', 'C4')
 GROUP BY 
 	ORGANIZATION_NAME
 ) AS T1
