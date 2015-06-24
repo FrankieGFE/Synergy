@@ -76,8 +76,15 @@ APS.PHLOTEAsOf('2015-05-22') AS PHL
 ON
 PHL.STUDENT_GU = PE.STUDENT_GU
 
+----------------------------------------------------------------------------------------------
 LEFT JOIN
-APS.LCEMostRecentHLSAsOf('2015-05-22') AS HLS
+(SELECT DISTINCT NOHLS.STUDENT_GU FROM rev.UD_HLS_HISTORY AS NOHLS
+INNER JOIN APS.PrimaryEnrollmentsAsOf('2015-05-22') AS PRIM
+ON
+PRIM.STUDENT_GU = NOHLS.STUDENT_GU
+WHERE 
+PRIM.GRADE NOT IN  ('050', '070', '090', '230', '240', '250', '260', '270', '280', '290', '300')
+) AS HLS
 ON
 HLS.STUDENT_GU = PE.STUDENT_GU
 
