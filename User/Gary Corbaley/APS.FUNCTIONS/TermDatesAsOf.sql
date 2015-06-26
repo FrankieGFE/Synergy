@@ -44,10 +44,3 @@ RETURN
 
 END	
 GO
-
-
-CREATE VIEW [APS].[TermDates] AS
-SELECT
-	*
-FROM
-	APS.TermDates()

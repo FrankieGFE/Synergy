@@ -88,11 +88,31 @@ SELECT DISTINCT
 	[School].[SCHOOL_CODE] AS [school_id]
 	,[STUDENT].[SIS_NUMBER] AS [student_id]
 	,[STUDENT].[STATE_STUDENT_NUMBER] AS [student_number]
+	,'' AS [State_id]
 	,[STUDENT].[LAST_NAME] AS [Last_name]
 	,[STUDENT].[FIRST_NAME] AS [First_name]
 	,[STUDENT].[MIDDLE_NAME] AS [Middle_name]
 	,[STUDENT].[GENDER] AS [Gender]
-	,[Grades].[VALUE_DESCRIPTION] AS [Grade]
+	,CASE 
+		WHEN [Grades].[VALUE_DESCRIPTION] BETWEEN '01' AND '12' THEN [Grades].[VALUE_DESCRIPTION]
+		WHEN [Grades].[VALUE_DESCRIPTION] = 'K' THEN 'Kindergarten'
+		WHEN [Grades].[VALUE_DESCRIPTION] = 'PK' THEN 'PreKindergarten'
+	END AS [Grade]
+	,[STUDENT].[BIRTH_DATE] AS [DOB]
+	,'' AS [Race]
+	,'' AS [Hispanic_Latino]
+	,'' AS [Ell_status]
+	,'' AS [Frl_status]
+	,'' AS [lep_status]
+	,'' AS [Student_zip]
+	,'' AS [Student_email]
+	,'' AS [Contact_relationship]
+	,'' AS [Contact_type]
+	,'' AS [Contact_name]
+	,'' AS [Contact_phone]
+	,'' AS [Contact_email]
+	,'' AS [User_name]
+	,'' AS [Password]
 	
 FROM
 	APS.PrimaryEnrollmentsAsOf(GETDATE()) AS [Enrollments]

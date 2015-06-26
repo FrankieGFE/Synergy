@@ -14,7 +14,7 @@
 DECLARE @School VARCHAR = '%'
 DECLARE @AsOfDate DATETIME = GETDATE()
 DECLARE @Grade AS VARCHAR(2) = '05'
-DECLARE @Buisness AS VARCHAR(1) = 'Y'
+DECLARE @Buisness AS VARCHAR(1) = 'N'
 DECLARE @University AS VARCHAR(1) = 'N'
 DECLARE @Military AS VARCHAR(1) = 'N'
 
@@ -38,6 +38,9 @@ SELECT
     ,CASE WHEN [Student].[MAIL_STATE] IS NULL THEN [Student].[HOME_STATE] ELSE [Student].[MAIL_STATE] END AS [STATE]
     ,CASE WHEN [Student].[MAIL_ZIP] IS NULL THEN [Student].[HOME_ZIP] ELSE [Student].[MAIL_ZIP] END AS [ZIP]
 	,[Student].[Parents]
+	
+	,[Enrollments].[LEAVE_CODE]
+	,[Enrollments].[SUMMER_WITHDRAWL_CODE]
 FROM
 	APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS [Enrollments]
 	
@@ -85,23 +88,26 @@ FROM
 	--AND [PARENT_NAMES].[rno] = 1
 	
 WHERE
-	--[Enrollments].[ORGANIZATION_GU] LIKE @School
+	[Enrollments].[ORGANIZATION_GU] LIKE @School
 	--AND [Enrollments].[GRADE] LIKE @Grade
 	
-	[Enrollments].[GRADE] IN ('08')
+	--[Enrollments].[GRADE] IN ('08')
 	--AND [Enrollments].[SCHOOL_CODE] IN ('452','407','427','485','440','435','420','418','455','448')
-	AND [Enrollments].[SCHOOL_CODE] IN ('470','460','416','413','427')
+	--AND [Enrollments].[SCHOOL_CODE] IN ('470','460','416','413','427')
 	
 	--[Enrollments].[GRADE] IN ('09')
 	--AND [School].[SCHOOL_CODE] IN ('452','407','427','485','440','435','420','418','455','448')
 	--AND [Enrollments].[SCHOOL_CODE] IN ('514')
 	--AND [Organization].[ORGANIZATION_NAME] LIKE '%Sandia%'
 	--AND [Student].[MAIL_ZIP] IN ('87123','87112','87111','87108','87106')
+	AND [Enrollments].[EXTENSION] = 'N'
 	
 --	--- EXCEPTIONS
 	AND ([STUDENT_EXCEPTIONS].[EXCLUDE_BUSINESS] IS NULL OR [STUDENT_EXCEPTIONS].[EXCLUDE_BUSINESS] != @Buisness OR @Buisness = 'N')
 	AND ([STUDENT_EXCEPTIONS].[EXCLUDE_UNIVERSITY] IS NULL OR [STUDENT_EXCEPTIONS].[EXCLUDE_UNIVERSITY] != @University OR @University = 'N')
 	AND ([STUDENT_EXCEPTIONS].[EXCLUDE_MILITARY] IS NULL OR [STUDENT_EXCEPTIONS].[EXCLUDE_MILITARY] != @Military OR @Military = 'N')
+	
+	--AND [Student].[SIS_NUMBER] = '980008867'
 	
 ORDER BY
 	[Enrollments].[SCHOOL_NAME]
