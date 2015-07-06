@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DataDirector"
   DTS:PackageType="5"
-  DTS:VersionBuild="37"
-  DTS:VersionGUID="{AD4596A2-E176-435D-AD1D-86E5564B92A1}">
+  DTS:VersionBuild="38"
+  DTS:VersionGUID="{C653CBE2-3688-44A1-BDAB-DEA8D5735B8A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -28,7 +28,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADXIYZ/MaWDP9eI8WksF3rQAAAAAASAAACgAAAAEAAAAJTVxhSIPgDdgk2W4deibEIQAAAAgpXkZigeBqBDaOVnihf7rBQAAAA4uYv1uO7kKUrJ60n9BVUjBIuN7w</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAALJ3E1X2vFDTCJB65z7r4UAAAAAASAAACgAAAAEAAAAF7W+luj0Xc402oRv4Nm+8AQAAAA3xwSzOXbc8vUmIaoeTOl1RQAAACAq/vN4wLUQkMXANtK6gvt8akfdQ</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -141,7 +141,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACwoBHKCv6KnrYmhgijTMUFAAAAAASAAACgAAAAEAAAAEEdWbhbQK5QLuaGLkCr5ZUwAAAAoz5FnsdWaX7sS4XucSqC9PvJuG2GYzCs/xsb/aNEUISDDGmTpF4dzY2sPgc2ADJGFAAAACUPbxxtwwoU2MK8QZbaLjN84NfB</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABFvgJ6s/ic7xsN55tQHiinAAAAAASAAACgAAAAEAAAAKGMVK84JDOd52z8IuqZIRQwAAAA14xreeq1CTDyyAKBRlGBVMuPb5QxfVqb5Qc1yTeqqKi0DFvrHkxEWtKhyZ6md0SAFAAAAMjboFpua6pLsEwSmsf4tdNwHZIb</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -2118,7 +2118,7 @@ FROM     rev.EPC_STU                    stu
                                                 AND ssyr.STATUS IS NULL
          JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU   = ssyr.ORGANIZATION_YEAR_GU
          JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU = oyr.YEAR_GU 
-                                                AND yr.SCHOOL_YEAR = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
+                                                AND yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
          JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU        = oyr.ORGANIZATION_GU
          JOIN rev.EPC_STU_CLASS         cls  ON cls.STUDENT_SCHOOL_YEAR_GU = ssyr.STUDENT_SCHOOL_YEAR_GU
          JOIN rev.EPC_SCH_YR_SECT       sect ON sect.SECTION_GU            = cls.SECTION_GU
