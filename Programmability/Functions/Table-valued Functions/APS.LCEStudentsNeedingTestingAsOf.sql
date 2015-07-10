@@ -66,5 +66,5 @@ FROM
 WHERE
 	Student.HOME_LANGUAGE NOT IN ('00','54')
 	AND MostRecentTest.STUDENT_GU IS NULL -- No Tests
-	AND GradeLevel.VALUE_DESCRIPTION NOT IN ('P1', 'P2', 'PK')
+	AND GradeLevel.VALUE_DESCRIPTION NOT IN ('P1', 'P2', 'PK', 'T1', 'T2', 'T3', 'T4', 'C1', 'C2', 'C3', 'C4')
 
