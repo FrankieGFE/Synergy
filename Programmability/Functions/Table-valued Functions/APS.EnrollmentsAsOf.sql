@@ -61,6 +61,8 @@ RETURN
 		-- We are dealing with Enrollment enter/leaves because SSY only has **most recent** info, and not necessarily what it was on
 		-- the date we are looking for.
 		Enrollment.ENTER_DATE <= CONVERT(DATE, @AsOfDate) -- check for existing and applicable enrollmentdate
+		
+		AND @AsOfDate BETWEEN YearDates.START_DATE AND YearDates.END_DATE
 
 		-- make sure not past leave dates
 		AND (
