@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Transportation"
   DTS:PackageType="5"
-  DTS:VersionBuild="9"
-  DTS:VersionGUID="{961294AC-D3E5-4E10-A6B6-7B506E8D8F95}">
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{3270FFB8-B2E1-4668-AF81-FB1023ADD93E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,12 +25,7 @@
       DTS:ObjectName="DB Connection">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=APSExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Transportation-{8AE2870A-349D-4A04-A0D2-714934C815BE}azlt-mmelarcode\sql2012.STDemo808_2012;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA18tsXWAShEu39NgC3mjhaAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABs65C2qot91ZN+jEiNVf9+AAAAAASAAACgAAAAEAAAAMOb74iyFyn34S36/FaNsx0wAAAAG/nuIQ9I8ogqsqJkJaDzovM1BaSmf/0JcOCKP67nIY8hB1XgR6oJ7QZlleVFf8a4FAAAAONLWYGbSyjDjUkPouYT4SdC9D4T</DTS:Password>
-        </DTS:ConnectionManager>
+          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=APSExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Transportation-{8AE2870A-349D-4A04-A0D2-714934C815BE}azlt-mmelarcode\sql2012.STDemo808_2012;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -711,6 +706,7 @@ SELECT
       , per.MIDDLE_NAME                          AS [Student Middle Name]
       , per.LAST_NAME                            AS [Student Last Name]
       , grd.VALUE_DESCRIPTION                    AS [Student Current SOR Enrollment Grade Level]
+	  , sped.PRIMARY_DISABILITY_CODE             AS [PRIM_DISAB]
       , CONVERT(VARCHAR(10), per.BIRTH_DATE,101) AS [Student Birthdate]
       , per.GENDER                               AS [Student Gender]
       , hadr.ADDRESS                             AS [Student Address]
@@ -775,7 +771,8 @@ FROM  rev.EPC_STU                     stu
       JOIN rev.REV_ADDRESS            hadr ON hadr.ADDRESS_GU            = per.HOME_ADDRESS_GU
 	  LEFT JOIN Parents               p1   ON p1.STUDENT_GU              = stu.STUDENT_GU and p1.rn = 1
 	  LEFT JOIN Parents               p2   ON p2.STUDENT_GU              = stu.STUDENT_GU and p2.rn = 2
-      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.AddressInfo', 'STREET_TYPE') hsty ON hsty.VALUE_CODE = hadr.STREET_TYPE</property>
+      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.AddressInfo', 'STREET_TYPE') hsty ON hsty.VALUE_CODE = hadr.STREET_TYPE
+	  LEFT JOIN rev.EP_STUDENT_SPECIAL_ED sped ON sped.STUDENT_GU = stu.STUDENT_GU</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
