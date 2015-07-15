@@ -17,14 +17,14 @@ SELECT
 	,1 AS DISTRICT_CODE
 	,'ALS' AS DISTRICT
 	,SUM([K12 Stus]) AS [K12 Stus]
-	,SUM (PHLOTE) AS PHLOTE
+	,SUM([PHLOTE]) AS PHLOTE
 	,SUM([No HLS]) AS [No HLS]
 	,SUM([Total ELL]) AS [Total ELL]
-	,SUM(ELL) AS ELL
-	,SUM(Entering) AS Entering
-	,SUM(Emerging) AS Emerging
-	,SUM(Developing) AS Developing
-	,SUM(Expanding) AS Expanding
+	,SUM([ELL]) AS ELL
+	,SUM([Entering]) AS Entering
+	,SUM([Emerging]) AS Emerging
+	,SUM([Developing]) AS Developing
+	,SUM([Expanding]) AS Expanding
 	,SUM([FEP Bridging/Reaching]) AS [FEP Bridging/Reaching]
 
  FROM 
