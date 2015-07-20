@@ -157,7 +157,19 @@ LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12','LANGUAGE') lang ON lang.VALUE
 --FRM
 LEFT JOIN FRMHistory           frm  ON frm.STUDENT_GU = stu.STUDENT_GU and frm.rn = 1
 --Disability
-LEFT JOIN rev.EP_STUDENT_SPECIAL_ED sped ON sped.STUDENT_GU = stu.STUDENT_GU
+LEFT JOIN 
+(
+SELECT
+               *
+    FROM
+                REV.EP_STUDENT_SPECIAL_ED AS SPED
+    WHERE
+                NEXT_IEP_DATE IS NOT NULL
+                AND (
+                            EXIT_DATE IS NULL 
+                            OR EXIT_DATE >= CONVERT(DATE, GETDATE())
+                            )
+) sped ON sped.STUDENT_GU = stu.STUDENT_GU
 --ELL
 LEFT JOIN rev.EPC_STU_PGM_ELL  ell  ON ell.STUDENT_GU = stu.STUDENT_GU
 --Concurrent Enrollment
