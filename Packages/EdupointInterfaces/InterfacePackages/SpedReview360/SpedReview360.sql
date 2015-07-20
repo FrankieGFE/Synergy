@@ -76,7 +76,8 @@ FROM  rev.EPC_STU                         stu
       JOIN rev.EPC_STU_SCH_YR             ssy  ON ssy.STUDENT_GU           = stu.STUDENT_GU
                                                   AND ssy.STATUS is null
       JOIN rev.REV_ORGANIZATION_YEAR      oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
-                                                  AND oyr.YEAR_GU          = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+                                                  --AND oyr.YEAR_GU          = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+                                                  AND oyr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE (GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE))
       JOIN rev.EPC_SCH                    sch  ON sch.ORGANIZATION_GU      = oyr.ORGANIZATION_GU
       JOIN rev.REV_PERSON                 per  ON per.PERSON_GU            = stu.STUDENT_GU
 	  LEFT JOIN rev.EP_STUDENT_SPECIAL_ED sped ON sped.STUDENT_GU          = stu.STUDENT_GU
