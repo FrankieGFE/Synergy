@@ -131,6 +131,8 @@ SELECT
  , CASE WHEN ell.PROGRAM_CODE is not NULL THEN 'ELL' END
                                              AS [ELL Status] --TBD.  
  , sped.PRIMARY_DISABILITY_CODE              AS [PRIM_DISAB] --TBD
+ , rpt.ROLE_NAME_LARGE	   			     AS [Program Involvment]
+ , rpt.LEVEL_INTEGRATION			 	     AS [Level Of Service]
  , stu.GRID_CODE                             AS [Grid Code]
  , COALESCE(madr.ADDRESS, hadr.ADDRESS)      AS [Student Mailing Address]
  , COALESCE(madr.CITY, hadr.city)            AS [Student Mailing Address City]
@@ -166,4 +168,32 @@ LEFT JOIN EthCodes             rcd  ON rcd.PERSON_GU = stu.STUDENT_GU and rcd.rn
 LEFT JOIN ParentNames          pnm  ON pnm.STUDENT_GU = stu.STUDENT_GU and pnm.rno = 1
 --StuSecPhone
 LEFT JOIN StuSecPhone          sph  ON sph.STUDENT_GU = stu.STUDENT_GU and sph.rn = 1
+LEFT JOIN 
+    (
+	   SELECT 
+		  rpt.[STUDENT_GU]
+		  ,rpt.[LEVEL_INTEGRATION]
+		  ,rol.ROLE_NAME_LARGE
+		  ,ROW_NUMBER() OVER (PARTITION BY rpt.[STUDENT_GU] ORDER BY rpt.[CHANGE_DATE_TIME_STAMP] DESC) AS [rn] 
+	   FROM 
+		  [rev].[EPC_NM_STU_SPED_RPT] rpt
+    
+		  LEFT JOIN
+		  [rev].[EP_STAFF_ROLE_SPED] sprl
+		  ON
+		  rpt.CASE_MANAGER_GU=sprl.STAFF_GU
+    
+		  LEFT JOIN
+		  [rev].[REV_ROLE] rol
+		  ON
+		  sprl.ROLE_GU=rol.ROLE_GU
+
+	   WHERE 
+		  [SCHOOL_YEAR]=2014
+
+    ) rpt
+    ON
+    stu.STUDENT_GU=rpt.STUDENT_GU
+    AND rpt.rn=1
+
 WHERE ssy.ENTER_DATE <= GETDATE()
