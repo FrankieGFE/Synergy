@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DIBELS"
   DTS:PackageType="5"
-  DTS:VersionBuild="12"
-  DTS:VersionGUID="{09BB614F-184D-4758-AA56-DBDCFA6046D4}">
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{6870D0EC-ACEE-463B-A069-E03C660C626B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -671,8 +671,8 @@ FROM  rev.EPC_STU                         stu
                                                    AND ssy.STATUS is NULL
       JOIN rev.REV_ORGANIZATION_YEAR      oyr   ON oyr.ORGANIZATION_YEAR_GU    = ssy.ORGANIZATION_YEAR_GU
       JOIN rev.REV_YEAR                   yr    ON yr.YEAR_GU                  = oyr.YEAR_GU
-                                                   AND yr.SCHOOL_YEAR          = @SchYr
-												   AND yr.EXTENSION            = @SchExt
+                                                   AND (yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+														OR yr.SCHOOL_YEAR = '2015')
       JOIN rev.EPC_SCH                    sch   ON sch.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
       JOIN rev.REV_ORGANIZATION           org   ON org.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
       JOIN REV.EPC_STU_CLASS              cls   ON cls.STUDENT_SCHOOL_YEAR_GU  = ssy.STUDENT_SCHOOL_YEAR_GU
@@ -969,327 +969,6 @@ WHERE grd.value_description in ('K', '01','02','03')
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\SrudentClass"
-      DTS:CreationName="SSIS.Pipeline.3"
-      DTS:Description="Data Flow Task"
-      DTS:DTSID="{31CB35B4-3630-4C0D-ACAD-A517BC564FE5}"
-      DTS:ExecutableType="SSIS.Pipeline.3"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="SrudentClass"
-      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <pipeline
-          BLOBTempStoragePath=""
-          bufferTempStoragePath=""
-          version="1">
-          <components>
-            <component
-              refId="Package\SrudentClass\DB Query"
-              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
-              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
-              description="OLE DB Source"
-              name="DB Query"
-              usesDispositions="true"
-              version="7">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset"></property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--&lt;APS - DIBELS Amplify - Student to Class File&gt;
-declare @SchYr INT
-declare @SchExt varchar(1) = 'R'
-set @SchYr = (select school_year from rev.SIF_22_Common_CurrentYear) 
---set @SchYr = 2014 -- remove tha add 1 post roll over
-SELECT DISTINCT
-
-   org.ORGANIZATION_NAME     AS [Institution]
- , stfp.LAST_NAME            AS [Primary Class ID]
- , stu.STATE_STUDENT_NUMBER  AS [Student Primary ID]
- , ''                        AS [Is Official Class]
-
-
-FROM  rev.EPC_STU                         stu
-      JOIN rev.EPC_STU_SCH_YR             ssy   ON ssy.STUDENT_GU              = stu.STUDENT_GU
-                                                   AND ssy.STATUS is NULL
-      JOIN rev.REV_ORGANIZATION_YEAR      oyr   ON oyr.ORGANIZATION_YEAR_GU    = ssy.ORGANIZATION_YEAR_GU
-      JOIN rev.REV_YEAR                   yr    ON yr.YEAR_GU                  = oyr.YEAR_GU
-                                                   AND yr.SCHOOL_YEAR          = @SchYr
-												   AND yr.EXTENSION            = @SchExt
-      JOIN rev.EPC_SCH                    sch   ON sch.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
-      JOIN rev.REV_ORGANIZATION           org   ON org.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
-      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd on grd.VALUE_CODE = ssy.GRADE
-      JOIN REV.EPC_STU_CLASS              cls   ON cls.STUDENT_SCHOOL_YEAR_GU  = ssy.STUDENT_SCHOOL_YEAR_GU
-      JOIN REV.EPC_SCH_YR_SECT            sec   ON cls.SECTION_GU              = sec.SECTION_GU
-      LEFT JOIN rev.EPC_SCH_YR_SECT       sect  ON sect.SECTION_GU             = ssy.HOMEROOM_SECTION_GU
-      LEFT JOIN rev.EPC_SCH_YR_CRS        ycrs  ON ycrs.SCHOOL_YEAR_COURSE_GU  = sect.SCHOOL_YEAR_COURSE_GU
-      LEFT JOIN rev.EPC_CRS               crs   ON crs.COURSE_GU               = ycrs.COURSE_GU
-	  LEFT JOIN rev.EPC_STAFF_SCH_YR      stfsy ON stfsy.STAFF_SCHOOL_YEAR_GU  = sect.STAFF_SCHOOL_YEAR_GU
-	  LEFT JOIN rev.EPC_STAFF             stf   ON stf.STAFF_GU                = stfsy.STAFF_GU
-	  LEFT JOIN rev.REV_PERSON            stfp  ON stfp.PERSON_GU              = stf.STAFF_GU
-WHERE grd.value_description in ('K', '01','02','03')</property>
-                <property
-                  dataType="System.String"
-                  description="The variable that contains the SQL command to be executed."
-                  name="SqlCommandVariable"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">2</property>
-                <property
-                  dataType="System.String"
-                  description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\SrudentClass\DB Query.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[DB Connection]"
-                  connectionManagerRefId="Package.ConnectionManagers[DB Connection]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <outputs>
-                <output
-                  refId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output]"
-                  name="OLE DB Source Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Institution]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Institution]"
-                      length="100"
-                      lineageId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Institution]"
-                      name="Institution"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Primary Class ID]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Class ID]"
-                      length="60"
-                      lineageId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Primary Class ID]"
-                      name="Primary Class ID"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Student Primary ID]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student Primary ID]"
-                      length="20"
-                      lineageId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Student Primary ID]"
-                      name="Student Primary ID"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Is Official Class]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Is Official Class]"
-                      length="1"
-                      lineageId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Is Official Class]"
-                      name="Is Official Class"
-                      truncationRowDisposition="FailComponent" />
-                  </outputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Institution]"
-                      dataType="wstr"
-                      length="100"
-                      name="Institution" />
-                    <externalMetadataColumn
-                      refId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Class ID]"
-                      dataType="wstr"
-                      length="60"
-                      name="Primary Class ID" />
-                    <externalMetadataColumn
-                      refId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student Primary ID]"
-                      dataType="wstr"
-                      length="20"
-                      name="Student Primary ID" />
-                    <externalMetadataColumn
-                      refId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Is Official Class]"
-                      codePage="1252"
-                      dataType="str"
-                      length="1"
-                      name="Is Official Class" />
-                  </externalMetadataColumns>
-                </output>
-                <output
-                  refId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Error Output]"
-                  isErrorOut="true"
-                  name="OLE DB Source Error Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[Institution]"
-                      dataType="wstr"
-                      length="100"
-                      lineageId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[Institution]"
-                      name="Institution" />
-                    <outputColumn
-                      refId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Class ID]"
-                      dataType="wstr"
-                      length="60"
-                      lineageId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Class ID]"
-                      name="Primary Class ID" />
-                    <outputColumn
-                      refId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[Student Primary ID]"
-                      dataType="wstr"
-                      length="20"
-                      lineageId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[Student Primary ID]"
-                      name="Student Primary ID" />
-                    <outputColumn
-                      refId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[Is Official Class]"
-                      codePage="1252"
-                      dataType="str"
-                      length="1"
-                      lineageId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[Is Official Class]"
-                      name="Is Official Class" />
-                    <outputColumn
-                      refId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\SrudentClass\Flat File Destination"
-              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
-              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Flat File Destination"
-              localeId="1033"
-              name="Flat File Destination">
-              <properties>
-                <property
-                  dataType="System.Boolean"
-                  description="Specifies whether the data will overwrite or append to the destination file."
-                  name="Overwrite">true</property>
-                <property
-                  dataType="System.Null"
-                  description="Specifies the text to write to the destination file before any data is written."
-                  expressionType="Notify"
-                  name="Header" />
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\SrudentClass\Flat File Destination.Connections[FlatFileConnection]"
-                  connectionManagerID="Package.ConnectionManagers[StudentClass]"
-                  connectionManagerRefId="Package.ConnectionManagers[StudentClass]"
-                  name="FlatFileConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\SrudentClass\Flat File Destination.Inputs[Flat File Destination Input]"
-                  hasSideEffects="true"
-                  name="Flat File Destination Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\SrudentClass\Flat File Destination.Inputs[Flat File Destination Input].Columns[Institution]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="Institution"
-                      externalMetadataColumnId="Package\SrudentClass\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Institution]"
-                      lineageId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Institution]" />
-                    <inputColumn
-                      refId="Package\SrudentClass\Flat File Destination.Inputs[Flat File Destination Input].Columns[Primary Class ID]"
-                      cachedDataType="wstr"
-                      cachedLength="60"
-                      cachedName="Primary Class ID"
-                      externalMetadataColumnId="Package\SrudentClass\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Class ID]"
-                      lineageId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Primary Class ID]" />
-                    <inputColumn
-                      refId="Package\SrudentClass\Flat File Destination.Inputs[Flat File Destination Input].Columns[Student Primary ID]"
-                      cachedDataType="wstr"
-                      cachedLength="20"
-                      cachedName="Student Primary ID"
-                      externalMetadataColumnId="Package\SrudentClass\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student Primary ID]"
-                      lineageId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Student Primary ID]" />
-                    <inputColumn
-                      refId="Package\SrudentClass\Flat File Destination.Inputs[Flat File Destination Input].Columns[Is Official Class]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="1"
-                      cachedName="Is Official Class"
-                      externalMetadataColumnId="Package\SrudentClass\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Is Official Class]"
-                      lineageId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Is Official Class]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\SrudentClass\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Institution]"
-                      dataType="wstr"
-                      length="100"
-                      name="Institution" />
-                    <externalMetadataColumn
-                      refId="Package\SrudentClass\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Class ID]"
-                      dataType="wstr"
-                      length="60"
-                      name="Primary Class ID" />
-                    <externalMetadataColumn
-                      refId="Package\SrudentClass\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student Primary ID]"
-                      dataType="wstr"
-                      length="20"
-                      name="Student Primary ID" />
-                    <externalMetadataColumn
-                      refId="Package\SrudentClass\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Is Official Class]"
-                      codePage="1252"
-                      dataType="str"
-                      length="1"
-                      name="Is Official Class" />
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-            </component>
-          </components>
-          <paths>
-            <path
-              refId="Package\SrudentClass.Paths[OLE DB Source Output]"
-              endId="Package\SrudentClass\Flat File Destination.Inputs[Flat File Destination Input]"
-              name="OLE DB Source Output"
-              startId="Package\SrudentClass\DB Query.Outputs[OLE DB Source Output]" />
-          </paths>
-        </pipeline>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
       DTS:refId="Package\Staff"
       DTS:CreationName="SSIS.Pipeline.3"
       DTS:Description="Data Flow Task"
@@ -1353,8 +1032,8 @@ FROM  rev.EPC_STU                         stu
                                                    AND ssy.STATUS is NULL
       JOIN rev.REV_ORGANIZATION_YEAR      oyr   ON oyr.ORGANIZATION_YEAR_GU    = ssy.ORGANIZATION_YEAR_GU
       JOIN rev.REV_YEAR                   yr    ON yr.YEAR_GU                  = oyr.YEAR_GU
-                                                   AND yr.SCHOOL_YEAR          = @SchYr
-                                                   AND yr.EXTENSION            = @SchExt
+                                                   AND (yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+														OR yr.SCHOOL_YEAR = '2015')
       JOIN rev.EPC_SCH                    sch   ON sch.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
       JOIN rev.REV_ORGANIZATION           org   ON org.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
       LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd on grd.VALUE_CODE = ssy.GRADE
@@ -1893,8 +1572,8 @@ FROM  rev.EPC_STU                         stu
                                                    AND ssy.STATUS is NULL
       JOIN rev.REV_ORGANIZATION_YEAR      oyr   ON oyr.ORGANIZATION_YEAR_GU    = ssy.ORGANIZATION_YEAR_GU
       JOIN rev.REV_YEAR                   yr    ON yr.YEAR_GU                  = oyr.YEAR_GU
-                                                   AND yr.SCHOOL_YEAR          = @SchYr
-                                                   AND yr.EXTENSION            = @SchExt
+                                                   AND (yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+														OR yr.SCHOOL_YEAR = '2015')
       JOIN rev.EPC_SCH                    sch   ON sch.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
       JOIN rev.REV_ORGANIZATION           org   ON org.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
       LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd on grd.VALUE_CODE = ssy.GRADE
@@ -2157,6 +1836,327 @@ WHERE grd.value_description in ('K', '01','02','03')
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\StudentClass"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{31CB35B4-3630-4C0D-ACAD-A517BC564FE5}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="StudentClass"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\StudentClass\DB Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--&lt;APS - DIBELS Amplify - Student to Class File&gt;
+declare @SchYr INT
+declare @SchExt varchar(1) = 'R'
+set @SchYr = (select school_year from rev.SIF_22_Common_CurrentYear) 
+--set @SchYr = 2014 -- remove tha add 1 post roll over
+SELECT DISTINCT
+
+   org.ORGANIZATION_NAME     AS [Institution]
+ , stfp.LAST_NAME            AS [Primary Class ID]
+ , stu.STATE_STUDENT_NUMBER  AS [Student Primary ID]
+ , ''                        AS [Is Official Class]
+
+
+FROM  rev.EPC_STU                         stu
+      JOIN rev.EPC_STU_SCH_YR             ssy   ON ssy.STUDENT_GU              = stu.STUDENT_GU
+                                                   AND ssy.STATUS is NULL
+      JOIN rev.REV_ORGANIZATION_YEAR      oyr   ON oyr.ORGANIZATION_YEAR_GU    = ssy.ORGANIZATION_YEAR_GU
+      JOIN rev.REV_YEAR                   yr    ON yr.YEAR_GU                  = oyr.YEAR_GU
+                                                  AND (yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+														OR yr.SCHOOL_YEAR = '2015')
+      JOIN rev.EPC_SCH                    sch   ON sch.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
+      JOIN rev.REV_ORGANIZATION           org   ON org.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
+      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd on grd.VALUE_CODE = ssy.GRADE
+      JOIN REV.EPC_STU_CLASS              cls   ON cls.STUDENT_SCHOOL_YEAR_GU  = ssy.STUDENT_SCHOOL_YEAR_GU
+      JOIN REV.EPC_SCH_YR_SECT            sec   ON cls.SECTION_GU              = sec.SECTION_GU
+      LEFT JOIN rev.EPC_SCH_YR_SECT       sect  ON sect.SECTION_GU             = ssy.HOMEROOM_SECTION_GU
+      LEFT JOIN rev.EPC_SCH_YR_CRS        ycrs  ON ycrs.SCHOOL_YEAR_COURSE_GU  = sect.SCHOOL_YEAR_COURSE_GU
+      LEFT JOIN rev.EPC_CRS               crs   ON crs.COURSE_GU               = ycrs.COURSE_GU
+	  LEFT JOIN rev.EPC_STAFF_SCH_YR      stfsy ON stfsy.STAFF_SCHOOL_YEAR_GU  = sect.STAFF_SCHOOL_YEAR_GU
+	  LEFT JOIN rev.EPC_STAFF             stf   ON stf.STAFF_GU                = stfsy.STAFF_GU
+	  LEFT JOIN rev.REV_PERSON            stfp  ON stfp.PERSON_GU              = stf.STAFF_GU
+WHERE grd.value_description in ('K', '01','02','03')</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\StudentClass\DB Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Institution]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Institution]"
+                      length="100"
+                      lineageId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Institution]"
+                      name="Institution"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Primary Class ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Class ID]"
+                      length="60"
+                      lineageId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Primary Class ID]"
+                      name="Primary Class ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Student Primary ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student Primary ID]"
+                      length="20"
+                      lineageId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Student Primary ID]"
+                      name="Student Primary ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Is Official Class]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Is Official Class]"
+                      length="1"
+                      lineageId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Is Official Class]"
+                      name="Is Official Class"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Institution]"
+                      dataType="wstr"
+                      length="100"
+                      name="Institution" />
+                    <externalMetadataColumn
+                      refId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Primary Class ID]"
+                      dataType="wstr"
+                      length="60"
+                      name="Primary Class ID" />
+                    <externalMetadataColumn
+                      refId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Student Primary ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="Student Primary ID" />
+                    <externalMetadataColumn
+                      refId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Is Official Class]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Is Official Class" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\StudentClass\DB Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\StudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[Institution]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\StudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[Institution]"
+                      name="Institution" />
+                    <outputColumn
+                      refId="Package\StudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Class ID]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\StudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[Primary Class ID]"
+                      name="Primary Class ID" />
+                    <outputColumn
+                      refId="Package\StudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[Student Primary ID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\StudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[Student Primary ID]"
+                      name="Student Primary ID" />
+                    <outputColumn
+                      refId="Package\StudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[Is Official Class]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\StudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[Is Official Class]"
+                      name="Is Official Class" />
+                    <outputColumn
+                      refId="Package\StudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\StudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\StudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\StudentClass\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\StudentClass\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\StudentClass\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[StudentClass]"
+                  connectionManagerRefId="Package.ConnectionManagers[StudentClass]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\StudentClass\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\StudentClass\Flat File Destination.Inputs[Flat File Destination Input].Columns[Institution]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Institution"
+                      externalMetadataColumnId="Package\StudentClass\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Institution]"
+                      lineageId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Institution]" />
+                    <inputColumn
+                      refId="Package\StudentClass\Flat File Destination.Inputs[Flat File Destination Input].Columns[Primary Class ID]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Primary Class ID"
+                      externalMetadataColumnId="Package\StudentClass\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Class ID]"
+                      lineageId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Primary Class ID]" />
+                    <inputColumn
+                      refId="Package\StudentClass\Flat File Destination.Inputs[Flat File Destination Input].Columns[Student Primary ID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Student Primary ID"
+                      externalMetadataColumnId="Package\StudentClass\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student Primary ID]"
+                      lineageId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Student Primary ID]" />
+                    <inputColumn
+                      refId="Package\StudentClass\Flat File Destination.Inputs[Flat File Destination Input].Columns[Is Official Class]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Is Official Class"
+                      externalMetadataColumnId="Package\StudentClass\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Is Official Class]"
+                      lineageId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output].Columns[Is Official Class]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\StudentClass\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Institution]"
+                      dataType="wstr"
+                      length="100"
+                      name="Institution" />
+                    <externalMetadataColumn
+                      refId="Package\StudentClass\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Primary Class ID]"
+                      dataType="wstr"
+                      length="60"
+                      name="Primary Class ID" />
+                    <externalMetadataColumn
+                      refId="Package\StudentClass\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Student Primary ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="Student Primary ID" />
+                    <externalMetadataColumn
+                      refId="Package\StudentClass\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Is Official Class]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Is Official Class" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\StudentClass.Paths[OLE DB Source Output]"
+              endId="Package\StudentClass\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\StudentClass\DB Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Students"
       DTS:CreationName="SSIS.Pipeline.3"
       DTS:DelayValidation="True"
@@ -2215,8 +2215,8 @@ set @SchYr = (select school_year from rev.SIF_22_Common_CurrentYear)
                                          AND ssy.STATUS is NULL
   JOIN rev.REV_ORGANIZATION_YEAR  oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU  
   JOIN rev.REV_YEAR               yr   ON yr.YEAR_GU               = oyr.YEAR_GU
-                                          and yr.SCHOOL_YEAR       = @SchYr
-										  and yr.EXTENSION         = @SchExt
+                                          and (yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+												OR yr.SCHOOL_YEAR = '2015')
    LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd on grd.VALUE_CODE = ssy.GRADE
    WHERE grd.value_description in ('K', '01','02','03')
 )
@@ -2315,8 +2315,8 @@ FROM  rev.EPC_STU                         stu
                                                   AND ssy.STATUS is NULL
       JOIN rev.REV_ORGANIZATION_YEAR      oyr  ON oyr.ORGANIZATION_YEAR_GU   = ssy.ORGANIZATION_YEAR_GU
       JOIN rev.REV_YEAR                   yr   ON yr.YEAR_GU                 = oyr.YEAR_GU
-                                                  AND yr.SCHOOL_YEAR         = @SchYr
-												  AND yr.EXTENSION           = @SchExt
+                                                  AND (yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+														OR yr.SCHOOL_YEAR = '2015')
       JOIN rev.EPC_SCH                    sch  ON sch.ORGANIZATION_GU        = oyr.ORGANIZATION_GU
       JOIN rev.REV_ORGANIZATION           org  ON org.ORGANIZATION_GU        = oyr.ORGANIZATION_GU
       JOIN rev.REV_PERSON                 per  ON per.PERSON_GU              = stu.STUDENT_GU
@@ -3477,12 +3477,12 @@ WHERE grd.value_description in ('K', '01','02','03')</property>
       DTS:From="Package\Class"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\SrudentClass" />
+      DTS:To="Package\StudentClass" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
       DTS:DTSID="{05FC744C-E4E1-43A0-95EE-58B70828791C}"
-      DTS:From="Package\SrudentClass"
+      DTS:From="Package\StudentClass"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2"
       DTS:To="Package\Staff" />
@@ -3510,26 +3510,26 @@ WHERE grd.value_description in ('K', '01','02','03')</property>
         <NodeLayout
           Size="136,44"
           Id="Package\Class"
-          TopLeft="5.5,76.4056603773585" />
+          TopLeft="28,76.4056603773585" />
         <NodeLayout
-          Size="136,44"
-          Id="Package\SrudentClass"
-          TopLeft="5.5,140.292452830189" />
+          Size="141,42"
+          Id="Package\StudentClass"
+          TopLeft="28,140.292452830189" />
         <NodeLayout
           Size="136,44"
           Id="Package\Staff"
-          TopLeft="5.5,211.160377358491" />
+          TopLeft="28,211.160377358491" />
         <NodeLayout
           Size="136,44"
           Id="Package\StaffClass"
-          TopLeft="5.5,289.764150943396" />
+          TopLeft="28,289.764150943396" />
         <NodeLayout
           Size="136,44"
           Id="Package\Students"
-          TopLeft="5.5,5.5" />
+          TopLeft="28,5.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="73.3867924528302,49.4245283018868">
+          TopLeft="95.8867924528302,49.4245283018868">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3551,18 +3551,30 @@ WHERE grd.value_description in ('K', '01','02','03')</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="73.3867924528302,120.330188679245">
+          TopLeft="28,98.4056603773585">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,19.9622641509434"
+              EndConnector="0,62.8867924528305"
               Start="0,0"
-              End="0,12.4622641509434">
+              End="-7.5,62.8867924528305">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,12.4622641509434" />
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,58.8867924528305" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,58.8867924528305"
+                    Point2="-22.5,62.8867924528305"
+                    Point3="-18.5,62.8867924528305" />
+                  <mssgle:LineSegment
+                    End="-7.5,62.8867924528305" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3573,18 +3585,18 @@ WHERE grd.value_description in ('K', '01','02','03')</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="73.3867924528302,184.216981132075">
+          TopLeft="97.25,182.292452830189">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,26.9433962264151"
+              EndConnector="0,28.867924528302"
               Start="0,0"
-              End="0,19.4433962264151">
+              End="0,21.367924528302">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,19.4433962264151" />
+                    End="0,21.367924528302" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3595,7 +3607,7 @@ WHERE grd.value_description in ('K', '01','02','03')</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="73.3867924528302,255.084905660377">
+          TopLeft="95.8867924528302,255.084905660377">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3665,20 +3677,20 @@ WHERE grd.value_description in ('K', '01','02','03')</property>
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\SrudentClass">
+    design-time-name="Package\StudentClass">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="126,42"
-          Id="Package\SrudentClass\DB Query"
+          Id="Package\StudentClass\DB Query"
           TopLeft="29.5,5.5" />
         <NodeLayout
           Size="174,42"
-          Id="Package\SrudentClass\Flat File Destination"
+          Id="Package\StudentClass\Flat File Destination"
           TopLeft="5.50000000000001,107.5" />
         <EdgeLayout
-          Id="Package\SrudentClass.Paths[OLE DB Source Output]"
+          Id="Package\StudentClass.Paths[OLE DB Source Output]"
           TopLeft="92.5,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -3703,7 +3715,7 @@ WHERE grd.value_description in ('K', '01','02','03')</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\SrudentClass\DB Query">
+    design-time-name="Package\StudentClass\DB Query">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
