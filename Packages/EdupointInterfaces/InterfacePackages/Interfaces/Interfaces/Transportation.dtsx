@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Transportation"
   DTS:PackageType="5"
-  DTS:VersionBuild="10"
-  DTS:VersionGUID="{3270FFB8-B2E1-4668-AF81-FB1023ADD93E}">
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{B783B220-FAC9-449A-A890-6681AC7B05C3}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,12 @@
       DTS:ObjectName="DB Connection">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=APSExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Transportation-{8AE2870A-349D-4A04-A0D2-714934C815BE}azlt-mmelarcode\sql2012.STDemo808_2012;" />
+          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=APSExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Transportation-{8AE2870A-349D-4A04-A0D2-714934C815BE}azlt-mmelarcode\sql2012.STDemo808_2012;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADgH/dccOGaOcEBqFaulRFVAAAAAASAAACgAAAAEAAAALUg6zvA+/sTCEJ5/aU0Pa0wAAAAPBUnNqLgqBmL8mwTLTSuqutc+F78TwtbXhmq/gQKkRoN/IrXR4W9mD2swmjw4eXlFAAAAL/08XAq+FInr5pxoLNbHc4IWWeT</DTS:Password>
+        </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -1090,6 +1095,16 @@ FROM  rev.EPC_STU                     stu
                       lineageId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Output].Columns[Parent2Email]"
                       name="Parent2Email"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Output].Columns[PRIM_DISAB]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PRIM_DISAB]"
+                      length="5"
+                      lineageId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Output].Columns[PRIM_DISAB]"
+                      name="PRIM_DISAB"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1235,6 +1250,11 @@ FROM  rev.EPC_STU                     stu
                       dataType="wstr"
                       length="100"
                       name="Parent2Email" />
+                    <externalMetadataColumn
+                      refId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PRIM_DISAB]"
+                      dataType="wstr"
+                      length="5"
+                      name="PRIM_DISAB" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1291,6 +1311,12 @@ FROM  rev.EPC_STU                     stu
                       length="20"
                       lineageId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Student Middle Name]"
                       name="Student Middle Name" />
+                    <outputColumn
+                      refId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PRIM_DISAB]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PRIM_DISAB]"
+                      name="PRIM_DISAB" />
                     <outputColumn
                       refId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Student Last Name]"
                       dataType="wstr"
