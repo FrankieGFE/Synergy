@@ -4,7 +4,7 @@ EXECUTE AS LOGIN='QueryFileUser'
 GO
 
 --6E5C9F97-F075-4729-9801-F852F170CD0A --new school's guid
-UPDATE
+/*UPDATE
     [SSY]
 
     SET
@@ -96,7 +96,7 @@ UPDATE
 
     WHERE
 	   [Year].[SCHOOL_YEAR]=2014
-	   AND [Year].[EXTENSION]='R'
+	   AND [Year].[EXTENSION]='R'*/
 
 UPDATE
     [Student]
@@ -140,7 +140,7 @@ FROM
     [Student].[SIS_NUMBER]=[GridCodeA].[APS_STUID]
 
 WHERE
-    [Year].[SCHOOL_YEAR]=2014
+    [Year].[SCHOOL_YEAR]=2015
     AND [Year].[EXTENSION]='R'
 
 UPDATE
@@ -184,7 +184,7 @@ UPDATE
 	   [Student].[SIS_NUMBER]=[GridCodeB].[APS_STUID]
 
     WHERE
-	   [Year].[SCHOOL_YEAR]=2014
+	   [Year].[SCHOOL_YEAR]=2015
 	   AND [Year].[EXTENSION]='R'
 
 
@@ -194,7 +194,7 @@ SELECT
     ,[GridCodeA].[SY1516_GridCode]
     ,[SSY].[NEXT_GRADE_LEVEL]
     ,[SSY].[NEXT_SCHOOL_GU]
-    ,[SSY].[GRADE]
+    ,[Grades].[VALUE_DESCRIPTION] AS [Grade]
 FROM
     [rev].[EPC_STU] AS [Student]
 
@@ -222,8 +222,13 @@ FROM
     ON
     [Student].[SIS_NUMBER]=[GridCodeA].[APS_STUID]
 
+    INNER HASH JOIN
+    [APS].[LookupTable]('K12','GRADE') AS [Grades]
+    ON
+    [SSY].[GRADE]=[Grades].[VALUE_CODE]
+
 WHERE
-    [Year].[SCHOOL_YEAR]=2014
+    [Year].[SCHOOL_YEAR]=2015
     AND [Year].[EXTENSION]='R'
     
 UNION
@@ -233,7 +238,7 @@ SELECT
     ,[GridCodeB].[SY1516_GridCode]
     ,[SSY].[NEXT_GRADE_LEVEL]
     ,[SSY].[NEXT_SCHOOL_GU]
-    ,[SSY].[GRADE]
+    ,[Grades].[VALUE_DESCRIPTION] AS [Grade]
 FROM
     [rev].[EPC_STU] AS [Student]
 
@@ -261,8 +266,13 @@ FROM
     ON
     [Student].[SIS_NUMBER]=[GridCodeB].[APS_STUID]
 
+    INNER HASH JOIN
+    [APS].[LookupTable]('K12','GRADE') AS [Grades]
+    ON
+    [SSY].[GRADE]=[Grades].[VALUE_CODE]
+
 WHERE
-    [Year].[SCHOOL_YEAR]=2014
+    [Year].[SCHOOL_YEAR]=2015
     AND [Year].[EXTENSION]='R'
     
 REVERT
