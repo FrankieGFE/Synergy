@@ -15,7 +15,8 @@ set @SchYr = (select school_year from rev.SIF_22_Common_CurrentYear)
                                          AND ssy.STATUS is NULL
   JOIN rev.REV_ORGANIZATION_YEAR  oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU  
   JOIN rev.REV_YEAR               yr   ON yr.YEAR_GU               = oyr.YEAR_GU
-                                          and yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+                                          and (yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+												OR yr.SCHOOL_YEAR = '2015')
    LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd on grd.VALUE_CODE = ssy.GRADE
    WHERE grd.value_description in ('K', '01','02','03')
 )
@@ -114,7 +115,8 @@ FROM  rev.EPC_STU                         stu
                                                   AND ssy.STATUS is NULL
       JOIN rev.REV_ORGANIZATION_YEAR      oyr  ON oyr.ORGANIZATION_YEAR_GU   = ssy.ORGANIZATION_YEAR_GU
       JOIN rev.REV_YEAR                   yr   ON yr.YEAR_GU                 = oyr.YEAR_GU
-                                                  AND yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+                                                  AND (yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
+														OR yr.SCHOOL_YEAR = '2015')
       JOIN rev.EPC_SCH                    sch  ON sch.ORGANIZATION_GU        = oyr.ORGANIZATION_GU
       JOIN rev.REV_ORGANIZATION           org  ON org.ORGANIZATION_GU        = oyr.ORGANIZATION_GU
       JOIN rev.REV_PERSON                 per  ON per.PERSON_GU              = stu.STUDENT_GU
