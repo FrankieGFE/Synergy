@@ -16,7 +16,7 @@ ROW_NUMBER() over (partition by stu.student_gu order by stu.student_gu) rn
                                                            and ssy1.STATUS is NULL
 									                       and ssy1.EXCLUDE_ADA_ADM is not null --only concurrent enrollment
                     JOIN rev.REV_ORGANIZATION_YEAR oyr1  ON oyr1.ORGANIZATION_YEAR_GU = ssy1.ORGANIZATION_YEAR_GU
-                                                           and oyr1.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+                                                           and oyr1.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
                     JOIN rev.EPC_SCH               sch1  ON sch1.ORGANIZATION_GU = oyr1.ORGANIZATION_GU 
 					where stu1.STUDENT_GU = stu.STUDENT_GU
 	                FOR XML PATH('')
@@ -27,7 +27,7 @@ JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
                                        and ssy.STATUS is NULL
 									   and ssy.EXCLUDE_ADA_ADM is not null --only concurrent enrollment
 JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
-                                       and oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+                                       and oyr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
 JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU 
 )
 --Ethnicity code
@@ -86,7 +86,7 @@ FROM rev.REV_PERSON_PHONE phn
 JOIN rev.EPC_STU               stu   ON stu.STUDENT_GU           = phn.PERSON_GU
 JOIN rev.EPC_STU_SCH_YR        ssyr  ON ssyr.STUDENT_GU          = stu.STUDENT_GU 
 JOIN rev.REV_ORGANIZATION_YEAR oyr   ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
-                                        AND oyr.YEAR_GU          = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+                                        AND oyr.YEAR_GU          IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
 JOIN rev.REV_PERSON            per   ON per.PERSON_GU            = phn.PERSON_GU
 WHERE phn.PRIMARY_PHONE = 'N'
 ), FRMHistory AS
@@ -146,7 +146,7 @@ JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
                                        and ssy.STATUS is NULL
 									   and ssy.EXCLUDE_ADA_ADM is null --exclude concurrent enrollment
 JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
-                                       and oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+                                       and oyr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
 JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU 
 JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
 LEFT JOIN rev.REV_ADDRESS      hadr ON hadr.ADDRESS_GU = per.HOME_ADDRESS_GU
