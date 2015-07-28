@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SpedReview360"
   DTS:PackageType="5"
-  DTS:VersionBuild="18"
-  DTS:VersionGUID="{87C00A97-F480-4C16-B255-F3A7CABB0D77}">
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{33E1C29E-B4AA-4BB2-B34A-F87328CAB734}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABt8rxrlExQMj6OKkSsJg5SAAAAAASAAACgAAAAEAAAAHMwffLQQ+aR8qk9pGHh3RowAAAAgohixv0mOyqBSHw0GrsoEtLiSYP6itQWbomjIYKxd+A/OXEWXApf/La5+i2BshuMFAAAAD9sIxeXWEkPQcrBViXcMI+DUM/m</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAgb/m+ocj8epZyNieqTXTaAAAAAASAAACgAAAAEAAAAIygkTzrTXByLtUTItxa/3cwAAAA4mw0iNsvmgvu0tXav/SBCY9dDhI0Euh22IexImpt5NM0S862SlvaLR3WeSeqtm3sFAAAAOM9ahpvkXskzm/DUEog8hsjcp5a</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -1122,7 +1122,8 @@ FROM  rev.EPC_STU                         stu
       JOIN rev.EPC_STU_SCH_YR             ssy  ON ssy.STUDENT_GU           = stu.STUDENT_GU
                                                   AND ssy.STATUS is null
       JOIN rev.REV_ORGANIZATION_YEAR      oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
-                                                  AND oyr.YEAR_GU          = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+                                                  --AND oyr.YEAR_GU          = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+                                                  AND oyr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE (GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE))
       JOIN rev.EPC_SCH                    sch  ON sch.ORGANIZATION_GU      = oyr.ORGANIZATION_GU
       JOIN rev.REV_PERSON                 per  ON per.PERSON_GU            = stu.STUDENT_GU
 	  LEFT JOIN rev.EP_STUDENT_SPECIAL_ED sped ON sped.STUDENT_GU          = stu.STUDENT_GU
