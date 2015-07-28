@@ -34,6 +34,7 @@ SELECT
         stu.SIS_NUMBER                               AS [Student ID Number]
       , per.LAST_NAME                                AS [Student Last Name]
       , per.FIRST_NAME                               AS [Student First Name]
+      --,ssy.ENTER_DATE
       , CONVERT(VARCHAR(10), per.BIRTH_DATE, 101)    AS [DOB]
       , per.GENDER                                   AS [Gender]
       , LEFT(el1.ALT_CODE_2,1)                       AS [Ethnicity 1]
