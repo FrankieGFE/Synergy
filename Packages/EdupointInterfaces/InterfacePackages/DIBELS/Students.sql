@@ -132,4 +132,4 @@ FROM  rev.EPC_STU                         stu
 	  LEFT JOIN rev.EPC_STU_PGM_FRM       frm  ON frm.STUDENT_GU             = stu.STUDENT_GU
       LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.ProgramInfo', 'FRM_CODE') fr on fr.VALUE_CODE = frm.FRM_CODE
 WHERE grd.value_description in ('K', '01','02','03')
-	AND stu.SIS_NUMBER = '980004362'
+	--AND stu.SIS_NUMBER = '980004362'
