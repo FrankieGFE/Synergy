@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DIBELS"
   DTS:PackageType="5"
-  DTS:VersionBuild="16"
-  DTS:VersionGUID="{A32A209A-6E62-47E9-A011-A85E0580E663}">
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{F44762DF-94E0-43B4-ADD2-08AFA37F6AB2}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -2230,7 +2230,7 @@ SELECT
         org.ORGANIZATION_NAME                                         AS [Institution]
       , stu.STATE_STUDENT_NUMBER                                      AS [State ID]
       , stu.SIS_NUMBER                                                AS [District ID]
-      , ''                                                            AS [School ID]
+      , ' '                                                            AS [School ID]
 /*K-3 Plus schools reporting Student State Number by Sean McMurray 1/20/2015*/
       , CASE WHEN org.ORGANIZATION_NAME = 'A. Montoya Elementary School'             THEN 'K3' + stu.STATE_STUDENT_NUMBER
 	         WHEN org.ORGANIZATION_NAME = 'Acoma Elementary School'                  THEN 'K3' + stu.STATE_STUDENT_NUMBER
