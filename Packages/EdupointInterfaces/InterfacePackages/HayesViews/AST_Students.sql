@@ -3,7 +3,7 @@
 IF OBJECT_ID('EVASourcedb.ASTStudents') IS NOT NULL DROP VIEW EVASourcedb.ASTStudents
 GO
 CREATE VIEW EVASourcedb.ASTStudents AS
-with ElemHomeroom AS
+;with ElemHomeroom AS
 (
   select 
           stu.student_gu
@@ -27,7 +27,8 @@ with ElemHomeroom AS
 
 SELECT
         sch.SCHOOL_CODE        AS [LocationGivenID]
-      , 'S'+stu.SIS_NUMBER     AS [StudentID]
+      --, 'S'+stu.SIS_NUMBER     AS [StudentID]
+      , stu.SIS_NUMBER     AS [StudentID]
       , per.FIRST_NAME         AS [FirstName]
       , per.LAST_NAME          AS [LastName]
       , per.MIDDLE_NAME        AS [MiddleName]
