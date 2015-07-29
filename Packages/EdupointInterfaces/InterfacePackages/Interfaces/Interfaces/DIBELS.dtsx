@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DIBELS"
   DTS:PackageType="5"
-  DTS:VersionBuild="20"
-  DTS:VersionGUID="{32B8807A-3370-41DC-8853-E28BB1502E17}">
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{4A471BB6-91BF-4C7E-A8E7-3321CAC92660}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -96,7 +96,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADt0tWWnII7+7sCfUpuHVGyAAAAAASAAACgAAAAEAAAAKqiLO/cJ73PaC3/oeUzipYwAAAA3D90dDslMgGyUt57iJSzEHWlaOBFca5hbVQTYtz+2M7g5fseRxNfhAjdkSwLpr0aFAAAAEVHoEdkm/TGAvmuRfexMGAaTMxM</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADwZF5IwuBkZcK8hkXafLxKAAAAAASAAACgAAAAEAAAAKH69ym4y2EhgfudfgFnUM8wAAAA4+FG3BxOxdtbYHMVdJsRGgd3l0Ciga4b24hOjfgGoMxHA8Oy2jig/qM/PRZTkk7WFAAAADDbC0iiZYUBbv3uLrMVNqZt0N7L</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -2235,7 +2235,7 @@ SELECT
         org.ORGANIZATION_NAME                                         AS [Institution]
       , stu.STATE_STUDENT_NUMBER                                      AS [State ID]
       , stu.SIS_NUMBER                                                AS [District ID]
-      , ' '                                                            AS [School ID]
+      , NULL                                                            AS [School ID]
 /*K-3 Plus schools reporting Student State Number by Sean McMurray 1/20/2015*/
       , CASE WHEN org.ORGANIZATION_NAME = 'A. Montoya Elementary School'             THEN 'K3' + stu.STATE_STUDENT_NUMBER
 	         WHEN org.ORGANIZATION_NAME = 'Acoma Elementary School'                  THEN 'K3' + stu.STATE_STUDENT_NUMBER
@@ -2843,9 +2843,7 @@ WHERE grd.value_description in ('K', '01','02','03')
                       name="Student Email" />
                     <externalMetadataColumn
                       refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[School ID]"
-                      codePage="1252"
-                      dataType="str"
-                      length="1"
+                      dataType="i4"
                       name="School ID" />
                   </externalMetadataColumns>
                 </output>
@@ -2874,9 +2872,7 @@ WHERE grd.value_description in ('K', '01','02','03')
                       name="District ID" />
                     <outputColumn
                       refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[School ID]"
-                      codePage="1252"
-                      dataType="str"
-                      length="1"
+                      dataType="i4"
                       lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[School ID]"
                       name="School ID" />
                     <outputColumn
