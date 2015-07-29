@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DIBELS"
   DTS:PackageType="5"
-  DTS:VersionBuild="13"
-  DTS:VersionGUID="{6870D0EC-ACEE-463B-A069-E03C660C626B}">
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{557D682F-344F-4F7D-B045-F873D4E4716E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -672,7 +672,8 @@ FROM  rev.EPC_STU                         stu
       JOIN rev.REV_ORGANIZATION_YEAR      oyr   ON oyr.ORGANIZATION_YEAR_GU    = ssy.ORGANIZATION_YEAR_GU
       JOIN rev.REV_YEAR                   yr    ON yr.YEAR_GU                  = oyr.YEAR_GU
                                                    AND (yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
-														OR yr.SCHOOL_YEAR = '2015')
+														--OR yr.SCHOOL_YEAR = '2015'
+														)
       JOIN rev.EPC_SCH                    sch   ON sch.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
       JOIN rev.REV_ORGANIZATION           org   ON org.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
       JOIN REV.EPC_STU_CLASS              cls   ON cls.STUDENT_SCHOOL_YEAR_GU  = ssy.STUDENT_SCHOOL_YEAR_GU
@@ -1033,7 +1034,8 @@ FROM  rev.EPC_STU                         stu
       JOIN rev.REV_ORGANIZATION_YEAR      oyr   ON oyr.ORGANIZATION_YEAR_GU    = ssy.ORGANIZATION_YEAR_GU
       JOIN rev.REV_YEAR                   yr    ON yr.YEAR_GU                  = oyr.YEAR_GU
                                                    AND (yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
-														OR yr.SCHOOL_YEAR = '2015')
+														--OR yr.SCHOOL_YEAR = '2015'
+														)
       JOIN rev.EPC_SCH                    sch   ON sch.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
       JOIN rev.REV_ORGANIZATION           org   ON org.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
       LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd on grd.VALUE_CODE = ssy.GRADE
@@ -1573,7 +1575,8 @@ FROM  rev.EPC_STU                         stu
       JOIN rev.REV_ORGANIZATION_YEAR      oyr   ON oyr.ORGANIZATION_YEAR_GU    = ssy.ORGANIZATION_YEAR_GU
       JOIN rev.REV_YEAR                   yr    ON yr.YEAR_GU                  = oyr.YEAR_GU
                                                    AND (yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
-														OR yr.SCHOOL_YEAR = '2015')
+														--OR yr.SCHOOL_YEAR = '2015'
+														)
       JOIN rev.EPC_SCH                    sch   ON sch.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
       JOIN rev.REV_ORGANIZATION           org   ON org.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
       LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd on grd.VALUE_CODE = ssy.GRADE
@@ -1895,7 +1898,8 @@ FROM  rev.EPC_STU                         stu
       JOIN rev.REV_ORGANIZATION_YEAR      oyr   ON oyr.ORGANIZATION_YEAR_GU    = ssy.ORGANIZATION_YEAR_GU
       JOIN rev.REV_YEAR                   yr    ON yr.YEAR_GU                  = oyr.YEAR_GU
                                                   AND (yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
-														OR yr.SCHOOL_YEAR = '2015')
+														--OR yr.SCHOOL_YEAR = '2015'
+														)
       JOIN rev.EPC_SCH                    sch   ON sch.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
       JOIN rev.REV_ORGANIZATION           org   ON org.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
       LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd on grd.VALUE_CODE = ssy.GRADE
@@ -2216,7 +2220,8 @@ set @SchYr = (select school_year from rev.SIF_22_Common_CurrentYear)
   JOIN rev.REV_ORGANIZATION_YEAR  oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU  
   JOIN rev.REV_YEAR               yr   ON yr.YEAR_GU               = oyr.YEAR_GU
                                           and (yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
-												OR yr.SCHOOL_YEAR = '2015')
+												--OR yr.SCHOOL_YEAR = '2015'
+												)
    LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd on grd.VALUE_CODE = ssy.GRADE
    WHERE grd.value_description in ('K', '01','02','03')
 )
@@ -2316,7 +2321,8 @@ FROM  rev.EPC_STU                         stu
       JOIN rev.REV_ORGANIZATION_YEAR      oyr  ON oyr.ORGANIZATION_YEAR_GU   = ssy.ORGANIZATION_YEAR_GU
       JOIN rev.REV_YEAR                   yr   ON yr.YEAR_GU                 = oyr.YEAR_GU
                                                   AND (yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
-														OR yr.SCHOOL_YEAR = '2015')
+														--OR yr.SCHOOL_YEAR = '2015'
+														)
       JOIN rev.EPC_SCH                    sch  ON sch.ORGANIZATION_GU        = oyr.ORGANIZATION_GU
       JOIN rev.REV_ORGANIZATION           org  ON org.ORGANIZATION_GU        = oyr.ORGANIZATION_GU
       JOIN rev.REV_PERSON                 per  ON per.PERSON_GU              = stu.STUDENT_GU
@@ -2329,7 +2335,8 @@ FROM  rev.EPC_STU                         stu
       LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'LANGUAGE') hlng on hlng.VALUE_CODE = stu.HOME_LANGUAGE
 	  LEFT JOIN rev.EPC_STU_PGM_FRM       frm  ON frm.STUDENT_GU             = stu.STUDENT_GU
       LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.ProgramInfo', 'FRM_CODE') fr on fr.VALUE_CODE = frm.FRM_CODE
-WHERE grd.value_description in ('K', '01','02','03')</property>
+WHERE grd.value_description in ('K', '01','02','03')
+	AND stu.SIS_NUMBER = '980004362'</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -3512,10 +3519,6 @@ WHERE grd.value_description in ('K', '01','02','03')</property>
           Id="Package\Class"
           TopLeft="28,76.4056603773585" />
         <NodeLayout
-          Size="141,42"
-          Id="Package\StudentClass"
-          TopLeft="28,140.292452830189" />
-        <NodeLayout
           Size="136,44"
           Id="Package\Staff"
           TopLeft="28,211.160377358491" />
@@ -3523,6 +3526,10 @@ WHERE grd.value_description in ('K', '01','02','03')</property>
           Size="136,44"
           Id="Package\StaffClass"
           TopLeft="28,289.764150943396" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\StudentClass"
+          TopLeft="28,140.292452830189" />
         <NodeLayout
           Size="136,44"
           Id="Package\Students"
@@ -3677,52 +3684,6 @@ WHERE grd.value_description in ('K', '01','02','03')</property>
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\StudentClass">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="126,42"
-          Id="Package\StudentClass\DB Query"
-          TopLeft="29.5,5.5" />
-        <NodeLayout
-          Size="174,42"
-          Id="Package\StudentClass\Flat File Destination"
-          TopLeft="5.50000000000001,107.5" />
-        <EdgeLayout
-          Id="Package\StudentClass.Paths[OLE DB Source Output]"
-          TopLeft="92.5,47.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\StudentClass\DB Query">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
     design-time-name="Package\Staff">
     <LayoutInfo>
       <GraphLayout
@@ -3808,6 +3769,52 @@ WHERE grd.value_description in ('K', '01','02','03')</property>
   </TaskHost>
   <PipelineComponentMetadata
     design-time-name="Package\StaffClass\DB query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\StudentClass">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="126,42"
+          Id="Package\StudentClass\DB Query"
+          TopLeft="29.5,5.5" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\StudentClass\Flat File Destination"
+          TopLeft="5.50000000000001,107.5" />
+        <EdgeLayout
+          Id="Package\StudentClass.Paths[OLE DB Source Output]"
+          TopLeft="92.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\StudentClass\DB Query">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
