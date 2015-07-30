@@ -3,7 +3,8 @@
 IF OBJECT_ID('EVASourcedb.ASTStudents') IS NOT NULL DROP VIEW EVASourcedb.ASTStudents
 GO
 CREATE VIEW EVASourcedb.ASTStudents AS
-;with ElemHomeroom AS
+
+WITH ElemHomeroom AS
 (
   select 
           stu.student_gu
@@ -48,3 +49,5 @@ FROM rev.EPC_STU                    stu
      JOIN rev.EPC_SCH               sch ON sch.ORGANIZATION_GU      = org.ORGANIZATION_GU
      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd ON grd.VALUE_CODE = ssy.GRADE
      LEFT JOIN ElemHomeroom         eht ON eht.STUDENT_GU           = stu.STUDENT_GU and  eht.rn = 1
+
+GO
