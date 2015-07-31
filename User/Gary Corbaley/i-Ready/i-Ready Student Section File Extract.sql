@@ -314,7 +314,7 @@ SELECT DISTINCT
 	--,[SCHEDULE].[COURSE_TITLE] AS [Name]
 	
 	--,CASE WHEN [Course Grades].[VALUE_DESCRIPTION] = 'K' THEN '0' ELSE [Course Grades].[VALUE_DESCRIPTION] END AS [Grade Level]
-	--,[Course Grades].[VALUE_DESCRIPTION] AS [Grade Level]
+	--,[Course Grades].[VALUE_DE SCRIPTION] AS [Grade Level]
 	
 	--,[SCHEDULE].[TERM_CODE] AS [Term]
 	--,'' AS [Code]
