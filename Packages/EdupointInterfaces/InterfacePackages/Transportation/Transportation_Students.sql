@@ -119,7 +119,7 @@ LEFT JOIN
 		  sprl.ROLE_GU=rol.ROLE_GU
 
 	   WHERE 
-		  [SCHOOL_YEAR]=2014
+		  [SCHOOL_YEAR]=2015
 
     ) rpt
     ON
