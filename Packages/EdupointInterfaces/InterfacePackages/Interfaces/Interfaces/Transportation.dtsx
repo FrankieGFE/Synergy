@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Transportation"
   DTS:PackageType="5"
-  DTS:VersionBuild="19"
-  DTS:VersionGUID="{D19A2F3E-CCA5-45A1-BA22-6EA964A5FE7D}">
+  DTS:VersionBuild="22"
+  DTS:VersionGUID="{DFE5BA98-8AE7-4297-B1DB-F19942EEFFAF}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,287 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACJE25QA6OFhwGHIFjm1tPNAAAAAASAAACgAAAAEAAAAFY3td+r6gXApYRW9JuHHJMwAAAAFO2uaKlIEfx2H4kpuCSXmZcstwKqnNzvHIp5nSdky5OGBZi5DI2nBj1Bx0czg/IlFAAAAPyBYN0BuhVtTlaTYGXa15YNvtGi</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABMafEQiag7XlPZvY/L1MG8AAAAAASAAACgAAAAEAAAAGNSo4Gww6B+fIyZNJYkoNgwAAAAxt4OwctmG9kxI7kpWWES6EkP6IVTd/qfVWFowMnLfnS9ohovZC1VgrJGftGdt5tiFAAAACcUTZEN0T5BGluvqMtUEZc1VgXF</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{DEB3BF49-1CB8-427F-B9FB-6D259B6E86F0}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis\Files\Export\Transportation\TRANSTAB.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student ID Number"
+              DTS:DTSID="{C6280EA6-BD16-4C20-85DF-37CF34BB24D1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="State ID Number"
+              DTS:DTSID="{F5686F62-2C45-4A17-AEF6-51F3EBF572D3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SOR School Number"
+              DTS:DTSID="{5528EB0A-4F7F-49E4-B2AC-D69E3319D3B2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CAL_SUB_TY"
+              DTS:DTSID="{D07FA47A-FAF6-45CB-A240-DB01B1B35E25}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student First Name"
+              DTS:DTSID="{27FF4376-BFAF-4BD7-A732-6EE9DAF0E98D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student Middle Name"
+              DTS:DTSID="{3124564D-8A2C-4A35-8EB9-83D014DF8614}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student Last Name"
+              DTS:DTSID="{66B676CC-257A-4D32-97A6-994C6BBB5EA5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student Current SOR Enrollment Grade Level"
+              DTS:DTSID="{224C6378-34B0-4D06-BD74-FFCD1A9452BF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student Birthdate"
+              DTS:DTSID="{4E8E8867-3EC5-4D42-9BED-AE7A3DD8CD56}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student Gender"
+              DTS:DTSID="{4B236F64-60AB-47F0-954D-6D4AE1C6C030}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student Address"
+              DTS:DTSID="{AE790B32-BF2C-4314-86D8-49122043A5C5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="City"
+              DTS:DTSID="{77300E6C-71F1-48BC-8455-066F4D2EEC5E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="State"
+              DTS:DTSID="{6745798F-0357-4DD5-86D6-26CA6E58DA70}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="6"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Zip Code"
+              DTS:DTSID="{FA00050B-74D8-44FA-AB58-AE5FE86110F2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="12"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student Home Phone Number"
+              DTS:DTSID="{EF7FF39B-F777-4C5E-9FE5-D2636C16071D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="12"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Parent 1 Home Phone"
+              DTS:DTSID="{6B9BF711-1ECA-4ACD-982F-28B180F846D2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="121"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Parent 1 Full Name"
+              DTS:DTSID="{D3ECFC76-E130-4684-9DE3-505D1CFB0230}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="12"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Parent 2 Home Phone"
+              DTS:DTSID="{5CEF99B7-0A4B-4281-B285-8E71A951BA44}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="121"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Parent 2 Full Name"
+              DTS:DTSID="{8552BD1B-8F4D-4CEA-AE65-E4DBE8E963B6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HouseNumber"
+              DTS:DTSID="{4AE55D29-D4EF-41FA-A61A-A103DF2E7A2F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="663"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Street"
+              DTS:DTSID="{2017DCF5-F105-46AE-A5F7-6036D0DFC4A2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Apartment"
+              DTS:DTSID="{99168CD5-922D-42CA-BD69-0C872141F72C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="12"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Parent1WorkPhone"
+              DTS:DTSID="{056EAE8F-58D9-43A1-8D02-CA87FD35E33B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="12"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Parent1CellPhone"
+              DTS:DTSID="{6F08BDD4-C65E-4C0D-99F3-93BA5D45706E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Parent1Email"
+              DTS:DTSID="{A9EFFA1C-B544-41EE-BA2A-5211F6F23EBA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="12"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Parent2WorkPhone"
+              DTS:DTSID="{25807062-F62E-4336-9F5C-EB7F0885D42E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="12"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Parent2CellPhone"
+              DTS:DTSID="{B1C74F10-CCF3-4975-99CB-66D965C61EF0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Parent2Email"
+              DTS:DTSID="{8047955F-61EB-407C-A801-94792A5C8A94}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PRIM_DISAB"
+              DTS:DTSID="{7D834ABE-E79F-4E2D-9FBC-4AD4E925A3EB}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -58,7 +338,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student ID Number"
-              DTS:DTSID="{06A6BAEA-77ED-41F2-A550-A0E45FB3FDF7}"
+              DTS:DTSID="{AED99259-3D29-42CE-9F3A-25751BFBF2A5}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -67,7 +347,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="State ID Number"
-              DTS:DTSID="{B07EDE45-C2E6-4AB2-9A83-F3AFBE3F6FD8}"
+              DTS:DTSID="{401873DF-62F8-4265-AFEB-8DCAB83DF1DB}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -76,7 +356,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="SOR School Number"
-              DTS:DTSID="{9AD168A0-83E8-47E0-9E39-F2F63B344890}"
+              DTS:DTSID="{BA5B5BDE-91BD-46CB-AD92-5952785442FF}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -85,7 +365,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="CAL_SUB_TY"
-              DTS:DTSID="{BA6507BD-C62C-47C3-82EE-676B911687B9}"
+              DTS:DTSID="{3D2D83C3-E151-45BB-8EEE-299608381391}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -94,7 +374,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student First Name"
-              DTS:DTSID="{2466412F-3D49-45B8-80F6-E1AD8A48AB24}"
+              DTS:DTSID="{3DCFA1B1-8867-49AC-9298-8E4C35E14DA2}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -103,7 +383,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Middle Name"
-              DTS:DTSID="{4B578594-70E3-4098-A536-DA7DE44784F9}"
+              DTS:DTSID="{D1E1D338-B130-4FCE-8BA7-B43F0E439D2B}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -112,7 +392,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Last Name"
-              DTS:DTSID="{7407BA06-EE55-4086-B9D6-19FCC1B3D107}"
+              DTS:DTSID="{5227979B-9C58-4DCB-A1F9-C6100884A784}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -121,7 +401,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Current SOR Enrollment Grade Level"
-              DTS:DTSID="{58C78550-36C2-4BEF-A743-6FDA787C17B7}"
+              DTS:DTSID="{03AE6217-45C0-4B61-8624-65AF64EAA1C3}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -130,7 +410,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Birthdate"
-              DTS:DTSID="{DEC4C246-5A17-489E-8C3F-9172E5D18C1D}"
+              DTS:DTSID="{8E978177-8D00-4AD6-9AD1-4C3D182795EC}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -139,7 +419,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Gender"
-              DTS:DTSID="{527682C4-8A7C-4E20-9409-BA45E53059F4}"
+              DTS:DTSID="{495EF884-3751-4DE8-A72C-88491E786787}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -148,7 +428,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Address"
-              DTS:DTSID="{F3B65547-DB11-427C-BECA-45CFA897D72C}"
+              DTS:DTSID="{C84A34BF-E59C-479C-96C4-6CED19F42061}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -157,7 +437,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="City"
-              DTS:DTSID="{7199A98A-086E-4314-A3F5-AAEC634A79B2}"
+              DTS:DTSID="{0CCE1483-EA77-4B0F-A6CB-DB9AD8A4FD15}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -166,7 +446,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="State"
-              DTS:DTSID="{121ED136-3713-4587-A63E-372F8F6E3586}"
+              DTS:DTSID="{31509B7D-8DCD-44B8-8D9B-6B2DE3F33C57}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -175,7 +455,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Zip Code"
-              DTS:DTSID="{1CA614FC-A1B1-4297-A037-8D4D764F17DE}"
+              DTS:DTSID="{1830C2C8-88B5-4532-8202-74576F2AF6C4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -184,7 +464,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Home Phone Number"
-              DTS:DTSID="{C1F1DBBA-CF0C-4131-960E-1FA0FAF4E023}"
+              DTS:DTSID="{81798099-C88C-4F3E-AC14-47D3E8CDC0F2}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -193,7 +473,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Parent 1 Home Phone"
-              DTS:DTSID="{97C3B611-7FC8-4B6C-80CF-4C1FC1BCA215}"
+              DTS:DTSID="{5E9F2078-FBCF-4226-A872-F8A973D78E77}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -202,7 +482,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Parent 1 Full Name"
-              DTS:DTSID="{A54060C4-1B7A-441E-A4FC-2B08A2CF8EFF}"
+              DTS:DTSID="{07DD9C9C-9FA7-449F-A000-F814F8555B54}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -211,7 +491,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Parent 2 Home Phone"
-              DTS:DTSID="{5EC06946-57CD-46F3-8D2D-7EB7694FDAAB}"
+              DTS:DTSID="{C10F45E4-B6A2-42CE-9370-B12C9F84FF9F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -220,7 +500,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Parent 2 Full Name"
-              DTS:DTSID="{9E9570E6-3EC8-444D-81F9-065347E361F9}"
+              DTS:DTSID="{63319D1C-3058-4287-9458-27A178890B51}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -229,7 +509,7 @@
               DTS:DataPrecision="9"
               DTS:TextQualified="True"
               DTS:ObjectName="HouseNumber"
-              DTS:DTSID="{184E02AB-A8BC-4FAF-A690-6F9B337851C6}"
+              DTS:DTSID="{BDB541D0-672C-4629-AA75-D4FE7D9CE027}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -238,7 +518,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Street"
-              DTS:DTSID="{1E10CA22-5E0A-4B4D-96D4-3040C5F55CE7}"
+              DTS:DTSID="{9E104DDF-CB9E-419F-8A5B-3570DDA5D2C4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -247,7 +527,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Apartment"
-              DTS:DTSID="{28C26072-D89B-4B17-82BE-5898D04571B2}"
+              DTS:DTSID="{A3DB9E72-0897-4577-8529-3CA8CC60C082}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -256,7 +536,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Parent1WorkPhone"
-              DTS:DTSID="{6A7681A4-BAB5-4A9D-A5F4-6C15E8ED5E29}"
+              DTS:DTSID="{271180CD-4F03-4A9D-BE27-5D29D18A1D41}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -265,7 +545,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Parent1CellPhone"
-              DTS:DTSID="{11E6E420-11B0-4D68-936D-1D37C6CD72D1}"
+              DTS:DTSID="{0221E432-87EC-4CB5-84AF-8151E888B0A1}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -274,7 +554,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Parent1Email"
-              DTS:DTSID="{5B07B8C2-2245-438E-8C14-FCBD6848D1A0}"
+              DTS:DTSID="{26F46816-3528-454C-BA61-AC21720223DE}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -283,7 +563,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Parent2WorkPhone"
-              DTS:DTSID="{8ED3B23E-BC26-4455-9CB7-35B57894DB6E}"
+              DTS:DTSID="{45DAAFB1-726C-4924-A008-D68D871C02A3}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -292,7 +572,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Parent2CellPhone"
-              DTS:DTSID="{A9A65C92-F2DA-48DC-91B4-1491315210E9}"
+              DTS:DTSID="{6D65BE0F-547B-44C2-8FA6-9B933E056E52}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -301,7 +581,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Parent2Email"
-              DTS:DTSID="{EE50EB20-0E18-4CAD-99FC-6E0DA9DA3E0B}"
+              DTS:DTSID="{74E45F16-9B0E-4DB4-97BE-67E414F23C9D}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -310,7 +590,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="PRIM_DISAB"
-              DTS:DTSID="{2A0242E3-C90C-497B-9DF0-B40FE05D2A64}"
+              DTS:DTSID="{EB8AC3C9-0BBC-450E-9C25-2B2CA8565E8A}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -1467,7 +1747,7 @@ FROM  rev.EPC_STU                     stu
             <component
               refId="Package\Transportation - Students\Flat File Destination"
               componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
-              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Flat File Destination"
               localeId="1033"
               name="Flat File Destination">
@@ -1485,8 +1765,8 @@ FROM  rev.EPC_STU                     stu
               <connections>
                 <connection
                   refId="Package\Transportation - Students\Flat File Destination.Connections[FlatFileConnection]"
-                  connectionManagerID="Package.ConnectionManagers[TansportationStudents]"
-                  connectionManagerRefId="Package.ConnectionManagers[TansportationStudents]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
                   name="FlatFileConnection" />
               </connections>
               <inputs>
@@ -3383,27 +3663,39 @@ WHERE not exists (select s.student_gu from rev.EP_STUDENT_SPECIAL_ED s where s.s
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="174,42"
-          Id="Package\Transportation - Students\Flat File Destination"
-          TopLeft="5.50000000000001,107.5" />
-        <NodeLayout
           Size="126,42"
           Id="Package\Transportation - Students\DB Query"
           TopLeft="29.5,5.5" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Transportation - Students\Flat File Destination"
+          TopLeft="94,107" />
         <EdgeLayout
           Id="Package\Transportation - Students.Paths[OLE DB Source Output]"
           TopLeft="92.5,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60"
+              EndConnector="88.5,59.5"
               Start="0,0"
-              End="0,52.5">
+              End="88.5,52">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5" />
+                    End="0,25.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.75"
+                    Point2="0,29.75"
+                    Point3="4,29.75" />
+                  <mssgle:LineSegment
+                    End="84.5,29.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="84.5,29.75"
+                    Point2="88.5,29.75"
+                    Point3="88.5,33.75" />
+                  <mssgle:LineSegment
+                    End="88.5,52" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
