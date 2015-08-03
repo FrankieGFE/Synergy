@@ -28,6 +28,9 @@ SELECT
       , per.MIDDLE_NAME                          AS [Student Middle Name]
       , per.LAST_NAME                            AS [Student Last Name]
       , grd.VALUE_DESCRIPTION                    AS [Student Current SOR Enrollment Grade Level]
+	  , sped.PRIMARY_DISABILITY_CODE             AS [PRIM_DISAB]
+	  , rpt.ROLE_NAME_LARGE	   			         AS [Program Involvment]
+      , rpt.LEVEL_INTEGRATION			 	     AS [Level Of Service]
       , CONVERT(VARCHAR(10), per.BIRTH_DATE,101) AS [Student Birthdate]
       , per.GENDER                               AS [Student Gender]
       , hadr.ADDRESS                             AS [Student Address]
@@ -93,3 +96,32 @@ FROM  rev.EPC_STU                     stu
 	  LEFT JOIN Parents               p1   ON p1.STUDENT_GU              = stu.STUDENT_GU and p1.rn = 1
 	  LEFT JOIN Parents               p2   ON p2.STUDENT_GU              = stu.STUDENT_GU and p2.rn = 2
       LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.AddressInfo', 'STREET_TYPE') hsty ON hsty.VALUE_CODE = hadr.STREET_TYPE
+	  LEFT JOIN rev.EP_STUDENT_SPECIAL_ED sped ON sped.STUDENT_GU = stu.STUDENT_GU
+--Get SPED level integration and program involvement
+LEFT JOIN 
+    (
+	   SELECT 
+		  rpt.[STUDENT_GU]
+		  ,rpt.[LEVEL_INTEGRATION]
+		  ,rol.ROLE_NAME_LARGE
+		  ,ROW_NUMBER() OVER (PARTITION BY rpt.[STUDENT_GU] ORDER BY rpt.[CHANGE_DATE_TIME_STAMP] DESC) AS [rn] 
+	   FROM 
+		  [rev].[EPC_NM_STU_SPED_RPT] rpt
+    
+		  LEFT JOIN
+		  [rev].[EP_STAFF_ROLE_SPED] sprl
+		  ON
+		  rpt.CASE_MANAGER_GU=sprl.STAFF_GU
+    
+		  LEFT JOIN
+		  [rev].[REV_ROLE] rol
+		  ON
+		  sprl.ROLE_GU=rol.ROLE_GU
+
+	   WHERE 
+		  [SCHOOL_YEAR]=2014
+
+    ) rpt
+    ON
+    stu.STUDENT_GU=rpt.STUDENT_GU
+    AND rpt.rn=1
