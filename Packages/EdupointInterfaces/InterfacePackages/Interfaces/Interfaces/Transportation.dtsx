@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Transportation"
   DTS:PackageType="5"
-  DTS:VersionBuild="23"
-  DTS:VersionGUID="{11DE9518-97D0-4573-88CE-9BD022A955F4}">
+  DTS:VersionBuild="24"
+  DTS:VersionGUID="{9938D0AC-28B9-4A17-BC8D-2926957201FC}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAC7jn/dhREabiAsWdfwfvFhAAAAAASAAACgAAAAEAAAADPHT3h+4F2ZVZxAMzxW3+4wAAAAB5MzYPou71QyHMYbrhNWa+3bTqqWVNdZBQSMI+aJqAwZb2f61lLURHby4dfvOKNpFAAAANKWU6yH29x7eyMU8AUSxckgNyME</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQx7WiiiBGk2YiSkaMARFiAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAxwRsrlGduqOzaptmHRKxFAAAAAASAAACgAAAAEAAAAO/1f/BjekY52+TxBOsp9ikwAAAABR2CcSlon6OeM2/SJM1OPgtV4znm2Dgrz4kzYbtpinqZmViIWzEJdiTAIs9qMSd9FAAAABjnju71fGhS0YB29N7CKsK6Zbdf</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -1317,6 +1317,8 @@ SELECT
       , per.LAST_NAME                            AS [Student Last Name]
       , grd.VALUE_DESCRIPTION                    AS [Student Current SOR Enrollment Grade Level]
 	  , sped.PRIMARY_DISABILITY_CODE             AS [PRIM_DISAB]
+	  , rpt.ROLE_NAME_LARGE	   			         AS [Program Involvment]
+      , rpt.LEVEL_INTEGRATION			 	     AS [Level Of Service]
       , CONVERT(VARCHAR(10), per.BIRTH_DATE,101) AS [Student Birthdate]
       , per.GENDER                               AS [Student Gender]
       , hadr.ADDRESS                             AS [Student Address]
@@ -1382,7 +1384,35 @@ FROM  rev.EPC_STU                     stu
 	  LEFT JOIN Parents               p1   ON p1.STUDENT_GU              = stu.STUDENT_GU and p1.rn = 1
 	  LEFT JOIN Parents               p2   ON p2.STUDENT_GU              = stu.STUDENT_GU and p2.rn = 2
       LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12.AddressInfo', 'STREET_TYPE') hsty ON hsty.VALUE_CODE = hadr.STREET_TYPE
-	  LEFT JOIN rev.EP_STUDENT_SPECIAL_ED sped ON sped.STUDENT_GU = stu.STUDENT_GU</property>
+	  LEFT JOIN rev.EP_STUDENT_SPECIAL_ED sped ON sped.STUDENT_GU = stu.STUDENT_GU
+--Get SPED level integration and program involvement
+LEFT JOIN 
+    (
+	   SELECT 
+		  rpt.[STUDENT_GU]
+		  ,rpt.[LEVEL_INTEGRATION]
+		  ,rol.ROLE_NAME_LARGE
+		  ,ROW_NUMBER() OVER (PARTITION BY rpt.[STUDENT_GU] ORDER BY rpt.[CHANGE_DATE_TIME_STAMP] DESC) AS [rn] 
+	   FROM 
+		  [rev].[EPC_NM_STU_SPED_RPT] rpt
+    
+		  LEFT JOIN
+		  [rev].[EP_STAFF_ROLE_SPED] sprl
+		  ON
+		  rpt.CASE_MANAGER_GU=sprl.STAFF_GU
+    
+		  LEFT JOIN
+		  [rev].[REV_ROLE] rol
+		  ON
+		  sprl.ROLE_GU=rol.ROLE_GU
+
+	   WHERE 
+		  [SCHOOL_YEAR]=2014
+
+    ) rpt
+    ON
+    stu.STUDENT_GU=rpt.STUDENT_GU
+    AND rpt.rn=1</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1710,6 +1740,26 @@ FROM  rev.EPC_STU                     stu
                       lineageId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Output].Columns[PRIM_DISAB]"
                       name="PRIM_DISAB"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Output].Columns[Program Involvment]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Program Involvment]"
+                      length="120"
+                      lineageId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Output].Columns[Program Involvment]"
+                      name="Program Involvment"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Output].Columns[Level Of Service]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Level Of Service]"
+                      length="5"
+                      lineageId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Output].Columns[Level Of Service]"
+                      name="Level Of Service"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1860,6 +1910,16 @@ FROM  rev.EPC_STU                     stu
                       dataType="wstr"
                       length="5"
                       name="PRIM_DISAB" />
+                    <externalMetadataColumn
+                      refId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Program Involvment]"
+                      dataType="wstr"
+                      length="120"
+                      name="Program Involvment" />
+                    <externalMetadataColumn
+                      refId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Level Of Service]"
+                      dataType="wstr"
+                      length="5"
+                      name="Level Of Service" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1922,6 +1982,18 @@ FROM  rev.EPC_STU                     stu
                       length="5"
                       lineageId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PRIM_DISAB]"
                       name="PRIM_DISAB" />
+                    <outputColumn
+                      refId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Program Involvment]"
+                      dataType="wstr"
+                      length="120"
+                      lineageId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Program Involvment]"
+                      name="Program Involvment" />
+                    <outputColumn
+                      refId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Level Of Service]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Level Of Service]"
+                      name="Level Of Service" />
                     <outputColumn
                       refId="Package\Transportation - Students\DB Query.Outputs[OLE DB Source Error Output].Columns[Student Last Name]"
                       dataType="wstr"
@@ -3979,13 +4051,13 @@ WHERE not exists (select s.student_gu from rev.EP_STUDENT_SPECIAL_ED s where s.s
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="126,42"
-          Id="Package\Transportation - Students\DB Query"
-          TopLeft="29.5,5.5" />
-        <NodeLayout
           Size="174,42"
           Id="Package\Transportation - Students\Flat File Destination"
           TopLeft="94,107" />
+        <NodeLayout
+          Size="126,42"
+          Id="Package\Transportation - Students\DB Query"
+          TopLeft="29.5,5.5" />
         <EdgeLayout
           Id="Package\Transportation - Students.Paths[OLE DB Source Output]"
           TopLeft="92.5,47.5">
