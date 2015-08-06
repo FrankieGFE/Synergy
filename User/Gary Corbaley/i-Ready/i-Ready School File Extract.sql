@@ -1,7 +1,16 @@
+USE ST_Production
+GO
 
 
+-- Remove Procedure if it exists
+IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[iReadySchool]') AND type in (N'P', N'PC'))
+	EXEC ('CREATE PROCEDURE [APS].iReadySchool AS SELECT 0')
+GO
 
+ALTER PROC [APS].[iReadySchool]
 
+AS
+BEGIN
 
 SELECT
 	'nm-albuq87774' AS [Client ID]
@@ -33,3 +42,6 @@ FROM
 	
 ORDER BY
 	[School].[SCHOOL_CODE]
+
+END
+GO

@@ -1,6 +1,16 @@
+USE ST_Production
+GO
 
 
+-- Remove Procedure if it exists
+IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[iReadyStudentSection]') AND type in (N'P', N'PC'))
+	EXEC ('CREATE PROCEDURE [APS].iReadyStudentSection AS SELECT 0')
+GO
 
+ALTER PROC [APS].[iReadyStudentSection]
+
+AS
+BEGIN
 
 ; WITH
 
@@ -398,3 +408,6 @@ WHERE
 	
 ORDER BY
 	[STUDENT].[STATE_STUDENT_NUMBER]
+
+END
+GO

@@ -1,4 +1,16 @@
+USE ST_Production
+GO
 
+
+-- Remove Procedure if it exists
+IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[iReadyStudent]') AND type in (N'P', N'PC'))
+	EXEC ('CREATE PROCEDURE [APS].iReadyStudent AS SELECT 0')
+GO
+
+ALTER PROC [APS].[iReadyStudent]
+
+AS
+BEGIN
 
 
 
@@ -322,3 +334,6 @@ WHERE
 
 WHERE
 	[RN] = 1
+
+END
+GO

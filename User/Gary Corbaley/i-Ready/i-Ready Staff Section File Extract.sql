@@ -2,6 +2,20 @@
 
 
 
+USE ST_Production
+GO
+
+
+-- Remove Procedure if it exists
+IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[iReadyStaffSection]') AND type in (N'P', N'PC'))
+	EXEC ('CREATE PROCEDURE [APS].iReadyStaffSection AS SELECT 0')
+GO
+
+ALTER PROC [APS].[iReadyStaffSection]
+
+AS
+BEGIN
+
 ; WITH
 
 -- From School of Record [EPC_STU_YR]
@@ -398,3 +412,6 @@ WHERE
 	AND ISNUMERIC([SCHEDULE].[BADGE_NUM]) = 1
 	AND LEFT([SCHEDULE].[BADGE_NUM],1) != '9'
 	AND [SCHEDULE].[BADGE_NUM] NOT IN ('222222222','666666666','777777777','888888888','999999999')
+
+END
+GO
