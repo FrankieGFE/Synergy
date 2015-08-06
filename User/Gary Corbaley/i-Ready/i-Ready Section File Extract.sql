@@ -35,7 +35,7 @@ SELECT
 	,[RevYear].[SCHOOL_YEAR]
 	,[RevYear].[EXTENSION]
 FROM
-	APS.PrimaryEnrollmentsAsOf(GETDATE()) AS [Enrollments]
+	APS.PrimaryEnrollmentsAsOf(CASE WHEN MONTH(GETDATE()) = 8 THEN '10/1/' + CONVERT(VARCHAR(4),YEAR(GETDATE())) ELSE GETDATE() END) AS [Enrollments]
 	
 	INNER JOIN
 	rev.EPC_STU_SCH_YR AS [StudentSchoolYear]
@@ -264,7 +264,7 @@ FROM
 		
 	FROM
 		--APS.BasicSchedule AS [SCHEDULE]
-		APS.ScheduleAsOf(GETDATE()) AS [SCHEDULE]
+		APS.ScheduleAsOf(CASE WHEN MONTH(GETDATE()) = 8 THEN '10/1/' + CONVERT(VARCHAR(4),YEAR(GETDATE())) ELSE GETDATE() END) AS [SCHEDULE]
 		
 		INNER JOIN
 		rev.EPC_CRS AS [COURSE]
