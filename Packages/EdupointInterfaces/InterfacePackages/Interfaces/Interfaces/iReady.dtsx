@@ -12,8 +12,8 @@
   DTS:ObjectName="iReady"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="26"
-  DTS:VersionGUID="{EF75A886-7570-4D3C-B6DC-58AEE463D8C7}">
+  DTS:VersionBuild="27"
+  DTS:VersionGUID="{2123B1DF-D9D0-4E9A-9AD4-B1C48B5BAFC3}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -3777,11 +3777,11 @@ SELECT DISTINCT
 	,[STAFF_PERSON].[LAST_NAME] AS [Last Name]
 	,CASE 
 		WHEN [STAFF].[TYPE] = 'TE' THEN 'Teacher'
-		WHEN [STAFF].[TYPE] = 'DA' THEN 'DistrictAdministrator'
+		WHEN [STAFF].[TYPE] = 'DA' THEN 'SchoolAdministrator'
 		WHEN [STAFF].[TYPE] = 'SA' THEN 'SchoolAdministrator'
 		WHEN [STAFF].[TYPE] = 'SCA' THEN 'SchoolAdministrator'
 		WHEN [STAFF].[TYPE] = 'ED' THEN 'Teacher'
-		ELSE 'Coordinator'
+		ELSE 'SchoolAdministrator'
 	END AS [Role]
 	,[STAFF_PERSON].[EMAIL]
 	,[STAFF_PERSON].[EMAIL] AS [User Name]
@@ -4134,7 +4134,7 @@ WHERE
                       refId="Package\iReadyStaff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Role]"
                       codePage="1252"
                       dataType="str"
-                      length="21"
+                      length="19"
                       name="Role" />
                     <externalMetadataColumn
                       refId="Package\iReadyStaff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EMAIL]"
@@ -4266,7 +4266,7 @@ WHERE
                       refId="Package\iReadyStaff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Role]"
                       codePage="1252"
                       dataType="str"
-                      length="21"
+                      length="19"
                       lineageId="Package\iReadyStaff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Role]"
                       name="Role" />
                     <outputColumn
