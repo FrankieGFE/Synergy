@@ -1,16 +1,16 @@
-USE ST_Production
-GO
+--USE ST_Production
+--GO
 
 
--- Remove Procedure if it exists
-IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[iReadyStaff]') AND type in (N'P', N'PC'))
-	EXEC ('CREATE PROCEDURE [APS].iReadyStaff AS SELECT 0')
-GO
+---- Remove Procedure if it exists
+--IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[iReadyStaff]') AND type in (N'P', N'PC'))
+--	EXEC ('CREATE PROCEDURE [APS].iReadyStaff AS SELECT 0')
+--GO
 
-ALTER PROC [APS].[iReadyStaff]
+--ALTER PROC [APS].[iReadyStaff]
 
-AS
-BEGIN
+--AS
+--BEGIN
 
 SELECT
 	[Client ID]
@@ -44,11 +44,11 @@ SELECT DISTINCT
 	,[STAFF_PERSON].[LAST_NAME] AS [Last Name]
 	,CASE 
 		WHEN [STAFF].[TYPE] = 'TE' THEN 'Teacher'
-		WHEN [STAFF].[TYPE] = 'DA' THEN 'DistrictAdministrator'
+		WHEN [STAFF].[TYPE] = 'DA' THEN 'SchoolAdministrator'
 		WHEN [STAFF].[TYPE] = 'SA' THEN 'SchoolAdministrator'
 		WHEN [STAFF].[TYPE] = 'SCA' THEN 'SchoolAdministrator'
 		WHEN [STAFF].[TYPE] = 'ED' THEN 'Teacher'
-		ELSE 'Coordinator'
+		ELSE 'SchoolAdministrator'
 	END AS [Role]
 	,[STAFF_PERSON].[EMAIL]
 	,[STAFF_PERSON].[EMAIL] AS [User Name]
@@ -109,5 +109,5 @@ WHERE
 WHERE
 	[RN] = 1
 	
-END
-GO
+--END
+--GO
