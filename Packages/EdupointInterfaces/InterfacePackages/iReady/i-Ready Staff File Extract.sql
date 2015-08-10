@@ -1,16 +1,16 @@
---USE ST_Production
---GO
+USE ST_Production
+GO
 
 
----- Remove Procedure if it exists
---IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[iReadyStaff]') AND type in (N'P', N'PC'))
---	EXEC ('CREATE PROCEDURE [APS].iReadyStaff AS SELECT 0')
---GO
+-- Remove Procedure if it exists
+IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[iReadyStaff]') AND type in (N'P', N'PC'))
+	EXEC ('CREATE PROCEDURE [APS].iReadyStaff AS SELECT 0')
+GO
 
---ALTER PROC [APS].[iReadyStaff]
+ALTER PROC [APS].[iReadyStaff]
 
---AS
---BEGIN
+AS
+BEGIN
 
 SELECT
 	[Client ID]
@@ -109,5 +109,5 @@ WHERE
 WHERE
 	[RN] = 1
 	
---END
---GO
+END
+GO
