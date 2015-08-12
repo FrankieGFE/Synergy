@@ -50,6 +50,7 @@ EXEC APS.ActiveDirectoryStudents
 --UPDATE IF THEY EXIST
 --this will only be run once, if they exist, update their userid
 
+/*
 UPDATE rev.REV_USER_NON_SYS
 SET USER_ID = SIS_NUMBER
 
@@ -74,7 +75,7 @@ FROM
 
   WHERE
   rev.REV_USER_NON_SYS.PERSON_GU = FOUNDSTUDENTVUEKIDS.STUDENT_GU
-
+*/
 -----------------------------------------------------------------------------------------------
 --INSERT IF THEY DON'T EXIST
 
