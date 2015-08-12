@@ -1,16 +1,16 @@
-USE ST_Production
-GO
+--USE ST_Production
+--GO
 
 
--- Remove Procedure if it exists
-IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[iReadyStudent]') AND type in (N'P', N'PC'))
-	EXEC ('CREATE PROCEDURE [APS].iReadyStudent AS SELECT 0')
-GO
+---- Remove Procedure if it exists
+--IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[iReadyStudent]') AND type in (N'P', N'PC'))
+--	EXEC ('CREATE PROCEDURE [APS].iReadyStudent AS SELECT 0')
+--GO
 
-ALTER PROC [APS].[iReadyStudent]
+--ALTER PROC [APS].[iReadyStudent]
 
-AS
-BEGIN
+--AS
+--BEGIN
 
 
 
@@ -241,43 +241,45 @@ FROM
 
 --------------------------------------------------------------------------------------------------------------------
 
-SELECT
+SELECT DISTINCT
 	[Client ID]
 	,[School ID]
-	,[Student SIS ID]
-	,[Student Number]
-	,[First Name]
-	,[Last Name]
-	,[Grade Level]
-	,[User Name]
-	,[Password]
-	,[DOB]
-	,[Ethnicity]
-	,[Hispanic]
-	,[Gender]
-	,[Economically Disadvantaged]
-	,[English Learner]
-	,[Special Education]
-	,[Migrant]
-	,[Math Developmental Level]
-	,[English Developmental Level]
-	,[Partner ID]
-	,[Action]
-	,[RTI Level]
-	,[Gifted / Talented]
-	,[Reserved1]
-	,[Reserved2]
-	,[Reserved3]
-	,[Reserved4]
-	,[Reserved5]
-	,[Reserved6]
-	,[Reserved7]
-	,[Reserved8]
+	,[SCHOOL_NAME]
+	--,[Student SIS ID]
+	--,[Student Number]
+	--,[First Name]
+	--,[Last Name]
+	--,[Grade Level]
+	--,[User Name]
+	--,[Password]
+	--,[DOB]
+	--,[Ethnicity]
+	--,[Hispanic]
+	--,[Gender]
+	--,[Economically Disadvantaged]
+	--,[English Learner]
+	--,[Special Education]
+	--,[Migrant]
+	--,[Math Developmental Level]
+	--,[English Developmental Level]
+	--,[Partner ID]
+	--,[Action]
+	--,[RTI Level]
+	--,[Gifted / Talented]
+	--,[Reserved1]
+	--,[Reserved2]
+	--,[Reserved3]
+	--,[Reserved4]
+	--,[Reserved5]
+	--,[Reserved6]
+	--,[Reserved7]
+	--,[Reserved8]
 FROM
 (
 SELECT DISTINCT
 	'nm-albuq87774' AS [Client ID]
 	,[ENROLLMENTS].[SCHOOL_CODE] AS [School ID]
+	,[ENROLLMENTS].[SCHOOL_NAME]
 	,[STUDENT].[STATE_STUDENT_NUMBER] AS [Student SIS ID]
 	,[STUDENT].[SIS_NUMBER] AS [Student Number]
 	,[STUDENT].[FIRST_NAME] AS [First Name]
@@ -334,6 +336,9 @@ WHERE
 
 WHERE
 	[RN] = 1
+	
+ORDER BY
+	[SCHOOL_NAME]
 
-END
-GO
+--END
+--GO
