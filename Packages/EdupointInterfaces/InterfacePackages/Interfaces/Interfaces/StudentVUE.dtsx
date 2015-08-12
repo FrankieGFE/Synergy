@@ -12,8 +12,8 @@
   DTS:ObjectName="StudentVUE"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="10"
-  DTS:VersionGUID="{C0769222-6C64-43DA-BE5D-3A92E5154055}">
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{BDF52053-0731-4CCA-8C45-B1D7291FEE09}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -64,7 +64,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{FADFF86B-1206-4654-968B-DAA434F31C3A}"
-          SQLTask:SqlStatementSource="exec APS.CreateStudentVUE" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="USE [ST_Production]&#xA;GO&#xA;&#xA;DECLARE&#x9;@return_value int&#xA;&#xA;EXEC&#x9;@return_value = [APS].[CreateStudentVUE]&#xA;&#x9;&#x9;@ValidateOnly = NULL&#xA;&#xA;SELECT&#x9;'Return Value' = @return_value&#xA;&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
