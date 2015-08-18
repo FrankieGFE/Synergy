@@ -109,4 +109,7 @@ LEFT JOIN EthCodes                  eth  ON eth.PERSON_GU = stu.STUDENT_GU and e
 LEFT JOIN rev.EP_STUDENT_SPECIAL_ED sped ON sped.STUDENT_GU = stu.STUDENT_GU and sped.PRIMARY_DISABILITY_CODE = 'GI'
 LEFT JOIN rev.EPC_STU_PGM_ELL       ell  ON ell.STUDENT_GU = stu.STUDENT_GU
 
+WHERE
+	EPC_SCH.SCHOOL_CODE = '540'
+
 Order by [Orderby]
