@@ -12,8 +12,8 @@
   DTS:ObjectName="StudentVUE"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="11"
-  DTS:VersionGUID="{BDF52053-0731-4CCA-8C45-B1D7291FEE09}">
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{6487C966-C9F2-4571-8113-2FAC75248B12}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -64,7 +64,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{FADFF86B-1206-4654-968B-DAA434F31C3A}"
-          SQLTask:SqlStatementSource="USE [ST_Production]&#xA;GO&#xA;&#xA;DECLARE&#x9;@return_value int&#xA;&#xA;EXEC&#x9;@return_value = [APS].[CreateStudentVUE]&#xA;&#x9;&#x9;@ValidateOnly = NULL&#xA;&#xA;SELECT&#x9;'Return Value' = @return_value&#xA;&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="DECLARE @TEMP TABLE&#xA;(&#xA;DistrictNumber VARCHAR (3), &#xA;SchoolYear VARCHAR (8),&#xA;StudentIDNumber VARCHAR (9),&#xA;SORSchoolNumber VARCHAR(3),&#xA;SchoolName VARCHAR (100),&#xA;Grade VARCHAR (2),&#xA;EnterDate VARCHAR (8),&#xA;AddDelStatus VARCHAR (1),&#xA;LastName VARCHAR (100),&#xA;FirstName VARCHAR (100),&#xA;StudentMiddleName VARCHAR (100),&#xA;SchooLOfRecord VARCHAR (1)&#xA;)&#xA;&#xA;INSERT INTO &#xA;&#x9;@TEMP&#xA;EXEC APS.ActiveDirectoryStudents&#xA;&#xA;----------------------------------------------------------------------------------------------&#xA;--UPDATE IF THEY EXIST&#xA;--this will only be run once, if they exist, update their userid&#xA;&#xA;/*&#xA;UPDATE rev.REV_USER_NON_SYS&#xA;SET USER_ID = SIS_NUMBER&#xA;&#xA;--SELECT *&#xA;&#xA;FROM &#xA;(&#xA;SELECT DISTINCT &#xA;&#x9;STUDENT_GU,&#xA;&#x9;SIS_NUMBER&#xA;FROM &#xA; @TEMP AS TEMP&#xA; INNER JOIN&#xA; rev.EPC_STU AS STU&#xA; ON&#xA; TEMP.StudentIDNumber = STU.SIS_NUMBER&#xA; INNER JOIN&#xA; rev.REV_USER_NON_SYS AS SYSUSER&#xA; ON&#xA; STU.STUDENT_GU = SYSUSER.PERSON_GU&#xA; ) AS FOUNDSTUDENTVUEKIDS&#xA;&#xA;  WHERE&#xA;  rev.REV_USER_NON_SYS.PERSON_GU = FOUNDSTUDENTVUEKIDS.STUDENT_GU&#xA;*/&#xA;-----------------------------------------------------------------------------------------------&#xA;--INSERT IF THEY DON'T EXIST&#xA;&#xA;&#xA;INSERT INTO rev.REV_USER_NON_SYS&#xA;&#xA;SELECT &#xA;NEWSTUDENTVUEKIDS.STUDENT_GU AS PERSON_GU&#xA;,NEWSTUDENTVUEKIDS.SIS_NUMBER AS USER_ID&#xA;,NULL AS ACTIVATE_KEY&#xA;, NULL AS PASSWORD&#xA;,NULL AS LAST_ACCESSED&#xA;,NULL AS LAST_ACCESSED_IP&#xA;,NULL AS ACTIVATION_DATE_TIME&#xA;,NULL AS ACTIVATE_KEY_DATETIME&#xA;,1 AS USER_TYPE&#xA;,'N' AS DISABLED&#xA;,NULL AS LOGIN_ATTEMPTS&#xA;,NULL AS PREFERENCES&#xA;,'N' AS ACTIVATED_VIA_REG&#xA;&#xA;FROM &#xA;(&#xA;SELECT DISTINCT &#xA;&#x9;STUDENT_GU,&#xA;&#x9;SIS_NUMBER&#xA;&#xA;FROM &#xA; @TEMP AS TEMP&#xA; INNER JOIN&#xA; rev.EPC_STU AS STU&#xA; ON&#xA; TEMP.StudentIDNumber = STU.SIS_NUMBER&#xA; LEFT JOIN&#xA; rev.REV_USER_NON_SYS AS SYSUSER&#xA; ON&#xA; STU.STUDENT_GU = SYSUSER.PERSON_GU&#xA;&#xA; WHERE&#xA; SYSUSER.PERSON_GU IS NULL&#xA;&#xA; ) AS NEWSTUDENTVUEKIDS" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
