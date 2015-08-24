@@ -1,16 +1,16 @@
---USE ST_Production
---GO
+USE ST_Production
+GO
 
 
----- Remove Procedure if it exists
---IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[iReadySection]') AND type in (N'P', N'PC'))
---	EXEC ('CREATE PROCEDURE [APS].iReadySection AS SELECT 0')
---GO
+-- Remove Procedure if it exists
+IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[iReadySection]') AND type in (N'P', N'PC'))
+	EXEC ('CREATE PROCEDURE [APS].iReadySection AS SELECT 0')
+GO
 
---ALTER PROC [APS].[iReadySection]
+ALTER PROC [APS].[iReadySection]
 
---AS
---BEGIN
+AS
+BEGIN
 ; WITH
 
 -- From School of Record [EPC_STU_YR]
@@ -435,7 +435,7 @@ WHERE
 	
 	--AND [SCHEDULE].[COURSE_ID] IN ('11504000','00052015')
 	
-	AND [ENROLLMENTS].[SCHOOL_CODE] = '430'
+	--AND [ENROLLMENTS].[SCHOOL_CODE] = '430'
 	
 --ORDER BY
 --	[ENROLLMENTS].[SCHOOL_CODE]
@@ -446,8 +446,8 @@ WHERE
 WHERE
 	[RN] = 1
 
---ORDER BY
---	[Section ID]
+ORDER BY
+	[Section ID]
 
---END
---GO
+END
+GO
