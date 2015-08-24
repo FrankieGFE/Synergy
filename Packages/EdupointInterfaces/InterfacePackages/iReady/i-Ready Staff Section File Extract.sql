@@ -275,7 +275,7 @@ FROM
 		rev.EPC_CRS AS [COURSE]
 		ON
 		[SCHEDULE].[COURSE_GU] = [COURSE].[COURSE_GU]
-		AND [COURSE].[TEACHER_AIDE] = 'N'
+		--AND [COURSE].[TEACHER_AIDE] = 'N'
 		
 		-- Get both primary and secodary staff
 		INNER JOIN
