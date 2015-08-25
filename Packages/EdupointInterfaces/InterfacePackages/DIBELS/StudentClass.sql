@@ -6,7 +6,7 @@ set @SchYr = (select school_year from rev.SIF_22_Common_CurrentYear)
 SELECT DISTINCT
 
    org.ORGANIZATION_NAME     AS [Institution]
- , stfp.LAST_NAME            AS [Primary Class ID]
+ , LEFT(crs.COURSE_SHORT_TITLE,3) + stfp.LAST_NAME            AS [Primary Class ID]
  , stu.STATE_STUDENT_NUMBER  AS [Student Primary ID]
  , ''                        AS [Is Official Class]
 
@@ -23,11 +23,13 @@ FROM  rev.EPC_STU                         stu
       JOIN rev.REV_ORGANIZATION           org   ON org.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
       LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd on grd.VALUE_CODE = ssy.GRADE
       JOIN REV.EPC_STU_CLASS              cls   ON cls.STUDENT_SCHOOL_YEAR_GU  = ssy.STUDENT_SCHOOL_YEAR_GU
-      JOIN REV.EPC_SCH_YR_SECT            sec   ON cls.SECTION_GU              = sec.SECTION_GU
-      LEFT JOIN rev.EPC_SCH_YR_SECT       sect  ON sect.SECTION_GU             = ssy.HOMEROOM_SECTION_GU
-      LEFT JOIN rev.EPC_SCH_YR_CRS        ycrs  ON ycrs.SCHOOL_YEAR_COURSE_GU  = sect.SCHOOL_YEAR_COURSE_GU
+      JOIN REV.EPC_SCH_YR_SECT            sec   ON cls.SECTION_GU              = sec.SECTION_GU AND sec.PERIOD_BEGIN = 1
+      
+      --LEFT JOIN rev.EPC_SCH_YR_SECT       sect  ON sect.SECTION_GU             = ssy.HOMEROOM_SECTION_GU
+													--OR (cls.SECTION_GU              = sect.SECTION_GU AND sect.PERIOD_BEGIN = 1)
+      LEFT JOIN rev.EPC_SCH_YR_CRS        ycrs  ON ycrs.SCHOOL_YEAR_COURSE_GU  = sec.SCHOOL_YEAR_COURSE_GU
       LEFT JOIN rev.EPC_CRS               crs   ON crs.COURSE_GU               = ycrs.COURSE_GU
-	  LEFT JOIN rev.EPC_STAFF_SCH_YR      stfsy ON stfsy.STAFF_SCHOOL_YEAR_GU  = sect.STAFF_SCHOOL_YEAR_GU
+	  LEFT JOIN rev.EPC_STAFF_SCH_YR      stfsy ON stfsy.STAFF_SCHOOL_YEAR_GU  = sec.STAFF_SCHOOL_YEAR_GU
 	  LEFT JOIN rev.EPC_STAFF             stf   ON stf.STAFF_GU                = stfsy.STAFF_GU
 	  LEFT JOIN rev.REV_PERSON            stfp  ON stfp.PERSON_GU              = stf.STAFF_GU
 WHERE grd.value_description in ('K', '01','02','03')
