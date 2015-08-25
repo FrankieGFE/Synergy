@@ -1,16 +1,16 @@
-USE ST_Production
-GO
+--USE ST_Production
+--GO
 
 
--- Remove Procedure if it exists
-IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[iReadySection]') AND type in (N'P', N'PC'))
-	EXEC ('CREATE PROCEDURE [APS].iReadySection AS SELECT 0')
-GO
+---- Remove Procedure if it exists
+--IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[iReadySection]') AND type in (N'P', N'PC'))
+--	EXEC ('CREATE PROCEDURE [APS].iReadySection AS SELECT 0')
+--GO
 
-ALTER PROC [APS].[iReadySection]
+--ALTER PROC [APS].[iReadySection]
 
-AS
-BEGIN
+--AS
+--BEGIN
 ; WITH
 
 -- From School of Record [EPC_STU_YR]
@@ -267,10 +267,11 @@ FROM
 		APS.ScheduleAsOf(CASE WHEN MONTH(GETDATE()) = 8 THEN '10/1/' + CONVERT(VARCHAR(4),YEAR(GETDATE())) ELSE GETDATE() END) AS [SCHEDULE]
 		
 		INNER JOIN
-		rev.EPC_CRS AS [COURSE]
+		rev.[EPC_STU_CLASS] AS [CLASS]
 		ON
-		[SCHEDULE].[COURSE_GU] = [COURSE].[COURSE_GU]
-		--AND [COURSE].[TEACHER_AIDE] = 'N'
+		[SCHEDULE].[STUDENT_SCHOOL_YEAR_GU] = [CLASS].[STUDENT_SCHOOL_YEAR_GU]
+		AND [SCHEDULE].[SECTION_GU] = [CLASS].[SECTION_GU]
+		AND [CLASS].[TEACHER_AIDE] = 'N'
 		
 		-- Get both primary and secodary staff
 		INNER JOIN
@@ -449,5 +450,5 @@ WHERE
 ORDER BY
 	[Section ID]
 
-END
-GO
+--END
+--GO
