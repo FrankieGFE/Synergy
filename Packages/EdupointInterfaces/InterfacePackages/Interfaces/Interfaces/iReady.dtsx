@@ -12,8 +12,8 @@
   DTS:ObjectName="iReady"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="27"
-  DTS:VersionGUID="{2123B1DF-D9D0-4E9A-9AD4-B1C48B5BAFC3}">
+  DTS:VersionBuild="30"
+  DTS:VersionGUID="{9A574BF7-8C8B-4767-A7EE-71129C1157EA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -2674,9 +2674,11 @@ FROM
 		APS.ScheduleAsOf(CASE WHEN MONTH(GETDATE()) = 8 THEN '10/1/' + CONVERT(VARCHAR(4),YEAR(GETDATE())) ELSE GETDATE() END) AS [SCHEDULE]
 		
 		INNER JOIN
-		rev.EPC_CRS AS [COURSE]
+		rev.[EPC_STU_CLASS] AS [CLASS]
 		ON
-		[SCHEDULE].[COURSE_GU] = [COURSE].[COURSE_GU]
+		[SCHEDULE].[STUDENT_SCHOOL_YEAR_GU] = [CLASS].[STUDENT_SCHOOL_YEAR_GU]
+		AND [SCHEDULE].[SECTION_GU] = [CLASS].[SECTION_GU]
+		AND [CLASS].[TEACHER_AIDE] = 'N'
 		
 		-- Get both primary and secodary staff
 		INNER JOIN
@@ -2841,7 +2843,7 @@ WHERE
 	
 	--AND [SCHEDULE].[COURSE_ID] IN ('11504000','00052015')
 	
-	--AND [ENROLLMENTS].[SCHOOL_CODE] = '405'
+	--AND [ENROLLMENTS].[SCHOOL_CODE] = '430'
 	
 --ORDER BY
 --	[ENROLLMENTS].[SCHOOL_CODE]
@@ -2852,8 +2854,8 @@ WHERE
 WHERE
 	[RN] = 1
 
---ORDER BY
---	[Section ID]</property>
+ORDER BY
+	[Section ID]</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -4927,9 +4929,11 @@ FROM
 		APS.ScheduleAsOf(CASE WHEN MONTH(GETDATE()) = 8 THEN '10/1/' + CONVERT(VARCHAR(4),YEAR(GETDATE())) ELSE GETDATE() END) AS [SCHEDULE]
 		
 		INNER JOIN
-		rev.EPC_CRS AS [COURSE]
+		rev.[EPC_STU_CLASS] AS [CLASS]
 		ON
-		[SCHEDULE].[COURSE_GU] = [COURSE].[COURSE_GU]
+		[SCHEDULE].[STUDENT_SCHOOL_YEAR_GU] = [CLASS].[STUDENT_SCHOOL_YEAR_GU]
+		AND [SCHEDULE].[SECTION_GU] = [CLASS].[SECTION_GU]
+		AND [CLASS].[TEACHER_AIDE] = 'N'
 		
 		-- Get both primary and secodary staff
 		INNER JOIN
@@ -5066,7 +5070,9 @@ WHERE
 	
 	AND ISNUMERIC([SCHEDULE].[BADGE_NUM]) = 1
 	AND LEFT([SCHEDULE].[BADGE_NUM],1) != '9'
-	AND [SCHEDULE].[BADGE_NUM] NOT IN ('222222222','666666666','777777777','888888888','999999999')</property>
+	AND [SCHEDULE].[BADGE_NUM] NOT IN ('222222222','666666666','777777777','888888888','999999999')
+	
+	AND [ENROLLMENTS].[SCHOOL_CODE] NOT IN ('517','592','702','701')</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -7603,9 +7609,11 @@ FROM
 		APS.ScheduleAsOf(CASE WHEN MONTH(GETDATE()) = 8 THEN '10/1/' + CONVERT(VARCHAR(4),YEAR(GETDATE())) ELSE GETDATE() END) AS [SCHEDULE]
 		
 		INNER JOIN
-		rev.EPC_CRS AS [COURSE]
+		rev.[EPC_STU_CLASS] AS [CLASS]
 		ON
-		[SCHEDULE].[COURSE_GU] = [COURSE].[COURSE_GU]
+		[SCHEDULE].[STUDENT_SCHOOL_YEAR_GU] = [CLASS].[STUDENT_SCHOOL_YEAR_GU]
+		AND [SCHEDULE].[SECTION_GU] = [CLASS].[SECTION_GU]
+		AND [CLASS].[TEACHER_AIDE] = 'N'
 		
 		-- Get both primary and secodary staff
 		INNER JOIN
@@ -7738,8 +7746,8 @@ FROM
 	
 WHERE
 	[ENROLLMENTS].[GRADE] IN ('K','01','02','03','04','05','06','07','08')
-	AND [SCHEDULE].[PRIMARY_STAFF] = 1
-	AND [STUDENT].[STATE_STUDENT_NUMBER] IS NOT NULL
+	--AND [SCHEDULE].[PRIMARY_STAFF] = 1
+	--AND [STUDENT].[STATE_STUDENT_NUMBER] IS NOT NULL
 	
 ORDER BY
 	[STUDENT].[STATE_STUDENT_NUMBER]</property>
