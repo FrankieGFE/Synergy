@@ -22,7 +22,8 @@ SELECT DISTINCT
 	,[ENROLLMENT].[SCHOOL_CODE] AS [institution_code]
 	,'2015-08-13' AS [date_start]
 	,'' AS [date_end]
-	,CASE WHEN [SCHEDULE].[PRIMARY_STAFF] = '1' THEN 'Teacher' ELSE 'Staff' END AS [teaching_assignment]	
+	,CASE WHEN [STAFF].[TYPE] = 'TE' THEN 'Teacher' ELSE 'Staff' END AS [position_code]
+	
 	
 FROM
 	APS.PrimaryEnrollmentDetailsAsOf(GETDATE()) AS [ENROLLMENT]
