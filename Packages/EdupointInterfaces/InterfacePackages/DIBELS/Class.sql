@@ -6,8 +6,8 @@ set @SchYr = (select school_year from rev.SIF_22_Common_CurrentYear)
 SELECT DISTINCT
 
    org.ORGANIZATION_NAME  AS [Institution]
- , LEFT(stfp.FIRST_NAME,1) + stfp.LAST_NAME         AS [Primary Class ID]
- , LEFT(stfp.FIRST_NAME,1) + stfp.LAST_NAME         AS [Class Name]
+ , stfp.LAST_NAME         AS [Primary Class ID]
+ , stfp.LAST_NAME         AS [Class Name]
  , grd.VALUE_DESCRIPTION  AS [Grade]
  , ''                     AS [Course Code]
 
