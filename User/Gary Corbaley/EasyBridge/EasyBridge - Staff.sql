@@ -23,7 +23,7 @@ SELECT DISTINCT
 	,[STAFF_PERSON].[EMAIL] AS [email]
 	,'' AS [title]
 	,REPLACE([STAFF].[BADGE_NUM],'e','') AS [staff_number]
-	,'' AS [federated_id]
+	,'115c16a7-2222-4ddc-82ee-2cd78e92a265' AS [federated_id]
 	
 FROM
 	APS.PrimaryEnrollmentDetailsAsOf(GETDATE()) AS [ENROLLMENT]

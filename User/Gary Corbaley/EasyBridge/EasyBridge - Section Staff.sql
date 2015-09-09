@@ -20,7 +20,7 @@ SELECT DISTINCT
 	,REPLACE([STAFF].[BADGE_NUM],'e','') AS [staff_code]
 	,CONVERT(VARCHAR,[ENROLLMENT].[SCHOOL_CODE]) + CONVERT(VARCHAR,[SCHEDULE].[SECTION_ID]) AS [native_section_code]
 	,'2015-08-13' AS [date_start]
-	,'' AS [date_end]
+	,[TERMDATES].[TermEnd] AS [date_end]
 	,[ENROLLMENT].[SCHOOL_YEAR] AS [school_year]
 	,CASE WHEN [SCHEDULE].[PRIMARY_STAFF] = '1' THEN 'true' ELSE 'false' END AS [teacher_of_record]
 	,CASE WHEN [SCHEDULE].[PRIMARY_STAFF] = '1' THEN 'Teacher' ELSE 'Co-teacher' END AS [teaching_assignment]
@@ -43,6 +43,12 @@ FROM
 	rev.[REV_PERSON] AS [STAFF_PERSON]
 	ON
 	[STAFF].[STAFF_GU] = [STAFF_PERSON].[PERSON_GU]
+	
+	LEFT OUTER JOIN
+	APS.TermDates() AS [TERMDATES]
+	ON
+	[SCHEDULE].[ORGANIZATION_YEAR_GU] = [TERMDATES].[OrgYearGU]
+	AND [SCHEDULE].[TERM_CODE] = [TERMDATES].[TermCode]
 	
 WHERE
 	[ENROLLMENT].[GRADE] IN ('06','07','08')

@@ -24,8 +24,7 @@ SELECT
 	,CONVERT(VARCHAR(4),YEAR([STUDENT].[BIRTH_DATE])) + '-' + RIGHT('00' + CONVERT(VARCHAR(2),DATEPART(MM,[STUDENT].[BIRTH_DATE])),2) + '-' + RIGHT('00' + CONVERT(VARCHAR(2),DATEPART(DD,[STUDENT].[BIRTH_DATE])),2) AS [dob]
 	,[PERSON].[EMAIL] AS [email]
 	,[STUDENT].[SIS_NUMBER] AS [student_number]
-	,[STUDENT].[SIS_NUMBER] AS [username]
-	,'' AS [password]
+	,'aae13276-e8d3-4bcc-84ed-3109fc95f9c3' AS [federated_id]
 	
 FROM
 	APS.PrimaryEnrollmentDetailsAsOf(GETDATE()) [ENROLLMENT]
