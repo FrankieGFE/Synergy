@@ -15,7 +15,7 @@
  */
  
  
-SELECT
+SELECT DISTINCT
 	[ENROLLMENT].[SCHOOL_CODE] AS [school_code]
 	,[ENROLLMENT].[SCHOOL_NAME] AS [school_name]
 	,'001' AS [district_code]

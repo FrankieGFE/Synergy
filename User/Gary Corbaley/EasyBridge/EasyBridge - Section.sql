@@ -21,7 +21,7 @@ SELECT DISTINCT
 	,'' AS [section_type]
 	,'' AS [section_type_description]
 	,'2015-08-13' AS [date_start]
-	,[TERMDATES].[TermEnd] AS [date_end]
+	,'2016-05-25' AS [date_end]
 	,[ENROLLMENT].[SCHOOL_YEAR] AS [school_year]
 	,[SCHEDULE].[COURSE_ID] AS [course_number]
 	,[SCHEDULE].[COURSE_TITLE] AS [course_name]
