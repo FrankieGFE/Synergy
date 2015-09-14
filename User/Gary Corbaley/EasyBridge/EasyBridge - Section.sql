@@ -20,8 +20,8 @@ SELECT DISTINCT
 	,[ENROLLMENT].[SCHOOL_CODE] AS [school_code]
 	,'' AS [section_type]
 	,'' AS [section_type_description]
-	,'2015-08-13' AS [date_start]
-	,'2016-05-25' AS [date_end]
+	,[TERMDATES].[TermBegin] AS [date_start]
+	,[TERMDATES].[TermEnd] AS [date_end]
 	,[ENROLLMENT].[SCHOOL_YEAR] AS [school_year]
 	,[SCHEDULE].[COURSE_ID] AS [course_number]
 	,[SCHEDULE].[COURSE_TITLE] AS [course_name]
@@ -38,7 +38,19 @@ FROM
 	AND [ENROLLMENT].[ORGANIZATION_YEAR_GU] = [SCHEDULE].[ORGANIZATION_YEAR_GU]
 	
 	LEFT OUTER JOIN
-	APS.TermDates() AS [TERMDATES]
+	(
+	SELECT
+		[TERMDATES].[OrgYearGU]
+		,[TERMDATES].[TermCode]
+		,CONVERT(VARCHAR(10),MIN([TERMDATES].[TermBegin]),126) AS [TermBegin]
+		,CONVERT(VARCHAR(10),MAX([TERMDATES].[TermEnd]),126) AS [TermEnd]
+	FROM
+		APS.TermDates() AS [TERMDATES]
+		
+	GROUP BY
+		[TERMDATES].[OrgYearGU]
+		,[TERMDATES].[TermCode]
+	) AS [TERMDATES]
 	ON
 	[SCHEDULE].[ORGANIZATION_YEAR_GU] = [TERMDATES].[OrgYearGU]
 	AND [SCHEDULE].[TERM_CODE] = [TERMDATES].[TermCode]

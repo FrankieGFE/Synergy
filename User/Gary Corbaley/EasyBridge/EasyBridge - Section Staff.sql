@@ -19,8 +19,8 @@ SELECT DISTINCT
 	REPLACE([STAFF].[BADGE_NUM],'e','') + '-' + CONVERT(VARCHAR,[ENROLLMENT].[SCHOOL_CODE]) + CONVERT(VARCHAR,[SCHEDULE].[SECTION_ID]) AS [section_teacher_code]
 	,REPLACE([STAFF].[BADGE_NUM],'e','') AS [staff_code]
 	,CONVERT(VARCHAR,[ENROLLMENT].[SCHOOL_CODE]) + CONVERT(VARCHAR,[SCHEDULE].[SECTION_ID]) AS [native_section_code]
-	,'2015-08-13' AS [date_start]
-	,'2016-05-25' AS [date_end]
+	,[TERMDATES].[TermBegin] AS [date_start]
+	,[TERMDATES].[TermEnd] AS [date_end]
 	,[ENROLLMENT].[SCHOOL_YEAR] AS [school_year]
 	,CASE WHEN [SCHEDULE].[PRIMARY_STAFF] = '1' THEN 'true' ELSE 'false' END AS [teacher_of_record]
 	,CASE WHEN [SCHEDULE].[PRIMARY_STAFF] = '1' THEN 'Teacher' ELSE 'Co-teacher' END AS [teaching_assignment]
@@ -47,7 +47,19 @@ FROM
 	[STAFF].[STAFF_GU] = [STAFF_PERSON].[PERSON_GU]
 	
 	LEFT OUTER JOIN
-	APS.TermDates() AS [TERMDATES]
+	(
+	SELECT
+		[TERMDATES].[OrgYearGU]
+		,[TERMDATES].[TermCode]
+		,CONVERT(VARCHAR(10),MIN([TERMDATES].[TermBegin]),126) AS [TermBegin]
+		,CONVERT(VARCHAR(10),MAX([TERMDATES].[TermEnd]),126) AS [TermEnd]
+	FROM
+		APS.TermDates() AS [TERMDATES]
+		
+	GROUP BY
+		[TERMDATES].[OrgYearGU]
+		,[TERMDATES].[TermCode]
+	) AS [TERMDATES]
 	ON
 	[SCHEDULE].[ORGANIZATION_YEAR_GU] = [TERMDATES].[OrgYearGU]
 	AND [SCHEDULE].[TERM_CODE] = [TERMDATES].[TermCode]
