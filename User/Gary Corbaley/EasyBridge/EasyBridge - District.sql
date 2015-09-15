@@ -5,7 +5,7 @@
 
 
 SELECT
-	'01' AS [district_code]
+	'001' AS [district_code]
 	,[Organization].[ORGANIZATION_NAME] AS [district_name]
 	,[ADDRESS].[ADDRESS] AS [address_1]
 	,[ADDRESS].[ADDRESS2] AS [address_2]
