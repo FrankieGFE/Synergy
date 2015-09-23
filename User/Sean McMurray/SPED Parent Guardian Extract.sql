@@ -1,9 +1,9 @@
-//*Created by: e207878/Sean McMurray
-Purpose: Data extract to pull parent information for SPED students
-Note: Created stored procedure for SSIS job to run nightly
-*//
+--Created by: e207878/Sean McMurray
+--Purpose: Data extract to pull parent information for SPED students
+--Note: Created stored procedure for SSIS job to run nightly
 
-USE [ST_SPED]
+
+
 
 Select
   rev.EPC_PARENT.ADULT_ID AS [Adult ID]
