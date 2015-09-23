@@ -1,4 +1,4 @@
-//*Pulls PK, P1, P2 students in specific schools*//
+--Pulls PK, P1, P2 students in specific schools
 
 SELECT
 
@@ -22,7 +22,7 @@ rev.REV_ADDRESS ON rev.REV_PERSON.HOME_ADDRESS_GU = rev.REV_ADDRESS.ADDRESS_GU
 INNER JOIN
 rev.EPC_STU ON APS.PrimaryEnrollmentDetailsAsOf.STUDENT_GU = rev.EPC_STU.STUDENT_GU
 
-//*Change this to include different schools and gradese*//
+--//*Change this to include different schools and grades*//
 
 WHERE
 
