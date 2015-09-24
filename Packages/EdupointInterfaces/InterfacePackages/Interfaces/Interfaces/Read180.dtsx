@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Read180"
   DTS:PackageType="5"
-  DTS:VersionBuild="24"
-  DTS:VersionGUID="{149D21E0-BDAF-4FD1-8512-3B95E76A761B}">
+  DTS:VersionBuild="26"
+  DTS:VersionGUID="{26804DE3-41BD-4A17-AEB7-E1FE7A5BC7C0}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA18tsXWAShEu39NgC3mjhaAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADKBQZB/FkpoA5I+qgDFP7sAAAAAASAAACgAAAAEAAAAG7Ix46C4DQmGQKYYUXJVeEwAAAADBP/kY6jj3wn9zqL8NYSf00VxXN9GQySSHhiRJJxsfrloB7etVtntka4QpCe/R6QFAAAAKhshjr/RFQlSuWzzHV5TLLR2HtD</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA6A0OOBBq9UmrEjGTEnKxXgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAB2xQE2WD5n80QFLUMQ6VvdAAAAAASAAACgAAAAEAAAAL0AloCICfWD6Og86OnH5L0wAAAA6dVoz8tBcdePrjtqcG9eM0Fr2eNABCAXju3a5IjwPgL39Tt2Hei81YV/UA2Oee0YFAAAAPKYNFEolldlGPLhT4EhGqBgPKVk</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -531,12 +531,20 @@ FROM
 	JOIN REV.EPC_SCH                SCH    ON OY.ORGANIZATION_GU = SCH.ORGANIZATION_GU
 
 WHERE  SSY.STATUS IS NULL
-AND crs.COURSE_ID IN (
- '540111','540112','540211','540212','540311','540312','21206','212061','212062','21207'
+AND (crs.COURSE_ID IN (
+'540111','540112','540211','540212','540311','540312','21206','212061','212062','21207'
 ,'212071','212072','21208','212081','212082','210421','210422','210431','210432','210441'
 ,'210442','212091','212092','212101','212102','212111','212112','212121','212122','54011'
-,'54021', '540411', '540412'
+,'54021', '540411', '540412','54031','540611','540612'
 )
+OR (crs.COURSE_ID IN
+('0604a1','0604a2','0614a1','0614a2','2055e1','2055e2','2055j1',
+'2055j2','2055n1','250311','250312','250341','250342') 
+AND SCH.SCHOOL_CODE = '540')
+OR
+(SCH.[SCHOOL_CODE] IN ('206','496') AND SEC.PERIOD_BEGIN = 1)
+)
+
 
 AND (CLS.LEAVE_DATE IS NULL OR CLS.LEAVE_DATE &gt;= GETDATE())
 	AND CLS.ENTER_DATE &lt;= GETDATE() 
@@ -1533,12 +1541,20 @@ FROM
     JOIN REV.EPC_SCH                SCH    ON SCH.ORGANIZATION_GU = OY.ORGANIZATION_GU
 	JOIN REV.REV_ORGANIZATION       ORG    ON ORG.ORGANIZATION_GU = oy.ORGANIZATION_GU
 WHERE  SSY.STATUS IS NULL
-AND crs.COURSE_ID IN (
-    '540111','540112','540211','540212','540311','540312','21206','212061','212062','21207'
-   ,'212071','212072','21208','212081','212082','210421','210422','210431','210432','210441'
-   ,'210442','212091','212092','212101','212102','212111','212112','212121','212122','54011'
-   ,'54021'
-   )
+AND (crs.COURSE_ID IN (
+'540111','540112','540211','540212','540311','540312','21206','212061','212062','21207'
+,'212071','212072','21208','212081','212082','210421','210422','210431','210432','210441'
+,'210442','212091','212092','212101','212102','212111','212112','212121','212122','54011'
+,'54021', '540411', '540412','54031','540611','540612'
+)
+OR (crs.COURSE_ID IN
+('0604a1','0604a2','0614a1','0614a2','2055e1','2055e2','2055j1',
+'2055j2','2055n1','250311','250312','250341','250342') 
+AND SCH.SCHOOL_CODE = '540')
+OR
+(SCH.[SCHOOL_CODE] IN ('206','496') AND SEC.PERIOD_BEGIN = 1)
+)
+
 
 )
 SELECT
@@ -2325,7 +2341,7 @@ order by [Orderby]</property>
           Text="Adjust Addendum file path in SQL Task Create student and Teacher addendum current location is &#xA;D:\from 011-synergydb\Edupoint_Work\InterfacePackages\Read180"
           ParentId="Package"
           FontInfo="{assembly:Null}"
-          Size="515,53"
+          Size="515,74"
           Id="6b8fccd9-682f-4307-bf0a-d8f47a56b439"
           TopLeft="268,15" />
       </GraphLayout>
@@ -2335,7 +2351,7 @@ order by [Orderby]</property>
     design-time-name="Package\Students">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="126,42"
           Id="Package\Students\DB Query"
@@ -2363,9 +2379,7 @@ order by [Orderby]</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2383,7 +2397,7 @@ order by [Orderby]</property>
     design-time-name="Package\Teacher">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="126,42"
           Id="Package\Teacher\DB Query"
@@ -2411,9 +2425,7 @@ order by [Orderby]</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
