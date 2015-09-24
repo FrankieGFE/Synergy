@@ -80,7 +80,7 @@ WHERE
 -- join in MostRecent ELL To get the STU_PGM_ELL_HIS_GU (for the record we are actually going to update)
 -- ----------------------------------------------------------------------------------
 
-
+/*
 UPDATE 
 	EllHistory
 SET
@@ -113,7 +113,7 @@ FROM
 WHERE
 	CalculatedELL.STUDENT_GU IS NULL
 
-
+*/
 
 --Validation Check to see how many records will be processed, 0 = INSERT AND UPDATE, 1 = ROLLBACK - WILL NOT - UPDATE/INSERT
 IF @ValidateOnly = 0
