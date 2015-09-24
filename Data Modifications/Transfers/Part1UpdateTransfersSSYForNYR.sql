@@ -6,9 +6,9 @@
 	The select creates a file for verification and error types.
 	After this Update is run, then NYR must be run to create enrollments.
 
-*/
 
-/*
+
+
 BEGIN TRANSACTION
 
 UPDATE rev.EPC_STU_SCH_YR
@@ -76,7 +76,7 @@ ON
 [Approvals].[APS ID] = STU.SIS_NUMBER
 
 LEFT JOIN
-APS.PrimaryEnrollmentsAsOf(GETDATE()) AS PE
+APS.PrimaryEnrollmentsAsOf('2015-05-22') AS PE
 ON
 STU.STUDENT_GU = PE.STUDENT_GU
 
@@ -183,7 +183,7 @@ APS.PrimaryEnrollmentDetailsAsOf('2015-08-13') AS NXTYRENR2
 ON
 NXTYRENR.STUDENT_GU = STU2.STUDENT_GU
 ------------------------------------------------------------------
-
+--COMMENT THIS OUT FOR THE DETAILS FOR THE FILE TO REVIEW
 ) AS T1
 
 WHERE 
@@ -192,7 +192,7 @@ WHERE
 ) AS T2
 
 
---COMMENT THIS OUT FOR THE DETAILS FOR THE FILE TO REVIEW
+
 INNER JOIN
 rev.EPC_SCH AS SCH
 ON

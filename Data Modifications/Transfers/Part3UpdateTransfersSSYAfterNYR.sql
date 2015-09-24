@@ -7,8 +7,8 @@
 	Part 2 Transfer Process - Update the SSY enrollment created by NYR 
 		1.  Reason for Attendance - ATTEND_PERMIT_CODE with 'TRAN'
 		2.  Reason for Attendance Date - ATTEND_PERMIT_DATE with current date
-
 */
+
 
 
 EXECUTE AS LOGIN='QueryFileUser'
@@ -27,11 +27,10 @@ SELECT [﻿SynSISNUMBER], ATTEND_PERMIT_CODE, ATTEND_PERMIT_DATE,STUDENT_SCHOOL_
 	,CASE WHEN NXTYR.SIS_NUMBER IS NULL THEN 'NO 2015 ENROLLMENT' ELSE '' END AS NEEDS_SSY 
 	,ROW_NUMBER() OVER (PARTITION BY [﻿SynSISNUMBER] ORDER BY STUDENT_SCHOOL_YEAR_GU) AS RN
 FROM
-      OPENROWSET (
+       OPENROWSET (
                   'Microsoft.ACE.OLEDB.12.0', 
-                  --'Text;Database=\\SYNSECONDDB\D$\SQLWorkingFiles\;', 
-				  'Text;Database=\\syntempssis.aps.edu.actd\Files\TempQuery;', 
-                  'SELECT ﻿SynSISNUMBER from TEST.csv'
+                  'Text;Database=\\SynTempSSIS\Files\TempQuery\;', 
+                  'SELECT * from TEST.csv'
                 ) AS [Approvals]
 				
 --LEFT JOIN  DO A LEFT JOIN TO SEE IF ANY RECORDS HAVE BEEN DELETED SINCE PART1 RAN
@@ -68,7 +67,7 @@ WHERE
 
 	T2.STUDENT_SCHOOL_YEAR_GU = rev.EPC_STU_SCH_YR.STUDENT_SCHOOL_YEAR_GU
 
-ROLLBACK
+COMMIT
 
       REVERT
 GO

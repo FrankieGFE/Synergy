@@ -3,14 +3,10 @@
  * $LastChangedBy: e104090 $
  * $LastChangedDate: 2015-05-22 $
  */
-
-
+ 
  /*  
 	1.  Must change the last day of school it is hardcoded.
-
-
  */
-
 
 IF NOT EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[APS].[LCEALS1A]'))
 	EXEC ('CREATE VIEW APS.LCEALS1A AS SELECT 0 AS DUMMY')
@@ -69,14 +65,94 @@ INNER JOIN
 rev.REV_ORGANIZATION AS CLUSTERNAME
 ON
 CLUSTER.ORGANIZATION_GU = CLUSTERNAME.ORGANIZATION_GU
------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
+--PHLOTE SECTION
+
+--------------------------------------------------------------------------------------------------
 
 LEFT JOIN
+(
+SELECT ALLPHLOTES.STUDENT_GU FROM
+(SELECT * FROM
+(
+SELECT MISSINGPHLOTE.STUDENT_GU, GETDATE() AS DATE_ASSIGNED FROM 
+
+(
+SELECT T1.STUDENT_GU
+FROM 
 APS.PHLOTEAsOf('2015-05-22') AS PHL
+INNER JOIN
+APS.PrimaryEnrollmentsAsOf('2015-05-22') AS ENR
+ON
+PHL.STUDENT_GU = ENR.STUDENT_GU
+AND GRADE NOT IN ('P1', 'P2', 'PK', 'T1', 'T2', 'T3', 'T4', 'C1', 'C2', 'C3', 'C4')
+
+RIGHT JOIN
+
+(	SELECT 
+			*
+	FROM 
+	(
+	SELECT 
+			ESL.*
+			,STU.STUDENT_GU 
+			,CLUSTER.ALT_FUNDING_SCHOOL_CODE
+			,ROW_NUMBER() OVER (PARTITION BY ESL.SIS_NUMBER ORDER BY STATUS DESC) AS RN
+	 FROM 
+	APS.LCEStudentsAndProvidersAsOf('2015-05-22') AS ESL
+	INNER JOIN
+	rev.EPC_STU AS STU
+	ON
+	ESL.SIS_NUMBER = STU.SIS_NUMBER
+
+	INNER JOIN
+	rev.EPC_SCH AS CLUSTER
+	ON
+	ESL.ORGANIZATION_GU = CLUSTER.ORGANIZATION_GU
+
+
+	) AS T1
+	WHERE RN =1
+	AND GRADE NOT IN ('P1', 'P2', 'PK', 'T1', 'T2', 'T3', 'T4', 'C1', 'C2', 'C3', 'C4')
+
+) AS T1
+
+ON
+PHL.STUDENT_GU = T1.STUDENT_GU 
+
+WHERE
+	PHL.STUDENT_GU IS NULL
+
+) AS MISSINGPHLOTE
+
+UNION ALL
+SELECT * FROM 
+APS.PHLOTEAsOf('2015-05-22') AS PHL2) AS PHL
+
+) AS ALLPHLOTES
+
+---------------------------------------------------------------------------------------------------
+LEFT JOIN
+(
+SELECT * FROM 
+APS.LCEStudentsNeedingTestingAsOf('2015-05-22')
+
+) AS REMOVEALL
+
+ON
+ALLPHLOTES.STUDENT_GU = REMOVEALL.STUDENT_GU
+
+WHERE REMOVEALL.STUDENT_GU IS NULL
+
+) AS PHL
+
 ON
 PHL.STUDENT_GU = PE.STUDENT_GU
+-------------------------------------------------------------------------------------------------------
+--END OF PHLOTE SECTION
 
-----------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------
 LEFT JOIN
 (SELECT DISTINCT NOHLS.STUDENT_GU FROM rev.UD_HLS_HISTORY AS NOHLS
 INNER JOIN APS.PrimaryEnrollmentsAsOf('2015-05-22') AS PRIM
