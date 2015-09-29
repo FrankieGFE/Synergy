@@ -69,7 +69,7 @@ FROM
 	   [rev].[REV_YEAR] AS [Year]
 	   ON
 	   [SSY].[YEAR_GU]=[Year].[YEAR_GU]
-	   AND [Year].[YEAR_GU]=(SELECT [YEAR_GU] FROM [rev].[REV_YEAR] WHERE [SCHOOL_YEAR]=2015 AND [EXTENSION]='R') --[rev].[SIF_22_Common_CurrentYearGU])
+	   AND [Year].[YEAR_GU]=(SELECT [YEAR_GU] FROM [rev].[SIF_22_Common_CurrentYearGU]) --[rev].[SIF_22_Common_CurrentYearGU])
 
     WHERE
 	   [Reason].[TYPE]='UNE'
@@ -130,7 +130,7 @@ FROM
 	   [rev].[REV_YEAR] AS [Year]
 	   ON
 	   [SSY].[YEAR_GU]=[Year].[YEAR_GU]
-	   AND [Year].[YEAR_GU]=(SELECT [YEAR_GU] FROM [rev].[REV_YEAR] WHERE [SCHOOL_YEAR]=2015 AND [EXTENSION]='R') --[rev].[SIF_22_Common_CurrentYearGU])
+	   AND [Year].[YEAR_GU]=(SELECT [YEAR_GU] FROM [rev].[SIF_22_Common_CurrentYearGU]) --[rev].[SIF_22_Common_CurrentYearGU])
 
     WHERE
 	   [Reason].[TYPE]='EXC'
