@@ -15,7 +15,7 @@ DECLARE @DebugOn INT
 , @RPEmailUpdated INT, @REmailUpdated INT, @RPPriPhnUpdated INT, @LastNameChanges INT
 , @FirstNameChanges INT, @RPCompKeysUpdated INT, @dbname nvarchar (100)
 
-SET @DebugOn = 0
+SET @DebugOn = 1
 SET @RvTrcSQLAlter= 0
 SET @PrntPXPEmailUpdated = 0
 SET @RPSSANUpdated = 0
