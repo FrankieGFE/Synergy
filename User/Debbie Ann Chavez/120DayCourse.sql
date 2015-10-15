@@ -1,5 +1,5 @@
 
-DECLARE @asOfDate DATE = '02-11-2015'
+DECLARE @asOfDate DATE = '10-14-2015'
 
 SELECT
 
