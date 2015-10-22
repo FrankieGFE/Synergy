@@ -42,7 +42,7 @@
 		
 	FROM
 		--APS.BasicSchedule AS [BASIC_SCHEDULE]
-		APS.ScheduleAsOf('10/14/2015') AS [BASIC_SCHEDULE]
+		APS.ScheduleWithFutureAsOf('10/14/2015') AS [BASIC_SCHEDULE]
 		
 		INNER JOIN
 		rev.EPC_CRS AS [COURSE]
@@ -98,13 +98,13 @@
 		
 	WHERE
 		--[RevYear].[SCHOOL_YEAR] IN ('2013','2014')
-		[RevYear].[SCHOOL_YEAR] = '2015'
-		AND [RevYear].[EXTENSION] = 'R'
+		--[RevYear].[SCHOOL_YEAR] = '2015'
+		--AND [RevYear].[EXTENSION] = 'R'
 	--	COURSE_ID = '110131'
 		--AND [COURSE].[COURSE_TITLE] LIKE '%ROTC%'
 		
 		--AND ( [COURSE].[AP_INDICATOR] = 'Y' OR [COURSE].[COURSE_TITLE] LIKE '%hon%')
-		AND [COURSE].[AP_INDICATOR] = 'Y'
+		[COURSE].[AP_INDICATOR] = 'Y'
 		
 		--AND COURSE_ID IN
 		--('96011'
