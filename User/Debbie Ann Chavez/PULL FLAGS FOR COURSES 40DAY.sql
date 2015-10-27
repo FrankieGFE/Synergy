@@ -1,6 +1,5 @@
 
 
-
 EXECUTE AS LOGIN='QueryFileUser'
 GO
 
@@ -10,6 +9,7 @@ SELECT
 	FLAGS.*
 	,CASE WHEN H IS NOT NULL THEN 'H' ELSE '' END AS [HONORS IND]
 	,CASE WHEN COURSE.AP_INDICATOR = 'Y' THEN 'AP' ELSE'' END AS [AP IND]
+	,CASE WHEN CTE.COURSEID IS NOT NULL THEN 'CTE' ELSE '' END AS [CTE IND]
 	,CASE WHEN GFT IS NOT NULL THEN 'GFT' ELSE '' END AS [GIFTED IND]
 	,'' AS [REMEDIAL IND]
 	,'' AS [BASIC IND]
@@ -77,6 +77,16 @@ FROM
 ON
 [COURSE_LIST].COURSE_GU = COURSE.COURSE_GU
 
+
+
+LEFT JOIN 
+	      OPENROWSET (
+                  'Microsoft.ACE.OLEDB.12.0', 
+                  'Text;Database=\\SynTempSSIS\Files\TempQuery\;', 
+                  'SELECT * from CTECOURSES.csv'
+                ) AS CTE
+
+CTE.COURSEID = COURSE.COURSE_ID
 
 
 
