@@ -85,9 +85,8 @@ LEFT JOIN
                   'Text;Database=\\SynTempSSIS\Files\TempQuery\;', 
                   'SELECT * from CTECOURSES.csv'
                 ) AS CTE
-
+ON
 CTE.COURSEID = COURSE.COURSE_ID
-
 
 
 ORDER BY [APS instr]
