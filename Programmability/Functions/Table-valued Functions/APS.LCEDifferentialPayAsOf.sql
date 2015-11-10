@@ -99,7 +99,7 @@ FROM
 (
 		SELECT 
 		
-				ORGANIZATION_NAME AS School
+				Organization.ORGANIZATION_NAME AS School
 				,Staff.BADGE_NUM AS Badge
 				,LAST_NAME + ', '+ FIRST_NAME + COALESCE(' ' +MIDDLE_NAME,'') AS TeacherName
 				,PRIMARY_TEACHER AS PrimaryTeacher
@@ -175,6 +175,7 @@ FROM
 			rev.EPC_STU_PGM_ELL_BEP AS BEP
 			ON
 			BEP.STUDENT_GU = Schedules.STUDENT_GU
+			AND BEP.EXIT_DATE IS NULL
 
 			/***********************************************************************************************
 			*Get additional data, school name, badge number, teacher name, school type		
@@ -207,7 +208,7 @@ FROM
 				
 
 			GROUP BY 
-				ORGANIZATION_NAME 
+				Organization.ORGANIZATION_NAME 
 				,Staff.BADGE_NUM 
 				,LAST_NAME + ', '+ FIRST_NAME + COALESCE(' ' +MIDDLE_NAME,'') 
 				,PRIMARY_TEACHER
