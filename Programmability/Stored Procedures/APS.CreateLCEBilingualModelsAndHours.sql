@@ -216,6 +216,7 @@ FROM
 WHERE
 	PHLOTE.STUDENT_GU IS NOT NULL
 	OR LCEClass.ALS2W IS NOT NULL
+	OR LCEClass.ALSMP IS NOT NULL --DAC ADDED THIS
 	OR ELL.STUDENT_GU IS NOT NULL  -- Added these two because once PHLOTE, Always phlote (review with Lynne)
 	OR LatestEvaluation.IS_ELL = 0 -- Added (FEP kiddos = anyone whose latest evaluation qualifies them to not be ELL)
 
@@ -252,6 +253,10 @@ WHERE
 			(ALSNV IS NULL AND HOME_LANGUAGE = '01')
 			OR
 			(ALS2W IS NOT NULL)
+			
+			OR --DAC ADDED THIS
+				(ALSMP IS NOT NULL)
+		
 			OR
 			(ALSNV IS NOT NULL AND HOME_LANGUAGE = '08')
 		)
@@ -476,6 +481,7 @@ WHERE
 -- Exception Rule: If student has 1 or 2 hours, and has at least 1 dual course, program is determined
 --					by ELL status ELL = Maintenance, Non-ELL = Enrichment
 -- ------------------------------------------------------------------------------------------------------
+
 UPDATE
 	Detail
 SET
@@ -507,6 +513,8 @@ WHERE
 	DualSum > 0
 
 
+
+/*
 -- ------------------------------------------------------------------------------------------------------
 -- Exception Rule: If not in 2way dual and not PHLOTE and not ELL then 0 hrs
 -- ------------------------------------------------------------------------------------------------------
@@ -537,6 +545,8 @@ WHERE
 	Has2Way.STUDENT_GU IS NULL
 	AND Detail.PHLOTE IS NULL
 	AND Detail.ELL IS NULL
+
+*/
 
 -- ------------------------------------------------------------------------------------------------------
 -- Exception Rule: If ELL And Maitenance and 1 hour => change to 2
@@ -594,6 +604,7 @@ WHERE
 -- Exception Rule: IF < 3 hours and NON-PHLOTE, Then they do not qualify (0 hours)
 -- ------------------------------------------------------------------------------------------------------
 -- LOGIC NOT RIGHT <= WORK ON IT
+/*
 UPDATE
 	@BEPDetail
 SET
@@ -604,6 +615,8 @@ WHERE
 	AND FEP IS NULL  -- added line
 	AND TotalHours < 3
 	AND TotalHours != 0
+
+*/
 
 -- ------------------------------------------------------------------------------------------------------
 -- Exception Rule: If no hours... then no model
