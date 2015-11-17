@@ -52,8 +52,15 @@ SELECT DISTINCT
 	,'' AS FEPNonPHLOTE2hrHeritageRev
 
 	--Enrichment
-	,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' AND FEP = 'Y' AND PHLOTE = 'N' AND BEPHours = 1 THEN 1 ELSE 0 END) AS FEPNonPHLOTE1hrEnrich
-	,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' AND FEP = 'Y' AND PHLOTE = 'N' AND BEPHours = 2 THEN 1 ELSE 0 END) AS FEPNonPHLOTE2hrEnrich
+	,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' AND FEP = 'Y' 
+	--AND PHLOTE = 'N' 
+	AND BEPHours = 1 THEN 1 ELSE 0 END) AS FEP1hrEnrich
+	,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' AND FEP = 'Y' 
+	--AND PHLOTE = 'N' 
+	AND BEPHours = 2 THEN 1 ELSE 0 END) AS FEP2hrEnrich
+
+	--,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' AND FEP = 'Y' AND PHLOTE = 'Y' AND BEPHours = 1 THEN 1 ELSE 0 END) AS FEPPHLOTE1hrEnrich
+	--,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' AND FEP = 'Y' AND PHLOTE = 'Y' AND BEPHours = 2 THEN 1 ELSE 0 END) AS FEPPHLOTE2hrEnrich
 
 	,NUMCLASSES.COUNTCLASSES AS NumClassesOffered
 	,CASE 
@@ -334,9 +341,16 @@ SELECT DISTINCT
 	,'' AS FEPNonPHLOTE1hrHeritageRev
 	,'' AS FEPNonPHLOTE2hrHeritageRev
 
-	--Enrichment
-	,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' AND FEP = 'Y' AND PHLOTE = 'N' AND BEPHours = 1 THEN 1 ELSE 0 END) AS FEPNonPHLOTE1hrEnrich
-	,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' AND FEP = 'Y' AND PHLOTE = 'N' AND BEPHours = 2 THEN 1 ELSE 0 END) AS FEPNonPHLOTE2hrEnrich
+--Enrichment
+	,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' AND FEP = 'Y' 
+	--AND PHLOTE = 'N' 
+	AND BEPHours = 1 THEN 1 ELSE 0 END) AS FEP1hrEnrich
+	,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' AND FEP = 'Y' 
+	--AND PHLOTE = 'N' 
+	AND BEPHours = 2 THEN 1 ELSE 0 END) AS FEP2hrEnrich
+
+	--,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' AND FEP = 'Y' AND PHLOTE = 'Y' AND BEPHours = 1 THEN 1 ELSE 0 END) AS FEPPHLOTE1hrEnrich
+	--,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' AND FEP = 'Y' AND PHLOTE = 'Y' AND BEPHours = 2 THEN 1 ELSE 0 END) AS FEPPHLOTE2hrEnrich
 
 	,NUMCLASSES.COUNTCLASSES AS NumClassesOffered
 	,CASE 
