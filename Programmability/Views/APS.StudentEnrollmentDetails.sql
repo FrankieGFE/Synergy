@@ -68,7 +68,7 @@ FROM
 	[Organization].[ORGANIZATION_GU] = [School].[ORGANIZATION_GU]
 	
 	LEFT JOIN
-	APS.LookupTable('K12,Enrollment','ENTER_CODE') AS ENTER_CODE
+	APS.LookupTable('K12.Enrollment','ENTER_CODE') AS ENTER_CODE
 	ON
 	[StudentSchoolYear].ENTER_CODE = ENTER_CODE.[VALUE_CODE]
 	
