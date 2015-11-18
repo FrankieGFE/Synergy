@@ -1,5 +1,10 @@
 
+BEGIN TRANSACTION
 
+UPDATE rev.EGB_REPORTCARDSCORES
+SET MARK = ''
+
+/*
 select 
 stu.STUDENTID
 ,T1.SIS_NUMBER
@@ -9,8 +14,9 @@ stu.STUDENTID
 , rci.ITEM
 , rcs.MARK 
 ,per.PERIOD
-
-from rev.EGB_REPORTCARDSCORES rcs
+*/
+from 
+rev.EGB_REPORTCARDSCORES rcs
 join rev.EGB_PEOPLE stu on stu.ID = rcs.STUDENTID
 join rev.EGB_SCHOOLYEAR sy on sy.ID = rcs.SCHOOLYEARID
 join rev.EGB_REPORTCARDITEMS rci on rci.ID = rcs.REPORTCARDITEMID
@@ -39,8 +45,10 @@ ON
 T1.SIS_NUMBER = stu.STUDENTID
 
 where 
-	PERIOD != 'Tri 1 Grade' 
+	PERIOD IN ('Tri 2 Grade', 'Tri 3 Grade')
 --sy.ID = @SchoolyearID
 --and per.ID = @GradingPeriodID
 --group by tch.LASTNAME,  tch.FIRSTNAME, stu.LASTNAME, stu.FIRSTNAME, rci.SEQ, rci.ITEM, rcs.MARK, per.PERIOD, stu.STUDENTID, stu.PEOPLETYPEID
-order by tch.LASTNAME,  tch.FIRSTNAME, stu.LASTNAME, stu.FIRSTNAME, rci.SEQ, rcs.MARK
+--order by tch.LASTNAME,  tch.FIRSTNAME, stu.LASTNAME, stu.FIRSTNAME, rci.SEQ, rcs.MARK
+
+ROLLBACK
