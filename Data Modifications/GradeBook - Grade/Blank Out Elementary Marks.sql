@@ -18,8 +18,9 @@ stu.STUDENTID
 ,(tch.LASTNAME + ', ' + tch.FIRSTNAME) as TEACHER
 ,(stu.LASTNAME + ', ' + stu.FIRSTNAME) as STUDENT
 , rci.ITEM
-, rcs.MARK 
+--, rcs.MARK 
 ,per.PERIOD
+,rcs.*
 */
 from 
 rev.EGB_REPORTCARDSCORES rcs
@@ -56,5 +57,12 @@ where
 --and per.ID = @GradingPeriodID
 --group by tch.LASTNAME,  tch.FIRSTNAME, stu.LASTNAME, stu.FIRSTNAME, rci.SEQ, rci.ITEM, rcs.MARK, per.PERIOD, stu.STUDENTID, stu.PEOPLETYPEID
 --order by tch.LASTNAME,  tch.FIRSTNAME, stu.LASTNAME, stu.FIRSTNAME, rci.SEQ, rcs.MARK
+
+
+
+
+
+-- MAY NEED THIS FOR UPDATE --
+--and rev.EGB_REPORTCARDSCORES.ID = rcs.ID
 
 ROLLBACK
