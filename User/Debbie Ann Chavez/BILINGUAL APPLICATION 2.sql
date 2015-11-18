@@ -111,7 +111,7 @@ SELECT DISTINCT
 	,'001' + BEP.SCHOOL_CODE AS SchoolCode_SchoolCode
 FROM 
 
-	APS.BilingualModelAndHoursDetailsAsOf(GETDATE()) AS BEP
+	APS.BilingualModelAndHoursDetailsAsOf('2015-10-14') AS BEP
 
 	INNER JOIN
 
@@ -131,7 +131,7 @@ FROM
 				,EnrollGrade
 				,ROW_NUMBER() OVER (PARTITION BY SCHOOL_CODE, BADGE_NUM,SectionID ORDER BY SectionID) AS RN
 			FROM 
-				APS.BilingualModelAndHoursDetailsAsOf(GETDATE()) AS BEP
+				APS.BilingualModelAndHoursDetailsAsOf('2015-10-14') AS BEP
 				) as t1
 			WHERE
 				RN = 1
@@ -401,7 +401,7 @@ SELECT DISTINCT
 	,'001' + BEP.SCHOOL_CODE AS SchoolCode_SchoolCode
 FROM 
 
-	APS.BilingualModelAndHoursDetailsAsOf(GETDATE()) AS BEP
+	APS.BilingualModelAndHoursDetailsAsOf('2015-10-14') AS BEP
 
 	INNER JOIN
 
@@ -421,7 +421,7 @@ FROM
 				,EnrollGrade
 				,ROW_NUMBER() OVER (PARTITION BY SCHOOL_CODE, BADGE_NUM,SectionID ORDER BY SectionID) AS RN
 			FROM 
-				APS.BilingualModelAndHoursDetailsAsOf(GETDATE()) AS BEP
+				APS.BilingualModelAndHoursDetailsAsOf('2015-10-14') AS BEP
 				) as t1
 			WHERE
 				RN = 1
