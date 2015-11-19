@@ -31,7 +31,7 @@ SELECT DISTINCT
 	,SUM(CASE WHEN BEPProgramDescription = '2-Way Dual' THEN 1 ELSE 0 END) AS NumOfStudentsDual
 	,SUM(CASE WHEN BEPProgramDescription = '2-Way Dual' AND ELL = 'Y' AND BEPHours = 3 THEN 1 ELSE 0 END) AS ELL3hrDual
 	,SUM(CASE WHEN BEPProgramDescription = '2-Way Dual' AND FEP = 'Y' AND BEPHours = 3 THEN 1 ELSE 0 END) AS FEP3HrDual
-	,SUM(CASE WHEN BEPProgramDescription = '2-Way Dual' AND PHLOTE = 'N' AND BEPHours = 3 THEN 1 ELSE 0 END) AS NonPHLOTE3hrDual
+	,SUM(CASE WHEN BEPProgramDescription = '2-Way Dual' AND ELL = 'N' AND FEP = 'N' AND BEPHours = 3 THEN 1 ELSE 0 END) AS NonPhlote3hrDual
 
 	--maintenance
 	,SUM(CASE WHEN BEPProgramDescription = 'Maintenance' AND ELL = 'Y' AND BEPHours = 2 THEN 1 ELSE 0 END) AS ELL2hrMaintenance
@@ -52,10 +52,13 @@ SELECT DISTINCT
 	,'' AS FEPNonPHLOTE2hrHeritageRev
 
 	--Enrichment
-	,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' AND FEP = 'Y' 
+	,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' 
+	--ND FEP = 'Y' 
 	--AND PHLOTE = 'N' 
 	AND BEPHours = 1 THEN 1 ELSE 0 END) AS FEP1hrEnrich
-	,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' AND FEP = 'Y' 
+
+	,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' 
+	--AND FEP = 'Y' 
 	--AND PHLOTE = 'N' 
 	AND BEPHours = 2 THEN 1 ELSE 0 END) AS FEP2hrEnrich
 
@@ -321,7 +324,7 @@ SELECT DISTINCT
 	,SUM(CASE WHEN BEPProgramDescription = '2-Way Dual' THEN 1 ELSE 0 END) AS NumOfStudentsDual
 	,SUM(CASE WHEN BEPProgramDescription = '2-Way Dual' AND ELL = 'Y' AND BEPHours = 3 THEN 1 ELSE 0 END) AS ELL3hrDual
 	,SUM(CASE WHEN BEPProgramDescription = '2-Way Dual' AND FEP = 'Y' AND BEPHours = 3 THEN 1 ELSE 0 END) AS FEP3HrDual
-	,SUM(CASE WHEN BEPProgramDescription = '2-Way Dual' AND PHLOTE = 'N' AND BEPHours = 3 THEN 1 ELSE 0 END) AS NonPHLOTE3hrDual
+	,SUM(CASE WHEN BEPProgramDescription = '2-Way Dual' AND ELL = 'N' AND FEP = 'N' AND BEPHours = 3 THEN 1 ELSE 0 END) AS NonPhlote3hrDual
 
 	--maintenance
 	,SUM(CASE WHEN BEPProgramDescription = 'Maintenance' AND ELL = 'Y' AND BEPHours = 2 THEN 1 ELSE 0 END) AS ELL2hrMaintenance
@@ -342,10 +345,14 @@ SELECT DISTINCT
 	,'' AS FEPNonPHLOTE2hrHeritageRev
 
 --Enrichment
-	,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' AND FEP = 'Y' 
+	--Enrichment
+	,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' 
+	--ND FEP = 'Y' 
 	--AND PHLOTE = 'N' 
 	AND BEPHours = 1 THEN 1 ELSE 0 END) AS FEP1hrEnrich
-	,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' AND FEP = 'Y' 
+
+	,SUM(CASE WHEN BEPProgramDescription = 'Enrichment' 
+	--AND FEP = 'Y' 
 	--AND PHLOTE = 'N' 
 	AND BEPHours = 2 THEN 1 ELSE 0 END) AS FEP2hrEnrich
 
