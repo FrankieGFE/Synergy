@@ -62,6 +62,7 @@ where
 	,'SLA'
 	,'Navajo'
 	,'Uses English and or'
+	,'Reading Interim Assessment'
 	)
 	AND ORGANIZATION_NAME LIKE '%Elementary%'
 
