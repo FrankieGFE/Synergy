@@ -4,13 +4,13 @@ Date:  11/11/2015
 */
 
 
-
+/*
 BEGIN TRANSACTION
 
 UPDATE rev.EGB_REPORTCARDSCORES
 SET MARK = ''
+*/
 
-/*
 select 
 stu.STUDENTID
 ,T1.SIS_NUMBER
@@ -21,7 +21,7 @@ stu.STUDENTID
 --, rcs.MARK 
 ,per.PERIOD
 ,rcs.*
-*/
+
 from 
 rev.EGB_REPORTCARDSCORES rcs
 join rev.EGB_PEOPLE stu on stu.ID = rcs.STUDENTID
@@ -53,10 +53,22 @@ T1.SIS_NUMBER = stu.STUDENTID
 
 where 
 	PERIOD IN ('Tri 2 Grade', 'Tri 3 Grade')
+
+	AND ITEM NOT IN (
+	'Access Score:'
+	,'SP LAS Links Score:'
+	,'ESL/ELD'
+	,'SSL'
+	,'SLA'
+	,'Navajo'
+	,'Uses English and or'
+	)
+	AND ORGANIZATION_NAME LIKE '%Elementary%'
+
 --sy.ID = @SchoolyearID
 --and per.ID = @GradingPeriodID
 --group by tch.LASTNAME,  tch.FIRSTNAME, stu.LASTNAME, stu.FIRSTNAME, rci.SEQ, rci.ITEM, rcs.MARK, per.PERIOD, stu.STUDENTID, stu.PEOPLETYPEID
 --order by tch.LASTNAME,  tch.FIRSTNAME, stu.LASTNAME, stu.FIRSTNAME, rci.SEQ, rcs.MARK
 
 
-ROLLBACK
+--ROLLBACK
