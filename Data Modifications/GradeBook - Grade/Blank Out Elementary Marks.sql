@@ -59,10 +59,4 @@ where
 --order by tch.LASTNAME,  tch.FIRSTNAME, stu.LASTNAME, stu.FIRSTNAME, rci.SEQ, rcs.MARK
 
 
-
-
-
--- MAY NEED THIS FOR UPDATE --
---and rev.EGB_REPORTCARDSCORES.ID = rcs.ID
-
 ROLLBACK
