@@ -5,7 +5,7 @@ SELECT * FROM
 SELECT DISTINCT 
 	BEP.SCHOOL_CODE 
 	--THIS IS THE 40TH DAY DATE
-	,'2015-10-14' AS [DATE]
+	,'2015-12-01' AS [DATE]
 	,'' AS TITLE
 	,CASE
 		WHEN BEPProgramDescription = 'Enrichment' THEN 'Enrichment for FEP and English Speakers' 
@@ -114,7 +114,7 @@ SELECT DISTINCT
 	,'001' + BEP.SCHOOL_CODE AS SchoolCode_SchoolCode
 FROM 
 
-	APS.BilingualModelAndHoursDetailsAsOf('2015-10-14') AS BEP
+	APS.BilingualModelAndHoursDetailsAsOf('2015-12-01') AS BEP
 
 	INNER JOIN
 
@@ -134,7 +134,7 @@ FROM
 				,EnrollGrade
 				,ROW_NUMBER() OVER (PARTITION BY SCHOOL_CODE, BADGE_NUM,SectionID ORDER BY SectionID) AS RN
 			FROM 
-				APS.BilingualModelAndHoursDetailsAsOf('2015-10-14') AS BEP
+				APS.BilingualModelAndHoursDetailsAsOf('2015-12-01') AS BEP
 				) as t1
 			WHERE
 				RN = 1
@@ -298,7 +298,7 @@ UNION ALL
 SELECT DISTINCT 
 	BEP.SCHOOL_CODE 
 	--THIS IS THE 40TH DAY DATE
-	,'2015-10-14' AS [DATE]
+	,'2015-12-01' AS [DATE]
 	,'' AS TITLE
 	,CASE
 		WHEN BEPProgramDescription = 'Enrichment' THEN 'Enrichment for FEP and English Speakers' 
@@ -408,7 +408,7 @@ SELECT DISTINCT
 	,'001' + BEP.SCHOOL_CODE AS SchoolCode_SchoolCode
 FROM 
 
-	APS.BilingualModelAndHoursDetailsAsOf('2015-10-14') AS BEP
+	APS.BilingualModelAndHoursDetailsAsOf('2015-12-01') AS BEP
 
 	INNER JOIN
 
@@ -428,7 +428,7 @@ FROM
 				,EnrollGrade
 				,ROW_NUMBER() OVER (PARTITION BY SCHOOL_CODE, BADGE_NUM,SectionID ORDER BY SectionID) AS RN
 			FROM 
-				APS.BilingualModelAndHoursDetailsAsOf('2015-10-14') AS BEP
+				APS.BilingualModelAndHoursDetailsAsOf('2015-12-01') AS BEP
 				) as t1
 			WHERE
 				RN = 1
