@@ -22,9 +22,11 @@ SELECT
 	,STATE_STUDENT_NUMBER
 	
 	--COMMENT THESE 3 COLUMNS OUT NOT NEEDED FOR STEVE FOR STARS, ONLY NEEDED FOR RESEARCH AND REVIEW
+	/*
 	,CASE WHEN T2.STUDENT_GU IS NULL THEN 'NO ELL RECORD FOUND' ELSE '' END AS ELL_STUDENT
 	, EXIT_DATE		
 	, EXIT_REASON
+	*/
 	-------------------------------------------------------------------------------------------------
 	
 	,CASE 
