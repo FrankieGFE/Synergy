@@ -19,6 +19,7 @@ BEGIN TRANSACTION
 	ALTER TABLE [rev].[REV_PROCESS_QUEUE_RESULT] CHECK CONSTRAINT [REV_PROCESS_QUEUE_RESULT_F1]
 COMMIT
 
+BEGIN TRAN
 --remove items in the e-mail queue
 -- -------------------------------------------------------
 PRINT '*** Removing E-mail Queue'
@@ -57,3 +58,5 @@ SET
 	[VALUE] = CONVERT(NVARCHAR(MAX), @XMLData)
 WHERE
 	[KEY] = 'REV_INSTALL_CONSTANT'
+
+COMMIT
