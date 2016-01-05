@@ -190,6 +190,7 @@ SELECT
 FROM rev.EPC_STU_PARENT             stupar
      JOIN rev.REV_PERSON            par  ON par.PERSON_GU            = stupar.PARENT_GU 
                                             and stupar.LIVES_WITH = 'Y'
+											and par.DECEASED = 'N'
      JOIN rev.EPC_STU               stu  ON stu.STUDENT_GU           = stupar.STUDENT_GU
      JOIN rev.EPC_STU_SCH_YR        ssyr ON ssyr.STUDENT_GU          = stu.STUDENT_GU
 	                                        and ssyr.STATUS is null
@@ -244,6 +245,7 @@ SELECT
 FROM rev.EPC_STU_PARENT             stupar
      JOIN rev.REV_PERSON            par  ON par.PERSON_GU            = stupar.PARENT_GU 
                                             and stupar.LIVES_WITH = 'Y'
+											and par.DECEASED = 'N'
      JOIN rev.EPC_STU               stu  ON stu.STUDENT_GU           = stupar.STUDENT_GU
      JOIN rev.EPC_STU_SCH_YR        ssyr ON ssyr.STUDENT_GU          = stu.STUDENT_GU
 	                                        and ssyr.STATUS is null
