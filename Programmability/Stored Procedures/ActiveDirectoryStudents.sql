@@ -86,7 +86,11 @@ SELECT
  , per.FIRST_NAME                           AS [FirstName]
  , per.MIDDLE_NAME                          AS [StudentMiddleName]
  , 'P'                                      AS [SchoolOfRecord]
- ,[AdditionalSchoolEnrollments]
+ 	,ALTLOC1
+	,ALTLOC2
+	,ALTLOC3
+	,ALTLOC4
+	,ALTLOC5
 
 FROM rev.EPC_STU               stu
 JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
@@ -105,31 +109,22 @@ SELECT
 	--[DistrictNumber]
 	--,[SchoolYear]
 	[StudentIDNumber]
-	, COALESCE(
-		CASE 
-			WHEN SCH4 IS NOT NULL THEN SCH1 + ',' + SCH2 + ',' + SCH3 + ',' + SCH4
-			WHEN SCH3 IS NOT NULL THEN SCH1 + ',' + SCH2 + ',' + SCH3
-			WHEN SCH1 IS NOT NULL THEN (SCH1 + CASE WHEN SCH2 IS NOT NULL THEN ',' + SCH2 END) 
-		END,SCH1) 
-		 AS [AdditionalSchoolEnrollments]
-
-	--,Min_Grade
-	--,Min_Enter_Date
-	--,[AddDelStatus]
-	--,[LastName]
-	--,[FirstName]
-	--,[StudentMiddleName]
-	--,[SchoolOfRecord]
+	,ALTLOC1
+	,ALTLOC2
+	,ALTLOC3
+	,ALTLOC4
+	,ALTLOC5
 
 FROM (
 SELECT 
 	[DistrictNumber]
 	,[SchoolYear]
 	,[StudentIDNumber]
-	,MAX([1]) AS SCH1
-	,MAX([2]) AS SCH2
-	,MAX([3]) AS SCH3
-	,MAX([4]) AS SCH4
+	,MAX([1]) AS ALTLOC1
+	,MAX([2]) AS ALTLOC2
+	,MAX([3]) AS ALTLOC3
+	,MAX([4]) AS ALTLOC4
+	,MAX([5]) AS ALTLOC5
 	--,[SchoolName]
 	,MIN([Grade]) AS Min_Grade
 	,MIN([EnterDate]) AS Min_Enter_Date
@@ -179,8 +174,8 @@ LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12','GRADE') grd on grd.VALUE_CODE
 
 PIVOT
 (
-MAX([SchoolName])
-FOR rn IN ([1], [2], [3], [4])
+MAX([SORSchoolNumber])
+FOR rn IN ([1], [2], [3], [4], [5])
 ) AS PIVOTME 
 
 GROUP BY 
@@ -234,7 +229,11 @@ SELECT
  , per.MIDDLE_NAME                          AS [StudentMiddleName]
  , 'S'                                      AS [SchoolOfRecord]
 
- ,AdditionalSchoolEnrollments
+ 	,ALTLOC1
+	,ALTLOC2
+	,ALTLOC3
+	,ALTLOC4
+	,ALTLOC5
 FROM rev.EPC_STU               stu
 JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
                                        and ssy.STATUS is NULL
@@ -253,13 +252,11 @@ SELECT
 	--[DistrictNumber]
 	--,[SchoolYear]
 	[StudentIDNumber]
-	, COALESCE(
-		CASE 
-			WHEN SCH4 IS NOT NULL THEN SCH1 + ',' + SCH2 + ',' + SCH3 + ',' + SCH4
-			WHEN SCH3 IS NOT NULL THEN SCH1 + ',' + SCH2 + ',' + SCH3
-			WHEN SCH1 IS NOT NULL THEN (SCH1 + CASE WHEN SCH2 IS NOT NULL THEN ',' + SCH2 END) 
-		END,SCH1) 
-		 AS [AdditionalSchoolEnrollments]
+	,ALTLOC1
+	,ALTLOC2
+	,ALTLOC3
+	,ALTLOC4
+	,ALTLOC5
 
 	--,Min_Grade
 	--,Min_Enter_Date
@@ -274,10 +271,11 @@ SELECT
 	[DistrictNumber]
 	,[SchoolYear]
 	,[StudentIDNumber]
-	,MAX([1]) AS SCH1
-	,MAX([2]) AS SCH2
-	,MAX([3]) AS SCH3
-	,MAX([4]) AS SCH4
+	,MAX([1]) AS ALTLOC1
+	,MAX([2]) AS ALTLOC2
+	,MAX([3]) AS ALTLOC3
+	,MAX([4]) AS ALTLOC4
+	,MAX([5]) AS ALTLOC5
 	--,[SchoolName]
 	,MIN([Grade]) AS Min_Grade
 	,MIN([EnterDate]) AS Min_Enter_Date
@@ -327,8 +325,8 @@ LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12','GRADE') grd on grd.VALUE_CODE
 
 PIVOT
 (
-MAX([SchoolName])
-FOR rn IN ([1], [2], [3], [4])
+MAX([SORSchoolNumber])
+FOR rn IN ([1], [2], [3], [4], [5])
 ) AS PIVOTME 
 
 GROUP BY 
