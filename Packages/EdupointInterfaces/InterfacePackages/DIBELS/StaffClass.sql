@@ -32,3 +32,4 @@ FROM  rev.EPC_STU                         stu
 	  LEFT JOIN rev.REV_PERSON            stfp  ON stfp.PERSON_GU              = stf.STAFF_GU
 WHERE grd.value_description in ('K', '01','02','03')
       and stf.BADGE_NUM is not null
+      AND cls.[LEAVE_DATE] IS NULL

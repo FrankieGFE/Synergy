@@ -9,6 +9,7 @@ SELECT DISTINCT
  , stfp.LAST_NAME            AS [Primary Class ID]
  , stu.STATE_STUDENT_NUMBER  AS [Student Primary ID]
  , ''                        AS [Is Official Class]
+ ,cls.*
 
 
 FROM  rev.EPC_STU                         stu
@@ -33,3 +34,4 @@ FROM  rev.EPC_STU                         stu
 	  LEFT JOIN rev.EPC_STAFF             stf   ON stf.STAFF_GU                = stfsy.STAFF_GU
 	  LEFT JOIN rev.REV_PERSON            stfp  ON stfp.PERSON_GU              = stf.STAFF_GU
 WHERE grd.value_description in ('K', '01','02','03')
+	AND cls.[LEAVE_DATE] IS NULL
