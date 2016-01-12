@@ -1,0 +1,96 @@
+		
+			SELECT 
+			SIS_NUMBER
+			,SCHOOL_YEAR
+			,EXTENSION
+			, enrollment.STUDENT_SCHOOL_YEAR_GU
+
+			,[HS Cum Flat]
+			,[HS Cum Weighted]
+			--,[MS Cum Flat]
+			,GPA_CODE
+		
+		
+	FROM		
+		APS.BasicStudentWithMoreInfo AS [STUDENT]
+
+INNER JOIN
+		
+		(
+		SELECT
+			*
+			,ROW_NUMBER() OVER (PARTITION BY STUDENT_GU ORDER BY ENTER_DATE DESC, EXCLUDE_ADA_ADM ) AS RN
+		FROM
+			APS.StudentEnrollmentDetails
+			
+		)  AS [ENROLLMENT]
+		ON
+		[STUDENT].[STUDENT_GU] = [ENROLLMENT].[STUDENT_GU]
+		AND [ENROLLMENT].[RN] = 1
+		
+		INNER JOIN
+		rev.EPC_STU_SCH_YR AS [StudentSchoolYear]
+		ON
+		[ENROLLMENT].[STUDENT_SCHOOL_YEAR_GU] = [StudentSchoolYear].[STUDENT_SCHOOL_YEAR_GU]
+		
+		LEFT OUTER JOIN
+		(
+		SELECT DISTINCT
+			[GPA].[STUDENT_SCHOOL_YEAR_GU]
+
+			,GPA_CODE
+			
+			,SUM(CASE WHEN [GPA_DEF].[GPA_CODE] = 'HSCF' THEN [GPA].[GPA] ELSE 0 END) AS [HS Cum Flat]
+			,SUM(CASE WHEN [GPA_DEF].[GPA_CODE] = 'HSCW' THEN [GPA].[GPA] ELSE 0 END) AS [HS Cum Weighted]
+			,SUM(CASE WHEN [GPA_DEF].[GPA_CODE] = 'MSCF' THEN [GPA].[GPA] ELSE 0 END) AS [MS Cum Flat]
+			
+		FROM	
+			rev.[EPC_STU_GPA] AS [GPA]  
+				
+			INNER JOIN
+			rev.[EPC_SCH_YR_GPA_TYPE_RUN] [GPA_RUN]
+			ON
+			[GPA].[SCHOOL_YEAR_GPA_TYPE_RUN_GU] = [GPA_RUN].[SCHOOL_YEAR_GPA_TYPE_RUN_GU]
+			AND [GPA_RUN].[SCHOOL_YEAR_GRD_PRD_GU] IS NULL
+			
+			INNER JOIN
+			rev.[EPC_GPA_DEF_TYPE] [GPA_TYPE] 
+			ON 
+			[GPA_RUN].[GPA_DEF_TYPE_GU] = [GPA_TYPE].[GPA_DEF_TYPE_GU]
+			AND (
+				[GPA_TYPE].[GPA_TYPE_NAME] = 'HS Cum Flat' 
+				OR
+				[GPA_TYPE].[GPA_TYPE_NAME] = 'HS Cum Weighted' 
+				OR
+				[GPA_TYPE].[GPA_TYPE_NAME] = 'MS Cum Flat'
+				)
+					
+			INNER JOIN 
+			rev.[EPC_GPA_DEF] [GPA_DEF]  
+			ON 
+			[GPA_TYPE].[GPA_DEF_GU] = [GPA_DEF].[GPA_DEF_GU]
+			
+		GROUP BY
+			[GPA].[STUDENT_SCHOOL_YEAR_GU]
+			,GPA_CODE
+		) AS [CUM_GPA]
+
+
+		ON
+		[ENROLLMENT].[STUDENT_SCHOOL_YEAR_GU] = [CUM_GPA].[STUDENT_SCHOOL_YEAR_GU]
+
+		WHERE
+		SIS_NUMBER = 102790268
+
+
+
+
+
+
+
+
+
+
+
+
+		--GROUP BY SIS_NUMBER

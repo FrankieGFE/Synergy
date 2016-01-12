@@ -1,10 +1,35 @@
 
 
-SELECT STU.SIS_NUMBER, EXIT_REASON, T1.TEST_NAME, T1.PERFORMANCE_LEVEL, T1.TEST_DATE, [Overall LP] AS OVERALL_LP, Scale AS SCALE, FRM.VALUE_DESCRIPTION AS LUNCH_STATUS,
+SELECT STU.SIS_NUMBER, BS.LAST_NAME, BS.FIRST_NAME, SCHOOL_NAME, GRADE, SCHOOL_YEAR, BS.BIRTH_DATE, BS.GENDER, EXIT_REASON,
+FRM.VALUE_DESCRIPTION AS LUNCH_STATUS,
 BS.HOME_LANGUAGE, GETGPA.[HS Cum Flat], GETGPA.[HS Cum Weighted], GETGPA.[MS Cum Flat]
-
+,BS.STUDENT_GU
  FROM 
+	
+	(SELECT 
+
+	EY2.STUDENT_GU, EXIT_REASON FROM 
 	rev.EPC_STU_PGM_ELL AS EY2
+	
+	LEFT JOIN
+	APS.LCELatestSpanishEvaluationAsOf(GETDATE()) AS LCE
+	ON
+	LCE.STUDENT_GU = EY2.STUDENT_GU
+
+	LEFT JOIN
+	APS.LCELatestEvaluationAsOf(GETDATE()) AS LCE1
+	ON
+	LCE1.STUDENT_GU = EY2.STUDENT_GU
+
+	WHERE
+	EXIT_REASON = 'EY2'
+	AND 
+	(LCE1.ADMIN_DATE > '2014-01-01'
+	OR
+	LCE.ADMIN_DATE > '2014-01-01')
+
+	) AS EY2
+
 	INNER JOIN
 	rev.EPC_STU AS STU
 	ON
@@ -20,98 +45,15 @@ BS.HOME_LANGUAGE, GETGPA.[HS Cum Flat], GETGPA.[HS Cum Weighted], GETGPA.[MS Cum
 
 /*******************************************************************************
 
-GET TEST STUFF AND PIVOT
-********************************************************************************/
-INNER JOIN
-(
-SELECT * FROM 
-(
-SELECT 
-
-	   FIRST_NAME
-       ,LAST_NAME
-       ,SIS_NUMBER
-	   ,TEST_NAME
-       ,SCORE_DESCRIPTION
-       ,PERFORMANCE_LEVEL
-       ,TEST_SCORE
-       ,CAST (ADMIN_DATE AS DATE) AS TEST_DATE
-       ,ADMIN_DATE
-FROM
-(
-SELECT 
-
-	   PERSON.FIRST_NAME
-       ,PERSON.LAST_NAME
-       ,SIS_NUMBER
-	   ,TEST.TEST_NAME
-       ,SCORE_DESCRIPTION
-       ,STU_PART.PERFORMANCE_LEVEL
-       ,SCORES.TEST_SCORE
-       ,STUDENTTEST.ADMIN_DATE
-FROM
-       rev.EPC_STU_TEST AS StudentTest
-
-       JOIN
-       rev.EPC_TEST_PART AS PART
-       ON StudentTest.TEST_GU = PART.TEST_GU
-
-       JOIN
-       rev.EPC_STU_TEST_PART AS STU_PART
-       ON PART.TEST_PART_GU = STU_PART.TEST_PART_GU
-       AND STU_PART.STUDENT_TEST_GU = StudentTest.STUDENT_TEST_GU
-
-    INNER JOIN
-    rev.EPC_STU_TEST_PART_SCORE AS SCORES
-    ON
-    SCORES.STU_TEST_PART_GU = STU_PART.STU_TEST_PART_GU
-
-    LEFT JOIN
-    rev.EPC_TEST_SCORE_TYPE AS SCORET
-    ON
-    SCORET.TEST_GU = StudentTest.TEST_GU
-    AND SCORES.TEST_SCORE_TYPE_GU = SCORET.TEST_SCORE_TYPE_GU
-
-    LEFT JOIN
-    rev.EPC_TEST_DEF_SCORE AS SCORETDEF
-    ON
-    SCORETDEF.TEST_DEF_SCORE_GU = SCORET.TEST_DEF_SCORE_GU
-
-       LEFT JOIN
-       rev.EPC_TEST AS TEST
-       ON TEST.TEST_GU = StudentTest.TEST_GU
-
-       INNER JOIN
-       rev.EPC_STU AS Student
-       ON Student.STUDENT_GU = StudentTest.STUDENT_GU
-
-       INNER JOIN
-       rev.REV_PERSON AS Person
-       ON Person.PERSON_GU = StudentTest.STUDENT_GU
-
-WHERE
-       TEST_NAME like '%ACCESS%'
-
-) AS SYN
-) AS GETALLTOPIVOT
-
-PIVOT
-	(
-	MAX(TEST_SCORE)
-	FOR SCORE_DESCRIPTION IN ([Overall LP], [Scale])
-	) AS PIVOTME
-) AS T1
-ON
-T1.SIS_NUMBER = STU.SIS_NUMBER
-
-/*******************************************************************************
-
 GET GPA
 ********************************************************************************/
 LEFT JOIN
 (
 			SELECT 
 			SIS_NUMBER
+			,SCHOOL_YEAR
+			,ENROLLMENT.SCHOOL_NAME
+			,ENROLLMENT.GRADE
 			,[HS Cum Flat]
 			,[HS Cum Weighted]
 			,[MS Cum Flat]
@@ -182,10 +124,291 @@ INNER JOIN
 
 ) AS GETGPA
 ON
-T1.SIS_NUMBER = GETGPA.SIS_NUMBER
+BS.SIS_NUMBER = GETGPA.SIS_NUMBER
+
+
+ORDER BY STU.SIS_NUMBER
+
+
+
+/*******************************************************************************
+
+
+GET ACCESS STUFF - SEPERATE GRID
+
+
+
+********************************************************************************/
+
+
+SELECT STU.SIS_NUMBER, BS.LAST_NAME, BS.FIRST_NAME, T1.TEST_NAME, T1.PERFORMANCE_LEVEL, T1.TEST_DATE, [Overall LP] AS OVERALL_LP, Scale AS SCALE
+  
+
+ FROM 
+		(SELECT 
+
+	EY2.STUDENT_GU, EXIT_REASON FROM 
+	rev.EPC_STU_PGM_ELL AS EY2
+	
+	LEFT JOIN
+	APS.LCELatestSpanishEvaluationAsOf(GETDATE()) AS LCE
+	ON
+	LCE.STUDENT_GU = EY2.STUDENT_GU
+
+	LEFT JOIN
+	APS.LCELatestEvaluationAsOf(GETDATE()) AS LCE1
+	ON
+	LCE1.STUDENT_GU = EY2.STUDENT_GU
+
+	WHERE
+	EXIT_REASON = 'EY2'
+	AND 
+	(LCE1.ADMIN_DATE > '2014-01-01'
+	OR
+	LCE.ADMIN_DATE > '2014-01-01')
+
+	) AS EY2
+
+	INNER JOIN
+	rev.EPC_STU AS STU
+	ON
+	EY2.STUDENT_GU = STU.STUDENT_GU
+	INNER JOIN
+	APS.BasicStudentWithMoreInfo AS BS
+	ON
+	BS.STUDENT_GU = STU.STUDENT_GU
+
+
+/*******************************************************************************
+
+GET TEST STUFF AND PIVOT
+********************************************************************************/
+LEFT JOIN
+(
+SELECT * FROM 
+(
+SELECT 
+
+	   FIRST_NAME
+       ,LAST_NAME
+       ,SIS_NUMBER
+	   ,TEST_NAME
+       ,SCORE_DESCRIPTION
+       ,PERFORMANCE_LEVEL
+       ,TEST_SCORE
+       ,CAST (ADMIN_DATE AS DATE) AS TEST_DATE
+       ,ADMIN_DATE
+FROM
+(
+SELECT 
+
+	   PERSON.FIRST_NAME
+       ,PERSON.LAST_NAME
+       ,SIS_NUMBER
+	   ,TEST.TEST_NAME
+       ,SCORE_DESCRIPTION
+       --,STU_PART.PERFORMANCE_LEVEL
+	   ,VALUE_DESCRIPTION AS PERFORMANCE_LEVEL
+       ,SCORES.TEST_SCORE
+       ,STUDENTTEST.ADMIN_DATE
+FROM
+       rev.EPC_STU_TEST AS StudentTest
+
+       JOIN
+       rev.EPC_TEST_PART AS PART
+       ON StudentTest.TEST_GU = PART.TEST_GU
+
+       JOIN
+       rev.EPC_STU_TEST_PART AS STU_PART
+       ON PART.TEST_PART_GU = STU_PART.TEST_PART_GU
+       AND STU_PART.STUDENT_TEST_GU = StudentTest.STUDENT_TEST_GU
+
+    INNER JOIN
+    rev.EPC_STU_TEST_PART_SCORE AS SCORES
+    ON
+    SCORES.STU_TEST_PART_GU = STU_PART.STU_TEST_PART_GU
+
+    LEFT JOIN
+    rev.EPC_TEST_SCORE_TYPE AS SCORET
+    ON
+    SCORET.TEST_GU = StudentTest.TEST_GU
+    AND SCORES.TEST_SCORE_TYPE_GU = SCORET.TEST_SCORE_TYPE_GU
+
+    LEFT JOIN
+    rev.EPC_TEST_DEF_SCORE AS SCORETDEF
+    ON
+    SCORETDEF.TEST_DEF_SCORE_GU = SCORET.TEST_DEF_SCORE_GU
+
+       LEFT JOIN
+       rev.EPC_TEST AS TEST
+       ON TEST.TEST_GU = StudentTest.TEST_GU
+
+       INNER JOIN
+       rev.EPC_STU AS Student
+       ON Student.STUDENT_GU = StudentTest.STUDENT_GU
+
+       INNER JOIN
+       rev.REV_PERSON AS Person
+       ON Person.PERSON_GU = StudentTest.STUDENT_GU
+
+	     INNER JOIN
+	   	APS.LookupTable('K12.TestInfo', 'PERFORMANCE_LEVELS') AS ACCESS
+		ON
+		ACCESS.VALUE_CODE = STU_PART.PERFORMANCE_LEVEL
 
 
 WHERE
-EXIT_REASON = 'EY2'
+       TEST_NAME like '%ACCESS%'
 
-ORDER BY STU.SIS_NUMBER, TEST_DATE DESC
+) AS SYN
+) AS GETALLTOPIVOT
+
+PIVOT
+	(
+	MAX(TEST_SCORE)
+	FOR SCORE_DESCRIPTION IN ([Overall LP], [Scale])
+	) AS PIVOTME
+) AS T1
+ON
+T1.SIS_NUMBER = STU.SIS_NUMBER
+
+
+ORDER BY STU.SIS_NUMBER, TEST_DATE
+
+
+/*******************************************************************************
+
+
+GET PARCC STUFF - SEPERATE GRID
+
+
+
+********************************************************************************/
+
+
+SELECT STU.SIS_NUMBER, BS.LAST_NAME, BS.FIRST_NAME, T1.TEST_NAME, PERFORMANCE_LEVEL,T1.TEST_DATE, TEST_SCORE, SCORE_DESCRIPTION
+
+ FROM 
+		(SELECT 
+
+	EY2.STUDENT_GU, EXIT_REASON FROM 
+	rev.EPC_STU_PGM_ELL AS EY2
+	
+	LEFT JOIN
+	APS.LCELatestSpanishEvaluationAsOf(GETDATE()) AS LCE
+	ON
+	LCE.STUDENT_GU = EY2.STUDENT_GU
+
+	LEFT JOIN
+	APS.LCELatestEvaluationAsOf(GETDATE()) AS LCE1
+	ON
+	LCE1.STUDENT_GU = EY2.STUDENT_GU
+
+	WHERE
+	EXIT_REASON = 'EY2'
+	AND 
+	(LCE1.ADMIN_DATE > '2014-01-01'
+	OR
+	LCE.ADMIN_DATE > '2014-01-01')
+
+	) AS EY2
+	INNER JOIN
+	rev.EPC_STU AS STU
+	ON
+	EY2.STUDENT_GU = STU.STUDENT_GU
+	INNER JOIN
+	APS.BasicStudentWithMoreInfo AS BS
+	ON
+	BS.STUDENT_GU = STU.STUDENT_GU
+
+/*******************************************************************************
+
+GET TEST STUFF
+********************************************************************************/
+LEFT JOIN
+(
+SELECT * FROM 
+(
+SELECT 
+
+	   FIRST_NAME
+       ,LAST_NAME
+       ,SIS_NUMBER
+	   ,TEST_NAME
+       ,SCORE_DESCRIPTION
+       --,PERFORMANCE_LEVEL
+	   ,PERFORMANCE_LEVEL
+       ,TEST_SCORE
+       ,CAST (ADMIN_DATE AS DATE) AS TEST_DATE
+       ,ADMIN_DATE
+FROM
+(
+SELECT 
+
+	   PERSON.FIRST_NAME
+       ,PERSON.LAST_NAME
+       ,SIS_NUMBER
+	   ,TEST.TEST_NAME
+       ,SCORE_DESCRIPTION
+	   --,STU_PART.PERFORMANCE_LEVEL
+	   ,VALUE_DESCRIPTION AS PERFORMANCE_LEVEL
+       ,SCORES.TEST_SCORE
+       ,STUDENTTEST.ADMIN_DATE
+FROM
+       rev.EPC_STU_TEST AS StudentTest
+
+       JOIN
+       rev.EPC_TEST_PART AS PART
+       ON StudentTest.TEST_GU = PART.TEST_GU
+
+       JOIN
+       rev.EPC_STU_TEST_PART AS STU_PART
+       ON PART.TEST_PART_GU = STU_PART.TEST_PART_GU
+       AND STU_PART.STUDENT_TEST_GU = StudentTest.STUDENT_TEST_GU
+
+    INNER JOIN
+    rev.EPC_STU_TEST_PART_SCORE AS SCORES
+    ON
+    SCORES.STU_TEST_PART_GU = STU_PART.STU_TEST_PART_GU
+
+    LEFT JOIN
+    rev.EPC_TEST_SCORE_TYPE AS SCORET
+    ON
+    SCORET.TEST_GU = StudentTest.TEST_GU
+    AND SCORES.TEST_SCORE_TYPE_GU = SCORET.TEST_SCORE_TYPE_GU
+
+    LEFT JOIN
+    rev.EPC_TEST_DEF_SCORE AS SCORETDEF
+    ON
+    SCORETDEF.TEST_DEF_SCORE_GU = SCORET.TEST_DEF_SCORE_GU
+
+       LEFT JOIN
+       rev.EPC_TEST AS TEST
+       ON TEST.TEST_GU = StudentTest.TEST_GU
+
+       INNER JOIN
+       rev.EPC_STU AS Student
+       ON Student.STUDENT_GU = StudentTest.STUDENT_GU
+
+       INNER JOIN
+       rev.REV_PERSON AS Person
+       ON Person.PERSON_GU = StudentTest.STUDENT_GU
+
+	   INNER JOIN
+	   	APS.LookupTable('K12.TestInfo', 'PERFORMANCE_LEVELS') AS PARCC
+		ON
+		PARCC.VALUE_CODE = STU_PART.PERFORMANCE_LEVEL
+
+
+WHERE
+       TEST_NAME like '%PARCC%'
+
+) AS SYN
+) AS GETALLTOPIVOT
+
+) AS T1
+ON
+T1.SIS_NUMBER = STU.SIS_NUMBER
+
+
+ORDER BY STU.SIS_NUMBER, TEST_DATE
