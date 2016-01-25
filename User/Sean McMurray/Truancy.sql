@@ -39,6 +39,7 @@ From
   INNER JOIN
   APS.StudentEnrollmentDetails on rev.EPC_STU.STUDENT_GU = APS.StudentEnrollmentDetails.STUDENT_GU
 
+
 WHERE 
 rev.UD_TRUANCY_LOG.UDTRUANCY_LOG_GU IS NOT NULL
 AND APS.StudentEnrollmentDetails.EXCLUDE_ADA_ADM IS NULL
