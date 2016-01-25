@@ -11,6 +11,8 @@ Select
   ,rev.REV_PERSON.LAST_NAME AS [Last Name]
   ,rev.REV_PERSON.FIRST_NAME AS [First Name]
   ,rev.REV_PERSON.MIDDLE_NAME AS [Middle Name]
+  ,APS.StudentEnrollmentDetails.GRADE AS [Grade]
+  ,APS.StudentEnrollmentDetails.SCHOOL_NAME [School]
   ,rev.UD_TRUANCY_LOG.CONTACT_TYPE AS [Contact Type]
   ,rev.UD_TRUANCY_LOG.CONTACT_WITH AS [Contact With]
   ,rev.UD_TRUANCY_LOG.NOTES AS [Notes]
@@ -34,6 +36,14 @@ From
   rev.UD_TRUANCY_LOG ON rev.EPC_STU.STUDENT_GU = rev.UD_TRUANCY_LOG.STUDENT_GU
   INNER JOIN
   rev.UD_TRUANT_STUDENT on rev.EPC_STU.STUDENT_GU = rev.UD_TRUANT_STUDENT.STUDENT_GU
+  INNER JOIN
+  APS.StudentEnrollmentDetails on rev.EPC_STU.STUDENT_GU = APS.StudentEnrollmentDetails.STUDENT_GU
 
 WHERE 
 rev.UD_TRUANCY_LOG.UDTRUANCY_LOG_GU IS NOT NULL
+AND APS.StudentEnrollmentDetails.EXCLUDE_ADA_ADM IS NULL
+AND APS.StudentEnrollmentDetails.SCHOOL_YEAR = '2015'
+AND APS.StudentEnrollmentDetails.EXTENSION = 'R'
+
+ORDER BY
+SCHOOL_NAME
