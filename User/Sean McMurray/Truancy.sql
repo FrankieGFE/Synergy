@@ -1,5 +1,5 @@
 --Created by: e207878/Sean McMurray
---Created on: 1/24/2016
+--Created on: 1/25/2016
 --Purpose: Data extract to pull truancy information
 --Note: Need to create function/report
 
@@ -15,7 +15,6 @@ Select
   ,MOSTRECENTENROLL.SCHOOL_NAME [School]
   ,TRUANCYLOG.CONTACT_TYPE AS [Contact Type]
   ,CONTACT.VALUE_DESCRIPTION AS [Contact With]
-  --,REPLACE(rev.UD_TRUANCY_LOG.NOTES, char(10),'') AS [Notes]
   ,LTRIM(RTRIM(REPLACE(REPLACE(REPLACE(CAST(TRUANCYLOG.NOTES AS VARCHAR), CHAR(9), ' '), CHAR(13), ' '), CHAR(10), ' '))) AS [Notes]
   ,OUTCOME1.VALUE_DESCRIPTION AS [Outcome]
   ,OUTCOME2.VALUE_DESCRIPTION AS [Outcome 2]
@@ -27,13 +26,12 @@ Select
   ,rev.UD_TRUANT_STUDENT.TWO_DAY_TRUANT AS [Two Day Truant]
   
 From
-  rev.UD_TRUANCY_LOG AS TRUANCYLOG -- 10k
+  rev.UD_TRUANCY_LOG AS TRUANCYLOG
   INNER JOIN 
   rev.EPC_STU
   ON
   rev.EPC_STU.STUDENT_GU = TRUANCYLOG.STUDENT_GU
-
-  
+ 
   INNER JOIN
   rev.REV_PERSON ON rev.EPC_STU.STUDENT_GU = rev.REV_PERSON.PERSON_GU
   INNER JOIN
@@ -63,6 +61,7 @@ WHERE RN = 1
 ON
 MOSTRECENTENROLL.STUDENT_GU = rev.EPC_STU.STUDENT_GU
 
+--Lookup Table Joins
 INNER JOIN
 APS.LookupTable('Revelation.UD.Truancy','Outcome_1') AS OUTCOME1
 ON
@@ -84,11 +83,8 @@ APS.LookupTable('revelation.ud.truancy','contact_with') AS CONTACT
 ON
 TRUANCYLOG.CONTACT_WITH = CONTACT.VALUE_CODE
 
-
 WHERE 
 TRUANCYLOG.UDTRUANCY_LOG_GU IS NOT NULL
-
-
 
 ORDER BY
 SCHOOL_NAME
