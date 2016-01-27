@@ -77,6 +77,7 @@ From
 		ON
 		MOSTRECENTENROLL.STUDENT_GU = rev.EPC_STU.STUDENT_GU
 
+--Lookup Tables
 	LEFT JOIN
 	APS.LookupTable('Revelation.UD.Truancy','Outcome_1') AS OUTCOME1
 	ON
