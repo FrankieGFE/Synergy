@@ -265,7 +265,7 @@ SELECT
       , stu.SIS_NUMBER                            AS [StudentID]
       , lorg.ORGANIZATION_NAME                    AS [LastLocation]
 	  --CHANGED FOR PRE-PRINTED CARDS WITH GRADE AHEAD
-      , grd_next.[VALUE_DESCRIPTION]			  AS [GradeLevel]
+      , grd_next.[VALUE_DESCRIPTION]				AS [GradeLevel]
       , per.GENDER                                AS [Gender]
       , shlng.VALUE_DESCRIPTION                   AS [PHLOTE_Q1]
       , CONVERT(VARCHAR(10), per.BIRTH_DATE, 101) AS [DateOfBirth]
@@ -484,7 +484,7 @@ FROM  rev.EPC_STU                     stu
       JOIN rev.REV_PERSON             per  ON per.PERSON_GU            = stu.STUDENT_GU
       LEFT JOIN rev.REV_ADDRESS       hadr ON hadr.ADDRESS_GU          = per.HOME_ADDRESS_GU
       LEFT JOIN APS.LookupTable('K12', 'GRADE') grd on grd.VALUE_CODE  = ssy.GRADE
-      LEFT JOIN APS.LookupTable('K12', 'GRADE') grd_next on grd.LIST_ORDER  = grd_next.[LIST_ORDER] + @SchRunGrade
+      LEFT JOIN APS.LookupTable('K12', 'GRADE') grd_next on grd.LIST_ORDER + @SchRunGrade = grd_next.[LIST_ORDER] 
 	   --APSPHLOTE
 	  LEFT JOIN 
 	  (
