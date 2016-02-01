@@ -75,7 +75,7 @@ FROM
 	[ENROLLMENTS].[STUDENT_GU] = [STUDENT].[STUDENT_GU]
 	
 	LEFT JOIN APS.LookupTable('K12', 'GRADE') grd on grd.VALUE_DESCRIPTION  = [ENROLLMENTS].[GRADE]
-    LEFT JOIN APS.LookupTable('K12', 'GRADE') grd_next on grd.LIST_ORDER  = grd_next.[LIST_ORDER] + @SchRunGrade
+    LEFT JOIN APS.LookupTable('K12', 'GRADE') grd_next on grd.LIST_ORDER + @SchRunGrade = grd_next.[LIST_ORDER] 
 	
 WHERE
 	[ENROLLMENTS].[YEAR_GU] = @SchRunYearGU
