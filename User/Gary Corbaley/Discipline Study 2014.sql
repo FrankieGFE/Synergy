@@ -41,6 +41,8 @@
 		,[Disposition_Code].[DISP_CODE]
 		,[Disposition_Code].[DESCRIPTION] AS [DISPOSITION_DESCRIPTION]
 		,[Disposition].[REASSIGNMENT_DAYS]
+		,[Disposition].[DISPOSITION_START_DATE]
+		,[Disposition].[DISPOSITION_END_DATE]
 		
 		
 		,[Violation].[VIOLATION_ID]

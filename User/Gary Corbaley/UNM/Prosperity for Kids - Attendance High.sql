@@ -225,7 +225,7 @@ FROM
     [Class].[SECTION_GU]=[Section].[SECTION_GU]
     AND [Section].[EXCLUDE_ATTENDANCE]='Y'
 
-    	INNER HASH JOIN 
+    INNER HASH JOIN 
 	rev.[EPC_SCH_YR_CRS] AS [SchoolYearCourse]
 	ON [Section].[SCHOOL_YEAR_COURSE_GU] = [SchoolYearCourse].[SCHOOL_YEAR_COURSE_GU]
 
@@ -284,226 +284,240 @@ GROUP BY
 
 
 
-SELECT --DISTINCT
-	'2014-2015' AS [SCHOOL_YEAR]
-	,[STUDENT].[SIS_NUMBER]
-	,[STUDENT].[STATE_STUDENT_NUMBER]
-	,[STUDENT].[LAST_NAME]
-	,[STUDENT].[FIRST_NAME]
-	,[STUDENT].[MIDDLE_NAME]
-	,[STUDENT].[BIRTH_DATE]
-	,[ENROLLMENTS].[SCHOOL_CODE]
-	,[ENROLLMENTS].[SCHOOL_NAME]
-	,[ENROLLMENTS].[GRADE]
-	,[STUDENT].[LUNCH_STATUS]
-	,[STUDENT].[ELL_STATUS]
-	,[STUDENT].[SPED_STATUS]
-	,[STUDENT].[RESOLVED_RACE]
-	,[STUDENT].[GENDER]
-	,[ENROLLMENTS].[LEAVE_DATE]
-	,[ENROLLMENTS].[LEAVE_DESCRIPTION]
+--SELECT --DISTINCT
+--	'2014-2015' AS [SCHOOL_YEAR]
+--	,[STUDENT].[SIS_NUMBER]
+--	,[STUDENT].[STATE_STUDENT_NUMBER]
+--	,[STUDENT].[LAST_NAME]
+--	,[STUDENT].[FIRST_NAME]
+--	,[STUDENT].[MIDDLE_NAME]
+--	,[STUDENT].[BIRTH_DATE]
+--	,[ENROLLMENTS].[SCHOOL_CODE]
+--	,[ENROLLMENTS].[SCHOOL_NAME]
+--	,[ENROLLMENTS].[GRADE]
+--	,[STUDENT].[LUNCH_STATUS]
+--	,[STUDENT].[ELL_STATUS]
+--	,[STUDENT].[SPED_STATUS]
+--	,[STUDENT].[RESOLVED_RACE]
+--	,[STUDENT].[GENDER]
+--	,[ENROLLMENTS].[LEAVE_DATE]
+--	,[ENROLLMENTS].[LEAVE_DESCRIPTION]
 	
-	,[ENROLLMENTS].[YEAR_END_STATUS]
+--	,[ENROLLMENTS].[YEAR_END_STATUS]
 	
-	,[UNEXCUSED].[Total Unexcused]
+--	,[UNEXCUSED].[Total Unexcused]
 	
-	--,[CUM_GPA].[MS Cum Flat]
+--	--,[CUM_GPA].[MS Cum Flat]
 	
+--FROM
+--	(
+--	SELECT
+--		*
+--		,ROW_NUMBER() OVER (PARTITION BY STUDENT_GU, SCHOOL_YEAR ORDER BY ENTER_DATE DESC) AS RN
+--	FROM
+--		APS.StudentEnrollmentDetails
+--	WHERE
+--		SCHOOL_YEAR = '2014'
+--		AND EXTENSION = 'R'
+--		AND EXCLUDE_ADA_ADM IS NULL
+--		AND ENTER_DATE IS NOT NULL
+--		--AND LEAVE_DATE IS NULL
+--		--AND ([GRADE] BETWEEN '01' AND '08' OR [GRADE] IN ('PK','K'))
+	
+--	)  AS [ENROLLMENTS]
+	
+--	INNER JOIN
+--	APS.BasicStudentWithMoreInfo  AS [STUDENT]
+--	ON
+--	[ENROLLMENTS].[STUDENT_GU] = [STUDENT].[STUDENT_GU]
+	
+--	--LEFT OUTER JOIN
+--	--	(
+--	--	SELECT DISTINCT
+--	--		[GPA].[STUDENT_SCHOOL_YEAR_GU]
+			
+--	--		,SUM(CASE WHEN [GPA_DEF].[GPA_CODE] = 'HSCF' THEN [GPA].[GPA] ELSE 0 END) AS [HS Cum Flat]
+--	--		,SUM(CASE WHEN [GPA_DEF].[GPA_CODE] = 'HSCW' THEN [GPA].[GPA] ELSE 0 END) AS [HS Cum Weighted]
+--	--		,SUM(CASE WHEN [GPA_DEF].[GPA_CODE] = 'MSCF' THEN [GPA].[GPA] ELSE 0 END) AS [MS Cum Flat]
+			
+--	--	FROM	
+--	--		rev.[EPC_STU_GPA] AS [GPA]  
+				
+--	--		INNER JOIN
+--	--		rev.[EPC_SCH_YR_GPA_TYPE_RUN] [GPA_RUN]
+--	--		ON
+--	--		[GPA].[SCHOOL_YEAR_GPA_TYPE_RUN_GU] = [GPA_RUN].[SCHOOL_YEAR_GPA_TYPE_RUN_GU]
+--	--		AND [GPA_RUN].[SCHOOL_YEAR_GRD_PRD_GU] IS NULL
+			
+--	--		INNER JOIN
+--	--		rev.[EPC_GPA_DEF_TYPE] [GPA_TYPE] 
+--	--		ON 
+--	--		[GPA_RUN].[GPA_DEF_TYPE_GU] = [GPA_TYPE].[GPA_DEF_TYPE_GU]
+--	--		AND (
+--	--			[GPA_TYPE].[GPA_TYPE_NAME] = 'HS Cum Flat' 
+--	--			OR
+--	--			[GPA_TYPE].[GPA_TYPE_NAME] = 'HS Cum Weighted' 
+--	--			OR
+--	--			[GPA_TYPE].[GPA_TYPE_NAME] = 'MS Cum Flat'
+--	--			)
+					
+--	--		INNER JOIN 
+--	--		rev.[EPC_GPA_DEF] [GPA_DEF]  
+--	--		ON 
+--	--		[GPA_TYPE].[GPA_DEF_GU] = [GPA_DEF].[GPA_DEF_GU]
+			
+--	--	GROUP BY
+--	--		[GPA].[STUDENT_SCHOOL_YEAR_GU]
+--	--	) AS [CUM_GPA]
+--	--	ON
+--	--	[ENROLLMENTS].[STUDENT_SCHOOL_YEAR_GU] = [CUM_GPA].[STUDENT_SCHOOL_YEAR_GU]
+	
+--	LEFT OUTER JOIN
+--	(
+--	SELECT --start with high schoolers
+--    [Truant].[SIS_NUMBER]
+--    ,[Truant].[SCHOOL_CODE]
+--    ,ISNULL(SUM(CASE
+--	   WHEN [Truant].[Unexcused Count For Day] >= 2 THEN
+--		  CASE WHEN [Truant].[Truant Percentage]<=50.00 THEN 1.00
+--		       ELSE 0
+--		  END
+--	   ELSE
+--		  0
+--     END),0.00) AS [Half Days Unexcused]
+--    ,ISNULL(SUM(CASE
+--	   WHEN [Truant].[Unexcused Count For Day] >= 2 THEN
+--		       CASE WHEN ([Truant].[Truant Percentage]>50.00 AND [Truant].[Truant Percentage]>0) THEN 1.00
+--		       ELSE 0.00
+--		  END
+--	   ELSE
+--		  0
+--     END),0.00) AS [Full Days Unexcused]
+--    ,ISNULL(SUM(CASE
+--	   WHEN [Truant].[Unexcused Count For Day] >= 2 THEN
+--			  CASE WHEN ([Truant].[Truant Percentage]<=50.00 AND [Truant].[Truant Percentage]>0) THEN 0.50
+--				  WHEN [Truant].[Truant Percentage]>50.00 THEN 1.00
+--		       ELSE 0
+--		  END
+--	   ELSE
+--		  0
+--     END),0.00) AS [Total Unexcused]
+--FROM
+--(
+--SELECT
+--    [Truant1].*
+--    ,[SchedCount].[Total Classes]
+--    ,([Truant1].[Unexcused Count For Day]/[SchedCount].[Total Classes])*100 AS [Truant Percentage]
+--FROM
+--[HighSchoolTruant] AS [Truant1]
+
+--LEFT HASH JOIN
+--(
+--SELECT
+--    [STUDENT_GU]
+--    ,[SIS_NUMBER]
+--    ,[CAL_DATE]
+--    ,[ROTATION]
+--    ,CAST(SUM([Total Classes]) AS DECIMAL(5,2)) AS [Total Classes]
+--FROM
+--	[HSSchedCount] AS [SchedCount]
+
+--GROUP BY
+--    [STUDENT_GU]
+--    ,[SIS_NUMBER]
+--    ,[CAL_DATE]
+--    ,[ROTATION]
+--) AS [SchedCount]
+--ON
+--[Truant1].[STUDENT_GU]=[SchedCount].[STUDENT_GU]
+--AND [Truant1].[ABS_DATE]=[SchedCount].[CAL_DATE]
+--AND [Truant1].[Unexcused Count For Day]>=2
+--) AS [Truant]
+
+--GROUP BY
+--    [Truant].[SIS_NUMBER]
+--    ,[Truant].[SCHOOL_CODE]
+
+--UNION
+
+--SELECT --pull middle school truancy
+--    [Truant].[SIS_NUMBER]
+--    ,[Truant].[SCHOOL_CODE]
+--    ,ISNULL(SUM(CASE
+--	   WHEN [Truant].[Unexcused Count For Day] >= 2 THEN
+--		  CASE WHEN [Truant].[Truant Percentage]<=50.00 THEN 1.00
+--		       ELSE 0
+--		  END
+--     END),0.00) AS [Half Days Unexcused]
+--    ,ISNULL(SUM(CASE
+--	   WHEN [Truant].[Unexcused Count For Day] >= 2 THEN
+--		       CASE WHEN [Truant].[Truant Percentage]>50.00 THEN 1.00
+--		       ELSE 0.00
+--		  END
+--     END),0.00) AS [Full Days Unexcused]
+--    ,ISNULL(SUM(CASE
+--	   WHEN [Truant].[Unexcused Count For Day] >= 2 THEN
+--			  CASE WHEN [Truant].[Truant Percentage]<=50.00 THEN 0.50
+--				  WHEN [Truant].[Truant Percentage]>50.00 THEN 1.00
+--		       ELSE 0
+--		  END
+--     END),0.00) AS [Total Unexcused]
+--FROM
+--(
+--SELECT
+--    [Truant1].*
+--    ,[SchedCount].[Total Classes]
+--    ,([Truant1].[Unexcused Count For Day]/[SchedCount].[Total Classes])*100 AS [Truant Percentage]
+--FROM
+--	[MiddleSchoolTruant] AS [Truant1]
+
+--LEFT HASH JOIN
+--(
+--SELECT
+--    [STUDENT_GU]
+--    ,[SIS_NUMBER]
+--    ,[CAL_DATE]
+--    ,[ROTATION]
+--    ,CAST(SUM([Total Classes]) AS DECIMAL(5,2)) AS [Total Classes]
+--FROM
+--	[HSSchedCount] AS [SchedCount]
+
+--GROUP BY
+--    [STUDENT_GU]
+--    ,[SIS_NUMBER]
+--    ,[CAL_DATE]
+--    ,[ROTATION]
+--) AS [SchedCount]
+--ON
+--[Truant1].[STUDENT_GU]=[SchedCount].[STUDENT_GU]
+--AND [Truant1].[ABS_DATE]=[SchedCount].[CAL_DATE]
+--) AS [Truant]
+
+--WHERE
+--    [Truant].[ABS_DATE]<='05/22/2015'
+--GROUP BY
+--    [Truant].[SIS_NUMBER]
+--    ,[Truant].[SCHOOL_CODE]
+--	) AS [UNEXCUSED]
+--	ON
+--	[STUDENT].[SIS_NUMBER] = [UNEXCUSED].[SIS_NUMBER]
+		
+--WHERE
+--	[ENROLLMENTS].[RN] = 1
+--	AND [ENROLLMENTS].[SCHOOL_CODE] BETWEEN '400' AND '499'
+--	--AND ([ENROLLMENTS].[GRADE] BETWEEN '01' AND '08' OR [ENROLLMENTS].[GRADE] IN ('PK','K'))
+
+
+SELECT
+	*
 FROM
-	(
-	SELECT
-		*
-		,ROW_NUMBER() OVER (PARTITION BY STUDENT_GU, SCHOOL_YEAR ORDER BY ENTER_DATE DESC) AS RN
-	FROM
-		APS.StudentEnrollmentDetails
-	WHERE
-		SCHOOL_YEAR = '2014'
-		AND EXTENSION = 'R'
-		AND EXCLUDE_ADA_ADM IS NULL
-		AND ENTER_DATE IS NOT NULL
-		--AND LEAVE_DATE IS NULL
-		--AND ([GRADE] BETWEEN '01' AND '08' OR [GRADE] IN ('PK','K'))
-	
-	)  AS [ENROLLMENTS]
+	[MiddleSchoolTruant]
 	
 	INNER JOIN
-	APS.BasicStudentWithMoreInfo  AS [STUDENT]
+	[HSSchedCount]
 	ON
-	[ENROLLMENTS].[STUDENT_GU] = [STUDENT].[STUDENT_GU]
+	[MiddleSchoolTruant].[STUDENT_GU] = [HSSchedCount].[STUDENT_GU]
+	AND [MiddleSchoolTruant].[ABS_DATE] = [HSSchedCount].[CAL_DATE]
 	
-	--LEFT OUTER JOIN
-	--	(
-	--	SELECT DISTINCT
-	--		[GPA].[STUDENT_SCHOOL_YEAR_GU]
-			
-	--		,SUM(CASE WHEN [GPA_DEF].[GPA_CODE] = 'HSCF' THEN [GPA].[GPA] ELSE 0 END) AS [HS Cum Flat]
-	--		,SUM(CASE WHEN [GPA_DEF].[GPA_CODE] = 'HSCW' THEN [GPA].[GPA] ELSE 0 END) AS [HS Cum Weighted]
-	--		,SUM(CASE WHEN [GPA_DEF].[GPA_CODE] = 'MSCF' THEN [GPA].[GPA] ELSE 0 END) AS [MS Cum Flat]
-			
-	--	FROM	
-	--		rev.[EPC_STU_GPA] AS [GPA]  
-				
-	--		INNER JOIN
-	--		rev.[EPC_SCH_YR_GPA_TYPE_RUN] [GPA_RUN]
-	--		ON
-	--		[GPA].[SCHOOL_YEAR_GPA_TYPE_RUN_GU] = [GPA_RUN].[SCHOOL_YEAR_GPA_TYPE_RUN_GU]
-	--		AND [GPA_RUN].[SCHOOL_YEAR_GRD_PRD_GU] IS NULL
-			
-	--		INNER JOIN
-	--		rev.[EPC_GPA_DEF_TYPE] [GPA_TYPE] 
-	--		ON 
-	--		[GPA_RUN].[GPA_DEF_TYPE_GU] = [GPA_TYPE].[GPA_DEF_TYPE_GU]
-	--		AND (
-	--			[GPA_TYPE].[GPA_TYPE_NAME] = 'HS Cum Flat' 
-	--			OR
-	--			[GPA_TYPE].[GPA_TYPE_NAME] = 'HS Cum Weighted' 
-	--			OR
-	--			[GPA_TYPE].[GPA_TYPE_NAME] = 'MS Cum Flat'
-	--			)
-					
-	--		INNER JOIN 
-	--		rev.[EPC_GPA_DEF] [GPA_DEF]  
-	--		ON 
-	--		[GPA_TYPE].[GPA_DEF_GU] = [GPA_DEF].[GPA_DEF_GU]
-			
-	--	GROUP BY
-	--		[GPA].[STUDENT_SCHOOL_YEAR_GU]
-	--	) AS [CUM_GPA]
-	--	ON
-	--	[ENROLLMENTS].[STUDENT_SCHOOL_YEAR_GU] = [CUM_GPA].[STUDENT_SCHOOL_YEAR_GU]
-	
-	LEFT OUTER JOIN
-	(
-	SELECT --start with high schoolers
-    [Truant].[SIS_NUMBER]
-    ,[Truant].[SCHOOL_CODE]
-    ,ISNULL(SUM(CASE
-	   WHEN [Truant].[Unexcused Count For Day] >= 2 THEN
-		  CASE WHEN [Truant].[Truant Percentage]<=50.00 THEN 1.00
-		       ELSE 0
-		  END
-	   ELSE
-		  0
-     END),0.00) AS [Half Days Unexcused]
-    ,ISNULL(SUM(CASE
-	   WHEN [Truant].[Unexcused Count For Day] >= 2 THEN
-		       CASE WHEN ([Truant].[Truant Percentage]>50.00 AND [Truant].[Truant Percentage]>0) THEN 1.00
-		       ELSE 0.00
-		  END
-	   ELSE
-		  0
-     END),0.00) AS [Full Days Unexcused]
-    ,ISNULL(SUM(CASE
-	   WHEN [Truant].[Unexcused Count For Day] >= 2 THEN
-			  CASE WHEN ([Truant].[Truant Percentage]<=50.00 AND [Truant].[Truant Percentage]>0) THEN 0.50
-				  WHEN [Truant].[Truant Percentage]>50.00 THEN 1.00
-		       ELSE 0
-		  END
-	   ELSE
-		  0
-     END),0.00) AS [Total Unexcused]
-FROM
-(
-SELECT
-    [Truant1].*
-    ,[SchedCount].[Total Classes]
-    ,([Truant1].[Unexcused Count For Day]/[SchedCount].[Total Classes])*100 AS [Truant Percentage]
-FROM
-[HighSchoolTruant] AS [Truant1]
-
-LEFT HASH JOIN
-(
-SELECT
-    [STUDENT_GU]
-    ,[SIS_NUMBER]
-    ,[CAL_DATE]
-    ,[ROTATION]
-    ,CAST(SUM([Total Classes]) AS DECIMAL(5,2)) AS [Total Classes]
-FROM
-	[HSSchedCount] AS [SchedCount]
-
-GROUP BY
-    [STUDENT_GU]
-    ,[SIS_NUMBER]
-    ,[CAL_DATE]
-    ,[ROTATION]
-) AS [SchedCount]
-ON
-[Truant1].[STUDENT_GU]=[SchedCount].[STUDENT_GU]
-AND [Truant1].[ABS_DATE]=[SchedCount].[CAL_DATE]
-AND [Truant1].[Unexcused Count For Day]>=2
-) AS [Truant]
-
-GROUP BY
-    [Truant].[SIS_NUMBER]
-    ,[Truant].[SCHOOL_CODE]
-
-UNION
-
-SELECT --pull middle school truancy
-    [Truant].[SIS_NUMBER]
-    ,[Truant].[SCHOOL_CODE]
-    ,ISNULL(SUM(CASE
-	   WHEN [Truant].[Unexcused Count For Day] >= 2 THEN
-		  CASE WHEN [Truant].[Truant Percentage]<=50.00 THEN 1.00
-		       ELSE 0
-		  END
-     END),0.00) AS [Half Days Unexcused]
-    ,ISNULL(SUM(CASE
-	   WHEN [Truant].[Unexcused Count For Day] >= 2 THEN
-		       CASE WHEN [Truant].[Truant Percentage]>50.00 THEN 1.00
-		       ELSE 0.00
-		  END
-     END),0.00) AS [Full Days Unexcused]
-    ,ISNULL(SUM(CASE
-	   WHEN [Truant].[Unexcused Count For Day] >= 2 THEN
-			  CASE WHEN [Truant].[Truant Percentage]<=50.00 THEN 0.50
-				  WHEN [Truant].[Truant Percentage]>50.00 THEN 1.00
-		       ELSE 0
-		  END
-     END),0.00) AS [Total Unexcused]
-FROM
-(
-SELECT
-    [Truant1].*
-    ,[SchedCount].[Total Classes]
-    ,([Truant1].[Unexcused Count For Day]/[SchedCount].[Total Classes])*100 AS [Truant Percentage]
-FROM
-	[MiddleSchoolTruant] AS [Truant1]
-
-LEFT HASH JOIN
-(
-SELECT
-    [STUDENT_GU]
-    ,[SIS_NUMBER]
-    ,[CAL_DATE]
-    ,[ROTATION]
-    ,CAST(SUM([Total Classes]) AS DECIMAL(5,2)) AS [Total Classes]
-FROM
-	[HSSchedCount] AS [SchedCount]
-
-GROUP BY
-    [STUDENT_GU]
-    ,[SIS_NUMBER]
-    ,[CAL_DATE]
-    ,[ROTATION]
-) AS [SchedCount]
-ON
-[Truant1].[STUDENT_GU]=[SchedCount].[STUDENT_GU]
-AND [Truant1].[ABS_DATE]=[SchedCount].[CAL_DATE]
-) AS [Truant]
-
 WHERE
-    [Truant].[ABS_DATE]<='05/22/2015'
-GROUP BY
-    [Truant].[SIS_NUMBER]
-    ,[Truant].[SCHOOL_CODE]
-	) AS [UNEXCUSED]
-	ON
-	[STUDENT].[SIS_NUMBER] = [UNEXCUSED].[SIS_NUMBER]
-		
-WHERE
-	[ENROLLMENTS].[RN] = 1
-	AND [ENROLLMENTS].[SCHOOL_CODE] BETWEEN '400' AND '499'
-	--AND ([ENROLLMENTS].[GRADE] BETWEEN '01' AND '08' OR [ENROLLMENTS].[GRADE] IN ('PK','K'))
-	
+	[MiddleSchoolTruant].[SCHOOL_CODE] = '410'

@@ -1,0 +1,19 @@
+
+
+
+
+
+SELECT
+	*
+FROM
+	APS.PrimaryEnrollmentDetailsAsOf('10/14/2015') AS [ENROLLMENT]
+	
+	INNER JOIN
+	APS.BasicStudent AS [STUDENT]
+	ON
+	[ENROLLMENT].[STUDENT_GU] = [STUDENT].[STUDENT_GU]
+	
+WHERE
+	[ENROLLMENT].[SCHOOL_CODE] IN ('410','416')
+	
+	--410 416
