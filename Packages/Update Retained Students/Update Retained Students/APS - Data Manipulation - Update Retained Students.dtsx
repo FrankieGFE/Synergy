@@ -7,13 +7,13 @@
   DTS:CreatorName="APS\e204042"
   DTS:DTSID="{9FBE257C-B84C-4588-9CF0-7ECC1766362A}"
   DTS:ExecutableType="SSIS.Package.3"
-  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LastModifiedProductVersion="11.0.5058.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="APS - Data Manipulation - Update Retained Students"
   DTS:PackageType="5"
   DTS:ProtectionLevel="2"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{507081E9-D439-40C2-8C6C-505675AE6B20}">
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{D78FC214-59B6-495A-85EB-CF67287A9D94}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -27,12 +27,12 @@
           DTS:ConnectionString="Data Source=180-smaxods-01.aps.edu.actd;User ID=lincinq;Initial Catalog=HELPER;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
           <EncryptedData
             Type="http://www.w3.org/2001/04/xmlenc#Element"
-            Salt="N1lESn7s0A=="
-            IV="JqEyXdvPRNw=" xmlns="http://www.w3.org/2001/04/xmlenc#">
+            Salt="YfhGE3q83A=="
+            IV="U8+pVjHe6Ng=" xmlns="http://www.w3.org/2001/04/xmlenc#">
             <EncryptionMethod
               Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc" />
             <CipherData>
-              <CipherValue>JqEyXdvPRNzKdt/KVa2FtcKAWnTjx2dKXo0ygcKvOpm1OV2YlWF7sK7BDu5Zp60kt+rYhBS5gH/VqLB+5lWI0/IBUI0A051DpRrkgUd4+2lj7h3bTpCAfUm9Rhabp1kHQzqsRclt1fjJKaWBQIc7HLS7El81hoPQ94oR9EMv7i8=</CipherValue>
+              <CipherValue>U8+pVjHe6Ng0gKk/gNWJCKqtH5/NeBEAaeWUDPlqj/BXhJGOn0IYxq23OlCL9uGxik1o3HmgpZKjmTgvy+NBrTjfh49PCqi/nlRsOpwvcc9mDuGBTJ2qGz3PH+g54xiJQPPyDerI24C5oBW2QiHq4gwDXaT51tigKqi/LU9r51E=</CipherValue>
             </CipherData>
           </EncryptedData>
         </DTS:ConnectionManager>
@@ -48,12 +48,12 @@
           DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=SystemImport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
           <EncryptedData
             Type="http://www.w3.org/2001/04/xmlenc#Element"
-            Salt="JA60bQa58w=="
-            IV="bxxyGBjLDjg=" xmlns="http://www.w3.org/2001/04/xmlenc#">
+            Salt="znXF6GG7Gg=="
+            IV="YW4y0Jm6OWI=" xmlns="http://www.w3.org/2001/04/xmlenc#">
             <EncryptionMethod
               Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc" />
             <CipherData>
-              <CipherValue>bxxyGBjLDjgHZlMzon7MAsR1WgpeijhzLWg7yX4rowmhtTiUHotJPApXRiV/mfqHHOSruicCYngQmWJX6zj5TxME0AQFsNXGTTB5Idakx1uPr+PIrVEpj6BXXo88jS5Fh+qWhiJCcIREUQwic1tT52mWBQGGlNX7m1poGAJgFzHikfL1sur4vQ==</CipherValue>
+              <CipherValue>YW4y0Jm6OWItNTWlEPhhe4/EM8EUm6FH/mMu7JzRPYXFKaMOjJP5TZ+SgP7XogpmvQpEXHYZttbqrqHZEnOJwgrc0jYZ2rLM3WG0gVFbCij5jTCqg+2yHSwC6H9kmeuunfNWNN7E2wooXTqzWdGGNCWeihtMQztJDNjIVFtfs89L75H27768Qw==</CipherValue>
             </CipherData>
           </EncryptedData>
         </DTS:ConnectionManager>
@@ -139,7 +139,7 @@
         <SQLTask:SqlTaskData
           SQLTask:Connection="{CFE3A1AE-F9D6-4C71-B517-F73FF777D809}"
           SQLTask:BypassPrepare="False"
-          SQLTask:SqlStatementSource="BEGIN TRAN&#xA;&#xA;/* delete the previous records. */&#xA;DELETE FROM&#xA;    [rev].[REV_PERSON_NOT]&#xA;&#xA;WHERE&#xA;    [RULE_GU]='AE97F092-D64D-47AD-893F-6CF872F12C01'&#xA;    AND [NOT_CFG_GU]='E9C39171-E893-4250-9B93-36B4A6C104DA'&#xA;&#xA;/* insert new records */&#xA;INSERT INTO&#xA;    [rev].[REV_PERSON_NOT]&#xA;&#xA;    (PERSON_NOT_GU,PERSON_GU,NOT_CFG_GU,BEGIN_DATE&#xA;     ,END_DATE,COMMENT,CHANGE_DATE_TIME_STAMP,CHANGE_ID_STAMP&#xA;&#x9;,ADD_DATE_TIME_STAMP,ADD_ID_STAMP,ADDED_BY_RULE,RULE_GU)&#xA;&#xA;    SELECT&#xA;&#x9;   NEWID() AS [PERSON_NOT_GU]&#xA;&#x9;   ,[Student].[STUDENT_GU] AS [PERSON_GU]&#xA;&#x9;   ,'E9C39171-E893-4250-9B93-36B4A6C104DA' AS [NOT_CFG_GU]&#xA;&#x9;   ,CAST(GETDATE() AS DATE) AS [BEGIN_DATE]&#xA;&#x9;   ,NULL AS [END_DATE]&#xA;&#x9;   ,NULL AS [COMMENT]&#xA;&#x9;   ,NULL AS [CHANGE_DATE_TIME_STAMP]&#xA;&#x9;   ,NULL AS [CHANGE_ID_STAMP]&#xA;&#x9;   ,CAST(GETDATE() AS DATE) AS [ADD_DATE_TIME_STAMP]&#xA;&#x9;   ,'D31C8E29-6CFB-43BB-B597-AA36480983F2' AS [ADD_ID_STAMP]&#xA;&#x9;   ,'Y' AS [ADDED_BY_RULE]&#xA;&#x9;   ,'AE97F092-D64D-47AD-893F-6CF872F12C01' AS [RULE_GU]&#xA;    FROM&#xA;&#x9;   (SELECT&#xA;&#x9;&#x9;  [Org].[ORGANIZATION_NAME]&#xA;&#x9;&#x9;  ,[Student].[STUDENT_GU]&#xA;&#x9;&#x9;  ,[Student].[SIS_NUMBER]&#xA;&#x9;&#x9;  ,[Student].[EXPECTED_GRADUATION_YEAR]&#xA;&#x9;&#x9;  ,[Grades].[VALUE_DESCRIPTION] AS [GRADE]&#xA;&#x9;&#x9;  ,CASE&#xA;&#x9;&#x9;&#x9; WHEN [Grades].[VALUE_DESCRIPTION]='12' THEN '2015'&#xA;&#x9;&#x9;&#x9; WHEN [Grades].[VALUE_DESCRIPTION]='11' THEN '2016'&#xA;&#x9;&#x9;&#x9; WHEN [Grades].[VALUE_DESCRIPTION]='10' THEN '2017'&#xA;&#x9;&#x9;&#x9; WHEN [Grades].[VALUE_DESCRIPTION]='09' THEN '2018'&#xA;&#x9;&#x9;   END AS [GRADUATION_YEAR]&#xA;&#x9;   FROM&#xA;&#x9;&#x9;  [APS].[PrimaryEnrollmentsAsOf](GETDATE()) AS [Enroll]&#xA;&#xA;&#x9;&#x9;  INNER JOIN&#xA;&#x9;&#x9;  [rev].[REV_ORGANIZATION_YEAR] AS [OrgYear]&#xA;&#x9;&#x9;  ON&#xA;&#x9;&#x9;  [Enroll].[ORGANIZATION_YEAR_GU]=[OrgYear].[ORGANIZATION_YEAR_GU]&#xA;&#xA;&#x9;&#x9;  INNER JOIN&#xA;&#x9;&#x9;  [rev].[REV_ORGANIZATION] AS [Org]&#xA;&#x9;&#x9;  ON&#xA;&#x9;&#x9;  [OrgYear].[ORGANIZATION_GU]=[Org].[ORGANIZATION_GU]&#xA;&#xA;&#x9;&#x9;  INNER JOIN&#xA;&#x9;&#x9;  [rev].[EPC_STU] AS [Student]&#xA;&#x9;&#x9;  ON&#xA;&#x9;&#x9;  [Enroll].[STUDENT_GU]=[Student].[STUDENT_GU]&#xA;&#xA;&#x9;&#x9;  INNER JOIN&#xA;&#x9;&#x9;  [APS].[LookupTable]('K12','GRADE') AS [Grades]&#xA;&#x9;&#x9;  ON&#xA;&#x9;&#x9;  [Enroll].[GRADE]=[Grades].[VALUE_CODE]&#xA;&#xA;&#x9;   WHERE&#xA;&#x9;&#x9;  [Grades].[VALUE_DESCRIPTION] IN ('09','10','11','12')&#xA;&#x9;   ) AS [Student]&#xA;&#xA;    WHERE&#xA;&#x9;   [Student].[GRADUATION_YEAR]&lt;&gt;[Student].[EXPECTED_GRADUATION_YEAR]&#xA;&#xA;COMMIT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="BEGIN TRAN&#xA;&#xA;/* delete the previous records. */&#xA;DELETE FROM&#xA;    [rev].[REV_PERSON_NOT]&#xA;&#xA;WHERE&#xA;    [RULE_GU]='AE97F092-D64D-47AD-893F-6CF872F12C01'&#xA;    AND [NOT_CFG_GU]='E9C39171-E893-4250-9B93-36B4A6C104DA'&#xA;&#xA;/* insert new records */&#xA;INSERT INTO&#xA;    [rev].[REV_PERSON_NOT]&#xA;&#xA;    (PERSON_NOT_GU,PERSON_GU,NOT_CFG_GU,BEGIN_DATE&#xA;     ,END_DATE,COMMENT,CHANGE_DATE_TIME_STAMP,CHANGE_ID_STAMP&#xA;&#x9;,ADD_DATE_TIME_STAMP,ADD_ID_STAMP,ADDED_BY_RULE,RULE_GU)&#xA;&#xA;    SELECT&#xA;&#x9;   NEWID() AS [PERSON_NOT_GU]&#xA;&#x9;   ,[Student].[STUDENT_GU] AS [PERSON_GU]&#xA;&#x9;   ,'E9C39171-E893-4250-9B93-36B4A6C104DA' AS [NOT_CFG_GU]&#xA;&#x9;   ,CAST(GETDATE() AS DATE) AS [BEGIN_DATE]&#xA;&#x9;   ,NULL AS [END_DATE]&#xA;&#x9;   ,NULL AS [COMMENT]&#xA;&#x9;   ,NULL AS [CHANGE_DATE_TIME_STAMP]&#xA;&#x9;   ,NULL AS [CHANGE_ID_STAMP]&#xA;&#x9;   ,CAST(GETDATE() AS DATE) AS [ADD_DATE_TIME_STAMP]&#xA;&#x9;   ,'D31C8E29-6CFB-43BB-B597-AA36480983F2' AS [ADD_ID_STAMP]&#xA;&#x9;   ,'Y' AS [ADDED_BY_RULE]&#xA;&#x9;   ,'AE97F092-D64D-47AD-893F-6CF872F12C01' AS [RULE_GU]&#xA;    FROM&#xA;&#x9;   (SELECT&#xA;&#x9;&#x9;  [Org].[ORGANIZATION_NAME]&#xA;&#x9;&#x9;  ,[Student].[STUDENT_GU]&#xA;&#x9;&#x9;  ,[Student].[SIS_NUMBER]&#xA;&#x9;&#x9;  ,[Student].[EXPECTED_GRADUATION_YEAR]&#xA;&#x9;&#x9;  ,[Grades].[VALUE_DESCRIPTION] AS [GRADE]&#xA;&#x9;&#x9;  ,CASE&#xA;&#x9;&#x9;&#x9; WHEN [Grades].[VALUE_DESCRIPTION]='12' THEN '2016'&#xA;&#x9;&#x9;&#x9; WHEN [Grades].[VALUE_DESCRIPTION]='11' THEN '2017'&#xA;&#x9;&#x9;&#x9; WHEN [Grades].[VALUE_DESCRIPTION]='10' THEN '2018'&#xA;&#x9;&#x9;&#x9; WHEN [Grades].[VALUE_DESCRIPTION]='09' THEN '2019'&#xA;&#x9;&#x9;   END AS [GRADUATION_YEAR]&#xA;&#x9;   FROM&#xA;&#x9;&#x9;  [APS].[PrimaryEnrollmentsAsOf](GETDATE()) AS [Enroll]&#xA;&#xA;&#x9;&#x9;  INNER JOIN&#xA;&#x9;&#x9;  [rev].[REV_ORGANIZATION_YEAR] AS [OrgYear]&#xA;&#x9;&#x9;  ON&#xA;&#x9;&#x9;  [Enroll].[ORGANIZATION_YEAR_GU]=[OrgYear].[ORGANIZATION_YEAR_GU]&#xA;&#xA;&#x9;&#x9;  INNER JOIN&#xA;&#x9;&#x9;  [rev].[REV_ORGANIZATION] AS [Org]&#xA;&#x9;&#x9;  ON&#xA;&#x9;&#x9;  [OrgYear].[ORGANIZATION_GU]=[Org].[ORGANIZATION_GU]&#xA;&#xA;&#x9;&#x9;  INNER JOIN&#xA;&#x9;&#x9;  [rev].[EPC_STU] AS [Student]&#xA;&#x9;&#x9;  ON&#xA;&#x9;&#x9;  [Enroll].[STUDENT_GU]=[Student].[STUDENT_GU]&#xA;&#xA;&#x9;&#x9;  INNER JOIN&#xA;&#x9;&#x9;  [APS].[LookupTable]('K12','GRADE') AS [Grades]&#xA;&#x9;&#x9;  ON&#xA;&#x9;&#x9;  [Enroll].[GRADE]=[Grades].[VALUE_CODE]&#xA;&#xA;&#x9;   WHERE&#xA;&#x9;&#x9;  [Grades].[VALUE_DESCRIPTION] IN ('09','10','11','12')&#xA;&#x9;   ) AS [Student]&#xA;&#xA;    WHERE&#xA;&#x9;   [Student].[GRADUATION_YEAR]&lt;&gt;[Student].[EXPECTED_GRADUATION_YEAR]&#xA;&#xA;COMMIT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -156,7 +156,7 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="165,42"
+          Size="164.8,41.6"
           Id="Package\Execute SQL Task"
           TopLeft="24,22" />
       </GraphLayout>
