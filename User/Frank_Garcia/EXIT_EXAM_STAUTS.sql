@@ -8,54 +8,51 @@ DECLARE @STUDENTS
 		SIS_NUMBER VARCHAR (50)
 		,STATE_ID VARCHAR (50)
 		,SCHOOL_CODE VARCHAR (50)
-		,FIRST_NAME VARCHAR (50)
 		,LAST_NAME VARCHAR (50)
-		,DOB VARCHAR (50)
+		,FIRST_NAME VARCHAR (501)
 		,GRADE VARCHAR (50)
 		)
 INSERT INTO @STUDENTS
-	SELECT  
+	SELECT 
+	t1. 
 		SIS_NUMBER
-		,STATE_ID
+		,STATE_STUDENT_NUMBER AS STATE_ID
 		,SCHOOL_CODE
-		,FIRST_NAME
 		,LAST_NAME
-		,DOB
+		,FIRST_NAME
 		,GRADE
 	FROM
 	(
-		SELECT
-			 stu.SIS_NUMBER                            AS SIS_NUMBER
-		   , stu.STATE_STUDENT_NUMBER				   AS [state_id]
-		   , yr.SCHOOL_YEAR                            AS [school_year]
-		   , sch.SCHOOL_CODE                           AS [school_code]
-		   , REPLACE (PER.FIRST_NAME, '''','')							   AS [FIRST_NAME]
-		   , REPLACE (per.LAST_NAME,'''','')			   AS [LAST_NAME]
-		   , CONVERT(VARCHAR(10), per.BIRTH_DATE, 120) AS [dob]
-		   , grade.VALUE_DESCRIPTION 				   AS GRADE
-		   , CASE WHEN stu.EXPECTED_GRADUATION_YEAR
-			 IS NULL THEN ''
-			 ELSE 'GSY'+ CAST(stu.EXPECTED_GRADUATION_YEAR  AS VARCHAR (4))  
-			 END						               AS [program_code]
-		   , CONVERT(VARCHAR(10), ssy.ENTER_DATE, 120) AS [date_enrolled]
-		   , CASE WHEN ssy.LEAVE_DATE IS NULL THEN ''
-			 ELSE CONVERT(VARCHAR(10), ssy.LEAVE_DATE, 120)
-			 END									   AS [date_withdrawn]
-		   , ''									       AS [date_iep]
-		   , ''									       AS [date_iep_end]
-	FROM   rev.EPC_STU                    stu
-		   JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
-		   join rev.EPC_STU_YR            SOR  ON SOR.STU_SCHOOL_YEAR_GU = SSY.STUDENT_SCHOOL_YEAR_GU  
-		   JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
-												  and oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
-		   JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU          = oyr.YEAR_GU
-		   JOIN rev.REV_ORGANIZATION      org  ON org.ORGANIZATION_GU = oyr.ORGANIZATION_GU
-		   JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
-		   JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
-		   LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grade ON grade.VALUE_CODE = ssy.GRADE
+SELECT * FROM (
 
-	WHERE  ssy.ENTER_DATE is not null
-	AND grade.VALUE_DESCRIPTION IN ( '09', '10', '11', '12','C1', 'C2', 'C3', 'C4', 'T1', 'T2', 'T3', 'T4','H0','H1','H2','H3','H4','H5','H6','H7','H8','H9') 
+SELECT 
+	ENR.*
+	,ROW_NUMBER() OVER (PARTITION BY ENR.STUDENT_GU ORDER BY ENTER_DATE DESC, EXCLUDE_ADA_ADM) AS RN
+	,SIS_NUMBER
+	,STATE_STUDENT_NUMBER
+	,LAST_NAME
+	,FIRST_NAME
+
+ FROM 
+APS.StudentEnrollmentDetails AS ENR
+INNER JOIN 
+rev.EPC_STU AS STU
+ON
+ENR.STUDENT_GU = STU.STUDENT_GU 
+INNER JOIN
+REV.REV_PERSON AS PER
+ON PER.PERSON_GU = STU.STUDENT_GU
+
+WHERE
+SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
+AND EXTENSION = 'R'
+AND SUMMER_WITHDRAWL_CODE IS NULL
+AND ENR.GRADE IN ('09', '10', '11', '12','C1', 'C2', 'C3', 'C4', 'T1', 'T2', 'T3', 'T4','H0','H1','H2','H3','H4','H5','H6','H7','H8','H9') 
+
+) AS T1
+WHERE
+RN = 1 		
+		
 	)AS T1
 
 
