@@ -3,6 +3,19 @@ GO
 
 BEGIN TRAN
 
+DECLARE @FeeCodes TABLE ([FEE_CODE_GU] UNIQUEIDENTIFIER, [FEE_CODE] VARCHAR(256))
+
+INSERT INTO
+	@FeeCodes
+
+	SELECT
+		[FEE_CODE_GU]
+		,[FEE_CODE]
+	FROM
+		[rev].[EPC_SCH_YR_FEE]
+	WHERE
+		LEFT([FEE_CODE],3) IN ('540','550','560','576','580')
+
 /* damaged text books */
 INSERT INTO
 	[rev].[EPC_STU_FEE] 
@@ -18,11 +31,11 @@ INSERT INTO
 		,'Damaged Textbook' AS [DESCRIPTION]
 		,'ACT' AS [FEE_CATEGORY]
 		,CASE --these might be different in live.
-			WHEN [Lost].[CampusID]='540' THEN (SELECT [FEE_CODE_GU] FROM [rev].[EPC_SCH_YR_FEE] WHERE [FEE_CODE]='540552')
-			WHEN [Lost].[CampusID]='550' THEN (SELECT [FEE_CODE_GU] FROM [rev].[EPC_SCH_YR_FEE] WHERE [FEE_CODE]='550502')
-			WHEN [Lost].[CampusID]='560' THEN (SELECT [FEE_CODE_GU] FROM [rev].[EPC_SCH_YR_FEE] WHERE [FEE_CODE]='560204')
-			WHEN [Lost].[CampusID]='576' THEN (SELECT [FEE_CODE_GU] FROM [rev].[EPC_SCH_YR_FEE] WHERE [FEE_CODE]='576203')
-			WHEN [Lost].[CampusID]='580' THEN (SELECT [FEE_CODE_GU] FROM [rev].[EPC_SCH_YR_FEE] WHERE [FEE_CODE]='580107')
+			WHEN [Damaged].[CampusID]='540' THEN (SELECT [FEE_CODE_GU] FROM @FeeCodes WHERE [FEE_CODE]='540552')
+			WHEN [Damaged].[CampusID]='550' THEN (SELECT [FEE_CODE_GU] FROM @FeeCodes WHERE [FEE_CODE]='550502')
+			WHEN [Damaged].[CampusID]='560' THEN (SELECT [FEE_CODE_GU] FROM @FeeCodes WHERE [FEE_CODE]='560204')
+			WHEN [Damaged].[CampusID]='576' THEN (SELECT [FEE_CODE_GU] FROM @FeeCodes WHERE [FEE_CODE]='576203')
+			WHEN [Damaged].[CampusID]='580' THEN (SELECT [FEE_CODE_GU] FROM @FeeCodes WHERE [FEE_CODE]='580107')
 		 END AS [FEE_CODE_GU]
 		,[Damaged].[ChargeAmount] AS [CREDIT_AMOUNT]
 		,CAST([Damaged].[ISBN] AS VARCHAR(255))+' '+CAST([Damaged].[Accession] AS VARCHAR(255))+' '+[Damaged].[Title] AS [NOTE]
@@ -64,7 +77,6 @@ INSERT INTO
 WHERE
 	[Damaged].[CampusID] IN ('540','550','560','576','580')
 	AND [fee].[STUDENT_FEE_GU] IS NULL
-GO
 
 /* lost text books */
 INSERT INTO
@@ -81,11 +93,11 @@ INSERT INTO
 		,'Lost Textbook' AS [DESCRIPTION]
 		,'ACT' AS [FEE_CATEGORY]
 		,CASE --these might be different in live.
-			WHEN [Lost].[CampusID]='540' THEN (SELECT [FEE_CODE_GU] FROM [rev].[EPC_SCH_YR_FEE] WHERE [FEE_CODE]='540551')
-			WHEN [Lost].[CampusID]='550' THEN (SELECT [FEE_CODE_GU] FROM [rev].[EPC_SCH_YR_FEE] WHERE [FEE_CODE]='550501')
-			WHEN [Lost].[CampusID]='560' THEN (SELECT [FEE_CODE_GU] FROM [rev].[EPC_SCH_YR_FEE] WHERE [FEE_CODE]='560203')
-			WHEN [Lost].[CampusID]='576' THEN (SELECT [FEE_CODE_GU] FROM [rev].[EPC_SCH_YR_FEE] WHERE [FEE_CODE]='576204')
-			WHEN [Lost].[CampusID]='580' THEN (SELECT [FEE_CODE_GU] FROM [rev].[EPC_SCH_YR_FEE] WHERE [FEE_CODE]='580110')
+			WHEN [Lost].[CampusID]='540' THEN (SELECT [FEE_CODE_GU] FROM @FeeCodes WHERE [FEE_CODE]='540551')
+			WHEN [Lost].[CampusID]='550' THEN (SELECT [FEE_CODE_GU] FROM @FeeCodes WHERE [FEE_CODE]='550501')
+			WHEN [Lost].[CampusID]='560' THEN (SELECT [FEE_CODE_GU] FROM @FeeCodes WHERE [FEE_CODE]='560203')
+			WHEN [Lost].[CampusID]='576' THEN (SELECT [FEE_CODE_GU] FROM @FeeCodes WHERE [FEE_CODE]='576204')
+			WHEN [Lost].[CampusID]='580' THEN (SELECT [FEE_CODE_GU] FROM @FeeCodes WHERE [FEE_CODE]='580110')
 		 END AS [FEE_CODE_GU]
 		,[Lost].[Price] AS [CREDIT_AMOUNT]
 		,CAST([Lost].[ISBN] AS VARCHAR(255))+' '+CAST([Lost].[Accession] AS VARCHAR(255))+' '+[Lost].[Title] AS [NOTE]
@@ -126,37 +138,6 @@ INSERT INTO
 WHERE
 	[Lost].[CampusID] IN ('540','550','560','576','580')
 	AND [fee].[STUDENT_FEE_GU] IS NULL
-GO
-
-/*
-SELECT
-	[Damaged].*
-FROM
-	OPENROWSET (
-	'Microsoft.ACE.OLEDB.12.0', 
-	'Text;Database=\\SynTempSSIS.aps.edu.actd\Files\TempQuery\;HDR=YES;', 
-	'SELECT * from APS_DamagedBooks.csv'
-	) AS [Damaged]
-
-	LEFT JOIN
-	[rev].[EPC_STU] as [stu]
-	ON
-	[Damaged].[StudentID]=[stu].[SIS_NUMBER]
-
-SELECT
-	[Lost].*
-FROM
-	OPENROWSET (
-	'Microsoft.ACE.OLEDB.12.0', 
-	'Text;Database=\\SynTempSSIS.aps.edu.actd\Files\TempQuery\;HDR=YES;', 
-	'SELECT * from APS_LostBooks.csv'
-	) AS [Lost]
-
-	LEFT JOIN
-	[rev].[EPC_STU] as [stu]
-	ON
-	[Lost].[StudentID]=[stu].[SIS_NUMBER]
-*/
 
 ROLLBACK
 
