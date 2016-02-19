@@ -28,8 +28,8 @@ SELECT
 	,EPC.EXPECTED_GRADUATION_YEAR
 
 FROM
-		
-	APS.StudentEnrolLmentDetails AS SCHOOL
+	APS.PrimaryEnrollmentDetailsAsOf(GETDATE()) as SCHOOL	--active only
+	--APS.StudentEnrolLmentDetails AS SCHOOL
 
 	RIGHT JOIN
 	rev.EPC_STU	as EPC
