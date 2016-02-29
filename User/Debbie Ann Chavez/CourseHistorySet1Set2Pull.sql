@@ -1,6 +1,7 @@
 
 
 EXECUTE AS LOGIN='QueryFileUser'
+
 GO
 
 SELECT DISTINCT 
