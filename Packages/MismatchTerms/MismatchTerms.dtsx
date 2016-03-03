@@ -1,25 +1,213 @@
 <?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="3/3/2016 2:51:58 PM"
+  DTS:CreationDate="3/3/2016 3:09:11 PM"
   DTS:CreationName="SSIS.Package.3"
   DTS:CreatorComputerName="046-SMCMURRAY"
   DTS:CreatorName="APS\e207878"
-  DTS:DTSID="{4442CDA7-A1D1-4F00-B380-B772DA399D5C}"
+  DTS:DTSID="{934A6D90-F0BD-4097-B46F-91A2805B27FC}"
   DTS:ExecutableType="SSIS.Package.3"
   DTS:LastModifiedProductVersion="11.0.5058.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="MismatchTerms"
   DTS:PackageType="5"
   DTS:VersionBuild="1"
-  DTS:VersionGUID="{BF5B6489-86C2-4465-A63D-5FA4821408AC}">
+  DTS:VersionGUID="{37DBB207-4AE8-4752-A47D-A23EDA80690C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{057C2123-4719-4AE0-873A-D60C0F0B9058}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\syntempssis\Files\Export\MismatchTerms\MismatchTerms.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{D5DD822C-33E3-4FDE-826C-463107154CC1}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x0009_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis\Files\Export\MismatchTerms\MismatchTerms.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ORGANIZATION_NAME"
+              DTS:DTSID="{6123872E-8D3B-43B3-9BF0-430E0B417F7A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="72"
+              DTS:TextQualified="True"
+              DTS:ObjectName="COURSE_GU"
+              DTS:DTSID="{E9C0A7D4-F475-46CF-9474-1F5A12F0DA19}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="72"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SCHOOL_YEAR_COURSE_GU"
+              DTS:DTSID="{AC130459-B53A-40CB-B8D1-FC75952AF6DD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="COURSE_TITLE"
+              DTS:DTSID="{4BB58545-33BC-4B8C-A6C8-908ACA9D54A8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="COURSE_ID"
+              DTS:DTSID="{42063765-265D-44DC-ADA5-3637F14307A5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SECTION_ID"
+              DTS:DTSID="{92790BC5-4BAE-470A-98E6-1B90B51F4C76}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="COURSE_DURATION"
+              DTS:DTSID="{3B3387BE-34D1-4EF7-8FB1-3EACF8CAEC8F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TERM_CODE"
+              DTS:DTSID="{336E53A6-A6F8-4798-9811-A92A556AE8E3}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager 1]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{8D8C5629-58AF-40B0-AEB3-F40E7867FB4D}"
+      DTS:ObjectName="Flat File Connection Manager 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x0009_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis\Files\Export\MismatchTerms\MismatchTerms.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ORGANIZATION_NAME"
+              DTS:DTSID="{BC312A4F-BC8A-46AE-92D7-7BDB1182808F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="72"
+              DTS:TextQualified="True"
+              DTS:ObjectName="COURSE_GU"
+              DTS:DTSID="{16A1EA53-20CB-494D-9260-28BCA4BA22F0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="72"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SCHOOL_YEAR_COURSE_GU"
+              DTS:DTSID="{C16076DB-4C1F-481D-B729-00D0F82CFF04}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="COURSE_TITLE"
+              DTS:DTSID="{72AB3A27-20D9-4D4A-9D62-82553FFCD6CF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="COURSE_ID"
+              DTS:DTSID="{C13DD2A0-B355-40C1-B2B5-A13C340951C0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SECTION_ID"
+              DTS:DTSID="{B9B80D3A-9E59-462F-8D7F-89D59CC2165B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="COURSE_DURATION"
+              DTS:DTSID="{1AE967BD-7715-4479-B06F-FBFFD05120FF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TERM_CODE"
+              DTS:DTSID="{3598B367-8541-4F04-A0F1-E0832EA53510}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[synergydbdc.ST_Production]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{825C5BCB-4009-4E24-BB7B-6B4E2B55B80C}"
+      DTS:DTSID="{8457292D-6EA4-47F0-A02B-D78DD1398462}"
       DTS:ObjectName="synergydbdc.ST_Production">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -30,30 +218,13 @@
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Copy Output Files"
-      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:Description="Execute Process Task"
-      DTS:DTSID="{E9FCDFEC-5C12-402D-8771-0D1BE49B2C8B}"
-      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Copy Output Files"
-      DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <ExecuteProcessData
-          Executable="C:\Windows\System32\cmd.exe"
-          Arguments="/C echo F | xcopy &quot;\\syntempssis.aps.edu.actd\Files\Export\MismatchTerms\MismatchTerms.csv&quot; &quot;\\syntempssis.aps.edu.actd\Files\MismatchTerms\MismatchTerms.csv&quot; /D /F /Y " />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Exec SPROC"
+      DTS:refId="Package\Data Flow Task"
       DTS:CreationName="SSIS.Pipeline.3"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{0A938E5D-3C3A-4B35-8869-1346AF48178B}"
+      DTS:DTSID="{3CA9E6AE-7C38-49EA-8507-9DABBB08CF2C}"
       DTS:ExecutableType="SSIS.Pipeline.3"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Exec SPROC"
+      DTS:ObjectName="Data Flow Task"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -61,7 +232,137 @@
           version="1">
           <components>
             <component
-              refId="Package\Exec SPROC\OLE DB Source"
+              refId="Package\Data Flow Task\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager 1]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[ORGANIZATION_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="ORGANIZATION_NAME"
+                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ORGANIZATION_NAME]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ORGANIZATION_NAME]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[COURSE_GU]"
+                      cachedDataType="guid"
+                      cachedName="COURSE_GU"
+                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[COURSE_GU]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_GU]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[SCHOOL_YEAR_COURSE_GU]"
+                      cachedDataType="guid"
+                      cachedName="SCHOOL_YEAR_COURSE_GU"
+                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SCHOOL_YEAR_COURSE_GU]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCHOOL_YEAR_COURSE_GU]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[COURSE_TITLE]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="COURSE_TITLE"
+                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[COURSE_TITLE]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_TITLE]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[COURSE_ID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="COURSE_ID"
+                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[COURSE_ID]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_ID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[SECTION_ID]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="SECTION_ID"
+                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SECTION_ID]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SECTION_ID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[COURSE_DURATION]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="COURSE_DURATION"
+                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[COURSE_DURATION]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_DURATION]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[TERM_CODE]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="TERM_CODE"
+                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[TERM_CODE]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[TERM_CODE]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ORGANIZATION_NAME]"
+                      dataType="wstr"
+                      length="100"
+                      name="ORGANIZATION_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[COURSE_GU]"
+                      dataType="guid"
+                      name="COURSE_GU" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SCHOOL_YEAR_COURSE_GU]"
+                      dataType="guid"
+                      name="SCHOOL_YEAR_COURSE_GU" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[COURSE_TITLE]"
+                      dataType="wstr"
+                      length="50"
+                      name="COURSE_TITLE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[COURSE_ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="COURSE_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SECTION_ID]"
+                      dataType="wstr"
+                      length="30"
+                      name="SECTION_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[COURSE_DURATION]"
+                      dataType="wstr"
+                      length="5"
+                      name="COURSE_DURATION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[TERM_CODE]"
+                      dataType="wstr"
+                      length="5"
+                      name="TERM_CODE" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLE DB Source"
               componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
@@ -111,7 +412,7 @@ APS.MismatchTerms</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Exec SPROC\OLE DB Source.Connections[OleDbConnection]"
+                  refId="Package\Data Flow Task\OLE DB Source.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[synergydbdc.ST_Production]"
                   connectionManagerRefId="Package.ConnectionManagers[synergydbdc.ST_Production]"
                   description="The OLE DB runtime connection used to access the database."
@@ -119,191 +420,191 @@ APS.MismatchTerms</property>
               </connections>
               <outputs>
                 <output
-                  refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output]"
+                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].Columns[ORGANIZATION_NAME]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ORGANIZATION_NAME]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ORGANIZATION_NAME]"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ORGANIZATION_NAME]"
                       length="100"
-                      lineageId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].Columns[ORGANIZATION_NAME]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ORGANIZATION_NAME]"
                       name="ORGANIZATION_NAME"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_GU]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_GU]"
                       dataType="guid"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COURSE_GU]"
-                      lineageId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_GU]"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COURSE_GU]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_GU]"
                       name="COURSE_GU"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCHOOL_YEAR_COURSE_GU]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCHOOL_YEAR_COURSE_GU]"
                       dataType="guid"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SCHOOL_YEAR_COURSE_GU]"
-                      lineageId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCHOOL_YEAR_COURSE_GU]"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SCHOOL_YEAR_COURSE_GU]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCHOOL_YEAR_COURSE_GU]"
                       name="SCHOOL_YEAR_COURSE_GU"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_TITLE]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_TITLE]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COURSE_TITLE]"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COURSE_TITLE]"
                       length="50"
-                      lineageId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_TITLE]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_TITLE]"
                       name="COURSE_TITLE"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_ID]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_ID]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COURSE_ID]"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COURSE_ID]"
                       length="20"
-                      lineageId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_ID]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_ID]"
                       name="COURSE_ID"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].Columns[SECTION_ID]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SECTION_ID]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SECTION_ID]"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SECTION_ID]"
                       length="30"
-                      lineageId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].Columns[SECTION_ID]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SECTION_ID]"
                       name="SECTION_ID"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_DURATION]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_DURATION]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COURSE_DURATION]"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COURSE_DURATION]"
                       length="5"
-                      lineageId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_DURATION]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[COURSE_DURATION]"
                       name="COURSE_DURATION"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].Columns[TERM_CODE]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[TERM_CODE]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TERM_CODE]"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TERM_CODE]"
                       length="5"
-                      lineageId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].Columns[TERM_CODE]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[TERM_CODE]"
                       name="TERM_CODE"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ORGANIZATION_NAME]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ORGANIZATION_NAME]"
                       dataType="wstr"
                       length="100"
                       name="ORGANIZATION_NAME" />
                     <externalMetadataColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COURSE_GU]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COURSE_GU]"
                       dataType="guid"
                       name="COURSE_GU" />
                     <externalMetadataColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SCHOOL_YEAR_COURSE_GU]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SCHOOL_YEAR_COURSE_GU]"
                       dataType="guid"
                       name="SCHOOL_YEAR_COURSE_GU" />
                     <externalMetadataColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COURSE_TITLE]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COURSE_TITLE]"
                       dataType="wstr"
                       length="50"
                       name="COURSE_TITLE" />
                     <externalMetadataColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COURSE_ID]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COURSE_ID]"
                       dataType="wstr"
                       length="20"
                       name="COURSE_ID" />
                     <externalMetadataColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SECTION_ID]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SECTION_ID]"
                       dataType="wstr"
                       length="30"
                       name="SECTION_ID" />
                     <externalMetadataColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COURSE_DURATION]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COURSE_DURATION]"
                       dataType="wstr"
                       length="5"
                       name="COURSE_DURATION" />
                     <externalMetadataColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TERM_CODE]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TERM_CODE]"
                       dataType="wstr"
                       length="5"
                       name="TERM_CODE" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ORGANIZATION_NAME]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ORGANIZATION_NAME]"
                       dataType="wstr"
                       length="100"
-                      lineageId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ORGANIZATION_NAME]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ORGANIZATION_NAME]"
                       name="ORGANIZATION_NAME" />
                     <outputColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COURSE_GU]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COURSE_GU]"
                       dataType="guid"
-                      lineageId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COURSE_GU]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COURSE_GU]"
                       name="COURSE_GU" />
                     <outputColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SCHOOL_YEAR_COURSE_GU]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SCHOOL_YEAR_COURSE_GU]"
                       dataType="guid"
-                      lineageId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SCHOOL_YEAR_COURSE_GU]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SCHOOL_YEAR_COURSE_GU]"
                       name="SCHOOL_YEAR_COURSE_GU" />
                     <outputColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COURSE_TITLE]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COURSE_TITLE]"
                       dataType="wstr"
                       length="50"
-                      lineageId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COURSE_TITLE]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COURSE_TITLE]"
                       name="COURSE_TITLE" />
                     <outputColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COURSE_ID]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COURSE_ID]"
                       dataType="wstr"
                       length="20"
-                      lineageId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COURSE_ID]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COURSE_ID]"
                       name="COURSE_ID" />
                     <outputColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SECTION_ID]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SECTION_ID]"
                       dataType="wstr"
                       length="30"
-                      lineageId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SECTION_ID]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SECTION_ID]"
                       name="SECTION_ID" />
                     <outputColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COURSE_DURATION]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COURSE_DURATION]"
                       dataType="wstr"
                       length="5"
-                      lineageId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COURSE_DURATION]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COURSE_DURATION]"
                       name="COURSE_DURATION" />
                     <outputColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TERM_CODE]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TERM_CODE]"
                       dataType="wstr"
                       length="5"
-                      lineageId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TERM_CODE]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TERM_CODE]"
                       name="TERM_CODE" />
                     <outputColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Exec SPROC\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -312,20 +613,17 @@ APS.MismatchTerms</property>
               </outputs>
             </component>
           </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
-  <DTS:PrecedenceConstraints>
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint]"
-      DTS:CreationName=""
-      DTS:DTSID="{D085A4F3-4A72-4D7B-9E4E-451D3EAF6228}"
-      DTS:From="Package\Exec SPROC"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint"
-      DTS:To="Package\Copy Output Files" />
-  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -337,41 +635,53 @@ APS.MismatchTerms</property>
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Data Flow Task"
+          TopLeft="75,31" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="139,42"
-          Id="Package\Exec SPROC"
-          TopLeft="85,53" />
+          Size="152,42"
+          Id="Package\Data Flow Task\OLE DB Source"
+          TopLeft="90,58" />
         <NodeLayout
-          Size="164,42"
-          Id="Package\Copy Output Files"
-          TopLeft="234,247" />
+          Size="174,42"
+          Id="Package\Data Flow Task\Flat File Destination"
+          TopLeft="191,139" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="154.5,95">
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="166,100">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="170.5,152"
+              EndConnector="112,39"
               Start="0,0"
-              End="170.5,144.5">
+              End="112,31.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,72" />
+                    End="0,15.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,72"
-                    Point2="0,76"
-                    Point3="4,76" />
+                    Point1="0,15.5"
+                    Point2="0,19.5"
+                    Point3="4,19.5" />
                   <mssgle:LineSegment
-                    End="166.5,76" />
+                    End="108,19.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="166.5,76"
-                    Point2="170.5,76"
-                    Point3="170.5,80" />
+                    Point1="108,19.5"
+                    Point2="112,19.5"
+                    Point3="112,23.5" />
                   <mssgle:LineSegment
-                    End="170.5,144.5" />
+                    End="112,31.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -382,21 +692,9 @@ APS.MismatchTerms</property>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
-  </Package>
-  <TaskHost
-    design-time-name="Package\Exec SPROC">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="152,42"
-          Id="Package\Exec SPROC\OLE DB Source"
-          TopLeft="84,39" />
-      </GraphLayout>
-    </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Exec SPROC\OLE DB Source">
+    design-time-name="Package\Data Flow Task\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
