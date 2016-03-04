@@ -41,7 +41,7 @@ FROM	(
 
 		WHERE	SCHOOL_YEAR = '2015' 
 				AND SCHOOL.extension = 'R' 
-				AND CSMDETAIL.grade IN ( '08' ) 
+				AND CSMDETAIL.grade IN ( '05' ) 
 				AND SCHOOL.exclude_ada_adm IS NULL
 				AND SUMMER_WITHDRAWL_CODE IS NULL
 		) AS A
