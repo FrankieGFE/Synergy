@@ -3,7 +3,7 @@
 *
 * Created: March 2016 by 053285
 *
-* Intial Request: All active Pre Kindergarten students from 2015-2016 school year (R) who have any of the 5 race indicator = Native American
+* Intial Request: All active Kindergarten students from 2015-2016 school year (R) who have any of the 5 race indicator = Native American
 *
 * Include:  student ID, Name, Address, Grade Level, School Code, School Name, RACE
 *
