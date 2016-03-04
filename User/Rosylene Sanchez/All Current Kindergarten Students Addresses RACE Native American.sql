@@ -47,7 +47,7 @@ FROM	(
 
 		WHERE	SCHOOL_YEAR = '2015' 
 				AND SCHOOL.extension = 'R' 
-				AND CSMDETAIL.grade IN ( 'PK')	-- Kindergarten
+				AND CSMDETAIL.grade IN ( 'K')	-- Kindergarten
 				AND SCHOOL.exclude_ada_adm IS NULL
 				AND SUMMER_WITHDRAWL_CODE IS NULL
 
