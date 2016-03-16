@@ -29,6 +29,7 @@ FROM   OPENROWSET ( 'Microsoft.ACE.OLEDB.12.0',
                 parent_first_name,
 				ADDRESS,
 				CITY,
+				STATE,
 				ZIP_5
 				
 		FROM   rev.epc_stu AS STU	--HAS SIS_NUMBER, STUDENT_GU,
@@ -39,6 +40,7 @@ FROM   OPENROWSET ( 'Microsoft.ACE.OLEDB.12.0',
 									PPER.first_name AS PARENT_FIRST_NAME,
 									ADDR.ADDRESS,
 									ADDR.CITY,
+									ADDR.STATE,
 									ADDR.ZIP_5
 							
 							FROM rev.epc_stu_parent AS spar	--HAS STUDENT_GU, PARENT_GU
