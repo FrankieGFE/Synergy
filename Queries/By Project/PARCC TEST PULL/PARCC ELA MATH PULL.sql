@@ -268,7 +268,8 @@ FROM
 						,CASE	WHEN SCH.COURSE_TITLE LIKE 'ALGEBRA II%' THEN 'ALG' + '02'
 								WHEN SCH.COURSE_TITLE LIKE '%MODEL%' THEN 'ALG' + '02'
 								WHEN SCH.COURSE_TITLE LIKE '%ALGEB%' THEN 'ALG' + '01'	
-								WHEN SCH.COURSE_TITLE LIKE '%GEOM%' THEN 'GEO' + '01'					
+								WHEN SCH.COURSE_TITLE LIKE '%GEOM%' THEN 'GEO' + '01'
+								WHEN SCH.COURSE_TITLE LIKE '%ALG II%' THEN 'ALG' + '02'					
 								WHEN SCH.DEPARTMENT = 'Eng' THEN 'ELA' + SUBSTRING(SCH.SUBJECT_AREA_1,2,2)
 						END	 AS [Test Code]
 						,SIS_NUMBER
@@ -297,7 +298,7 @@ FROM
 					PRIM.GRADE IN ('09', '10', '11')
 					AND SCH.PRIMARY_STAFF = 1
 					AND (SCH.DEPARTMENT IN ('Eng')
-						OR SCH.COURSE_TITLE LIKE '%ALGEBR%' OR 
+						OR SCH.COURSE_TITLE LIKE '%ALG%' OR 
 						SCH.COURSE_TITLE LIKE '%GEOM%')
 
 				) AS T1	
@@ -322,7 +323,8 @@ FROM
 	
 WHERE 
 [State Field 5] IS NOT NULL
-
+--AND [Staff Member Identifier] = 'Elizabeth Alvarado'
+AND [Testing School] = '900'
 
 ORDER BY [Testing School], [Grade Level When Assessed], [Local Student Identifier]
 
