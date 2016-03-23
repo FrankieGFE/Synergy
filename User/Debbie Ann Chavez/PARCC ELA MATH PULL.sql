@@ -166,7 +166,8 @@ FROM
 		SCH.STAFF_GU = STF.STAFF_GU
 
 		WHERE
-		PRIM.GRADE IN ('03', '04', '05')
+		(PRIM.GRADE IN ('03', '04', '05')
+		OR PRIM.SCHOOL_CODE = '900')
 		AND PERIOD_BEGIN = '01'
 		AND SCH.PRIMARY_STAFF = 1
 
@@ -194,7 +195,8 @@ FROM
 		SCH.STAFF_GU = STF.STAFF_GU
 
 		WHERE
-		PRIM.GRADE IN ('03', '04', '05')
+		(PRIM.GRADE IN ('03', '04', '05')
+		OR PRIM.SCHOOL_CODE = '900')
 		AND PERIOD_BEGIN = '01'
 		AND SCH.PRIMARY_STAFF = 1
 		) AS ELAMTH0305
@@ -268,7 +270,8 @@ FROM
 						,CASE	WHEN SCH.COURSE_TITLE LIKE 'ALGEBRA II%' THEN 'ALG' + '02'
 								WHEN SCH.COURSE_TITLE LIKE '%MODEL%' THEN 'ALG' + '02'
 								WHEN SCH.COURSE_TITLE LIKE '%ALGEB%' THEN 'ALG' + '01'	
-								WHEN SCH.COURSE_TITLE LIKE '%GEOM%' THEN 'GEO' + '01'					
+								WHEN SCH.COURSE_TITLE LIKE '%GEOM%' THEN 'GEO' + '01'
+								WHEN SCH.COURSE_TITLE LIKE '%ALG II%' THEN 'ALG' + '02'					
 								WHEN SCH.DEPARTMENT = 'Eng' THEN 'ELA' + SUBSTRING(SCH.SUBJECT_AREA_1,2,2)
 						END	 AS [Test Code]
 						,SIS_NUMBER
@@ -297,7 +300,7 @@ FROM
 					PRIM.GRADE IN ('09', '10', '11')
 					AND SCH.PRIMARY_STAFF = 1
 					AND (SCH.DEPARTMENT IN ('Eng')
-						OR SCH.COURSE_TITLE LIKE '%ALGEBR%' OR 
+						OR SCH.COURSE_TITLE LIKE '%ALG%' OR 
 						SCH.COURSE_TITLE LIKE '%GEOM%')
 
 				) AS T1	
@@ -322,7 +325,9 @@ FROM
 	
 WHERE 
 [State Field 5] IS NOT NULL
-
+--AND [Staff Member Identifier] = 'Elizabeth Alvarado'
+AND [Testing School] = '900'
+AND [Grade Level When Assessed] IN ('06', '07', '08')
 
 ORDER BY [Testing School], [Grade Level When Assessed], [Local Student Identifier]
 
