@@ -25,6 +25,7 @@ FROM   OPENROWSET ( 'Microsoft.ACE.OLEDB.12.0',
 					) AS [RAMLabel] 
 
 		LEFT JOIN (SELECT sis_number, 
+						  stu.STATE_STUDENT_NUMBER,
 						  parent_last_name, 
 						  parent_first_name,
 				          ADDRESS,
