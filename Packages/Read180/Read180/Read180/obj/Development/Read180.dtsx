@@ -1,0 +1,2445 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/15/2014 4:20:02 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="AZLT-MMELARCODE"
+  DTS:CreatorName="XNOVAHQ\MMelarcode"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{ED1F85D4-2C11-43F8-A52F-84CB461E3A84}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5058.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Read180"
+  DTS:PackageType="5"
+  DTS:VersionBuild="28"
+  DTS:VersionGUID="{14CF75B0-777C-4141-B8C7-F179DCD0C961}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DB Conection]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C2B81544-54FE-4344-84E4-CF7E74027FD8}"
+      DTS:ObjectName="DB Conection">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Retain="True"
+          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=APSExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Read180-{C2B81544-54FE-4344-84E4-CF7E74027FD8}azlt-mmelarcode\sql2012.STDemo808_2012;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACIZgkb/qET+6wDAU2yaPGEAAAAAASAAACgAAAAEAAAAPkbDbEr8ata/7rPpNr+GmswAAAAdKqVODw7izanKPhDVmvT+ZjBDJEEglm1xezGDO2BoVw06ZRI2bmQMZITt87IDdsMFAAAAEaQ5/9KpDtaAfr8JmBsdSGK8apL</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Students]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{787F6000-3B96-46D4-BD89-11BADF57F16F}"
+      DTS:ObjectName="Students">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\Read180\Student.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="USER_NAME"
+              DTS:DTSID="{6F67897A-5A13-4C53-8505-D114C4ED4FF1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PASSWORD"
+              DTS:DTSID="{25203BA3-1108-4FB2-804C-8772AE66728E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SIS_ID"
+              DTS:DTSID="{54B04C84-457D-4741-9452-DC7A73594540}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FIRST_NAME"
+              DTS:DTSID="{F4A5DA5E-85D6-4ACB-BA20-AD8CE0144FEC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MIDDLE_NAME"
+              DTS:DTSID="{928A44E4-32BB-4201-A5EE-677CDC9C5A33}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LAST_NAME"
+              DTS:DTSID="{4A4241A4-49CD-4F8B-A414-1B3C4B6483A0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="GRADE"
+              DTS:DTSID="{CCFB2BF5-94D9-44C7-885E-97C0EA99B1A1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SCHOOL_NAME"
+              DTS:DTSID="{A91D3813-FFB3-4BB9-B578-1F9E0386557C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="108"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CLASS_NAME"
+              DTS:DTSID="{ACF54408-053F-49C8-8216-61874486AADA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ETHNIC_CAUCASIAN"
+              DTS:DTSID="{125E9C7C-0790-4D28-9979-F4CB638CD46D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ETHNIC_AFRICAN_AM"
+              DTS:DTSID="{E9D3FB67-3BB7-4B50-918D-4CD2D6DAA97E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ETHNIC_HISPANIC"
+              DTS:DTSID="{86FA36FC-D86D-453B-8D88-CA5B04300C68}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ETHNIC_PACIFIC_ISL"
+              DTS:DTSID="{9D3D2070-1DC6-4FCE-84FF-3A8B15BB7B92}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ETHNIC_AM_IND_AK_NATIVE"
+              DTS:DTSID="{774EF616-7BA0-41EF-B945-1FDB4CD932CA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ETHNIC_ASIAN"
+              DTS:DTSID="{265F0100-57C8-447D-AD8D-9FCC4ACEC3E6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="GENDER_MALE"
+              DTS:DTSID="{65D350E5-6B25-4FD0-97A9-37E64B42F31A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="GENDER_FEMALE"
+              DTS:DTSID="{24B2792B-0CB2-4A2A-B7E8-D662FA9BDC8D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AYP_ECON_DISADVANTAGED"
+              DTS:DTSID="{246398D4-0C7E-4021-889C-11A6B65EBAA4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AYP_LTD_ENGLISH_PROFICIENCY"
+              DTS:DTSID="{8A8364A0-C70C-454F-B71C-1A90C55AA82D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AYP_GIFTED_TALENTED"
+              DTS:DTSID="{11F5B930-154E-41F2-AA43-3AB1D1487EEF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AYP_MIGRANT"
+              DTS:DTSID="{3D971FAD-5EBF-4E11-B794-A61E77B5FA73}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LAST_COL"
+              DTS:DTSID="{FFC21452-DC5D-48E3-AC53-B27EE8313998}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Teacher]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{ED7E4B06-A946-454A-A838-22B91E6C9C1A}"
+      DTS:ObjectName="Teacher">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\Read180\Teacher.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4000"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DISTRICT_USER_ID"
+              DTS:DTSID="{2AB8C572-AA37-4147-9E7A-B2D25A104679}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4000"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SPS_ID"
+              DTS:DTSID="{DF77B0D3-2BD6-41A9-8C4D-5EAE2DB8BB12}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PREFIX"
+              DTS:DTSID="{B264D6C0-8332-44A0-8A86-B12916D9702D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FIRST_NAME"
+              DTS:DTSID="{D5DED1D6-071B-414E-9F86-389E5EC59AE3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LAST_NAME"
+              DTS:DTSID="{BAD74E9B-633F-4B1A-B71F-4162C32C598E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TITLE"
+              DTS:DTSID="{CD7EF1CC-502F-48CA-B9BD-D413DE719905}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SUFFIX"
+              DTS:DTSID="{9873096A-F854-4181-BCDF-0986A3AAD25D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="EMAIL"
+              DTS:DTSID="{CD0598F9-F88F-4372-ADD5-284B6F6F5420}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4000"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="USER_NAME"
+              DTS:DTSID="{3DD75B43-64BD-4BBF-8CC9-7769D473647F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PASSWORD"
+              DTS:DTSID="{9D5B22E4-C94C-460A-BE31-244BA3AA4FCB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SCHOOL_NAME"
+              DTS:DTSID="{B39422BC-8843-43F7-A707-264D894EBC9B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="108"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CLASS_NAME"
+              DTS:DTSID="{38BBA28D-46E9-48BA-8122-2DB47B13DA15}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LAST_COL"
+              DTS:DTSID="{ADBA3425-CA37-4211-8EA6-7123571BD098}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Copy files to Server"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute Process Task"
+      DTS:DTSID="{226A9542-3859-49B1-A995-A7880B466C2D}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Copy files to Server"
+      DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecuteProcessData
+          Executable="C:\Windows\System32\cmd.exe"
+          Arguments="/C del /q \\011-read180\smax_data$\*.* &amp;&amp; robocopy \\syntempssis.aps.edu.actd\Files\Export\Read180 \\011-read180\smax_data$ /mir /copy:DTS &amp;&amp; exit /B"
+          SuccessValue="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create StudentAddendum"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{CAE03B8C-560C-4E59-AC1A-A2DD52AC2B7E}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create StudentAddendum"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C2B81544-54FE-4344-84E4-CF7E74027FD8}"
+          SQLTask:SqlStatementSource="--Use user QueryFileUser'&#xA;EXECUTE  AS  LOGIN='QueryFileUser'&#xA;GO&#xA;--Create table&#xA;IF OBJECT_ID('tempdb..##TempStuAddendum') IS NOT NULL DROP TABLE ##TempStuAddendum&#xA;CREATE TABLE ##TempStuAddendum(&#xA;   [USER_NAME]                    NVARCHAR(50) null&#xA; , [PASSWORD]                     NVARCHAR(50) null&#xA; , [SIS_ID]                       NVARCHAR(50) null&#xA; , [FIRST_NAME]                   NVARCHAR(50) null&#xA; , [MIDDLE_NAME]                  NVARCHAR(50) null&#xA; , [LAST_NAME]                    NVARCHAR(50) null&#xA; , [GRADE]                        NVARCHAR(50) null&#xA; , [SCHOOL_NAME]                  NVARCHAR(50) null&#xA; , [CLASS_NAME]                   NVARCHAR(50) null&#xA; , [ETHNIC_CAUCASIAN]             NVARCHAR(50) null&#xA; , [ETHNIC_AFRICAN_AM]            NVARCHAR(50) null&#xA; , [ETHNIC_HISPANIC]              NVARCHAR(50) null&#xA; , [ETHNIC_PACIFIC_ISL]           NVARCHAR(50) null&#xA; , [ETHNIC_AM_IND_AK_NATIVE]      NVARCHAR(50) null&#xA; , [ETHNIC_ASIAN]                 NVARCHAR(50) null&#xA; , [GENDER_MALE]                  NVARCHAR(50) null&#xA; , [GENDER_FEMALE]                NVARCHAR(50) null&#xA; , [AYP_ECON_DISADVANTAGED]       NVARCHAR(50) null&#xA; , [AYP_LTD_ENGLISH_PROFICIENCY]  NVARCHAR(50) null&#xA; , [AYP_GIFTED_TALENTED]          NVARCHAR(50) null&#xA; , [AYP_MIGRANT]                  NVARCHAR(50) null&#xA; , [LAST_COL]                     NVARCHAR(50) null&#xA; )&#xA;&#xA;INSERT INTO ##TempStuAddendum&#xA;SELECT  &#xA;*&#xA;FROM&#xA;&#xA;            OPENROWSET (&#xA;                  'Microsoft.ACE.OLEDB.12.0',  &#xA;                  'Text;Database=\\SynTempSSIS\Files\Export\Read180\;',  &#xA;                  'SELECT * from Student.csv'&#xA;                )  AS  [CAREER]&#xA;&#xA;&#xA;&#xA;      REVERT&#xA;GO&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create Teacher Addendum"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5416FB21-8767-4965-A1BE-C3EB9CD59F56}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Teacher Addendum"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C2B81544-54FE-4344-84E4-CF7E74027FD8}"
+          SQLTask:SqlStatementSource="EXECUTE  AS  LOGIN='QueryFileUser'&#xA;GO&#xA;&#xA;&#xA;--&lt;APS - Read180 - Teacher Addendum&gt;&#xA;-- Addendum file to be joined - Fixed rows from a temp table&#xA;IF OBJECT_ID('tempdb..##TempStfAddendum') IS NOT NULL DROP TABLE ##TempStfAddendum&#xA;CREATE TABLE ##TempStfAddendum(&#xA;   [DISTRICT_USER_ID]  NVARCHAR(50) null&#xA; , [SPS_ID]            NVARCHAR(50) null&#xA; , [PREFIX]            NVARCHAR(50) null&#xA; , [FIRST_NAME]        NVARCHAR(50) null&#xA; , [LAST_NAME]         NVARCHAR(50) null&#xA; , [TITLE]             NVARCHAR(50) null&#xA; , [SUFFIX]            NVARCHAR(50) null&#xA; , [EMAIL]             NVARCHAR(50) null&#xA; , [USER_NAME]         NVARCHAR(50) null&#xA; , [PASSWORD]          NVARCHAR(50) null&#xA; , [SCHOOL_NAME]       NVARCHAR(50) null&#xA; , [CLASS_NAME]        NVARCHAR(50) null&#xA; , [LAST_COL]          NVARCHAR(50) null&#xA; )&#xA; -- Load the data into the temp table &#xA;INSERT INTO ##TempStfAddendum&#xA;SELECT  &#xA;*&#xA;FROM&#xA;&#xA;            OPENROWSET (&#xA;                  'Microsoft.ACE.OLEDB.12.0',  &#xA;                  'Text;Database=\\SynTempSSIS\Files\Export\Read180\;',  &#xA;                  'SELECT * from Teacher.csv'&#xA;                )  AS  [CAREER]&#xA;&#xA;&#xA;&#xA;      REVERT&#xA;GO&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Drop Temp Tables"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{729F733F-54F8-4AB5-8F06-CC527221EC4B}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Drop Temp Tables"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C2B81544-54FE-4344-84E4-CF7E74027FD8}"
+          SQLTask:SqlStatementSource="IF OBJECT_ID('tempdb..##TempStuAddendum') IS NOT NULL DROP TABLE ##TempStuAddendum&#xA;&#xA;IF OBJECT_ID('tempdb..##TempStfAddendum') IS NOT NULL DROP TABLE ##TempStfAddendum" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Students"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{53CF7E0D-5623-489C-886C-45865FE4553C}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Students"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Students\DB Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--&lt;APS - Read180 - Students&gt;
+-- Addendum file to be joined - Fixed rows from a temp table
+; with SelectedCourses AS
+(
+SELECT
+   stu.STUDENT_GU
+   --courses at Hayes Middle School the number 416 will need to precede the course number
+ , crs.COURSE_TITLE + ' '+
+   CASE WHEN sch.SCHOOL_CODE = '416' THEN '416' ELSE '' END +
+   crs.COURSE_ID + ' '+
+   sec.SECTION_ID + ' ' +
+   CAST(sec.PERIOD_BEGIN as VARCHAR(2)) ClassName
+ , ssy.STUDENT_SCHOOL_YEAR_GU
+FROM 
+	REV.EPC_STU_SCH_YR              SSY 
+	JOIN REV.EPC_STU                STU    ON STU.STUDENT_GU = SSY.STUDENT_GU
+	JOIN REV.EPC_STU_CLASS          CLS    ON CLS.STUDENT_SCHOOL_YEAR_GU = SSY.STUDENT_SCHOOL_YEAR_GU
+	JOIN REV.EPC_SCH_YR_SECT        SEC    ON CLS.SECTION_GU = SEC.SECTION_GU
+	JOIN REV.EPC_SCH_YR_CRS         SYCRS  ON SYCRS.SCHOOL_YEAR_COURSE_GU = SEC.SCHOOL_YEAR_COURSE_GU
+	JOIN REV.EPC_CRS                CRS    ON CRS.COURSE_GU = SYCRS.COURSE_GU
+	JOIN REV.REV_ORGANIZATION_YEAR  OY     ON OY.ORGANIZATION_YEAR_GU = SSY.ORGANIZATION_YEAR_GU
+	JOIN REV.REV_YEAR               Y      ON Y.YEAR_GU = OY.YEAR_GU 
+	                                          AND Y.YEAR_GU = (SELECT YEAR_GU FROM REV.SIF_22_Common_CurrentYearGU)
+	JOIN REV.EPC_SCH                SCH    ON OY.ORGANIZATION_GU = SCH.ORGANIZATION_GU
+
+WHERE  SSY.STATUS IS NULL
+AND (crs.COURSE_ID IN (
+'540111','540112','540211','540212','540311','540312','21206','212061','212062','21207'
+,'212071','212072','21208','212081','212082','210421','210422','210431','210432','210441'
+,'210442','212091','212092','212101','212102','212111','212112','212121','212122','54011'
+,'54021', '540411', '540412','54031','540611','540612'
+)
+OR (crs.COURSE_ID IN
+('0604a1','0604a2','0614a1','0614a2','2055e1','2055e2','2055j1',
+'2055j2','2055n1','250311','250312','250341','250342') 
+AND SCH.SCHOOL_CODE = '540')
+OR
+(SCH.[SCHOOL_CODE] IN ('206','496') AND SEC.PERIOD_BEGIN = 1)
+OR
+(SCH.SCHOOL_CODE = '496' AND crs.COURSE_ID = '10240000')
+)
+
+
+AND (CLS.LEAVE_DATE IS NULL OR CLS.LEAVE_DATE &gt;= GETDATE())
+	AND CLS.ENTER_DATE &lt;= GETDATE() 
+	
+),  EthCodes AS 
+(
+  SELECT ethl.PERSON_GU
+  , ROW_NUMBER() OVER(PARTITION BY ethl.PERSON_GU ORDER BY ethl.PERSON_GU) rn
+  , (select ''+RIGHT('000'+ ethl2.ETHNIC_CODE,3) from rev.REV_PERSON_SECONDRY_ETH_LST ethl2 where ethl2.PERSON_GU = ethl.PERSON_GU for xml path('')) ethlist
+  FROM rev.REV_PERSON_SECONDRY_ETH_LST ethl
+)
+SELECT
+   t.[USER_NAME]
+ , t.[PASSWORD]
+ , t.[SIS_ID]
+ , t.[FIRST_NAME]
+ , t.[MIDDLE_NAME]
+ , t.[LAST_NAME]
+ , t.[GRADE]
+ , t.[SCHOOL_NAME]
+ , t.[CLASS_NAME]
+ , t.[ETHNIC_CAUCASIAN]
+ , t.[ETHNIC_AFRICAN_AM]
+ , t.[ETHNIC_HISPANIC]
+ , t.[ETHNIC_PACIFIC_ISL]
+ , t.[ETHNIC_AM_IND_AK_NATIVE]
+ , t.[ETHNIC_ASIAN]
+ , t.[GENDER_MALE]
+ , t.[GENDER_FEMALE]
+ , t.[AYP_ECON_DISADVANTAGED]
+ , t.[AYP_LTD_ENGLISH_PROFICIENCY]
+ , t.[AYP_GIFTED_TALENTED]
+ , t.[AYP_MIGRANT]
+ , t.[LAST_COL]
+ , 1 [Orderby]
+FROM ##TempStuAddendum t
+WHERE t.USER_NAME != '' and t.PASSWORD != '' and t.SIS_ID != '' and t.FIRST_NAME != ''
+UNION  
+SELECT
+   stu.SIS_NUMBER                                                    AS [USER_NAME]
+ , SUBSTRING(REPLACE(CONVERT(VARCHAR(10), per.BIRTH_DATE, 101), '/',''),1,4)
+                                                                     AS [PASSWORD]
+ , stu.SIS_NUMBER                                                    AS [SIS_ID]
+ , per.FIRST_NAME                                                    AS [FIRST_NAME]
+ , per.MIDDLE_NAME                                                   AS [MIDDLE_NAME]
+ , per.LAST_NAME                                                     AS [LAST_NAME]
+ , grade.VALUE_DESCRIPTION                                           AS [GRADE]
+ , org.ORGANIZATION_NAME                                             AS [SCHOOL_NAME]
+ , scs.ClassName                                                     AS [CLASS_NAME]
+ , CASE WHEN per.RESOLVED_ETHNICITY_RACE = '001'  THEN 'Y' ELSE 'N' END   AS [ETHNIC_CAUCASIAN]
+ , CASE WHEN per.RESOLVED_ETHNICITY_RACE = '600'  THEN 'Y' ELSE 'N' END   AS [ETHNIC_AFRICAN_AM]
+ , CASE WHEN per.RESOLVED_ETHNICITY_RACE = '500'  THEN 'Y' ELSE 'N' END   AS [ETHNIC_HISPANIC]
+ , CASE WHEN per.RESOLVED_ETHNICITY_RACE = '399'  THEN 'Y' ELSE 'N' END   AS [ETHNIC_PACIFIC_ISL]
+ , CASE WHEN per.RESOLVED_ETHNICITY_RACE = '100'  THEN 'Y' ELSE 'N' END   AS [ETHNIC_AM_IND_AK_NATIVE]
+ , CASE WHEN per.RESOLVED_ETHNICITY_RACE = '299'  THEN 'Y' ELSE 'N' END   AS [ETHNIC_ASIAN]
+ , CASE WHEN per.GENDER = 'M' THEN 'Y' ELSE 'N' END                  AS [GENDER_MALE]
+ , CASE WHEN per.GENDER = 'F' THEN 'Y' ELSE 'N' END                  AS [GENDER_FEMALE]
+ , CASE WHEN stu.DISADVANTAGED is not null then 'Y' ELSE 'N' END     AS [AYP_ECON_DISADVANTAGED]
+ , CASE WHEN ell.PROGRAM_CODE is not NULL THEN 'Y' ELSE 'N' END      AS [AYP_LTD_ENGLISH_PROFICIENCY]
+ , CASE WHEN sped.PRIMARY_DISABILITY_CODE is not null THEN 'Y' ELSE 'N' END AS [AYP_GIFTED_TALENTED]
+ , CASE WHEN stu.MIGRANT = 'Y' THEN 'Y' ELSE 'N' END                 AS [AYP_MIGRANT]
+ , 'Y'                                                               AS [LAST_COL]
+ , 2                                                                 AS [Orderby]
+FROM rev.EPC_STU                    stu
+JOIN rev.EPC_STU_SCH_YR             ssyr ON ssyr.STUDENT_GU = stu.STUDENT_GU
+                                            AND ssyr.STATUS IS NULL
+JOIN rev.REV_ORGANIZATION_YEAR      oyr  ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU
+                                            AND oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+JOIN rev.REV_ORGANIZATION           org  ON org.ORGANIZATION_GU = oyr.ORGANIZATION_GU
+JOIN rev.EPC_SCH                    sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
+JOIN rev.REV_PERSON                 per  ON per.PERSON_GU = stu.STUDENT_GU
+LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grade ON grade.VALUE_CODE = ssyr.GRADE
+JOIN SelectedCourses                scs  ON scs.STUDENT_GU = stu.STUDENT_GU
+                                            and scs.STUDENT_SCHOOL_YEAR_GU = ssyr.STUDENT_SCHOOL_YEAR_GU
+LEFT JOIN EthCodes                  eth  ON eth.PERSON_GU = stu.STUDENT_GU and eth.rn = 1
+LEFT JOIN rev.EP_STUDENT_SPECIAL_ED sped ON sped.STUDENT_GU = stu.STUDENT_GU and sped.PRIMARY_DISABILITY_CODE = 'GI'
+LEFT JOIN rev.EPC_STU_PGM_ELL       ell  ON ell.STUDENT_GU = stu.STUDENT_GU
+
+Order by [Orderby]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Students\DB Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB Conection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB Conection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Students\DB Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[USER_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[USER_NAME]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[USER_NAME]"
+                      name="USER_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[PASSWORD]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PASSWORD]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[PASSWORD]"
+                      name="PASSWORD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[SIS_ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SIS_ID]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[SIS_ID]"
+                      name="SIS_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[FIRST_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[FIRST_NAME]"
+                      length="60"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[FIRST_NAME]"
+                      name="FIRST_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[MIDDLE_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[MIDDLE_NAME]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[MIDDLE_NAME]"
+                      name="MIDDLE_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[LAST_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[LAST_NAME]"
+                      length="60"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[LAST_NAME]"
+                      name="LAST_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[GRADE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[GRADE]"
+                      length="600"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[GRADE]"
+                      name="GRADE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[SCHOOL_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SCHOOL_NAME]"
+                      length="100"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[SCHOOL_NAME]"
+                      name="SCHOOL_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[CLASS_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[CLASS_NAME]"
+                      length="108"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[CLASS_NAME]"
+                      name="CLASS_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ETHNIC_CAUCASIAN]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ETHNIC_CAUCASIAN]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ETHNIC_CAUCASIAN]"
+                      name="ETHNIC_CAUCASIAN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ETHNIC_AFRICAN_AM]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ETHNIC_AFRICAN_AM]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ETHNIC_AFRICAN_AM]"
+                      name="ETHNIC_AFRICAN_AM"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ETHNIC_HISPANIC]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ETHNIC_HISPANIC]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ETHNIC_HISPANIC]"
+                      name="ETHNIC_HISPANIC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ETHNIC_PACIFIC_ISL]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ETHNIC_PACIFIC_ISL]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ETHNIC_PACIFIC_ISL]"
+                      name="ETHNIC_PACIFIC_ISL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ETHNIC_AM_IND_AK_NATIVE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ETHNIC_AM_IND_AK_NATIVE]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ETHNIC_AM_IND_AK_NATIVE]"
+                      name="ETHNIC_AM_IND_AK_NATIVE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ETHNIC_ASIAN]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ETHNIC_ASIAN]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ETHNIC_ASIAN]"
+                      name="ETHNIC_ASIAN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[GENDER_MALE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[GENDER_MALE]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[GENDER_MALE]"
+                      name="GENDER_MALE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[GENDER_FEMALE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[GENDER_FEMALE]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[GENDER_FEMALE]"
+                      name="GENDER_FEMALE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[AYP_ECON_DISADVANTAGED]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[AYP_ECON_DISADVANTAGED]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[AYP_ECON_DISADVANTAGED]"
+                      name="AYP_ECON_DISADVANTAGED"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[AYP_LTD_ENGLISH_PROFICIENCY]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[AYP_LTD_ENGLISH_PROFICIENCY]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[AYP_LTD_ENGLISH_PROFICIENCY]"
+                      name="AYP_LTD_ENGLISH_PROFICIENCY"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[AYP_GIFTED_TALENTED]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[AYP_GIFTED_TALENTED]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[AYP_GIFTED_TALENTED]"
+                      name="AYP_GIFTED_TALENTED"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[AYP_MIGRANT]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[AYP_MIGRANT]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[AYP_MIGRANT]"
+                      name="AYP_MIGRANT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[LAST_COL]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[LAST_COL]"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[LAST_COL]"
+                      name="LAST_COL"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[USER_NAME]"
+                      dataType="wstr"
+                      length="50"
+                      name="USER_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PASSWORD]"
+                      dataType="wstr"
+                      length="50"
+                      name="PASSWORD" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SIS_ID]"
+                      dataType="wstr"
+                      length="50"
+                      name="SIS_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[FIRST_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      name="FIRST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[MIDDLE_NAME]"
+                      dataType="wstr"
+                      length="50"
+                      name="MIDDLE_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[LAST_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      name="LAST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[GRADE]"
+                      dataType="wstr"
+                      length="600"
+                      name="GRADE" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SCHOOL_NAME]"
+                      dataType="wstr"
+                      length="100"
+                      name="SCHOOL_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[CLASS_NAME]"
+                      dataType="wstr"
+                      length="108"
+                      name="CLASS_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ETHNIC_CAUCASIAN]"
+                      dataType="wstr"
+                      length="50"
+                      name="ETHNIC_CAUCASIAN" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ETHNIC_AFRICAN_AM]"
+                      dataType="wstr"
+                      length="50"
+                      name="ETHNIC_AFRICAN_AM" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ETHNIC_HISPANIC]"
+                      dataType="wstr"
+                      length="50"
+                      name="ETHNIC_HISPANIC" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ETHNIC_PACIFIC_ISL]"
+                      dataType="wstr"
+                      length="50"
+                      name="ETHNIC_PACIFIC_ISL" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ETHNIC_AM_IND_AK_NATIVE]"
+                      dataType="wstr"
+                      length="50"
+                      name="ETHNIC_AM_IND_AK_NATIVE" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ETHNIC_ASIAN]"
+                      dataType="wstr"
+                      length="50"
+                      name="ETHNIC_ASIAN" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[GENDER_MALE]"
+                      dataType="wstr"
+                      length="50"
+                      name="GENDER_MALE" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[GENDER_FEMALE]"
+                      dataType="wstr"
+                      length="50"
+                      name="GENDER_FEMALE" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[AYP_ECON_DISADVANTAGED]"
+                      dataType="wstr"
+                      length="50"
+                      name="AYP_ECON_DISADVANTAGED" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[AYP_LTD_ENGLISH_PROFICIENCY]"
+                      dataType="wstr"
+                      length="50"
+                      name="AYP_LTD_ENGLISH_PROFICIENCY" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[AYP_GIFTED_TALENTED]"
+                      dataType="wstr"
+                      length="50"
+                      name="AYP_GIFTED_TALENTED" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[AYP_MIGRANT]"
+                      dataType="wstr"
+                      length="50"
+                      name="AYP_MIGRANT" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[LAST_COL]"
+                      dataType="wstr"
+                      length="50"
+                      name="LAST_COL" />
+                    <externalMetadataColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Orderby]"
+                      dataType="i4"
+                      name="Orderby" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[USER_NAME]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[USER_NAME]"
+                      name="USER_NAME" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PASSWORD]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[PASSWORD]"
+                      name="PASSWORD" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[SIS_ID]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[SIS_ID]"
+                      name="SIS_ID" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[FIRST_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[FIRST_NAME]"
+                      name="FIRST_NAME" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[MIDDLE_NAME]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[MIDDLE_NAME]"
+                      name="MIDDLE_NAME" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[LAST_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[LAST_NAME]"
+                      name="LAST_NAME" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[GRADE]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[GRADE]"
+                      name="GRADE" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[SCHOOL_NAME]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[SCHOOL_NAME]"
+                      name="SCHOOL_NAME" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[CLASS_NAME]"
+                      dataType="wstr"
+                      length="108"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[CLASS_NAME]"
+                      name="CLASS_NAME" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ETHNIC_CAUCASIAN]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ETHNIC_CAUCASIAN]"
+                      name="ETHNIC_CAUCASIAN" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ETHNIC_AFRICAN_AM]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ETHNIC_AFRICAN_AM]"
+                      name="ETHNIC_AFRICAN_AM" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ETHNIC_HISPANIC]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ETHNIC_HISPANIC]"
+                      name="ETHNIC_HISPANIC" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ETHNIC_PACIFIC_ISL]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ETHNIC_PACIFIC_ISL]"
+                      name="ETHNIC_PACIFIC_ISL" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ETHNIC_AM_IND_AK_NATIVE]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ETHNIC_AM_IND_AK_NATIVE]"
+                      name="ETHNIC_AM_IND_AK_NATIVE" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ETHNIC_ASIAN]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ETHNIC_ASIAN]"
+                      name="ETHNIC_ASIAN" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[GENDER_MALE]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[GENDER_MALE]"
+                      name="GENDER_MALE" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[GENDER_FEMALE]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[GENDER_FEMALE]"
+                      name="GENDER_FEMALE" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[AYP_ECON_DISADVANTAGED]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[AYP_ECON_DISADVANTAGED]"
+                      name="AYP_ECON_DISADVANTAGED" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[AYP_LTD_ENGLISH_PROFICIENCY]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[AYP_LTD_ENGLISH_PROFICIENCY]"
+                      name="AYP_LTD_ENGLISH_PROFICIENCY" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[AYP_GIFTED_TALENTED]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[AYP_GIFTED_TALENTED]"
+                      name="AYP_GIFTED_TALENTED" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[AYP_MIGRANT]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[AYP_MIGRANT]"
+                      name="AYP_MIGRANT" />
+                    <outputColumn
+                      refId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[LAST_COL]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Error Output].Columns[LAST_COL]"
+                      name="LAST_COL" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Students\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Students\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Students]"
+                  connectionManagerRefId="Package.ConnectionManagers[Students]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[USER_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="USER_NAME"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[USER_NAME]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[USER_NAME]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[PASSWORD]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="PASSWORD"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PASSWORD]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[PASSWORD]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[SIS_ID]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="SIS_ID"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SIS_ID]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[SIS_ID]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[FIRST_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="FIRST_NAME"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FIRST_NAME]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[FIRST_NAME]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[MIDDLE_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="MIDDLE_NAME"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MIDDLE_NAME]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[MIDDLE_NAME]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[LAST_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="LAST_NAME"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LAST_NAME]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[LAST_NAME]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[GRADE]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="GRADE"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GRADE]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[GRADE]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[SCHOOL_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="SCHOOL_NAME"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SCHOOL_NAME]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[SCHOOL_NAME]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[CLASS_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="108"
+                      cachedName="CLASS_NAME"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CLASS_NAME]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[CLASS_NAME]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[ETHNIC_CAUCASIAN]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ETHNIC_CAUCASIAN"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ETHNIC_CAUCASIAN]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ETHNIC_CAUCASIAN]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[ETHNIC_AFRICAN_AM]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ETHNIC_AFRICAN_AM"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ETHNIC_AFRICAN_AM]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ETHNIC_AFRICAN_AM]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[ETHNIC_HISPANIC]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ETHNIC_HISPANIC"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ETHNIC_HISPANIC]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ETHNIC_HISPANIC]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[ETHNIC_PACIFIC_ISL]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ETHNIC_PACIFIC_ISL"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ETHNIC_PACIFIC_ISL]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ETHNIC_PACIFIC_ISL]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[ETHNIC_AM_IND_AK_NATIVE]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ETHNIC_AM_IND_AK_NATIVE"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ETHNIC_AM_IND_AK_NATIVE]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ETHNIC_AM_IND_AK_NATIVE]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[ETHNIC_ASIAN]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ETHNIC_ASIAN"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ETHNIC_ASIAN]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[ETHNIC_ASIAN]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[GENDER_MALE]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="GENDER_MALE"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GENDER_MALE]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[GENDER_MALE]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[GENDER_FEMALE]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="GENDER_FEMALE"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GENDER_FEMALE]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[GENDER_FEMALE]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[AYP_ECON_DISADVANTAGED]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="AYP_ECON_DISADVANTAGED"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AYP_ECON_DISADVANTAGED]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[AYP_ECON_DISADVANTAGED]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[AYP_LTD_ENGLISH_PROFICIENCY]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="AYP_LTD_ENGLISH_PROFICIENCY"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AYP_LTD_ENGLISH_PROFICIENCY]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[AYP_LTD_ENGLISH_PROFICIENCY]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[AYP_GIFTED_TALENTED]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="AYP_GIFTED_TALENTED"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AYP_GIFTED_TALENTED]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[AYP_GIFTED_TALENTED]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[AYP_MIGRANT]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="AYP_MIGRANT"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AYP_MIGRANT]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[AYP_MIGRANT]" />
+                    <inputColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[LAST_COL]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LAST_COL"
+                      externalMetadataColumnId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LAST_COL]"
+                      lineageId="Package\Students\DB Query.Outputs[OLE DB Source Output].Columns[LAST_COL]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[USER_NAME]"
+                      dataType="wstr"
+                      length="50"
+                      name="USER_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PASSWORD]"
+                      dataType="wstr"
+                      length="50"
+                      name="PASSWORD" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SIS_ID]"
+                      dataType="wstr"
+                      length="50"
+                      name="SIS_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FIRST_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      name="FIRST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MIDDLE_NAME]"
+                      dataType="wstr"
+                      length="50"
+                      name="MIDDLE_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LAST_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      name="LAST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GRADE]"
+                      dataType="wstr"
+                      length="50"
+                      name="GRADE" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SCHOOL_NAME]"
+                      dataType="wstr"
+                      length="100"
+                      name="SCHOOL_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CLASS_NAME]"
+                      dataType="wstr"
+                      length="108"
+                      name="CLASS_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ETHNIC_CAUCASIAN]"
+                      dataType="wstr"
+                      length="50"
+                      name="ETHNIC_CAUCASIAN" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ETHNIC_AFRICAN_AM]"
+                      dataType="wstr"
+                      length="50"
+                      name="ETHNIC_AFRICAN_AM" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ETHNIC_HISPANIC]"
+                      dataType="wstr"
+                      length="50"
+                      name="ETHNIC_HISPANIC" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ETHNIC_PACIFIC_ISL]"
+                      dataType="wstr"
+                      length="50"
+                      name="ETHNIC_PACIFIC_ISL" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ETHNIC_AM_IND_AK_NATIVE]"
+                      dataType="wstr"
+                      length="50"
+                      name="ETHNIC_AM_IND_AK_NATIVE" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ETHNIC_ASIAN]"
+                      dataType="wstr"
+                      length="50"
+                      name="ETHNIC_ASIAN" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GENDER_MALE]"
+                      dataType="wstr"
+                      length="50"
+                      name="GENDER_MALE" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GENDER_FEMALE]"
+                      dataType="wstr"
+                      length="50"
+                      name="GENDER_FEMALE" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AYP_ECON_DISADVANTAGED]"
+                      dataType="wstr"
+                      length="50"
+                      name="AYP_ECON_DISADVANTAGED" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AYP_LTD_ENGLISH_PROFICIENCY]"
+                      dataType="wstr"
+                      length="50"
+                      name="AYP_LTD_ENGLISH_PROFICIENCY" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AYP_GIFTED_TALENTED]"
+                      dataType="wstr"
+                      length="50"
+                      name="AYP_GIFTED_TALENTED" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AYP_MIGRANT]"
+                      dataType="wstr"
+                      length="50"
+                      name="AYP_MIGRANT" />
+                    <externalMetadataColumn
+                      refId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LAST_COL]"
+                      dataType="wstr"
+                      length="50"
+                      name="LAST_COL" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Students.Paths[OLE DB Source Output]"
+              endId="Package\Students\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Students\DB Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Teacher"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{8EC76CF7-3DAA-410E-8D8C-6FE01602854A}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Teacher"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Teacher\DB Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--&lt;APS - Read180 - teacher&gt;
+-- Addendum file to be joined - Fixed rows from a temp table
+; with SelectedCourses AS
+(
+SELECT
+   STF.STAFF_GU
+ , REPLACE(STF.BADGE_NUM, 'e', '') BADGE_NUM
+   --courses at Hayes Middle School the number 416 will need to precede the course number
+ , crs.COURSE_TITLE + ' '+
+   CASE WHEN sch.SCHOOL_CODE = '416' THEN '416' ELSE '' END +
+   crs.COURSE_ID + ' '+
+   sec.SECTION_ID + ' ' +
+   CAST(sec.PERIOD_BEGIN as VARCHAR(2)) ClassName
+ , stfp.FIRST_NAME
+ , stfp.LAST_NAME
+ , COALESCE(stfp.JOB_TITLE, 'Administrator') TITLE
+ , COALESCE(stfp.EMAIL, 'aps.edu') email
+ , org.ORGANIZATION_NAME
+FROM 
+	REV.EPC_STU_SCH_YR              SSY 
+	JOIN REV.EPC_STU                STU    ON STU.STUDENT_GU = SSY.STUDENT_GU
+	JOIN REV.EPC_STU_CLASS          CLS    ON CLS.STUDENT_SCHOOL_YEAR_GU = SSY.STUDENT_SCHOOL_YEAR_GU
+	JOIN REV.EPC_SCH_YR_SECT        SEC    ON CLS.SECTION_GU = SEC.SECTION_GU
+	JOIN REV.EPC_STAFF_SCH_YR       STFSSY ON STFSSY.STAFF_SCHOOL_YEAR_GU = SEC.STAFF_SCHOOL_YEAR_GU
+	JOIN rev.EPC_STAFF              STF    ON STF.STAFF_GU = STFSSY.STAFF_GU
+	JOIN REV.REV_PERSON             STFP   ON STFP.PERSON_GU              = STFSSY.STAFF_GU
+	JOIN REV.EPC_SCH_YR_CRS         SYCRS  ON SYCRS.SCHOOL_YEAR_COURSE_GU = SEC.SCHOOL_YEAR_COURSE_GU
+	JOIN REV.EPC_CRS                CRS    ON CRS.COURSE_GU = SYCRS.COURSE_GU
+	JOIN REV.REV_ORGANIZATION_YEAR  OY     ON OY.ORGANIZATION_YEAR_GU = SSY.ORGANIZATION_YEAR_GU
+	JOIN REV.REV_YEAR               Y      ON Y.YEAR_GU = OY.YEAR_GU 
+	                                          AND Y.YEAR_GU = (SELECT YEAR_GU FROM REV.SIF_22_Common_CurrentYearGU)
+    JOIN REV.EPC_SCH                SCH    ON SCH.ORGANIZATION_GU = OY.ORGANIZATION_GU
+	JOIN REV.REV_ORGANIZATION       ORG    ON ORG.ORGANIZATION_GU = oy.ORGANIZATION_GU
+WHERE  SSY.STATUS IS NULL
+AND (crs.COURSE_ID IN (
+'540111','540112','540211','540212','540311','540312','21206','212061','212062','21207'
+,'212071','212072','21208','212081','212082','210421','210422','210431','210432','210441'
+,'210442','212091','212092','212101','212102','212111','212112','212121','212122','54011'
+,'54021', '540411', '540412','54031','540611','540612'
+)
+OR (crs.COURSE_ID IN
+('0604a1','0604a2','0614a1','0614a2','2055e1','2055e2','2055j1',
+'2055j2','2055n1','250311','250312','250341','250342') 
+AND SCH.SCHOOL_CODE = '540')
+OR
+(SCH.[SCHOOL_CODE] IN ('206','496') AND SEC.PERIOD_BEGIN = 1)
+)
+
+
+)
+SELECT
+ 
+    [DISTRICT_USER_ID]  
+  , [SPS_ID]            
+  , ' ' [PREFIX]            
+  , [FIRST_NAME]        
+  , [LAST_NAME]         
+  , [TITLE]             
+  , ' ' [SUFFIX]            
+  , [EMAIL]             
+  , [USER_NAME]         
+  , [PASSWORD]          
+  , [SCHOOL_NAME]       
+  , [CLASS_NAME]        
+  , [LAST_COL]          
+  , 1 [Orderby] 
+ 
+
+FROM ##TempStfAddendum t
+WHERE t.USER_NAME != '' and t.PASSWORD != '' and t.SPS_ID != '' and t.FIRST_NAME != ''
+UNION  
+SELECT DISTINCT
+   scs.BADGE_NUM         AS [DISTRICT_USER_ID]
+ , scs.BADGE_NUM         AS [SPS_ID]
+ , ' '                   AS [PREFIX]
+ , scs.FIRST_NAME        AS [FIRST_NAME]
+ , scs.LAST_NAME         AS [LAST_NAME]
+ , scs.TITLE             AS [TITLE]
+ , ' '                   AS [SUFFIX]
+ , scs.email             AS [EMAIL]
+ , scs.BADGE_NUM         AS [USER_NAME]
+ , 'TEACHER1'            AS [PASSWORD]
+ , scs.ORGANIZATION_NAME AS [SCHOOL_NAME]
+ , scs.ClassName         AS [CLASS_NAME]
+ , 'Y'                   AS [LAST_COL]
+ , 2                     AS [Orderby]
+FROM rev.EPC_STAFF                  stf
+JOIN SelectedCourses                scs  ON scs.STAFF_GU = stf.STAFF_GU
+order by [Orderby]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Teacher\DB Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB Conection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB Conection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[DISTRICT_USER_ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[DISTRICT_USER_ID]"
+                      length="4000"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[DISTRICT_USER_ID]"
+                      name="DISTRICT_USER_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[SPS_ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SPS_ID]"
+                      length="4000"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[SPS_ID]"
+                      name="SPS_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[PREFIX]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PREFIX]"
+                      length="1"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[PREFIX]"
+                      name="PREFIX"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[FIRST_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[FIRST_NAME]"
+                      length="60"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[FIRST_NAME]"
+                      name="FIRST_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[LAST_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[LAST_NAME]"
+                      length="60"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[LAST_NAME]"
+                      name="LAST_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[TITLE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[TITLE]"
+                      length="50"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[TITLE]"
+                      name="TITLE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[SUFFIX]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SUFFIX]"
+                      length="1"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[SUFFIX]"
+                      name="SUFFIX"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[EMAIL]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[EMAIL]"
+                      length="100"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[EMAIL]"
+                      name="EMAIL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[USER_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[USER_NAME]"
+                      length="4000"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[USER_NAME]"
+                      name="USER_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[PASSWORD]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PASSWORD]"
+                      length="50"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[PASSWORD]"
+                      name="PASSWORD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[SCHOOL_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SCHOOL_NAME]"
+                      length="100"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[SCHOOL_NAME]"
+                      name="SCHOOL_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[CLASS_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[CLASS_NAME]"
+                      length="108"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[CLASS_NAME]"
+                      name="CLASS_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[LAST_COL]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[LAST_COL]"
+                      length="50"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[LAST_COL]"
+                      name="LAST_COL"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[DISTRICT_USER_ID]"
+                      dataType="wstr"
+                      length="4000"
+                      name="DISTRICT_USER_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SPS_ID]"
+                      dataType="wstr"
+                      length="4000"
+                      name="SPS_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PREFIX]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="PREFIX" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[FIRST_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      name="FIRST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[LAST_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      name="LAST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[TITLE]"
+                      dataType="wstr"
+                      length="50"
+                      name="TITLE" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SUFFIX]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="SUFFIX" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[EMAIL]"
+                      dataType="wstr"
+                      length="100"
+                      name="EMAIL" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[USER_NAME]"
+                      dataType="wstr"
+                      length="4000"
+                      name="USER_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[PASSWORD]"
+                      dataType="wstr"
+                      length="50"
+                      name="PASSWORD" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SCHOOL_NAME]"
+                      dataType="wstr"
+                      length="100"
+                      name="SCHOOL_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[CLASS_NAME]"
+                      dataType="wstr"
+                      length="108"
+                      name="CLASS_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[LAST_COL]"
+                      dataType="wstr"
+                      length="50"
+                      name="LAST_COL" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].ExternalColumns[Orderby]"
+                      dataType="i4"
+                      name="Orderby" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[DISTRICT_USER_ID]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[DISTRICT_USER_ID]"
+                      name="DISTRICT_USER_ID" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[SPS_ID]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[SPS_ID]"
+                      name="SPS_ID" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[PREFIX]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[PREFIX]"
+                      name="PREFIX" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[FIRST_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[FIRST_NAME]"
+                      name="FIRST_NAME" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[LAST_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[LAST_NAME]"
+                      name="LAST_NAME" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[TITLE]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[TITLE]"
+                      name="TITLE" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[SUFFIX]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[SUFFIX]"
+                      name="SUFFIX" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[EMAIL]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[EMAIL]"
+                      name="EMAIL" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[USER_NAME]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[USER_NAME]"
+                      name="USER_NAME" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[PASSWORD]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[PASSWORD]"
+                      name="PASSWORD" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[SCHOOL_NAME]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[SCHOOL_NAME]"
+                      name="SCHOOL_NAME" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[CLASS_NAME]"
+                      dataType="wstr"
+                      length="108"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[CLASS_NAME]"
+                      name="CLASS_NAME" />
+                    <outputColumn
+                      refId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[LAST_COL]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Error Output].Columns[LAST_COL]"
+                      name="LAST_COL" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Teacher\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Teacher\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Teacher]"
+                  connectionManagerRefId="Package.ConnectionManagers[Teacher]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].Columns[DISTRICT_USER_ID]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="DISTRICT_USER_ID"
+                      externalMetadataColumnId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DISTRICT_USER_ID]"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[DISTRICT_USER_ID]" />
+                    <inputColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].Columns[SPS_ID]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="SPS_ID"
+                      externalMetadataColumnId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SPS_ID]"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[SPS_ID]" />
+                    <inputColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].Columns[PREFIX]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="PREFIX"
+                      externalMetadataColumnId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PREFIX]"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[PREFIX]" />
+                    <inputColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].Columns[FIRST_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="FIRST_NAME"
+                      externalMetadataColumnId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FIRST_NAME]"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[FIRST_NAME]" />
+                    <inputColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].Columns[LAST_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="LAST_NAME"
+                      externalMetadataColumnId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LAST_NAME]"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[LAST_NAME]" />
+                    <inputColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].Columns[TITLE]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TITLE"
+                      externalMetadataColumnId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[TITLE]"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[TITLE]" />
+                    <inputColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].Columns[SUFFIX]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="SUFFIX"
+                      externalMetadataColumnId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SUFFIX]"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[SUFFIX]" />
+                    <inputColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].Columns[EMAIL]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="EMAIL"
+                      externalMetadataColumnId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[EMAIL]"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[EMAIL]" />
+                    <inputColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].Columns[USER_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="USER_NAME"
+                      externalMetadataColumnId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[USER_NAME]"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[USER_NAME]" />
+                    <inputColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].Columns[PASSWORD]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="PASSWORD"
+                      externalMetadataColumnId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PASSWORD]"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[PASSWORD]" />
+                    <inputColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].Columns[SCHOOL_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="SCHOOL_NAME"
+                      externalMetadataColumnId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SCHOOL_NAME]"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[SCHOOL_NAME]" />
+                    <inputColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].Columns[CLASS_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="108"
+                      cachedName="CLASS_NAME"
+                      externalMetadataColumnId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CLASS_NAME]"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[CLASS_NAME]" />
+                    <inputColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].Columns[LAST_COL]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LAST_COL"
+                      externalMetadataColumnId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LAST_COL]"
+                      lineageId="Package\Teacher\DB Query.Outputs[OLE DB Source Output].Columns[LAST_COL]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DISTRICT_USER_ID]"
+                      dataType="wstr"
+                      length="4000"
+                      name="DISTRICT_USER_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SPS_ID]"
+                      dataType="wstr"
+                      length="4000"
+                      name="SPS_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PREFIX]"
+                      dataType="wstr"
+                      length="50"
+                      name="PREFIX" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FIRST_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      name="FIRST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LAST_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      name="LAST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[TITLE]"
+                      dataType="wstr"
+                      length="50"
+                      name="TITLE" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SUFFIX]"
+                      dataType="wstr"
+                      length="50"
+                      name="SUFFIX" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[EMAIL]"
+                      dataType="wstr"
+                      length="100"
+                      name="EMAIL" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[USER_NAME]"
+                      dataType="wstr"
+                      length="4000"
+                      name="USER_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PASSWORD]"
+                      dataType="wstr"
+                      length="50"
+                      name="PASSWORD" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SCHOOL_NAME]"
+                      dataType="wstr"
+                      length="100"
+                      name="SCHOOL_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CLASS_NAME]"
+                      dataType="wstr"
+                      length="108"
+                      name="CLASS_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LAST_COL]"
+                      dataType="wstr"
+                      length="50"
+                      name="LAST_COL" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Teacher.Paths[OLE DB Source Output]"
+              endId="Package\Teacher\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Teacher\DB Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{820C0720-7F57-4263-A85A-46C213E887FC}"
+      DTS:From="Package\Create StudentAddendum"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Students" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{56021C1F-3778-45AE-B5AD-83B31C2E090B}"
+      DTS:From="Package\Students"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Create Teacher Addendum" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{E79129FC-61B1-43EA-A93F-F39AAA446060}"
+      DTS:From="Package\Create Teacher Addendum"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Teacher" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{E8608BDA-C9B7-455C-A0DD-A7485363F53C}"
+      DTS:From="Package\Teacher"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Drop Temp Tables" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{36438A58-83D5-474A-A49F-F2B6315A8AD6}"
+      DTS:From="Package\Drop Temp Tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Copy files to Server" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Copy files to Server"
+          TopLeft="21,463" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Create StudentAddendum"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="207,44"
+          Id="Package\Create Teacher Addendum"
+          TopLeft="5.5,194.216981132075" />
+        <NodeLayout
+          Size="207,44"
+          Id="Package\Drop Temp Tables"
+          TopLeft="5.5,376.933962264151" />
+        <NodeLayout
+          Size="207,44"
+          Id="Package\Students"
+          TopLeft="5.5,105.160377358491" />
+        <NodeLayout
+          Size="207,44"
+          Id="Package\Teacher"
+          TopLeft="5.5,286.745283018868" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="107.75,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57.660377358491"
+              Start="0,0"
+              End="0,50.160377358491">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.160377358491" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="109,149.160377358491">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45.0566037735849"
+              Start="0,0"
+              End="0,37.5566037735849">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5566037735849" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="109,238.216981132075">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.5283018867925"
+              Start="0,0"
+              End="0,41.0283018867925">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.0283018867925" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="109,330.745283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.188679245283"
+              Start="0,0"
+              End="0,38.688679245283">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.688679245283" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="108.25,420.933962264151">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.066037735849"
+              Start="0,0"
+              End="0,34.566037735849">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.566037735849" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Adjust Addendum file path in SQL Task Create student and Teacher addendum current location is &#xA;D:\from 011-synergydb\Edupoint_Work\InterfacePackages\Read180"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="515,74"
+          Id="6b8fccd9-682f-4307-bf0a-d8f47a56b439"
+          TopLeft="268,15" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Students">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="126,42"
+          Id="Package\Students\DB Query"
+          TopLeft="29.5,5.5" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Students\Flat File Destination"
+          TopLeft="5.50000000000001,107.5" />
+        <EdgeLayout
+          Id="Package\Students.Paths[OLE DB Source Output]"
+          TopLeft="92.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Students\DB Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Teacher">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="126,42"
+          Id="Package\Teacher\DB Query"
+          TopLeft="29.5,5.5" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Teacher\Flat File Destination"
+          TopLeft="5.50000000000001,107.5" />
+        <EdgeLayout
+          Id="Package\Teacher.Paths[OLE DB Source Output]"
+          TopLeft="92.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Teacher\DB Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
