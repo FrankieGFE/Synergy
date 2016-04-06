@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="MismatchTerms"
   DTS:PackageType="5"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{1DEFAF13-465F-4522-B130-5BB6F69DF695}">
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{E7A907C1-C206-48FF-B8CC-F97D9B83CC7C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -129,6 +129,16 @@
       <DTS:ObjectData>
         <SmtpConnectionManager
           ConnectionString="SmtpServer=webmail.aps.edu;UseWindowsAuthentication=False;EnableSsl=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SMTP Mail]"
+      DTS:CreationName="SMTP"
+      DTS:DTSID="{6CE6AB13-6449-4F27-A90C-6C0BEFD3B518}"
+      DTS:ObjectName="SMTP Mail">
+      <DTS:ObjectData>
+        <SmtpConnectionManager
+          ConnectionString="SmtpServer=webmail.aps.edu;UseWindowsAuthentication=False;EnableSsl=True;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -619,7 +629,7 @@ APS.MismatchTerms</property>
       <DTS:Variables />
       <DTS:ObjectData>
         <SendMailTask:SendMailTaskData
-          SendMailTask:SMTPServer="{7CB44F0E-40B1-4258-AF5D-58C841597BD4}"
+          SendMailTask:SMTPServer="{6CE6AB13-6449-4F27-A90C-6C0BEFD3B518}"
           SendMailTask:From="SISsysadmin@aps.edu"
           SendMailTask:To="salaz_p@aps.edu"
           SendMailTask:Subject="Mismatch Terms" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask">
