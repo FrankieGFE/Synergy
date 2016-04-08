@@ -48,7 +48,7 @@ FROM
 		,SSY.ORGANIZATION_YEAR_GU
 		,SSY.STUDENT_SCHOOL_YEAR_GU
 		,Enrollment.ENROLLMENT_GU
-		,Enrollment.GRADE
+		,SSY.GRADE
 		,Enrollment.ENTER_DATE
 		,Enrollment.LEAVE_DATE
 		-- We have to row number to make sure we only get one record per kid.  We noticed
