@@ -166,7 +166,8 @@ FROM
 		SCH.STAFF_GU = STF.STAFF_GU
 
 		WHERE
-		PRIM.GRADE IN ('03', '04', '05')
+		(PRIM.GRADE IN ('03', '04', '05')
+		OR PRIM.SCHOOL_CODE = '900')
 		AND PERIOD_BEGIN = '01'
 		AND SCH.PRIMARY_STAFF = 1
 
@@ -194,7 +195,8 @@ FROM
 		SCH.STAFF_GU = STF.STAFF_GU
 
 		WHERE
-		PRIM.GRADE IN ('03', '04', '05')
+		(PRIM.GRADE IN ('03', '04', '05')
+		OR PRIM.SCHOOL_CODE = '900')
 		AND PERIOD_BEGIN = '01'
 		AND SCH.PRIMARY_STAFF = 1
 		) AS ELAMTH0305
@@ -325,6 +327,7 @@ WHERE
 [State Field 5] IS NOT NULL
 --AND [Staff Member Identifier] = 'Elizabeth Alvarado'
 AND [Testing School] = '900'
+AND [Grade Level When Assessed] IN ('06', '07', '08')
 
 ORDER BY [Testing School], [Grade Level When Assessed], [Local Student Identifier]
 
