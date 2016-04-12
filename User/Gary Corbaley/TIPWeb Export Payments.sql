@@ -1,0 +1,165 @@
+
+EXECUTE AS LOGIN='QueryFileUser'
+GO
+
+DECLARE @SynFees AS TABLE([PayeeID] VARCHAR(255), [StudentID] INT, [SynergyFeeID] UNIQUEIDENTIFIER, [Amount] DECIMAL(10,2), [StudentName] TEXT, [FeeDate] DATE, [CreditCardType] VARCHAR(20), [CreditCardLastFour] VARCHAR(4),[TransID] UNIQUEIDENTIFIER);
+
+INSERT INTO
+	@SynFees
+
+	SELECT
+		[SynergyFees].*
+		,NEWID() AS [TransID]
+	FROM
+		OPENROWSET (
+			'Microsoft.ACE.OLEDB.12.0', 
+			'Text;Database=\\syntempssis.aps.edu.actd\Files\TempQuery\SchoolPay;', 
+			'SELECT * from synergy_fake_fees.csv'
+		) AS [SynergyFees]
+		
+--SELECT * FROM @SynFees
+
+SELECT
+	[ENROLMENT].[SCHOOL_CODE] AS [CampusID]
+	,[STUDENT].[SIS_NUMBER] AS [StudentID]
+	--,[FEE].[NOTE] AS [Note]
+	,LEFT(CONVERT(VARCHAR(256),[FEE].[NOTE]),CHARINDEX(' ',[FEE].[NOTE])) AS [ISBN]
+	,RIGHT(LEFT(CONVERT(VARCHAR(256),[FEE].[NOTE]),CHARINDEX(' ',[FEE].[NOTE],CHARINDEX(' ',[FEE].[NOTE])+1)),CHARINDEX(' ',[FEE].[NOTE],CHARINDEX(' ',[FEE].[NOTE])+1) - CHARINDEX(' ',[FEE].[NOTE])) AS [Accession]
+	--,[FEE].[FEE_STATUS] AS [Status]
+	--,'Paid' AS [Status]
+	,CASE WHEN [PAYMENT].[AMOUNT] = [FEE].[CREDIT_AMOUNT] OR [FEE].[FEE_STATUS] = 1 THEN 'Paid' ELSE 'Partial' END AS [Status]
+	,CONVERT(VARCHAR(10),[PAYMENT].[PAYMENT_DATE],101) AS [TransactionDate]
+	--,GETDATE() AS [TransactionDate]
+	,[PAYTRANS].[TRANSACTION_ID] AS [TransReceiptID]
+	--,'999999999' AS [TransReceiptID]
+	--,[FEE].[CREDIT_AMOUNT]
+	--,[FEE].[DEBIT_AMOUNT]
+	--,[FEE].[CREDIT_AMOUNT]-ISNULL([PAYMENT].[AMOUNT],0.00) AS [BALANCE]
+	,[PAYMENT].[AMOUNT] AS [PaymentAmount]
+	--,'999.99' AS [PaymentAmount]
+	,'' AS [Notes]
+	--,[FEE].[NOTE] AS [Notes]
+	
+	--,[PAYMENT].*
+	
+	--,[FEE].[STUDENT_FEE_GU]
+	
+	--,[SYNFEES].*
+	
+	--,[STUDENT].[FIRST_NAME]
+	--,[STUDENT].[LAST_NAME]
+	
+FROM
+	[rev].[EPC_STU_FEE] AS [FEE]
+	
+	INNER JOIN
+	--LEFT OUTER JOIN
+	APS.BasicStudent AS [STUDENT]
+	ON
+	[FEE].[STUDENT_GU] = [STUDENT].[STUDENT_GU]
+	
+	INNER JOIN
+	@SynFees AS [SYNFEES]
+	ON
+	[FEE].[STUDENT_FEE_GU] = [SYNFEES].[SynergyFeeID]
+	AND [STUDENT].[SIS_NUMBER] = [SYNFEES].[StudentID]
+	
+	INNER JOIN
+	[rev].[EPC_STU_FEE_PAYMENT] AS [PAYMENT]
+	ON
+	[FEE].[STUDENT_FEE_GU] = [PAYMENT].[STU_FEE_GU]
+	AND [SYNFEES].[FeeDate] = [PAYMENT].[PAYMENT_DATE]
+	AND [SYNFEES].[Amount] = [PAYMENT].[AMOUNT]
+	
+	LEFT OUTER JOIN
+	[rev].[EPC_STU_FEE_PAY_TRANS] AS [PAYTRANS]
+	ON
+	[PAYMENT].[STU_FEE_PAY_TRANS_GU] = [PAYTRANS].[STU_FEE_PAY_TRANS_GU]
+	
+	INNER JOIN
+	--LEFT OUTER JOIN
+	[rev].[EPC_SCH_YR_FEE] AS [FEE_CODE]
+	ON
+	[FEE].[FEE_CODE_GU] = [FEE_CODE].[FEE_CODE_GU]
+	
+	--INNER JOIN
+	LEFT OUTER JOIN
+	APS.StudentEnrollmentDetails AS [ENROLMENT]
+	ON
+	[FEE].[STUDENT_SCHOOL_YEAR_GU] = [ENROLMENT].[STUDENT_SCHOOL_YEAR_GU]
+	
+WHERE
+	[FEE_CODE].[FEE_DESCRIPTION] = 'Textbooks Lost'
+	--AND [FEE].[FEE_STATUS] != 0
+	--AND [STUDENT].[SIS_NUMBER] = '970093990'
+
+------------------------------------------------------------------------------------------------	
+
+SELECT
+	[ENROLMENT].[SCHOOL_CODE] AS [CampusID]
+	,[STUDENT].[SIS_NUMBER] AS [StudentID]
+	--,[FEE].[NOTE] AS [Note]
+	,LEFT(CONVERT(VARCHAR(256),[FEE].[NOTE]),CHARINDEX(' ',[FEE].[NOTE])) AS [ISBN]
+	,RIGHT(LEFT(CONVERT(VARCHAR(256),[FEE].[NOTE]),CHARINDEX(' ',[FEE].[NOTE],CHARINDEX(' ',[FEE].[NOTE])+1)),CHARINDEX(' ',[FEE].[NOTE],CHARINDEX(' ',[FEE].[NOTE])+1) - CHARINDEX(' ',[FEE].[NOTE])) AS [Accession]
+	--,[FEE].[FEE_STATUS] AS [Status]
+	,CASE WHEN [PAYMENT].[AMOUNT] = [FEE].[CREDIT_AMOUNT] OR [FEE].[FEE_STATUS] = 1 THEN 'Paid' ELSE 'Partial' END AS [Status]
+	,CONVERT(VARCHAR(10),[PAYMENT].[PAYMENT_DATE],101) AS [TransactionDate]
+	,[PAYTRANS].[TRANSACTION_ID] AS [TransReceiptID]
+	--,[FEE].[CREDIT_AMOUNT]
+	--,[FEE].[DEBIT_AMOUNT]
+	,[PAYMENT].[AMOUNT] AS [PaymentAmount]
+	,'' AS [Notes]
+	
+	--,[FEE].*
+	--,[PAYMENT].*
+	--,[PAYTRANS].*
+	
+	--,[FEE].[STUDENT_FEE_GU]
+	
+	--,[SYNFEES].*
+	
+FROM
+	[rev].[EPC_STU_FEE] AS [FEE]
+	
+	INNER JOIN
+	--LEFT OUTER JOIN
+	APS.BasicStudent AS [STUDENT]
+	ON
+	[FEE].[STUDENT_GU] = [STUDENT].[STUDENT_GU]
+	
+	INNER JOIN
+	@SynFees AS [SYNFEES]
+	ON
+	[FEE].[STUDENT_FEE_GU] = [SYNFEES].[SynergyFeeID]
+	AND [STUDENT].[SIS_NUMBER] = [SYNFEES].[StudentID]
+	
+	INNER JOIN
+	[rev].[EPC_STU_FEE_PAYMENT] AS [PAYMENT]
+	ON
+	[FEE].[STUDENT_FEE_GU] = [PAYMENT].[STU_FEE_GU]
+	AND [SYNFEES].[FeeDate] = [PAYMENT].[PAYMENT_DATE]
+	
+	LEFT OUTER JOIN
+	[rev].[EPC_STU_FEE_PAY_TRANS] AS [PAYTRANS]
+	ON
+	[PAYMENT].[STU_FEE_PAY_TRANS_GU] = [PAYTRANS].[STU_FEE_PAY_TRANS_GU]
+	
+	INNER JOIN
+	--LEFT OUTER JOIN
+	[rev].[EPC_SCH_YR_FEE] AS [FEE_CODE]
+	ON
+	[FEE].[FEE_CODE_GU] = [FEE_CODE].[FEE_CODE_GU]
+	
+	--INNER JOIN
+	LEFT OUTER JOIN
+	APS.StudentEnrollmentDetails AS [ENROLMENT]
+	ON
+	[FEE].[STUDENT_SCHOOL_YEAR_GU] = [ENROLMENT].[STUDENT_SCHOOL_YEAR_GU]
+	
+WHERE
+	[FEE_CODE].[FEE_DESCRIPTION] LIKE 'Textbooks Damaged'
+	--AND [FEE].[FEE_STATUS] != 0
+	--AND [STUDENT].[SIS_NUMBER] = '970093990'
+	
+REVERT
+GO
