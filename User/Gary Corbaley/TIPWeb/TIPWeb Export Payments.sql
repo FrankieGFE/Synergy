@@ -16,6 +16,8 @@ INSERT INTO
 			'Text;Database=\\syntempssis.aps.edu.actd\Files\TempQuery\SchoolPay;', 
 			'SELECT * from synergy_fees.csv'
 		) AS [SynergyFees]
+		
+SELECT * FROM @SynFees
 
 SELECT
 	[ENROLMENT].[SCHOOL_CODE] AS [CampusID]
@@ -29,7 +31,7 @@ SELECT
 	,'' AS [Notes]
 	
 FROM
-	[rev].[EPC_STU_FEE] AS [FEE]
+	[SYNERGYDBDC.APS.EDU.ACTD].[ST_Production].[rev].[EPC_STU_FEE] AS [FEE]
 	
 	INNER JOIN
 	APS.BasicStudent AS [STUDENT]
@@ -43,19 +45,19 @@ FROM
 	AND [STUDENT].[SIS_NUMBER] = [SYNFEES].[StudentID]
 	
 	INNER JOIN
-	[rev].[EPC_STU_FEE_PAYMENT] AS [PAYMENT]
+	[SYNERGYDBDC.APS.EDU.ACTD].[ST_Production].[rev].[EPC_STU_FEE_PAYMENT] AS [PAYMENT]
 	ON
 	[FEE].[STUDENT_FEE_GU] = [PAYMENT].[STU_FEE_GU]
-	AND [SYNFEES].[FeeDate] = [PAYMENT].[PAYMENT_DATE]
+	--AND [SYNFEES].[FeeDate] = [PAYMENT].[PAYMENT_DATE]
 	AND [SYNFEES].[Amount] = [PAYMENT].[AMOUNT]
 	
 	LEFT OUTER JOIN
-	[rev].[EPC_STU_FEE_PAY_TRANS] AS [PAYTRANS]
+	[SYNERGYDBDC.APS.EDU.ACTD].[ST_Production].[rev].[EPC_STU_FEE_PAY_TRANS] AS [PAYTRANS]
 	ON
 	[PAYMENT].[STU_FEE_PAY_TRANS_GU] = [PAYTRANS].[STU_FEE_PAY_TRANS_GU]
 	
 	INNER JOIN
-	[rev].[EPC_SCH_YR_FEE] AS [FEE_CODE]
+	[SYNERGYDBDC.APS.EDU.ACTD].[ST_Production].[rev].[EPC_SCH_YR_FEE] AS [FEE_CODE]
 	ON
 	[FEE].[FEE_CODE_GU] = [FEE_CODE].[FEE_CODE_GU]
 	
@@ -65,7 +67,7 @@ FROM
 	[FEE].[STUDENT_SCHOOL_YEAR_GU] = [ENROLMENT].[STUDENT_SCHOOL_YEAR_GU]
 	
 WHERE
-	[FEE_CODE].[FEE_DESCRIPTION] = 'Textbooks Lost'
+	[FEE_CODE].[FEE_DESCRIPTION] IN ('Textbook Lost','Textbooks Lost')
 
 ------------------------------------------------------------------------------------------------	
 
@@ -81,7 +83,7 @@ SELECT
 	,'' AS [Notes]
 	
 FROM
-	[rev].[EPC_STU_FEE] AS [FEE]
+	[SYNERGYDBDC.APS.EDU.ACTD].[ST_Production].[rev].[EPC_STU_FEE] AS [FEE]
 	
 	INNER JOIN
 	APS.BasicStudent AS [STUDENT]
@@ -95,18 +97,19 @@ FROM
 	AND [STUDENT].[SIS_NUMBER] = [SYNFEES].[StudentID]
 	
 	INNER JOIN
-	[rev].[EPC_STU_FEE_PAYMENT] AS [PAYMENT]
+	[SYNERGYDBDC.APS.EDU.ACTD].[ST_Production].[rev].[EPC_STU_FEE_PAYMENT] AS [PAYMENT]
 	ON
 	[FEE].[STUDENT_FEE_GU] = [PAYMENT].[STU_FEE_GU]
-	AND [SYNFEES].[FeeDate] = [PAYMENT].[PAYMENT_DATE]
+	--AND [SYNFEES].[FeeDate] = [PAYMENT].[PAYMENT_DATE]
+	AND [SYNFEES].[Amount] = [PAYMENT].[AMOUNT]
 	
 	LEFT OUTER JOIN
-	[rev].[EPC_STU_FEE_PAY_TRANS] AS [PAYTRANS]
+	[SYNERGYDBDC.APS.EDU.ACTD].[ST_Production].[rev].[EPC_STU_FEE_PAY_TRANS] AS [PAYTRANS]
 	ON
 	[PAYMENT].[STU_FEE_PAY_TRANS_GU] = [PAYTRANS].[STU_FEE_PAY_TRANS_GU]
 	
 	INNER JOIN
-	[rev].[EPC_SCH_YR_FEE] AS [FEE_CODE]
+	[SYNERGYDBDC.APS.EDU.ACTD].[ST_Production].[rev].[EPC_SCH_YR_FEE] AS [FEE_CODE]
 	ON
 	[FEE].[FEE_CODE_GU] = [FEE_CODE].[FEE_CODE_GU]
 	
@@ -116,7 +119,7 @@ FROM
 	[FEE].[STUDENT_SCHOOL_YEAR_GU] = [ENROLMENT].[STUDENT_SCHOOL_YEAR_GU]
 	
 WHERE
-	[FEE_CODE].[FEE_DESCRIPTION] LIKE 'Textbooks Damaged'
+	[FEE_CODE].[FEE_DESCRIPTION] IN ('Textbook Damaged','Textbooks Damaged')
 	
 REVERT
 GO
