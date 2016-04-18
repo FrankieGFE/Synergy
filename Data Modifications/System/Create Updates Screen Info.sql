@@ -9,16 +9,17 @@ SELECT
 	,'27CDCD0E-BF93-4071-94B2-5DB792BB735F' AS ADD_ID_STAMP
 	,NULL AS CHANGE_DATE_TIME_STAMP
 	,NULL AS CHANGE_ID_STAMP
-	
+		
 	--ENTER IN THE REFRESH DATE
-	,'2016-04-05' AS REFRESH_DATE
-
+	,'2016-02-11' AS REFRESH_DATE
+	
 	--ENTER THE USER INTERFACE URL
-	,'http://synfunc.aps.edu.actd/' AS URL
+	,'http://synsped.aps.edu.actd/' AS URL
 
 	--ENTER IN ANY NOTES FOR ENVIRONMENT
-	,'DO NOT REFRESH!!! Per Patti, Building Out and Testing Scheduling Tables' AS NOTES
-	
+	,'Check with Special Ed Department' AS NOTES
+
+		
 
 FROM 
 (
