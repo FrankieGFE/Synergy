@@ -1,7 +1,7 @@
 /**
- * $Revision: 1 $
- * $LastChangedBy: e104090 $
- * $LastChangedDate: 2015-05-07$
+ * $Revision: 2 $
+ * $LastChangedBy: Gary Corbaley $
+ * $LastChangedDate: 04/18/2016$
  */
  
 -- Removing function if it exists
@@ -22,6 +22,8 @@ SELECT
 	,Person.LAST_NAME + ', ' + Person.FIRST_NAME AS Name
 	,HomeLanguage.VALUE_DESCRIPTION AS HomeLanguage
 	,Student.STUDENT_GU
+	,Student.HOME_LANGUAGE
+	,Organization.ORGANIZATION_GU
 FROM
 	APS.PrimaryEnrollmentsAsOf(@AsOfDate) AS Enroll
 	INNER JOIN
@@ -89,11 +91,11 @@ FROM
 	FROM
 		rev.UD_HLS_HISTORY AS History
 		INNER JOIN
-		APS.PrimaryEnrollmentsAsOf('2015-05-22') AS Enroll
+		APS.PrimaryEnrollmentsAsOf(@AsOfDate) AS Enroll
 		ON 
 		History.STUDENT_GU = Enroll.STUDENT_GU
 	WHERE
-		History.DATE_ASSIGNED <= '2015-05-22'
+		History.DATE_ASSIGNED <= @AsOfDate
 	) AS ALLHistory
 WHERE 
 	RN=1
