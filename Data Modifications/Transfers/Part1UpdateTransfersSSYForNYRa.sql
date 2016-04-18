@@ -1,0 +1,31 @@
+
+EXECUTE AS LOGIN='QueryFileUser'
+GO
+
+BEGIN TRANSACTION
+UPDATE rev.EPC_STU_SCH_YR
+	SET NEXT_GRADE_LEVEL = T3.VALUE_CODE, NEXT_SCHOOL_GU = T3.ORGANIZATION_GU
+	, CHANGE_DATE_TIME_STAMP = GETDATE(), CHANGE_ID_STAMP = '27CDCD0E-BF93-4071-94B2-5DB792BB735F'
+
+
+FROM (
+
+SELECT 
+	*
+	FROM
+            OPENROWSET (
+                  'Microsoft.ACE.OLEDB.12.0', 
+                 'Text;Database=\\SYNTEMPSSIS\Files\TempQuery;',
+                  'SELECT * from SSY.csv'
+                ) AS [T3]
+) AS T3
+
+
+
+WHERE
+	T3.SSYGU = rev.EPC_STU_SCH_YR.STUDENT_SCHOOL_YEAR_GU
+
+COMMIT
+
+REVERT 
+GO
