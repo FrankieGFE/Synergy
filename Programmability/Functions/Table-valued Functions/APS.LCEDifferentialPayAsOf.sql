@@ -215,6 +215,7 @@ FROM
 				,Staff.BADGE_NUM 
 				,LAST_NAME + ', '+ FIRST_NAME + COALESCE(' ' +MIDDLE_NAME,'') 
 				,PRIMARY_TEACHER
+				,Staff.HIRE_DATE
 			
 				,Schedules.COURSE_ID
 				,Schedules.SECTION_ID
@@ -247,6 +248,7 @@ GROUP BY
 			,Badge
 			,TeacherName
 			,PrimaryTeacher
+			,HIRE_DATE
 			,Course
 			,Section
 			,CourseTitle
