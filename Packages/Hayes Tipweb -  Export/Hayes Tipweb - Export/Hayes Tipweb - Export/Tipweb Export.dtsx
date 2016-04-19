@@ -5,31 +5,42 @@
   DTS:CreationName="SSIS.Package.3"
   DTS:CreatorComputerName="046-SMCMURRAY"
   DTS:CreatorName="APS\e207878"
-  DTS:DTSID="{8ABA9286-5BEB-4E9D-B84D-019A9866F52F}"
+  DTS:DTSID="{FB3C20DE-F148-4622-89C0-BB2B8DD1785B}"
   DTS:ExecutableType="SSIS.Package.3"
   DTS:LastModifiedProductVersion="11.0.5058.0"
   DTS:LocaleID="1033"
-  DTS:ObjectName="Package"
+  DTS:ObjectName="Tipweb Export"
   DTS:PackageType="5"
-  DTS:VersionBuild="15"
-  DTS:VersionGUID="{8A7419FC-34FE-47C6-BA29-52BBEF276FBF}">
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{84E42BD1-318F-466A-9EE8-544F10374163}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{9828E2CE-6CDB-4012-ADEF-E2B508EB4108}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\syntempssis\Files\Export\Hayes Tipweb\TextLost.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
       DTS:CreationName="FLATFILE"
-      DTS:DTSID="{021D36DD-24FF-41CB-9EB5-AF7ABD5E45BF}"
+      DTS:DTSID="{68B2A1DC-2075-41C3-A00E-FE90E2E52574}"
       DTS:ObjectName="Flat File Connection Manager">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:Format="Delimited"
           DTS:LocaleID="1033"
           DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="Z:\Export\Hayes Tipweb\Test.txt">
+          DTS:ConnectionString="\\syntempssis\Files\Export\Hayes Tipweb\Textbook Lost.csv">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -38,7 +49,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="CampusID"
-              DTS:DTSID="{15DF7233-43A9-4BC7-9D1B-DD997C0A0077}"
+              DTS:DTSID="{D732497B-64A4-4E17-A2FA-674BCD327AE3}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -47,7 +58,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="StudentID"
-              DTS:DTSID="{81D04CA9-A855-4144-B5DD-A1C714DD98EB}"
+              DTS:DTSID="{162A0EC7-B121-410F-AA0F-E3BAB9F91C80}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -56,7 +67,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="ISBN"
-              DTS:DTSID="{A8742BFC-E038-4BB3-84BF-9A4CAE923DEA}"
+              DTS:DTSID="{4431D316-BA3D-4354-89B5-C49BDC2F03AD}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -65,7 +76,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Accession"
-              DTS:DTSID="{1B37A67C-79D2-4B29-8673-E84BA190A617}"
+              DTS:DTSID="{9CFE39C4-D012-4244-B3AC-34BD2B538FFF}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -74,7 +85,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Status"
-              DTS:DTSID="{DE01743F-AF57-4587-A825-A2687C91B37E}"
+              DTS:DTSID="{2F295781-A495-40E5-BACE-167E1EBD678E}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -83,7 +94,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="TransactionDate"
-              DTS:DTSID="{9EEBD139-C0A0-4823-B077-28A35DE6CE48}"
+              DTS:DTSID="{8C0449F8-6F43-4DF9-BC00-F2EECF349BBF}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -92,7 +103,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="TransReceiptID"
-              DTS:DTSID="{239A3CC9-4B92-420C-AB63-6A0825C16C41}"
+              DTS:DTSID="{AC68FA98-C530-4DE3-8F67-0807C89DE911}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -102,7 +113,7 @@
               DTS:DataScale="2"
               DTS:TextQualified="True"
               DTS:ObjectName="PaymentAmount"
-              DTS:DTSID="{EE9A0C9B-98E1-4DB3-AB0E-2A3BB31B25AE}"
+              DTS:DTSID="{EECF792F-2C59-4719-A04E-5D5EAE66802F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -111,108 +122,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Notes"
-              DTS:DTSID="{77D6D4D4-8FA5-4A22-89CF-1B9ADD03B8CA}"
-              DTS:CreationName="" />
-          </DTS:FlatFileColumns>
-        </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager 1]"
-      DTS:CreationName="FLATFILE"
-      DTS:DTSID="{F7DD56A5-B1CF-429D-985B-0D785801287D}"
-      DTS:ObjectName="Flat File Connection Manager 1">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:Format="Delimited"
-          DTS:LocaleID="1033"
-          DTS:HeaderRowDelimiter="_x000D__x000A_"
-          DTS:RowDelimiter=""
-          DTS:TextQualifier="_x003C_none_x003E_"
-          DTS:CodePage="1252"
-          DTS:ConnectionString="Z:\Export\Hayes Tipweb\Test2.txt">
-          <DTS:FlatFileColumns>
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="20"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="CampusID"
-              DTS:DTSID="{B29477BC-F2F7-49BC-B717-88EF675C7CDA}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="20"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="StudentID"
-              DTS:DTSID="{ACDF90E9-1E6C-41B4-80FE-DD1B8B80D66F}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="256"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="ISBN"
-              DTS:DTSID="{5F1C7EEF-6390-42DF-A47F-DDCACC3EA646}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="256"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Accession"
-              DTS:DTSID="{902A587F-FAC0-46B1-B34F-E717A674CF2D}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="7"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Status"
-              DTS:DTSID="{273BDB16-F344-4513-87DA-594EECEDECD7}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="TransactionDate"
-              DTS:DTSID="{33B7F154-BE29-4DA7-8BAF-E17196F2E8DE}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="20"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="TransReceiptID"
-              DTS:DTSID="{C60545F0-6B33-46CE-BE3E-115B8BBDF57D}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:DataType="131"
-              DTS:DataPrecision="9"
-              DTS:DataScale="2"
-              DTS:TextQualified="True"
-              DTS:ObjectName="PaymentAmount"
-              DTS:DTSID="{83F327B6-BD1F-4A1B-B6FF-B1165A8C8A99}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x000D__x000A_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Notes"
-              DTS:DTSID="{A25F1354-21B4-47C8-9B22-73FCCE5A19CC}"
+              DTS:DTSID="{3A405C9D-14C0-4AE4-BF06-A2C18281BDB5}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -229,7 +139,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADkVC3oFf1IdRtWMBQhdKaAAAAAAASAAACgAAAAEAAAAMioQ2AreW+n0RVo4GKaxmYwAAAAjhKnO18dUW5ne/usWmfNXFLA0O9DhtoJPY1w++87a0NanA8hlw72zXiV0u/3OOufFAAAABMdrAa90Uu898aY2/C155g+Az9H</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAw1DIi92kG9Fq5VdJQGpS7AAAAAASAAACgAAAAEAAAAH8kS6wXpOCPt1Y79bZjhdkwAAAA4wIPaWTH//d0ElulT8e6HVnOOz1lWKUnPWTHTpSZI6B4Kil3L9fGwqqEAqkj9oS4FAAAAIyzP8VqC7+7NvbxLHzMRQezB44Z</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -250,7 +160,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{259066C7-A976-43B4-A64B-0E416EBFC266}"
-          SQLTask:SqlStatementSource="IF OBJECT_ID('ST_Production.dbo.##SynFees') IS NOT NULL&#xA;DROP TABLE ##SynFees&#xA;CREATE TABLE ##SynFees&#xA;([PayeeID] VARCHAR(255)&#xA;, [StudentID] INT&#xA;, [SynergyFeeID] UNIQUEIDENTIFIER&#xA;, [Amount] DECIMAL(10,2)&#xA;, [StudentName] TEXT&#xA;, [FeeDate] DATE&#xA;, [CreditCardType] VARCHAR(20)&#xA;, [CreditCardLastFour] VARCHAR(4)&#xA;,[TransID] UNIQUEIDENTIFIER)&#xA;&#xA;DECLARE @SynFees AS TABLE([PayeeID] VARCHAR(255), [StudentID] INT, [SynergyFeeID] UNIQUEIDENTIFIER, [Amount] DECIMAL(10,2), [StudentName] TEXT, [FeeDate] DATE, [CreditCardType] VARCHAR(20), [CreditCardLastFour] VARCHAR(4),[TransID] UNIQUEIDENTIFIER);&#xA;&#xA;&#xA;INSERT INTO&#xA;&#x9;@SynFees&#xA;&#xA;&#x9;SELECT&#xA;&#x9;&#x9;[SynergyFees].*&#xA;&#x9;&#x9;,NEWID() AS [TransID]&#xA;&#x9;FROM&#xA;&#x9;&#x9;OPENROWSET (&#xA;&#x9;&#x9;&#x9;'Microsoft.ACE.OLEDB.12.0', &#xA;&#x9;&#x9;&#x9;'Text;Database=\\syntempssis.aps.edu.actd\Files\TempQuery\SchoolPay;', &#xA;&#x9;&#x9;&#x9;'SELECT * from synergy_fees_test.csv'&#xA;&#x9;&#x9;) AS [SynergyFees]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="IF OBJECT_ID('ST_Production.dbo.##SynFees') IS NOT NULL&#xA;DROP TABLE ##SynFees&#xA;CREATE TABLE ##SynFees&#xA;([PayeeID] VARCHAR(255)&#xA;, [StudentID] INT&#xA;, [SynergyFeeID] UNIQUEIDENTIFIER&#xA;, [Amount] DECIMAL(10,2)&#xA;, [StudentName] TEXT&#xA;, [FeeDate] DATE&#xA;, [CreditCardType] VARCHAR(20)&#xA;, [CreditCardLastFour] VARCHAR(4)&#xA;,[TransID] UNIQUEIDENTIFIER)&#xA;&#xA;DECLARE @SynFees AS TABLE([PayeeID] VARCHAR(255), [StudentID] INT, [SynergyFeeID] UNIQUEIDENTIFIER, [Amount] DECIMAL(10,2), [StudentName] TEXT, [FeeDate] DATE, [CreditCardType] VARCHAR(20), [CreditCardLastFour] VARCHAR(4),[TransID] UNIQUEIDENTIFIER);&#xA;&#xA;&#xA;INSERT INTO&#xA;&#x9;@SynFees&#xA;&#xA;&#x9;SELECT&#xA;&#x9;&#x9;[SynergyFees].*&#xA;&#x9;&#x9;,NEWID() AS [TransID]&#xA;&#x9;FROM&#xA;&#x9;&#x9;OPENROWSET (&#xA;&#x9;&#x9;&#x9;'Microsoft.ACE.OLEDB.12.0', &#xA;&#x9;&#x9;&#x9;'Text;Database=\\syntempssis.aps.edu.actd\Files\TempQuery\SchoolPay;', &#xA;&#x9;&#x9;&#x9;'SELECT * from synergy_fees.csv'&#xA;&#x9;&#x9;) AS [SynergyFees]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -288,8 +198,8 @@
               <connections>
                 <connection
                   refId="Package\Textbooks Damaged Output\Flat File Destination.Connections[FlatFileConnection]"
-                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager 1]"
-                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager 1]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
                   name="FlatFileConnection" />
               </connections>
               <inputs>
@@ -826,13 +736,6 @@ WHERE
                   name="Flat File Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Textbooks Lost Output\Flat File Destination.Inputs[Flat File Destination Input].Columns[CampusID]"
-                      cachedDataType="wstr"
-                      cachedLength="20"
-                      cachedName="CampusID"
-                      externalMetadataColumnId="Package\Textbooks Lost Output\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CampusID]"
-                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[CampusID]" />
-                    <inputColumn
                       refId="Package\Textbooks Lost Output\Flat File Destination.Inputs[Flat File Destination Input].Columns[StudentID]"
                       cachedDataType="wstr"
                       cachedLength="20"
@@ -898,11 +801,6 @@ WHERE
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Textbooks Lost Output\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CampusID]"
-                      dataType="wstr"
-                      length="20"
-                      name="CampusID" />
-                    <externalMetadataColumn
                       refId="Package\Textbooks Lost Output\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[StudentID]"
                       dataType="wstr"
                       length="20"
@@ -948,6 +846,11 @@ WHERE
                       dataType="str"
                       length="1"
                       name="Notes" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CampusID]"
+                      dataType="wstr"
+                      length="20"
+                      name="CampusID" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1344,6 +1247,10 @@ WHERE
           Id="Package\Create Temp Table"
           TopLeft="106,73" />
         <NodeLayout
+          Size="213,42"
+          Id="Package\Textbooks Damaged Output"
+          TopLeft="287,267" />
+        <NodeLayout
           Size="188,42"
           Id="Package\Textbooks Lost Output"
           TopLeft="190,168" />
@@ -1381,10 +1288,6 @@ WHERE
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="213,42"
-          Id="Package\Textbooks Damaged Output"
-          TopLeft="287,267" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="284,210">
@@ -1423,64 +1326,6 @@ WHERE
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Textbooks Lost Output">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="152,42"
-          Id="Package\Textbooks Lost Output\OLE DB Source"
-          TopLeft="113,58" />
-        <NodeLayout
-          Size="174,42"
-          Id="Package\Textbooks Lost Output\Flat File Destination"
-          TopLeft="193,148" />
-        <EdgeLayout
-          Id="Package\Textbooks Lost Output.Paths[OLE DB Source Output]"
-          TopLeft="189,100">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="91,48"
-              Start="0,0"
-              End="91,40.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20"
-                    Point2="0,24"
-                    Point3="4,24" />
-                  <mssgle:LineSegment
-                    End="87,24" />
-                  <mssgle:CubicBezierSegment
-                    Point1="87,24"
-                    Point2="91,24"
-                    Point3="91,28" />
-                  <mssgle:LineSegment
-                    End="91,40.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Textbooks Lost Output\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
     design-time-name="Package\Textbooks Damaged Output">
     <LayoutInfo>
       <GraphLayout
@@ -1492,33 +1337,33 @@ WHERE
         <NodeLayout
           Size="174,42"
           Id="Package\Textbooks Damaged Output\Flat File Destination"
-          TopLeft="191,140" />
+          TopLeft="215,158" />
         <EdgeLayout
           Id="Package\Textbooks Damaged Output.Paths[OLE DB Source Output]"
           TopLeft="200,102">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="78,38"
+              EndConnector="102,56"
               Start="0,0"
-              End="78,30.5">
+              End="102,48.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,15" />
+                    End="0,24" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,15"
-                    Point2="0,19"
-                    Point3="4,19" />
+                    Point1="0,24"
+                    Point2="0,28"
+                    Point3="4,28" />
                   <mssgle:LineSegment
-                    End="74,19" />
+                    End="98,28" />
                   <mssgle:CubicBezierSegment
-                    Point1="74,19"
-                    Point2="78,19"
-                    Point3="78,23" />
+                    Point1="98,28"
+                    Point2="102,28"
+                    Point3="102,32" />
                   <mssgle:LineSegment
-                    End="78,30.5" />
+                    End="102,48.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1532,6 +1377,64 @@ WHERE
   </TaskHost>
   <PipelineComponentMetadata
     design-time-name="Package\Textbooks Damaged Output\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Textbooks Lost Output">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Textbooks Lost Output\OLE DB Source"
+          TopLeft="141,70" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Textbooks Lost Output\Flat File Destination"
+          TopLeft="202,170" />
+        <EdgeLayout
+          Id="Package\Textbooks Lost Output.Paths[OLE DB Source Output]"
+          TopLeft="217,112">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="72,58"
+              Start="0,0"
+              End="72,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25"
+                    Point2="0,29"
+                    Point3="4,29" />
+                  <mssgle:LineSegment
+                    End="68,29" />
+                  <mssgle:CubicBezierSegment
+                    Point1="68,29"
+                    Point2="72,29"
+                    Point3="72,33" />
+                  <mssgle:LineSegment
+                    End="72,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Textbooks Lost Output\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
