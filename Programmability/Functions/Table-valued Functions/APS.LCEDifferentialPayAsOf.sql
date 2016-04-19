@@ -30,6 +30,7 @@ SELECT
 	,Badge
 	,TeacherName
 	,PrimaryTeacher
+	,HIRE_DATE
 	,Course
 	,Section
 	,CourseTitle
@@ -56,6 +57,7 @@ SELECT
 	,Badge
 	,TeacherName
 	,PrimaryTeacher
+	,HIRE_DATE
 	,Course
 	,Section
 	,CourseTitle
@@ -103,6 +105,7 @@ FROM
 				,Staff.BADGE_NUM AS Badge
 				,LAST_NAME + ', '+ FIRST_NAME + COALESCE(' ' +MIDDLE_NAME,'') AS TeacherName
 				,PRIMARY_TEACHER AS PrimaryTeacher
+				,Staff.HIRE_DATE
 
 				,Schedules.COURSE_ID AS Course
 				,Schedules.SECTION_ID AS Section
