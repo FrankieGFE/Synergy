@@ -1,5 +1,4 @@
 
-
 /*K12.SpecialEd.Student R0, K12.SpecialEd.IEP.IEPInfo R1, K12.School R8 (OrganizationGU,R0.OrganizationID,Outer), K12.SpecialEd.IEP.Service R3, K12.SpecialEd.SpecialEdService R7 (ServiceID,R3.ServiceCode,Outer), Revelation.FrequencyUnit R2 (FreqUnitID,R3.FrequencyUnit,Outer)
  COLS R0.FormattedName (2.5in), R0.SisNumb
  er (1in), R8.OrganizationName (3in), R3.ServiceCode (1.5in), R3.StartDate, R3.EndDate, R3.Frequency, R3.FrequencyUnit, R7.StateReportingCode  If R1.IepStatus ='Current'
@@ -40,7 +39,7 @@ FROM
 	   ,'' AS [PCP First Name]
 	   ,MAX([Audiology on IEP?]) AS [Audiology on IEP?]
 	   ,'' AS [Case Management on IEP?]
-	   ,CASE WHEN (MAX([IEP Start Date])<'20151001') THEN MAX([Mental Health-Counseling on IEP?]) ELSE '' END AS [Mental Health-Counseling on IEP?]
+	   ,MAX([Mental Health-Counseling on IEP?])  AS [Mental Health-Counseling on IEP?]
 	   ,MAX([Nursing Services on IEP?]) AS [Nursing Services on IEP?]
 	   ,'' AS [Nutritional Services on IEP?]
 	   ,MAX([Occupational Therapy on IEP?]) AS [Occupational Therapy on IEP?]
@@ -53,7 +52,7 @@ FROM
 	   ,MAX([Mental Health-Counseling on IEP?]) AS [BH-Social Worker on IEP?]
 	   ,MAX([Parent Consent]) AS [Parent Consent]
 	   ,MAX([AD Hours]) AS [AD Hours] 
-	   ,CASE WHEN MAX([IEP Start Date])<'20151001' THEN MAX([MHC Hours]) ELSE '' END AS [MHC Hours] 
+	   ,MAX([MHC Hours]) AS [MHC Hours] 
 	   ,MAX([NURS Hours]) AS [NURS Hours] 
 	   ,MAX([OT Hours]) AS [OT Hours] 
 	   ,MAX([PT Hours]) AS [PT Hours] 
@@ -63,7 +62,7 @@ FROM
 	   ,'' AS [BH-SPS Hours]
 	   ,MAX([MHC Hours]) AS [BH-SW Hours]
 	   ,LEFT(MAX([AD Frequency]),1) AS [AD Frequency]
-	   ,CASE WHEN MAX([IEP Start Date])<'20151001' THEN LEFT(MAX([MHC Frequency]),1) ELSE '' END AS [MHC Frequency]
+	   ,MAX([MHC Frequency]) AS [MHC Frequency]
 	   ,LEFT(MAX([NURS Frequency]),1) AS [NURS Frequency]
 	   ,LEFT(MAX([OT Frequency]),1) AS [OT Frequency]
 	   ,LEFT(MAX([PT Frequency]),1) AS [PT Frequency]
@@ -296,7 +295,7 @@ FROM
 	   ,'' AS [PCP First Name]
 	   ,MAX([Audiology on IEP?]) AS [Audiology on IEP?]
 	   ,'' AS [Case Management on IEP?]
-	   ,CASE WHEN (MAX([IEP Start Date])<'20151001') THEN MAX([Mental Health-Counseling on IEP?]) ELSE '' END AS [Mental Health-Counseling on IEP?]
+	   ,MAX([Mental Health-Counseling on IEP?])  AS [Mental Health-Counseling on IEP?]
 	   ,MAX([Nursing Services on IEP?]) AS [Nursing Services on IEP?]
 	   ,'' AS [Nutritional Services on IEP?]
 	   ,MAX([Occupational Therapy on IEP?]) AS [Occupational Therapy on IEP?]
@@ -309,7 +308,7 @@ FROM
 	   ,MAX([Mental Health-Counseling on IEP?]) AS [BH-Social Worker on IEP?]
 	   ,MAX([Parent Consent]) AS [Parent Consent]
 	   ,MAX([AD Hours]) AS [AD Hours] 
-	   ,CASE WHEN MAX([IEP Start Date])<'20151001' THEN MAX([MHC Hours]) ELSE '' END AS [MHC Hours] 
+	   ,MAX([MHC Hours])  AS [MHC Hours] 
 	   ,MAX([NURS Hours]) AS [NURS Hours] 
 	   ,MAX([OT Hours]) AS [OT Hours] 
 	   ,MAX([PT Hours]) AS [PT Hours] 
@@ -319,7 +318,7 @@ FROM
 	   ,'' AS [BH-SPS Hours]
 	   ,MAX([MHC Hours]) AS [BH-SW Hours]
 	   ,LEFT(MAX([AD Frequency]),1) AS [AD Frequency]
-	   ,CASE WHEN MAX([IEP Start Date])<'20151001' THEN LEFT(MAX([MHC Frequency]),1) ELSE '' END AS [MHC Frequency]
+	   ,MAX([MHC Frequency]) AS [MHC Frequency]
 	   ,LEFT(MAX([NURS Frequency]),1) AS [NURS Frequency]
 	   ,LEFT(MAX([OT Frequency]),1) AS [OT Frequency]
 	   ,LEFT(MAX([PT Frequency]),1) AS [PT Frequency]
