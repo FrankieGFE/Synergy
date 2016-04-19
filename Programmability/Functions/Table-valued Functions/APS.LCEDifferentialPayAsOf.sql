@@ -23,14 +23,14 @@ RETURNS TABLE
 AS
 RETURN
 
---DECLARE @AsOfDate DATE = GETDATE()
+DECLARE @AsOfDate DATE = GETDATE()
 
 SELECT
 	School
 	,Badge
 	,TeacherName
 	,PrimaryTeacher
-	,HIRE_DATE
+	,CONVERT(VARCHAR(10),HIRE_DATE,101) AS HIRE_DATE
 	,Course
 	,Section
 	,CourseTitle
