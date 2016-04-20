@@ -1,4 +1,3 @@
-
 /*K12.SpecialEd.Student R0, K12.SpecialEd.IEP.IEPInfo R1, K12.School R8 (OrganizationGU,R0.OrganizationID,Outer), K12.SpecialEd.IEP.Service R3, K12.SpecialEd.SpecialEdService R7 (ServiceID,R3.ServiceCode,Outer), Revelation.FrequencyUnit R2 (FreqUnitID,R3.FrequencyUnit,Outer)
  COLS R0.FormattedName (2.5in), R0.SisNumb
  er (1in), R8.OrganizationName (3in), R3.ServiceCode (1.5in), R3.StartDate, R3.EndDate, R3.Frequency, R3.FrequencyUnit, R7.StateReportingCode  If R1.IepStatus ='Current'
@@ -11,6 +10,8 @@ FROM
 (
     SELECT
 		[District CD]
+	   ,IEP_STATUS
+	   ,[SEC_SRV_SHOW]
 	   ,[School CD]
 	   ,[School Name]
 	   ,[Student ID]
@@ -30,16 +31,16 @@ FROM
 	   ,'' AS [Secondary Diagnosis CD]
 	   ,'' AS [Tertiary Diagnosis CD]
 	   ,'' AS [Fourth Diagnosis CD]
-	   ,MAX(CONVERT(VARCHAR(10),[IEP Start Date],101)) AS [IEP Start Date]
-	   ,MIN(CONVERT(VARCHAR(10),[IEP End Date],101)) AS [IEP End Date]
-	   ,MAX(CONVERT(VARCHAR(10),[PCP Prescription Start Date],101)) AS [PCP Prescription Start Date]
-	   ,MIN(CONVERT(VARCHAR(10),[PCP Prescription End Date],101)) AS [PCP Prescription End Date]
+	   ,CONVERT(VARCHAR(10),MAX([IEP Start Date]),101) AS [IEP Start Date]
+	   ,CONVERT(VARCHAR(10),MIN([IEP End Date]),101) AS [IEP End Date]
+	   ,CONVERT(VARCHAR(10),MAX([PCP Prescription Start Date]),101) AS [PCP Prescription Start Date]
+	   ,CONVERT(VARCHAR(10),MIN([PCP Prescription End Date]),101) AS [PCP Prescription End Date]
 	   ,'' AS [PCP Prescription Exempt(E)/In Process(P)]
 	   ,'' AS [PCP Last Name]
 	   ,'' AS [PCP First Name]
 	   ,MAX([Audiology on IEP?]) AS [Audiology on IEP?]
 	   ,'' AS [Case Management on IEP?]
-	   ,MAX([Mental Health-Counseling on IEP?])  AS [Mental Health-Counseling on IEP?]
+	   ,MAX([Mental Health-Counseling on IEP?])AS [Mental Health-Counseling on IEP?]
 	   ,MAX([Nursing Services on IEP?]) AS [Nursing Services on IEP?]
 	   ,'' AS [Nutritional Services on IEP?]
 	   ,MAX([Occupational Therapy on IEP?]) AS [Occupational Therapy on IEP?]
@@ -126,6 +127,9 @@ FROM
 			 WHEN LEN((SELECT TOP 1 [P].[PHONE] FROM [rev].[REV_PERSON_PHONE] AS [P] WHERE [Student].[STUDENT_GU]=[P].[PERSON_GU] AND [P].[PHONE_TYPE]='H'))<10 THEN '505'+(SELECT TOP 1 [P].[PHONE] FROM [rev].[REV_PERSON_PHONE] AS [P] WHERE [Student].[STUDENT_GU]=[P].[PERSON_GU] AND [P].[PHONE_TYPE]='H')
 			 ELSE (SELECT TOP 1 [P].[PHONE] FROM [rev].[REV_PERSON_PHONE] AS [P] WHERE [Student].[STUDENT_GU]=[P].[PERSON_GU] AND [P].[PHONE_TYPE]='H') 
 		   END AS [Phone Nbr]
+		   ,IEP_STATUS
+	   ,[SEC_SRV_SHOW]
+
 	   FROM
 		  [rev].[EP_STUDENT_SPECIAL_ED] AS [Sped]
 
@@ -225,6 +229,8 @@ FROM
 
     GROUP BY
 		[District CD]
+		,IEP_STATUS
+	   ,[SEC_SRV_SHOW]
 	   ,[School CD]
 	   ,[School Name]
 	   ,[Student ID]
@@ -267,6 +273,8 @@ FROM
 (
     SELECT
 		[District CD]
+		,IEP_STATUS
+	   ,[SEC_SRV_SHOW]
 	   ,[School CD]
 	   ,[School Name]
 	   ,[Student ID]
@@ -286,10 +294,10 @@ FROM
 	   ,'' AS [Secondary Diagnosis CD]
 	   ,'' AS [Tertiary Diagnosis CD]
 	   ,'' AS [Fourth Diagnosis CD]
-	   ,MAX(CONVERT(VARCHAR(10),[IEP Start Date],101)) AS [IEP Start Date]
-	   ,MIN(CONVERT(VARCHAR(10),[IEP End Date],101)) AS [IEP End Date]
-	   ,MAX(CONVERT(VARCHAR(10),[PCP Prescription Start Date],101)) AS [PCP Prescription Start Date]
-	   ,MIN(CONVERT(VARCHAR(10),[PCP Prescription End Date],101)) AS [PCP Prescription End Date]
+	   ,CONVERT(VARCHAR(10),MAX([IEP Start Date]),101) AS [IEP Start Date]
+	   ,CONVERT(VARCHAR(10),MIN([IEP End Date]),101) AS [IEP End Date]
+	   ,CONVERT(VARCHAR(10),MAX([PCP Prescription Start Date]),101) AS [PCP Prescription Start Date]
+	   ,CONVERT(VARCHAR(10),MIN([PCP Prescription End Date]),101) AS [PCP Prescription End Date]
 	   ,'' AS [PCP Prescription Exempt(E)/In Process(P)]
 	   ,'' AS [PCP Last Name]
 	   ,'' AS [PCP First Name]
@@ -382,6 +390,9 @@ FROM
 			 WHEN LEN((SELECT TOP 1 [P].[PHONE] FROM [rev].[REV_PERSON_PHONE] AS [P] WHERE [Student].[STUDENT_GU]=[P].[PERSON_GU] AND [P].[PHONE_TYPE]='H'))<10 THEN '505'+(SELECT TOP 1 [P].[PHONE] FROM [rev].[REV_PERSON_PHONE] AS [P] WHERE [Student].[STUDENT_GU]=[P].[PERSON_GU] AND [P].[PHONE_TYPE]='H')
 			 ELSE (SELECT TOP 1 [P].[PHONE] FROM [rev].[REV_PERSON_PHONE] AS [P] WHERE [Student].[STUDENT_GU]=[P].[PERSON_GU] AND [P].[PHONE_TYPE]='H') 
 		   END AS [Phone Nbr]
+		   ,IEP_STATUS
+	   ,[SEC_SRV_SHOW]
+
 	   FROM
 		  [rev].[EP_STUDENT_SPECIAL_ED] AS [Sped]
 
@@ -483,6 +494,8 @@ FROM
 
     GROUP BY
 		[District CD]
+		,IEP_STATUS
+	   ,[SEC_SRV_SHOW]
 	   ,[School CD]
 	   ,[School Name]
 	   ,[Student ID]
