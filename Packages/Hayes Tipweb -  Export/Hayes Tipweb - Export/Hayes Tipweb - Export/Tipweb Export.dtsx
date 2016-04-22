@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Tipweb Export"
   DTS:PackageType="5"
-  DTS:VersionBuild="18"
-  DTS:VersionGUID="{9671E74C-4C3F-49CE-855A-0E3BA1F26CBD}">
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{A8FDD070-CCAE-47C5-8BCB-59EAE5E1F663}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -139,7 +139,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAk0BDPrSw1p9PO1gWUsTC8AAAAAASAAACgAAAAEAAAAPgO0hTQVPYFqFoASImOAZcwAAAAVm3N7az4bhlVYztkMD3evNEV7utAJ5nUyUcFP4Recn+3EnPhJigdTTDEMikm7ZRxFAAAAJ7djG8wollUBHxNZO7YZSq2LkCT</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACQeRg0htklYT0OriF41EoVAAAAAASAAACgAAAAEAAAACGEV544028h90qiLV21RBAwAAAADyJnF5UzltGMM2HCkFtJqEAGLFBENsJ/ZSozd/Bq1uzWkgk/RK5vB2pyl2nx1VIrFAAAAIHEm+q4HZZlEjBZb2u5zMEz4HMx</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -162,6 +162,19 @@
           SQLTask:Connection="{259066C7-A976-43B4-A64B-0E416EBFC266}"
           SQLTask:SqlStatementSource="IF OBJECT_ID('ST_Production.dbo.##SynFees') IS NOT NULL&#xA;DROP TABLE ##SynFees&#xA;CREATE TABLE ##SynFees&#xA;([PayeeID] VARCHAR(255)&#xA;, [StudentID] INT&#xA;, [SynergyFeeID] UNIQUEIDENTIFIER&#xA;, [Amount] DECIMAL(10,2)&#xA;, [StudentName] TEXT&#xA;, [FeeDate] DATE&#xA;, [CreditCardType] VARCHAR(20)&#xA;, [CreditCardLastFour] VARCHAR(4)&#xA;,[TransID] UNIQUEIDENTIFIER)&#xA;&#xA;DECLARE @SynFees AS TABLE([PayeeID] VARCHAR(255), [StudentID] INT, [SynergyFeeID] UNIQUEIDENTIFIER, [Amount] DECIMAL(10,2), [StudentName] TEXT, [FeeDate] DATE, [CreditCardType] VARCHAR(20), [CreditCardLastFour] VARCHAR(4),[TransID] UNIQUEIDENTIFIER);&#xA;&#xA;&#xA;INSERT INTO&#xA;&#x9;@SynFees&#xA;&#xA;&#x9;SELECT&#xA;&#x9;&#x9;[SynergyFees].*&#xA;&#x9;&#x9;,NEWID() AS [TransID]&#xA;&#x9;FROM&#xA;&#x9;&#x9;OPENROWSET (&#xA;&#x9;&#x9;&#x9;'Microsoft.ACE.OLEDB.12.0', &#xA;&#x9;&#x9;&#x9;'Text;Database=\\syntempssis.aps.edu.actd\Files\TempQuery\SchoolPay;', &#xA;&#x9;&#x9;&#x9;'SELECT * from synergy_fees.csv'&#xA;&#x9;&#x9;) AS [SynergyFees]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Push to Tipweb"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.FtpTask.FtpTask, Microsoft.SqlServer.FtpTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Push Payment files to Tipweb at 5:10am"
+      DTS:DTSID="{4EFB4EC5-8FE5-4649-B53A-943890F8EAC6}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.FtpTask.FtpTask, Microsoft.SqlServer.FtpTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Push to Tipweb"
+      DTS:TaskContact="FTP Task; Microsoft Corporation; SQL Server 2012; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData />
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Textbooks Damaged Output"
@@ -1229,6 +1242,14 @@ WHERE
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
       DTS:To="Package\Textbooks Damaged Output" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{F2715AB6-13EE-47B3-805A-BFEF78F0BEAA}"
+      DTS:From="Package\Textbooks Damaged Output"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Push to Tipweb" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -1245,18 +1266,18 @@ WHERE
         <NodeLayout
           Size="171,42"
           Id="Package\Create Temp Table"
-          TopLeft="106,73" />
+          TopLeft="151,73" />
         <NodeLayout
           Size="213,42"
           Id="Package\Textbooks Damaged Output"
-          TopLeft="287,267" />
+          TopLeft="332,267" />
         <NodeLayout
           Size="188,42"
           Id="Package\Textbooks Lost Output"
-          TopLeft="190,168" />
+          TopLeft="235,168" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="191.5,115">
+          TopLeft="236.5,115">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1290,7 +1311,7 @@ WHERE
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="284,210">
+          TopLeft="329,210">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1314,6 +1335,44 @@ WHERE
                     Point3="109.5,32.5" />
                   <mssgle:LineSegment
                     End="109.5,49.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="244,42"
+          Id="Package\Push to Tipweb"
+          TopLeft="442,367" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="438.5,309">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="125.5,58"
+              Start="0,0"
+              End="125.5,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25"
+                    Point2="0,29"
+                    Point3="4,29" />
+                  <mssgle:LineSegment
+                    End="121.5,29" />
+                  <mssgle:CubicBezierSegment
+                    Point1="121.5,29"
+                    Point2="125.5,29"
+                    Point3="125.5,33" />
+                  <mssgle:LineSegment
+                    End="125.5,50.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
