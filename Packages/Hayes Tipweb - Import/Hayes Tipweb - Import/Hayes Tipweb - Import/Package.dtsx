@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{C08D9590-F5E6-4146-AEC3-CFA98DD7CB76}">
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{2AFC22CF-2D25-4575-B71D-3D5F9C6382B3}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:Variables />
@@ -35,7 +35,7 @@
     <DTS:Executable
       DTS:refId="Package\FTP Task"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.FtpTask.FtpTask, Microsoft.SqlServer.FtpTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:Description="FTP Task"
+      DTS:Description="Pulls fees and inserts into Synergy 5:30am"
       DTS:DTSID="{4BA3964D-4A18-44F0-9D6C-03B0649253F9}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.FtpTask.FtpTask, Microsoft.SqlServer.FtpTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -92,13 +92,17 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="171,42"
+          Id="Package\Create Temp Table"
+          TopLeft="206,166" />
+        <NodeLayout
           Size="124,42"
           Id="Package\FTP Task"
           TopLeft="145,50" />
         <NodeLayout
-          Size="171,42"
-          Id="Package\Create Temp Table"
-          TopLeft="206,166" />
+          Size="163,42"
+          Id="Package\WRite to Synergy"
+          TopLeft="313,276" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="207,92">
@@ -133,10 +137,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="163,42"
-          Id="Package\WRite to Synergy"
-          TopLeft="313,276" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="291.5,208">
