@@ -1,0 +1,1437 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/12/2015 7:42:22 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="046-MCMURRAY"
+  DTS:CreatorName="APS\Sean.McMurray"
+  DTS:DTSID="{87F9E15C-C6CC-408D-BF73-DF59F8CB52AA}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Extended School Year"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{0F10C408-BBD7-4537-9776-67C0FDE9C98C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{3537E363-EC65-4619-9BA2-AE3A6CB67180}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\syntempssis.aps.edu.actd\Files\Export\Extended School Year\Extended School Year.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager 3]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{5663A779-1308-4671-9175-838C818160EE}"
+      DTS:ObjectName="Excel Connection Manager 3">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\syntempssis\Files\Export\Extended School Year\Extended School Year.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{B20EFD71-1BB1-497C-8253-7E465251E711}"
+      DTS:ObjectName="Flat File">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\Extended School Year\Extended School Year.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SIS_NUMBER"
+              DTS:DTSID="{C9587F7F-7B66-4951-9391-63B3AB2440A6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="STATE_STUDENT_NUMBER"
+              DTS:DTSID="{F06E43EE-897A-4C49-889F-B48CAD620CCA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SCHOOL_CODE"
+              DTS:DTSID="{48548429-C630-442D-9CB6-D1E563CFDDF5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FIRST_NAME"
+              DTS:DTSID="{48F89535-53C6-445A-B91A-473D070CE275}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MIDDLE_NAME"
+              DTS:DTSID="{83496B94-FC2E-4191-9535-E9956BAC6C6D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LAST_NAME"
+              DTS:DTSID="{8B5955CE-32DC-4FBF-B2A0-CB8AB636EA20}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="GRADE"
+              DTS:DTSID="{290D6BFA-54DD-4243-9778-6F2DDE6A4D33}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BIRTH_DATE"
+              DTS:DTSID="{0D104342-3CCA-4187-8763-3CDA71948660}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="GENDER"
+              DTS:DTSID="{5A9F22A2-EC5C-47F6-97E5-5297C5469CDF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HOME_ADDRESS"
+              DTS:DTSID="{B1B23E95-0349-4BC3-80AB-C4D99F270CC8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HOME_ADDRESS_2"
+              DTS:DTSID="{E17FD406-AE97-4A5B-8E62-3F9B25DCDB04}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HOME_CITY"
+              DTS:DTSID="{4097B5F9-A29C-414A-A9CB-A0DFDBA60F83}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HOME_STATE"
+              DTS:DTSID="{DE1CD69C-7FCA-4125-AB44-F0CF9FF21DFC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="6"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HOME_ZIP"
+              DTS:DTSID="{A6E35B6A-0705-4A00-854E-53CABA7A2082}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="13"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HOME PHONE"
+              DTS:DTSID="{E17318E9-A920-4D86-9E18-1F4C1B2D5ACA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="121"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PARENT_1/GAURDIAN"
+              DTS:DTSID="{A839953D-2BD3-4E8E-AED5-1FC22B02DCC5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="121"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PARENT_2/GAURDIAN"
+              DTS:DTSID="{4465259A-30A0-4901-9F19-DC330D6E9257}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{F3B79D05-EFE5-4549-AD5E-62BDF5F0DFAD}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis\Files\Export\Extended School Year\Extended School Year.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SIS_NUMBER"
+              DTS:DTSID="{24C5C6AD-F9EE-4AA7-AA6F-359461269EDA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="STATE_STUDENT_NUMBER"
+              DTS:DTSID="{80BB604B-3F03-407B-A074-AD00466D7158}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SCHOOL_CODE"
+              DTS:DTSID="{488ED3CC-281D-49E1-8F1F-6BC524A6E6A2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FIRST_NAME"
+              DTS:DTSID="{2C14250E-DF71-41D8-859A-4E3E8F836965}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MIDDLE_NAME"
+              DTS:DTSID="{33F8EE65-A593-41F9-B7BB-DA32C51BF878}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LAST_NAME"
+              DTS:DTSID="{A5B5805B-6CB2-4C56-9E35-EEB3627B44F0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="GRADE"
+              DTS:DTSID="{C4A7808E-5518-4376-952D-BB3DB9331BE9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BIRTH_DATE"
+              DTS:DTSID="{D3A2F4E7-779A-44FF-A0EE-0C6D303DA446}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="GENDER"
+              DTS:DTSID="{D00EF9DE-D3A6-409E-A588-84D48F811362}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HOME_ADDRESS"
+              DTS:DTSID="{5E6D9983-A74D-46FC-A8D7-45BC1E9E2648}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HOME_ADDRESS_2"
+              DTS:DTSID="{1783183A-2100-42CC-88A2-D16028BD8EC8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HOME_CITY"
+              DTS:DTSID="{C6F0AECA-BFC0-4E58-9A7B-EDB56A62E6E7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HOME_STATE"
+              DTS:DTSID="{33A37D50-E5C0-4FBF-ACE3-73DE1C80132E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="6"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HOME_ZIP"
+              DTS:DTSID="{6B9415B8-9802-4247-B345-A935A9A2A093}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="13"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HOME PHONE"
+              DTS:DTSID="{8894AFE1-3CBE-4267-9858-48DC303965C5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="121"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PARENT_1/GAURDIAN"
+              DTS:DTSID="{B0214F9C-DBEC-4C59-B207-81AE23955420}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="121"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PARENT_2/GAURDIAN"
+              DTS:DTSID="{D7AF6A7F-EE4B-455F-B8CE-75341F3D1C0F}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[synergydbdc.ST_Production]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{38612BF1-269C-4BC2-AEE2-9E11FBE77F7F}"
+      DTS:ObjectName="synergydbdc.ST_Production">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=synergydbdc;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Extended Year"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{8F48F7BA-6F33-432C-A49E-35460B678BE8}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Extended Year"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Extended Year\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Extended Year\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].Columns[SIS_NUMBER]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="SIS_NUMBER"
+                      externalMetadataColumnId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SIS_NUMBER]"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[SIS_NUMBER]" />
+                    <inputColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].Columns[STATE_STUDENT_NUMBER]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="STATE_STUDENT_NUMBER"
+                      externalMetadataColumnId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[STATE_STUDENT_NUMBER]"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[STATE_STUDENT_NUMBER]" />
+                    <inputColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].Columns[SCHOOL_CODE]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="SCHOOL_CODE"
+                      externalMetadataColumnId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SCHOOL_CODE]"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCHOOL_CODE]" />
+                    <inputColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].Columns[FIRST_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="FIRST_NAME"
+                      externalMetadataColumnId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FIRST_NAME]"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[FIRST_NAME]" />
+                    <inputColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].Columns[MIDDLE_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="MIDDLE_NAME"
+                      externalMetadataColumnId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MIDDLE_NAME]"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDDLE_NAME]" />
+                    <inputColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].Columns[LAST_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="LAST_NAME"
+                      externalMetadataColumnId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LAST_NAME]"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[LAST_NAME]" />
+                    <inputColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].Columns[GRADE]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="GRADE"
+                      externalMetadataColumnId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GRADE]"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[GRADE]" />
+                    <inputColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].Columns[BIRTH_DATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="BIRTH_DATE"
+                      externalMetadataColumnId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BIRTH_DATE]"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[BIRTH_DATE]" />
+                    <inputColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].Columns[GENDER]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="GENDER"
+                      externalMetadataColumnId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GENDER]"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[GENDER]" />
+                    <inputColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].Columns[HOME_ADDRESS]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="HOME_ADDRESS"
+                      externalMetadataColumnId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[HOME_ADDRESS]"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOME_ADDRESS]" />
+                    <inputColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].Columns[HOME_ADDRESS_2]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="HOME_ADDRESS_2"
+                      externalMetadataColumnId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[HOME_ADDRESS_2]"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOME_ADDRESS_2]" />
+                    <inputColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].Columns[HOME_CITY]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="HOME_CITY"
+                      externalMetadataColumnId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[HOME_CITY]"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOME_CITY]" />
+                    <inputColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].Columns[HOME_STATE]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="HOME_STATE"
+                      externalMetadataColumnId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[HOME_STATE]"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOME_STATE]" />
+                    <inputColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].Columns[HOME_ZIP]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="HOME_ZIP"
+                      externalMetadataColumnId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[HOME_ZIP]"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOME_ZIP]" />
+                    <inputColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].Columns[HOME PHONE]"
+                      cachedDataType="wstr"
+                      cachedLength="13"
+                      cachedName="HOME PHONE"
+                      externalMetadataColumnId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[HOME PHONE]"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOME PHONE]" />
+                    <inputColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].Columns[PARENT_1/GAURDIAN]"
+                      cachedDataType="wstr"
+                      cachedLength="121"
+                      cachedName="PARENT_1/GAURDIAN"
+                      externalMetadataColumnId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PARENT_1/GAURDIAN]"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[PARENT_1/GAURDIAN]" />
+                    <inputColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].Columns[PARENT_2/GAURDIAN]"
+                      cachedDataType="wstr"
+                      cachedLength="121"
+                      cachedName="PARENT_2/GAURDIAN"
+                      externalMetadataColumnId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PARENT_2/GAURDIAN]"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[PARENT_2/GAURDIAN]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SIS_NUMBER]"
+                      dataType="wstr"
+                      length="20"
+                      name="SIS_NUMBER" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[STATE_STUDENT_NUMBER]"
+                      dataType="wstr"
+                      length="20"
+                      name="STATE_STUDENT_NUMBER" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SCHOOL_CODE]"
+                      dataType="wstr"
+                      length="20"
+                      name="SCHOOL_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FIRST_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      name="FIRST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MIDDLE_NAME]"
+                      dataType="wstr"
+                      length="20"
+                      name="MIDDLE_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LAST_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      name="LAST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GRADE]"
+                      dataType="wstr"
+                      length="600"
+                      name="GRADE" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BIRTH_DATE]"
+                      dataType="dbTimeStamp"
+                      name="BIRTH_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GENDER]"
+                      dataType="wstr"
+                      length="5"
+                      name="GENDER" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[HOME_ADDRESS]"
+                      dataType="wstr"
+                      length="50"
+                      name="HOME_ADDRESS" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[HOME_ADDRESS_2]"
+                      dataType="wstr"
+                      length="50"
+                      name="HOME_ADDRESS_2" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[HOME_CITY]"
+                      dataType="wstr"
+                      length="50"
+                      name="HOME_CITY" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[HOME_STATE]"
+                      dataType="wstr"
+                      length="5"
+                      name="HOME_STATE" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[HOME_ZIP]"
+                      dataType="wstr"
+                      length="6"
+                      name="HOME_ZIP" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[HOME PHONE]"
+                      dataType="wstr"
+                      length="13"
+                      name="HOME PHONE" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PARENT_1/GAURDIAN]"
+                      dataType="wstr"
+                      length="121"
+                      name="PARENT_1/GAURDIAN" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PARENT_2/GAURDIAN]"
+                      dataType="wstr"
+                      length="121"
+                      name="PARENT_2/GAURDIAN" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Extended Year\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">;WITH
+-- From School of Record [EPC_STU_YR]
+ASOF_ENROLLMENTS AS
+(
+SELECT
+	[StudentSchoolYear].[STUDENT_GU]
+	,[StudentSchoolYear].[ORGANIZATION_YEAR_GU]
+	,[Organization].[ORGANIZATION_GU]
+	,[Grades].[VALUE_DESCRIPTION] AS [GRADE]
+	,[Grades].[LIST_ORDER]
+	,[School].[SCHOOL_CODE]
+	,[Organization].[ORGANIZATION_NAME] AS [SCHOOL_NAME]
+	,[StudentSchoolYear].[ENTER_DATE]
+	,[StudentSchoolYear].[LEAVE_DATE]
+	,[StudentSchoolYear].[EXCLUDE_ADA_ADM]
+	,[StudentSchoolYear].[ACCESS_504]
+	,CASE WHEN [StudentSchoolYear].[EXCLUDE_ADA_ADM] = 2 THEN 'CONCURRENT'
+		WHEN [StudentSchoolYear].[EXCLUDE_ADA_ADM] = 1 THEN 'NO ADA/ADM'
+		ELSE '' END AS [CONCURRENT]
+	,[RevYear].[SCHOOL_YEAR]
+	,[RevYear].[EXTENSION]
+FROM
+	APS.PrimaryEnrollmentsAsOf(GETDATE()) AS [Enrollments]
+	
+	INNER JOIN
+	rev.EPC_STU_SCH_YR AS [StudentSchoolYear]
+	ON
+	[Enrollments].[STUDENT_SCHOOL_YEAR_GU] = [StudentSchoolYear].[STUDENT_SCHOOL_YEAR_GU]
+	
+	INNER JOIN 
+	rev.REV_ORGANIZATION_YEAR AS [OrgYear] -- Links between School and Year
+	ON 
+	[StudentSchoolYear].[ORGANIZATION_YEAR_GU] = [OrgYear].[ORGANIZATION_YEAR_GU]
+	
+	INNER JOIN 
+	rev.REV_ORGANIZATION AS [Organization] -- Contains the School Name
+	ON 
+	[OrgYear].[ORGANIZATION_GU] = [Organization].[ORGANIZATION_GU]
+	
+	INNER JOIN 
+	rev.REV_YEAR AS [RevYear] -- Contains the School Year
+	ON 
+	[OrgYear].[YEAR_GU] = [RevYear].[YEAR_GU]
+	
+	LEFT OUTER JOIN
+	APS.LookupTable('K12','Grade') AS [Grades]
+	ON
+	[StudentSchoolYear].[GRADE] = [Grades].[VALUE_CODE]
+	
+	INNER JOIN 
+	rev.EPC_SCH AS [School] -- Contains the School Code / Number
+	ON 
+	[Organization].[ORGANIZATION_GU] = [School].[ORGANIZATION_GU]
+)
+
+-- From APS.BasicStudent
+, STUDENT_DETAILS AS
+(
+SELECT
+	-- Basic Student Demographics
+	[STUDENT].[STUDENT_GU]
+	,[STUDENT].[SIS_NUMBER]
+	,[STUDENT].[STATE_STUDENT_NUMBER]
+	,[STUDENT].[LAST_NAME]
+	,[STUDENT].[FIRST_NAME]
+	,[STUDENT].[MIDDLE_NAME]
+	,[STUDENT].[BIRTH_DATE]
+	,[STUDENT].[GENDER]
+	,[STUDENT].[CLASS_OF]	
+	,[STUDENT].[HOME_ADDRESS] AS [HOME_ADDRESS]
+	,[STUDENT].[HOME_ADDRESS_2] AS [HOME_ADDRESS_2]
+	,[STUDENT].[HOME_CITY] AS [HOME_CITY]
+	,[STUDENT].[HOME_STATE] AS [HOME_STATE]
+	,[STUDENT].[HOME_ZIP] AS [HOME_ZIP]
+	,[STUDENT].[MAIL_ADDRESS] AS [MAIL_ADDRESS]
+	,[STUDENT].[MAIL_ADDRESS_2] AS [MAIL_ADDRESS_2]
+	,[STUDENT].[MAIL_CITY] AS [MAIL_CITY]
+	,[STUDENT].[MAIL_STATE] AS [MAIL_STATE]
+	,[STUDENT].[MAIL_ZIP] AS [MAIL_ZIP]
+	
+	-- Format Primary Phone
+	,'(' + left([PERSON].[PRIMARY_PHONE],3) + ')' 
+       + substring([PERSON].[PRIMARY_PHONE], 4,3)+ '-'
+                   + RIGHT([PERSON].[PRIMARY_PHONE],4) AS [PRIMARY_PHONE]
+    
+    -- Most Recent Lunch Status
+    ,[FRMHistory].[FRM_CODE]
+    
+    -- Most Recent ELL Status
+    ,CASE WHEN [ELL_PGM].[PROGRAM_CODE] = '1' AND [ELL_PGM].[EXIT_DATE] IS NULL THEN 'Y' ELSE 'N' END AS [ELL_STATUS]
+    
+    -- Current SPED or Gifted Status
+    ,[CurrentSPED].[PRIMARY_DISABILITY_CODE]
+    -- SPED Not Gifted
+    ,CASE WHEN [CurrentSPED].[PRIMARY_DISABILITY_CODE] != 'GI' AND [CurrentSPED].[PRIMARY_DISABILITY_CODE] IS NOT NULL THEN 'Y' ELSE 'N' END AS [SPED_STATUS]
+    ,CASE WHEN [CurrentSPED].[PRIMARY_DISABILITY_CODE] = 'GI' OR [CurrentSPED].[SECONDARY_DISABILITY_CODE] = 'GI' THEN 'Y' ELSE 'N' END AS [GIFTED_STATUS]
+    
+    -- Prefered Home Contact Language
+    ,CASE WHEN [Contact_Language].[VALUE_DESCRIPTION] IS NULL THEN [STUDENT].[HOME_LANGUAGE] ELSE [Contact_Language].[VALUE_DESCRIPTION] END AS [HOME_LANGUAGE2]
+    
+    ,[STUDENT].[HISPANIC_INDICATOR]
+    ,[ETHNIC_CODES].[RACE_1]
+    ,[ETHNIC_CODES].[RACE_2]
+    ,[ETHNIC_CODES].[RACE_3]
+    ,[ETHNIC_CODES].[RACE_4]
+    ,[ETHNIC_CODES].[RACE_5]
+    
+FROM
+	APS.BasicStudent AS [STUDENT]
+	
+	INNER JOIN
+	rev.REV_PERSON AS [PERSON]
+	ON
+	[STUDENT].[STUDENT_GU] = [PERSON].[PERSON_GU]
+	
+	LEFT JOIN
+    (
+    SELECT
+               *
+    FROM
+                REV.EP_STUDENT_SPECIAL_ED AS SPED
+    WHERE
+                NEXT_IEP_DATE IS NOT NULL
+                AND (
+                            EXIT_DATE IS NULL 
+                            OR EXIT_DATE &gt;= CONVERT(DATE, GETDATE())
+                            )
+    ) AS [CurrentSPED]
+    ON
+    [STUDENT].[STUDENT_GU] = [CurrentSPED].[STUDENT_GU]
+    
+    LEFT JOIN
+    rev.EPC_STU_PGM_ELL AS [ELL_PGM]
+    ON
+    [STUDENT].[STUDENT_GU] = [ELL_PGM].[STUDENT_GU] 
+    
+    LEFT JOIN
+    (
+	SELECT
+		  ROW_NUMBER() OVER (PARTITION BY [STU].[STUDENT_GU] order by [FRM].[ENTER_DATE],[STU].[STUDENT_GU]) [RN]
+		, [STU].[STUDENT_GU]
+		, [FRM].[FRM_CODE]
+	FROM 
+		rev.EPC_STU [STU]
+		
+		LEFT JOIN 
+		rev.EPC_STU_PGM_FRM_HIS [FRM] 
+		ON
+		[FRM].[STUDENT_GU] = [STU].[STUDENT_GU]
+		AND [FRM].[ENTER_DATE] IS NOT NULL 
+		AND ([FRM].[EXIT_DATE] IS NOT NULL OR [FRM].[EXIT_DATE] &gt; GETDATE())
+	) AS [FRMHistory]
+	ON
+	[STUDENT].[STUDENT_GU] = [FRMHistory].[STUDENT_GU]
+	AND [FRMHistory].[RN] = 1
+	
+	-- Get Home Contact Language
+	LEFT JOIN
+	APS.LookupTable ('K12', 'Language') AS [Contact_Language]	
+	ON
+	[ELL_PGM].[LANGUAGE_TO_HOME] = [Contact_Language].[VALUE_CODE]
+	
+	-- Get All Racial Codes
+	LEFT JOIN
+	(
+	SELECT
+		[ETHNIC_PIVOT].[PERSON_GU]
+		,(SELECT [VALUE_DESCRIPTION] FROM APS.LookupTable ('Revelation', 'ETHNICITY') WHERE [VALUE_CODE] = [ETHNIC_PIVOT].[1]) AS [RACE_1]
+		,(SELECT [VALUE_DESCRIPTION] FROM APS.LookupTable ('Revelation', 'ETHNICITY') WHERE [VALUE_CODE] = [ETHNIC_PIVOT].[2]) AS [RACE_2]
+		,(SELECT [VALUE_DESCRIPTION] FROM APS.LookupTable ('Revelation', 'ETHNICITY') WHERE [VALUE_CODE] = [ETHNIC_PIVOT].[3]) AS [RACE_3]
+		,(SELECT [VALUE_DESCRIPTION] FROM APS.LookupTable ('Revelation', 'ETHNICITY') WHERE [VALUE_CODE] = [ETHNIC_PIVOT].[4]) AS [RACE_4]
+		,(SELECT [VALUE_DESCRIPTION] FROM APS.LookupTable ('Revelation', 'ETHNICITY') WHERE [VALUE_CODE] = [ETHNIC_PIVOT].[5]) AS [RACE_5]
+	FROM
+		(
+		SELECT
+			[SECONDARY_ETHNIC_CODES].[PERSON_GU]
+			,[SECONDARY_ETHNIC_CODES].[ETHNIC_CODE]
+			,ROW_NUMBER() OVER(PARTITION by [SECONDARY_ETHNIC_CODES].[PERSON_GU] order by [SECONDARY_ETHNIC_CODES].[ETHNIC_CODE]) [RN]
+		FROM
+			rev.REV_PERSON_SECONDRY_ETH_LST AS [SECONDARY_ETHNIC_CODES]
+		) [PVT]
+		PIVOT (MIN(ETHNIC_CODE) FOR [RN] IN ([1],[2],[3],[4],[5])) AS [ETHNIC_PIVOT]
+	) AS [ETHNIC_CODES]
+	ON
+	[STUDENT].[STUDENT_GU] = [ETHNIC_CODES].[PERSON_GU]
+	
+)
+
+
+SELECT
+	--[ASOF_ENROLLMENTS].[GRADE]
+	--,[ASOF_ENROLLMENTS].[SCHOOL_CODE]
+	--,[STUDENT_DETAILS].[SIS_NUMBER]
+	--,DATEPART(M,[STUDENT_DETAILS].[BIRTH_DATE]) AS [BIRTH MONTH]
+	--,DATEPART(YEAR,[STUDENT_DETAILS].[BIRTH_DATE]) AS [BIRTH YEAR]
+	--,[STUDENT_DETAILS].[GENDER]
+	--,CASE WHEN [STUDENT_DETAILS].[HISPANIC_INDICATOR] = 'Y' THEN 'Hispanic' ELSE [STUDENT_DETAILS].[RACE_1] END AS [Ethnicity]
+	--,[STUDENT_DETAILS].[FRM_CODE]
+	--,[ASOF_ENROLLMENTS].[ACCESS_504]
+	--,[STUDENT_DETAILS].[SPED_STATUS]
+	--,[STUDENT_DETAILS].[ELL_STATUS]
+	
+	[STUDENT_DETAILS].[SIS_NUMBER]
+	,[STUDENT_DETAILS].[STATE_STUDENT_NUMBER]
+	,[ASOF_ENROLLMENTS].[SCHOOL_CODE]
+	,[STUDENT_DETAILS].[FIRST_NAME]
+	,[STUDENT_DETAILS].[MIDDLE_NAME]
+	,[STUDENT_DETAILS].[LAST_NAME]
+	,[ASOF_ENROLLMENTS].[GRADE]
+	,[STUDENT_DETAILS].[BIRTH_DATE]
+	,[STUDENT_DETAILS].[GENDER]
+	,[STUDENT_DETAILS].[HOME_ADDRESS]
+	,[STUDENT_DETAILS].[HOME_ADDRESS_2]
+	,[STUDENT_DETAILS].[HOME_CITY]
+	,[STUDENT_DETAILS].[HOME_STATE]
+	,[STUDENT_DETAILS].[HOME_ZIP]
+	
+	,[STUDENT_DETAILS].[PRIMARY_PHONE] AS [HOME PHONE]
+	
+	,[PARENT_1].[FIRST_NAME] + ' ' + [PARENT_1].[LAST_NAME] AS [PARENT_1/GAURDIAN]
+	,[PARENT_2].[FIRST_NAME] + ' ' + [PARENT_2].[LAST_NAME] AS [PARENT_2/GAURDIAN]
+	
+FROM
+	ASOF_ENROLLMENTS AS [ASOF_ENROLLMENTS]
+	
+	INNER JOIN
+	STUDENT_DETAILS  AS [STUDENT_DETAILS]
+	ON
+	[ASOF_ENROLLMENTS].[STUDENT_GU] = [STUDENT_DETAILS].[STUDENT_GU]
+	
+	LEFT OUTER JOIN
+	rev.[EPC_STU_PARENT] AS [STUDENT_PARENT_1]
+	ON
+	[STUDENT_DETAILS].[STUDENT_GU] = [STUDENT_PARENT_1].[STUDENT_GU]
+	--AND [STUDENT_PARENT_1].[MAILINGS_ALLOWED] = 'Y'
+	AND [STUDENT_PARENT_1].[LIVES_WITH] = 'Y'
+	AND [STUDENT_PARENT_1].[ORDERBY] = 1
+	
+	LEFT OUTER JOIN
+	rev.[REV_PERSON] AS [PARENT_1]
+	ON
+	[STUDENT_PARENT_1].[PARENT_GU] = [PARENT_1].[PERSON_GU]
+	
+	LEFT OUTER JOIN
+	rev.[EPC_STU_PARENT] AS [STUDENT_PARENT_2]
+	ON
+	[STUDENT_DETAILS].[STUDENT_GU] = [STUDENT_PARENT_2].[STUDENT_GU]
+	--AND [STUDENT_PARENT_2].[MAILINGS_ALLOWED] = 'Y'
+	AND [STUDENT_PARENT_2].[LIVES_WITH] = 'Y'
+	AND [STUDENT_PARENT_2].[ORDERBY] = 2
+	
+	LEFT OUTER JOIN
+	rev.[REV_PERSON] AS [PARENT_2]
+	ON
+	[STUDENT_PARENT_2].[PARENT_GU] = [PARENT_2].[PERSON_GU]
+	
+--WHERE
+--	[STUDENT_DETAILS].[SPED_STATUS] = 'Y'</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Extended Year\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[synergydbdc.ST_Production]"
+                  connectionManagerRefId="Package.ConnectionManagers[synergydbdc.ST_Production]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[SIS_NUMBER]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SIS_NUMBER]"
+                      length="20"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[SIS_NUMBER]"
+                      name="SIS_NUMBER"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[STATE_STUDENT_NUMBER]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[STATE_STUDENT_NUMBER]"
+                      length="20"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[STATE_STUDENT_NUMBER]"
+                      name="STATE_STUDENT_NUMBER"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCHOOL_CODE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SCHOOL_CODE]"
+                      length="20"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCHOOL_CODE]"
+                      name="SCHOOL_CODE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[FIRST_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FIRST_NAME]"
+                      length="60"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[FIRST_NAME]"
+                      name="FIRST_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDDLE_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MIDDLE_NAME]"
+                      length="20"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[MIDDLE_NAME]"
+                      name="MIDDLE_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[LAST_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LAST_NAME]"
+                      length="60"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[LAST_NAME]"
+                      name="LAST_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[GRADE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GRADE]"
+                      length="600"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[GRADE]"
+                      name="GRADE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[BIRTH_DATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BIRTH_DATE]"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[BIRTH_DATE]"
+                      name="BIRTH_DATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[GENDER]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GENDER]"
+                      length="5"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[GENDER]"
+                      name="GENDER"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOME_ADDRESS]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HOME_ADDRESS]"
+                      length="50"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOME_ADDRESS]"
+                      name="HOME_ADDRESS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOME_ADDRESS_2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HOME_ADDRESS_2]"
+                      length="50"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOME_ADDRESS_2]"
+                      name="HOME_ADDRESS_2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOME_CITY]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HOME_CITY]"
+                      length="50"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOME_CITY]"
+                      name="HOME_CITY"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOME_STATE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HOME_STATE]"
+                      length="5"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOME_STATE]"
+                      name="HOME_STATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOME_ZIP]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HOME_ZIP]"
+                      length="6"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOME_ZIP]"
+                      name="HOME_ZIP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOME PHONE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HOME PHONE]"
+                      length="13"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOME PHONE]"
+                      name="HOME PHONE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[PARENT_1/GAURDIAN]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PARENT_1/GAURDIAN]"
+                      length="121"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[PARENT_1/GAURDIAN]"
+                      name="PARENT_1/GAURDIAN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[PARENT_2/GAURDIAN]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PARENT_2/GAURDIAN]"
+                      length="121"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].Columns[PARENT_2/GAURDIAN]"
+                      name="PARENT_2/GAURDIAN"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SIS_NUMBER]"
+                      dataType="wstr"
+                      length="20"
+                      name="SIS_NUMBER" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[STATE_STUDENT_NUMBER]"
+                      dataType="wstr"
+                      length="20"
+                      name="STATE_STUDENT_NUMBER" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SCHOOL_CODE]"
+                      dataType="wstr"
+                      length="20"
+                      name="SCHOOL_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FIRST_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      name="FIRST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MIDDLE_NAME]"
+                      dataType="wstr"
+                      length="20"
+                      name="MIDDLE_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LAST_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      name="LAST_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GRADE]"
+                      dataType="wstr"
+                      length="600"
+                      name="GRADE" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BIRTH_DATE]"
+                      dataType="dbTimeStamp"
+                      name="BIRTH_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GENDER]"
+                      dataType="wstr"
+                      length="5"
+                      name="GENDER" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HOME_ADDRESS]"
+                      dataType="wstr"
+                      length="50"
+                      name="HOME_ADDRESS" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HOME_ADDRESS_2]"
+                      dataType="wstr"
+                      length="50"
+                      name="HOME_ADDRESS_2" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HOME_CITY]"
+                      dataType="wstr"
+                      length="50"
+                      name="HOME_CITY" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HOME_STATE]"
+                      dataType="wstr"
+                      length="5"
+                      name="HOME_STATE" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HOME_ZIP]"
+                      dataType="wstr"
+                      length="6"
+                      name="HOME_ZIP" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HOME PHONE]"
+                      dataType="wstr"
+                      length="13"
+                      name="HOME PHONE" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PARENT_1/GAURDIAN]"
+                      dataType="wstr"
+                      length="121"
+                      name="PARENT_1/GAURDIAN" />
+                    <externalMetadataColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PARENT_2/GAURDIAN]"
+                      dataType="wstr"
+                      length="121"
+                      name="PARENT_2/GAURDIAN" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SIS_NUMBER]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SIS_NUMBER]"
+                      name="SIS_NUMBER" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[STATE_STUDENT_NUMBER]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[STATE_STUDENT_NUMBER]"
+                      name="STATE_STUDENT_NUMBER" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SCHOOL_CODE]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SCHOOL_CODE]"
+                      name="SCHOOL_CODE" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FIRST_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FIRST_NAME]"
+                      name="FIRST_NAME" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MIDDLE_NAME]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MIDDLE_NAME]"
+                      name="MIDDLE_NAME" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LAST_NAME]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LAST_NAME]"
+                      name="LAST_NAME" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GRADE]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GRADE]"
+                      name="GRADE" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BIRTH_DATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BIRTH_DATE]"
+                      name="BIRTH_DATE" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GENDER]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GENDER]"
+                      name="GENDER" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HOME_ADDRESS]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HOME_ADDRESS]"
+                      name="HOME_ADDRESS" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HOME_ADDRESS_2]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HOME_ADDRESS_2]"
+                      name="HOME_ADDRESS_2" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HOME_CITY]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HOME_CITY]"
+                      name="HOME_CITY" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HOME_STATE]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HOME_STATE]"
+                      name="HOME_STATE" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HOME_ZIP]"
+                      dataType="wstr"
+                      length="6"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HOME_ZIP]"
+                      name="HOME_ZIP" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HOME PHONE]"
+                      dataType="wstr"
+                      length="13"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HOME PHONE]"
+                      name="HOME PHONE" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PARENT_1/GAURDIAN]"
+                      dataType="wstr"
+                      length="121"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PARENT_1/GAURDIAN]"
+                      name="PARENT_1/GAURDIAN" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PARENT_2/GAURDIAN]"
+                      dataType="wstr"
+                      length="121"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PARENT_2/GAURDIAN]"
+                      name="PARENT_2/GAURDIAN" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Extended Year.Paths[OLE DB Source Output]"
+              endId="Package\Extended Year\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Extended Year\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="149,42"
+          Id="Package\Extended Year"
+          TopLeft="37,19" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Extended Year">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Extended Year\OLE DB Source"
+          TopLeft="108,51" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Extended Year\Flat File Destination"
+          TopLeft="217,158" />
+        <EdgeLayout
+          Id="Package\Extended Year.Paths[OLE DB Source Output]"
+          TopLeft="184,93">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="120,65"
+              Start="0,0"
+              End="120,57.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.5"
+                    Point2="0,32.5"
+                    Point3="4,32.5" />
+                  <mssgle:LineSegment
+                    End="116,32.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="116,32.5"
+                    Point2="120,32.5"
+                    Point3="120,36.5" />
+                  <mssgle:LineSegment
+                    End="120,57.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extended Year\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

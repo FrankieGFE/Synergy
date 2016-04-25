@@ -1,0 +1,2436 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/25/2014 8:30:18 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="AZLT-MMELARCODE"
+  DTS:CreatorName="XNOVAHQ\MMelarcode"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{1CE9C170-1610-42EA-9330-D5C6F99CA8FD}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="FRM_Import"
+  DTS:PackageType="5"
+  DTS:VersionBuild="97"
+  DTS:VersionGUID="{159C4440-529E-4822-B638-B9929FC82215}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DBConnection]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{0D457872-C1A3-4995-9408-1B3493AE9B52}"
+      DTS:ObjectName="DBConnection">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Retain="True"
+          DTS:ConnectionString="Data Source=synseconddb.aps.edu.actd;User ID=FoodServicesImport;Initial Catalog=ST_Experiment;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-FRM_Import;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[InvalidFRMcodes]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{FF9E5B7F-9BF5-490B-91DA-8E96B4A1887E}"
+      DTS:ObjectName="InvalidFRMcodes">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::TempFilePath] + "InvalidFRMcodes_"+ @[User::TempFileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Import\Food Services\FRM\InvalidFRMcodes_WINSNAPI.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SIS_Number"
+              DTS:DTSID="{AD7DFB07-8D1C-4D2E-951B-163F9A118F06}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FRMCode"
+              DTS:DTSID="{68470B36-6C78-43F0-A8B4-AFD87FF95101}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SchoolCode"
+              DTS:DTSID="{FDF12EC3-5549-47E8-B635-63A43E9A849F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LastName"
+              DTS:DTSID="{5627BB36-DC17-438A-94EA-AE828CFA617A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FirstName"
+              DTS:DTSID="{7F99EB2E-5058-4AC0-973D-A454DD4BA42C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="StatusCode"
+              DTS:DTSID="{968CFDC2-9685-4301-BA61-5D1832ABA72A}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MissingStudentIDs]"
+      DTS:CreationName="FLATFILE"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{350B6D4C-9E91-4122-8B84-F7293AF9CF58}"
+      DTS:ObjectName="MissingStudentIDs">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::TempFilePath] + "StudentsNotFound_"+ @[User::TempFileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Import\Food Services\FRM\StudentsNotFound_WINSNAPI.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="15"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SIS_Number"
+              DTS:DTSID="{78214E5D-E5B6-4A85-AEDA-6CD3802EBC0D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FRMCode"
+              DTS:DTSID="{F3A33F7A-0028-4B2A-AEE3-650DE561AEC8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SchoolCode"
+              DTS:DTSID="{BB01DC35-D70B-47AB-A5AF-AEF06AF18673}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LastName"
+              DTS:DTSID="{BA20CE65-BBF2-4535-8ADB-A6EFEE2A6B96}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FirstName"
+              DTS:DTSID="{B351868C-B6B1-4A77-A4C0-B50170F99E1C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="StatusCode"
+              DTS:DTSID="{BEE27060-2BEC-410F-B18F-665648EE04A9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="72"
+              DTS:TextQualified="True"
+              DTS:ObjectName="StudentGU"
+              DTS:DTSID="{CAE71EC2-4573-4561-A8CD-1564F7B39A26}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CurrentFRM"
+              DTS:DTSID="{42851698-A663-4F01-9F39-D387E4645DB8}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D3B21E11-BA40-4437-B5AD-E14FA704EEE9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="CurrentFRMCode">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C878098F-12B0-4B41-9E95-A2FEC343A130}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FirstName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{729D7AED-DA1F-43DE-A43C-E358F4337915}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FRMCode">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E1C43E35-B3EA-4BF7-A6F7-370883489F07}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::TempFilePath]+ @[User::TempFileName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FullPathImportFile">
+      <DTS:VariableValue
+        DTS:DataType="8">\\syntempssis.aps.edu.actd\Files\Import\Food Services\FRM\WINSNAPI.txt</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4EAE1A5B-B7B0-4BD0-968E-15A58AC839BE}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::TempFilePath]+&quot;Source_&quot;+ @[User::TempFileName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FullPathImportFileRenamed">
+      <DTS:VariableValue
+        DTS:DataType="8">\\syntempssis.aps.edu.actd\Files\Import\Food Services\FRM\Source_WINSNAPI.txt</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8CA5353F-DCC1-43CD-94FE-07C8253AB53B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ImportFileExists">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{460240BF-B630-4B53-B7E0-3E5A5D853645}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ImportRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1975FDEA-1879-49D0-BD9E-AF7FD3FA5812}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ImportRows">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1F2EEF9A-669A-4268-8436-AE4692951658}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{95D625B9-E847-4D54-A87F-BB17F6297632}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;IF OBJECT_ID('tempdb..##TempFRMImport') IS NOT NULL DROP TABLE ##TempFRMImport&#xA;CREATE TABLE ##TempFRMImport(&#xA;   SIS_Number  NVARCHAR(20) null&#xA; , FRMCode     NVARCHAR(05) null&#xA; , SchoolCode  NVARCHAR(20) null&#xA; , LastName    NVARCHAR(30) null&#xA; , FirstName   NVARCHAR(30) null&#xA; , StatusCode  NVARCHAR(20) null&#xA;)&#xA;&#xA;&#xA;BULK INSERT ##TempFRMImport&#xA;    FROM '&quot;+ @[User::TempFilePath] + @[User::TempFileName] +&quot;'&#xA;    WITH&#xA;    (&#xA;    FIELDTERMINATOR = ','&#xA;    )&#xA;alter table ##TempFRMImport add StudentGU  uniqueidentifier null&#xA;alter table ##TempFRMImport add CurrentFRM NVARCHAR(05)     null&#xA;&#xA;-- drop leading zeros in sis_number&#xA;update ##TempFRMImport&#xA;       set ##tempFRMImport.SIS_Number = convert(int, SIS_Number)&#xA;&#xA;--&#xA;&#xA;update ##TempFRMImport&#xA;&#xA;set ##tempFRMImport.StudentGU = stu.STUDENT_GU&#xA;  , ##tempFRMImport.CurrentFRM = frm.FRM_CODE&#xA;from ##TempFRMImport t&#xA;left join rev.EPC_STU stu on stu.SIS_NUMBER = t.SIS_Number&#xA;left join rev.EPC_STU_PGM_FRM frm on frm.STUDENT_GU = stu.STUDENT_GU&#xA;&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="LoadTempTable">
+      <DTS:VariableValue
+        DTS:DataType="8">IF OBJECT_ID('tempdb..##TempFRMImport') IS NOT NULL DROP TABLE ##TempFRMImport
+CREATE TABLE ##TempFRMImport(
+   SIS_Number  NVARCHAR(20) null
+ , FRMCode     NVARCHAR(05) null
+ , SchoolCode  NVARCHAR(20) null
+ , LastName    NVARCHAR(30) null
+ , FirstName   NVARCHAR(30) null
+ , StatusCode  NVARCHAR(20) null
+)
+
+
+BULK INSERT ##TempFRMImport
+    FROM '\\syntempssis.aps.edu.actd\Files\Import\Food Services\FRM\WINSNAPI.txt'
+    WITH
+    (
+    FIELDTERMINATOR = ','
+    )
+alter table ##TempFRMImport add StudentGU  uniqueidentifier null
+alter table ##TempFRMImport add CurrentFRM NVARCHAR(05)     null
+
+-- drop leading zeros in sis_number
+update ##TempFRMImport
+       set ##tempFRMImport.SIS_Number = convert(int, SIS_Number)
+
+--
+
+update ##TempFRMImport
+
+set ##tempFRMImport.StudentGU = stu.STUDENT_GU
+  , ##tempFRMImport.CurrentFRM = frm.FRM_CODE
+from ##TempFRMImport t
+left join rev.EPC_STU stu on stu.SIS_NUMBER = t.SIS_Number
+left join rev.EPC_STU_PGM_FRM frm on frm.STUDENT_GU = stu.STUDENT_GU
+</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4164784C-90F6-49C2-ACF0-88E931EAA9C5}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SchoolCode">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5C280118-5688-4D18-912F-1E2B8728A1C2}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SISNumber">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C66CB83B-9384-49CE-B311-11E455400A77}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="StatusCode">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{60514C77-0871-488F-8EA5-607A2BF71FA0}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="StudentGU">
+      <DTS:VariableValue
+        DTS:DataType="0"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{293605CB-34C2-462B-B7DE-EC93DA830409}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TempFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">WINSNAPI.txt</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{59AF72C6-1382-4BA9-BC67-3D086520FA94}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TempFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\syntempssis.aps.edu.actd\Files\Import\Food Services\FRM\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A236F37A-AC18-4DD7-9E0E-F581464E445C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TempTableName">
+      <DTS:VariableValue
+        DTS:DataType="8">##TempFRMImport</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="2">
+    <DTS:Property
+      DTS:DataType="8"
+      DTS:Name="EventFilter">1,9,OnWarning</DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnError"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnInformation"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnWarning"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+  </DTS:LoggingOptions>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Check If Source File for Import Exists"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ScriptTask.ScriptTask, Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Script Task"
+      DTS:DTSID="{AC777847-15E8-4DD3-8EF9-9FCF9CD063C5}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ScriptTask.ScriptTask, Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Check If Source File for Import Exists"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <ScriptProject
+          Name="ST_4f6a8623157d48a6906b7441822d58bc"
+          VSTAMajorVersion="3"
+          VSTAMinorVersion="0"
+          Language="VisualBasic"
+          ReadOnlyVariables="User::TempFileName,User::TempFilePath"
+          ReadWriteVariables="User::ImportFileExists">
+          <ProjectItem
+            Name="My Project\AssemblyInfo.vb"
+            Encoding="UTF8"><![CDATA[Imports System
+Imports System.Reflection
+Imports System.Runtime.InteropServices
+
+' General Information about an assembly is controlled through the following 
+' set of attributes. Change these attribute values to modify the information
+' associated with an assembly.
+
+' Review the values of the assembly attributes
+
+<Assembly: AssemblyTitle("ST_fb523b4f308343a0b06249a5b9af95e9.vbproj")> 
+<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyCompany("Microsoft")> 
+<Assembly: AssemblyProduct("ST_fb523b4f308343a0b06249a5b9af95e9.vbproj")> 
+<Assembly: AssemblyCopyright("Copyright @ Microsoft 2013")> 
+<Assembly: AssemblyTrademark("")> 
+<Assembly: CLSCompliant(True)> 
+
+<Assembly: ComVisible(False)> 
+
+'The following GUID is for the ID of the typelib if this project is exposed to COM
+<Assembly: Guid("d358df53-12b4-42f7-a6f7-bedddf6e6059")> 
+
+' Version information for an assembly consists of the following four values:
+'
+'      Major Version
+'      Minor Version 
+'      Build Number
+'      Revision
+'
+' You can specify all the values or you can default the Build and Revision Numbers 
+' by using the '*' as shown below:
+' <Assembly: AssemblyVersion("1.0.*")>
+
+<Assembly: AssemblyVersion("1.0.0.0")> 
+<Assembly: AssemblyFileVersion("1.0.0.0")> ]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Settings.settings"
+            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)" GeneratedClassNamespace="$safeprojectname" GeneratedClassName="MySettings">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+          <ProjectItem
+            Name="st_4f6a8623157d48a6906b7441822d58bc.vbproj"
+            Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- This section defines project-level properties.
+
+       Configuration - Specifies whether the default configuration is Release or Debug.
+       Platform - Specifies what CPU the output of this project can run on.
+       OutputType - Must be "Library" for VSTA.
+       NoStandardLibraries - Set to "false" for VSTA.
+       RootNamespace - In C#, this specifies the namespace given to new files.
+                       In Visual Basic, all objects are wrapped in this namespace at runtime.
+       AssemblyName - Name of the output assembly.
+  -->
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ST_fb523b4f308343a0b06249a5b9af95e9.vbproj</RootNamespace>
+    <AssemblyName>st_4f6a8623157d48a6906b7441822d58bc</AssemblyName>
+    <StartupObject></StartupObject>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>Off</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <ProjectGuid>{E0DE8A46-D49A-466D-ACAC-7D7CB97AA9C6}</ProjectGuid>
+  </PropertyGroup>
+  <!-- This section defines properties that are set when the "Debug" configuration is
+       selected.
+
+       DebugSymbols - If true, create symbols (.pdb). If false, do not create symbols.
+       Optimize - If true, optimize the build output. If false, do not optimize.
+       OutputPath - Output path of the project relative to the project file.
+       EnableUnmanagedDebugging - If true, starting the debugger will attach both managed and unmanaged debuggers.
+       DefineConstants - Constants defined for the preprocessor.
+       Warning Level - Warning level for the compiler.
+  -->
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DefineConstants></DefineConstants>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <!-- This section defines properties that are set when the "Release" configuration is
+       selected.
+
+       DebugSymbols - If true, create symbols (.pdb). If false, do not create symbols.
+       Optimize - If true, optimize the build output. If false, do not optimize.
+       OutputPath - Output path of the project relative to the project file.
+       EnableUnmanagedDebugging - If true, starting the debugger will attach both managed and unmanaged debuggers.
+       DefineConstants - Constants defined for the preprocessor.
+       Warning Level - Warning level for the compiler.
+  -->
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DefineConstants></DefineConstants>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <!-- This section enables pre- and post-build steps. However,
+       it is recommended that MSBuild tasks be used instead of these properties.
+  -->
+  <PropertyGroup>
+    <PreBuildEvent></PreBuildEvent>
+    <PostBuildEvent></PostBuildEvent>
+  </PropertyGroup>
+  <!-- This sections specifies references for the project. -->
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=11.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+  <!-- Visual Basic supports Importing namespaces (equivalent to using statements in C#).-->
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <!-- This section defines the user source files that are part of the
+       project.
+
+       Compile - Specifies a source file to compile.
+       EmbeddedResource - Specifies a .resx file for embedded resources.
+       None - Specifies a file that is not to be passed to the compiler (for instance,
+              a text file or XML file).
+       AppDesigner - Specifies the directory where the application properties files can
+                     be found.
+  -->
+  <ItemGroup>
+    <AppDesigner Include="My Project\" />
+    <Compile Include="My Project\AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ScriptMain.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <!-- Include the default configuration information and metadata files for the add-in.
+         These files are copied to the build output directory when the project is
+         built, and the path to the configuration file is passed to add-in on the command
+         line when debugging.
+    -->
+  </ItemGroup>
+  <!-- Include the build rules for a VB project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="vb" TemplatesPath="" DebugInfoExeName="#HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VisualStudio\9.0\InstallDir#\devenv.exe" />
+        <Host Name="SSIS_ScriptTask" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST110</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+</Project>]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Settings.Designer.vb"
+            Encoding="UTF8"><![CDATA['------------------------------------------------------------------------------
+' <autogenerated>
+'     This code was generated by a tool.
+'
+'     Changes to this file may cause incorrect behavior and will be lost if
+'     the code is regenerated.
+' </autogenerated>
+'------------------------------------------------------------------------------
+
+Option Strict Off
+Option Explicit On
+
+
+
+Partial Friend NotInheritable Class MySettings
+    Inherits System.Configuration.ApplicationSettingsBase
+
+    Private Shared m_Value As MySettings
+
+    Private Shared m_SyncObject As Object = New Object
+
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Public Shared ReadOnly Property Value() As MySettings
+        Get
+            If (MySettings.m_Value Is Nothing) Then
+                System.Threading.Monitor.Enter(MySettings.m_SyncObject)
+                If (MySettings.m_Value Is Nothing) Then
+                    Try
+                        MySettings.m_Value = New MySettings
+                    Finally
+                        System.Threading.Monitor.Exit(MySettings.m_SyncObject)
+                    End Try
+                End If
+            End If
+            Return MySettings.m_Value
+        End Get
+    End Property
+End Class]]></ProjectItem>
+          <ProjectItem
+            Name="Project"
+            Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:Language>msBuild</msb:Language>
+		<msb:NoContent>Reference;Import;Folder</msb:NoContent>
+		<msb:ProjectId>{9E9600AF-525C-4485-BB36-4A28BA4D96B6}</msb:ProjectId>
+		<msb:DisplayName>st_4f6a8623157d48a6906b7441822d58bc</msb:DisplayName>
+		<msb:CodeName>st_4f6a8623157d48a6906b7441822d58bc</msb:CodeName>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:File Include="My Project\AssemblyInfo.vb"/>
+		<msb:File Include="My Project\Resources.Designer.vb"/>
+		<msb:File Include="My Project\Settings.Designer.vb"/>
+		<msb:File Include="My Project\Resources.resx"/>
+		<msb:File Include="My Project\Settings.settings"/>
+		<msb:File Include="ScriptMain.vb"/>
+		<msb:Project Include="st_4f6a8623157d48a6906b7441822d58bc.vbproj"/>
+	</msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+          <ProjectItem
+            Name="ScriptMain.vb"
+            Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services Script Task
+' Write scripts using Microsoft Visual Basic 2008.
+' The ScriptMain is the entry point class of the script.
+
+Imports System
+Imports System.Data
+Imports System.Math
+Imports System.IO
+Imports Microsoft.SqlServer.Dts.Runtime
+
+<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
+<System.CLSCompliantAttribute(False)> _
+Partial Public Class ScriptMain
+	Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+
+	Enum ScriptResults
+		Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
+		Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+	End Enum
+	
+
+	' The execution engine calls this method when the task executes.
+	' To access the object model, use the Dts property. Connections, variables, events,
+	' and logging features are available as members of the Dts property as shown in the following examples.
+	'
+	' To reference a variable, call Dts.Variables("MyCaseSensitiveVariableName").Value
+	' To post a log entry, call Dts.Log("This is my log text", 999, Nothing)
+	' To fire an event, call Dts.Events.FireInformation(99, "test", "hit the help message", "", 0, True)
+	'
+	' To use the connections collection use something like the following:
+	' ConnectionManager cm = Dts.Connections.Add("OLEDB")
+	' cm.ConnectionString = "Data Source=localhost;Initial Catalog=AdventureWorks;Provider=SQLNCLI10;Integrated Security=SSPI;Auto Translate=False;"
+	'
+	' Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+	' 
+	' To open Help, press F1.
+
+	Public Sub Main()
+        Dim fileLoc, fileName As String
+        If Dts.Variables.Contains("User::TempFilePath") = True AndAlso _
+        Dts.Variables.Contains("User::TempFileName") = True Then
+            fileLoc = CStr(Dts.Variables("User::TempFilePath").Value)
+            fileName = CStr(Dts.Variables.Item("User::TempFileName").Value)
+            If File.Exists(fileLoc + fileName) Then
+                Dts.Variables.Item("User::ImportFileExists").Value = True
+            Else
+                Dts.Variables.Item("User::ImportFileExists").Value = False
+            End If
+            Dts.TaskResult = ScriptResults.Success
+        Else
+            Dts.TaskResult = ScriptResults.Failure
+        End If
+	End Sub
+
+End Class]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Resources.resx"
+            Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Resources.Designer.vb"
+            Encoding="UTF8"><![CDATA['------------------------------------------------------------------------------
+' <autogenerated>
+'     This code was generated by a tool.
+'
+'     Changes to this file may cause incorrect behavior and will be lost if
+'     the code is regenerated.
+' </autogenerated>
+'------------------------------------------------------------------------------
+
+Option Strict Off
+Option Explicit On
+
+
+Namespace My.Resources
+    
+    '''<summary>
+    '''   A strongly-typed resource class, for looking up localized strings, etc.
+    '''</summary>
+    'This class was auto-generated by the Strongly Typed Resource Builder
+    'class via a tool like ResGen or Visual Studio.NET.
+    'To add or remove a member, edit your .ResX file then rerun ResGen
+    'with the /str option, or rebuild your VS project.
+    Class MyResources
+        
+        Private Shared _resMgr As System.Resources.ResourceManager
+        
+        Private Shared _resCulture As System.Globalization.CultureInfo
+        
+        Friend Sub New()
+            MyBase.New
+        End Sub
+        
+        '''<summary>
+        '''   Returns the cached ResourceManager instance used by this class.
+        '''</summary>
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Shared ReadOnly Property ResourceManager() As System.Resources.ResourceManager
+            Get
+                If (_resMgr Is Nothing) Then
+                    Dim temp As System.Resources.ResourceManager = New System.Resources.ResourceManager("My.Resources.MyResources", GetType(MyResources).Assembly)
+                    _resMgr = temp
+                End If
+                Return _resMgr
+            End Get
+        End Property
+        
+        '''<summary>
+        '''   Overrides the current thread's CurrentUICulture property for all
+        '''   resource lookups using this strongly typed resource class.
+        '''</summary>
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Shared Property Culture() As System.Globalization.CultureInfo
+            Get
+                Return _resCulture
+            End Get
+            Set
+                _resCulture = value
+            End Set
+        End Property
+    End Class
+End Namespace]]></ProjectItem>
+          <BinaryItem
+            Name="st_4f6a8623157d48a6906b7441822d58bc.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAAaXRVMAAAAAAAAAAOAAAiELAQsAABwAAAAIAAAAAAAALjsA
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACAAAAAAgAAAAAAAAIAQIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAANQ6AABXAAAAAEAAAEAEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAANBsAAAAgAAAAHAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAEAEAAAAQAAAAAYAAAAeAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAJAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAAAQ
+OwAAAAAAAEgAAAACAAUAVCQAAIAWAAABAAAAAAAAAJsjAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CKAEAAAoqHgIoBAAACiqmcwYAAAqAAQAABHMHAAAKgAIA
+AARzCAAACoADAAAEcwkAAAqABAAABCoAABMwAQALAAAAAQAAEX4BAAAEbwoAAAoqABMwAQALAAAA
+AgAAEX4CAAAEbwsAAAoqABMwAQALAAAAAwAAEX4DAAAEbwwAAAoqABMwAQALAAAABAAAEX4EAAAE
+bw0AAAoqABMwAgANAAAABQAAEQIDKBEAAAooEgAACioAAAATMAEABwAAAAYAABECKBMAAAoqABMw
+AQALAAAABwAAEdAFAAACKBQAAAoqABMwAQAHAAAACAAAEQIoFQAACioAEzABABAAAAAJAAARAowB
+AAAbLQYoAQAAKyoCKhMwAgAQAAAACgAAEQMSAP4VAgAAGwaBAgAAGyoeAigXAAAKKhMwAgAoAAAA
+CwAAEQJ7GQAACm8aAAAKCweMAwAAGy0SKAIAACsLAnsZAAAKB28bAAAKBypKAigXAAAKAnMcAAAK
+fRkAAAoqAB4CKBcAAAoqEzACAC0AAAAMAAARfgYAAAQtIHIBAABw0AcAAAIoFAAACm8eAAAKcx8A
+AAoLB4AGAAAEfgYAAAQqAAAAEzABAAYAAAANAAARfgcAAAQqAAAeAoAHAAAEKkJzFwAACigRAAAK
+gAkAAAQqAAAAHgIoIAAACiobMAEAPwAAAA4AABF+CAAABC0yfgkAAAQoEQAACighAAAKfggAAAQt
+HHMWAAAGgAgAAATeEH4JAAAEKBEAAAooIgAACtx+CAAABCoAARAAAAIAHQAMKQAQAAAAAB4CKCQA
+AAoqEzACAN8AAAAPAAARAm8lAAAKbyYAAApyMwAAcG8nAAAKObgAAAACbyUAAApvJgAACnJZAABw
+bycAAAo5ngAAAAJvJQAACm8mAAAKcjMAAHBvKAAACm8pAAAKKCoAAAoKAm8lAAAKbyYAAApyWQAA
+cG8oAAAKbykAAAooKgAACgsGBygrAAAKKCwAAAosIgJvJQAACm8mAAAKcn8AAHBvKAAACheMIQAA
+AW8tAAAKKyACbyUAAApvJgAACnJ/AABwbygAAAoWjCEAAAFvLQAACgJvJQAAChZvLgAACisMAm8l
+AAAKF28uAAAKKrQAAADOyu++AQAAAJEAAABsU3lzdGVtLlJlc291cmNlcy5SZXNvdXJjZVJlYWRl
+ciwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlU
+b2tlbj1iNzdhNWM1NjE5MzRlMDg5I1N5c3RlbS5SZXNvdXJjZXMuUnVudGltZVJlc291cmNlU2V0
+AgAAAAAAAAAAAAAAUEFEUEFEULQAAAAAQlNKQgEAAQAAAAAADAAAAHY0LjAuMzAzMTkAAAAABQBs
+AAAA3AcAACN+AABICAAAtAkAACNTdHJpbmdzAAAAAPwRAACwAAAAI1VTAKwSAAAQAAAAI0dVSUQA
+AAC8EgAAxAMAACNCbG9iAAAAAAAAAAIAAAFXHaIJCQ8AAAD6JTMAFgAAAQAAAC4AAAAKAAAADAAA
+ABkAAAAEAAAAOwAAAAIAAAA2AAAADwAAAAQAAAAIAAAACQAAAAkAAAABAAAABQAAAAEAAAADAAAA
+AwAAAAIAAAAAAIwJAQAAAAAACgBgATYBCgCUAXYBBgCkAZ0BCgD8ATYBBgB6Ap0BCgD8AtICBgAy
+AyEDBgBfA0oDDgDGA7EDEgBFBBwEBgBmBJ0BDgCZBIMEDgCyBIMEDgDfBMcEBgAJBfYECgBIBSEF
+CgBgBRMADgCVBXgFBgDKBaoFBgDoBZ0BBgAMBp0BCgAlBhMABgBpBkoGBgCPBn0GBgC2BqUGBgDJ
+BvYEEgDmBhwEFgA/Bx8HFgBgBx8HCgByByEFBgB+B50BBgCWB4wHBgCiB50BBgC5B50BEgDPBxwE
+BgAwCKoFBgBQCKoFBgCICG4IBgChCH0GBgC+CEoGBgDMCH0GBgDnCH0GBgACCX0GBgAbCX0GBgA0
+CX0GBgBRCX0GAAAAAAEAAAAAAAEAAQAAAAAAKQA3AAUAAQABAAAAAABlADcACQABAAIAAAEQAHAA
+NwANAAEAAwAFAQAAegAAAA0ABQAIAAUBAACIAAAADQAFAA8AAAAAAKMArwANAAYAEQAAARAA5wDy
+ACUACAAVAAEAAAAdAfIAKQAKABgAAgEAACgBAAAtAAoAGgAxAL8BIAAxAOgBLQAxAAoCOgAxAC8C
+RwAhAAsDkAARAEIDnQARAGsDoQARAN4DvwARAOYDwwAGBmsE2QBWgHME3ABWgHsE3ABQIAAAAAAG
+GHABEwABAFggAAAAAAYYcAETAAEAYCAAAAAAERirARcAAQCMIAAAAAATCLIBGwABAKQgAAAAABMI
+2AEoAAEAvCAAAAAAEwgBAjUAAQDUIAAAAAATCB8CQgABAOwgAAAAAEYCZQJjAAEACCEAAAAARgJu
+AmgAAgAcIQAAAACDAH8CbAACADQhAAAAAEYChwJxAAIASCEAAAAAEQCQAngAAgBkIQAAAAABAK4C
+gAADAIAhAAAAAAYYcAETAAQAiCEAAAAAAwjCAosABAC8IQAAAAAGGHABEwAEANAhAAAAAAMYcAET
+AAQA2CEAAAAAFgh3A6UABAAUIgAAAAAWCIsDqgAEACgiAAAAABYIlwOvAAQAMCIAAAAAERirARcA
+BQBEIgAAAAAGGHABEwAFAEwiAAAAABYI8wPGAAUAqCIAAAAABhhwARMABQCwIgAAAAAGAGEEEwAF
+AAAAAQBsAgAAAQClAgAAAQClAgAAAQCjAwkAcAETAGEAcAHqAHEAcAH5ABEAcAETAHkAcAETACQA
+cAETACwAcAETADQAcAETADwAcAETACQAwgKLACwAwgKLADQAwgKLADwAwgKLAIEAcAETAIkAcAET
+AJEAcAFIAZkA2QWTARkAZQJjABkAbgJoACkA+gWgARkAhwJxAKkAFgawARkAcAETALEAcAHAAUQA
+CwOQAEwA8wOLAEwAQAY9AkwAcAETALkAcAFMAikAmAZXAjkAcAFcAkkAcAETAMkAvgZ4AskAxAZ4
+AtEAcAETAFEAcAETAFEA+AaCAtkASQeHAuEAVwdjAOEAaQeMAukA8wOSAvEAhwKWAvkAhQebAgEB
+mwehAukAQAamAtkAqgerAhEBcAFMAhkBcAETACEBcAGrAikBcAETADEBcAFIATkBcAFIAUEBcAFI
+AUkBcAFIAVEBcAFIAVkBcAFIAWEBcAFIAWkBcAFIAXEBcAFIAQgALADgAAgAMADlACkAgwBNAS4A
+wwGCAy4A2wGCAy4AuwFiAy4AkwG+Ai4AmwHdAi4AswFRAi4A0wFRAi4AiwG1Ai4AywGyAy4AowEl
+Ay4AqwEyAy4A6wBRAi4AewFcA0AAKwDlAEAAEwDwAEMAEwDwAEMAGwD/AEkAgwBrAWMAGwD/AGMA
+EwDwAGkAgwBeAYAAKwDlAIMAcwDlAIMAGwD/AIMAewDlAIkAgwB/AaAAKwDlAKMAwwDIAaMAEwDw
+AMAAKwDlAMMAEwDwAMMA6wBRAskAEwBvAuAAKwDlAOkAEwBvAgABKwDlAAABEwDwAAkBGwHlACAB
+KwDlACABEwDwACMBgwHlACMBewFRAkABKwDlAEABEwDwAGABEwDwAGABKwDlAIABKwDlAKABKwDl
+AMABKwDlAMABEwDwAOABKwDlAAACEwDwAAACKwDlADQBOQE+AUMBmAGcAacBrAG7AbsBQwJjAmoC
+fQKwAgQAAQAGAAUABwAGAAgACAAAAJQBTwAAAE0CVAAAAPwBWQAAAFkCXgAAABUDmAAAADIDtQAA
+AKkDugAAAKMDywACAAQAAwACAAUABQACAAYABwACAAcACQACAA8ACwACABIADQACABMADwABABQA
+DwACABcAEQB1AHUAiAAYAR8BJgEtASoCMQIEgAAAAQAAAAAAAAAAAAAAAABoCQAABAAAAAAAAAAA
+AAAAAQAKAAAAAAAKAAAAAAAAAAAAAAAKABMAAAAAAAQAAAAAAAAAAAAAAAEAnQEAAAAACwAAAAAA
+AAAAAAAA0AD9AwAAAAALAAAAAAAAAAAAAADQAAAHAAAAAAAAAAABAAAA8QcAAAUABAAGAAQACgAJ
+AAAAEAAMAKMCAAAQABkAowIAAAAAGwCjAi0AtgEtADgCAAAAPE1vZHVsZT4AbXNjb3JsaWIATWlj
+cm9zb2Z0LlZpc3VhbEJhc2ljAE15QXBwbGljYXRpb24AU1RfZmI1MjNiNGYzMDgzNDNhMGIwNjI0
+OWE1YjlhZjk1ZTkudmJwcm9qLk15AE15Q29tcHV0ZXIATXlQcm9qZWN0AE15V2ViU2VydmljZXMA
+VGhyZWFkU2FmZU9iamVjdFByb3ZpZGVyYDEATXlSZXNvdXJjZXMAU1RfZmI1MjNiNGYzMDgzNDNh
+MGIwNjI0OWE1YjlhZjk1ZTkudmJwcm9qLk15LlJlc291cmNlcwBNeVNldHRpbmdzAFNUX2ZiNTIz
+YjRmMzA4MzQzYTBiMDYyNDlhNWI5YWY5NWU5LnZicHJvagBTY3JpcHRNYWluAFNjcmlwdFJlc3Vs
+dHMATWljcm9zb2Z0LlZpc3VhbEJhc2ljLkFwcGxpY2F0aW9uU2VydmljZXMAQXBwbGljYXRpb25C
+YXNlAC5jdG9yAE1pY3Jvc29mdC5WaXN1YWxCYXNpYy5EZXZpY2VzAENvbXB1dGVyAFN5c3RlbQBP
+YmplY3QALmNjdG9yAGdldF9Db21wdXRlcgBtX0NvbXB1dGVyT2JqZWN0UHJvdmlkZXIAZ2V0X0Fw
+cGxpY2F0aW9uAG1fQXBwT2JqZWN0UHJvdmlkZXIAVXNlcgBnZXRfVXNlcgBtX1VzZXJPYmplY3RQ
+cm92aWRlcgBnZXRfV2ViU2VydmljZXMAbV9NeVdlYlNlcnZpY2VzT2JqZWN0UHJvdmlkZXIAQXBw
+bGljYXRpb24AV2ViU2VydmljZXMARXF1YWxzAG8AR2V0SGFzaENvZGUAVHlwZQBHZXRUeXBlAFRv
+U3RyaW5nAENyZWF0ZV9fSW5zdGFuY2VfXwBUAGluc3RhbmNlAERpc3Bvc2VfX0luc3RhbmNlX18A
+Z2V0X0dldEluc3RhbmNlAE1pY3Jvc29mdC5WaXN1YWxCYXNpYy5NeVNlcnZpY2VzLkludGVybmFs
+AENvbnRleHRWYWx1ZWAxAG1fQ29udGV4dABHZXRJbnN0YW5jZQBTeXN0ZW0uUmVzb3VyY2VzAFJl
+c291cmNlTWFuYWdlcgBfcmVzTWdyAFN5c3RlbS5HbG9iYWxpemF0aW9uAEN1bHR1cmVJbmZvAF9y
+ZXNDdWx0dXJlAGdldF9SZXNvdXJjZU1hbmFnZXIAZ2V0X0N1bHR1cmUAc2V0X0N1bHR1cmUAVmFs
+dWUAQ3VsdHVyZQBTeXN0ZW0uQ29uZmlndXJhdGlvbgBBcHBsaWNhdGlvblNldHRpbmdzQmFzZQBt
+X1ZhbHVlAG1fU3luY09iamVjdABnZXRfVmFsdWUATWljcm9zb2Z0LlNxbFNlcnZlci5TY3JpcHRU
+YXNrAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlRhc2tzLlNjcmlwdFRhc2sAVlNUQVJUU2NyaXB0
+T2JqZWN0TW9kZWxCYXNlAE1haW4ARW51bQB2YWx1ZV9fAFN1Y2Nlc3MARmFpbHVyZQBTeXN0ZW0u
+Q29tcG9uZW50TW9kZWwARWRpdG9yQnJvd3NhYmxlQXR0cmlidXRlAEVkaXRvckJyb3dzYWJsZVN0
+YXRlAFN5c3RlbS5Db2RlRG9tLkNvbXBpbGVyAEdlbmVyYXRlZENvZGVBdHRyaWJ1dGUAU3lzdGVt
+LkRpYWdub3N0aWNzAERlYnVnZ2VySGlkZGVuQXR0cmlidXRlAE1pY3Jvc29mdC5WaXN1YWxCYXNp
+Yy5Db21waWxlclNlcnZpY2VzAFN0YW5kYXJkTW9kdWxlQXR0cmlidXRlAEhpZGVNb2R1bGVOYW1l
+QXR0cmlidXRlAFN5c3RlbS5Db21wb25lbnRNb2RlbC5EZXNpZ24ASGVscEtleXdvcmRBdHRyaWJ1
+dGUAU3lzdGVtLlJ1bnRpbWUuQ29tcGlsZXJTZXJ2aWNlcwBSdW50aW1lSGVscGVycwBHZXRPYmpl
+Y3RWYWx1ZQBSdW50aW1lVHlwZUhhbmRsZQBHZXRUeXBlRnJvbUhhbmRsZQBBY3RpdmF0b3IAQ3Jl
+YXRlSW5zdGFuY2UATXlHcm91cENvbGxlY3Rpb25BdHRyaWJ1dGUAc2V0X1ZhbHVlAFN5c3RlbS5S
+dW50aW1lLkludGVyb3BTZXJ2aWNlcwBDb21WaXNpYmxlQXR0cmlidXRlAFN5c3RlbS5SZWZsZWN0
+aW9uAEFzc2VtYmx5AGdldF9Bc3NlbWJseQBTeXN0ZW0uVGhyZWFkaW5nAE1vbml0b3IARW50ZXIA
+RXhpdABEZWJ1Z2dlck5vblVzZXJDb2RlQXR0cmlidXRlAFNjcmlwdE9iamVjdE1vZGVsAGdldF9E
+dHMATWljcm9zb2Z0LlNxbFNlcnZlci5NYW5hZ2VkRFRTAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRz
+LlJ1bnRpbWUAVmFyaWFibGVzAGdldF9WYXJpYWJsZXMAQ29udGFpbnMAVmFyaWFibGUAZ2V0X0l0
+ZW0AQ29udmVyc2lvbnMAU3RyaW5nAENvbmNhdABTeXN0ZW0uSU8ARmlsZQBFeGlzdHMAQm9vbGVh
+bgBzZXRfVGFza1Jlc3VsdABDTFNDb21wbGlhbnRBdHRyaWJ1dGUAU1NJU1NjcmlwdFRhc2tFbnRy
+eVBvaW50QXR0cmlidXRlAFNUX2ZiNTIzYjRmMzA4MzQzYTBiMDYyNDlhNWI5YWY5NWU5LnZicHJv
+ai5SZXNvdXJjZXMucmVzb3VyY2VzAENvbXBpbGF0aW9uUmVsYXhhdGlvbnNBdHRyaWJ1dGUAUnVu
+dGltZUNvbXBhdGliaWxpdHlBdHRyaWJ1dGUAU3lzdGVtLlJ1bnRpbWUuVmVyc2lvbmluZwBUYXJn
+ZXRGcmFtZXdvcmtBdHRyaWJ1dGUAQXNzZW1ibHlGaWxlVmVyc2lvbkF0dHJpYnV0ZQBHdWlkQXR0
+cmlidXRlAEFzc2VtYmx5VHJhZGVtYXJrQXR0cmlidXRlAEFzc2VtYmx5Q29weXJpZ2h0QXR0cmli
+dXRlAEFzc2VtYmx5UHJvZHVjdEF0dHJpYnV0ZQBBc3NlbWJseUNvbXBhbnlBdHRyaWJ1dGUAQXNz
+ZW1ibHlEZXNjcmlwdGlvbkF0dHJpYnV0ZQBBc3NlbWJseVRpdGxlQXR0cmlidXRlAHN0XzRmNmE4
+NjIzMTU3ZDQ4YTY5MDZiNzQ0MTgyMmQ1OGJjAHN0XzRmNmE4NjIzMTU3ZDQ4YTY5MDZiNzQ0MTgy
+MmQ1OGJjLmRsbAAAMU0AeQAuAFIAZQBzAG8AdQByAGMAZQBzAC4ATQB5AFIAZQBzAG8AdQByAGMA
+ZQBzAAAlVQBzAGUAcgA6ADoAVABlAG0AcABGAGkAbABlAFAAYQB0AGgAACVVAHMAZQByADoAOgBU
+AGUAbQBwAEYAaQBsAGUATgBhAG0AZQAALVUAcwBlAHIAOgA6AEkAbQBwAG8AcgB0AEYAaQBsAGUA
+RQB4AGkAcwB0AHMAAAAAAGz+rpm/1VFIgcvJj3+TcbwACLd6XFYZNOCJCLA/X38R1Qo6AyAAAQMA
+AAEEAAASDAcGFRIYARIMBAAAEggHBhUSGAESCAQAABIRBwYVEhgBEhEEAAASFAcGFRIYARIUBAgA
+EgwECAASCAQIABIRBAgAEhQEIAECHAMgAAgEIAASFQMgAA4CHgAHEAEBHgAeAAcwAQEBEB4AAhMA
+BCAAEwAHBhUSGQETAAQoABMAAwYSHQMGEiEEAAASHQQAABIhBQABARIhBAgAEh0ECAASIQMGEiAC
+BhwEAAASIAQIABIgCImEXc2AgMyRAgYIAwYRKAQAAAAABAEAAAAFIAEBETUIAQABAAAAAAAFIAIB
+Dg4YAQAKTXlUZW1wbGF0ZQgxMC4wLjAuMAAABhUSGAESDAYVEhgBEggGFRIYARIRBhUSGAESFAQH
+ARIMBAcBEggEBwESEQQHARIUBCABAQ4QAQALTXkuQ29tcHV0ZXIAAAwBAAdNeS5Vc2VyAAATAQAO
+TXkuQXBwbGljYXRpb24AABMBAA5NeS5XZWJTZXJ2aWNlcwAABAABHBwDBwECAwcBCAYAARIVEVEE
+BwESFQMHAQ4FEAEAHgAECgEeAAQHAR4AByAEAQ4ODg5hAQA0U3lzdGVtLldlYi5TZXJ2aWNlcy5Q
+cm90b2NvbHMuU29hcEh0dHBDbGllbnRQcm90b2NvbBJDcmVhdGVfX0luc3RhbmNlX18TRGlzcG9z
+ZV9fSW5zdGFuY2VfXwAAAAYVEhgBEwAGFRIZARMABAoBEwAFIAEBEwAIBwMTABMAEwAEIAEBAgUB
+AAAAAAQgABJhBiACAQ4SYQYHAhIdEh0EBwESIQgBAAIAAAAAAAQAAQEcBAcBEiAEIAASbQQgABJx
+BSABEnUcAyAAHAQAAQ4cBQACDg4OBAABAg4EIAEBHAQgAQEIBAcCDg4IAQAIAAAAAAAeAQABAFQC
+FldyYXBOb25FeGNlcHRpb25UaHJvd3MBRwEAGi5ORVRGcmFtZXdvcmssVmVyc2lvbj12NC4wAQBU
+DhRGcmFtZXdvcmtEaXNwbGF5TmFtZRAuTkVUIEZyYW1ld29yayA0DAEABzEuMC4wLjAAACkBACRk
+MzU4ZGY1My0xMmI0LTQyZjctYTZmNy1iZWRkZGY2ZTYwNTkAAAUBAAEAAB8BABpDb3B5cmlnaHQg
+QCBNaWNyb3NvZnQgMjAxMwAALwEAKlNUX2ZiNTIzYjRmMzA4MzQzYTBiMDYyNDlhNWI5YWY5NWU5
+LnZicHJvagAADgEACU1pY3Jvc29mdAAAAAAA/DoAAAAAAAAAAAAAHjsAAAAgAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAABA7AAAAAAAAAAAAAAAAAAAAAAAAAABfQ29yRGxsTWFpbgBtc2NvcmVlLmRsbAAA
+AAAA/yUAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB
+ABAAAAAYAACAAAAAAAAAAAAAAAAAAAABAAEAAAAwAACAAAAAAAAAAAAAAAAAAAABAAAAAABIAAAA
+WEAAAOgDAAAAAAAAAAAAAOgDNAAAAFYAUwBfAFYARQBSAFMASQBPAE4AXwBJAE4ARgBPAAAAAAC9
+BO/+AAABAAAAAQAAAAAAAAABAAAAAAA/AAAAAAAAAAQAAAACAAAAAAAAAAAAAAAAAAAARAAAAAEA
+VgBhAHIARgBpAGwAZQBJAG4AZgBvAAAAAAAkAAQAAABUAHIAYQBuAHMAbABhAHQAaQBvAG4AAAAA
+AAAAsARIAwAAAQBTAHQAcgBpAG4AZwBGAGkAbABlAEkAbgBmAG8AAAAkAwAAAQAwADAAMAAwADAA
+NABiADAAAAA0AAoAAQBDAG8AbQBwAGEAbgB5AE4AYQBtAGUAAAAAAE0AaQBjAHIAbwBzAG8AZgB0
+AAAAgAArAAEARgBpAGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4AAAAAAFMAVABfAGYAYgA1ADIA
+MwBiADQAZgAzADAAOAAzADQAMwBhADAAYgAwADYAMgA0ADkAYQA1AGIAOQBhAGYAOQA1AGUAOQAu
+AHYAYgBwAHIAbwBqAAAAAAAwAAgAAQBGAGkAbABlAFYAZQByAHMAaQBvAG4AAAAAADEALgAwAC4A
+MAAuADAAAABwACgAAQBJAG4AdABlAHIAbgBhAGwATgBhAG0AZQAAAHMAdABfADQAZgA2AGEAOAA2
+ADIAMwAxADUANwBkADQAOABhADYAOQAwADYAYgA3ADQANAAxADgAMgAyAGQANQA4AGIAYwAuAGQA
+bABsAAAAXAAbAAEATABlAGcAYQBsAEMAbwBwAHkAcgBpAGcAaAB0AAAAQwBvAHAAeQByAGkAZwBo
+AHQAIABAACAATQBpAGMAcgBvAHMAbwBmAHQAIAAyADAAMQAzAAAAAAB4ACgAAQBPAHIAaQBnAGkA
+bgBhAGwARgBpAGwAZQBuAGEAbQBlAAAAcwB0AF8ANABmADYAYQA4ADYAMgAzADEANQA3AGQANAA4
+AGEANgA5ADAANgBiADcANAA0ADEAOAAyADIAZAA1ADgAYgBjAC4AZABsAGwAAAB4ACsAAQBQAHIA
+bwBkAHUAYwB0AE4AYQBtAGUAAAAAAFMAVABfAGYAYgA1ADIAMwBiADQAZgAzADAAOAAzADQAMwBh
+ADAAYgAwADYAMgA0ADkAYQA1AGIAOQBhAGYAOQA1AGUAOQAuAHYAYgBwAHIAbwBqAAAAAAA0AAgA
+AQBQAHIAbwBkAHUAYwB0AFYAZQByAHMAaQBvAG4AAAAxAC4AMAAuADAALgAwAAAAOAAIAAEAQQBz
+AHMAZQBtAGIAbAB5ACAAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4AMAAuADAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAwAAAAwOwAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
+        </ScriptProject>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Copy Source File"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute Process Task"
+      DTS:DTSID="{485F0007-DE27-476C-91E9-187BD1D43EE1}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Copy Source File"
+      DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecuteProcessData
+          Executable="C:\Windows\System32\cmd.exe"
+          Arguments="/C net use P: &quot;\\172.27.0.24\apssisfiles&quot; APSsis@DiBs /USER:fans\apssis &amp; echo F | xcopy &quot;P:\WINSNAPI&quot; &quot;\\SMAXDBPROD.aps.edu.actd\Sync\&quot; /F /Y &amp; echo F | xcopy &quot;P:\WINSNAPI&quot; &quot;\\syntempssis.aps.edu.actd\Files\Import\Food Services\FRM\WINSNAPI.TXT&quot; /F /Y &amp; net use P: /delete /yes &amp; exit /b" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create TempTable and Load Data"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{29FA52E6-0FD1-4FE8-87F0-419FE037A47C}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create TempTable and Load Data"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0D457872-C1A3-4995-9408-1B3493AE9B52}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStmtSourceType="Variable"
+          SQLTask:SqlStatementSource="User::LoadTempTable" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Drop TempTable"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5CADFC56-DCE7-4912-8262-C09CC0B256AC}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Drop TempTable"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0D457872-C1A3-4995-9408-1B3493AE9B52}"
+          SQLTask:SqlStatementSource="IF OBJECT_ID('tempdb..##TempFRMImport') IS NOT NULL DROP TABLE ##TempFRMImport" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Refresh EPC_STU_PGM_FRM from history"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C438904D-3AE1-4EB5-9C31-E7E2A88F1DDE}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Refresh EPC_STU_PGM_FRM from history"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0D457872-C1A3-4995-9408-1B3493AE9B52}"
+          SQLTask:SqlStatementSource="-- APS FRM Import&#xA;-- Truncates the FRM table &#xA;-- inserts the recent history enter date row in epc_stu_pgm_frm&#xA;--&#xA;truncate table rev.epc_stu_pgm_frm&#xA;insert rev.EPC_STU_PGM_FRM&#xA;(&#xA;        STUDENT_GU&#xA;      , FRM_CODE&#xA;      , ENTER_DATE&#xA;      , EXIT_DATE&#xA;      , ADD_DATE_TIME_STAMP&#xA;)&#xA;select &#xA;    h.student_gu&#xA;  , t.FRM_CODE&#xA;  , t.ENTER_DATE&#xA;  , t.EXIT_DATE&#xA;  , getdate()&#xA;  from rev.EPC_STU_PGM_FRM_HIS h&#xA;  join (&#xA;        select&#xA;          ROW_NUMBER() over (partition by student_gu order by enter_date desc) rn&#xA;&#x9;&#x9;, his.STU_PGM_FRM_HIS_GU&#xA;&#x9;&#x9;, his.STUDENT_GU&#xA;&#x9;&#x9;, his.FRM_CODE&#xA;&#x9;&#x9;, his.ENTER_DATE&#xA;&#x9;&#x9;, his.EXIT_DATE&#xA;        from rev.epc_stu_pgm_frm_his his&#xA;       ) t on  t.rn = 1 and t.STU_PGM_FRM_HIS_GU = h.STU_PGM_FRM_HIS_GU" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Rename Source File"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="File System Task"
+      DTS:DTSID="{2F57FC64-80B6-4DD5-919D-EA32C15C8B06}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Rename Source File"
+      DTS:TaskContact="File System Task;Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="RenameFile"
+          TaskOverwriteDestFile="True"
+          TaskSourcePath="User::FullPathImportFile"
+          TaskIsSourceVariable="True"
+          TaskDestinationPath="User::FullPathImportFileRenamed"
+          TaskIsDestinationVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\StudentID not found and invalid frm codes"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{07668845-F15A-4922-95EF-64AB493AC308}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="StudentID not found and invalid frm codes"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\StudentID not found and invalid frm codes\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\StudentID not found and invalid frm codes\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MissingStudentIDs]"
+                  connectionManagerRefId="Package.ConnectionManagers[MissingStudentIDs]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].Columns[SIS_Number]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="SIS_Number"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SIS_Number]"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].Columns[SIS_Number]" />
+                    <inputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].Columns[FRMCode]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="FRMCode"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FRMCode]"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].Columns[FRMCode]" />
+                    <inputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].Columns[SchoolCode]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="SchoolCode"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SchoolCode]"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].Columns[SchoolCode]" />
+                    <inputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].Columns[StatusCode]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="StatusCode"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[StatusCode]"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].Columns[StatusCode]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SIS_Number]"
+                      dataType="wstr"
+                      length="15"
+                      name="SIS_Number" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FRMCode]"
+                      dataType="wstr"
+                      length="1"
+                      name="FRMCode" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SchoolCode]"
+                      dataType="wstr"
+                      length="5"
+                      name="SchoolCode" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="30"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="30"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[StatusCode]"
+                      dataType="wstr"
+                      length="20"
+                      name="StatusCode" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[StudentGU]"
+                      dataType="guid"
+                      name="StudentGU" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CurrentFRM]"
+                      dataType="wstr"
+                      length="5"
+                      name="CurrentFRM" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Invalid FRM Codes"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select t.* from ##TempFRMImport t
+left join rev.SIF_22_Common_GetLookupValues('K12.ProgramInfo', 'FRM_CODE') fc on fc.VALUE_CODE = t.FRMCode
+where fc.VALUE_CODE is null</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DBConnection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DBConnection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].Columns[SIS_Number]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].ExternalColumns[SIS_Number]"
+                      length="20"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].Columns[SIS_Number]"
+                      name="SIS_Number"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].Columns[FRMCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].ExternalColumns[FRMCode]"
+                      length="5"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].Columns[FRMCode]"
+                      name="FRMCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].Columns[SchoolCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].ExternalColumns[SchoolCode]"
+                      length="20"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].Columns[SchoolCode]"
+                      name="SchoolCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].Columns[LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      length="30"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      length="30"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].Columns[StatusCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].ExternalColumns[StatusCode]"
+                      length="20"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].Columns[StatusCode]"
+                      name="StatusCode"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].ExternalColumns[SIS_Number]"
+                      dataType="wstr"
+                      length="20"
+                      name="SIS_Number" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].ExternalColumns[FRMCode]"
+                      dataType="wstr"
+                      length="5"
+                      name="FRMCode" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].ExternalColumns[SchoolCode]"
+                      dataType="wstr"
+                      length="20"
+                      name="SchoolCode" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="30"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="30"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].ExternalColumns[StatusCode]"
+                      dataType="wstr"
+                      length="20"
+                      name="StatusCode" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].ExternalColumns[StudentGU]"
+                      dataType="guid"
+                      name="StudentGU" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].ExternalColumns[CurrentFRM]"
+                      dataType="wstr"
+                      length="5"
+                      name="CurrentFRM" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Error Output].Columns[SIS_Number]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Error Output].Columns[SIS_Number]"
+                      name="SIS_Number" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Error Output].Columns[FRMCode]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Error Output].Columns[FRMCode]"
+                      name="FRMCode" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Error Output].Columns[SchoolCode]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Error Output].Columns[SchoolCode]"
+                      name="SchoolCode" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Error Output].Columns[StatusCode]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Error Output].Columns[StatusCode]"
+                      name="StatusCode" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="InvalidFRMCodes">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[InvalidFRMcodes]"
+                  connectionManagerRefId="Package.ConnectionManagers[InvalidFRMcodes]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input].Columns[SIS_Number]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="SIS_Number"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input].ExternalColumns[SIS_Number]"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].Columns[SIS_Number]" />
+                    <inputColumn
+                      refId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input].Columns[FRMCode]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="FRMCode"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input].ExternalColumns[FRMCode]"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].Columns[FRMCode]" />
+                    <inputColumn
+                      refId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input].Columns[SchoolCode]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="SchoolCode"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input].ExternalColumns[SchoolCode]"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].Columns[SchoolCode]" />
+                    <inputColumn
+                      refId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input].Columns[StatusCode]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="StatusCode"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input].ExternalColumns[StatusCode]"
+                      lineageId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output].Columns[StatusCode]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input].ExternalColumns[SIS_Number]"
+                      dataType="wstr"
+                      length="20"
+                      name="SIS_Number" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input].ExternalColumns[FRMCode]"
+                      dataType="wstr"
+                      length="5"
+                      name="FRMCode" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input].ExternalColumns[SchoolCode]"
+                      dataType="wstr"
+                      length="20"
+                      name="SchoolCode" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="30"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="30"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input].ExternalColumns[StatusCode]"
+                      dataType="wstr"
+                      length="20"
+                      name="StatusCode" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\StudentID not found and invalid frm codes\Missing Stu#"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Missing Stu#"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select 
+  t.SIS_Number
+, t.FRMCode
+, t.SchoolCode
+, t.LastName
+, t.FirstName
+, t.StatusCode
+from ##TempFRMImport t
+where t.studentGU is null</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable">User::MissingStudentID</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DBConnection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DBConnection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].Columns[SIS_Number]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].ExternalColumns[SIS_Number]"
+                      length="15"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].Columns[SIS_Number]"
+                      name="SIS_Number"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].Columns[FRMCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].ExternalColumns[FRMCode]"
+                      length="1"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].Columns[FRMCode]"
+                      name="FRMCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].Columns[SchoolCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].ExternalColumns[SchoolCode]"
+                      length="5"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].Columns[SchoolCode]"
+                      name="SchoolCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].Columns[LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      length="30"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      length="30"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].Columns[StatusCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].ExternalColumns[StatusCode]"
+                      length="50"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].Columns[StatusCode]"
+                      name="StatusCode"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].ExternalColumns[SIS_Number]"
+                      dataType="wstr"
+                      length="15"
+                      name="SIS_Number" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].ExternalColumns[FRMCode]"
+                      dataType="wstr"
+                      length="1"
+                      name="FRMCode" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].ExternalColumns[SchoolCode]"
+                      dataType="wstr"
+                      length="5"
+                      name="SchoolCode" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="30"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="30"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output].ExternalColumns[StatusCode]"
+                      dataType="wstr"
+                      length="20"
+                      name="StatusCode" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Error Output].Columns[SIS_Number]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Error Output].Columns[SIS_Number]"
+                      name="SIS_Number" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Error Output].Columns[FRMCode]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Error Output].Columns[FRMCode]"
+                      name="FRMCode" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Error Output].Columns[SchoolCode]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Error Output].Columns[SchoolCode]"
+                      name="SchoolCode" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Error Output].Columns[StatusCode]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Error Output].Columns[StatusCode]"
+                      name="StatusCode" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\StudentID not found and invalid frm codes.Paths[OLE DB Source Output1]"
+              endId="Package\StudentID not found and invalid frm codes\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\StudentID not found and invalid frm codes\Missing Stu#.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\StudentID not found and invalid frm codes.Paths[OLE DB Source Output]"
+              endId="Package\StudentID not found and invalid frm codes\InvalidFRMCodes.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\StudentID not found and invalid frm codes\Invalid FRM Codes.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update FRM N code rows"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D0942610-8D47-4FD7-BB8C-A67E8D21FEFF}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update FRM N code rows"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0D457872-C1A3-4995-9408-1B3493AE9B52}"
+          SQLTask:SqlStatementSource="-- APS FRM Import&#xA;--&#xA;-- Update exit date for rows in temp table = N, Status = 1 and prev FRM Code != N&#xA;--&#xA;update rev.EPC_STU_PGM_FRM_HIS &#xA;  set EXIT_DATE = getdate()&#xA;  , CHANGE_DATE_TIME_STAMP = getdate()&#xA;from ##TempFRMImport t&#xA;join rev.EPC_STU             stu  on stu.SIS_NUMBER  = t.SIS_Number&#xA;join rev.EPC_STU_PGM_FRM     frm  on frm.STUDENT_GU  = stu.STUDENT_GU&#xA;join rev.EPC_STU_PGM_FRM_HIS frmh on frmh.STUDENT_GU = stu.STUDENT_GU&#xA;where t.StatusCode = '1'&#xA;      and t.FRMCode = 'N'&#xA;&#x9;  and t.CurrentFRM != 'N'&#xA;&#x9;  and frmh.EXIT_DATE is null&#xA;&#x9;  and exists (select l.value_code from rev.SIF_22_Common_GetLookupValues('K12.ProgramInfo', 'FRM_CODE') l where l.VALUE_CODE = t.FRMcode)&#xA;--&#xA;-- Insert row for rows in temp table = N, Status = 1 and prev FRM Code != N or null with FRM code = N&#xA;--&#xA;insert rev.EPC_STU_PGM_FRM_HIS&#xA;      (STU_PGM_FRM_HIS_GU&#xA;      ,STUDENT_GU&#xA;      ,FRM_CODE&#xA;      ,ENTER_DATE&#xA;&#x9;  ,ADD_DATE_TIME_STAMP&#xA;&#x9;  )&#xA;select&#xA;       newid()&#xA;&#x9; , t.studentGU&#xA;&#x9; , t.FRMCode&#xA;&#x9; , getdate()&#xA;&#x9; , getdate() &#xA;from ##TempFRMImport t&#xA;where t.StatusCode = '1'&#xA;      and t.FRMCode = 'N'&#xA;&#x9;  and (t.CurrentFRM != 'N' or t.CurrentFRM is null OR t.CurrentFRM!=t.FRMCode)&#xA;&#x9;  and t.studentGU is not null&#xA;&#x9;  and exists (select l.value_code from rev.SIF_22_Common_GetLookupValues('K12.ProgramInfo', 'FRM_CODE') l where l.VALUE_CODE = t.FRMcode)&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update FRM other codes"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B5D9711B-8F9E-406A-9124-B7E53A18E689}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update FRM other codes"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0D457872-C1A3-4995-9408-1B3493AE9B52}"
+          SQLTask:SqlStatementSource="-- APS FRM Import&#xA;--&#xA;-- Update exit date for rows in temp table != N, Status = 1 &#xA;--&#xA;update rev.EPC_STU_PGM_FRM_HIS &#xA;  set EXIT_DATE = getdate()&#xA;  , CHANGE_DATE_TIME_STAMP = getdate()&#xA;from ##TempFRMImport t&#xA;join rev.EPC_STU             stu  on stu.SIS_NUMBER  = t.SIS_Number&#xA;join rev.EPC_STU_PGM_FRM     frm  on frm.STUDENT_GU  = stu.STUDENT_GU&#xA;join rev.EPC_STU_PGM_FRM_HIS frmh on frmh.STUDENT_GU = stu.STUDENT_GU&#xA;where t.StatusCode = '1'&#xA;      and t.FRMCode != 'N'&#xA;&#x9;  and frmh.EXIT_DATE is null&#xA;&#x9;  and exists (select l.value_code from rev.SIF_22_Common_GetLookupValues('K12.ProgramInfo', 'FRM_CODE') l where l.VALUE_CODE = t.FRMcode)&#xA;--&#xA;-- Insert row for rows in temp table != N, Status = 1 &#xA;--&#xA;insert rev.EPC_STU_PGM_FRM_HIS&#xA;      (STU_PGM_FRM_HIS_GU&#xA;      ,STUDENT_GU&#xA;      ,FRM_CODE&#xA;      ,ENTER_DATE&#xA;&#x9;  ,ADD_DATE_TIME_STAMP&#xA;&#x9;  )&#xA;select&#xA;       newid()&#xA;&#x9; , t.studentGU&#xA;&#x9; , t.FRMCode&#xA;&#x9; , getdate()&#xA;&#x9; , getdate() &#xA;from ##TempFRMImport t&#xA;where t.StatusCode = '1'&#xA;      and t.FRMCode != 'N'&#xA;&#x9;  and t.StudentGU is not NULL&#xA;&#x9;  and exists (select l.value_code from rev.SIF_22_Common_GetLookupValues('K12.ProgramInfo', 'FRM_CODE') l where l.VALUE_CODE = t.FRMcode)&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{14A91E3D-E365-4BD1-8BF7-EC6C9978567C}"
+      DTS:From="Package\Create TempTable and Load Data"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Update FRM N code rows" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{A18438F5-647C-42DE-BF95-641722EA8A65}"
+      DTS:From="Package\StudentID not found and invalid frm codes"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Drop TempTable" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{27D61D4C-D791-4F2D-BE31-CA3F475AD80E}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::ImportFileExists]==True"
+      DTS:From="Package\Check If Source File for Import Exists"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Create TempTable and Load Data" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{38BA9D67-6E21-4ADD-B133-859153459592}"
+      DTS:From="Package\Drop TempTable"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Refresh EPC_STU_PGM_FRM from history" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{526CBEBC-5C85-45F2-BB0D-A7EDE36EF70D}"
+      DTS:From="Package\Refresh EPC_STU_PGM_FRM from history"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Rename Source File" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{E0DD2F7E-F5D3-4A98-849E-790E0E378A58}"
+      DTS:From="Package\Copy Source File"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Check If Source File for Import Exists" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{46AAD97E-3E7C-4F44-A9FB-A9CAA164664D}"
+      DTS:From="Package\Update FRM N code rows"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\Update FRM other codes" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
+      DTS:CreationName=""
+      DTS:DTSID="{F9526A54-566F-408F-AB5C-8C14413F68F5}"
+      DTS:From="Package\Update FRM other codes"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 9"
+      DTS:To="Package\StudentID not found and invalid frm codes" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="257,42"
+          Id="Package\Check If Source File for Import Exists"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Copy Source File"
+          TopLeft="314,13" />
+        <NodeLayout
+          Size="278,44"
+          Id="Package\Create TempTable and Load Data"
+          TopLeft="5.5,78.7830188679245" />
+        <NodeLayout
+          Size="278,44"
+          Id="Package\Drop TempTable"
+          TopLeft="5.5,371.915094339623" />
+        <NodeLayout
+          Size="278,44"
+          Id="Package\Refresh EPC_STU_PGM_FRM from history"
+          TopLeft="5.5,445.198113207548" />
+        <NodeLayout
+          Size="278,44"
+          Id="Package\Rename Source File"
+          TopLeft="5.5,518.707547169812" />
+        <NodeLayout
+          Size="278,44"
+          Id="Package\StudentID not found and invalid frm codes"
+          TopLeft="5.5,298.632075471699" />
+        <NodeLayout
+          Size="278,44"
+          Id="Package\Update FRM N code rows"
+          TopLeft="5.5,152.066037735849" />
+        <NodeLayout
+          Size="278,44"
+          Id="Package\Update FRM other codes"
+          TopLeft="5.5,225.349056603774" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="144.254716981132,122.707547169811">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.3584905660377"
+              Start="0,0"
+              End="0,21.8584905660377">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.8584905660377" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="144.254716981132,342.556603773585">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.3584905660377"
+              Start="0,0"
+              End="0,21.8584905660377">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.8584905660377" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="134,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="10.5,31.2830188679245"
+              Start="0,0"
+              End="10.5,23.7830188679245">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.6415094339622" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.6415094339622"
+                    Point2="0,15.6415094339622"
+                    Point3="4,15.6415094339622" />
+                  <mssgle:LineSegment
+                    End="6.5,15.6415094339622" />
+                  <mssgle:CubicBezierSegment
+                    Point1="6.5,15.6415094339622"
+                    Point2="10.5,15.6415094339622"
+                    Point3="10.5,19.6415094339622" />
+                  <mssgle:LineSegment
+                    End="10.5,23.7830188679245" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-2.75,20.6415094339622,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="144.254716981132,415.83962264151">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.3584905660377"
+              Start="0,0"
+              End="0,21.8584905660377">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.8584905660377" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="144.254716981132,489.122641509434">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.5849056603774"
+              Start="0,0"
+              End="0,22.0849056603774">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.0849056603774" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="314,30.25">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-51.5,0"
+              Start="0,0"
+              End="-44,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-44,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="144.254716981132,195.990566037736">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.3584905660373"
+              Start="0,0"
+              End="0,21.8584905660373">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.8584905660373" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="144.254716981132,269.273584905661">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.3584905660377"
+              Start="0,0"
+              End="0,21.8584905660377">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.8584905660377" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\StudentID not found and invalid frm codes">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="181,44"
+          Id="Package\StudentID not found and invalid frm codes\InvalidFRMCodes"
+          TopLeft="395.5,114.141509433962" />
+        <NodeLayout
+          Size="139,44"
+          Id="Package\StudentID not found and invalid frm codes\Missing Stu#"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="172,44"
+          Id="Package\StudentID not found and invalid frm codes\Flat File Destination"
+          TopLeft="78.3679245283019,100.367924528302" />
+        <NodeLayout
+          Size="167,44"
+          Id="Package\StudentID not found and invalid frm codes\Invalid FRM Codes"
+          TopLeft="342.594339622641,10.3301886792453" />
+        <EdgeLayout
+          Id="Package\StudentID not found and invalid frm codes.Paths[OLE DB Source Output]"
+          TopLeft="425.952830188679,54.2547169811321">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="59.8867924528302,59.8867924528302"
+              Start="0,0"
+              End="59.8867924528302,52.3867924528302">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.9245283018868" />
+                  <mssgle:LineSegment
+                    End="59.8867924528302,29.9245283018868" />
+                  <mssgle:LineSegment
+                    End="59.8867924528302,52.3867924528302" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\StudentID not found and invalid frm codes.Paths[OLE DB Source Output1]"
+          TopLeft="74.8962264150943,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="89.3207547169811,50.9433962264151"
+              Start="0,0"
+              End="89.3207547169811,43.4433962264151">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.4716981132076" />
+                  <mssgle:LineSegment
+                    End="89.3207547169811,25.4716981132076" />
+                  <mssgle:LineSegment
+                    End="89.3207547169811,43.4433962264151" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\StudentID not found and invalid frm codes\Missing Stu#">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\StudentID not found and invalid frm codes\Invalid FRM Codes">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

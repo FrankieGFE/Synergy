@@ -1,0 +1,2104 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/29/2014 12:41:43 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="AZLT-MMELARCODE"
+  DTS:CreatorName="XNOVAHQ\MMelarcode"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{12C946C5-50FC-4B24-B74C-6D7A425DB28E}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SchoolNet_RDA"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{13C470EB-09D0-4CE3-A5F7-38619CC83817}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Course]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{D021857A-2BB4-4CF8-9C1E-E082B59318AE}"
+      DTS:ObjectName="Course">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::OutputFilePath]+"RDA_COURSE.txt"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="D:\from 011-synergydb\Edupoint_Work\InterfacePackages\SchoolNet_RDA\RDA_COURSE.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ID_NBR"
+              DTS:DTSID="{83917735-3AE7-4C7D-B723-6B46A1B5B62D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="4000"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="EMP_NBR"
+              DTS:DTSID="{F6F14F44-EE65-4222-A554-D865996BBA45}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SCH_NBR"
+              DTS:DTSID="{1E6FAC7E-2C47-49EF-857F-EA14D1FBD38A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DATE_CREATE"
+              DTS:DTSID="{75380E6E-6C94-4349-81BF-ADB80779F1F0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CRS_ASG"
+              DTS:DTSID="{DEE6095F-B325-44A1-99EC-30473099ABEB}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DB Connection]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{48D58464-730F-4698-B76A-0769836F6733}"
+      DTS:ObjectName="DB Connection">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SYNERGYDBDC;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-SchoolNet_RDA-{48D58464-730F-4698-B76A-0769836F6733}azlt-mmelarcode\sql2012.STDemo808_2012;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Students]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{B624E53B-0469-4FE8-B314-202CC2DAE0AD}"
+      DTS:ObjectName="Students">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::OutputFilePath]+"RDA_STUDENT.txt"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="D:\from 011-synergydb\Edupoint_Work\InterfacePackages\SchoolNet_RDA\RDA_STUDENT.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_ID_NBR"
+              DTS:DTSID="{87AAF756-B9DC-4C62-86EE-EBBA43A4086B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_STATE_ID"
+              DTS:DTSID="{B02A8819-DB81-44C2-88AF-C37B7BBA3B81}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_PRIOR_ID"
+              DTS:DTSID="{BCD8BD7B-3B4A-4E6F-BAF1-F7612A379CC2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_FRST_NME"
+              DTS:DTSID="{E8F712C5-DE7C-4CD4-88D2-F7264574E527}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_LST_NME"
+              DTS:DTSID="{22949D2F-0DAF-4E73-87DA-C95EEB79AE31}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_M_NME"
+              DTS:DTSID="{2B1ECE0D-9E84-455D-BC6C-1EB369C2CA3C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_BRTH_DT"
+              DTS:DTSID="{50DE1C86-5B7B-4436-839B-2802FA3A1F65}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_GENDER"
+              DTS:DTSID="{F643584F-FA98-4BBB-9485-EA409297F2D6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_ETHN_CD"
+              DTS:DTSID="{515D3E8C-06F7-4F21-98D3-6C0CE99F31C6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="16"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_ETHN_VALUE"
+              DTS:DTSID="{C711D116-5696-4D43-9684-38AF1BB4C0E3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_ETHN_CD2"
+              DTS:DTSID="{BB168833-7FF9-430F-B441-5B776F223C60}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="16"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_ETHN2_VALUE"
+              DTS:DTSID="{29967804-D354-44A9-BE09-BC7C669073C0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_ETHN_CD3"
+              DTS:DTSID="{A6A6B05A-E899-42B8-8552-601F8336BC91}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="16"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_ETHN3_VALUE"
+              DTS:DTSID="{D6AD5402-9C54-4CD2-AC82-A5EB09D5CF6A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_ETHN_CD4"
+              DTS:DTSID="{B7A093B2-3791-4621-B147-B0434F0A53D5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="16"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_ETHN4_VALUE"
+              DTS:DTSID="{9D3FAB82-ADA4-417E-8DD8-F37C2BDAA8AE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_ETHN_CD5"
+              DTS:DTSID="{B8E7A05F-3684-4CF0-A16A-0D4C0FCF4004}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="16"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_ETHN5_VALUE"
+              DTS:DTSID="{57647E5B-9736-432F-A26B-87FCD70F050B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="3"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_HISPLAT"
+              DTS:DTSID="{7BBE1FFB-C0D4-4202-8A5D-A643AA5291A7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_SCH_NBR"
+              DTS:DTSID="{73F36285-813A-48F2-9138-601D0DA2B2F3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_GRDE"
+              DTS:DTSID="{16B3786B-D179-4C33-9C91-9708EC378406}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_LNCH_FLG"
+              DTS:DTSID="{D7D51921-94B0-4948-AD13-5B694A3CF819}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_ELL_STATUS"
+              DTS:DTSID="{0F68D684-9B7D-494D-A874-6FF4C62B4C3B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_SPED"
+              DTS:DTSID="{C43033CA-6F25-47BF-BEF4-D825A3C8354D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_PRIM_DISAB"
+              DTS:DTSID="{212DD574-947F-4CDB-A9A4-0162E2C9E63E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_504"
+              DTS:DTSID="{3BC20B7C-DEAF-43D8-935E-839978C25C14}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fld_DateCreate"
+              DTS:DTSID="{10C7590F-88B8-41DA-910C-DBD72E878083}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{61E1A8ED-CF43-49CB-A399-8A95525CD2E0}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="OutputFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\from 011-synergydb\Edupoint_Work\InterfacePackages\SchoolNet_RDA\</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\RDA-Course"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{261DEB0E-852A-4742-ADEE-98BCB47452BD}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="RDA-Course"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\RDA-Course\DB Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--&lt;APS - SchoolNet - RDA - Course&gt;
+declare @SchYr INT
+declare @SchExt varchar(1) = 'R'
+declare @RunDate smalldatetime = getdate()
+set @SchYr = (select school_year from rev.SIF_22_Common_CurrentYear) 
+----**********  Comment out these post year roll over *******
+--set @RunDate = '08/04/2014'
+--set @SchYr = 2014  
+------------------------------------------------------------
+SELECT distinct
+
+   stu.SIS_NUMBER                   AS [ID_NBR]
+ , replace(stf.BADGE_NUM, 'e', '')  AS [EMP_NBR]
+ , sch.SCHOOL_CODE                  AS [SCH_NBR]
+ , @RunDate                         AS [DATE_CREATE]
+ , crs.COURSE_ID                    AS [CRS_ASG]
+
+FROM  rev.EPC_STU                         stu
+      JOIN rev.EPC_STU_SCH_YR             ssy   ON ssy.STUDENT_GU              = stu.STUDENT_GU
+                                                   AND ssy.STATUS is NULL
+      JOIN rev.REV_ORGANIZATION_YEAR      oyr   ON oyr.ORGANIZATION_YEAR_GU    = ssy.ORGANIZATION_YEAR_GU
+      JOIN rev.REV_YEAR                   yr    ON yr.YEAR_GU                  = oyr.YEAR_GU
+                                                   AND yr.SCHOOL_YEAR          = @SchYr
+                                                   AND yr.EXTENSION            = @SchExt
+      JOIN rev.EPC_SCH                    sch   ON sch.ORGANIZATION_GU         = oyr.ORGANIZATION_GU
+      JOIN REV.EPC_STU_CLASS              cls   ON cls.STUDENT_SCHOOL_YEAR_GU  = ssy.STUDENT_SCHOOL_YEAR_GU
+      JOIN REV.EPC_SCH_YR_SECT            sec   ON cls.SECTION_GU              = sec.SECTION_GU
+      LEFT JOIN rev.EPC_SCH_YR_SECT       sect  ON sect.SECTION_GU             = ssy.HOMEROOM_SECTION_GU
+      LEFT JOIN rev.EPC_SCH_YR_CRS        ycrs  ON ycrs.SCHOOL_YEAR_COURSE_GU  = sect.SCHOOL_YEAR_COURSE_GU
+      LEFT JOIN rev.EPC_CRS               crs   ON crs.COURSE_GU               = ycrs.COURSE_GU
+      LEFT JOIN rev.EPC_STAFF_SCH_YR      stfsy ON stfsy.STAFF_SCHOOL_YEAR_GU  = sect.STAFF_SCHOOL_YEAR_GU
+      LEFT JOIN rev.EPC_STAFF             stf   ON stf.STAFF_GU                = stfsy.STAFF_GU
+WHERE (cls.LEAVE_DATE IS NULL OR cls.LEAVE_DATE &gt;= @RunDate)
+       AND cls.ENTER_DATE &lt;= @RunDate
+       AND cls.ENTER_DATE &lt;= @RunDate</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\RDA-Course\DB Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].Columns[ID_NBR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ID_NBR]"
+                      length="20"
+                      lineageId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].Columns[ID_NBR]"
+                      name="ID_NBR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].Columns[EMP_NBR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].ExternalColumns[EMP_NBR]"
+                      length="4000"
+                      lineageId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].Columns[EMP_NBR]"
+                      name="EMP_NBR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].Columns[SCH_NBR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SCH_NBR]"
+                      length="20"
+                      lineageId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].Columns[SCH_NBR]"
+                      name="SCH_NBR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].Columns[DATE_CREATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].ExternalColumns[DATE_CREATE]"
+                      lineageId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].Columns[DATE_CREATE]"
+                      name="DATE_CREATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].Columns[CRS_ASG]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].ExternalColumns[CRS_ASG]"
+                      length="20"
+                      lineageId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].Columns[CRS_ASG]"
+                      name="CRS_ASG"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].ExternalColumns[ID_NBR]"
+                      dataType="wstr"
+                      length="20"
+                      name="ID_NBR" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].ExternalColumns[EMP_NBR]"
+                      dataType="wstr"
+                      length="4000"
+                      name="EMP_NBR" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].ExternalColumns[SCH_NBR]"
+                      dataType="wstr"
+                      length="20"
+                      name="SCH_NBR" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].ExternalColumns[DATE_CREATE]"
+                      dataType="dbTimeStamp"
+                      name="DATE_CREATE" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].ExternalColumns[CRS_ASG]"
+                      dataType="wstr"
+                      length="20"
+                      name="CRS_ASG" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Error Output].Columns[ID_NBR]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Error Output].Columns[ID_NBR]"
+                      name="ID_NBR" />
+                    <outputColumn
+                      refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Error Output].Columns[EMP_NBR]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Error Output].Columns[EMP_NBR]"
+                      name="EMP_NBR" />
+                    <outputColumn
+                      refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Error Output].Columns[SCH_NBR]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Error Output].Columns[SCH_NBR]"
+                      name="SCH_NBR" />
+                    <outputColumn
+                      refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Error Output].Columns[DATE_CREATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Error Output].Columns[DATE_CREATE]"
+                      name="DATE_CREATE" />
+                    <outputColumn
+                      refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Error Output].Columns[CRS_ASG]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Error Output].Columns[CRS_ASG]"
+                      name="CRS_ASG" />
+                    <outputColumn
+                      refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\RDA-Course\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\RDA-Course\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Course]"
+                  connectionManagerRefId="Package.ConnectionManagers[Course]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\RDA-Course\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\RDA-Course\Flat File Destination.Inputs[Flat File Destination Input].Columns[ID_NBR]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="ID_NBR"
+                      externalMetadataColumnId="Package\RDA-Course\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ID_NBR]"
+                      lineageId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].Columns[ID_NBR]" />
+                    <inputColumn
+                      refId="Package\RDA-Course\Flat File Destination.Inputs[Flat File Destination Input].Columns[EMP_NBR]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="EMP_NBR"
+                      externalMetadataColumnId="Package\RDA-Course\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[EMP_NBR]"
+                      lineageId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].Columns[EMP_NBR]" />
+                    <inputColumn
+                      refId="Package\RDA-Course\Flat File Destination.Inputs[Flat File Destination Input].Columns[SCH_NBR]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="SCH_NBR"
+                      externalMetadataColumnId="Package\RDA-Course\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SCH_NBR]"
+                      lineageId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].Columns[SCH_NBR]" />
+                    <inputColumn
+                      refId="Package\RDA-Course\Flat File Destination.Inputs[Flat File Destination Input].Columns[DATE_CREATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DATE_CREATE"
+                      externalMetadataColumnId="Package\RDA-Course\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DATE_CREATE]"
+                      lineageId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].Columns[DATE_CREATE]" />
+                    <inputColumn
+                      refId="Package\RDA-Course\Flat File Destination.Inputs[Flat File Destination Input].Columns[CRS_ASG]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="CRS_ASG"
+                      externalMetadataColumnId="Package\RDA-Course\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CRS_ASG]"
+                      lineageId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output].Columns[CRS_ASG]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\RDA-Course\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ID_NBR]"
+                      dataType="wstr"
+                      length="20"
+                      name="ID_NBR" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Course\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[EMP_NBR]"
+                      dataType="wstr"
+                      length="4000"
+                      name="EMP_NBR" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Course\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SCH_NBR]"
+                      dataType="wstr"
+                      length="20"
+                      name="SCH_NBR" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Course\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DATE_CREATE]"
+                      dataType="dbTimeStamp"
+                      name="DATE_CREATE" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Course\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CRS_ASG]"
+                      dataType="wstr"
+                      length="20"
+                      name="CRS_ASG" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\RDA-Course.Paths[OLE DB Source Output]"
+              endId="Package\RDA-Course\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\RDA-Course\DB Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\RDA-Students"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{CE295A3C-CEF6-49FC-A3AD-DAA9C33A5FBD}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="RDA-Students"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\RDA-Students\DB Query"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--&lt;APS - SchoolNet - RDA - Student&gt;
+declare @SchYr INT
+declare @SchExt varchar(1) = 'R'
+declare @RunDate smalldatetime = getdate()
+set @SchYr = (select school_year from rev.SIF_22_Common_CurrentYear) 
+----**********  Comment out these post year roll over *******
+set @RunDate = '08/04/2014'
+set @SchYr = 2014  
+------------------------------------------------------------
+; with Rlist AS
+(
+select 
+  pvt.PERSON_GU
+, pvt.[1] as Race1
+, pvt.[2] as Race2
+, pvt.[3] as Race3
+, pvt.[4] as Race4
+, pvt.[5] as Race5
+, ROW_NUMBER() OVER(PARTITION by pvt.PERSON_GU order by pvt.person_gu) rn
+from 
+  (select
+       ROW_NUMBER() OVER(PARTITION by seth.PERSON_GU order by seth.Ethnic_code) rn
+    ,  seth.PERSON_GU
+    , seth.ETHNIC_CODE
+   from rev.REV_PERSON_SECONDRY_ETH_LST seth
+   ) pt
+   pivot (min(ETHNIC_CODE) FOR rn in ([1],[2],[3],[4],[5])) pvt
+)
+SELECT
+   stu.SIS_NUMBER                            AS [fld_ID_NBR]
+ , ''                                        AS [fld_STATE_ID]
+ , ''                                        AS [fld_PRIOR_ID]
+ , per.FIRST_NAME                            AS [fld_FRST_NME]
+ , per.LAST_NAME                             AS [fld_LST_NME]
+ , per.MIDDLE_NAME                           AS [fld_M_NME]
+ , convert(varchar(10), per.birth_date, 120) AS [fld_BRTH_DT]
+ , per.GENDER                                AS [fld_GENDER]
+ , CASE
+             WHEN rl.Race1 = '1'     THEN 'C'
+             WHEN rl.Race1 = '600'   THEN 'B'
+             WHEN rl.Race1 = '100'   THEN 'I'
+             WHEN rl.Race1 = '299'   THEN 'A'
+             WHEN rl.Race1 = '399'   THEN 'P'
+             WHEN rl.Race1 = '401'   THEN 'X'
+   END                                       AS [fld_ETHN_CD]
+ , CASE
+             WHEN rl.Race1 = '1'     THEN 'WHITE-CAUCASION'
+             WHEN rl.Race1 = '600'   THEN 'BBLACK-AFRICANAM'
+             WHEN rl.Race1 = '100'   THEN 'AM INDIAN'
+             WHEN rl.Race1 = '299'   THEN 'ASIAN'
+             WHEN rl.Race1 = '399'   THEN 'PACIFIC ISLANDER'
+             WHEN rl.Race1 = '401'   THEN 'X'
+   END                                       AS [fld_ETHN_VALUE]
+ ,  CASE
+             WHEN rl.Race2 = '1'     THEN 'C'
+             WHEN rl.Race2 = '600'   THEN 'B'
+             WHEN rl.Race2 = '100'   THEN 'I'
+             WHEN rl.Race2 = '299'   THEN 'A'
+             WHEN rl.Race2 = '399'   THEN 'P'
+             WHEN rl.Race2 = '401'   THEN 'X'
+   END                                       AS [fld_ETHN_CD2]
+ , CASE
+             WHEN rl.Race2 = '1'     THEN 'WHITE-CAUCASION'
+             WHEN rl.Race2 = '600'   THEN 'BBLACK-AFRICANAM'
+             WHEN rl.Race2 = '100'   THEN 'AM INDIAN'
+             WHEN rl.Race2 = '299'   THEN 'ASIAN'
+             WHEN rl.Race2 = '399'   THEN 'PACIFIC ISLANDER'
+             WHEN rl.Race2 = '401'   THEN 'X'
+   END                                       AS [fld_ETHN2_VALUE]
+ ,  CASE
+             WHEN rl.Race3 = '1'     THEN 'C'
+             WHEN rl.Race3 = '600'   THEN 'B'
+             WHEN rl.Race3 = '100'   THEN 'I'
+             WHEN rl.Race3 = '299'   THEN 'A'
+             WHEN rl.Race3 = '399'   THEN 'P'
+             WHEN rl.Race3 = '401'   THEN 'X'
+   END                                       AS [fld_ETHN_CD3]
+ , CASE
+             WHEN rl.Race3 = '1'     THEN 'WHITE-CAUCASION'
+             WHEN rl.Race3 = '600'   THEN 'BBLACK-AFRICANAM'
+             WHEN rl.Race3 = '100'   THEN 'AM INDIAN'
+             WHEN rl.Race3 = '299'   THEN 'ASIAN'
+             WHEN rl.Race3 = '399'   THEN 'PACIFIC ISLANDER'
+             WHEN rl.Race3 = '401'   THEN 'X'
+   END                                       AS [fld_ETHN3_VALUE]
+ ,  CASE
+             WHEN rl.Race4 = '1'     THEN 'C'
+             WHEN rl.Race4 = '600'   THEN 'B'
+             WHEN rl.Race4 = '100'   THEN 'I'
+             WHEN rl.Race4 = '299'   THEN 'A'
+             WHEN rl.Race4 = '399'   THEN 'P'
+             WHEN rl.Race4 = '401'   THEN 'X'
+   END                                       AS [fld_ETHN_CD4]
+ , CASE
+             WHEN rl.Race4 = '1'     THEN 'WHITE-CAUCASION'
+             WHEN rl.Race4 = '600'   THEN 'BBLACK-AFRICANAM'
+             WHEN rl.Race4 = '100'   THEN 'AM INDIAN'
+             WHEN rl.Race4 = '299'   THEN 'ASIAN'
+             WHEN rl.Race4 = '399'   THEN 'PACIFIC ISLANDER'
+             WHEN rl.Race4 = '401'   THEN 'X'
+   END                                       AS [fld_ETHN4_VALUE]
+ ,  CASE
+             WHEN rl.Race5 = '1'     THEN 'C'
+             WHEN rl.Race5 = '600'   THEN 'B'
+             WHEN rl.Race5 = '100'   THEN 'I'
+             WHEN rl.Race5 = '299'   THEN 'A'
+             WHEN rl.Race5 = '399'   THEN 'P'
+             WHEN rl.Race5 = '401'   THEN 'X'
+   END                                       AS [fld_ETHN_CD5]
+ , CASE
+             WHEN rl.Race5 = '1'     THEN 'WHITE-CAUCASION'
+             WHEN rl.Race5 = '600'   THEN 'BBLACK-AFRICANAM'
+             WHEN rl.Race5 = '100'   THEN 'AM INDIAN'
+             WHEN rl.Race5 = '299'   THEN 'ASIAN'
+             WHEN rl.Race5 = '399'   THEN 'PACIFIC ISLANDER'
+             WHEN rl.Race5 = '401'   THEN 'X'
+   END                                       AS [fld_ETHN5_VALUE]
+ , CASE WHEN per.HISPANIC_INDICATOR = 'Y' THEN 'HL'
+        ELSE 'NHL'
+   END                                       AS [fld_HISPLAT]
+ , sch.SCHOOL_CODE                           AS [fld_SCH_NBR]
+ , grd.VALUE_DESCRIPTION                     AS [fld_GRDE]
+ , (select top 1 f.frm_code from rev.EPC_STU_PGM_FRM_HIS f where f.STUDENT_GU = stu.STUDENT_GU and f.EXIT_DATE is null)
+                                             AS [fld_LNCH_FLG]
+ , ''                                        AS [fld_ELL_STATUS]
+ , ''                                        AS [fld_SPED]
+ , ''                                        AS [fld_PRIM_DISAB]
+ , ''                                        AS [fld_504]
+ , @RunDate                                  AS [fld_DateCreate]
+FROM  rev.EPC_STU                    stu
+      JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU           = stu.STUDENT_GU
+                                             AND ssy.STATUS is NULL
+      JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
+      JOIN rev.REV_YEAR              yr   ON yr.YEAR_GU               = oyr.YEAR_GU
+                                             AND yr.SCHOOL_YEAR       = @SchYr
+                                             AND yr.EXTENSION         = @SchExt
+      JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU      = oyr.ORGANIZATION_GU
+      JOIN rev.REV_PERSON            per  ON per.PERSON_GU            = stu.STUDENT_GU
+      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd on grd.VALUE_CODE = ssy.GRADE
+      LEFT JOIN Rlist                rl   ON rl.PERSON_GU             = stu.STUDENT_GU and rl.rn = 1</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\RDA-Students\DB Query.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ID_NBR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ID_NBR]"
+                      length="20"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ID_NBR]"
+                      name="fld_ID_NBR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_STATE_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_STATE_ID]"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_STATE_ID]"
+                      name="fld_STATE_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_PRIOR_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_PRIOR_ID]"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_PRIOR_ID]"
+                      name="fld_PRIOR_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_FRST_NME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_FRST_NME]"
+                      length="60"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_FRST_NME]"
+                      name="fld_FRST_NME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_LST_NME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_LST_NME]"
+                      length="60"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_LST_NME]"
+                      name="fld_LST_NME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_M_NME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_M_NME]"
+                      length="20"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_M_NME]"
+                      name="fld_M_NME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_BRTH_DT]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_BRTH_DT]"
+                      length="10"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_BRTH_DT]"
+                      name="fld_BRTH_DT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_GENDER]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_GENDER]"
+                      length="5"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_GENDER]"
+                      name="fld_GENDER"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN_CD]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN_CD]"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN_CD]"
+                      name="fld_ETHN_CD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN_VALUE]"
+                      length="16"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN_VALUE]"
+                      name="fld_ETHN_VALUE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN_CD2]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN_CD2]"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN_CD2]"
+                      name="fld_ETHN_CD2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN2_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN2_VALUE]"
+                      length="16"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN2_VALUE]"
+                      name="fld_ETHN2_VALUE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN_CD3]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN_CD3]"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN_CD3]"
+                      name="fld_ETHN_CD3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN3_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN3_VALUE]"
+                      length="16"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN3_VALUE]"
+                      name="fld_ETHN3_VALUE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN_CD4]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN_CD4]"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN_CD4]"
+                      name="fld_ETHN_CD4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN4_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN4_VALUE]"
+                      length="16"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN4_VALUE]"
+                      name="fld_ETHN4_VALUE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN_CD5]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN_CD5]"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN_CD5]"
+                      name="fld_ETHN_CD5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN5_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN5_VALUE]"
+                      length="16"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN5_VALUE]"
+                      name="fld_ETHN5_VALUE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_HISPLAT]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_HISPLAT]"
+                      length="3"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_HISPLAT]"
+                      name="fld_HISPLAT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_SCH_NBR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_SCH_NBR]"
+                      length="20"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_SCH_NBR]"
+                      name="fld_SCH_NBR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_GRDE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_GRDE]"
+                      length="600"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_GRDE]"
+                      name="fld_GRDE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_LNCH_FLG]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_LNCH_FLG]"
+                      length="5"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_LNCH_FLG]"
+                      name="fld_LNCH_FLG"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ELL_STATUS]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ELL_STATUS]"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ELL_STATUS]"
+                      name="fld_ELL_STATUS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_SPED]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_SPED]"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_SPED]"
+                      name="fld_SPED"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_PRIM_DISAB]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_PRIM_DISAB]"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_PRIM_DISAB]"
+                      name="fld_PRIM_DISAB"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_504]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_504]"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_504]"
+                      name="fld_504"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_DateCreate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_DateCreate]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_DateCreate]"
+                      name="fld_DateCreate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ID_NBR]"
+                      dataType="wstr"
+                      length="20"
+                      name="fld_ID_NBR" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_STATE_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_STATE_ID" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_PRIOR_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_PRIOR_ID" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_FRST_NME]"
+                      dataType="wstr"
+                      length="60"
+                      name="fld_FRST_NME" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_LST_NME]"
+                      dataType="wstr"
+                      length="60"
+                      name="fld_LST_NME" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_M_NME]"
+                      dataType="wstr"
+                      length="20"
+                      name="fld_M_NME" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_BRTH_DT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="fld_BRTH_DT" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_GENDER]"
+                      dataType="wstr"
+                      length="5"
+                      name="fld_GENDER" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN_CD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_ETHN_CD" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      name="fld_ETHN_VALUE" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN_CD2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_ETHN_CD2" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN2_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      name="fld_ETHN2_VALUE" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN_CD3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_ETHN_CD3" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN3_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      name="fld_ETHN3_VALUE" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN_CD4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_ETHN_CD4" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN4_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      name="fld_ETHN4_VALUE" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN_CD5]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_ETHN_CD5" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ETHN5_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      name="fld_ETHN5_VALUE" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_HISPLAT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="fld_HISPLAT" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_SCH_NBR]"
+                      dataType="wstr"
+                      length="20"
+                      name="fld_SCH_NBR" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_GRDE]"
+                      dataType="wstr"
+                      length="600"
+                      name="fld_GRDE" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_LNCH_FLG]"
+                      dataType="wstr"
+                      length="5"
+                      name="fld_LNCH_FLG" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_ELL_STATUS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_ELL_STATUS" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_SPED]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_SPED" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_PRIM_DISAB]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_PRIM_DISAB" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_504]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_504" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].ExternalColumns[fld_DateCreate]"
+                      dataType="dbTimeStamp"
+                      name="fld_DateCreate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ID_NBR]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ID_NBR]"
+                      name="fld_ID_NBR" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_STATE_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_STATE_ID]"
+                      name="fld_STATE_ID" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_PRIOR_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_PRIOR_ID]"
+                      name="fld_PRIOR_ID" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_FRST_NME]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_FRST_NME]"
+                      name="fld_FRST_NME" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_LST_NME]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_LST_NME]"
+                      name="fld_LST_NME" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_M_NME]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_M_NME]"
+                      name="fld_M_NME" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_BRTH_DT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_BRTH_DT]"
+                      name="fld_BRTH_DT" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_GENDER]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_GENDER]"
+                      name="fld_GENDER" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN_CD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN_CD]"
+                      name="fld_ETHN_CD" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN_VALUE]"
+                      name="fld_ETHN_VALUE" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN_CD2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN_CD2]"
+                      name="fld_ETHN_CD2" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN2_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN2_VALUE]"
+                      name="fld_ETHN2_VALUE" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN_CD3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN_CD3]"
+                      name="fld_ETHN_CD3" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN3_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN3_VALUE]"
+                      name="fld_ETHN3_VALUE" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN_CD4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN_CD4]"
+                      name="fld_ETHN_CD4" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN4_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN4_VALUE]"
+                      name="fld_ETHN4_VALUE" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN_CD5]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN_CD5]"
+                      name="fld_ETHN_CD5" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN5_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ETHN5_VALUE]"
+                      name="fld_ETHN5_VALUE" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_HISPLAT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_HISPLAT]"
+                      name="fld_HISPLAT" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_SCH_NBR]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_SCH_NBR]"
+                      name="fld_SCH_NBR" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_GRDE]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_GRDE]"
+                      name="fld_GRDE" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_LNCH_FLG]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_LNCH_FLG]"
+                      name="fld_LNCH_FLG" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ELL_STATUS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_ELL_STATUS]"
+                      name="fld_ELL_STATUS" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_SPED]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_SPED]"
+                      name="fld_SPED" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_PRIM_DISAB]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_PRIM_DISAB]"
+                      name="fld_PRIM_DISAB" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_504]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_504]"
+                      name="fld_504" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_DateCreate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[fld_DateCreate]"
+                      name="fld_DateCreate" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\RDA-Students\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\RDA-Students\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Students]"
+                  connectionManagerRefId="Package.ConnectionManagers[Students]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_ID_NBR]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="fld_ID_NBR"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ID_NBR]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ID_NBR]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_STATE_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="fld_STATE_ID"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_STATE_ID]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_STATE_ID]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_PRIOR_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="fld_PRIOR_ID"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_PRIOR_ID]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_PRIOR_ID]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_FRST_NME]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="fld_FRST_NME"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_FRST_NME]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_FRST_NME]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_LST_NME]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="fld_LST_NME"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_LST_NME]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_LST_NME]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_M_NME]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="fld_M_NME"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_M_NME]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_M_NME]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_BRTH_DT]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="fld_BRTH_DT"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_BRTH_DT]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_BRTH_DT]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_GENDER]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="fld_GENDER"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_GENDER]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_GENDER]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_ETHN_CD]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="fld_ETHN_CD"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN_CD]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN_CD]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_ETHN_VALUE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="16"
+                      cachedName="fld_ETHN_VALUE"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN_VALUE]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN_VALUE]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_ETHN_CD2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="fld_ETHN_CD2"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN_CD2]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN_CD2]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_ETHN2_VALUE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="16"
+                      cachedName="fld_ETHN2_VALUE"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN2_VALUE]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN2_VALUE]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_ETHN_CD3]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="fld_ETHN_CD3"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN_CD3]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN_CD3]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_ETHN3_VALUE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="16"
+                      cachedName="fld_ETHN3_VALUE"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN3_VALUE]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN3_VALUE]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_ETHN_CD4]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="fld_ETHN_CD4"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN_CD4]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN_CD4]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_ETHN4_VALUE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="16"
+                      cachedName="fld_ETHN4_VALUE"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN4_VALUE]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN4_VALUE]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_ETHN_CD5]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="fld_ETHN_CD5"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN_CD5]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN_CD5]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_ETHN5_VALUE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="16"
+                      cachedName="fld_ETHN5_VALUE"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN5_VALUE]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ETHN5_VALUE]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_HISPLAT]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="fld_HISPLAT"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_HISPLAT]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_HISPLAT]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_SCH_NBR]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="fld_SCH_NBR"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_SCH_NBR]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_SCH_NBR]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_GRDE]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="fld_GRDE"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_GRDE]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_GRDE]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_LNCH_FLG]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="fld_LNCH_FLG"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_LNCH_FLG]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_LNCH_FLG]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_ELL_STATUS]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="fld_ELL_STATUS"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ELL_STATUS]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_ELL_STATUS]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_SPED]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="fld_SPED"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_SPED]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_SPED]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_PRIM_DISAB]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="fld_PRIM_DISAB"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_PRIM_DISAB]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_PRIM_DISAB]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_504]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="fld_504"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_504]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_504]" />
+                    <inputColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].Columns[fld_DateCreate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="fld_DateCreate"
+                      externalMetadataColumnId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_DateCreate]"
+                      lineageId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output].Columns[fld_DateCreate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ID_NBR]"
+                      dataType="wstr"
+                      length="20"
+                      name="fld_ID_NBR" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_STATE_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_STATE_ID" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_PRIOR_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_PRIOR_ID" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_FRST_NME]"
+                      dataType="wstr"
+                      length="60"
+                      name="fld_FRST_NME" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_LST_NME]"
+                      dataType="wstr"
+                      length="60"
+                      name="fld_LST_NME" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_M_NME]"
+                      dataType="wstr"
+                      length="20"
+                      name="fld_M_NME" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_BRTH_DT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="fld_BRTH_DT" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_GENDER]"
+                      dataType="wstr"
+                      length="5"
+                      name="fld_GENDER" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN_CD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_ETHN_CD" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      name="fld_ETHN_VALUE" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN_CD2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_ETHN_CD2" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN2_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      name="fld_ETHN2_VALUE" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN_CD3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_ETHN_CD3" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN3_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      name="fld_ETHN3_VALUE" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN_CD4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_ETHN_CD4" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN4_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      name="fld_ETHN4_VALUE" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN_CD5]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_ETHN_CD5" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ETHN5_VALUE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="16"
+                      name="fld_ETHN5_VALUE" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_HISPLAT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="fld_HISPLAT" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_SCH_NBR]"
+                      dataType="wstr"
+                      length="20"
+                      name="fld_SCH_NBR" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_GRDE]"
+                      dataType="wstr"
+                      length="600"
+                      name="fld_GRDE" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_LNCH_FLG]"
+                      dataType="wstr"
+                      length="5"
+                      name="fld_LNCH_FLG" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_ELL_STATUS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_ELL_STATUS" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_SPED]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_SPED" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_PRIM_DISAB]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_PRIM_DISAB" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_504]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="fld_504" />
+                    <externalMetadataColumn
+                      refId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fld_DateCreate]"
+                      dataType="dbTimeStamp"
+                      name="fld_DateCreate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\RDA-Students.Paths[OLE DB Source Output]"
+              endId="Package\RDA-Students\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\RDA-Students\DB Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{F56D871C-9DDD-4F56-8F45-3B337D46F73A}"
+      DTS:From="Package\RDA-Students"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\RDA-Course" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="137,42"
+          Id="Package\RDA-Course"
+          TopLeft="24.3679245283019,99.9150943396226" />
+        <NodeLayout
+          Size="146,42"
+          Id="Package\RDA-Students"
+          TopLeft="5.5,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="78.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="14.3679245283019,52.4150943396226"
+              Start="0,0"
+              End="14.3679245283019,44.9150943396226">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.2075471698113" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.2075471698113"
+                    Point2="0,26.2075471698113"
+                    Point3="4,26.2075471698113" />
+                  <mssgle:LineSegment
+                    End="10.3679245283019,26.2075471698113" />
+                  <mssgle:CubicBezierSegment
+                    Point1="10.3679245283019,26.2075471698113"
+                    Point2="14.3679245283019,26.2075471698113"
+                    Point3="14.3679245283019,30.2075471698113" />
+                  <mssgle:LineSegment
+                    End="14.3679245283019,44.9150943396226" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\RDA-Course">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="174,42"
+          Id="Package\RDA-Course\Flat File Destination"
+          TopLeft="5.50000000000001,107.5" />
+        <NodeLayout
+          Size="126,42"
+          Id="Package\RDA-Course\DB Query"
+          TopLeft="29.5,5.5" />
+        <EdgeLayout
+          Id="Package\RDA-Course.Paths[OLE DB Source Output]"
+          TopLeft="92.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\RDA-Course\DB Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
