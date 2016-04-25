@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/4/2015 11:47:21 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="046-DJARRETT"
+  DTS:CreatorName="APS\e204042"
+  DTS:DTSID="{90476BC5-F49F-499B-85F8-65D0F29BE900}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5058.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="APS - Data Manipulation - Update Retained Students"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{1755B2BD-C0ED-46C8-AA3F-0F7785A7D9F3}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[180-smaxods-01.aps.edu.actd.HELPER.lincinq]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{22A2C5AE-62B7-4F65-AF49-730DF250E28F}"
+      DTS:ObjectName="180-smaxods-01.aps.edu.actd.HELPER.lincinq">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=180-smaxods-01.aps.edu.actd;User ID=lincinq;Initial Catalog=HELPER;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAB7V3a4zMsbJQYpyh14gEgJAAAAAASAAACgAAAAEAAAAFcUPdKqMTQ6cEdm8YZIanMQAAAADOME6rK9nyDDcC8eaewYQBQAAADYVNcMcjZ2lbEkZHgqA943lzclcg</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[synergydbdc.aps.edu.actd.ST_Production.SystemImport]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F09500D8-0408-416C-8219-1A64128C9C30}"
+      DTS:ObjectName="synergydbdc.aps.edu.actd.ST_Production.SystemImport">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=SystemImport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABjmeI75rsMZHRB+h3gBNCrAAAAAASAAACgAAAAEAAAAG6DMlYkKH6Jlf2k0HXM3KowAAAAMNjP/1Pz8gekLNev9/G6E/EA9azpwaTZkQmTMq5tW80NOoRU6Ki23WRkD3vz0E7zFAAAAL3NfNAcFVzPhcI3T8gbGQd+uoO/</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:LogProviders>
+    <DTS:LogProvider
+      DTS:ConfigString="180-smaxods-01.aps.edu.actd.HELPER.lincinq"
+      DTS:CreationName="DTS.LogProviderSQLServer.3"
+      DTS:Description="Writes log entries for events to a SQL Server database"
+      DTS:DTSID="{72A67F00-C9FF-45FD-A5B7-5A94D971EDFC}"
+      DTS:ObjectName="SSIS log provider for SQL Server">
+      <DTS:ObjectData>
+        <InnerObject />
+      </DTS:ObjectData>
+    </DTS:LogProvider>
+  </DTS:LogProviders>
+  <DTS:Variables />
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="1">
+    <DTS:Property
+      DTS:DataType="8"
+      DTS:Name="EventFilter">2,7,OnError,13,OnInformation</DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnError"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnInformation"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:SelectedLogProviders>
+      <DTS:SelectedLogProvider
+        DTS:InstanceID="{72A67F00-C9FF-45FD-A5B7-5A94D971EDFC}" />
+    </DTS:SelectedLogProviders>
+  </DTS:LoggingOptions>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{4402D1C7-7EC0-4350-8F35-57540820E81F}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F09500D8-0408-416C-8219-1A64128C9C30}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="BEGIN TRAN&#xA;&#xA;/* delete the previous records. */&#xA;DELETE FROM&#xA;    [rev].[REV_PERSON_NOT]&#xA;&#xA;WHERE&#xA;    [RULE_GU]='AE97F092-D64D-47AD-893F-6CF872F12C01'&#xA;    AND [NOT_CFG_GU]='E9C39171-E893-4250-9B93-36B4A6C104DA'&#xA;&#xA;/* insert new records */&#xA;INSERT INTO&#xA;    [rev].[REV_PERSON_NOT]&#xA;&#xA;    (PERSON_NOT_GU,PERSON_GU,NOT_CFG_GU,BEGIN_DATE&#xA;     ,END_DATE,COMMENT,CHANGE_DATE_TIME_STAMP,CHANGE_ID_STAMP&#xA;&#x9;,ADD_DATE_TIME_STAMP,ADD_ID_STAMP,ADDED_BY_RULE,RULE_GU)&#xA;&#xA;    SELECT&#xA;&#x9;   NEWID() AS [PERSON_NOT_GU]&#xA;&#x9;   ,[Student].[STUDENT_GU] AS [PERSON_GU]&#xA;&#x9;   ,'E9C39171-E893-4250-9B93-36B4A6C104DA' AS [NOT_CFG_GU]&#xA;&#x9;   ,CAST(GETDATE() AS DATE) AS [BEGIN_DATE]&#xA;&#x9;   ,NULL AS [END_DATE]&#xA;&#x9;   ,NULL AS [COMMENT]&#xA;&#x9;   ,NULL AS [CHANGE_DATE_TIME_STAMP]&#xA;&#x9;   ,NULL AS [CHANGE_ID_STAMP]&#xA;&#x9;   ,CAST(GETDATE() AS DATE) AS [ADD_DATE_TIME_STAMP]&#xA;&#x9;   ,'D31C8E29-6CFB-43BB-B597-AA36480983F2' AS [ADD_ID_STAMP]&#xA;&#x9;   ,'Y' AS [ADDED_BY_RULE]&#xA;&#x9;   ,'AE97F092-D64D-47AD-893F-6CF872F12C01' AS [RULE_GU]&#xA;    FROM&#xA;&#x9;   (SELECT&#xA;&#x9;&#x9;  [Org].[ORGANIZATION_NAME]&#xA;&#x9;&#x9;  ,[Student].[STUDENT_GU]&#xA;&#x9;&#x9;  ,[Student].[SIS_NUMBER]&#xA;&#x9;&#x9;  ,[Student].[EXPECTED_GRADUATION_YEAR]&#xA;&#x9;&#x9;  ,[Grades].[VALUE_DESCRIPTION] AS [GRADE]&#xA;&#x9;&#x9;  ,CASE&#xA;&#x9;&#x9;&#x9; WHEN [Grades].[VALUE_DESCRIPTION]='12' THEN '2016'&#xA;&#x9;&#x9;&#x9; WHEN [Grades].[VALUE_DESCRIPTION]='11' THEN '2017'&#xA;&#x9;&#x9;&#x9; WHEN [Grades].[VALUE_DESCRIPTION]='10' THEN '2018'&#xA;&#x9;&#x9;&#x9; WHEN [Grades].[VALUE_DESCRIPTION]='09' THEN '2019'&#xA;&#x9;&#x9;   END AS [GRADUATION_YEAR]&#xA;&#x9;   FROM&#xA;&#x9;&#x9;  [APS].[PrimaryEnrollmentsAsOf](GETDATE()) AS [Enroll]&#xA;&#xA;&#x9;&#x9;  INNER JOIN&#xA;&#x9;&#x9;  [rev].[REV_ORGANIZATION_YEAR] AS [OrgYear]&#xA;&#x9;&#x9;  ON&#xA;&#x9;&#x9;  [Enroll].[ORGANIZATION_YEAR_GU]=[OrgYear].[ORGANIZATION_YEAR_GU]&#xA;&#xA;&#x9;&#x9;  INNER JOIN&#xA;&#x9;&#x9;  [rev].[REV_ORGANIZATION] AS [Org]&#xA;&#x9;&#x9;  ON&#xA;&#x9;&#x9;  [OrgYear].[ORGANIZATION_GU]=[Org].[ORGANIZATION_GU]&#xA;&#xA;&#x9;&#x9;  INNER JOIN&#xA;&#x9;&#x9;  [rev].[EPC_STU] AS [Student]&#xA;&#x9;&#x9;  ON&#xA;&#x9;&#x9;  [Enroll].[STUDENT_GU]=[Student].[STUDENT_GU]&#xA;&#xA;&#x9;&#x9;  INNER JOIN&#xA;&#x9;&#x9;  [APS].[LookupTable]('K12','GRADE') AS [Grades]&#xA;&#x9;&#x9;  ON&#xA;&#x9;&#x9;  [Enroll].[GRADE]=[Grades].[VALUE_CODE]&#xA;&#xA;&#x9;   WHERE&#xA;&#x9;&#x9;  [Grades].[VALUE_DESCRIPTION] IN ('09','10','11','12')&#xA;&#x9;   ) AS [Student]&#xA;&#xA;    WHERE&#xA;&#x9;   [Student].[GRADUATION_YEAR]&lt;&gt;[Student].[EXPECTED_GRADUATION_YEAR]&#xA;&#xA;COMMIT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\Execute SQL Task"
+          TopLeft="24,22" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
