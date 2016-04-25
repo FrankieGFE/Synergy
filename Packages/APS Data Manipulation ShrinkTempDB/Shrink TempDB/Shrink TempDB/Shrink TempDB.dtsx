@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/23/2015 1:29:01 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="046-DJARRETT"
+  DTS:CreatorName="APS\e204042"
+  DTS:DTSID="{F0B478D1-B39D-4216-95FB-42788B95BCFD}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5058.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ShrinkTempDB"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{68DF868B-9577-4A8A-BEB6-3A5D8554B11F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[synergydbdc.aps.edu.actd.ST_Production]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2C2964D9-CCFF-47E7-A7D3-7892080A0546}"
+      DTS:ObjectName="synergydbdc.aps.edu.actd.ST_Production">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Shrink TempDB"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B0971C0B-8070-4456-9752-038CF2616DD2}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Shrink TempDB"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2C2964D9-CCFF-47E7-A7D3-7892080A0546}"
+          SQLTask:SqlStatementSource="USE tempdb&#xA;GO&#xA;DBCC SHRINKFILE (tempdev2, 1); -- to empty &quot;tempdev12&quot; data file&#xA;GO&#xA;DBCC SHRINKFILE (tempdev3, 1); -- to empty &quot;tempdev12&quot; data file&#xA;GO&#xA;DBCC SHRINKFILE (tempdev4, 1); -- to empty &quot;tempdev12&quot; data file&#xA;GO&#xA;--Step3: Re-size the data files to target file size &#xA;-- Use ALTER DATABASE if the target file size is greater than the current file size&#xA;USE [master]&#xA;GO&#xA;ALTER DATABASE [tempdb] &#xA;MODIFY FILE ( NAME = N'tempdev', SIZE = 1024KB ) --grow to 3000 MB&#xA;GO&#xA;--Use DBCC SHRINKFILE if the target file size is less than the current file size&#xA;USE [tempdb]&#xA;GO&#xA;DBCC SHRINKFILE (N'tempdev' , 1) --shrink to 3000 MB&#xA;GO&#xA;ALTER DATABASE [tempdb] &#xA;MODIFY FILE ( NAME = N'tempdev2', SIZE = 1024KB ) --grow to 3000 MB&#xA;GO&#xA;--Use DBCC SHRINKFILE if the target file size is less than the current file size&#xA;USE [tempdb]&#xA;GO&#xA;DBCC SHRINKFILE (N'tempdev2' , 1) --shrink to 3000 MB&#xA;GO&#xA;ALTER DATABASE [tempdb] &#xA;MODIFY FILE ( NAME = N'tempdev3', SIZE = 1024KB ) --grow to 3000 MB&#xA;GO&#xA;--Use DBCC SHRINKFILE if the target file size is less than the current file size&#xA;USE [tempdb]&#xA;GO&#xA;DBCC SHRINKFILE (N'tempdev3' , 1) --shrink to 3000 MB&#xA;GO&#xA;ALTER DATABASE [tempdb] &#xA;MODIFY FILE ( NAME = N'tempdev4', SIZE = 1024KB ) --grow to 3000 MB&#xA;GO&#xA;--Use DBCC SHRINKFILE if the target file size is less than the current file size&#xA;USE [tempdb]&#xA;GO&#xA;DBCC SHRINKFILE (N'tempdev4' , 1) --shrink to 3000 MB&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Shrink TempDB"
+          TopLeft="33,20" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
