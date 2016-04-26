@@ -12,1124 +12,11 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="MedicAidStudents"
   DTS:PackageType="5"
-  DTS:VersionBuild="59"
-  DTS:VersionGUID="{CEAD8A95-60A5-46E8-855F-7AB78BBDDDDA}">
+  DTS:VersionBuild="60"
+  DTS:VersionGUID="{50394E12-28B9-4F8E-B991-6E84CCE4D457}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[APS_StudentData]"
-      DTS:CreationName="FLATFILE"
-      DTS:DTSID="{DB635474-C1B7-44E3-A779-62662E22D983}"
-      DTS:ObjectName="APS_StudentData">
-      <DTS:PropertyExpression
-        DTS:Name="ConnectionString">@[User::OutputFilePath] + @[User::OutputFileName] 
-+"_"
-+ RIGHT("0" + (DT_WSTR,4)DATEPART("year", GETDATE() ),4) 
-+ RIGHT("0" + (DT_WSTR,2)DATEPART("month", GETDATE() ), 2)
-+ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
-+".csv"</DTS:PropertyExpression>
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:Format="Delimited"
-          DTS:LocaleID="1033"
-          DTS:HeaderRowDelimiter="_x000D__x000A_"
-          DTS:ColumnNamesInFirstDataRow="True"
-          DTS:RowDelimiter=""
-          DTS:TextQualifier="_x0022_"
-          DTS:CodePage="1252"
-          DTS:ConnectionString="\\syntempssis\Files\Export\Medicaid\APS_StudentData_20160426.csv">
-          <DTS:FlatFileColumns>
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="2"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="District CD"
-              DTS:DTSID="{28F2BCE4-68D4-4CCE-B622-E87786966F97}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="4"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="School CD"
-              DTS:DTSID="{D18B7CA3-6734-44B2-B5CF-81E762CABFE8}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="100"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="School Name"
-              DTS:DTSID="{22599DAF-F6EB-4673-B4B5-D3F2C9A37070}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="9"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Student ID"
-              DTS:DTSID="{A7FB8A2B-9069-4A77-986D-E0CB1F20A0B4}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:DataType="3"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Medicaid ID"
-              DTS:DTSID="{FE8DC2CD-9D32-4548-8D8D-4488CF595229}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="60"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Last Name"
-              DTS:DTSID="{050C1A0E-947D-4539-A7A4-D063DDCB5A8A}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="60"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="First Name"
-              DTS:DTSID="{E5613E26-C4B2-4070-AFB9-B872637D90EA}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="20"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Middle Name"
-              DTS:DTSID="{35F4BE51-5D77-417C-A125-91FAB89B8894}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="DOB (MM/DD/YYYY)"
-              DTS:DTSID="{A1730B3B-00B0-4007-9BFC-5145E1ACFDFF}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="SSN"
-              DTS:DTSID="{7DB81E56-08FA-43BE-9A2F-3192723F68CE}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="5"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Gender CD"
-              DTS:DTSID="{B9FA6370-4B99-489A-BE90-93CD9500B9FE}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Student Address1"
-              DTS:DTSID="{3007442F-40C8-4BCF-AD58-7A642433108A}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Student Address2"
-              DTS:DTSID="{AF713666-CEDA-41A0-8CBC-817156E739DE}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="City"
-              DTS:DTSID="{E665984B-D0DA-45C7-9F54-215C60A2742A}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="5"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="State"
-              DTS:DTSID="{6C14182E-B03E-4271-AF7C-0EEC0BD06EB3}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="6"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Zip Code"
-              DTS:DTSID="{8350DC1B-7BFF-4E5F-B565-F53629502076}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Primary Diagnosis CD"
-              DTS:DTSID="{18BC7CAE-2DDB-4C6F-83B6-706ABF1313E6}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Secondary Diagnosis CD"
-              DTS:DTSID="{77D87D06-FE11-45E7-AD24-8BF46E02B9B2}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Tertiary Diagnosis CD"
-              DTS:DTSID="{D84FE391-C683-4F57-B80F-E3BE013BEFBD}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Fourth Diagnosis CD"
-              DTS:DTSID="{9598CC6D-A068-432C-828F-22107257CBAF}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="IEP Start Date"
-              DTS:DTSID="{BC9C0D2C-8532-43C4-BDCC-BBABCB968592}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="IEP End Date"
-              DTS:DTSID="{A80BF6F5-90C2-4F24-8CAD-A3C70EF7D2C1}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="PCP Prescription Start Date"
-              DTS:DTSID="{C7351959-2F7A-4163-9DD6-BFA5B41BFC7B}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="PCP Prescription End Date"
-              DTS:DTSID="{F4069B46-916B-44BC-85E9-C7B0D98C63AD}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="PCP Prescription Exempt(E)/In Process(P)"
-              DTS:DTSID="{C6A46B0D-2503-4938-B801-99C59FD9D353}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="PCP Last Name"
-              DTS:DTSID="{175AE0E3-B104-4B2E-807A-B523FF71AB61}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="PCP First Name"
-              DTS:DTSID="{DD1F7AD7-860C-4BA3-9DA9-97D4017611FC}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Audiology on IEP?"
-              DTS:DTSID="{9B85E6DC-6A20-42D0-A668-2E9179F97FB6}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Case Management on IEP?"
-              DTS:DTSID="{76447E22-9013-4F37-B145-62998184BC2B}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Mental Health-Counseling on IEP?"
-              DTS:DTSID="{7779C8DC-19B5-49F5-A0B1-9A074C27FB41}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Nursing Services on IEP?"
-              DTS:DTSID="{C4CAD277-E743-4B8D-9C81-8A5743991CD3}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Nutritional Services on IEP?"
-              DTS:DTSID="{DBE5E655-252C-424F-AE39-06CC4F027C26}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Occupational Therapy on IEP?"
-              DTS:DTSID="{F93DB9C0-C6B5-4B4D-90DE-9F9DD1568E10}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Physical Therapy on IEP?"
-              DTS:DTSID="{2AA87F20-7796-4FB8-A5FD-B4A60D14514B}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Speech Therapy on IEP?"
-              DTS:DTSID="{8E773909-7D0B-4637-89BD-18AF4EA2F573}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Special Transportation on IEP?"
-              DTS:DTSID="{034FB85C-D82E-4BA4-A45A-C5E71CCD9D46}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="BH-Mental Health Counselor/Therapist?"
-              DTS:DTSID="{D72CDE47-4FC9-41A7-8331-352099FD61A6}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="BH-Psychologist on IEP?"
-              DTS:DTSID="{31FC09D7-05C6-4AA6-B037-899A6A2E1196}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="BH-School Psychologist on IEP?"
-              DTS:DTSID="{FD660B23-50B3-4C19-B271-850200F009EF}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="BH-Social Worker on IEP?"
-              DTS:DTSID="{B9F87D3B-A733-43B3-B80D-200E82F5ACA4}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Parent Consent"
-              DTS:DTSID="{97A86BDB-B3E9-4705-941C-4796E2600E2E}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="AD Hours"
-              DTS:DTSID="{B2114250-0DEF-4C77-BBB5-C5CBDA04DE27}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="MHC Hours"
-              DTS:DTSID="{030F888E-E023-4941-BE73-0D4791104DC8}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="NURS Hours"
-              DTS:DTSID="{269A834A-943A-4B40-879B-665F0F4BACB2}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="OT Hours"
-              DTS:DTSID="{18B03FD2-6256-4EDD-AE0F-B64A2EBAD259}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="PT Hours"
-              DTS:DTSID="{EA47BC9C-101C-406B-873C-2CD7A4536BB0}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="SP Hours"
-              DTS:DTSID="{B7ED5519-C1C0-42CB-ACA8-1E631AB88930}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="BH-C Hours"
-              DTS:DTSID="{3CF014E3-BBC3-4584-BBE8-B562B80D88C9}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="BH-PS Hours"
-              DTS:DTSID="{7E08F390-1121-4802-9781-ABD4AF3FB6B4}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="BH-SPS Hours"
-              DTS:DTSID="{BDF95414-3735-44CB-9478-BB021E424A5D}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="BH-SW Hours"
-              DTS:DTSID="{31DCFEA0-152E-424B-A0B9-615FC781174F}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="AD Frequency"
-              DTS:DTSID="{2EB4004D-F800-41B0-BAD4-AA04FD697122}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="MHC Frequency"
-              DTS:DTSID="{CDD542F7-2820-4084-82D7-61A71D07E756}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="NURS Frequency"
-              DTS:DTSID="{6E121C78-3541-44CF-8F2F-3CE69F84100B}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="OT Frequency"
-              DTS:DTSID="{D9BFA0D6-00C2-4FE8-869C-DD9A83164C17}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="PT Frequency"
-              DTS:DTSID="{39661BFC-A4C3-48ED-B5A7-C8C00E83032D}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="SP Frequency"
-              DTS:DTSID="{F8B87507-DCB7-4E0C-8DF3-2767B34395AC}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="BH-C Frequency"
-              DTS:DTSID="{F64B1C8C-A83E-425B-8FB7-7261A9E9B97E}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="BH-PS Frequency"
-              DTS:DTSID="{1EE9F42D-EE2D-4190-97F8-C84AF322B937}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="BH-SPS Frequency"
-              DTS:DTSID="{AC4EADD2-7451-4F2F-86B5-FD58370892C6}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="BH-SW Frequency"
-              DTS:DTSID="{C64BD4E0-57DA-46DF-BAA3-F95DBAF0AE3F}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="13"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Phone Nbr"
-              DTS:DTSID="{7EA810B0-56B7-443F-8564-64F3EB5B152E}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Inactive?"
-              DTS:DTSID="{58634133-BE35-4DD9-B4AC-EF09E40105B5}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x000D__x000A_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Override Ind"
-              DTS:DTSID="{1A42DDE5-46A5-488C-B046-F83384E1B393}"
-              DTS:CreationName="" />
-          </DTS:FlatFileColumns>
-        </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[APS_Students]"
-      DTS:CreationName="FLATFILE"
-      DTS:DelayValidation="True"
-      DTS:DTSID="{7208E4D5-A88F-41DD-B1DD-049D8A3A22F3}"
-      DTS:ObjectName="APS_Students">
-      <DTS:PropertyExpression
-        DTS:Name="ConnectionString">@[User::OutputFilePath] + @[User::OutputFileName] 
-+"_"
-+ RIGHT("0" + (DT_WSTR,4)DATEPART("year", GETDATE() ),4) 
-+ RIGHT("0" + (DT_WSTR,2)DATEPART("month", GETDATE() ), 2)
-+ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
-+".csv"</DTS:PropertyExpression>
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:Format="Delimited"
-          DTS:LocaleID="1033"
-          DTS:HeaderRowDelimiter="_x000D__x000A_"
-          DTS:ColumnNamesInFirstDataRow="True"
-          DTS:RowDelimiter=""
-          DTS:TextQualifier="_x0022_"
-          DTS:CodePage="1252"
-          DTS:ConnectionString="\\syntempssis\Files\Export\Medicaid\APS_StudentData_20160426.csv">
-          <DTS:FlatFileColumns>
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="2"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="District CD"
-              DTS:DTSID="{F5DFC46E-5D8C-4AB4-A517-6AF4D546BB0D}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="20"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="School CD"
-              DTS:DTSID="{F0D95323-810E-4BE0-937A-1DBFAF25139C}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="100"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="School Name"
-              DTS:DTSID="{05F5B804-71FE-46CB-B45C-41BDF35276E8}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="20"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Student ID"
-              DTS:DTSID="{876BDE6E-5C85-4827-ADD3-AA9D1BF538F4}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="20"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Medicaid ID"
-              DTS:DTSID="{083C1F05-9506-4C97-ADDC-B8F2F5749CDE}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="60"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Last Name"
-              DTS:DTSID="{B9803265-A1FF-46EF-8077-A87E38B1CC9E}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="60"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="First Name"
-              DTS:DTSID="{66A0D87C-BA35-4674-86A9-45981638CA3A}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="20"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Middle Name"
-              DTS:DTSID="{E01B711C-4405-4028-9C75-D7B5748B6578}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="DOB (MM/DD/YYYY)"
-              DTS:DTSID="{0FE88312-1BC8-4726-AE8F-7D3EB2ED6AC1}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="SSN"
-              DTS:DTSID="{2386783D-8DC2-4888-B03E-AFBD09BF1AA3}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="5"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Gender CD"
-              DTS:DTSID="{5F1788B1-B9C8-4657-BB94-66E6B0848736}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Student Address1"
-              DTS:DTSID="{099E1D56-EA63-4B87-9504-D293D77B845C}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Student Address2"
-              DTS:DTSID="{D963202A-FEE4-4EC4-B8A0-33BB9B6A4E28}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="City"
-              DTS:DTSID="{4AA0D330-3E35-4FD7-A5FB-DF24E77C7335}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="5"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="State"
-              DTS:DTSID="{3D338859-F5DD-4D32-AA79-FF5A6B3B3EE9}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="6"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Zip Code"
-              DTS:DTSID="{C6E32E60-812E-480D-93E4-50D485E25E79}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Primary Diagnosis CD"
-              DTS:DTSID="{9F9655C0-502F-4F12-881C-17ACF1A701CE}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Secondary Diagnosis CD"
-              DTS:DTSID="{89D87339-2C24-4000-8E03-07E014D72C1E}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Tertiary Diagnosis CD"
-              DTS:DTSID="{20A5F7FB-0AFD-4E47-9806-8BAC5F01B07E}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Fourth Diagnosis CD"
-              DTS:DTSID="{5368D8C4-09DC-4620-BF3B-B732D715E90F}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="IEP Start Date"
-              DTS:DTSID="{D9AFBB43-3FDA-489D-8F80-5D4C41D19F49}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="IEP End Date"
-              DTS:DTSID="{C1092FC1-EDEC-4DEE-A66D-9AB404DFA06D}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="PCP Prescription Start Date"
-              DTS:DTSID="{BB2EF723-86E8-4B68-BB09-DB1D0EC23785}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="PCP Prescription End Date"
-              DTS:DTSID="{2F7401BB-1A76-4634-ADEB-A641878C3E07}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="PCP Prescription Exempt(E)/In Process(P)"
-              DTS:DTSID="{5C060F3C-59DB-41E3-9CE5-839B1E0AC5DA}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="PCP Last Name"
-              DTS:DTSID="{5019EC1C-0B78-4901-B479-A6FD4223BDF5}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="PCP First Name"
-              DTS:DTSID="{BB125C9C-2915-4E67-9DFD-47D09B26467A}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Audiology on IEP?"
-              DTS:DTSID="{464D30CF-CC14-4775-BFA0-29C4E8B636D1}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Case Management on IEP?"
-              DTS:DTSID="{F8568111-0986-4C9C-8F93-C39B550D3459}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Mental Health-Counseling on IEP?"
-              DTS:DTSID="{23BB4648-1E57-4C6C-8845-29B680568FE7}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Nursing Services on IEP?"
-              DTS:DTSID="{38F69BC8-B750-455A-883B-F7E0A1F0621B}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Nutritional Services on IEP?"
-              DTS:DTSID="{D4B22AEE-93EC-449C-8030-E40646064E03}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Occupational Therapy on IEP?"
-              DTS:DTSID="{79980F0C-07AC-47F4-93D6-2BE68CC04DA7}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Physical Therapy on IEP?"
-              DTS:DTSID="{3CDA7EF7-5C6E-4E8A-B78E-5E9C129F0378}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Speech Therapy on IEP?"
-              DTS:DTSID="{F6729E40-2D03-4BF4-AB5C-691C69208109}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Special Transportation on IEP?"
-              DTS:DTSID="{876DBEFC-6978-43A3-A1A2-0FC495AF99FE}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="5"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Parent Consent"
-              DTS:DTSID="{3293FC82-BC1A-4BF0-8F60-6A1A648934D8}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="AD Hours"
-              DTS:DTSID="{6C99BD83-C1B4-46C3-9DB1-AEECEA72D7E6}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="MHC Hours"
-              DTS:DTSID="{95A5D7AF-CBE4-4282-AF2E-D053E2A29B7D}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="NURS Hours"
-              DTS:DTSID="{564C55C8-1532-4A87-816C-EFFB685CFF4C}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="OT Hours"
-              DTS:DTSID="{F755EA25-E206-4DFC-BB89-F7FB7BB64BDF}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="PT Hours"
-              DTS:DTSID="{E9E3AAE0-BB2A-4EC1-A62A-0EA28DF3D250}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="SP Hours"
-              DTS:DTSID="{2D596A44-7B34-4028-801D-2E530C6F2CC9}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="AD Frequency"
-              DTS:DTSID="{CA183C0A-3232-4F9C-B054-22B16CE8F4E6}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="MHC Frequency"
-              DTS:DTSID="{E668794B-069C-4799-B162-9D8F2038A590}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="NURS Frequency"
-              DTS:DTSID="{211E81C7-6113-40F7-8BB4-A2B47151FEB8}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="OT Frequency"
-              DTS:DTSID="{789D7940-06B7-4158-BA30-97A7F3112DAC}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="PT Frequency"
-              DTS:DTSID="{D89F62D4-E096-4497-B511-F6CF62A05A1C}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="SP Frequency"
-              DTS:DTSID="{2DD108C2-2CB5-4EF6-8DB6-60F8E1112E28}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Phone Nbr"
-              DTS:DTSID="{E87753A7-47C5-4402-9A42-8437C8B9D496}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Inactive?"
-              DTS:DTSID="{820E8466-061A-4C0D-8B23-5BF97AA222F4}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x000D__x000A_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Override Ind"
-              DTS:DTSID="{42E2B189-A9A2-4691-B187-6F6032DACD20}"
-              DTS:CreationName="" />
-          </DTS:FlatFileColumns>
-        </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[DB Connection]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{62ECC637-F236-4FE8-BB2F-6FBC7E6A94DE}"
-      DTS:ObjectName="DB Connection">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=APSExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-MedicAidStudents-{62ECC637-F236-4FE8-BB2F-6FBC7E6A94DE}azlt-mmelarcode\sql2012.STDemo808_2012;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADZeS8ZOitwh0n6TJiaT5OQAAAAAASAAACgAAAAEAAAAECEogbTPF/MH4QxYdk8hP8wAAAAa5CXhVWIY9kJTpELopGQtIQ50RJDWzWO6gcBZORFeCsDucGme1UL23ECG7QkdSVkFAAAAGrmRcgY9dxlbPq8I8HJjty5fSJS</DTS:Password>
-        </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[DB Connection 1]"
       DTS:CreationName="OLEDB"
@@ -1141,7 +28,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAiWPntDjAQqsRxUGb45SD0AAAAAASAAACgAAAAEAAAABvTkltR6c8ED0x2hYB+c10wAAAAxSJLGW26WIl7NKZhej2+SwjtjW34Eos3JY1J4btfRO1lbBdV2pcrWRm9UZoDjktxFAAAAMbc22IWKLMpjyLl3Ag4+KEKc5o2</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAA/uOUDiqY7OP2ho8EWAoReAAAAAASAAACgAAAAEAAAALFg7d4CIOdvubJlVdOs/ZIwAAAAsYD2CYDKEM4N/LpnwI1ftxvWUyUdEUuPd/FkJdjSNd8YKTD1CG3vyJlgDLLsHlDEFAAAABe9tITQpzk0LlxElu9rr186/ltN</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -1156,604 +43,10 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:refId="Package.ConnectionManagers[Medicaid File 1]"
       DTS:CreationName="FLATFILE"
-      DTS:DTSID="{5171141E-F061-47D6-AB79-956D3F31BBAD}"
-      DTS:ObjectName="Flat File Connection Manager">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:Format="Delimited"
-          DTS:LocaleID="1033"
-          DTS:HeaderRowDelimiter="_x000D__x000A_"
-          DTS:RowDelimiter=""
-          DTS:TextQualifier="_x003C_none_x003E_"
-          DTS:CodePage="1252"
-          DTS:ConnectionString="\\syntempssis\Files\Export\Medicaid\MedicaidFile1.csv">
-          <DTS:FlatFileColumns>
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="2"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 0"
-              DTS:DTSID="{28083ED1-F81F-4546-8867-FF7E30165B97}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="4"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 1"
-              DTS:DTSID="{8606CC1C-9F1D-499E-AB39-B649C47B230C}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="100"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 2"
-              DTS:DTSID="{CAD386F6-E2F8-4EEE-B205-4061F528D409}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="9"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 3"
-              DTS:DTSID="{0CBBB57A-F177-405E-8149-BB7F1D82D576}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:DataType="3"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 4"
-              DTS:DTSID="{5BE363B6-66B6-4BD6-AC1B-304FF4AB6AA4}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="60"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 5"
-              DTS:DTSID="{DD72DA5D-251F-403F-8191-1738D7ECF278}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="60"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 6"
-              DTS:DTSID="{94E51D41-5840-47A4-867C-2BF918C46A37}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="20"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 7"
-              DTS:DTSID="{A5ED3F85-CE96-4142-A479-45EAF3ECF471}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 8"
-              DTS:DTSID="{68D85230-A6BD-452A-BFBB-4ED17D01B824}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 9"
-              DTS:DTSID="{CFD053CC-2962-4329-A9F4-CB70C313676F}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="5"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 10"
-              DTS:DTSID="{7C2C1078-5155-4F66-8404-9D3E41BC4011}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 11"
-              DTS:DTSID="{5EAF6BA4-00E5-4B5D-95F0-B32A3EB331CD}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 12"
-              DTS:DTSID="{8143742E-8EEF-4B2C-9F80-ACB36C942390}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 13"
-              DTS:DTSID="{75A39410-B484-47BC-BED6-42EFE4E0DB28}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="5"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 14"
-              DTS:DTSID="{6C309275-9FF3-4498-8BA8-02C492DCA3B7}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="6"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 15"
-              DTS:DTSID="{8BB05B58-F8DC-41EB-92F2-38F43D18411A}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 16"
-              DTS:DTSID="{54CEA3FE-FA71-4C19-95F8-46654979F6D1}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 17"
-              DTS:DTSID="{3DE2C0B9-6C2B-472E-B56C-FA197F7957A6}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 18"
-              DTS:DTSID="{3F466597-DC94-497C-A9B1-3449F8D8C8B8}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 19"
-              DTS:DTSID="{158C69D5-8D8C-4B6A-BC61-AB0D5F6B6A23}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 20"
-              DTS:DTSID="{F1F71902-6ACC-4661-9C9F-68F93AEA4737}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 21"
-              DTS:DTSID="{34874039-D016-4B5B-8C27-D0ED6CF9F6E7}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 22"
-              DTS:DTSID="{B79796DC-1A1B-44F3-B9FE-9283EDAADB40}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 23"
-              DTS:DTSID="{5E24536E-AF81-452C-8413-EF92E095B3F7}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 24"
-              DTS:DTSID="{83DAEA98-DF3C-4FB0-8835-B164D6679CD1}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 25"
-              DTS:DTSID="{013DD905-9EFF-404A-A44D-A7FE27DD67B0}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 26"
-              DTS:DTSID="{9B7B4C92-B813-48BE-B834-166ECACDBCCC}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 27"
-              DTS:DTSID="{55218E70-EEBD-4908-B18A-78A2EDEC8CEE}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 28"
-              DTS:DTSID="{D6F946DE-BA16-4908-A43A-803C2B369C84}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 29"
-              DTS:DTSID="{08F21E13-BD6F-41C4-9CD0-55A5C700CD1C}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 30"
-              DTS:DTSID="{8F435538-23D1-4762-95C8-580B9763A595}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 31"
-              DTS:DTSID="{E89D5616-8131-4C6B-9A4D-73F5D2E1D4B7}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 32"
-              DTS:DTSID="{0B2102D5-09FC-4560-9772-F546E2B2C60D}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 33"
-              DTS:DTSID="{10C64D2F-95BE-4304-865E-5FAF1C1BB8EF}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 34"
-              DTS:DTSID="{552C3662-9F02-4F98-ABA0-1A50EDD60F2F}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 35"
-              DTS:DTSID="{CCA03E45-6FBA-46BF-A217-1F6D4002A166}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 36"
-              DTS:DTSID="{BABA0287-5547-44EC-92D6-7426AFAA829B}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 37"
-              DTS:DTSID="{CAC23C37-249D-4453-A342-94302F52C4C5}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 38"
-              DTS:DTSID="{4D96D505-C48B-4347-B28D-F2CABDF43635}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 39"
-              DTS:DTSID="{D72FB84F-481A-4665-82E9-48405F8624C1}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 40"
-              DTS:DTSID="{A2F37073-E5F0-4334-AD93-7DFAD6E64222}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 41"
-              DTS:DTSID="{53BAA4B2-78D2-47F7-AE86-36D71501BD31}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 42"
-              DTS:DTSID="{B0884BE6-BCDC-475E-926A-65E6FDA4C34C}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 43"
-              DTS:DTSID="{A6B216DB-E128-47FB-BFF3-797F2983E79C}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 44"
-              DTS:DTSID="{3A7CC1EF-32EF-43D0-BF41-9D063C461B00}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 45"
-              DTS:DTSID="{D5C4FBE5-B436-49B9-9FED-16A20C411E7A}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 46"
-              DTS:DTSID="{6A7FFF45-6DC3-4D52-9DA6-23B7771BE0B3}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 47"
-              DTS:DTSID="{43CCBFDC-E255-4040-8D07-72A92F8C0565}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 48"
-              DTS:DTSID="{E298218A-1A6B-4ABA-B38B-EA142B889BFB}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 49"
-              DTS:DTSID="{85123523-1904-4CAA-A489-5B96ED0CB2CE}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 50"
-              DTS:DTSID="{407DBE1D-8D1D-4E33-A233-C18548183216}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 51"
-              DTS:DTSID="{F9E31B8C-ACCB-4D16-B785-66219836EF7B}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 52"
-              DTS:DTSID="{383857A9-2A12-41EF-853E-757A9FB7AD3B}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 53"
-              DTS:DTSID="{B4B7AAA7-06D1-481D-85FE-A53B24DC0B40}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 54"
-              DTS:DTSID="{5C03363C-F8CB-433F-A646-DCFBDAA49822}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 55"
-              DTS:DTSID="{420946F2-49D5-4176-B55D-8F3D38892ED4}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 56"
-              DTS:DTSID="{6189FD47-55FF-4554-BA01-A7F595F04264}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 57"
-              DTS:DTSID="{0E9EF5CA-27AD-43DF-8BD2-93CA12910422}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 58"
-              DTS:DTSID="{DA6CE80B-2D0F-4267-AC9B-9CB55C1E2FDD}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 59"
-              DTS:DTSID="{3A773A8B-8027-4F3E-8B63-999C10324B59}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 60"
-              DTS:DTSID="{7F4370E6-3EE2-4416-B79F-A8498659131D}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="13"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 61"
-              DTS:DTSID="{5758DD68-5234-41A2-9857-6ED180EE98A3}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 62"
-              DTS:DTSID="{10EC67C7-5653-4F58-88F1-808B1ADFCDF4}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x000D__x000A_"
-              DTS:MaximumWidth="1"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Column 63"
-              DTS:DTSID="{09C3EEA6-52E7-43F2-BAE1-DFECF7ED5855}"
-              DTS:CreationName="" />
-          </DTS:FlatFileColumns>
-        </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager 1]"
-      DTS:CreationName="FLATFILE"
-      DTS:DTSID="{C8002F48-D10D-4545-AC3A-8E568A81B6F6}"
-      DTS:ObjectName="Flat File Connection Manager 1">
+      DTS:DTSID="{C5278F35-CFA9-40F7-8FAE-A9E43C36FAE1}"
+      DTS:ObjectName="Medicaid File 1">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:Format="Delimited"
@@ -1771,8 +64,8 @@
               DTS:MaximumWidth="2"
               DTS:DataType="129"
               DTS:TextQualified="True"
-              DTS:ObjectName="Column 0"
-              DTS:DTSID="{FE3C5282-277E-417A-8333-10C0B2015425}"
+              DTS:ObjectName="District CD"
+              DTS:DTSID="{84FF6E25-0D4E-4C88-B65E-1054E0205A50}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1781,7 +74,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="School CD"
-              DTS:DTSID="{CD6F3667-5C72-4F0E-87F0-E775D86862FA}"
+              DTS:DTSID="{578E1089-9824-451E-BF4E-86F2229D19DF}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1790,7 +83,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="School Name"
-              DTS:DTSID="{0A170BCB-137F-4270-B856-614A90D36129}"
+              DTS:DTSID="{B1BA56B3-0DF3-42B8-B884-7FA93DA1B27F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1799,7 +92,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student ID"
-              DTS:DTSID="{EC863182-462F-4506-B7DF-D2CB1D7BC277}"
+              DTS:DTSID="{9C3CB40C-5A79-4D06-A359-C44BEBBB2562}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1807,7 +100,7 @@
               DTS:DataType="3"
               DTS:TextQualified="True"
               DTS:ObjectName="Medicaid ID"
-              DTS:DTSID="{1CC3A98C-1E19-4D0F-A604-27DFD820CB1A}"
+              DTS:DTSID="{28C31E61-BEC7-43B2-8C6A-0341241AB9B4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1816,7 +109,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Last Name"
-              DTS:DTSID="{D7EDDBCE-52AD-4560-961F-17465BE6618F}"
+              DTS:DTSID="{EDA95C6C-894C-4CBA-A6F9-D3585361BB28}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1825,7 +118,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="First Name"
-              DTS:DTSID="{075A18D5-E7AE-4F82-B366-DC1F96A59E6C}"
+              DTS:DTSID="{A4BBA458-4E2D-484C-BEC6-1A2877582B28}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1834,7 +127,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Middle Name"
-              DTS:DTSID="{927404DD-EB7D-4292-A49F-630661FFD7D8}"
+              DTS:DTSID="{ADA74911-12DB-40C5-AE2A-9D07B9775F7A}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1842,8 +135,8 @@
               DTS:MaximumWidth="10"
               DTS:DataType="129"
               DTS:TextQualified="True"
-              DTS:ObjectName="DOB (MM DD YYYY)"
-              DTS:DTSID="{25955233-C28D-411C-8001-966DCD8C1BE6}"
+              DTS:ObjectName="DOB (MM/DD/YYYY)"
+              DTS:DTSID="{6E16D832-DD25-41FF-A2D7-A9DF511A5846}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1852,7 +145,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="SSN"
-              DTS:DTSID="{0317F86D-61A1-423D-A8F5-7C456FFC045F}"
+              DTS:DTSID="{82264885-6018-4438-A4CA-9F579CD98A39}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1861,7 +154,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Gender CD"
-              DTS:DTSID="{004C47FD-4B8E-487A-A4F6-A1699AC14054}"
+              DTS:DTSID="{64D13278-755C-49B6-B519-E7EE3BD3A6F1}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1870,7 +163,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Address1"
-              DTS:DTSID="{4A7AD4A3-3488-43F6-B6FA-01FE10CC3F2E}"
+              DTS:DTSID="{AABA7C7A-3638-4F35-837F-4C28B01544FD}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1879,7 +172,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Address2"
-              DTS:DTSID="{0B1D1B95-82D5-48E5-B91B-6F997D70B703}"
+              DTS:DTSID="{5B7B3394-DF5F-449F-8A34-0809E44F0139}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1888,7 +181,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="City"
-              DTS:DTSID="{077D44B5-EB37-4855-B65B-0AF4F81EEDE6}"
+              DTS:DTSID="{C46FFE60-8A53-455D-8B0B-D7CDB42B74F4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1897,7 +190,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="State"
-              DTS:DTSID="{390B34ED-2DD5-4F61-ADE1-4CA0B1411B50}"
+              DTS:DTSID="{DA757CC3-D6D3-4FD0-B2FE-1DEF366F8065}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1906,7 +199,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Zip Code"
-              DTS:DTSID="{64DF838A-9FC5-4674-AED0-3B96F056A8E9}"
+              DTS:DTSID="{3C1C8E09-D780-4FE5-A738-07F3BDAC6CEF}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1915,7 +208,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Primary Diagnosis CD"
-              DTS:DTSID="{FBF21B96-9313-4764-83DE-002EA90344BD}"
+              DTS:DTSID="{37251961-951B-4A7C-84A8-180384CBD85D}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1924,7 +217,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Secondary Diagnosis CD"
-              DTS:DTSID="{7EBF9502-E6DF-4048-AF0A-0FC8A9AA2EFF}"
+              DTS:DTSID="{F5C2CFAF-7773-4867-A022-5B37E06791E7}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1933,7 +226,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Tertiary Diagnosis CD"
-              DTS:DTSID="{9E7F73F6-92F7-4AD5-AC64-DC57425AE41C}"
+              DTS:DTSID="{984D56BB-19C1-4886-8C01-FE64A7D74BCC}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1942,7 +235,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Fourth Diagnosis CD"
-              DTS:DTSID="{7CDAE942-59BC-452D-9EBE-0C60A8BFDAA5}"
+              DTS:DTSID="{BC8A0CC3-25A0-4FC3-B65E-BA284FE90BFF}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1951,7 +244,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="IEP Start Date"
-              DTS:DTSID="{BC3D884F-BA56-4840-A7B8-375C29DB6B49}"
+              DTS:DTSID="{E0EDE9A7-74A4-4B99-AFCD-8BBABF7730C6}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1960,7 +253,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="IEP End Date"
-              DTS:DTSID="{06EEAE23-42F2-41C0-93F1-18A237C16C19}"
+              DTS:DTSID="{FC623A16-CB09-462B-B1FE-6F4B0C20810C}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1969,7 +262,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="PCP Prescription Start Date"
-              DTS:DTSID="{9338FC51-44AB-47E1-946F-4732667E0863}"
+              DTS:DTSID="{6A35132D-CE2E-4312-A369-9974239983C8}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1978,7 +271,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="PCP Prescription End Date"
-              DTS:DTSID="{DFDF097E-664B-40F1-BE51-8AD87515222A}"
+              DTS:DTSID="{1BE7CFAE-9862-4ED4-916D-0C4FBFDEFE9E}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1986,8 +279,8 @@
               DTS:MaximumWidth="1"
               DTS:DataType="129"
               DTS:TextQualified="True"
-              DTS:ObjectName="PCP Prescription Exempt(E) In Process(P)"
-              DTS:DTSID="{54AC19A6-432E-4957-9C18-039ABB19BAC1}"
+              DTS:ObjectName="PCP Prescription Exempt(E)/In Process(P)"
+              DTS:DTSID="{9A6F3D37-62F0-426B-9939-A4BFE4B3D91B}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -1996,7 +289,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="PCP Last Name"
-              DTS:DTSID="{9C8EEE68-B72F-4F01-9DAE-47B75FA9ACEC}"
+              DTS:DTSID="{DC20E371-B836-435A-8025-5E31CC62F8F9}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2005,7 +298,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="PCP First Name"
-              DTS:DTSID="{21E08CB5-1987-4A9E-8161-9E040D98C606}"
+              DTS:DTSID="{2F485031-7566-48D6-B976-B0A1EF60CD9D}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2014,7 +307,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Audiology on IEP?"
-              DTS:DTSID="{619BB405-5768-4569-94E7-B615500A0E7C}"
+              DTS:DTSID="{64E49906-4C62-46EB-B55F-583C34901247}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2023,7 +316,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Case Management on IEP?"
-              DTS:DTSID="{EAF28278-C4A9-43C5-96D1-16753A425734}"
+              DTS:DTSID="{3FED8A2F-4710-42CC-B858-48C886A5D5E5}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2032,7 +325,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Mental Health-Counseling on IEP?"
-              DTS:DTSID="{E4218ACC-6E4A-41EE-9A14-D1736C29CC2A}"
+              DTS:DTSID="{41C8CC3C-96EF-465B-80D9-DFF03BD75614}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2041,7 +334,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Nursing Services on IEP?"
-              DTS:DTSID="{792114A9-4C35-43F3-9825-61AE35BB775F}"
+              DTS:DTSID="{043B3C10-0F9C-4012-A9E4-B5C3A7DF2EB4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2050,7 +343,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Nutritional Services on IEP?"
-              DTS:DTSID="{9EAFA4C0-8B8F-4843-A06A-58F38266DF55}"
+              DTS:DTSID="{D1A83953-8C1F-40F1-A240-0FE759AA213F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2059,7 +352,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Occupational Therapy on IEP?"
-              DTS:DTSID="{2E211C58-1390-4CF7-9D76-31223A6D86FF}"
+              DTS:DTSID="{283EA940-42E7-4D00-BBDD-6DEE8241D9D5}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2068,7 +361,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Physical Therapy on IEP?"
-              DTS:DTSID="{07073183-0B11-4984-B7CD-FBB2B33F264C}"
+              DTS:DTSID="{6461733F-565F-4531-A2BB-E7017699CDCD}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2077,7 +370,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Speech Therapy on IEP?"
-              DTS:DTSID="{6C8337B5-256C-406C-A1BF-D1404CE683F0}"
+              DTS:DTSID="{6E193E9C-E6C9-4439-B60C-C51DFB3B6216}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2086,7 +379,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Special Transportation on IEP?"
-              DTS:DTSID="{F4BC323A-EBF9-4380-A84E-CD8D13611FB1}"
+              DTS:DTSID="{4DB5BD62-9F02-4AC5-9BA8-5CF4D4EA00AD}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2094,8 +387,8 @@
               DTS:MaximumWidth="1"
               DTS:DataType="129"
               DTS:TextQualified="True"
-              DTS:ObjectName="BH-Mental Health Counselor Therapist?"
-              DTS:DTSID="{7F580925-A1F0-4E9D-B1B4-12838241E68A}"
+              DTS:ObjectName="BH-Mental Health Counselor/Therapist?"
+              DTS:DTSID="{49BA089A-780B-4CC4-84F0-E1211D5D0FAA}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2104,7 +397,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="BH-Psychologist on IEP?"
-              DTS:DTSID="{E9F4D9A7-724C-43DD-BD91-8F3C3221F750}"
+              DTS:DTSID="{EB017BC1-D6C2-43C4-B018-F1B341B18306}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2113,7 +406,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="BH-School Psychologist on IEP?"
-              DTS:DTSID="{D8C26534-B8C8-4B28-B305-65F5465CCA5C}"
+              DTS:DTSID="{4323294B-B3D6-45DB-B620-86F2D01C3895}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2122,7 +415,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="BH-Social Worker on IEP?"
-              DTS:DTSID="{AD3C04DF-B89A-47F4-B470-F29DA227E3AE}"
+              DTS:DTSID="{A70C256B-B7DF-4241-B687-5E33A43DF5A3}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2131,7 +424,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Parent Consent"
-              DTS:DTSID="{86634DD4-3107-4BE6-BA60-FA5752B0679B}"
+              DTS:DTSID="{B2379B56-6E0D-498D-B582-1040EA307F33}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2140,7 +433,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="AD Hours"
-              DTS:DTSID="{B19815D4-40AB-4CE7-A173-CFB1E143B206}"
+              DTS:DTSID="{BE8569D9-E51E-4A0E-B8FA-5D82FAF82831}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2149,7 +442,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="MHC Hours"
-              DTS:DTSID="{AB6A9C33-DE73-4F24-98AD-C782DCB7EFCD}"
+              DTS:DTSID="{D1AAD707-4C5B-4C3D-B661-9F31D8226EDC}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2158,7 +451,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="NURS Hours"
-              DTS:DTSID="{96612610-DC3F-43B8-84E9-90361277FA88}"
+              DTS:DTSID="{8D7D8552-5C56-4468-8807-F9568899D7BF}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2167,7 +460,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="OT Hours"
-              DTS:DTSID="{D03A6499-84B7-477D-B57B-5BD2033BCD49}"
+              DTS:DTSID="{C36A84D9-FC1F-4F31-A271-6A8FFA3BDC79}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2176,7 +469,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="PT Hours"
-              DTS:DTSID="{8309A3EE-9FEC-4D4C-A1E3-7DECA311B141}"
+              DTS:DTSID="{9C5F2762-334E-4AC0-9492-3FED4E879D75}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2185,7 +478,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="SP Hours"
-              DTS:DTSID="{6DCEA1F4-058A-4802-BDEF-CE7ED4460D5E}"
+              DTS:DTSID="{636684C3-5525-48AE-BECF-2FDD7F462754}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2194,7 +487,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="BH-C Hours"
-              DTS:DTSID="{2AE5C18F-D295-4C96-8587-91B622F5A813}"
+              DTS:DTSID="{8DFB1C6C-23B8-4C1B-A9CB-370AADA2F392}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2203,7 +496,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="BH-PS Hours"
-              DTS:DTSID="{27B6E1D2-0F61-430C-A0F9-30D3C83A58E2}"
+              DTS:DTSID="{7297AEB7-40A0-4B51-9D87-CE4A30F756B2}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2212,7 +505,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="BH-SPS Hours"
-              DTS:DTSID="{4F5EB28A-CE4E-4E2A-BFD9-A053326F51B8}"
+              DTS:DTSID="{6D82B86D-232D-424F-BE99-61BC70497678}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2221,7 +514,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="BH-SW Hours"
-              DTS:DTSID="{B84F9B05-98B3-42CE-9D43-B819F03B8A40}"
+              DTS:DTSID="{3F3CEA88-EBC2-45C0-901E-9E02E6A46E38}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2230,7 +523,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="AD Frequency"
-              DTS:DTSID="{D333100D-1A81-4437-BBA5-C89B226AE0B1}"
+              DTS:DTSID="{700012C9-8FA0-4E98-A9C9-57065E1045DF}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2239,7 +532,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="MHC Frequency"
-              DTS:DTSID="{3858121E-B62F-49F5-B926-44D078CB53DE}"
+              DTS:DTSID="{FF31A799-FD87-4F64-A394-11A91297C3DB}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2248,7 +541,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="NURS Frequency"
-              DTS:DTSID="{5E714C6B-04A2-4F33-8D62-592FDF84D0FC}"
+              DTS:DTSID="{66A51105-E24D-4162-89DD-87EBFD74ABBB}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2257,7 +550,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="OT Frequency"
-              DTS:DTSID="{24AB7B57-9853-4A39-A174-ECCBFCBD955C}"
+              DTS:DTSID="{4C15062A-AE48-457B-8F6D-60AB1EC195FE}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2266,7 +559,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="PT Frequency"
-              DTS:DTSID="{385FBA3B-81D2-499F-B6F1-0A7FBB46E20C}"
+              DTS:DTSID="{149EF70E-901D-49A8-ACB6-C1DA8F48F785}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2275,7 +568,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="SP Frequency"
-              DTS:DTSID="{BF3B6136-AC19-4AC7-A1C0-8891CC6D3D75}"
+              DTS:DTSID="{64944E9F-BF52-4D50-8CD6-1CA1258447CB}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2284,7 +577,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="BH-C Frequency"
-              DTS:DTSID="{FA7CE1FC-0F6F-4E17-BF31-9411111351B5}"
+              DTS:DTSID="{051614F8-49FD-45D4-BD8B-FD06EEE445D6}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2293,7 +586,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="BH-PS Frequency"
-              DTS:DTSID="{5FA0F6F8-2FB5-4DCF-A483-5B62C0BCB335}"
+              DTS:DTSID="{70F365E3-6E33-42C2-A729-D910BBB49ED9}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2302,7 +595,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="BH-SPS Frequency"
-              DTS:DTSID="{AD6D8497-35CD-42FA-86B6-5E2CE4489166}"
+              DTS:DTSID="{F19A5602-DDA5-4C4B-A773-ED93248DFEAA}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2311,7 +604,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="BH-SW Frequency"
-              DTS:DTSID="{81E2D2D1-FF93-4D6D-8B87-71AA2B3A4263}"
+              DTS:DTSID="{2604F4BE-E1ED-4BDD-9655-225D07114BBC}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2320,7 +613,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Phone Nbr"
-              DTS:DTSID="{07F2A78D-4794-4BAC-8F71-D50F4732B5CF}"
+              DTS:DTSID="{29A7F6CC-DE3D-491D-B8CE-628C1EB21AA8}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2329,7 +622,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Inactive?"
-              DTS:DTSID="{04BCCAE7-AFA0-479D-8188-E09ED4CD3022}"
+              DTS:DTSID="{AE584B1C-4182-41F2-9FAE-ACC501540497}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -2338,7 +631,602 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Override Ind"
-              DTS:DTSID="{CA6EF1A5-ED19-4110-A964-34936BE46FDF}"
+              DTS:DTSID="{14BBB5CF-0C50-4461-93A2-F04E64905978}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Medicaid File 2]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{18E26FAA-4342-47F4-80EB-0DA5856A9FC3}"
+      DTS:ObjectName="Medicaid File 2">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis\Files\Export\Medicaid\MedicaidFile2.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="2"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="District CD"
+              DTS:DTSID="{C9486CB9-BCDA-403A-8ACE-188BC34E23CA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="School CD"
+              DTS:DTSID="{A5AEE01D-7A7A-430E-94A9-DD2E0032CA3E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="School Name"
+              DTS:DTSID="{AB398C58-F837-42E8-BCCC-D0AADEE69785}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="9"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student ID"
+              DTS:DTSID="{DA3F36DE-6112-4C9B-874F-03584FFEA608}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Medicaid ID"
+              DTS:DTSID="{7E1929DB-9856-46B6-B3BF-532B307668A3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Last Name"
+              DTS:DTSID="{95EF130A-D201-49CB-A46A-E1EC79DFF18B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="First Name"
+              DTS:DTSID="{AFEC79FC-31E3-4956-B09C-3B6B428FBC53}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Middle Name"
+              DTS:DTSID="{51612C13-E62E-4F78-99BD-B67E6B1739AA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DOB (MM/DD/YYYY)"
+              DTS:DTSID="{E354DEA8-77B7-469B-A563-BC467065C75A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SSN"
+              DTS:DTSID="{FABA2E50-D32D-4A4E-A2AA-057F44A5FED8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Gender CD"
+              DTS:DTSID="{16FC023D-FDDA-4803-A214-93BFF54957E7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student Address1"
+              DTS:DTSID="{A74CC9E8-1620-4060-927B-8AA3D9D7688E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student Address2"
+              DTS:DTSID="{C8B8C03E-97F6-4DFB-855A-A330E0841196}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="City"
+              DTS:DTSID="{B1EAC305-2755-4DF2-8E4F-C16C5CD03879}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="State"
+              DTS:DTSID="{F5B3A407-B0F9-4AD0-A7BF-2E03924E7ED0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="6"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Zip Code"
+              DTS:DTSID="{35F93EC6-5BDF-44EC-8FB6-3D9D8938CEAF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Primary Diagnosis CD"
+              DTS:DTSID="{9ABBD8D7-9D1E-41C6-9FBD-05A4C497CDF6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Secondary Diagnosis CD"
+              DTS:DTSID="{F78D5CB6-CDEB-40F4-AE54-9FDDE478CEAA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Tertiary Diagnosis CD"
+              DTS:DTSID="{9E1879CB-3BCD-4646-8E08-33F55E0FC296}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Fourth Diagnosis CD"
+              DTS:DTSID="{BD48AA50-6DF3-4677-BBD5-21FE73A0BA42}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IEP Start Date"
+              DTS:DTSID="{63A6AA2F-09B5-48C6-81EB-8D0A5A9DE7D8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IEP End Date"
+              DTS:DTSID="{6766868B-B9A2-4D81-A481-796BFAE264F4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PCP Prescription Start Date"
+              DTS:DTSID="{A364DCFF-0260-466F-8042-19E4CBFE7226}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PCP Prescription End Date"
+              DTS:DTSID="{8FCEF605-640E-41BA-8067-4413FBB9D260}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PCP Prescription Exempt(E)/In Process(P)"
+              DTS:DTSID="{24540926-7F1A-4EC7-A11A-494E9CE1AFB2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PCP Last Name"
+              DTS:DTSID="{E1D181DF-79FC-452A-A154-85CEFCEC9986}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PCP First Name"
+              DTS:DTSID="{89DB7D1C-A2F0-4077-83AC-5BF7E9EE38BE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Audiology on IEP?"
+              DTS:DTSID="{AA984906-F1B4-4858-9FBF-53455F48EAF8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Case Management on IEP?"
+              DTS:DTSID="{5AD86456-30EA-4B7E-BF56-ABD492B6B9A4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Mental Health-Counseling on IEP?"
+              DTS:DTSID="{B768D83E-E535-4F3A-8AE2-A65FDA4957BD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Nursing Services on IEP?"
+              DTS:DTSID="{198310BA-C5FC-4F54-B90C-3144F435B93B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Nutritional Services on IEP?"
+              DTS:DTSID="{69FA5B0C-840F-44FF-8832-C6ED4099BE5B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Occupational Therapy on IEP?"
+              DTS:DTSID="{228B83BD-65D1-496E-AED0-26EF57CC6D58}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Physical Therapy on IEP?"
+              DTS:DTSID="{30F28FA5-1124-42DA-9110-722069069A9F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Speech Therapy on IEP?"
+              DTS:DTSID="{0067E4AC-3BE0-4355-87B8-114B1A5ACA36}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Special Transportation on IEP?"
+              DTS:DTSID="{FB7D3CC3-941A-441C-B4B8-4E8E7BB41696}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BH-Mental Health Counselor/Therapist?"
+              DTS:DTSID="{C64D909F-4E01-4555-926C-071C37BF5839}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BH-Psychologist on IEP?"
+              DTS:DTSID="{0FC67BC8-C2CF-4D1F-A72F-81FBCF2B6734}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BH-School Psychologist on IEP?"
+              DTS:DTSID="{2281D507-406A-4C69-94BE-3BFBC4A57150}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BH-Social Worker on IEP?"
+              DTS:DTSID="{27398873-87FB-4226-89AF-20D428EE7196}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Parent Consent"
+              DTS:DTSID="{A538DF35-C32B-48D1-A2EB-70C4EA5DB217}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AD Hours"
+              DTS:DTSID="{3F4866BD-E506-4096-BDD5-5A2B73B50CB1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MHC Hours"
+              DTS:DTSID="{72CE26CF-AAE9-4002-AE59-F00869D2A609}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NURS Hours"
+              DTS:DTSID="{62BEA6EB-E50B-40E8-87D2-CC39E00EF808}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="OT Hours"
+              DTS:DTSID="{516FC244-7F25-40A5-B940-C35F1D3DF625}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PT Hours"
+              DTS:DTSID="{0F78062A-E556-4C96-83E8-CBA769BEDF26}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SP Hours"
+              DTS:DTSID="{19D71DB0-F92F-4A2B-8B3F-2F99BF61F359}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BH-C Hours"
+              DTS:DTSID="{8D488349-5626-4653-AC34-7E6FA11777E6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BH-PS Hours"
+              DTS:DTSID="{199D722E-6D1D-412C-8383-750A942C2541}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BH-SPS Hours"
+              DTS:DTSID="{F442C19A-4BA1-4853-8927-BF853C1C3810}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BH-SW Hours"
+              DTS:DTSID="{5DBD4CBA-8F7E-4F3E-AD6A-C3DE853A8C4B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AD Frequency"
+              DTS:DTSID="{A1E7E46F-6851-49E3-86E6-11F2CFC00972}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MHC Frequency"
+              DTS:DTSID="{CC1B1CA9-1E2F-4B31-80B1-0D065BDB1F6A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NURS Frequency"
+              DTS:DTSID="{69F6F080-DD40-47FA-BB77-9075F57189E5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="OT Frequency"
+              DTS:DTSID="{625ADCDC-3187-42C6-B5B2-B58D2898A2BB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PT Frequency"
+              DTS:DTSID="{20C5898E-658E-4799-889D-213377A52DFF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SP Frequency"
+              DTS:DTSID="{3626C4E0-C17A-4F7B-AEE9-33352ED7762A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BH-C Frequency"
+              DTS:DTSID="{1C1ABF23-F85D-4CF0-B8DC-6A4FC9722164}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BH-PS Frequency"
+              DTS:DTSID="{5469272E-C26D-4D72-8ED6-5C7C7CB66BF1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BH-SPS Frequency"
+              DTS:DTSID="{613619FC-7B39-49A7-94DD-03070BF34A65}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BH-SW Frequency"
+              DTS:DTSID="{32B8AB91-715D-4AF2-B61B-7996AC914770}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="13"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Phone Nbr"
+              DTS:DTSID="{E34C48EE-1912-434A-BA58-8813FB4A8F0D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Inactive?"
+              DTS:DTSID="{EB78677F-0540-4DBD-B328-8D77C8A64BD8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Override Ind"
+              DTS:DTSID="{51C9B6C9-3576-4844-B3CB-8C880D850DF3}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -2349,16 +1237,6 @@
       DTS:CreationName="OLEDB"
       DTS:DTSID="{F9193849-5640-4A13-82C9-109CC1A74ED0}"
       DTS:ObjectName="synergydbdc.ST_Production">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=synergydbdc;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[synergydbdc.ST_Production 1]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{EB16FD7E-55CE-4A6B-A529-06E5C24AE920}"
-      DTS:ObjectName="synergydbdc.ST_Production 1">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectionString="Data Source=synergydbdc;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
@@ -2435,8 +1313,8 @@
               <connections>
                 <connection
                   refId="Package\MedicAid File 1\Flat File Destination.Connections[FlatFileConnection]"
-                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager 1]"
-                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager 1]"
+                  connectionManagerID="Package.ConnectionManagers[Medicaid File 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[Medicaid File 1]"
                   name="FlatFileConnection" />
               </connections>
               <inputs>
@@ -2445,6 +1323,14 @@
                   hasSideEffects="true"
                   name="Flat File Destination Input">
                   <inputColumns>
+                    <inputColumn
+                      refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].Columns[District CD]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="District CD"
+                      externalMetadataColumnId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[District CD]"
+                      lineageId="Package\MedicAid File 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[District CD]" />
                     <inputColumn
                       refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].Columns[School CD]"
                       cachedDataType="wstr"
@@ -2493,6 +1379,14 @@
                       cachedName="Middle Name"
                       externalMetadataColumnId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Middle Name]"
                       lineageId="Package\MedicAid File 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Middle Name]" />
+                    <inputColumn
+                      refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].Columns[DOB (MM/DD/YYYY)]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="DOB (MM/DD/YYYY)"
+                      externalMetadataColumnId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DOB (MM/DD/YYYY)]"
+                      lineageId="Package\MedicAid File 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DOB (MM/DD/YYYY)]" />
                     <inputColumn
                       refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].Columns[SSN]"
                       cachedCodepage="1252"
@@ -2608,6 +1502,14 @@
                       externalMetadataColumnId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PCP Prescription End Date]"
                       lineageId="Package\MedicAid File 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[PCP Prescription End Date]" />
                     <inputColumn
+                      refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].Columns[PCP Prescription Exempt(E)/In Process(P)]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="PCP Prescription Exempt(E)/In Process(P)"
+                      externalMetadataColumnId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PCP Prescription Exempt(E)/In Process(P)]"
+                      lineageId="Package\MedicAid File 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[PCP Prescription Exempt(E)/In Process(P)]" />
+                    <inputColumn
                       refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].Columns[PCP Last Name]"
                       cachedCodepage="1252"
                       cachedDataType="str"
@@ -2695,6 +1597,14 @@
                       cachedName="Special Transportation on IEP?"
                       externalMetadataColumnId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Special Transportation on IEP?]"
                       lineageId="Package\MedicAid File 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Special Transportation on IEP?]" />
+                    <inputColumn
+                      refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].Columns[BH-Mental Health Counselor/Therapist?]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="BH-Mental Health Counselor/Therapist?"
+                      externalMetadataColumnId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BH-Mental Health Counselor/Therapist?]"
+                      lineageId="Package\MedicAid File 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[BH-Mental Health Counselor/Therapist?]" />
                     <inputColumn
                       refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].Columns[BH-Psychologist on IEP?]"
                       cachedCodepage="1252"
@@ -2907,11 +1817,11 @@
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 0]"
+                      refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[District CD]"
                       codePage="1252"
                       dataType="str"
                       length="2"
-                      name="Column 0" />
+                      name="District CD" />
                     <externalMetadataColumn
                       refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[School CD]"
                       dataType="wstr"
@@ -2947,11 +1857,11 @@
                       length="20"
                       name="Middle Name" />
                     <externalMetadataColumn
-                      refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DOB (MM DD YYYY)]"
+                      refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DOB (MM/DD/YYYY)]"
                       codePage="1252"
                       dataType="str"
                       length="10"
-                      name="DOB (MM DD YYYY)" />
+                      name="DOB (MM/DD/YYYY)" />
                     <externalMetadataColumn
                       refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SSN]"
                       codePage="1252"
@@ -3037,11 +1947,11 @@
                       length="10"
                       name="PCP Prescription End Date" />
                     <externalMetadataColumn
-                      refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PCP Prescription Exempt(E) In Process(P)]"
+                      refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PCP Prescription Exempt(E)/In Process(P)]"
                       codePage="1252"
                       dataType="str"
                       length="1"
-                      name="PCP Prescription Exempt(E) In Process(P)" />
+                      name="PCP Prescription Exempt(E)/In Process(P)" />
                     <externalMetadataColumn
                       refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PCP Last Name]"
                       codePage="1252"
@@ -3109,11 +2019,11 @@
                       length="1"
                       name="Special Transportation on IEP?" />
                     <externalMetadataColumn
-                      refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BH-Mental Health Counselor Therapist?]"
+                      refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BH-Mental Health Counselor/Therapist?]"
                       codePage="1252"
                       dataType="str"
                       length="1"
-                      name="BH-Mental Health Counselor Therapist?" />
+                      name="BH-Mental Health Counselor/Therapist?" />
                     <externalMetadataColumn
                       refId="Package\MedicAid File 1\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BH-Psychologist on IEP?]"
                       codePage="1252"
@@ -4846,7 +3756,7 @@ APS.MedicaidImport1</property>
       DTS:refId="Package\MedicAid File 2"
       DTS:CreationName="SSIS.Pipeline.3"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{D147CA4F-0A40-4D66-BB76-ACF450E4F8CF}"
+      DTS:DTSID="{15CEB642-EB7B-45B4-A735-F91B3247F889}"
       DTS:ExecutableType="SSIS.Pipeline.3"
       DTS:LocaleID="-1"
       DTS:ObjectName="MedicAid File 2"
@@ -4877,8 +3787,8 @@ APS.MedicaidImport1</property>
               <connections>
                 <connection
                   refId="Package\MedicAid File 2\Flat File Destination.Connections[FlatFileConnection]"
-                  connectionManagerID="Package.ConnectionManagers[APS_StudentData]"
-                  connectionManagerRefId="Package.ConnectionManagers[APS_StudentData]"
+                  connectionManagerID="Package.ConnectionManagers[Medicaid File 2]"
+                  connectionManagerRefId="Package.ConnectionManagers[Medicaid File 2]"
                   name="FlatFileConnection" />
               </connections>
               <inputs>
@@ -5798,8 +4708,8 @@ APS.MedicaidImport2</property>
               <connections>
                 <connection
                   refId="Package\MedicAid File 2\OLE DB Source.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[synergydbdc.ST_Production 1]"
-                  connectionManagerRefId="Package.ConnectionManagers[synergydbdc.ST_Production 1]"
+                  connectionManagerID="Package.ConnectionManagers[DB Connection 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB Connection 1]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -7321,7 +6231,7 @@ APS.MedicaidImport2</property>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{69980273-2474-4562-8DB7-B401A3CD9C21}"
+      DTS:DTSID="{B262D509-AA5E-4B09-B6AD-00E2A398BD86}"
       DTS:From="Package\MedicAid File 1"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
@@ -7346,33 +6256,33 @@ APS.MedicaidImport2</property>
         <NodeLayout
           Size="151,42"
           Id="Package\MedicAid File 2"
-          TopLeft="118,227" />
+          TopLeft="135,204" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="124.71428574348,167.31176369347">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="68.7857142565202,59.68823630653"
+              EndConnector="85.7857142565202,36.68823630653"
               Start="0,0"
-              End="68.7857142565202,52.18823630653">
+              End="85.7857142565202,29.18823630653">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,25.844118153265" />
+                    End="0,14.344118153265" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,25.844118153265"
-                    Point2="0,29.844118153265"
-                    Point3="4,29.844118153265" />
+                    Point1="0,14.344118153265"
+                    Point2="0,18.344118153265"
+                    Point3="4,18.344118153265" />
                   <mssgle:LineSegment
-                    End="64.7857142565202,29.844118153265" />
+                    End="81.7857142565202,18.344118153265" />
                   <mssgle:CubicBezierSegment
-                    Point1="64.7857142565202,29.844118153265"
-                    Point2="68.7857142565202,29.844118153265"
-                    Point3="68.7857142565202,33.844118153265" />
+                    Point1="81.7857142565202,18.344118153265"
+                    Point2="85.7857142565202,18.344118153265"
+                    Point3="85.7857142565202,22.344118153265" />
                   <mssgle:LineSegment
-                    End="68.7857142565202,52.18823630653" />
+                    End="85.7857142565202,29.18823630653" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -7396,33 +6306,33 @@ APS.MedicaidImport2</property>
         <NodeLayout
           Size="174,42"
           Id="Package\MedicAid File 1\Flat File Destination"
-          TopLeft="148,123" />
+          TopLeft="156,147" />
         <EdgeLayout
           Id="Package\MedicAid File 1.Paths[OLE DB Source Output]"
           TopLeft="164.000001498631,80.5411770111137">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="70.9999985013689,42.4588229888863"
+              EndConnector="78.9999985013689,66.4588229888863"
               Start="0,0"
-              End="70.9999985013689,34.9588229888863">
+              End="78.9999985013689,58.9588229888863">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,17.2294114944431" />
+                    End="0,29.2294114944431" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,17.2294114944431"
-                    Point2="0,21.2294114944431"
-                    Point3="4,21.2294114944431" />
+                    Point1="0,29.2294114944431"
+                    Point2="0,33.2294114944431"
+                    Point3="4,33.2294114944431" />
                   <mssgle:LineSegment
-                    End="66.9999985013689,21.2294114944431" />
+                    End="74.9999985013689,33.2294114944431" />
                   <mssgle:CubicBezierSegment
-                    Point1="66.9999985013689,21.2294114944431"
-                    Point2="70.9999985013689,21.2294114944431"
-                    Point3="70.9999985013689,25.2294114944431" />
+                    Point1="74.9999985013689,33.2294114944431"
+                    Point2="78.9999985013689,33.2294114944431"
+                    Point3="78.9999985013689,37.2294114944431" />
                   <mssgle:LineSegment
-                    End="70.9999985013689,34.9588229888863" />
+                    End="78.9999985013689,58.9588229888863" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -7450,37 +6360,37 @@ APS.MedicaidImport2</property>
         <NodeLayout
           Size="152,42"
           Id="Package\MedicAid File 2\OLE DB Source"
-          TopLeft="153,77" />
+          TopLeft="88,79" />
         <NodeLayout
           Size="174,42"
           Id="Package\MedicAid File 2\Flat File Destination"
-          TopLeft="212,181" />
+          TopLeft="155,179" />
         <EdgeLayout
           Id="Package\MedicAid File 2.Paths[OLE DB Source Output]"
-          TopLeft="229,119">
+          TopLeft="164,121">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="70,62"
+              EndConnector="78,58"
               Start="0,0"
-              End="70,54.5">
+              End="78,50.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,27" />
+                    End="0,25" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,27"
-                    Point2="0,31"
-                    Point3="4,31" />
+                    Point1="0,25"
+                    Point2="0,29"
+                    Point3="4,29" />
                   <mssgle:LineSegment
-                    End="66,31" />
+                    End="74,29" />
                   <mssgle:CubicBezierSegment
-                    Point1="66,31"
-                    Point2="70,31"
-                    Point3="70,35" />
+                    Point1="74,29"
+                    Point2="78,29"
+                    Point3="78,33" />
                   <mssgle:LineSegment
-                    End="70,54.5" />
+                    End="78,50.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
