@@ -6,6 +6,13 @@
 	for Schedule 2 and Ammendments only.  One is grouped by Start IEP date the other is by End IEP date.  
 
 */
+
+IF NOT EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[APS].[MedicaidImport2]'))
+	EXEC ('CREATE VIEW APS.MedicaidImport2 AS SELECT 0 AS DUMMY')
+GO
+
+ALTER VIEW APS.MedicaidImport2 AS
+
 SELECT * FROM (
 
 SELECT * FROM 
