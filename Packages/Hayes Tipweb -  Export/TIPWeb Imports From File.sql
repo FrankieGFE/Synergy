@@ -36,7 +36,7 @@ INSERT INTO
 		[OrgYear].[ORGANIZATION_YEAR_GU] = [CalendarOptions].[ORG_YEAR_GU]
 		
 	WHERE
-		LEFT([FEE_CODE],3) IN ('525','540','550','560','570','576','580')
+		LEFT([FEE_CODE],3) IN ('525','540','550','560','570','576','580','998')
 		
 -----------------------------------------------------------------------------------	
 
@@ -99,7 +99,7 @@ FROM
 	CAST([fee].[NOTE] AS VARCHAR(4000))=CAST([Lost].[ISBN] AS VARCHAR(255))+' '+CAST([Lost].[Accession] AS VARCHAR(255))+' '+[Lost].[Title] + ' LST'
 	
 WHERE
-	[Lost].[CampusID] IN ('525','540','550','560','570','576','580')
+	[Lost].[CampusID] IN ('525','540','550','560','570','576','580','998')
 	AND [fee].[STUDENT_FEE_GU] IS NULL
 	AND [Lost].[ModifiedDate] IS NOT NULL
 
