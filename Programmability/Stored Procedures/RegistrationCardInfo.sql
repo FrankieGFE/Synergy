@@ -68,7 +68,7 @@ insert into ##TempSiblings1
 	SiblingName
 	 )
 select 
-           stu.SIS_NUMBER                          sSIS_Number
+         stu.SIS_NUMBER                          sSIS_Number
          , per.FIRST_NAME + ' ' + per.LAST_NAME    sStudentName
          , row_number() over(partition by stu.sis_number order by sibp.scroll_composite_key) ssn
 		 , row_number() over(partition by sibs.sis_number order by sibp.scroll_composite_key) sdn
@@ -81,6 +81,9 @@ from     rev.epc_stu               stu
 		 join rev.EPC_STU_PARENT   ppar on ppar.PARENT_GU    = par.PARENT_GU
 		 join rev.EPC_STU          sibs on sibs.STUDENT_GU   = ppar.STUDENT_GU
 		 join rev.REV_PERSON       sibp on sibp.PERSON_GU    = sibs.STUDENT_GU
+		 --PULL ONLY ACTIVE OPEN SIBLING ENROLLMENTS
+		 INNER JOIN APS.PrimaryEnrollmentsAsOf(GETDATE()) AS PRIM ON SIBS.STUDENT_GU = PRIM.STUDENT_GU
+
 where    stu.STUDENT_GU <> ppar.STUDENT_GU
 
 

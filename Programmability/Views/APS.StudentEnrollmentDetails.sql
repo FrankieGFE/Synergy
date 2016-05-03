@@ -13,7 +13,8 @@ GO
 ALTER VIEW [APS].[StudentEnrollmentDetails] AS
 
 SELECT	
-	[School].[SCHOOL_CODE]
+	SIS_NUMBER
+	,[School].[SCHOOL_CODE]
 	,[Organization].[ORGANIZATION_NAME] AS [SCHOOL_NAME]
 	,[StudentSchoolYear].[ENTER_DATE]
 	,[StudentSchoolYear].[ENTER_CODE]
@@ -22,6 +23,7 @@ SELECT
 	,[StudentSchoolYear].[LEAVE_CODE]
 	,[LEAVE_CODE].[VALUE_DESCRIPTION] AS [LEAVE_DESCRIPTION]
 	,[StudentSchoolYear].[SUMMER_WITHDRAWL_CODE]
+	,[StudentSchoolYear].SUMMER_WITHDRAWL_DATE
 	,[StudentSchoolYear].[YEAR_END_STATUS]
 	,[Grades].[VALUE_DESCRIPTION] AS [GRADE]
 	,[Grades].[LIST_ORDER]
@@ -77,5 +79,8 @@ FROM
 	ON
 	[StudentSchoolYear].[LEAVE_CODE] = [LEAVE_CODE].[VALUE_CODE]
 
+	INNER JOIN 
+	rev.EPC_STU AS STU
+	ON
 
-
+	[StudentSchoolYear].STUDENT_GU = STU.STUDENT_GU
