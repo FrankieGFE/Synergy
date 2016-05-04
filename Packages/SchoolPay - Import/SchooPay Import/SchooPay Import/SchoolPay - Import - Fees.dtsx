@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SchoolPay - Import - Fees"
   DTS:PackageType="5"
-  DTS:VersionBuild="34"
-  DTS:VersionGUID="{3DF4C641-5F66-4FC1-B364-EF87EA1F7565}">
+  DTS:VersionBuild="35"
+  DTS:VersionGUID="{5F29F96D-EAD5-4E78-861E-DCB626FB3BE5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -30,7 +30,7 @@
             <DTS:Property
               DTS:Name="ServerPassword"
               Sensitive="1"
-              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADOU0DFJsRlK4uLXP1dp6MVAAAAAASAAACgAAAAEAAAAAk9R9buujLF6nIk+Vwp9jYQAAAAphi7pzZIydLD+DK+MgqZJBQAAABWcQawZcp/RksMkM3SbyMJwt84vA</DTS:Property>
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAQvEjfyucZoqN3LwkeecTUAAAAAASAAACgAAAAEAAAAMp3uk5465p7LnolJuu2YgQQAAAAJE6kQfPEedKUeDQ9uAP1ABQAAABrNSCxtb2zJ6QNsAuQhTB4poJupg</DTS:Property>
           </DTS:FtpConnection>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
@@ -46,7 +46,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACC64mnL8+xBG4QI874sulvAAAAAASAAACgAAAAEAAAAHwRw/kMfZ3d4HatnVO5qfEwAAAAG1IpvunoacHP0NAMoK1DHNWHcT01b9tss5XcLDAF4tlbh2I0pjI15qYUjDH81YsvFAAAAPJSkltxp2upP5eRwH4x5vrTTN3J</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADaiiI6xv6OZJvZYgOMGjvcAAAAAASAAACgAAAAEAAAACiFzWMjHoiKCeKWVZKFyq4wAAAAa2DicSOAEzHcJusA+MWh8oo+Ri2R+64UeyhebrpHyEfJ59/o3xoJNKeDFmctQ4uhFAAAAPX+CTw82v7PppffKQIHtPGQUGc5</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -70,7 +70,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="DestinationPath">
       <DTS:VariableValue
-        DTS:DataType="8">\\syntempssis\Files\TempQuery\SchoolPay\Archive</DTS:VariableValue>
+        DTS:DataType="8">\\syntempssis\Files\TempQuery\SchoolPay\Archive\</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -81,7 +81,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="DestName">
       <DTS:VariableValue
-        DTS:DataType="8">\\syntempssis\Files\TempQuery\SchoolPay\Archive20160503.csv</DTS:VariableValue>
+        DTS:DataType="8">\\syntempssis\Files\TempQuery\SchoolPay\Archive\20160504.csv</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -92,7 +92,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="FileNameDate">
       <DTS:VariableValue
-        DTS:DataType="8">20160503</DTS:VariableValue>
+        DTS:DataType="8">20160504</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -206,6 +206,10 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="165,42"
+          Id="Package\Copy Rename File"
+          TopLeft="142,214" />
+        <NodeLayout
           Size="243,42"
           Id="Package\Download File from SchoolPay FTP"
           TopLeft="38.8571435188761,23.8588238640227" />
@@ -235,10 +239,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="165,42"
-          Id="Package\Copy Rename File"
-          TopLeft="142,214" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="160.214286901513,149.058825030871">
