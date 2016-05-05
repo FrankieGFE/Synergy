@@ -62,11 +62,17 @@ SELECT
 	
 FROM
 	-- READ FEES FROM FILE
-	OPENROWSET (
-		'Microsoft.ACE.OLEDB.12.0', 
-		'Text;Database=\\SynTempSSIS.aps.edu.actd\Files\TempQuery\;HDR=YES;', 
-		'SELECT * from APSLostBooks.csv'
-		) AS [Lost]
+	(
+	SELECT
+		CASE WHEN CampusID = 999 THEN 998 ELSE CampusID END AS CampusID
+		,StudentID,ISBN,Title,Accession,Status,Price,ModifiedDate,Notes
+	FROM
+		OPENROWSET (
+			'Microsoft.ACE.OLEDB.12.0', 
+			'Text;Database=\\SynTempSSIS.aps.edu.actd\Files\TempQuery\;HDR=YES;', 
+			'SELECT * FROM APSLostBooks.csv'
+			) AS [FILE]
+	) AS [Lost]
 
 	-- GET FEE CODES		
 	LEFT OUTER JOIN
@@ -100,11 +106,12 @@ FROM
 	
 WHERE
 	[Lost].[CampusID] IN ('525','540','550','560','570','576','580','998')
-	AND [fee].[STUDENT_FEE_GU] IS NULL
+	--AND [fee].[STUDENT_FEE_GU] IS NULL
 	AND [Lost].[ModifiedDate] IS NOT NULL
+	AND [Lost].[StudentID] = '100063619'
 
 ---------------------------------------------------------------------------------------------------	
---/*
+
 INSERT INTO
 	[rev].[EPC_STU_FEE] 
 
@@ -166,10 +173,10 @@ WHERE
 	[Damaged].[CampusID] IN ('525','540','550','560','570','576','580')
 	AND [fee].[STUDENT_FEE_GU] IS NULL
 	AND [Damaged].[ModifiedDate] IS NOT NULL
---*/
 
---ROLLBACK
-COMMIT
+
+ROLLBACK
+--COMMIT
 		
 REVERT
 GO
