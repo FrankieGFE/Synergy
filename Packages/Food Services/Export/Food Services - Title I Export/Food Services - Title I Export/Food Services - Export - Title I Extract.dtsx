@@ -1,0 +1,521 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/23/2015 9:43:27 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="046-SMCMURRAY"
+  DTS:CreatorName="APS\e207878"
+  DTS:DTSID="{F14CCBB5-00C0-465B-A67C-3C96117DB349}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5058.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Food Services - Export - Title I Extract"
+  DTS:PackageType="5"
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{EFDC2990-18EA-42E1-856E-5DF8126DDB95}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[synergydbdc.ST_Production]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{235F891A-FF4D-4D77-BD61-6295CEB0136F}"
+      DTS:ObjectName="synergydbdc.ST_Production">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=synergydbdc;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[TitleIExtract]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{E0FBE1F9-D6F3-46A5-BCD2-4117576144AB}"
+      DTS:ObjectName="TitleIExtract">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:Unicode="True"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\FoodServices\TitleIExtract.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Column 0"
+              DTS:DTSID="{5980BC1B-CA8B-40E8-AA17-777B060DEF61}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{630323D5-2C1E-43A8-A678-277A77FA8713}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[TitleIExtract]"
+                  connectionManagerRefId="Package.ConnectionManagers[TitleIExtract]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[SIS_NUMBER]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="SIS_NUMBER"
+                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 0]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SIS_NUMBER]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 0]"
+                      dataType="wstr"
+                      length="20"
+                      name="Column 0" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DECLARE @AsOfDate AS DATETIME = GETDATE()
+
+
+SELECT
+	/*[STUDENT].[STATE_STUDENT_NUMBER]
+	,*/[STUDENT].[SIS_NUMBER]
+	/*,[STUDENT].[FIRST_NAME]
+	,[STUDENT].[LAST_NAME]
+	,[ENROLLMENTS].[SCHOOL_CODE]
+	,[ENROLLMENTS].[SCHOOL_NAME]
+	,[ENROLLMENTS].[GRADE]
+	
+	,[StudentSchoolYear].[CAME_FROM]
+	,[StudentSchoolYear].[ENR_USER_DD_4] AS [HOME/CHARTER]
+	
+	,[TITLE_1_LOG].[DATE_FIRST_REFERRED]
+	,[TITLE_1_LOG].[REFERRED_SCHOOL_LOCATION]
+	,[TITLE_1_LOG].[REFERRAL_TAKEN_BY]
+	,[TITLE_1_LOG].[ASSIGNED_OUTREACH]
+	,[TITLE_1_LOG].[HOUSING_STATUS]
+	,[HOUSING_STATUS].[VALUE_DESCRIPTION]
+	,[HOUSING_STATUS].[ALT_CODE_1]
+	,[HOUSING_STATUS].[ALT_CODE_2]
+	,[HOUSING_STATUS].[ALT_CODE_3]
+	,[TITLE_1_LOG].[EXPECTING]
+	,[TITLE_1_LOG].[ADD_DATE_TIME_STAMP] AS [LOG_DATE]
+	,[TITLE_1_LOG].[NOTES] AS [LOG_NOTES]
+	,[TITLE_1_LOG].[OUTCOME] AS [LOG_OUTCOME]
+	,[LOG_OUTCOME].[VALUE_DESCRIPTION] AS [LOG_OUTCOME_DESC]
+	
+	,[TITLE_1_CONTACT].[ADD_DATE_TIME_STAMP] AS [CONTACT_DATE]
+	,[TITLE_1_CONTACT].[NOTES] AS [CONTACT_NOTES]
+	,[TITLE_1_CONTACT].[OUTCOME] AS [CONTACT_OUTCOME]
+	,[CONTACT_OUTCOME].[VALUE_DESCRIPTION] AS [CONTACT_OUTCOME_DESC]
+	
+	,[TITLE_1_FOLLOW_UP].[ADD_DATE_TIME_STAMP] AS [FOLLOW_UP_DATE]
+	,[TITLE_1_FOLLOW_UP].[NOTES] AS [FOLLOW_UP_NOTES]
+	,[TITLE_1_FOLLOW_UP].[OUTCOME] AS [FOLLOW_UP_OUTCOME]
+	,[FOLLOW_UP_OUTCOME].[VALUE_DESCRIPTION]  AS [FOLLOW_UP_OUTCOME_DESC]
+	
+	,[TITLE_1_HISTORY].[ADD_DATE_TIME_STAMP] AS [HISTORY_DATE]
+	,[TITLE_1_HISTORY].[HISTORY_NOTES]
+	
+	,[UD_STUDENT].[ADVOCACY_COLLABORATION_WITH]
+	,[UD_STUDENT].[ASSISTANCE_WITH_OTHER_SCHOO]
+	,[UD_STUDENT].[CAP_AND_GOWN_VOUCHER]
+	,[UD_STUDENT].[CHILD_NUTRITION]
+	,[UD_STUDENT].[COMMUNITY_RESOURCE_GUIDE]
+	,[UD_STUDENT].[DISCUSSION_OF_MVRIGHTS]
+	,[UD_STUDENT].[EMERGENCY_FOOD_BAG]
+	,[UD_STUDENT].[EMERGENCY_CLOTHING_VOUCHER]
+	,[UD_STUDENT].[ENROLLMENT_ASSISTANCE]
+	,[UD_STUDENT].[EXPEDITED_EVALUATION]
+	,[UD_STUDENT].[FAFSA_COLLEGE_FINANCIAL_AS]
+	,[UD_STUDENT].[FAMILY_NUMBER]
+	,[UD_STUDENT].[FOOD_SERVICES]
+	,[UD_STUDENT].[HOLIDAY_ADOPTIONS]
+	,[UD_STUDENT].[HOME_VISIT]
+	,[UD_STUDENT].[HYGIENE_PRODUCTS]
+	,[UD_STUDENT].[MEDICAL_DENTAL_SERVICES]
+	,[UD_STUDENT].[MENTAL_HEALTH_SERVICES]
+	,[UD_STUDENT].[OTHER_CLOTHING]
+	,[UD_STUDENT].[SCHOOL_RECORDS]
+	,[UD_STUDENT].[SCHOOL_SUPPLIES]
+	,[UD_STUDENT].[SCHOOL_UNIFORMS]
+	,[UD_STUDENT].[SUMMER_PROGRAM]
+	,[UD_STUDENT].[SUMMER_SCHOOL_ASSISTANCE_FE]
+	,[UD_STUDENT].[TUTORING_PROGRAM]
+	,[UD_STUDENT].[TRANSPORTATION]*/
+	
+	
+FROM
+	APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS [ENROLLMENTS]
+	
+	INNER JOIN
+	rev.EPC_STU_SCH_YR AS [StudentSchoolYear]
+	ON
+	[ENROLLMENTS].[STUDENT_SCHOOL_YEAR_GU] = [StudentSchoolYear].[STUDENT_SCHOOL_YEAR_GU]
+	
+	INNER JOIN
+	APS.BasicStudent AS [STUDENT]
+	ON
+	[ENROLLMENTS].[STUDENT_GU] = [STUDENT].[STUDENT_GU]
+	
+	LEFT OUTER JOIN
+	rev.UD_TITLEI_LOG AS [TITLE_1_LOG]
+	ON
+	[ENROLLMENTS].[STUDENT_GU] = [TITLE_1_LOG].[STUDENT_GU]
+	
+	LEFT OUTER JOIN
+	APS.LookupTable('Revelation.UD.TitleI','OUTCOME') AS [LOG_OUTCOME]
+	ON
+	[TITLE_1_LOG].[OUTCOME] = [LOG_OUTCOME].[VALUE_CODE]
+	
+	LEFT OUTER JOIN
+	APS.LookupTable('Revelation.UD.TitleI','HOUSING_STATUS') AS [HOUSING_STATUS]
+	ON
+	[TITLE_1_LOG].[HOUSING_STATUS] = [HOUSING_STATUS].[VALUE_CODE]
+	
+	LEFT OUTER JOIN
+	rev.UD_TITLEI_CONTACT AS [TITLE_1_CONTACT]
+	ON
+	[ENROLLMENTS].[STUDENT_GU] = [TITLE_1_CONTACT].[STUDENT_GU]
+	
+	LEFT OUTER JOIN
+	APS.LookupTable('Revelation.UD.TitleI','OUTCOME') AS [CONTACT_OUTCOME]
+	ON
+	[TITLE_1_CONTACT].[OUTCOME] = [CONTACT_OUTCOME].[VALUE_CODE]
+	
+	LEFT OUTER JOIN
+	rev.UD_TITLEI_FOLLOW_UP AS [TITLE_1_FOLLOW_UP]
+	ON
+	[ENROLLMENTS].[STUDENT_GU] = [TITLE_1_FOLLOW_UP].[STUDENT_GU]
+	
+	LEFT OUTER JOIN
+	APS.LookupTable('Revelation.UD.TitleI','OUTCOME') AS [FOLLOW_UP_OUTCOME]
+	ON
+	[TITLE_1_FOLLOW_UP].[OUTCOME] = [FOLLOW_UP_OUTCOME].[VALUE_CODE]
+	
+	LEFT OUTER JOIN
+	rev.UD_TITLEI_HISTORY AS [TITLE_1_HISTORY]
+	ON
+	[ENROLLMENTS].[STUDENT_GU] = [TITLE_1_HISTORY].[STUDENT_GU]
+	
+	LEFT OUTER JOIN
+	rev.UD_STU AS [UD_STUDENT]
+	ON
+	[ENROLLMENTS].[STUDENT_GU] = [UD_STUDENT].[STUDENT_GU]
+	
+WHERE
+--	[TITLE_1_LOG].[OUTCOME] IS NOT NULL
+	--[ENROLLMENTS].[ORGANIZATION_GU] LIKE @School
+	[TITLE_1_LOG].[DATE_FIRST_REFERRED] IS NOT NULL</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[synergydbdc.ST_Production]"
+                  connectionManagerRefId="Package.ConnectionManagers[synergydbdc.ST_Production]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SIS_NUMBER]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SIS_NUMBER]"
+                      length="20"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SIS_NUMBER]"
+                      name="SIS_NUMBER"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SIS_NUMBER]"
+                      dataType="wstr"
+                      length="20"
+                      name="SIS_NUMBER" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SIS_NUMBER]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SIS_NUMBER]"
+                      name="SIS_NUMBER" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Upload File"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute Process Task"
+      DTS:DTSID="{B7CDB8BA-D2E6-4A14-9FD9-51C7A007EF10}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Upload File"
+      DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecuteProcessData
+          Executable="C:\Windows\System32\cmd.exe"
+          Arguments="/c net use R: \\172.27.0.24\apssisfiles /user:fans\apssis APSsis@DiBs /persistent:yes &amp; copy /y \\syntempssis.aps.edu.actd\Files\Export\FoodServices\TitleIExtract.txt R:\TitleIExtract.txt &amp; net use R: /delete" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{072680F2-778A-4866-AAB7-E92FACC482D1}"
+      DTS:From="Package\Data Flow Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Upload File" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Data Flow Task"
+          TopLeft="71,44" />
+        <NodeLayout
+          Size="132.8,41.6"
+          Id="Package\Upload File"
+          TopLeft="76.5714298754322,152.941178615531" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="147,85.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="19.9714298754323,67.3411786155305"
+              Start="0,0"
+              End="19.9714298754323,59.8411786155305">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.6705893077653" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.6705893077653"
+                    Point2="0,33.6705893077653"
+                    Point3="4,33.6705893077653" />
+                  <mssgle:LineSegment
+                    End="15.9714298754322,33.6705893077653" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.9714298754322,33.6705893077653"
+                    Point2="19.9714298754323,33.6705893077653"
+                    Point3="19.9714298754323,37.6705893077653" />
+                  <mssgle:LineSegment
+                    End="19.9714298754323,59.8411786155305" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Data Flow Task\OLE DB Source"
+          TopLeft="42.2857150058357,23.8588238640228" />
+        <NodeLayout
+          Size="172.8,41.6"
+          Id="Package\Data Flow Task\Flat File Destination"
+          TopLeft="46.2857150739553,105.223530887485" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="118.285715005836,65.4588238640228">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="14.4000000681196,39.7647070234623"
+              Start="0,0"
+              End="14.4000000681196,32.2647070234623">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.8823535117311" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.8823535117311"
+                    Point2="0,19.8823535117311"
+                    Point3="4,19.8823535117311" />
+                  <mssgle:LineSegment
+                    End="10.4000000681196,19.8823535117311" />
+                  <mssgle:CubicBezierSegment
+                    Point1="10.4000000681196,19.8823535117311"
+                    Point2="14.4000000681196,19.8823535117311"
+                    Point3="14.4000000681196,23.8823535117311" />
+                  <mssgle:LineSegment
+                    End="14.4000000681196,32.2647070234623" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
