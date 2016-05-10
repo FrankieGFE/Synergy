@@ -1,5 +1,4 @@
 
-
 -- THIS IS NOT NEEDED IN THE PACKAGE
 
 --EXECUTE AS LOGIN='QueryFileUser'
