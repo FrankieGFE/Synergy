@@ -11,11 +11,38 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Compare"
   DTS:PackageType="5"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{27B5D544-5F84-4929-87E7-75D2D657E0AB}">
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{2DEB0FEF-5020-486A-ADDF-AA9D1991AC4B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{CECA9FE5-FB8E-47B1-8FE9-FC3CFC84C8D4}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="Z:\TempQuery\SchoolPay\Compare\Test.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="72"
+              DTS:TextQualified="True"
+              DTS:ObjectName="STU_FEE_PAY_TRANS_GU"
+              DTS:DTSID="{535C5B08-124E-4F11-96B8-B02A78EC0038}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[synergydbdc.ST_Production.QueryFileUser]"
       DTS:CreationName="OLEDB"
@@ -27,7 +54,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAsb70eGF6Iffs8BR8MprwEAAAAAASAAACgAAAAEAAAAP968I9lEAEUoV6ECdGdraIwAAAALCkTekjN9howWTl/zRWBvc8awIO6uDEkzS4ERNY2i9H3BCmf2vRWEZUHXJi3yVwQFAAAAMbHbkgH2MHe+KKlz4/OR3M2nytU</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADNeUueYVbUqpQURfXZCzEsAAAAAASAAACgAAAAEAAAAJcPELbHTRWRzAnY7Yi55hIwAAAA17q2y+moVFf2rc394WANBrOKKdgvXSD7ehy5rb+AyX5ZPbgnwpb5GEr0BwuTy4MuFAAAAD19sH77kIxeg2CJlQtL5Juo213Q</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -51,7 +78,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="DestName">
       <DTS:VariableValue
-        DTS:DataType="8">\\syntempssis\Files\TempQuery\SchoolPay\Compare\20160511.csv</DTS:VariableValue>
+        DTS:DataType="8">\\syntempssis\Files\TempQuery\SchoolPay\Compare\20160520.csv</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -62,7 +89,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="FileNameDate">
       <DTS:VariableValue
-        DTS:DataType="8">20160511</DTS:VariableValue>
+        DTS:DataType="8">20160520</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -87,53 +114,219 @@
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Copy Rename File"
-      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:Description="File System Task"
-      DTS:DTSID="{3381B5FD-52F1-42CF-BE97-0F0B5396CAF7}"
-      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{5C45C1D0-7AE8-4D77-9CC3-B42113A4D97E}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Copy Rename File"
-      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
-        <FileSystemData
-          TaskOverwriteDestFile="True"
-          TaskSourcePath="User::SourceName"
-          TaskIsSourceVariable="True"
-          TaskDestinationPath="User::DestName"
-          TaskIsDestinationVariable="True" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Execute SQL Task"
-      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{84616AE8-331C-4D1C-BC1D-EC0735537E8A}"
-      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{63FCAE03-4644-4994-8B3C-F0A9162FBD54}"
-          SQLTask:SqlStatementSource="DECLARE @SynFees2 AS TABLE&#xA;&#xA;([PayeeID] VARCHAR(255), [StudentID] INT&#xA;, [SynergyFeeID] UNIQUEIDENTIFIER, [Amount] DECIMAL(10,2), [StudentName] TEXT&#xA;, [FeeDate] DATE, [CreditCardType] VARCHAR(20), [CreditCardLastFour] VARCHAR(4),[TransID] UNIQUEIDENTIFIER);&#xA;&#xA;&#xA;INSERT INTO&#xA;&#x9;@SynFees2&#xA;&#xA;&#x9;SELECT&#xA;&#x9;&#x9;[SynergyFees].*&#x9;&#xA;&#x9;&#x9;,NEWID() AS [TransID]&#xA;&#x9;&#x9;FROM&#xA;&#x9;&#x9;OPENROWSET (&#xA;&#x9;&#x9;&#x9;'Microsoft.ACE.OLEDB.12.0', &#xA;&#x9;&#x9;&#x9;'Text;Database=\\syntempssis.aps.edu.actd\Files\TempQuery\SchoolPay;HDR=NO;', &#xA;&#x9;&#x9;&#x9;'SELECT * from synergy_fees.csv'&#xA;&#x9;&#x9;) AS [SynergyFees]&#xA;&#xA;&#xA;SELECT &#xA;*&#xA;FROM &#xA;&#xA;@SynFees2 AS T1&#xA;&#xA;LEFT JOIN &#xA;&#x9;[rev].[EPC_STU_FEE_PAY_TRANS] AS PAYTRANS&#xA;&#x9;ON&#xA;&#x9;PAYTRANS.TRANSACTION_ID = T1.[PayeeID] &#xA;&#x9;--AND PAYTRANS.AMOUNT = T1.Amount&#xA;&#xA;WHERE&#xA;&#x9;PAYTRANS.TRANSACTION_ID IS NULL" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[STU_FEE_PAY_TRANS_GU]"
+                      cachedDataType="guid"
+                      cachedName="STU_FEE_PAY_TRANS_GU"
+                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[STU_FEE_PAY_TRANS_GU]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[STU_FEE_PAY_TRANS_GU]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[STU_FEE_PAY_TRANS_GU]"
+                      dataType="guid"
+                      name="STU_FEE_PAY_TRANS_GU" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DECLARE @SynFees2 AS TABLE
+
+([PayeeID] VARCHAR(255), [StudentID] INT
+, [SynergyFeeID] UNIQUEIDENTIFIER, [Amount] DECIMAL(10,2), [StudentName] TEXT
+, [FeeDate] DATE, [CreditCardType] VARCHAR(20), [CreditCardLastFour] VARCHAR(4),[TransID] UNIQUEIDENTIFIER);
+
+
+INSERT INTO
+	@SynFees2
+
+	SELECT
+		[SynergyFees].*	
+		,NEWID() AS [TransID]
+		FROM
+		OPENROWSET (
+			'Microsoft.ACE.OLEDB.12.0', 
+			'Text;Database=\\syntempssis.aps.edu.actd\Files\TempQuery\SchoolPay;HDR=NO;', 
+			'SELECT * from synergy_fees.csv'
+		) AS [SynergyFees]
+
+
+ SELECT  
+STU_FEE_PAY_TRANS_GU
+FROM  
+
+@SynFees2 AS  T1
+
+LEFT JOIN 
+	[rev].[EPC_STU_FEE_PAY_TRANS] AS PAYTRANS
+	ON
+	PAYTRANS.TRANSACTION_ID = T1.[PayeeID] 
+	--AND PAYTRANS.AMOUNT = T1.Amount
+
+WHERE
+	PAYTRANS.TRANSACTION_ID IS NULL</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[synergydbdc.ST_Production.QueryFileUser]"
+                  connectionManagerRefId="Package.ConnectionManagers[synergydbdc.ST_Production.QueryFileUser]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[STU_FEE_PAY_TRANS_GU]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[STU_FEE_PAY_TRANS_GU]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[STU_FEE_PAY_TRANS_GU]"
+                      name="STU_FEE_PAY_TRANS_GU"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[STU_FEE_PAY_TRANS_GU]"
+                      dataType="guid"
+                      name="STU_FEE_PAY_TRANS_GU" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[STU_FEE_PAY_TRANS_GU]"
+                      dataType="guid"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[STU_FEE_PAY_TRANS_GU]"
+                      name="STU_FEE_PAY_TRANS_GU" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
-  <DTS:PrecedenceConstraints>
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint]"
-      DTS:CreationName=""
-      DTS:DTSID="{F9819B6E-C48E-45ED-9932-2BDCE3DEA338}"
-      DTS:From="Package\Execute SQL Task"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint"
-      DTS:To="Package\Copy Rename File" />
-  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -145,41 +338,53 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Data Flow Task"
+          TopLeft="147,86" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="165,42"
-          Id="Package\Execute SQL Task"
-          TopLeft="114,31" />
+          Size="152,42"
+          Id="Package\Data Flow Task\OLE DB Source"
+          TopLeft="144,23" />
         <NodeLayout
-          Size="165,42"
-          Id="Package\Copy Rename File"
-          TopLeft="207,119" />
+          Size="174,42"
+          Id="Package\Data Flow Task\Flat File Destination"
+          TopLeft="224,124" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="196.5,73">
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="220,65">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="90.5,46"
+              EndConnector="91,59"
               Start="0,0"
-              End="90.5,38.5">
+              End="91,51.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,19" />
+                    End="0,25.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,19"
-                    Point2="0,23"
-                    Point3="4,23" />
+                    Point1="0,25.5"
+                    Point2="0,29.5"
+                    Point3="4,29.5" />
                   <mssgle:LineSegment
-                    End="86.5,23" />
+                    End="87,29.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="86.5,23"
-                    Point2="90.5,23"
-                    Point3="90.5,27" />
+                    Point1="87,29.5"
+                    Point2="91,29.5"
+                    Point3="91,33.5" />
                   <mssgle:LineSegment
-                    End="90.5,38.5" />
+                    End="91,51.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -190,6 +395,14 @@
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
-  </Package>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
