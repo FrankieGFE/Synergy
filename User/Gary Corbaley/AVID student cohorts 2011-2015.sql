@@ -26,12 +26,15 @@ SELECT
 	,CASE WHEN [Attendance].[TOTAL UNEXCUSED] IS NULL THEN '0.0' ELSE [Attendance].[TOTAL UNEXCUSED] END AS [TOTAL UNEXCUSED]
 	--,[PERIOD_ATTENDANCE].[Full Days Unexcused] + ([PERIOD_ATTENDANCE].[Half Days Unexcused]/2) AS [TOTAL UNEXCUSED]
 	
-	,[GPA].[HS Cum Flat]
-	,[GPA].[HS Cum Weighted]
+	--,[GPA].[HS Cum Flat]
+	--,[GPA].[HS Cum Weighted]
+	,[CumulativeGPA].[Cumulative Flat GPA]
+	,[CumulativeGPA].[Cumulative Weighted GPA]
+	,[CumulativeGPA].[TOTAL CREDITS]
 	
 	,[CREDITS].[MATH_CREDITS]
 	,[CREDITS].[ENGLISH_CREDITS]
-	,[CREDITS].[TOTAL_CREDITS]
+	--,[CREDITS].[TOTAL_CREDITS]
 	
 	--,[COURSE_HISTORY].[COURSE_TITLE]
 	--,[COURSE_HISTORY].[CREDIT_COMPLETED]
@@ -140,12 +143,46 @@ FROM
 	[STUDENT].[STUDENT_GU] = [AVID_STUDENTS].[STUDENT_GU]
 	
 	-- GET GPA FROM SYNERGY
-	LEFT OUTER HASH JOIN
+	--LEFT OUTER HASH JOIN
 	--LEFT OUTER JOIN
-	APS.CumGPA AS [GPA]
+	--APS.CumGPA AS [GPA]
+	--ON
+	--[STUDENT].[SIS_NUMBER] = [GPA].[SIS_NUMBER]
+	--AND [GPA].[SCHOOL_YEAR] = @SchoolYear
+	
+	LEFT OUTER HASH JOIN
+	(
+	SELECT
+		--*
+		DST_NBR
+		,ID_NBR
+		,CASE WHEN SUM([Attempted Credits]) != 0 THEN
+			SUM([FLAT GPA]*[Attempted Credits])/SUM([Attempted Credits])+SUM([Honors Points]) 
+		 ELSE 0
+		 END AS [Cumulative Weighted GPA]
+		 
+		,CASE WHEN SUM([Attempted Credits]) != 0 THEN
+			SUM([FLAT GPA]*[Attempted Credits])/SUM([Attempted Credits]) 
+		 ELSE 0
+		 END AS [Cumulative Flat GPA]
+		 
+		,CASE WHEN SUM([Attempted Credits]) != 0 THEN
+			SUM([Earned Credits])
+		 ELSE 0
+		 END AS [TOTAL CREDITS]		 
+	FROM
+		[SMAXDBDEV.APS.EDU.ACTD].[PR].APS.BasicGPA
+	WHERE
+		ENR_GRDE > '08'	
+		AND 
+		SCH_YR <= @SchoolYear + 1
+	GROUP BY
+		DST_NBR
+		,ID_NBR
+	) AS [CumulativeGPA]	
 	ON
-	[STUDENT].[SIS_NUMBER] = [GPA].[SIS_NUMBER]
-	AND [GPA].[SCHOOL_YEAR] = @SchoolYear
+	[CumulativeGPA].[DST_NBR] = 1
+	AND [STUDENT].[SIS_NUMBER] = [CumulativeGPA].[ID_NBR]
 	
 	-- GET CREDITS EARNED FROM SYNERGY
 	LEFT OUTER HASH JOIN
