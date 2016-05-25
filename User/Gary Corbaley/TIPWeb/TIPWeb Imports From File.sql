@@ -38,13 +38,21 @@ INSERT INTO
 	WHERE
 		LEFT([FEE_CODE],3) IN ('525','540','550','560','570','576','580','998')
 		
+SELECT
+	*
+FROM
+	@FeeCodes
+	
+WHERE
+	LEFT([FEE_CODE],3) = '998'
+		
 -----------------------------------------------------------------------------------	
 
-INSERT INTO
-	[rev].[EPC_STU_FEE] 
+--INSERT INTO
+--	[rev].[EPC_STU_FEE] 
 
-	([STUDENT_FEE_GU],[STUDENT_SCHOOL_YEAR_GU],[STUDENT_GU],[TRANSACTION_DATE],[DESCRIPTION],[FEE_CATEGORY],[FEE_CODE_GU],[CREDIT_AMOUNT]
-	,[NOTE],[REFUND_NEEDED],[FEE_STATUS],[ADD_DATE_TIME_STAMP])	
+--	([STUDENT_FEE_GU],[STUDENT_SCHOOL_YEAR_GU],[STUDENT_GU],[TRANSACTION_DATE],[DESCRIPTION],[FEE_CATEGORY],[FEE_CODE_GU],[CREDIT_AMOUNT]
+--	,[NOTE],[REFUND_NEEDED],[FEE_STATUS],[ADD_DATE_TIME_STAMP])	
 
 SELECT
 	NEWID() AS [STUDENT_FEE_GU]
@@ -59,6 +67,8 @@ SELECT
 	,'N' AS [REFUND_NEEDED]
 	,0 AS [FEE_STATUS]
 	,GETDATE() AS [ADD_DATE_TIME_STAMP]
+	
+	,[Lost].*
 	
 FROM
 	-- READ FEES FROM FILE
@@ -108,10 +118,12 @@ WHERE
 	[Lost].[CampusID] IN ('525','540','550','560','570','576','580','998')
 	--AND [fee].[STUDENT_FEE_GU] IS NULL
 	AND [Lost].[ModifiedDate] IS NOT NULL
-	AND [Lost].[StudentID] = '100063619'
+	--AND [Lost].[StudentID] = '100063619'
+	
+	--AND CampusID = 998
 
 ---------------------------------------------------------------------------------------------------	
-
+/*
 INSERT INTO
 	[rev].[EPC_STU_FEE] 
 
@@ -173,7 +185,7 @@ WHERE
 	[Damaged].[CampusID] IN ('525','540','550','560','570','576','580')
 	AND [fee].[STUDENT_FEE_GU] IS NULL
 	AND [Damaged].[ModifiedDate] IS NOT NULL
-
+*/
 
 ROLLBACK
 --COMMIT
