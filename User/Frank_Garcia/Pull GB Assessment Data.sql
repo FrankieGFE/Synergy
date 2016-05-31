@@ -15,7 +15,7 @@ from REV.EGB_TEST_ITEMBANK ib
 	join REV.EGB_STANDARDS_NEW st on st.ID = ist.STANDARDID
 	join REV.EGB_SUBJECTS subj on subj.ID = st.SUBJECTID	
 	join REV.EGB_PEOPLE stu on stu.ID = r.STUDENTID
-WHERE T.TESTNAME = 'SS Grade 4 Form 1'
+WHERE T.TESTNAME = '2015-2016 Senior Retakes EOC ELA III Reading 9 12 V006'
 group by stu.LASTNAME, stu.FIRSTNAME, sch.STARTDATE 
 	,t.TESTNAME
 order by stu.LASTNAME, stu.FIRSTNAME 
@@ -23,4 +23,4 @@ order by stu.LASTNAME, stu.FIRSTNAME
 	,t.TESTNAME
 
 
-select * from rev.egb_test
+--select * from rev.egb_test

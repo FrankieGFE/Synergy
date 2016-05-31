@@ -16,7 +16,7 @@ UPDATE rev.EPC_STU_SCH_YR
 	, CHANGE_DATE_TIME_STAMP = GETDATE(), CHANGE_ID_STAMP = '27CDCD0E-BF93-4071-94B2-5DB792BB735F'
 
 
-*/	
+	
 SELECT * 
 FROM
 (
@@ -35,7 +35,7 @@ SELECT
  FROM 
 
 (
-
+*/
 
 
 SELECT 
@@ -216,7 +216,7 @@ ON
 NXTYRENR.STUDENT_GU = STU2.STUDENT_GU
 
 
-
+/*
 -----------------------------------------------------------------
 --COMMENT THIS OUT FOR THE DETAILS FOR THE FILE TO REVIEW
 ) AS T1
@@ -242,7 +242,7 @@ GRDE.VALUE_DESCRIPTION = [App Grde]
 
 ) AS T3
 
-/*
+
 
 
 
