@@ -139,7 +139,7 @@ SELECT
 	,[FEE].[CREDIT_AMOUNT] AS [WAIVER_AMOUNT]
 	,0 AS [WAIVER_TYPE]
 	,'RETN' AS [WAIVER_REASON]
-	,'Fee Waived for ''Reasons'' Please see Admin for more Details' AS [WAIVER_NOTE]
+	,'Item Returned' AS [WAIVER_NOTE]
 	,NULL AS [WAIVER_TRANSACTION_TYPE]
 FROM
 	@NOT_IN_FILE [FEE]
