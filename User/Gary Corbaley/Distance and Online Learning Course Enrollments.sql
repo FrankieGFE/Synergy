@@ -59,10 +59,10 @@ WHERE
 	[Organization].[ORGANIZATION_GU] LIKE @SchoolGu
 	--AND [Grades].[VALUE_DESCRIPTION] LIKE @Grade
 
-	--AND
-	--(
-	--[COURSE].[DISTANCE_LEARNING]  = @Distance
-	--OR [COURSE].[ONLINE_COURSE] = @Online
-	--)
+	AND
+	(
+	[COURSE].[DISTANCE_LEARNING]  = @Distance
+	OR [COURSE].[ONLINE_COURSE] = @Online
+	)
 	
-	AND [COURSE].[COURSE_ID] LIKE '11013%'
+	--AND [COURSE].[COURSE_ID] LIKE '11013%'
