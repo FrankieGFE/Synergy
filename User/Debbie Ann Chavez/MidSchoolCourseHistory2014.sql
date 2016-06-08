@@ -17,10 +17,11 @@ ON
 HIST.COURSE_GU = CRS.COURSE_GU
 
 INNER JOIN 
-(SELECT SIS_NUMBER, [Total Unexcused] FROM 
-APS.MidSchoolAttendance2014
+(SELECT SIS_NUMBER, [Unexc Absences] AS [Total Unexcused]  FROM
+APS.AttendanceTruancyPrevYrAsOf('2015-05-22')
 WHERE 
-[Total Unexcused] >= 5
+[Unexc Absences] >= 5
+AND [Grade] = '08'
 ) AS TOTATT
 ON
 TOTATT.SIS_NUMBER = ENR.SIS_NUMBER

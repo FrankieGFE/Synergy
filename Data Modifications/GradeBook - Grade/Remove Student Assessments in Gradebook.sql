@@ -1,7 +1,7 @@
-declare @StudentDistrictID varchar(50) = 573136710
+declare @StudentDistrictID varchar(50) = 980024096
 
 -- Important that this value is the ID found in the EGB_TEST_SCHEDULED table.
-declare @AssessmentScheduleID int = 331
+declare @AssessmentScheduleID int = 317
 
 -- Run this first SQL to verify you are targetting the right assessment and the right student.
 
@@ -19,48 +19,49 @@ declare @AssessmentScheduleID int = 331
 	AND sp.STUDENTID = @StudentDistrictID
 
 -- If you are confident everything looks good, uncomment the sql below and run it as well.  It will remove the results targetted from above.
-
-	/*
+/*
+BEGIN TRANSACTION 	
 	-- Removing the student's answer chocies to the scheduled assessment
 	-- Must be run first
-	DELETE FROM EGB_TEST_RESPONSEANSWER WHERE RESPONSEID IN
+	DELETE FROM rev.EGB_TEST_RESPONSEANSWER WHERE RESPONSEID IN
 	(
 		SELECT sr.ID 
-		FROM egb_test_scheduled sch 
-		JOIN EGB_TEST t ON t.ID = sch.TESTID
-		JOIN EGB_TEST_STUDENTS stu ON stu.SCHEDULEDTESTID = sch.ID
-		JOIN EGB_PEOPLE sp ON sp.ID = stu.STUDENTID
-		JOIN EGB_TEST_STUDENTRESPONSES sr ON sr.SCHEDULEDTESTID = stu.SCHEDULEDTESTID AND sr.STUDENTID = stu.STUDENTID
+		FROM rev.egb_test_scheduled sch 
+		JOIN rev.EGB_TEST t ON t.ID = sch.TESTID
+		JOIN rev.EGB_TEST_STUDENTS stu ON stu.SCHEDULEDTESTID = sch.ID
+		JOIN rev.EGB_PEOPLE sp ON sp.ID = stu.STUDENTID
+		JOIN rev.EGB_TEST_STUDENTRESPONSES sr ON sr.SCHEDULEDTESTID = stu.SCHEDULEDTESTID AND sr.STUDENTID = stu.STUDENTID
 		WHERE sch.ID = @AssessmentScheduleID
 		AND sp.STUDENTID = @StudentDistrictID
 	)
-	*/
-	/*
+	
+	
 	-- Removing the student's responses to the scheduled assessment
 	-- Must be run second
-	DELETE FROM EGB_TEST_STUDENTRESPONSES WHERE ID IN
+	DELETE FROM rev.EGB_TEST_STUDENTRESPONSES WHERE ID IN
 	(
 		SELECT sr.ID 
-		FROM egb_test_scheduled sch 
-		JOIN EGB_TEST t ON t.ID = sch.TESTID
-		JOIN EGB_TEST_STUDENTS stu ON stu.SCHEDULEDTESTID = sch.ID
-		JOIN EGB_PEOPLE sp ON sp.ID = stu.STUDENTID
-		JOIN EGB_TEST_STUDENTRESPONSES sr ON sr.SCHEDULEDTESTID = stu.SCHEDULEDTESTID AND sr.STUDENTID = stu.STUDENTID
+		FROM rev.egb_test_scheduled sch 
+		JOIN rev.EGB_TEST t ON t.ID = sch.TESTID
+		JOIN rev.EGB_TEST_STUDENTS stu ON stu.SCHEDULEDTESTID = sch.ID
+		JOIN rev.EGB_PEOPLE sp ON sp.ID = stu.STUDENTID
+		JOIN rev.EGB_TEST_STUDENTRESPONSES sr ON sr.SCHEDULEDTESTID = stu.SCHEDULEDTESTID AND sr.STUDENTID = stu.STUDENTID
 		WHERE sch.ID = @AssessmentScheduleID
 		AND sp.STUDENTID = @StudentDistrictID
 	)
-	*/
-	/*
+	
 	-- Removing the student's direct assignment to the scheduled assessment.
 	-- Must be run last
-	DELETE FROM EGB_TEST_STUDENTS WHERE ID IN
+	DELETE FROM rev.EGB_TEST_STUDENTS WHERE ID IN
 	(
 		SELECT stu.ID 
-		FROM egb_test_scheduled sch 
-		JOIN EGB_TEST t ON t.ID = sch.TESTID
-		JOIN EGB_TEST_STUDENTS stu ON stu.SCHEDULEDTESTID = sch.ID
-		JOIN EGB_PEOPLE sp ON sp.ID = stu.STUDENTID
+		FROM rev.egb_test_scheduled sch 
+		JOIN rev.EGB_TEST t ON t.ID = sch.TESTID
+		JOIN rev.EGB_TEST_STUDENTS stu ON stu.SCHEDULEDTESTID = sch.ID
+		JOIN rev.EGB_PEOPLE sp ON sp.ID = stu.STUDENTID
 		WHERE sch.ID = @AssessmentScheduleID
 		AND sp.STUDENTID = @StudentDistrictID
 	)
-	*/
+	
+ROLLBACK
+*/
