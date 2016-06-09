@@ -11,10 +11,11 @@ SELECT DISTINCT
 	--,[STARS_STAFF].[StaffId] AS [StaffID]
 	--,REPLACE([LAWSON].[FICA_NBR],'-','') AS [StaffID]
 	,RIGHT(CONVERT(VARCHAR(9),REPLACE([LAWSON].[FICA_NBR],'-','')),5) AS [StaffID]
-	,REPLACE([STAFF].[BADGE_NUM],'e','') AS [StaffAltID]
+	--,REPLACE([STAFF].[BADGE_NUM],'e','') AS [StaffAltID]
 	,[STAFF_PERSON].[EMAIL] AS [Email]
 	,CONVERT(VARCHAR(10),[STAFF_PERSON].[BIRTH_DATE],101) AS [Birthdate]
 	--,[STARS_STAFF].[Birthdate] AS [Birthdate]
+	,[STAFF_PERSON].[GENDER]
 	,'' AS [Statement]
 	,'' AS [ErrorDesc]
 FROM
