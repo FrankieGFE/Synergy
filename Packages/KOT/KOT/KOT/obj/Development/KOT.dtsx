@@ -1,0 +1,2258 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/13/2016 8:33:50 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="046-SMCMURRAY"
+  DTS:CreatorName="APS\e207878"
+  DTS:DTSID="{721127CA-3CF2-4D90-9F7A-3AA03B66DDC5}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5058.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="KOT"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{7AB2D56A-0672-4402-9877-85C8417FD677}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{135FF301-7027-43C8-BF79-4F61D43C51AC}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\046-fs01\RDA Files\SIS\KOT Pilot\ObservationWindow.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="3"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Column 0"
+              DTS:DTSID="{605DAD41-CAEF-49E2-87C5-F9F8D33B6224}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="3"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DistrictCode"
+              DTS:DTSID="{A8DB7993-224F-496D-81CC-1625F0C435E0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LocationCode"
+              DTS:DTSID="{2105E27C-7FEB-449F-AA3B-AB3811E9A1C8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="START_DATE"
+              DTS:DTSID="{41E491CD-BE45-498A-BA68-374A9AC47DEC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="END_DATE"
+              DTS:DTSID="{F3FA10EA-7140-4E31-B2B7-4861F300B326}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Statement"
+              DTS:DTSID="{C5F1D780-0EBD-4F1B-92CC-27AE16B5FF6B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ErrorDesc"
+              DTS:DTSID="{DFBAB648-534E-430E-A8EA-27E8DB92CE49}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager 1]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{68B5BD1B-3417-4D46-9E08-DED5E2D0DD2A}"
+      DTS:ObjectName="Flat File Connection Manager 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\046-fs01\RDA Files\SIS\KOT Pilot\Staff.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="3"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Column 0"
+              DTS:DTSID="{DA985627-A857-4D02-B4D0-F8A66A051467}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="3"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DistrictCode"
+              DTS:DTSID="{70BF3C35-FEB3-4288-B722-FD7B87E74A2C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LocationCode"
+              DTS:DTSID="{FCDCB74D-E5E9-407E-A2A4-3DAB298478AE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FirstName"
+              DTS:DTSID="{8C7407E0-8378-4E5C-B6BA-4DC8AACF990E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LastName"
+              DTS:DTSID="{D439D687-EB10-4169-ADBC-913704A483FC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="StaffID"
+              DTS:DTSID="{4431FA8C-22CD-44ED-B4FE-AB95CD542273}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Email"
+              DTS:DTSID="{94910C27-4302-4762-B15D-FACDC4A02C73}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Birthdate"
+              DTS:DTSID="{D7BA598E-D964-4840-8BCC-EB4E9351443E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="GENDER"
+              DTS:DTSID="{74374A05-302A-4D1D-B404-08E287CB63F0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Statement"
+              DTS:DTSID="{193F73B4-2681-4DCE-B7C1-F378EAD166E5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ErrorDesc"
+              DTS:DTSID="{8D64EE64-06EC-4906-91C8-FC205E220B02}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager 2]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{B5578B0C-F6A1-4008-B013-44317533858F}"
+      DTS:ObjectName="Flat File Connection Manager 2">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\046-fs01\RDA Files\SIS\KOT Pilot\Student.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="3"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Column 0"
+              DTS:DTSID="{F43660E7-B8F7-4D4B-9CB8-36794FDDD52C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LocationCode"
+              DTS:DTSID="{FF66F4CA-336A-4206-84AC-04319B7821F2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LastName"
+              DTS:DTSID="{41EF0514-8C49-4842-A0F0-EB74832B76BE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MiddleInitial"
+              DTS:DTSID="{4E3C7890-5AB6-4DE3-AA49-89EC7977ED53}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FirstName"
+              DTS:DTSID="{B33DCE0F-9E0D-426D-8587-CDA6ED654181}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="STARSID"
+              DTS:DTSID="{2890E715-E3A0-49F3-96A0-13D3295BEE4F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="StudentAltID"
+              DTS:DTSID="{1EC558B1-795C-483A-8D1A-CE7002775A33}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Birthdate"
+              DTS:DTSID="{1B5B4509-E77D-4358-B3C5-C72B05144E0C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Gender"
+              DTS:DTSID="{06DC37B2-4AB2-43BF-9885-F74C7C85B40F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Statement"
+              DTS:DTSID="{99413BB5-3661-425F-8AAA-7991B835A258}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ErrorDesc"
+              DTS:DTSID="{A6C890BA-4C23-4564-890A-630121A81EFE}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[synergydbdc.ST_Production.QueryFileUser]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{A6485F73-2609-46DB-9FD4-77DB93CC3188}"
+      DTS:ObjectName="synergydbdc.ST_Production.QueryFileUser">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=synergydbdc;User ID=QueryFileUser;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACaHpN/Hg1yvh9nxi6XQev7AAAAAASAAACgAAAAEAAAAI30jgzKh0u1YN2tJorC4mswAAAARMwfrEoRz7apw9il/Q6QSnVxWRFkHkgVlBsUnuOVmWSfT3F6tM5/PwDK26JOaIRwFAAAAMmvw73s7Oa0UndZb863ybYbsOiV</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\ObservationWindow"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{CD2F6B69-5763-4AEE-BD85-B4EF76625B73}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ObservationWindow"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\ObservationWindow\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ObservationWindow\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].Columns[DistrictCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="DistrictCode"
+                      externalMetadataColumnId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DistrictCode]"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[DistrictCode]" />
+                    <inputColumn
+                      refId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].Columns[LocationCode]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="LocationCode"
+                      externalMetadataColumnId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LocationCode]"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationCode]" />
+                    <inputColumn
+                      refId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].Columns[START_DATE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="START_DATE"
+                      externalMetadataColumnId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[START_DATE]"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[START_DATE]" />
+                    <inputColumn
+                      refId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].Columns[END_DATE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="END_DATE"
+                      externalMetadataColumnId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[END_DATE]"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[END_DATE]" />
+                    <inputColumn
+                      refId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].Columns[Statement]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Statement"
+                      externalMetadataColumnId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Statement]"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[Statement]" />
+                    <inputColumn
+                      refId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].Columns[ErrorDesc]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="ErrorDesc"
+                      externalMetadataColumnId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorDesc]"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[ErrorDesc]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 0]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Column 0" />
+                    <externalMetadataColumn
+                      refId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DistrictCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="DistrictCode" />
+                    <externalMetadataColumn
+                      refId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LocationCode]"
+                      dataType="wstr"
+                      length="20"
+                      name="LocationCode" />
+                    <externalMetadataColumn
+                      refId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[START_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="START_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[END_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="END_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Statement]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Statement" />
+                    <externalMetadataColumn
+                      refId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorDesc]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ErrorDesc" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\ObservationWindow\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+		'K3P' AS [WindowName]
+		,'001' AS [DistrictCode]
+		,[School].[SCHOOL_CODE] AS [LocationCode]
+		,CONVERT(VARCHAR(10),CalendarOptions.START_DATE,126) AS START_DATE
+		,CONVERT(VARCHAR(10),CalendarOptions.END_DATE,126) AS END_DATE
+		,'' AS [Statement]
+		,'' AS [ErrorDesc]
+	FROM
+		rev.EPC_SCH_ATT_CAL_OPT AS CalendarOptions
+		INNER JOIN
+		REV.REV_ORGANIZATION_YEAR AS OrgYear
+		ON
+		CalendarOptions.ORG_YEAR_GU = OrgYear.ORGANIZATION_YEAR_GU
+		
+		LEFT OUTER JOIN
+		rev.REV_ORGANIZATION AS [Organization] -- Contains the School Name
+		ON 
+		OrgYear.[ORGANIZATION_GU] = [Organization].[ORGANIZATION_GU]
+		
+		LEFT OUTER JOIN 
+		rev.EPC_SCH AS [School] -- Contains the School Code / Number
+		ON 
+		[Organization].[ORGANIZATION_GU] = [School].[ORGANIZATION_GU]
+
+		INNER JOIN 
+		rev.REV_YEAR AS YEARS
+		ON
+		OrgYear.YEAR_GU = YEARS.YEAR_GU
+	WHERE
+		-- Exclude Child Find and Early Childhood
+		OrgYear.ORGANIZATION_GU != '02D7B4ED-495A-4617-83FD-834AF27BDD15'
+		AND YEARS.[SCHOOL_YEAR] = '2016'
+		AND EXTENSION = 'N'
+	--GROUP BY
+	--	OrgYear.YEAR_GU
+	--	,EXTENSION</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ObservationWindow\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[synergydbdc.ST_Production.QueryFileUser]"
+                  connectionManagerRefId="Package.ConnectionManagers[synergydbdc.ST_Production.QueryFileUser]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[WindowName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[WindowName]"
+                      length="3"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[WindowName]"
+                      name="WindowName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[DistrictCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DistrictCode]"
+                      length="3"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[DistrictCode]"
+                      name="DistrictCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LocationCode]"
+                      length="20"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationCode]"
+                      name="LocationCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[START_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[START_DATE]"
+                      length="10"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[START_DATE]"
+                      name="START_DATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[END_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[END_DATE]"
+                      length="10"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[END_DATE]"
+                      name="END_DATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[Statement]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Statement]"
+                      length="1"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[Statement]"
+                      name="Statement"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[ErrorDesc]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ErrorDesc]"
+                      length="1"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].Columns[ErrorDesc]"
+                      name="ErrorDesc"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[WindowName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="WindowName" />
+                    <externalMetadataColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DistrictCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="DistrictCode" />
+                    <externalMetadataColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LocationCode]"
+                      dataType="wstr"
+                      length="20"
+                      name="LocationCode" />
+                    <externalMetadataColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[START_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="START_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[END_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="END_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Statement]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Statement" />
+                    <externalMetadataColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ErrorDesc]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ErrorDesc" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[WindowName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[WindowName]"
+                      name="WindowName" />
+                    <outputColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DistrictCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DistrictCode]"
+                      name="DistrictCode" />
+                    <outputColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LocationCode]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LocationCode]"
+                      name="LocationCode" />
+                    <outputColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[START_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[START_DATE]"
+                      name="START_DATE" />
+                    <outputColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[END_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[END_DATE]"
+                      name="END_DATE" />
+                    <outputColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Statement]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Statement]"
+                      name="Statement" />
+                    <outputColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorDesc]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorDesc]"
+                      name="ErrorDesc" />
+                    <outputColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\ObservationWindow.Paths[OLE DB Source Output]"
+              endId="Package\ObservationWindow\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\ObservationWindow\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Staff"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C6AFA4F1-06A0-4D87-9979-EF84FD705414}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Staff"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Staff\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Staff\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager 1]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].Columns[DistrictCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="DistrictCode"
+                      externalMetadataColumnId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DistrictCode]"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[DistrictCode]" />
+                    <inputColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].Columns[LocationCode]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="LocationCode"
+                      externalMetadataColumnId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LocationCode]"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationCode]" />
+                    <inputColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].Columns[StaffID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="StaffID"
+                      externalMetadataColumnId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[StaffID]"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[StaffID]" />
+                    <inputColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].Columns[Email]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Email"
+                      externalMetadataColumnId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Email]"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].Columns[Birthdate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Birthdate"
+                      externalMetadataColumnId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Birthdate]"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[Birthdate]" />
+                    <inputColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].Columns[GENDER]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="GENDER"
+                      externalMetadataColumnId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GENDER]"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[GENDER]" />
+                    <inputColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].Columns[Statement]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Statement"
+                      externalMetadataColumnId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Statement]"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[Statement]" />
+                    <inputColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].Columns[ErrorDesc]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="ErrorDesc"
+                      externalMetadataColumnId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorDesc]"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[ErrorDesc]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 0]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Column 0" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DistrictCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="DistrictCode" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LocationCode]"
+                      dataType="wstr"
+                      length="20"
+                      name="LocationCode" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="60"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="60"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[StaffID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="StaffID" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Email]"
+                      dataType="wstr"
+                      length="100"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Birthdate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Birthdate" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GENDER]"
+                      dataType="wstr"
+                      length="5"
+                      name="GENDER" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Statement]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Statement" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorDesc]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ErrorDesc" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Staff\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT
+	'K3P' AS [WindowName]
+	,'001' AS [DistrictCode]
+	,[School].[SCHOOL_CODE] AS [LocationCode]
+	,[STAFF_PERSON].[FIRST_NAME] AS [FirstName]
+	,[STAFF_PERSON].[LAST_NAME] AS [LastName]
+	--,[STARS_STAFF].[StaffId] AS [StaffID]
+	--,REPLACE([LAWSON].[FICA_NBR],'-','') AS [StaffID]
+	,RIGHT(CONVERT(VARCHAR(9),REPLACE([LAWSON].[FICA_NBR],'-','')),5) AS [StaffID]
+	--,REPLACE([STAFF].[BADGE_NUM],'e','') AS [StaffAltID]
+	,[STAFF_PERSON].[EMAIL] AS [Email]
+	,CONVERT(VARCHAR(10),[STAFF_PERSON].[BIRTH_DATE],101) AS [Birthdate]
+	--,[STARS_STAFF].[Birthdate] AS [Birthdate]
+	,[STAFF_PERSON].[GENDER]
+	,'' AS [Statement]
+	,'' AS [ErrorDesc]
+FROM
+	APS.StudentScheduleDetails AS [SCHEDULE]
+	
+	INNER JOIN 
+	rev.REV_ORGANIZATION AS [Organization] -- Contains the School Name
+	ON 
+	[SCHEDULE].[ORGANIZATION_GU] = [Organization].[ORGANIZATION_GU]
+	
+	INNER JOIN 
+	rev.EPC_SCH AS [School] -- Contains the School Code / Number
+	ON 
+	[Organization].[ORGANIZATION_GU] = [School].[ORGANIZATION_GU]
+	
+	INNER JOIN
+	rev.[REV_YEAR] AS [YEAR]
+	ON
+	[SCHEDULE].[YEAR_GU] = [YEAR].[YEAR_GU]	
+   
+	INNER JOIN
+	rev.[EPC_STAFF] AS [STAFF]
+	ON
+	[SCHEDULE].[STAFF_GU] = [STAFF].[STAFF_GU]
+
+	INNER JOIN
+	rev.[REV_PERSON] AS [STAFF_PERSON]
+	ON
+	[STAFF].[STAFF_GU] = [STAFF_PERSON].[PERSON_GU]
+	
+	--LEFT OUTER JOIN
+	--(
+	--SELECT
+	--	*
+	--FROM
+	--	[046-WS02.APS.EDU.ACTD].[db_STARS_History].[dbo].[STAFF]
+		
+	--WHERE
+	--	[Period] = '2015-06-01'
+	--) AS [STARS_STAFF]
+	--ON
+	--REPLACE([STAFF].[BADGE_NUM],'e','') = [STARS_STAFF].[Field3]
+	
+	LEFT OUTER JOIN
+	(
+	SELECT 
+		   -- IN SYNERGY USE THE BADGE_NUMBER SUBSTRING(BADGE_NUMBER,2,6) OR USE THE STATE_NUMBER (has no 'e') and join to the EMPLOYEE field in the EMPLOYEE table.
+		   EMPLOYEE
+		   ,FICA_NBR
+	FROM 
+	[180-SMAXODS-01.aps.edu.actd].Lawson.dbo.Employee
+	) AS [LAWSON]
+	ON
+	REPLACE([STAFF].[BADGE_NUM],'e','') = [LAWSON].[EMPLOYEE]
+	
+WHERE
+	--[SCHEDULE].[COURSE_ID] IN ('00056015','00004000','00008000','00014001','00018001','00052015')
+	--AND 
+	(
+	--([YEAR].[SCHOOL_YEAR] = '2015' AND [YEAR].[EXTENSION] = 'R')
+	--OR
+	([YEAR].[SCHOOL_YEAR] = '2016' AND [YEAR].[EXTENSION] = 'N')
+	)
+	--AND [School].[SCHOOL_CODE] IN ('315','321','207','329','229','203','241','244','350','219','255','328','267','270','395','276','217','300','317','360','389','363','370','264')
+	--AND [School].[SCHOOL_CODE] BETWEEN '200' AND '399'
+	
+	AND [STAFF_PERSON].[LAST_NAME] != 'Closed'
+	AND [STAFF_PERSON].[BIRTH_DATE] IS NOT NULL</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Staff\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[synergydbdc.ST_Production.QueryFileUser]"
+                  connectionManagerRefId="Package.ConnectionManagers[synergydbdc.ST_Production.QueryFileUser]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[WindowName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[WindowName]"
+                      length="3"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[WindowName]"
+                      name="WindowName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[DistrictCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DistrictCode]"
+                      length="3"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[DistrictCode]"
+                      name="DistrictCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LocationCode]"
+                      length="20"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationCode]"
+                      name="LocationCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      length="60"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      length="60"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[StaffID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StaffID]"
+                      length="5"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[StaffID]"
+                      name="StaffID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      length="100"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]"
+                      name="Email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[Birthdate]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Birthdate]"
+                      length="10"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[Birthdate]"
+                      name="Birthdate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[GENDER]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GENDER]"
+                      length="5"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[GENDER]"
+                      name="GENDER"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[Statement]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Statement]"
+                      length="1"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[Statement]"
+                      name="Statement"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[ErrorDesc]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ErrorDesc]"
+                      length="1"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].Columns[ErrorDesc]"
+                      name="ErrorDesc"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[WindowName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="WindowName" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DistrictCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="DistrictCode" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LocationCode]"
+                      dataType="wstr"
+                      length="20"
+                      name="LocationCode" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="60"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="60"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StaffID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="StaffID" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      dataType="wstr"
+                      length="100"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Birthdate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Birthdate" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GENDER]"
+                      dataType="wstr"
+                      length="5"
+                      name="GENDER" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Statement]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Statement" />
+                    <externalMetadataColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ErrorDesc]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ErrorDesc" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[WindowName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[WindowName]"
+                      name="WindowName" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DistrictCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DistrictCode]"
+                      name="DistrictCode" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LocationCode]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LocationCode]"
+                      name="LocationCode" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StaffID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StaffID]"
+                      name="StaffID" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      name="Email" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Birthdate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Birthdate]"
+                      name="Birthdate" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GENDER]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GENDER]"
+                      name="GENDER" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Statement]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Statement]"
+                      name="Statement" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorDesc]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorDesc]"
+                      name="ErrorDesc" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Staff.Paths[OLE DB Source Output]"
+              endId="Package\Staff\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Staff\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Student"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{EEE86BBC-91A1-49E4-A47D-AAE8A72F15AB}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Student"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Student\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Student\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager 2]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager 2]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].Columns[LocationCode]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="LocationCode"
+                      externalMetadataColumnId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LocationCode]"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationCode]" />
+                    <inputColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].Columns[MiddleInitial]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="MiddleInitial"
+                      externalMetadataColumnId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MiddleInitial]"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[MiddleInitial]" />
+                    <inputColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].Columns[STARSID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="STARSID"
+                      externalMetadataColumnId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[STARSID]"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[STARSID]" />
+                    <inputColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].Columns[StudentAltID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="StudentAltID"
+                      externalMetadataColumnId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[StudentAltID]"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[StudentAltID]" />
+                    <inputColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].Columns[Birthdate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Birthdate"
+                      externalMetadataColumnId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Birthdate]"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[Birthdate]" />
+                    <inputColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].Columns[Statement]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Statement"
+                      externalMetadataColumnId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Statement]"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[Statement]" />
+                    <inputColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].Columns[ErrorDesc]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="ErrorDesc"
+                      externalMetadataColumnId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorDesc]"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[ErrorDesc]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 0]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Column 0" />
+                    <externalMetadataColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LocationCode]"
+                      dataType="wstr"
+                      length="20"
+                      name="LocationCode" />
+                    <externalMetadataColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="60"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MiddleInitial]"
+                      dataType="wstr"
+                      length="1"
+                      name="MiddleInitial" />
+                    <externalMetadataColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="60"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[STARSID]"
+                      dataType="wstr"
+                      length="20"
+                      name="STARSID" />
+                    <externalMetadataColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[StudentAltID]"
+                      dataType="wstr"
+                      length="20"
+                      name="StudentAltID" />
+                    <externalMetadataColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Birthdate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Birthdate" />
+                    <externalMetadataColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="5"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Statement]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Statement" />
+                    <externalMetadataColumn
+                      refId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorDesc]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ErrorDesc" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Student\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+	'001' AS [DistrictCode]
+	,[ENROLLMENT].[SCHOOL_CODE] AS [LocationCode]
+	,[STUDENT].[LAST_NAME] AS [LastName]
+	,CASE WHEN [STUDENT].[MIDDLE_NAME] IS NULL THEN '' ELSE LEFT([STUDENT].[MIDDLE_NAME],1) END AS [MiddleInitial]
+	,[STUDENT].[FIRST_NAME] AS [FirstName]
+	,[STUDENT].[STATE_STUDENT_NUMBER] AS [STARSID]
+	,[STUDENT].[SIS_NUMBER] AS [StudentAltID]
+	,CONVERT(VARCHAR(4),YEAR([STUDENT].[BIRTH_DATE])) + '-' + RIGHT('000' + CONVERT(VARCHAR(2),DATEPART(MM,[STUDENT].[BIRTH_DATE])),2) + '-' + RIGHT('000' + CONVERT(VARCHAR(2),DATEPART(DD,[STUDENT].[BIRTH_DATE])),2) AS [Birthdate]
+	,[STUDENT].[GENDER] AS [Gender]
+	,'' AS [Statement]
+	,'' AS [ErrorDesc]
+	
+FROM
+	APS.StudentEnrollmentDetails AS [ENROLLMENT]
+	
+	INNER JOIN
+	APS.BasicStudent AS [STUDENT]
+	ON
+	[ENROLLMENT].[STUDENT_GU] = [STUDENT].[STUDENT_GU]
+	
+WHERE
+	[ENROLLMENT].[GRADE] = 'K'
+	AND [ENROLLMENT].[ENTER_DATE] IS NOT NULL
+	AND [ENROLLMENT].[LEAVE_DATE] IS NULL
+	AND [ENROLLMENT].[EXCLUDE_ADA_ADM] IS NULL
+	AND [ENROLLMENT].[SCHOOL_YEAR] = '2016'
+	AND [ENROLLMENT].[EXTENSION] = 'N'
+	--AND [ENROLLMENT].[SCHOOL_CODE] IN ('315','321','207','329','229','203','241','244','350','219','255','328','267','270','395','276','217','300','317','360','389','363','370','264')</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Student\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[synergydbdc.ST_Production.QueryFileUser]"
+                  connectionManagerRefId="Package.ConnectionManagers[synergydbdc.ST_Production.QueryFileUser]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[DistrictCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DistrictCode]"
+                      length="3"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[DistrictCode]"
+                      name="DistrictCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LocationCode]"
+                      length="20"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationCode]"
+                      name="LocationCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      length="60"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[MiddleInitial]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MiddleInitial]"
+                      length="1"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[MiddleInitial]"
+                      name="MiddleInitial"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      length="60"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[STARSID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[STARSID]"
+                      length="20"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[STARSID]"
+                      name="STARSID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[StudentAltID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StudentAltID]"
+                      length="20"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[StudentAltID]"
+                      name="StudentAltID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[Birthdate]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Birthdate]"
+                      length="10"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[Birthdate]"
+                      name="Birthdate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[Gender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      length="5"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[Statement]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Statement]"
+                      length="1"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[Statement]"
+                      name="Statement"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[ErrorDesc]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ErrorDesc]"
+                      length="1"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].Columns[ErrorDesc]"
+                      name="ErrorDesc"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DistrictCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="DistrictCode" />
+                    <externalMetadataColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LocationCode]"
+                      dataType="wstr"
+                      length="20"
+                      name="LocationCode" />
+                    <externalMetadataColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="60"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MiddleInitial]"
+                      dataType="wstr"
+                      length="1"
+                      name="MiddleInitial" />
+                    <externalMetadataColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="60"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[STARSID]"
+                      dataType="wstr"
+                      length="20"
+                      name="STARSID" />
+                    <externalMetadataColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StudentAltID]"
+                      dataType="wstr"
+                      length="20"
+                      name="StudentAltID" />
+                    <externalMetadataColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Birthdate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Birthdate" />
+                    <externalMetadataColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="5"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Statement]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Statement" />
+                    <externalMetadataColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ErrorDesc]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ErrorDesc" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DistrictCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DistrictCode]"
+                      name="DistrictCode" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LocationCode]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LocationCode]"
+                      name="LocationCode" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MiddleInitial]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MiddleInitial]"
+                      name="MiddleInitial" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[STARSID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[STARSID]"
+                      name="STARSID" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StudentAltID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StudentAltID]"
+                      name="StudentAltID" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Birthdate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Birthdate]"
+                      name="Birthdate" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Statement]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Statement]"
+                      name="Statement" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorDesc]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorDesc]"
+                      name="ErrorDesc" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Student\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Student.Paths[OLE DB Source Output]"
+              endId="Package\Student\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Student\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{0983E186-1C49-41E8-AD26-74B1011D2B80}"
+      DTS:From="Package\ObservationWindow"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Staff" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{6E100A7A-69A2-4713-970E-99A64A0B5965}"
+      DTS:From="Package\Staff"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Student" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="175,42"
+          Id="Package\ObservationWindow"
+          TopLeft="100,35" />
+        <NodeLayout
+          Size="103,42"
+          Id="Package\Staff"
+          TopLeft="192,120" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="187.5,77">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="56,43"
+              Start="0,0"
+              End="56,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.5"
+                    Point2="0,21.5"
+                    Point3="4,21.5" />
+                  <mssgle:LineSegment
+                    End="52,21.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="52,21.5"
+                    Point2="56,21.5"
+                    Point3="56,25.5" />
+                  <mssgle:LineSegment
+                    End="56,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="117,42"
+          Id="Package\Student"
+          TopLeft="283,214" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="243.5,162">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="98,52"
+              Start="0,0"
+              End="98,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22"
+                    Point2="0,26"
+                    Point3="4,26" />
+                  <mssgle:LineSegment
+                    End="94,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="94,26"
+                    Point2="98,26"
+                    Point3="98,30" />
+                  <mssgle:LineSegment
+                    End="98,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\ObservationWindow">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,42"
+          Id="Package\ObservationWindow\OLE DB Source"
+          TopLeft="81,41" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\ObservationWindow\Flat File Destination"
+          TopLeft="169,135" />
+        <EdgeLayout
+          Id="Package\ObservationWindow.Paths[OLE DB Source Output]"
+          TopLeft="157,83">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="99,52"
+              Start="0,0"
+              End="99,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22"
+                    Point2="0,26"
+                    Point3="4,26" />
+                  <mssgle:LineSegment
+                    End="95,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="95,26"
+                    Point2="99,26"
+                    Point3="99,30" />
+                  <mssgle:LineSegment
+                    End="99,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\ObservationWindow\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Staff">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Staff\OLE DB Source"
+          TopLeft="127,35" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Staff\Flat File Destination"
+          TopLeft="217,118" />
+        <EdgeLayout
+          Id="Package\Staff.Paths[OLE DB Source Output]"
+          TopLeft="203,77">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="101,41"
+              Start="0,0"
+              End="101,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.5"
+                    Point2="0,20.5"
+                    Point3="4,20.5" />
+                  <mssgle:LineSegment
+                    End="97,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="97,20.5"
+                    Point2="101,20.5"
+                    Point3="101,24.5" />
+                  <mssgle:LineSegment
+                    End="101,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Staff\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Student">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Student\OLE DB Source"
+          TopLeft="101,38" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Student\Flat File Destination"
+          TopLeft="186,135" />
+        <EdgeLayout
+          Id="Package\Student.Paths[OLE DB Source Output]"
+          TopLeft="177,80">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="96,55"
+              Start="0,0"
+              End="96,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.5"
+                    Point2="0,27.5"
+                    Point3="4,27.5" />
+                  <mssgle:LineSegment
+                    End="92,27.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="92,27.5"
+                    Point2="96,27.5"
+                    Point3="96,31.5" />
+                  <mssgle:LineSegment
+                    End="96,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Student\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
