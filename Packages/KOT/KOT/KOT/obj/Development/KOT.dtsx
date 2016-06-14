@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="KOT"
   DTS:PackageType="5"
-  DTS:VersionBuild="3"
-  DTS:VersionGUID="{AE0DBBDA-1A93-41AB-AACA-062DCE95E46B}">
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{EB8ED34F-EE00-4883-9262-ECA228FBF64D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -348,7 +348,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACW4Q/x4URCzHRI/OOkJz+9AAAAAASAAACgAAAAEAAAAByXeH5Xqy/KCmr67qOPbDUwAAAAK9jSgl4a3mODJqMt6mb+dyOiB4yqDc6/Ek//Zy6tVTIgaB/DWCuc5yhIB/OcGWOKFAAAAFcvcdiUTBk3sX0bD93IKXjigNmV</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADKmAG4PevSFMUrLVwDDNMQAAAAAASAAACgAAAAEAAAAOWe002w1hCuYLyEfVzUHVswAAAAcfkdhqDq+5bWa1zffl0cfVrDD7jJ/kIxoR0SDL7qZ1LWHl+if9bGBOna98W3En7yFAAAAPUK/cTSvuqoxmZ5zUQ+j7KWNeMk</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -530,17 +530,18 @@
 		,'' AS [ErrorDesc]
 	FROM
 		rev.EPC_SCH_ATT_CAL_OPT AS CalendarOptions
+		
 		INNER JOIN
 		REV.REV_ORGANIZATION_YEAR AS OrgYear
 		ON
 		CalendarOptions.ORG_YEAR_GU = OrgYear.ORGANIZATION_YEAR_GU
 		
-		LEFT OUTER JOIN
+		INNER JOIN
 		rev.REV_ORGANIZATION AS [Organization] -- Contains the School Name
 		ON 
 		OrgYear.[ORGANIZATION_GU] = [Organization].[ORGANIZATION_GU]
 		
-		LEFT OUTER JOIN 
+		INNER JOIN 
 		rev.EPC_SCH AS [School] -- Contains the School Code / Number
 		ON 
 		[Organization].[ORGANIZATION_GU] = [School].[ORGANIZATION_GU]
@@ -554,6 +555,10 @@
 		OrgYear.ORGANIZATION_GU != '02D7B4ED-495A-4617-83FD-834AF27BDD15'
 		AND YEARS.[SCHOOL_YEAR] = '2016'
 		AND EXTENSION = 'N'
+		AND [School].[SCHOOL_CODE] IN ('206','207','210','214','215','225','228','229','339','234','236','118','237','351','244','303','249','252',
+			'219','069','255','258','261','496','230','270','395','273','279','231','282','285','288','373','291','297',
+			'336','300','365','364','250','305','307','309','310','324','275','333','330','392','357','280','363','370',
+			'264','376','379')
 	--GROUP BY
 	--	OrgYear.YEAR_GU
 	--	,EXTENSION</property>
