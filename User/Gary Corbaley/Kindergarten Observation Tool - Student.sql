@@ -1,7 +1,12 @@
+/****** Object:  View [APS].[KOTStudent]    Script Date: 06/21/2016 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
 
 
-
-
+CREATE VIEW [APS].[KOTStudent] AS
 
 SELECT
 	'001' AS [DistrictCode]

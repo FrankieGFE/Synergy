@@ -1,4 +1,12 @@
+/****** Object:  View [APS].[KOTObservationWindow]    Script Date: 06/21/2016 ******/
+SET ANSI_NULLS ON
+GO
 
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE VIEW [APS].[KOTObservationWindow] AS
 
 	SELECT
 		'K3P' AS [WindowName]

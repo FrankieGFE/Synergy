@@ -1,6 +1,12 @@
+/****** Object:  View [APS].[KOTStaff]    Script Date: 06/21/2016 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
 
 
-
+CREATE VIEW [APS].[KOTStaff] AS
 
 SELECT DISTINCT
 	'K3P' AS [WindowName]
@@ -8,20 +14,12 @@ SELECT DISTINCT
 	,[School].[SCHOOL_CODE] AS [LocationCode]
 	,[STAFF_PERSON].[FIRST_NAME] AS [FirstName]
 	,[STAFF_PERSON].[LAST_NAME] AS [LastName]
-	--,[STARS_STAFF].[StaffId] AS [StaffID]
-	--,REPLACE([LAWSON].[FICA_NBR],'-','') AS [StaffID]
 	,RIGHT(CONVERT(VARCHAR(9),REPLACE([LAWSON].[FICA_NBR],'-','')),5) AS [StaffID]
-	--,REPLACE([STAFF].[BADGE_NUM],'e','') AS [StaffAltID]
 	,[STAFF_PERSON].[EMAIL] AS [Email]
 	,CONVERT(VARCHAR(10),[STAFF_PERSON].[BIRTH_DATE],101) AS [Birthdate]
-	--,[STARS_STAFF].[Birthdate] AS [Birthdate]
 	,[STAFF_PERSON].[GENDER]
 	,'' AS [Statement]
 	,'' AS [ErrorDesc]
-	
-	--,[ENROLLMENTS].[GRADE]
-	
-	--,[SCHEDULE].[STUDENT_SCHOOL_YEAR_GU]
 FROM
 	APS.BasicSchedule AS [SCHEDULE]
 	
@@ -55,19 +53,6 @@ FROM
 	ON
 	[STAFF].[STAFF_GU] = [STAFF_PERSON].[PERSON_GU]
 	
-	--LEFT OUTER JOIN
-	--(
-	--SELECT
-	--	*
-	--FROM
-	--	[046-WS02.APS.EDU.ACTD].[db_STARS_History].[dbo].[STAFF]
-		
-	--WHERE
-	--	[Period] = '2015-06-01'
-	--) AS [STARS_STAFF]
-	--ON
-	--REPLACE([STAFF].[BADGE_NUM],'e','') = [STARS_STAFF].[Field3]
-	
 	LEFT OUTER JOIN
 	(
 	SELECT 
@@ -80,12 +65,8 @@ FROM
 	ON
 	REPLACE([STAFF].[BADGE_NUM],'e','') = [LAWSON].[EMPLOYEE]
 	
-WHERE
-	--[SCHEDULE].[COURSE_ID] IN ('00056015','00004000','00008000','00014001','00018001','00052015')
-	--AND 
+WHERE	
 	(
-	--([YEAR].[SCHOOL_YEAR] = '2015' AND [YEAR].[EXTENSION] = 'R')
-	--OR
 	([YEAR].[SCHOOL_YEAR] = '2016' AND [YEAR].[EXTENSION] = 'N')
 	)
 	--AND [School].[SCHOOL_CODE] IN ('315','321','207','329','229','203','241','244','350','219','255','328','267','270','395','276','217','300','317','360','389','363','370','264')
