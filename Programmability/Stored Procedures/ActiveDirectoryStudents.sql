@@ -25,7 +25,7 @@ DECLARE  @vSchYr VARCHAR(4)
 DECLARE  @vRunDate smalldatetime
 SET @vDistrict_Number = (SELECT CONVERT(xml,[VALUE]).value('(/ROOT/SIS/@DISTRICT_NUMBER)[1]','varchar(20)') AS DISTRICT_NUMBER
                          FROM rev.REV_APPLICATION  WHERE [KEY] = 'REV_INSTALL_CONSTANT')
-SET @vSchYr = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
+SET @vSchYr = (select SCHOOL_YEAR + 1 from rev.SIF_22_Common_CurrentYear)
 set @vRunDate = GETDATE() - 1 -- Previous day
 --All Enrollments
 ; with AllEnrollments AS
@@ -39,7 +39,7 @@ ROW_NUMBER() over (partition by stu.student_gu order by stu.student_gu) rn
 FROM rev.EPC_STU               stu
 JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
 JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
-                                       and oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+                                       and oyr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
 JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU 
 )
 
@@ -58,8 +58,7 @@ JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
 JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
                                        and oyr.YEAR_GU    = ssy.year_gu
 join rev.rev_year               yr   ON yr.year_gu        = oyr.YEAR_GU
-                                       and yr.school_year = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)
-									   and yr.EXTENSION   = 'S'
+                                       and yr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE AND EXTENSION != 'R')
 JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU 
 )
 
@@ -97,7 +96,7 @@ JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
                                        and ssy.STATUS is NULL
                                        and ssy.EXCLUDE_ADA_ADM is null --exclude concurrent enrollment
 JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
-                                       and oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+                                       and oyr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
 JOIN rev.REV_ORGANIZATION      org  ON org.ORGANIZATION_GU = oyr.ORGANIZATION_GU
 JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
 JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
@@ -164,7 +163,7 @@ JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
                                        and ssy.STATUS is NULL
                                        and ssy.EXCLUDE_ADA_ADM is not null --exclude concurrent enrollment
 JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
-                                       and oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+                                       and oyr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
 JOIN rev.REV_ORGANIZATION      org  ON org.ORGANIZATION_GU = oyr.ORGANIZATION_GU
 JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
 JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
@@ -239,7 +238,7 @@ JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
                                        and ssy.STATUS is NULL
                                        and ssy.EXCLUDE_ADA_ADM is not null --only concurrent enrollment
 JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
-                                       and oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+                                       and oyr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
 JOIN rev.REV_ORGANIZATION      org  ON org.ORGANIZATION_GU = oyr.ORGANIZATION_GU
 JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
 JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
@@ -315,7 +314,7 @@ JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
                                        and ssy.STATUS is NULL
                                        and ssy.EXCLUDE_ADA_ADM is not null --exclude concurrent enrollment
 JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
-                                       and oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+                                       and oyr.YEAR_GU IN (SELECT YEAR_GU FROM APS.YearDates WHERE GETDATE() BETWEEN YearDates.START_DATE AND YearDates.END_DATE)
 JOIN rev.REV_ORGANIZATION      org  ON org.ORGANIZATION_GU = oyr.ORGANIZATION_GU
 JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU
 JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
