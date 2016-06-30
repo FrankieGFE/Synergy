@@ -1,4 +1,5 @@
 
+/*this view selects all K grade students in the year specified */
 ALTER VIEW [APS].[KOTStudent] AS
 
 SELECT
