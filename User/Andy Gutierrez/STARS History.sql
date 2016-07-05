@@ -1,0 +1,1 @@
+SELECT * FROM [046-WS02].db_STARS_History.dbo.STUD_GRADES 

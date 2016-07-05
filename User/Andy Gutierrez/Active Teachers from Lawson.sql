@@ -1,0 +1,2 @@
+SELECT * FROM 
+APS.CurrentActiveTeachers
