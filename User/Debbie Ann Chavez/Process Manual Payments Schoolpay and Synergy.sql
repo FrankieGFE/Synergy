@@ -15,8 +15,8 @@ INSERT INTO
 	FROM
 		OPENROWSET (
 			'Microsoft.ACE.OLEDB.12.0', 
-			'Text;Database=\\syntempssis.aps.edu.actd\Files\TempQuery\;HDR=NO;', 
-			'SELECT * from UpdateSynergy.csv'
+			'Text;Database=\\syntempssis.aps.edu.actd\Files\TempQuery\SchoolPay\Archive;HDR=NO;', 
+			'SELECT * from 20160709.csv'
 		) AS [SynergyFees]
 
 INSERT INTO
@@ -282,7 +282,7 @@ FROM
 WHERE
 	[Fee].[STUDENT_FEE_GU] IS NOT NULL
 
-ROLLBACK
+COMMIT
 
 REVERT
 GO
