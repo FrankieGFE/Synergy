@@ -16,7 +16,7 @@ INSERT INTO
 		OPENROWSET (
 			'Microsoft.ACE.OLEDB.12.0', 
 			'Text;Database=\\syntempssis.aps.edu.actd\Files\TempQuery\SchoolPay\Archive;HDR=NO;', 
-			'SELECT * from 20160709.csv'
+			'SELECT * from Abigail.csv'
 		) AS [SynergyFees]
 
 INSERT INTO
@@ -203,7 +203,7 @@ UPDATE
 	[StuFees].[FEE_STATUS]=CASE WHEN [Fee].[BALANCE]=0.00 THEN 1
 	                            WHEN [Fee].[BALANCE]<0.00 THEN 3
 		                        ELSE [StuFees].[FEE_STATUS] END
-
+--SELECT * 
 FROM
 	[rev].[EPC_STU_FEE] AS [StuFees]
 
@@ -281,6 +281,8 @@ FROM
 
 WHERE
 	[Fee].[STUDENT_FEE_GU] IS NOT NULL
+
+
 
 COMMIT
 
