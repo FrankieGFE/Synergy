@@ -16,8 +16,8 @@ SELECT
 	,TCH.LAST_NAME AS tlname
 	,TCH.EMAIL AS email
 	,TCH.EMP_ID AS tid
-	,LEFT(TCH.FIRST_NAME, 1) + TCH.LAST_NAME AS tlogin_id
-	--,TCH.BADGE_NUM AS tlogin_id --- teacher's login e012345
+	--,LEFT(TCH.FIRST_NAME, 1) + TCH.LAST_NAME AS tlogin_id
+	,TCH.BADGE_NUM AS tlogin_id --- teacher's login e012345
 	,'' AS cid
 	,'1' AS period
 	,'' AS class_name

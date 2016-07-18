@@ -9,7 +9,8 @@ SELECT
 	,PER.LAST_NAME AS tlname
 	,PER.EMAIL AS email
 	,STF.STATE_ID AS tid
-	,LEFT(PER.FIRST_NAME, 1) + PER.LAST_NAME AS tlogin_id
+	,STF.BADGE_NUM AS tlogin_id
+	--,LEFT(PER.FIRST_NAME, 1) + PER.LAST_NAME AS tlogin_id
 	,'' AS grade
 	,CASE WHEN STF.TYPE = 'SSS' THEN 'Y' ELSE 'N' END 
 	 AS ismgr
