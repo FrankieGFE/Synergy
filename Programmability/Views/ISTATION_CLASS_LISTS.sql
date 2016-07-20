@@ -1,29 +1,42 @@
 
---CREATE VIEW [APS].[ST_MATH_STUDENTS] AS 
+ALTER VIEW [APS].[ISTATION_CLASSES] AS 
 
 
 
-SELECT 
-	--ENR.SCHOOL_CODE AS campus_id
-	ENR.SIS_NUMBER as iid
-	,ENR.SCHOOL_CODE AS distric_school_id
-	,ENR.SCHOOL_NAME AS school
-	,TCH.EMP_ID AS district_teacher_id
-	,TCH.EMAIL AS teacher_email
-	,TCH.FIRST_NAME AS teacher_last_name
-	,PER.FIRST_NAME AS teacher_first_name
+SELECT DISTINCT
+	ENR.SCHOOL_CODE AS campus_id
+	,ENR.SIS_NUMBER as id
+	,PER.FIRST_NAME AS fname
+	,PER.LAST_NAME AS lname
+	,PER.MIDDLE_NAME AS mi
+	,(PER.FIRST_NAME)+ LEFT(PER.LAST_NAME,1) AS login_id 
+	,'' AS password
 	,GRADE AS grade
-	,'' AS [group]
-	,'' AS fluency
-	,PER.LAST_NAME AS student_last_name
-	,PER.FIRST_NAME AS student_first_name
-	,LEFT(PER.LAST_NAME,1) + ENR.SIS_NUMBER AS student_username
-	,ENR.SIS_NUMBER AS student_password
-	,'' AS permanent_login
+	,TCH.FIRST_NAME AS tfname
+	,TCH.LAST_NAME AS tlname
+	,TCH.EMAIL AS email
+	,TCH.EMP_ID AS tid
+	,TCH.BADGE_NUM AS tlogin_id --- teacher's login e012345
+	,'' AS cid
+	,'1' AS period
+	,'' AS class_name
+	,STU.STATE_STUDENT_NUMBER AS state_id
+	,BS.GENDER AS GENDER
+	,BS.RESOLVED_RACE AS RACE
+	,BS.SPED_STATUS AS SPECIAL_ED
+	,'' AS CLASS_INSTR
+	,CASE WHEN BS.LUNCH_STATUS IN ('F','2') THEN 'Y' ELSE BS.LUNCH_STATUS
+	END AS ECON_DISADV
+	,BS.ELL_STATUS AS ENG_PROFICIENCY
+	,BS.PRIMARY_DISABILITY_CODE AS DISABILITY
+	,BS.GIFTED_STATUS AS 'G/T'
+	,STU.HOME_LESS AS HOMELESS
+	,STU.MIGRANT AS MIGRANT
+	,BS.HISPANIC_INDICATOR AS ETHNICITY
 	,CONVERT(DATE, BS.BIRTH_DATE) AS birthdate
-	,'' AS mss
-	,'' AS [action]
-
+	--,TCH.PERIOD_BEGIN
+	--,TCH.PRIMARY_STAFF
+	--,SCH.COURSE_ID
 FROM
 	APS.StudentEnrollmentDetails AS ENR
 	LEFT JOIN
@@ -60,7 +73,7 @@ FROM
 			,CAST(replace(lower(st.BADGE_NUM), 'e', '')AS INT) AS EMP_ID
 	
 			FROM 
-			APS.ScheduleDetailsAsOf ('07/20/2016') AS SCH --- Change to getdate in August
+			APS.ScheduleDetailsAsOf ('07/21/2016') AS SCH
 
 			LEFT JOIN
 			REV.REV_YEAR AS YR
@@ -75,6 +88,7 @@ FROM
 			ON PER.PERSON_GU = ST.STAFF_GU
 			WHERE 1 = 1
 			AND SCHOOL_YEAR = '2016'
+			AND EXTENSION = 'R'
 			AND PERIOD_BEGIN = 1
 			AND PRIMARY_STAFF = 1
 			) AS TCH
@@ -91,6 +105,6 @@ WHERE
 	AND ENR.LEAVE_DATE IS NULL
 	AND ENR.EXCLUDE_ADA_ADM IS NULL
 	AND ENR.SUMMER_WITHDRAWL_CODE IS NULL
-	--AND TCH.EMP_ID = '203050'
+	--AND  ENR.SIS_NUMBER = '970052733'
 
 --ORDER BY id
