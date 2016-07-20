@@ -1,40 +1,28 @@
 
---CREATE VIEW [APS].[ISTATION_CLASSES] AS 
+--CREATE VIEW [APS].[ST_MATH_STUDENTS] AS 
 
 
 
 SELECT 
-	ENR.SCHOOL_CODE AS campus_id
-	,ENR.SIS_NUMBER as id
-	,PER.FIRST_NAME AS fname
-	,PER.LAST_NAME AS lname
-	,PER.MIDDLE_NAME AS mi
-	,(PER.FIRST_NAME)+ LEFT(PER.LAST_NAME,1) AS login_id 
-	,'' AS password
+	--ENR.SCHOOL_CODE AS campus_id
+	ENR.SIS_NUMBER as iid
+	,ENR.SCHOOL_CODE AS distric_school_id
+	,ENR.SCHOOL_NAME AS school
+	,TCH.EMP_ID AS district_teacher_id
+	,TCH.EMAIL AS teacher_email
+	,TCH.FIRST_NAME AS teacher_last_name
+	,PER.FIRST_NAME AS teacher_first_name
 	,GRADE AS grade
-	,TCH.FIRST_NAME AS tfname
-	,TCH.LAST_NAME AS tlname
-	,TCH.EMAIL AS email
-	,TCH.EMP_ID AS tid
-	--,LEFT(TCH.FIRST_NAME, 1) + TCH.LAST_NAME AS tlogin_id
-	,TCH.BADGE_NUM AS tlogin_id --- teacher's login e012345
-	,'' AS cid
-	,'1' AS period
-	,'' AS class_name
-	,STU.STATE_STUDENT_NUMBER AS state_id
-	,BS.GENDER AS GENDER
-	,BS.RESOLVED_RACE AS RACE
-	,BS.SPED_STATUS AS SPECIAL_ED
-	,'' AS CLASS_INSTR
-	,CASE WHEN BS.LUNCH_STATUS IN ('F','2') THEN 'Y' ELSE BS.LUNCH_STATUS
-	END AS ECON_DISADV
-	,BS.ELL_STATUS AS ENG_PROFICIENCY
-	,BS.PRIMARY_DISABILITY_CODE AS DISABILITY
-	,BS.GIFTED_STATUS AS 'G/T'
-	,STU.HOME_LESS AS HOMELESS
-	,STU.MIGRANT AS MIGRANT
-	,BS.HISPANIC_INDICATOR AS ETHNICITY
+	,'' AS [group]
+	,'' AS fluency
+	,PER.LAST_NAME AS student_last_name
+	,PER.FIRST_NAME AS student_first_name
+	,LEFT(PER.LAST_NAME,1) + ENR.SIS_NUMBER AS student_username
+	,ENR.SIS_NUMBER AS student_password
+	,'' AS permanent_login
 	,CONVERT(DATE, BS.BIRTH_DATE) AS birthdate
+	,'' AS mss
+	,'' AS [action]
 
 FROM
 	APS.StudentEnrollmentDetails AS ENR
