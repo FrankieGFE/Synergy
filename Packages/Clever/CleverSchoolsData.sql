@@ -1,9 +1,10 @@
--- =================================================================
--- Author     :	mlm - EduPoint                                    --
--- Create date: 12/17/2015                                        --
--- Description:	Clever – Schools Data Extract - schools.csv       --
--- Revision   :                                                   --
--- =================================================================
+/*
+	Created by Debbie Ann Chavez (ORIGINAL CODE FROM MLM/EDUPOINT)
+	Date 7/18/2016
+*/
+
+
+ALTER VIEW APS.CleverSchools AS
 
 SELECT
          sch.SCHOOL_CODE                      AS [School_id]
