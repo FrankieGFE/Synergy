@@ -9,7 +9,7 @@ SELECT DISTINCT
 	,PER.FIRST_NAME AS fname
 	,PER.LAST_NAME AS lname
 	,PER.MIDDLE_NAME AS mi
-	,(PER.FIRST_NAME)+ LEFT(PER.LAST_NAME,1) AS login_id 
+	,'' AS login_id 
 	,'' AS password
 	,GRADE AS grade
 	,TCH.FIRST_NAME AS tfname

@@ -31,6 +31,7 @@ SELECT
 	,ENR.SCHOOL_CODE AS distric_school_id
 	,CASE WHEN ENR.SCHOOL_NAME = 'Reginald Chavez Elementary School' THEN 'REGINALD CHAVEZ ELEM SCHOOL' 
 	      WHEN ENR.SCHOOL_NAME = 'A. Montoya Elementary School' THEN 'A MONTOYA ELEMENTARY SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Arroyo Del Oso Elementary School' THEN 'ARROYO DEL OSO ELEM SCHOOL'
 		  WHEN ENR.SCHOOL_NAME = 'Dolores Gonzales Elementary School' THEN 'DOLORES GONZALES ELEM SCHOOL'
 		  WHEN ENR.SCHOOL_NAME = 'East San Jose Elementary School' THEN 'EAST SAN JOSE ELEMENTARY SCH'
 		  WHEN ENR.SCHOOL_NAME = 'Edmund G. Ross Elementary School' THEN 'EDMUND G ROSS ELEM SCHOOL'
@@ -45,6 +46,7 @@ SELECT
 		  WHEN ENR.SCHOOL_NAME = 'Mission Avenue Elementary School' THEN 'MISSION AVE ELEMENTARY SCHOOL'
 		  WHEN ENR.SCHOOL_NAME = 'Mountain View Elementary School' THEN 'MOUNTAIN VIEW ELEM SCHOOL'
 		  WHEN ENR.SCHOOL_NAME = 'Rudolfo Anaya Elementary School' THEN 'RUDOLFO ANAYA ELEMENTARY SCH'
+		  WHEN ENR.SCHOOL_NAME = 'School On Wheels High School' THEN 'SCHOOL ON WHEELS'
 		  WHEN ENR.SCHOOL_NAME = 'Sombra Del Monte Elementary School' THEN 'SOMBRA DEL MONTE ELEM SCHOOL'
 		  WHEN ENR.SCHOOL_NAME = 'Susie Rayos Marmon Elementary School' THEN 'SUSIE RAYOS MARMON ELEM SCHOOL'
 		  WHEN ENR.SCHOOL_NAME = '' THEN ''
@@ -53,8 +55,8 @@ SELECT
 	END AS school
 	,TCH.EMP_ID AS district_teacher_id
 	,TCH.EMAIL AS teacher_email
-	,TCH.FIRST_NAME AS teacher_last_name
-	,PER.FIRST_NAME AS teacher_first_name
+	,TCH.LAST_NAME AS teacher_last_name
+	,TCH.FIRST_NAME AS teacher_first_name
 	,GRADE AS grade
 	,'' AS [group]
 	,'' AS fluency
@@ -178,8 +180,28 @@ SELECT
 	ROW_NUMBER () OVER (PARTITION BY ENR.SIS_NUMBER ORDER BY ENR.SIS_NUMBER DESC) AS RN
 	,'' AS iid
 	,ENR.SCHOOL_CODE AS distric_school_id
-	,CASE WHEN LTRIM(RTRIM(ENR.SCHOOL_NAME)) = 'George I. Sanchez Collaborative Community School' THEN 'GEORGE I SANCHEZ CMTY SCHOOL' 
-	      WHEN ENR.SCHOOL_NAME = '' THEN ''
+	,CASE WHEN ENR.SCHOOL_NAME = 'Reginald Chavez Elementary School' THEN 'REGINALD CHAVEZ ELEM SCHOOL' 
+	      WHEN ENR.SCHOOL_NAME = 'A. Montoya Elementary School' THEN 'A MONTOYA ELEMENTARY SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Arroyo Del Oso Elementary School' THEN 'ARROYO DEL OSO ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Dolores Gonzales Elementary School' THEN 'DOLORES GONZALES ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'East San Jose Elementary School' THEN 'EAST SAN JOSE ELEMENTARY SCH'
+		  WHEN ENR.SCHOOL_NAME = 'Edmund G. Ross Elementary School' THEN 'EDMUND G ROSS ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Edward Gonzales Elementary School' THEN 'EDWARD GONZALES ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'George I. Sanchez Collaborative Community School' THEN 'GEORGE I SANCHEZ CMTY SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Governor Bent Elementary School' THEN 'GOVERNOR BENT ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Helen Cordero Elementary School' THEN 'HELEN CORDERO PRIMARY SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Janet Kahn Fine Arts Academy a.k.a Eubank Elementary School' THEN 'EUBANK ELEMENTARY SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Marie M. Hughes Elementary School' THEN 'MARIE M HUGHES ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Mary Ann Binford Elementary School' THEN 'MARY ANN BINFORD ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Matheson Park Elementary School' THEN 'MATHESON PARK ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Mission Avenue Elementary School' THEN 'MISSION AVE ELEMENTARY SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Mountain View Elementary School' THEN 'MOUNTAIN VIEW ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Rudolfo Anaya Elementary School' THEN 'RUDOLFO ANAYA ELEMENTARY SCH'
+		  WHEN ENR.SCHOOL_NAME = 'School On Wheels High School' THEN 'SCHOOL ON WHEELS'
+		  WHEN ENR.SCHOOL_NAME = 'Sombra Del Monte Elementary School' THEN 'SOMBRA DEL MONTE ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Susie Rayos Marmon Elementary School' THEN 'SUSIE RAYOS MARMON ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = '' THEN ''
+		  WHEN ENR.SCHOOL_NAME = '' THEN ''
 	ELSE ENR.SCHOOL_NAME
 	END AS school
 	,TCH.EMP_ID AS district_teacher_id
