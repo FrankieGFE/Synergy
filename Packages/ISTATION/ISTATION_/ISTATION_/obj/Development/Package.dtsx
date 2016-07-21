@@ -1,0 +1,2156 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/21/2016 10:38:59 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="046-FRGARCIA"
+  DTS:CreatorName="APS\e138796"
+  DTS:DTSID="{900E1EC5-C659-4F17-BCEB-20572334DC43}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5058.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{EF6C38FF-6A11-4F81-A9F2-166D3E8502ED}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ISTATION TEACHERS]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="ISTATION TEACHERS"
+      DTS:DTSID="{8053E432-2B8F-4112-A312-1DCC4551B2C1}"
+      DTS:ObjectName="ISTATION TEACHERS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\files\Export\ISTATION\ISTATION_TEACHER_FILE.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="campus_id"
+              DTS:DTSID="{61DA9C0D-E99E-45DC-B7B2-B9AC52386325}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="tfname"
+              DTS:DTSID="{B412BFE4-28C7-4ADE-A319-6BDC77C388AB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="tlname"
+              DTS:DTSID="{181BEFB4-4F9D-4B2C-8A80-247621123657}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="email"
+              DTS:DTSID="{8FAD68DA-CC0D-43F9-96EC-33EE61564C80}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="tid"
+              DTS:DTSID="{B386A0D5-7BCD-487C-8359-E42E2DE86FBE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="tlogin_id"
+              DTS:DTSID="{8BA9C38D-EDA3-41E9-94D8-6B372EB4E0F9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="grade"
+              DTS:DTSID="{D8308581-EF26-44C4-96AE-D2C3B970AF14}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ismgr"
+              DTS:DTSID="{0CC9E836-3302-4C8D-9B87-7C4323B43E7D}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ISTATION_CLASS_FILE]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="ISTATION_CLASS_FILE"
+      DTS:DTSID="{632F2A8F-8826-4692-B3AD-B66679BE1BDB}"
+      DTS:ObjectName="ISTATION_CLASS_FILE">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\files\Export\ISTATION\ISTATION_CLASS_FILE.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="campus_id"
+              DTS:DTSID="{18131E98-81BF-407C-AE99-E06F2C7914EB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="id"
+              DTS:DTSID="{96605AA2-6C37-4441-812E-1EE7F58933AF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fname"
+              DTS:DTSID="{F855F825-10CC-4396-970C-00868AC02FDA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="lname"
+              DTS:DTSID="{F477A4B9-9284-4541-96FE-E9D9F335CE2D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="mi"
+              DTS:DTSID="{E87F3968-A03F-4C0D-9924-3C78F60DCAE1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="login_id"
+              DTS:DTSID="{9444C264-AEF1-4461-BE5B-00501C8965C9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="password"
+              DTS:DTSID="{3601752E-CCAC-4997-BF3A-5452EB6F1948}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="grade"
+              DTS:DTSID="{B6573E0B-0BA6-442A-9061-0CB177426980}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="tfname"
+              DTS:DTSID="{D16A1988-0812-45C2-8BF0-9A2CAA3918A2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="tlname"
+              DTS:DTSID="{4593F074-8AD8-4281-9994-1224C8DB5BCA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="email"
+              DTS:DTSID="{17D22386-CC29-47DF-AFA1-E8F7BE4C8FCB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="tid"
+              DTS:DTSID="{9DBF5BB6-BE3D-47F5-9228-68207E7358F4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="tlogin_id"
+              DTS:DTSID="{AA272170-7B25-4797-9763-AAB4FDCD52BC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="cid"
+              DTS:DTSID="{F62A3F7A-0CD5-4F8B-A5E7-59DBBC15ADE4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="period"
+              DTS:DTSID="{B5F1757B-2105-4247-A571-73B6C0011BE9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="class_name"
+              DTS:DTSID="{04E2E0CA-462A-4491-8923-4601B27CBD45}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="state_id"
+              DTS:DTSID="{22FEFBB5-AD1C-4015-8E36-A9FA60B0679D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="GENDER"
+              DTS:DTSID="{94BAC38B-B313-4D3F-85FA-4B6A2C7873B4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RACE"
+              DTS:DTSID="{526A6C31-B2AC-4158-BAD1-45A5A5A43CC6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SPECIAL_ED"
+              DTS:DTSID="{27F01262-762A-4D6C-960E-9A86AE20532D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CLASS_INSTR"
+              DTS:DTSID="{264FB8EB-0EC9-41AA-8ED5-CDCF56AB888D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ECON_DISADV"
+              DTS:DTSID="{45ADD65C-B18E-402E-9BB2-F0FBE87D792F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ENG_PROFICIENCY"
+              DTS:DTSID="{A25E7AF3-CEEE-4842-B3FA-79059A6FA843}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DISABILITY"
+              DTS:DTSID="{803EDDE6-D923-443D-A7BA-CCEE8CF55014}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="G T"
+              DTS:DTSID="{FDE832D1-F140-4005-8317-1EB6010BF90D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HOMELESS"
+              DTS:DTSID="{5E55883D-864C-4C0D-B4E3-1CAEA9212F21}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MIGRANT"
+              DTS:DTSID="{3783FA1A-122A-4002-9478-4FD2AC40CE12}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ETHNICITY"
+              DTS:DTSID="{3D02C338-C3D6-4BCF-A847-629775553737}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="133"
+              DTS:TextQualified="True"
+              DTS:ObjectName="birthdate"
+              DTS:DTSID="{054DE093-4698-4991-8343-045B8BBBAA16}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[synergydbdc.ST_Production.apsexport]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C31E6CB4-FBD8-4929-9AAD-9147072C44EC}"
+      DTS:ObjectName="synergydbdc.ST_Production.apsexport">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=synergydbdc;User ID=apsexport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADv6n979/NP5jWZ1HZunvusAAAAAASAAACgAAAAEAAAAKKu/o1s5dIglgu2esWavz0wAAAA8Z4/cB9IdlxQ6Ydk9H/3Ql6mmFeEw2VeaQaN3bFxWDBPj9jVYW09XWmz4DX//fk4FAAAABmNI2zrDQmTFwiXA+2+z8FTJf6H</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\ISTATION CLASSES"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{AD99CCC2-3A8B-487D-952A-F51D8645B1B9}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ISTATION CLASSES"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\ISTATION CLASSES\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ISTATION CLASSES\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ISTATION_CLASS_FILE]"
+                  connectionManagerRefId="Package.ConnectionManagers[ISTATION_CLASS_FILE]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[campus_id]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="campus_id"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[campus_id]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[campus_id]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[id]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="id"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[id]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[id]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[fname]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="fname"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fname]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[fname]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[lname]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="lname"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[lname]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[lname]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[mi]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="mi"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[mi]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[mi]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[login_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="login_id"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[login_id]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[login_id]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[password]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="password"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[password]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[password]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[grade]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="grade"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[grade]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[grade]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[tfname]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="tfname"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[tfname]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[tfname]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[tlname]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="tlname"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[tlname]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[tlname]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[email]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="email"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[email]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[email]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[tid]"
+                      cachedDataType="i4"
+                      cachedName="tid"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[tid]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[tid]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[tlogin_id]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="tlogin_id"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[tlogin_id]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[tlogin_id]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[cid]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="cid"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[cid]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[cid]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[period]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="period"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[period]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[period]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[class_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="class_name"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[class_name]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[class_name]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[state_id]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="state_id"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[state_id]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[state_id]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[GENDER]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="GENDER"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GENDER]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[GENDER]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[RACE]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="RACE"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[RACE]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[RACE]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[SPECIAL_ED]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="SPECIAL_ED"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SPECIAL_ED]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[SPECIAL_ED]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[CLASS_INSTR]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="CLASS_INSTR"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CLASS_INSTR]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[CLASS_INSTR]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[ECON_DISADV]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="ECON_DISADV"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ECON_DISADV]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[ECON_DISADV]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[ENG_PROFICIENCY]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="ENG_PROFICIENCY"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ENG_PROFICIENCY]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[ENG_PROFICIENCY]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[DISABILITY]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="DISABILITY"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DISABILITY]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[DISABILITY]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[HOMELESS]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="HOMELESS"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[HOMELESS]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOMELESS]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[MIGRANT]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="MIGRANT"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MIGRANT]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[MIGRANT]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[ETHNICITY]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="ETHNICITY"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ETHNICITY]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[ETHNICITY]" />
+                    <inputColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].Columns[birthdate]"
+                      cachedDataType="dbDate"
+                      cachedName="birthdate"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[birthdate]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[birthdate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[campus_id]"
+                      dataType="wstr"
+                      length="20"
+                      name="campus_id" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[id]"
+                      dataType="wstr"
+                      length="20"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[fname]"
+                      dataType="wstr"
+                      length="60"
+                      name="fname" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[lname]"
+                      dataType="wstr"
+                      length="60"
+                      name="lname" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[mi]"
+                      dataType="wstr"
+                      length="20"
+                      name="mi" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[login_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="login_id" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[password]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="password" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[grade]"
+                      dataType="wstr"
+                      length="600"
+                      name="grade" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[tfname]"
+                      dataType="wstr"
+                      length="60"
+                      name="tfname" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[tlname]"
+                      dataType="wstr"
+                      length="60"
+                      name="tlname" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[email]"
+                      dataType="wstr"
+                      length="100"
+                      name="email" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[tid]"
+                      dataType="i4"
+                      name="tid" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[tlogin_id]"
+                      dataType="wstr"
+                      length="10"
+                      name="tlogin_id" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[cid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="cid" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[period]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="period" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[class_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="class_name" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[state_id]"
+                      dataType="wstr"
+                      length="20"
+                      name="state_id" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GENDER]"
+                      dataType="wstr"
+                      length="5"
+                      name="GENDER" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[RACE]"
+                      dataType="wstr"
+                      length="600"
+                      name="RACE" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SPECIAL_ED]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="SPECIAL_ED" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CLASS_INSTR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="CLASS_INSTR" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ECON_DISADV]"
+                      dataType="wstr"
+                      length="5"
+                      name="ECON_DISADV" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ENG_PROFICIENCY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ENG_PROFICIENCY" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DISABILITY]"
+                      dataType="wstr"
+                      length="5"
+                      name="DISABILITY" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[G T]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="G T" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[HOMELESS]"
+                      dataType="wstr"
+                      length="5"
+                      name="HOMELESS" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MIGRANT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="MIGRANT" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ETHNICITY]"
+                      dataType="wstr"
+                      length="5"
+                      name="ETHNICITY" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[birthdate]"
+                      dataType="dbDate"
+                      name="birthdate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\ISTATION CLASSES\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+ 	*
+FROM
+	APS.ISTATION_CLASSES</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ISTATION CLASSES\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[synergydbdc.ST_Production.apsexport]"
+                  connectionManagerRefId="Package.ConnectionManagers[synergydbdc.ST_Production.apsexport]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[campus_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[campus_id]"
+                      length="20"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[campus_id]"
+                      name="campus_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      length="20"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[id]"
+                      name="id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[fname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[fname]"
+                      length="60"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[fname]"
+                      name="fname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[lname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[lname]"
+                      length="60"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[lname]"
+                      name="lname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[mi]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[mi]"
+                      length="20"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[mi]"
+                      name="mi"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[login_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[login_id]"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[login_id]"
+                      name="login_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[password]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[password]"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[password]"
+                      name="password"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[grade]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[grade]"
+                      length="600"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[grade]"
+                      name="grade"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[tfname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tfname]"
+                      length="60"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[tfname]"
+                      name="tfname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[tlname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tlname]"
+                      length="60"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[tlname]"
+                      name="tlname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[email]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[email]"
+                      length="100"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[email]"
+                      name="email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[tid]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tid]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[tid]"
+                      name="tid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[tlogin_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tlogin_id]"
+                      length="10"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[tlogin_id]"
+                      name="tlogin_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[cid]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[cid]"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[cid]"
+                      name="cid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[period]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[period]"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[period]"
+                      name="period"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[class_name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[class_name]"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[class_name]"
+                      name="class_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[state_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[state_id]"
+                      length="20"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[state_id]"
+                      name="state_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[GENDER]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GENDER]"
+                      length="5"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[GENDER]"
+                      name="GENDER"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[RACE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RACE]"
+                      length="600"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[RACE]"
+                      name="RACE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[SPECIAL_ED]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SPECIAL_ED]"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[SPECIAL_ED]"
+                      name="SPECIAL_ED"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[CLASS_INSTR]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CLASS_INSTR]"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[CLASS_INSTR]"
+                      name="CLASS_INSTR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[ECON_DISADV]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ECON_DISADV]"
+                      length="5"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[ECON_DISADV]"
+                      name="ECON_DISADV"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[ENG_PROFICIENCY]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ENG_PROFICIENCY]"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[ENG_PROFICIENCY]"
+                      name="ENG_PROFICIENCY"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[DISABILITY]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DISABILITY]"
+                      length="5"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[DISABILITY]"
+                      name="DISABILITY"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[G/T]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[G/T]"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[G/T]"
+                      name="G/T"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOMELESS]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HOMELESS]"
+                      length="5"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[HOMELESS]"
+                      name="HOMELESS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[MIGRANT]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MIGRANT]"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[MIGRANT]"
+                      name="MIGRANT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[ETHNICITY]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ETHNICITY]"
+                      length="5"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[ETHNICITY]"
+                      name="ETHNICITY"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[birthdate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[birthdate]"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].Columns[birthdate]"
+                      name="birthdate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[campus_id]"
+                      dataType="wstr"
+                      length="20"
+                      name="campus_id" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      dataType="wstr"
+                      length="20"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[fname]"
+                      dataType="wstr"
+                      length="60"
+                      name="fname" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[lname]"
+                      dataType="wstr"
+                      length="60"
+                      name="lname" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[mi]"
+                      dataType="wstr"
+                      length="20"
+                      name="mi" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[login_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="login_id" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[password]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="password" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[grade]"
+                      dataType="wstr"
+                      length="600"
+                      name="grade" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tfname]"
+                      dataType="wstr"
+                      length="60"
+                      name="tfname" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tlname]"
+                      dataType="wstr"
+                      length="60"
+                      name="tlname" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[email]"
+                      dataType="wstr"
+                      length="100"
+                      name="email" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tid]"
+                      dataType="i4"
+                      name="tid" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tlogin_id]"
+                      dataType="wstr"
+                      length="10"
+                      name="tlogin_id" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[cid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="cid" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[period]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="period" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[class_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="class_name" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[state_id]"
+                      dataType="wstr"
+                      length="20"
+                      name="state_id" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GENDER]"
+                      dataType="wstr"
+                      length="5"
+                      name="GENDER" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RACE]"
+                      dataType="wstr"
+                      length="600"
+                      name="RACE" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SPECIAL_ED]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="SPECIAL_ED" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CLASS_INSTR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="CLASS_INSTR" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ECON_DISADV]"
+                      dataType="wstr"
+                      length="5"
+                      name="ECON_DISADV" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ENG_PROFICIENCY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ENG_PROFICIENCY" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DISABILITY]"
+                      dataType="wstr"
+                      length="5"
+                      name="DISABILITY" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[G/T]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="G/T" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HOMELESS]"
+                      dataType="wstr"
+                      length="5"
+                      name="HOMELESS" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MIGRANT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="MIGRANT" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ETHNICITY]"
+                      dataType="wstr"
+                      length="5"
+                      name="ETHNICITY" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[birthdate]"
+                      dataType="dbDate"
+                      name="birthdate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[campus_id]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[campus_id]"
+                      name="campus_id" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[id]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[id]"
+                      name="id" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[fname]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[fname]"
+                      name="fname" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[lname]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[lname]"
+                      name="lname" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[mi]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[mi]"
+                      name="mi" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[login_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[login_id]"
+                      name="login_id" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[password]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[password]"
+                      name="password" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[grade]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[grade]"
+                      name="grade" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tfname]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tfname]"
+                      name="tfname" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tlname]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tlname]"
+                      name="tlname" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[email]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[email]"
+                      name="email" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tid]"
+                      dataType="i4"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tid]"
+                      name="tid" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tlogin_id]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tlogin_id]"
+                      name="tlogin_id" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[cid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[cid]"
+                      name="cid" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[period]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[period]"
+                      name="period" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[class_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[class_name]"
+                      name="class_name" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[state_id]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[state_id]"
+                      name="state_id" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GENDER]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GENDER]"
+                      name="GENDER" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RACE]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RACE]"
+                      name="RACE" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SPECIAL_ED]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SPECIAL_ED]"
+                      name="SPECIAL_ED" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CLASS_INSTR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CLASS_INSTR]"
+                      name="CLASS_INSTR" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ECON_DISADV]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ECON_DISADV]"
+                      name="ECON_DISADV" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ENG_PROFICIENCY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ENG_PROFICIENCY]"
+                      name="ENG_PROFICIENCY" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DISABILITY]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DISABILITY]"
+                      name="DISABILITY" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[G/T]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[G/T]"
+                      name="G/T" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HOMELESS]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HOMELESS]"
+                      name="HOMELESS" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MIGRANT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MIGRANT]"
+                      name="MIGRANT" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ETHNICITY]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ETHNICITY]"
+                      name="ETHNICITY" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[birthdate]"
+                      dataType="dbDate"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[birthdate]"
+                      name="birthdate" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\ISTATION CLASSES.Paths[OLE DB Source Output]"
+              endId="Package\ISTATION CLASSES\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\ISTATION CLASSES\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ISTATION TEACHERS"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{F857B6E0-A5BC-46E7-BB91-F46BEE015DE5}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ISTATION TEACHERS"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\ISTATION TEACHERS\Flat File Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ISTATION TEACHERS\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ISTATION TEACHERS]"
+                  connectionManagerRefId="Package.ConnectionManagers[ISTATION TEACHERS]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].Columns[campus_id]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="campus_id"
+                      externalMetadataColumnId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[campus_id]"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[campus_id]" />
+                    <inputColumn
+                      refId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].Columns[tfname]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="tfname"
+                      externalMetadataColumnId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[tfname]"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[tfname]" />
+                    <inputColumn
+                      refId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].Columns[tlname]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="tlname"
+                      externalMetadataColumnId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[tlname]"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[tlname]" />
+                    <inputColumn
+                      refId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].Columns[email]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="email"
+                      externalMetadataColumnId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[email]"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[email]" />
+                    <inputColumn
+                      refId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].Columns[tid]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="tid"
+                      externalMetadataColumnId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[tid]"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[tid]" />
+                    <inputColumn
+                      refId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].Columns[tlogin_id]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="tlogin_id"
+                      externalMetadataColumnId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[tlogin_id]"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[tlogin_id]" />
+                    <inputColumn
+                      refId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].Columns[grade]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="grade"
+                      externalMetadataColumnId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[grade]"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[grade]" />
+                    <inputColumn
+                      refId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].Columns[ismgr]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="ismgr"
+                      externalMetadataColumnId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ismgr]"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[ismgr]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[campus_id]"
+                      dataType="wstr"
+                      length="20"
+                      name="campus_id" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[tfname]"
+                      dataType="wstr"
+                      length="60"
+                      name="tfname" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[tlname]"
+                      dataType="wstr"
+                      length="60"
+                      name="tlname" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[email]"
+                      dataType="wstr"
+                      length="100"
+                      name="email" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[tid]"
+                      dataType="wstr"
+                      length="20"
+                      name="tid" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[tlogin_id]"
+                      dataType="wstr"
+                      length="10"
+                      name="tlogin_id" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[grade]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="grade" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ismgr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ismgr" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\ISTATION TEACHERS\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[APS].[ISTATION_TEACHERS]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ISTATION TEACHERS\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[synergydbdc.ST_Production.apsexport]"
+                  connectionManagerRefId="Package.ConnectionManagers[synergydbdc.ST_Production.apsexport]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[campus_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[campus_id]"
+                      length="20"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[campus_id]"
+                      name="campus_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[tfname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tfname]"
+                      length="60"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[tfname]"
+                      name="tfname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[tlname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tlname]"
+                      length="60"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[tlname]"
+                      name="tlname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[email]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[email]"
+                      length="100"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[email]"
+                      name="email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[tid]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tid]"
+                      length="20"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[tid]"
+                      name="tid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[tlogin_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tlogin_id]"
+                      length="10"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[tlogin_id]"
+                      name="tlogin_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[grade]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[grade]"
+                      length="1"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[grade]"
+                      name="grade"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[ismgr]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ismgr]"
+                      length="1"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].Columns[ismgr]"
+                      name="ismgr"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[campus_id]"
+                      dataType="wstr"
+                      length="20"
+                      name="campus_id" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tfname]"
+                      dataType="wstr"
+                      length="60"
+                      name="tfname" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tlname]"
+                      dataType="wstr"
+                      length="60"
+                      name="tlname" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[email]"
+                      dataType="wstr"
+                      length="100"
+                      name="email" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tid]"
+                      dataType="wstr"
+                      length="20"
+                      name="tid" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tlogin_id]"
+                      dataType="wstr"
+                      length="10"
+                      name="tlogin_id" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[grade]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="grade" />
+                    <externalMetadataColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ismgr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ismgr" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[campus_id]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[campus_id]"
+                      name="campus_id" />
+                    <outputColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tfname]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tfname]"
+                      name="tfname" />
+                    <outputColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tlname]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tlname]"
+                      name="tlname" />
+                    <outputColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[email]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[email]"
+                      name="email" />
+                    <outputColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tid]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tid]"
+                      name="tid" />
+                    <outputColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tlogin_id]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tlogin_id]"
+                      name="tlogin_id" />
+                    <outputColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[grade]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[grade]"
+                      name="grade" />
+                    <outputColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ismgr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ismgr]"
+                      name="ismgr" />
+                    <outputColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\ISTATION TEACHERS.Paths[OLE DB Source Output]"
+              endId="Package\ISTATION TEACHERS\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\ISTATION TEACHERS\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{BC6A7DDA-1014-4110-BAFD-5FD0D1F5E777}"
+      DTS:From="Package\ISTATION TEACHERS"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\ISTATION CLASSES" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="182.4,41.6"
+          Id="Package\ISTATION TEACHERS"
+          TopLeft="52.0000008855547,22.0235297206364" />
+        <NodeLayout
+          Size="172.8,41.6"
+          Id="Package\ISTATION CLASSES"
+          TopLeft="121.142859205908,107.670589745333" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="143.200000885555,63.6235297206364">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="64.342858320353,44.0470600246971"
+              Start="0,0"
+              End="64.342858320353,36.5470600246971">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.0235300123485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.0235300123485"
+                    Point2="0,22.0235300123485"
+                    Point3="4,22.0235300123485" />
+                  <mssgle:LineSegment
+                    End="60.342858320353,22.0235300123485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="60.342858320353,22.0235300123485"
+                    Point2="64.342858320353,22.0235300123485"
+                    Point3="64.342858320353,26.0235300123485" />
+                  <mssgle:LineSegment
+                    End="64.342858320353,36.5470600246971" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\ISTATION TEACHERS">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\ISTATION TEACHERS\OLE DB Source"
+          TopLeft="124.571430692867,10.4000001458561" />
+        <NodeLayout
+          Size="172.8,41.6"
+          Id="Package\ISTATION TEACHERS\Flat File Destination"
+          TopLeft="180.000003065382,70.9647068776062" />
+        <EdgeLayout
+          Id="Package\ISTATION TEACHERS.Paths[OLE DB Source Output]"
+          TopLeft="276.571430692867,31.2000001458561">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-10.1714276274856,39.7647067317501"
+              Start="0,0"
+              End="-10.1714276274856,32.2647067317501">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-6.17142762748563,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-6.17142762748563,0"
+                    Point2="-10.1714276274856,0"
+                    Point3="-10.1714276274856,4" />
+                  <mssgle:LineSegment
+                    End="-10.1714276274856,32.2647067317501" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\ISTATION TEACHERS\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\ISTATION CLASSES">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\ISTATION CLASSES\OLE DB Source"
+          TopLeft="218.4,48.8" />
+        <NodeLayout
+          Size="172.8,41.6"
+          Id="Package\ISTATION CLASSES\Flat File Destination"
+          TopLeft="282.4,108" />
+        <EdgeLayout
+          Id="Package\ISTATION CLASSES.Paths[OLE DB Source Output]"
+          TopLeft="370.4,69.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-1.59999999999991,38.4"
+              Start="0,0"
+              End="-1.59999999999991,30.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="2.40000000000009,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="2.40000000000009,0"
+                    Point2="-1.59999999999991,0"
+                    Point3="-1.59999999999991,4" />
+                  <mssgle:LineSegment
+                    End="-1.59999999999991,30.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\ISTATION CLASSES\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
