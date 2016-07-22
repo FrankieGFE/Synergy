@@ -85,7 +85,7 @@ FROM
 	ON BS.SIS_NUMBER = ENR.SIS_NUMBER
 
 	LEFT JOIN
-	APS.ScheduleAsOf ('07/21/2016') AS SCH  --- Change to getdate when school starts
+	APS.ScheduleAsOf (GETDATE()) AS SCH  --- Change to getdate when school starts
 	ON SCH.SIS_NUMBER = ENR.SIS_NUMBER
 
 		INNER JOIN 
@@ -106,7 +106,7 @@ FROM
 			,CAST(replace(lower(st.BADGE_NUM), 'e', '')AS INT) AS EMP_ID
 	
 			FROM 
-			APS.ScheduleDetailsAsOf ('07/20/2016') AS SCH --- Change to getdate in August
+			APS.ScheduleDetailsAsOf (GETDATE()) AS SCH --- Change to getdate in August
 
 			LEFT JOIN
 			REV.REV_YEAR AS YR
@@ -120,7 +120,8 @@ FROM
 			REV.EPC_STAFF AS ST
 			ON PER.PERSON_GU = ST.STAFF_GU
 			WHERE 1 = 1
-			AND SCHOOL_YEAR = '2016'
+			AND SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
+			AND EXTENSION = 'R'
 			AND PERIOD_BEGIN = 1
 			AND PRIMARY_STAFF = 1
 			) AS TCH
@@ -131,7 +132,7 @@ FROM
 
 WHERE 
 	1 = 1
-	AND ENR.SCHOOL_YEAR = '2016'
+	AND ENR.SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
 	AND EXTENSION = 'R'
 	AND GRADE IN ('K','01','02','03')
 	AND ENR.LEAVE_DATE IS NULL
@@ -140,7 +141,7 @@ WHERE
 	--AND TCH.EMP_ID = '70652'
 ) AS EST
 
-		LEFT JOIN
+		INNER JOIN
 		OPENROWSET (
 			'Microsoft.ACE.OLEDB.12.0', 
 			'Text;Database=\\SynTempSSIS\Files\TempQuery\;', 
@@ -148,9 +149,12 @@ WHERE
 		)AS [FILE]
 		ON [FILE].SCHOOL = EST.school
 
+WHERE EST.IID IS NULL
 --ORDER BY grade
 
 UNION
+
+
 
 SELECT
 	[FILE].IID
@@ -240,7 +244,7 @@ FROM
 	ON BS.SIS_NUMBER = ENR.SIS_NUMBER
 
 	LEFT JOIN
-	APS.ScheduleAsOf ('08/13/2016') AS SCH  --- Change to getdate when school starts
+	APS.ScheduleAsOf (GETDATE()) AS SCH  --- Change to getdate when school starts
 	ON SCH.SIS_NUMBER = ENR.SIS_NUMBER
 
 		INNER JOIN 
@@ -262,7 +266,7 @@ FROM
 			,CAST(replace(lower(st.BADGE_NUM), 'e', '')AS VARCHAR(9)) AS EMP_ID
 	
 			FROM 
-			APS.ScheduleDetailsAsOf ('08/13/2016') AS SCH --- Change to getdate in August
+			APS.ScheduleDetailsAsOf (GETDATE()) AS SCH --- Change to getdate in August
 
 			LEFT JOIN
 			REV.REV_YEAR AS YR
@@ -276,7 +280,7 @@ FROM
 			REV.EPC_STAFF AS ST
 			ON PER.PERSON_GU = ST.STAFF_GU
 			WHERE 1 = 1
-			AND SCHOOL_YEAR = '2016'
+			AND SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
 			AND DEPARTMENT = 'MATH'
 			--AND PERIOD_BEGIN = 1
 			AND PRIMARY_STAFF = 1
@@ -287,9 +291,8 @@ FROM
 		
 WHERE 
 	1 = 1
-	AND ENR.SCHOOL_YEAR = '2016'
+	AND ENR.SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
 	AND EXTENSION = 'R'
-	AND GRADE IN ('06','07','08')
 	AND ENR.LEAVE_DATE IS NULL
 	AND ENR.EXCLUDE_ADA_ADM IS NULL
 	AND ENR.SUMMER_WITHDRAWL_CODE IS NULL
@@ -297,7 +300,7 @@ WHERE
 	--AND TCH.EMP_ID = '203050'
 ) AS ST
 
-		LEFT JOIN
+		INNER JOIN
 		OPENROWSET (
 			'Microsoft.ACE.OLEDB.12.0', 
 			'Text;Database=\\SynTempSSIS\Files\TempQuery\;', 
@@ -307,6 +310,7 @@ WHERE
 
 WHERE 1 = 1
 AND RN = 1
+AND ST.iid IS NOT NULL
 ORDER BY IID, school
 
 REVERT

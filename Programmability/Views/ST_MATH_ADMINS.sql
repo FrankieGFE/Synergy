@@ -48,10 +48,10 @@ SELECT
 	,PER.LAST_NAME AS 'Last Name'
 	,PER.FIRST_NAME AS 'First Name'
 	,CASE WHEN STF.TYPE = 'TE' THEN 'teacher'
-	      WHEN STF.TYPE = 'SSS' THEN 'program_coordinator'
+	      ELSE 'program_coordinator'
 	END AS position
 	,CASE WHEN STF.TYPE = 'TE' THEN 'class_level'
-	      WHEN STF.TYPE = 'SSS' THEN 'school_level'
+	      ELSE 'school_level'
 	END AS access_level
 	
 FROM
@@ -78,15 +78,14 @@ FROM
 WHERE 1 = 1
 AND STF.TYPE IN ('TE','SSS','SA')
 --AND LAST_NAME = 'ST JOHN'
-AND YR.SCHOOL_YEAR = '2016'
---AND (SCH.SCHOOL_CODE BETWEEN '200' AND '400' OR SCH.SCHOOL_CODE IN ('496','900','188'))
+AND YR.SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
 AND (PER.FIRST_NAME NOT IN ('TEACHER','PLACEMENT','Spedpre','SECTION') AND PER.FIRST_NAME NOT LIKE 'Staff%')
 AND YR.EXTENSION = 'R'
 --AND SCH.SCHOOL_CODE = '329'
 ) AS STAFF
 
 
-		LEFT JOIN
+		INNER JOIN
 		OPENROWSET (
 			'Microsoft.ACE.OLEDB.12.0', 
 			'Text;Database=\\SynTempSSIS\Files\TempQuery\;', 
