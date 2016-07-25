@@ -1,4 +1,3 @@
-
 /*********************************************************************
 
 Created by Debbie Ann Chavez
@@ -23,6 +22,7 @@ IF NOT EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[APS].[Mism
 GO
 
 ALTER VIEW APS.MismatchTerms AS
+
 
 SELECT T1.*, T2.[ROWCOUNT] FROM 
 
@@ -78,7 +78,7 @@ WHERE
 	AND SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
 	AND [Year].[EXTENSION]='R'
 	AND Course.COURSE_ID NOT IN ('08330', '08375')
-	AND SCHOOL_CODE = '425'
+	--AND SCHOOL_CODE = '425'
 	)AS T1
 
 	LEFT JOIN 
@@ -128,9 +128,15 @@ WHERE
 	AND SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
 	AND [Year].[EXTENSION]='R'
 	AND Course.COURSE_ID NOT IN ('08330', '08375')
-	AND SCHOOL_CODE = '425'
+	--AND SCHOOL_CODE = '425'
 
 	) AS T2
 
 	ON
 	T1.DST = T2.DST
+
+
+
+GO
+
+
