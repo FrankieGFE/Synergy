@@ -5,22 +5,37 @@
   DTS:CreationName="SSIS.Package.3"
   DTS:CreatorComputerName="046-DEBBCHAVEZ"
   DTS:CreatorName="APS\e104090"
-  DTS:DTSID="{381A7972-B6E1-421C-BF55-79CCAAC2DEC2}"
+  DTS:DTSID="{7A6CA051-907B-4B47-BA02-4F9567F51537}"
   DTS:ExecutableType="SSIS.Package.3"
   DTS:LastModifiedProductVersion="11.0.5058.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="BusinessSystemsSpedInfo"
   DTS:PackageType="5"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{E12C4742-1D3D-4D40-85B5-630E18B1A3D7}">
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{12E8D2ED-DD1D-4B67-B60F-55B706CFC573}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:refId="Package.ConnectionManagers[synergydbdc.ST_Production.APSExport]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{8189AF8F-A225-4521-BABC-A1BCCE368F99}"
+      DTS:ObjectName="synergydbdc.ST_Production.APSExport">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=synergydbdc;User ID=APSExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATewWZ/TlJEy+RoEBYRx+mgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAl+RFfaitJNLVAIZbrrJmNAAAAAASAAACgAAAAEAAAAMXKf65RK4kaDoABfovooxEwAAAAiLZKsKdfiswkHUQXNvjl6m9XsnYQoh99N75gpAatAAXKAeCqIsC47t8JOYLYtSrwFAAAAGK/VyaMu4f6yZDQy+9XUqYCZwc6</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[TestFile]"
       DTS:CreationName="FLATFILE"
-      DTS:DTSID="{604F1013-25A2-407C-A162-5132B18BA8A4}"
-      DTS:ObjectName="Flat File Connection Manager">
+      DTS:DTSID="{253F8AF4-AA6C-4D45-AFB6-3321D01BC5E7}"
+      DTS:ObjectName="TestFile">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:Format="Delimited"
@@ -30,7 +45,7 @@
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x0022_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="\\APS-DW-DEV\Special Ed Service log\BusinessSystemsSpedInfo.csv">
+          DTS:ConnectionString="\\APS-DW-DEV\Special Ed Service log\BusinessSystemsSped.csv">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -39,7 +54,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="LAST_NAME"
-              DTS:DTSID="{AF1838BD-B804-428D-AFBC-A8F3FCC6F9DD}"
+              DTS:DTSID="{0E41C5B2-F074-47F1-903E-C5D495871F60}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -48,7 +63,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="FIRST_NAME"
-              DTS:DTSID="{C91756CD-8FF0-4EE9-9858-4DE23ABBC18E}"
+              DTS:DTSID="{7A5A11BE-43DF-449A-B268-A5B330951E29}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -57,7 +72,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="SIS_NUMBER"
-              DTS:DTSID="{9442CFE8-86B8-41A7-BF4B-6D2A6EEA0A1C}"
+              DTS:DTSID="{6911FCE6-4C67-44CF-AA73-C2EBA3A119FC}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -66,7 +81,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="GRADE"
-              DTS:DTSID="{627B5DDF-CACF-480C-9288-83A4A63C6115}"
+              DTS:DTSID="{419F4A3D-4623-4FC3-AD64-F0114DB908AB}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -75,7 +90,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="SCHOOL_CODE"
-              DTS:DTSID="{8A84EB2B-10C7-4B9E-86FD-842E1B7CADB9}"
+              DTS:DTSID="{E6E924E5-FDB6-4ED1-ACF7-FB3E094498FB}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -84,7 +99,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="SCHOOL_NAME"
-              DTS:DTSID="{3E609980-4BB1-4FD2-8AF0-CF2A762E14F3}"
+              DTS:DTSID="{253A5A5C-9DA6-461F-8148-A39FA77B8C7C}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -92,7 +107,7 @@
               DTS:DataType="135"
               DTS:TextQualified="True"
               DTS:ObjectName="ENTER_DATE"
-              DTS:DTSID="{6BFD39DF-59FB-4DC1-ADC2-EB7258F1507E}"
+              DTS:DTSID="{CAEBA7D9-A29A-402D-91C3-16CA050D7E3E}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -100,7 +115,7 @@
               DTS:DataType="135"
               DTS:TextQualified="True"
               DTS:ObjectName="LEAVE_DATE"
-              DTS:DTSID="{F70E9B94-0C0C-4337-B539-B324D096449F}"
+              DTS:DTSID="{936E7F2B-F73C-4662-971B-A6B6A4CC1063}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -109,16 +124,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="EXCEPTIONALITY"
-              DTS:DTSID="{686C336A-CB3F-48DB-8511-1BB05CA400CC}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="30"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="PROCESS_NAME"
-              DTS:DTSID="{EAC3B1B5-CC0E-4CB7-BFDE-483AAE3F1A02}"
+              DTS:DTSID="{8F831348-58DA-4AAA-A238-D465E8573F43}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -127,7 +133,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="GIFTED_STATUS"
-              DTS:DTSID="{D12AB648-A37E-4B90-AEE6-A6815C2DF9B7}"
+              DTS:DTSID="{EAAA62BF-905B-4328-A7D1-50C94049DE3D}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -135,24 +141,9 @@
               DTS:DataType="135"
               DTS:TextQualified="True"
               DTS:ObjectName="IEP_EXIT_DATE"
-              DTS:DTSID="{DAC1EB05-CBC9-45DA-953C-390A1110321A}"
+              DTS:DTSID="{B7DD778E-A6E2-4775-A3FF-4B690732B7EF}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
-        </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[synergydbdc.ST_Production.APSExport]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{6649287A-23B9-4CE2-8BFF-768FB40CD5D5}"
-      DTS:ObjectName="synergydbdc.ST_Production.APSExport">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=synergydbdc;User ID=APSExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATewWZ/TlJEy+RoEBYRx+mgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABw+SyVX4jioI1B64Dkit5/AAAAAASAAACgAAAAEAAAAMKDOm6m0xGLtZoLqRviLf0wAAAA8c+Mhcvbg4NgG+QDVJVmhcZBewz/fdSCV356Y/IAZyEiUDxaVbGIjw5BhIANzHTfFAAAALlE4s+u0bts4ug7sb/C9vkXGQO1</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -163,7 +154,7 @@
       DTS:refId="Package\Data Flow Task"
       DTS:CreationName="SSIS.Pipeline.3"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{EC02D3BF-AD10-41B9-B413-D709C996D078}"
+      DTS:DTSID="{6BA1DF1E-10BD-4754-9650-948A31E487B5}"
       DTS:ExecutableType="SSIS.Pipeline.3"
       DTS:LocaleID="-1"
       DTS:ObjectName="Data Flow Task"
@@ -194,8 +185,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task\Flat File Destination.Connections[FlatFileConnection]"
-                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
-                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                  connectionManagerID="Package.ConnectionManagers[TestFile]"
+                  connectionManagerRefId="Package.ConnectionManagers[TestFile]"
                   name="FlatFileConnection" />
               </connections>
               <inputs>
@@ -266,13 +257,6 @@
                       externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[EXCEPTIONALITY]"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EXCEPTIONALITY]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[PROCESS_NAME]"
-                      cachedDataType="wstr"
-                      cachedLength="30"
-                      cachedName="PROCESS_NAME"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PROCESS_NAME]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROCESS_NAME]" />
-                    <inputColumn
                       refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[GIFTED_STATUS]"
                       cachedCodepage="1252"
                       cachedDataType="str"
@@ -332,11 +316,6 @@
                       dataType="wstr"
                       length="5"
                       name="EXCEPTIONALITY" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PROCESS_NAME]"
-                      dataType="wstr"
-                      length="30"
-                      name="PROCESS_NAME" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GIFTED_STATUS]"
                       codePage="1252"
@@ -502,16 +481,6 @@ APS.BusinessSystemsSpedInfo</property>
                       name="EXCEPTIONALITY"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROCESS_NAME]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROCESS_NAME]"
-                      length="30"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROCESS_NAME]"
-                      name="PROCESS_NAME"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[GIFTED_STATUS]"
                       codePage="1252"
                       dataType="str"
@@ -577,11 +546,6 @@ APS.BusinessSystemsSpedInfo</property>
                       dataType="wstr"
                       length="5"
                       name="EXCEPTIONALITY" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROCESS_NAME]"
-                      dataType="wstr"
-                      length="30"
-                      name="PROCESS_NAME" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GIFTED_STATUS]"
                       codePage="1252"
@@ -651,12 +615,6 @@ APS.BusinessSystemsSpedInfo</property>
                       length="5"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EXCEPTIONALITY]"
                       name="EXCEPTIONALITY" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROCESS_NAME]"
-                      dataType="wstr"
-                      length="30"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROCESS_NAME]"
-                      name="PROCESS_NAME" />
                     <outputColumn
                       refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GIFTED_STATUS]"
                       codePage="1252"
@@ -729,21 +687,33 @@ APS.BusinessSystemsSpedInfo</property>
         <NodeLayout
           Size="172.8,41.6"
           Id="Package\Data Flow Task\Flat File Destination"
-          TopLeft="75.4285727131123,131.529413609356" />
+          TopLeft="81.7142871058717,124.800001750273" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
-          TopLeft="160.057144200072,72.1882357231061">
+          TopLeft="158.285715687032,72.1882357231061">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,59.3411778862502"
+              EndConnector="9.82857141884,52.6117660271668"
               Start="0,0"
-              End="0,51.8411778862502">
+              End="9.82857141884,45.1117660271668">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,51.8411778862502" />
+                    End="0,22.3058830135834" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.3058830135834"
+                    Point2="0,26.3058830135834"
+                    Point3="4,26.3058830135834" />
+                  <mssgle:LineSegment
+                    End="5.82857141884,26.3058830135834" />
+                  <mssgle:CubicBezierSegment
+                    Point1="5.82857141884,26.3058830135834"
+                    Point2="9.82857141884,26.3058830135834"
+                    Point3="9.82857141884,30.3058830135834" />
+                  <mssgle:LineSegment
+                    End="9.82857141884,45.1117660271668" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
