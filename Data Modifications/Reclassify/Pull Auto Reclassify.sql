@@ -116,7 +116,7 @@ WHERE
     AND [SSY].[STATUS] IS NULL
     AND [SSY].[EXCLUDE_ADA_ADM] IS NULL
     AND [SSY].[YEAR_GU]=(SELECT [YEAR_GU] FROM [rev].[REV_YEAR] WHERE SCHOOL_YEAR=2015 AND EXTENSION='R')
-    AND [School].[SCHOOL_CODE] NOT IN ('048','058','188','592','597','598','846','847','901','910')
+   AND [School].[SCHOOL_CODE] NOT IN ('048','058','188','592','597','598','846','847','901','910', '022', '611', '848')
 */
 
 /**********************************************************************************************************************************************	
@@ -318,7 +318,7 @@ WHERE
     AND [SSY].[STATUS] IS NULL
     AND [SSY].[EXCLUDE_ADA_ADM] IS NULL
     AND [SSY].[YEAR_GU]=(SELECT [YEAR_GU] FROM [rev].[REV_YEAR] WHERE SCHOOL_YEAR=2015 AND EXTENSION='R')
-    AND [School].[SCHOOL_CODE] NOT IN ('048','058','188','592','597','598','846','847','901','910')
+    AND [School].[SCHOOL_CODE] NOT IN ('048','058','188','592','597','598','846','847','901','910', '022', '611', '848')
     ) AS [Retained]
     ON
     [SSY].[STUDENT_SCHOOL_YEAR_GU]=[Retained].[STUDENT_SCHOOL_YEAR_GU]
@@ -606,7 +606,7 @@ WHERE
     AND [SSY].[EXCLUDE_ADA_ADM] IS NULL
     AND ISNULL([SSY].[YEAR_END_STATUS],'')!='G'
     AND [SSY].[YEAR_GU]=(SELECT [YEAR_GU] FROM [rev].[REV_YEAR] WHERE SCHOOL_YEAR=2015 AND EXTENSION='R')
-    AND [School].[SCHOOL_CODE] NOT IN ('048','058','188','517','592','597','598','846','847','901','910')
+    AND [School].[SCHOOL_CODE] NOT IN ('048','058','188','592','597','598','846','847','901','910', '022', '611', '848')
 ) AS [Retain]
 ON
 [SSY].[STUDENT_GU]=[Retain].[STUDENT_GU]
@@ -735,7 +735,7 @@ WHERE
     AND [SSY].[EXCLUDE_ADA_ADM] IS NULL
     AND ISNULL([SSY].[YEAR_END_STATUS],'')!='G'
     AND [SSY].[YEAR_GU]=(SELECT [YEAR_GU] FROM [rev].[REV_YEAR] WHERE SCHOOL_YEAR=2015 AND EXTENSION='R')
-    AND [School].[SCHOOL_CODE] NOT IN ('048','058','188','592','597','598','846','847','901','910')
+   AND [School].[SCHOOL_CODE] NOT IN ('048','058','188','592','597','598','846','847','901','910', '022', '611', '848')
 ) AS [Retain]
 
 WHERE

@@ -50,9 +50,7 @@ SELECT
       , per.LAST_NAME                             AS [Last_name]
       , per.MIDDLE_NAME                           AS [Middle_name]
       , per.FIRST_NAME                            AS [First_name]
-      , per.GENDER                                AS [Gender]
-      , CONVERT(VARCHAR(20), per.BIRTH_DATE, 101) AS [Dob]
-      , CASE
+           , CASE
 	       WHEN grd.VALUE_DESCRIPTION in ('P3', 'P4', '5C', '8C') THEN 'Prekindergarten'
 	       WHEN grd.VALUE_DESCRIPTION = 'K'                       THEN 'Kindergarten'
 	       WHEN grd.VALUE_DESCRIPTION in ('PG', 'Grad', '12+')    THEN 'Postgraduate'
@@ -66,7 +64,10 @@ SELECT
 		   WHEN grd.VALUE_DESCRIPTION = '08'                      THEN '8'
 		   WHEN grd.VALUE_DESCRIPTION = '09'                      THEN '9'
 		   ELSE grd.VALUE_DESCRIPTION
-		  END                                     AS [Grade]
+		  END                                     AS [Grade] 
+	, per.GENDER                                AS [Gender]
+      , CONVERT(VARCHAR(20), per.BIRTH_DATE, 101) AS [Dob]
+
       , CASE
 	        WHEN per.RESOLVED_ETHNICITY_RACE = '__HIS' THEN
 			     CASE
@@ -113,11 +114,19 @@ SELECT
           THEN 'Y' 
 		  ELSE 'N'
 	    END                                      AS [Iep_Status]
+
+
+	,adr.STREET_NAME							 AS [Student_street]
+	,adr.CITY									 AS [Student_city]
+	,adr.[STATE]								 AS [Student_state]
       , adr.ZIP_5                                AS [Student_Zip]
+	, per.EMAIL                                  AS [Student_email]
+	, par.Relation                               AS [Contact_relationship]
+	, 'family'									 AS [Contact_type]
       , par.ParentName                           AS [Contact_name]
-      , par.Relation                             AS [Contact_type]
+     
       , par.Phone                                AS [Contact_Phone]
-      , par.EMAIL                                AS [Contact_email]
+     , par.EMAIL                                 AS [Contact_email]
       , ''                                       AS [Username]
       , ''                                       AS [password]
 FROM  rev.EPC_STU                    stu
