@@ -1,7 +1,7 @@
 
 --ALTER VIEW [APS].[ST_MATH_ADMIN] AS 
-EXECUTE AS LOGIN='QueryFileUser'
-GO
+--EXECUTE AS LOGIN='QueryFileUser'
+--GO
 
 SELECT
 	[FILE].iid
@@ -9,8 +9,8 @@ SELECT
 	, STAFF.school
 	,district_teacher_id
 	,email
-	,[Last Name]
-	,[First Name]
+	,last_name
+	,first_name
 	,position
 	,access_level
 FROM
@@ -45,8 +45,8 @@ SELECT
 	END AS school
 	,STF.BADGE_NUM AS district_teacher_id
 	,PER.EMAIL AS 'email'
-	,PER.LAST_NAME AS 'Last Name'
-	,PER.FIRST_NAME AS 'First Name'
+	,PER.LAST_NAME AS 'last_name'
+	,PER.FIRST_NAME AS 'first_name'
 	,CASE WHEN STF.TYPE = 'TE' THEN 'teacher'
 	      ELSE 'program_coordinator'
 	END AS position
