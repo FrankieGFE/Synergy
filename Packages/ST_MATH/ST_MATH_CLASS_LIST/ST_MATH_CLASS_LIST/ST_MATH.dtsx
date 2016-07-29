@@ -1,0 +1,2206 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/20/2016 2:04:29 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="046-FRGARCIA"
+  DTS:CreatorName="APS\e138796"
+  DTS:DTSID="{A1398EB5-725D-4D2D-AC3E-8F4436BD125A}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5058.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ST_MATH"
+  DTS:PackageType="5"
+  DTS:VersionBuild="16"
+  DTS:VersionGUID="{3858F3FF-6A50-4DA3-9DBF-55680C608F47}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ST_ADMINS]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{913B9F4E-6ADE-4F28-A44C-82E8615E5E54}"
+      DTS:ObjectName="ST_ADMINS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis\files\Export\ST_MATH\admins.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="iid"
+              DTS:DTSID="{76293DC7-6F24-46D6-B718-AE32D1714A3D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="district_school"
+              DTS:DTSID="{76A4B74A-8BAF-4D7B-B2FE-29453EC40F93}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="school"
+              DTS:DTSID="{75DF2509-0975-4FA4-B523-57885856935F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="district_teacher_id"
+              DTS:DTSID="{944660DB-FB5E-48E9-BB7A-E037BC38E616}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="email"
+              DTS:DTSID="{D7E0EA75-674E-495B-84ED-B38CEAA9EA98}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Last Name"
+              DTS:DTSID="{0E9C1ECB-A513-4DF0-969F-3A9CF3D73609}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="First Name"
+              DTS:DTSID="{0A4D16B0-AC62-45E7-B5DD-BAD423409DFD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="19"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="position"
+              DTS:DTSID="{59360516-D172-4651-8921-0205F52C0B8A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="12"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="access_level"
+              DTS:DTSID="{249E04C7-92A9-4CCE-9343-009F57137536}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ST_MATH_CLASS_LIST]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="ST_MATH_CLASS_LIST"
+      DTS:DTSID="{862D78F8-D601-4CDF-A205-6FD0165C4CE3}"
+      DTS:ObjectName="ST_MATH_CLASS_LIST">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\files\Export\ST_MATH\students.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IID"
+              DTS:DTSID="{2C14FEA9-0FAC-4270-B639-ACEDE489977F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="distric_school_id"
+              DTS:DTSID="{325497BB-7528-45AF-8B1D-1CF7C0C946B8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="school"
+              DTS:DTSID="{2B45AD6C-ECFB-4EE4-B146-8B627DD93B57}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="district_teacher_id"
+              DTS:DTSID="{CC15130B-F727-463B-8CF0-93A72AEF03AB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="teacher_email"
+              DTS:DTSID="{B2252BBC-31D2-40CB-BB39-C97FB6DD5BDE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="teacher_last_name"
+              DTS:DTSID="{76D3CB2A-626C-435A-AEDD-9869F57CD6D0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="teacher_first_name"
+              DTS:DTSID="{BDB82278-3359-44AE-A848-5D750628C6A4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="grade"
+              DTS:DTSID="{F046AADE-B4C5-4E4A-84A5-CC24B1491E6F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="period"
+              DTS:DTSID="{59079EC6-4F9B-4C2A-B116-927066655184}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="curriculum"
+              DTS:DTSID="{1FF270E4-1AFA-4C78-BD93-B98CF154D20B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="student_id"
+              DTS:DTSID="{0F97CCB0-1689-4653-BF1D-29AC85CCD392}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4000"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="student_last_name"
+              DTS:DTSID="{DA0FDBBD-536B-4970-BE9B-76CD6261E612}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4000"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="student_first_name"
+              DTS:DTSID="{A7CEEDD9-DC7C-4B95-ADCD-FAB802F4B3BD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="21"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="student_username"
+              DTS:DTSID="{F4CE9AD7-1FE6-459C-9141-BDC8E15ACE42}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="12"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="student_password"
+              DTS:DTSID="{2CBF45A1-1186-45F1-9B7C-3A40DA6F51BF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="permanent_login"
+              DTS:DTSID="{555B6119-96B3-4830-BA84-D1737997DCFF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="birthdate"
+              DTS:DTSID="{9E4E995E-6EF7-4272-A3EE-9DD2841EFB1A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="mss"
+              DTS:DTSID="{CA3A7333-7DBB-44A0-BDF9-B241E07C9D38}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="action"
+              DTS:DTSID="{7CE4F596-4A32-47C0-A5CD-E5EB887570CB}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[synergydbdc.aps.edu.actd.ST_Production.queryfileuser]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{913F5BE7-DCFD-4ACE-9A70-8DC0196297BB}"
+      DTS:ObjectName="synergydbdc.aps.edu.actd.ST_Production.queryfileuser">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=queryfileuser;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACqpmQPbQGJA/USxPDWTSWUAAAAAASAAACgAAAAEAAAADK+V2vQVn8+PuT3iV33650wAAAAxYm8fJXD+A/GHB435Pw8eZ+9A3i77hAAEYWhOhrTQyDUr2r1ObYLDMPCvLfhJTs8FAAAAOLA+Tp1kUrqnSrN9x3zZ8T4svxk</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[synergydbdc.ST_Production.apsexport]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{337805A1-A124-4DB3-8818-ACB4EF7EE734}"
+      DTS:ObjectName="synergydbdc.ST_Production.apsexport">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=synergydbdc;User ID=apsexport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABxjZ3OP9h9UVQqlpSMJvmjAAAAAASAAACgAAAAEAAAACwmbX/Xc9s+1wFyM+FS204wAAAA7M234p3w05JcbxwAEZBubGeFxV5cKm/trPcp+Qs8ovxwZnRglePkfXXqF8zHmLwiFAAAAAVdb2V3pGIADBq5GXuL+/5ZNugR</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\ST_MATH_ADMIN"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{6BEBDE65-E2D9-4320-ACAA-3D708A879617}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ST_MATH_ADMIN"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\ST_MATH_ADMIN\admins"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="admins">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ST_MATH_ADMIN\admins.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ST_ADMINS]"
+                  connectionManagerRefId="Package.ConnectionManagers[ST_ADMINS]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].Columns[iid]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="iid"
+                      externalMetadataColumnId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].ExternalColumns[iid]"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[iid]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].Columns[district_school]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="district_school"
+                      externalMetadataColumnId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].ExternalColumns[district_school]"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[district_school]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].Columns[school]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="school"
+                      externalMetadataColumnId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].ExternalColumns[school]"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[school]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].Columns[district_teacher_id]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="district_teacher_id"
+                      externalMetadataColumnId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].ExternalColumns[district_teacher_id]"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[district_teacher_id]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].Columns[email]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="email"
+                      externalMetadataColumnId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].ExternalColumns[email]"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[email]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].Columns[Last Name]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Last Name"
+                      externalMetadataColumnId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].ExternalColumns[Last Name]"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[Last Name]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].Columns[First Name]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="First Name"
+                      externalMetadataColumnId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].ExternalColumns[First Name]"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[First Name]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].Columns[position]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="19"
+                      cachedName="position"
+                      externalMetadataColumnId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].ExternalColumns[position]"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[position]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].Columns[access_level]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="access_level"
+                      externalMetadataColumnId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].ExternalColumns[access_level]"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[access_level]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].ExternalColumns[iid]"
+                      dataType="wstr"
+                      length="255"
+                      name="iid" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].ExternalColumns[district_school]"
+                      dataType="wstr"
+                      length="20"
+                      name="district_school" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].ExternalColumns[school]"
+                      dataType="wstr"
+                      length="100"
+                      name="school" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].ExternalColumns[district_teacher_id]"
+                      dataType="wstr"
+                      length="10"
+                      name="district_teacher_id" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].ExternalColumns[email]"
+                      dataType="wstr"
+                      length="100"
+                      name="email" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].ExternalColumns[Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].ExternalColumns[First Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="First Name" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].ExternalColumns[position]"
+                      codePage="1252"
+                      dataType="str"
+                      length="19"
+                      name="position" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input].ExternalColumns[access_level]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="access_level" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="ST_MATH_ADMINS"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--ALTER VIEW [APS].[ST_MATH_ADMIN] AS 
+--EXECUTE AS LOGIN='QueryFileUser'
+--GO
+
+SELECT
+	[FILE].iid
+	,district_school
+	, STAFF.school
+	,district_teacher_id
+	,email
+	,[Last Name]
+	,[First Name]
+	,position
+	,access_level
+FROM
+(
+SELECT
+    distinct
+	'' AS iid
+	,SCH.SCHOOL_CODE AS district_school
+	,CASE WHEN ORG.ORGANIZATION_NAME = 'Reginald Chavez Elementary School' THEN 'REGINALD CHAVEZ ELEM SCHOOL' 
+	      WHEN ORG.ORGANIZATION_NAME = 'A. Montoya Elementary School' THEN 'A MONTOYA ELEMENTARY SCHOOL'
+		  WHEN ORG.ORGANIZATION_NAME = 'Arroyo Del Oso Elementary School' THEN 'ARROYO DEL OSO ELEM SCHOOL'
+		  WHEN ORG.ORGANIZATION_NAME = 'Dolores Gonzales Elementary School' THEN 'DOLORES GONZALES ELEM SCHOOL'
+		  WHEN ORG.ORGANIZATION_NAME = 'East San Jose Elementary School' THEN 'EAST SAN JOSE ELEMENTARY SCH'
+		  WHEN ORG.ORGANIZATION_NAME = 'Edmund G. Ross Elementary School' THEN 'EDMUND G ROSS ELEM SCHOOL'
+		  WHEN ORG.ORGANIZATION_NAME = 'Edward Gonzales Elementary School' THEN 'EDWARD GONZALES ELEM SCHOOL'
+		  WHEN ORG.ORGANIZATION_NAME = 'George I. Sanchez Collaborative Community School' THEN 'GEORGE I SANCHEZ CMTY SCHOOL'
+		  WHEN ORG.ORGANIZATION_NAME = 'Governor Bent Elementary School' THEN 'GOVERNOR BENT ELEM SCHOOL'
+		  WHEN ORG.ORGANIZATION_NAME = 'Helen Cordero Elementary School' THEN 'HELEN CORDERO PRIMARY SCHOOL'
+		  WHEN ORG.ORGANIZATION_NAME = 'Janet Kahn Fine Arts Academy a.k.a Eubank Elementary School' THEN 'EUBANK ELEMENTARY SCHOOL'
+		  WHEN ORG.ORGANIZATION_NAME = 'Marie M. Hughes Elementary School' THEN 'MARIE M HUGHES ELEM SCHOOL'
+		  WHEN ORG.ORGANIZATION_NAME = 'Mary Ann Binford Elementary School' THEN 'MARY ANN BINFORD ELEM SCHOOL'
+		  WHEN ORG.ORGANIZATION_NAME = 'Matheson Park Elementary School' THEN 'MATHESON PARK ELEM SCHOOL'
+		  WHEN ORG.ORGANIZATION_NAME = 'Mission Avenue Elementary School' THEN 'MISSION AVE ELEMENTARY SCHOOL'
+		  WHEN ORG.ORGANIZATION_NAME = 'Mountain View Elementary School' THEN 'MOUNTAIN VIEW ELEM SCHOOL'
+		  WHEN ORG.ORGANIZATION_NAME = 'Rudolfo Anaya Elementary School' THEN 'RUDOLFO ANAYA ELEMENTARY SCH'
+		  WHEN ORG.ORGANIZATION_NAME = 'School On Wheels High School' THEN 'SCHOOL ON WHEELS'
+		  WHEN ORG.ORGANIZATION_NAME = 'Sombra Del Monte Elementary School' THEN 'SOMBRA DEL MONTE ELEM SCHOOL'
+		  WHEN ORG.ORGANIZATION_NAME = 'Susie Rayos Marmon Elementary School' THEN 'SUSIE RAYOS MARMON ELEM SCHOOL'
+		  WHEN ORG.ORGANIZATION_NAME = '' THEN ''
+		  WHEN ORG.ORGANIZATION_NAME = '' THEN ''
+	ELSE ORG.ORGANIZATION_NAME
+	END AS school
+	,STF.BADGE_NUM AS district_teacher_id
+	,PER.EMAIL AS 'email'
+	,PER.LAST_NAME AS 'Last Name'
+	,PER.FIRST_NAME AS 'First Name'
+	,CASE WHEN STF.TYPE = 'TE' THEN 'teacher'
+	      ELSE 'program_coordinator'
+	END AS position
+	,CASE WHEN STF.TYPE = 'TE' THEN 'class_level'
+	      ELSE 'school_level'
+	END AS access_level
+	
+FROM
+	REV.EPC_STAFF AS STF
+	JOIN
+	REV.EPC_STAFF_SCH_YR SYR
+	ON SYR.STAFF_GU = STF.STAFF_GU
+	JOIN
+	REV.REV_ORGANIZATION_YEAR OYR 
+	ON OYR.ORGANIZATION_YEAR_GU = SYR.ORGANIZATION_YEAR_GU
+	JOIN
+	REV.REV_YEAR AS YR
+	ON YR.YEAR_GU = OYR.YEAR_GU
+	JOIN
+	REV.REV_ORGANIZATION AS ORG 
+	ON ORG.ORGANIZATION_GU = OYR.ORGANIZATION_GU
+	JOIN
+	REV.EPC_SCH AS SCH
+	ON SCH.ORGANIZATION_GU = OYR.ORGANIZATION_GU
+	JOIN
+	REV.REV_PERSON AS PER
+	ON PER.PERSON_GU = STF.STAFF_GU
+
+WHERE 1 = 1
+AND STF.TYPE IN ('TE','SSS','SA')
+--AND LAST_NAME = 'ST JOHN'
+AND YR.SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
+AND (PER.FIRST_NAME NOT IN ('TEACHER','PLACEMENT','Spedpre','SECTION') AND PER.FIRST_NAME NOT LIKE 'Staff%')
+AND YR.EXTENSION = 'R'
+--AND SCH.SCHOOL_CODE = '329'
+) AS STAFF
+
+
+		INNER JOIN
+		OPENROWSET (
+			'Microsoft.ACE.OLEDB.12.0', 
+			'Text;Database=\\SynTempSSIS\Files\TempQuery\;', 
+			'SELECT * FROM admins_8_early_start_schools.csv'  
+		)AS [FILE]
+		ON [FILE].SCHOOL = STAFF.school
+
+WHERE [FILE].IID IS NOT NULL
+--and [Last Name] like '%,%'
+--ORDER BY [E-Mail]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[synergydbdc.aps.edu.actd.ST_Production.queryfileuser]"
+                  connectionManagerRefId="Package.ConnectionManagers[synergydbdc.aps.edu.actd.ST_Production.queryfileuser]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[iid]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].ExternalColumns[iid]"
+                      length="255"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[iid]"
+                      name="iid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[district_school]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].ExternalColumns[district_school]"
+                      length="20"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[district_school]"
+                      name="district_school"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[school]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].ExternalColumns[school]"
+                      length="100"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[school]"
+                      name="school"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[district_teacher_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].ExternalColumns[district_teacher_id]"
+                      length="10"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[district_teacher_id]"
+                      name="district_teacher_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[email]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].ExternalColumns[email]"
+                      length="100"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[email]"
+                      name="email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[Last Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].ExternalColumns[Last Name]"
+                      length="60"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[Last Name]"
+                      name="Last Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[First Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].ExternalColumns[First Name]"
+                      length="60"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[First Name]"
+                      name="First Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[position]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].ExternalColumns[position]"
+                      length="19"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[position]"
+                      name="position"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[access_level]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].ExternalColumns[access_level]"
+                      length="12"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].Columns[access_level]"
+                      name="access_level"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].ExternalColumns[iid]"
+                      dataType="wstr"
+                      length="255"
+                      name="iid" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].ExternalColumns[district_school]"
+                      dataType="wstr"
+                      length="20"
+                      name="district_school" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].ExternalColumns[school]"
+                      dataType="wstr"
+                      length="100"
+                      name="school" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].ExternalColumns[district_teacher_id]"
+                      dataType="wstr"
+                      length="10"
+                      name="district_teacher_id" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].ExternalColumns[email]"
+                      dataType="wstr"
+                      length="100"
+                      name="email" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].ExternalColumns[Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].ExternalColumns[First Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="First Name" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].ExternalColumns[position]"
+                      codePage="1252"
+                      dataType="str"
+                      length="19"
+                      name="position" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output].ExternalColumns[access_level]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="access_level" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[iid]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[iid]"
+                      name="iid" />
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[district_school]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[district_school]"
+                      name="district_school" />
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[school]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[school]"
+                      name="school" />
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[district_teacher_id]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[district_teacher_id]"
+                      name="district_teacher_id" />
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[email]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[email]"
+                      name="email" />
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[Last Name]"
+                      name="Last Name" />
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[First Name]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[First Name]"
+                      name="First Name" />
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[position]"
+                      codePage="1252"
+                      dataType="str"
+                      length="19"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[position]"
+                      name="position" />
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[access_level]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[access_level]"
+                      name="access_level" />
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\ST_MATH_ADMIN.Paths[OLE DB Source Output]"
+              endId="Package\ST_MATH_ADMIN\admins.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\ST_MATH_ADMIN\ST_MATH_ADMINS.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ST_MATH_CLASS_LIST"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{E58F8F54-4745-4F6F-8BD1-076765E1D822}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ST_MATH_CLASS_LIST"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="ST MATH STUDENTS"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--EXECUTE AS LOGIN='QueryFileUser'
+--GO
+
+SELECT
+	[FILE].IID
+	,distric_school_id
+	,EST.school
+	,district_teacher_id
+	,teacher_email
+	,teacher_last_name
+	,teacher_first_name
+	,grade
+	,period
+	,curriculum
+	,student_id
+	,student_last_name
+	,student_first_name
+	,student_username
+	,student_password
+	,permanent_login
+	,birthdate
+	,mss
+	,[action]
+FROM
+(
+SELECT 
+	--ENR.SCHOOL_CODE AS campus_id
+	'' AS iid
+	,ENR.SCHOOL_CODE AS distric_school_id
+	,CASE WHEN ENR.SCHOOL_NAME = 'Reginald Chavez Elementary School' THEN 'REGINALD CHAVEZ ELEM SCHOOL' 
+	      WHEN ENR.SCHOOL_NAME = 'A. Montoya Elementary School' THEN 'A MONTOYA ELEMENTARY SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Arroyo Del Oso Elementary School' THEN 'ARROYO DEL OSO ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Dolores Gonzales Elementary School' THEN 'DOLORES GONZALES ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'East San Jose Elementary School' THEN 'EAST SAN JOSE ELEMENTARY SCH'
+		  WHEN ENR.SCHOOL_NAME = 'Edmund G. Ross Elementary School' THEN 'EDMUND G ROSS ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Edward Gonzales Elementary School' THEN 'EDWARD GONZALES ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'George I. Sanchez Collaborative Community School' THEN 'GEORGE I SANCHEZ CMTY SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Governor Bent Elementary School' THEN 'GOVERNOR BENT ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Helen Cordero Elementary School' THEN 'HELEN CORDERO PRIMARY SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Janet Kahn Fine Arts Academy a.k.a Eubank Elementary School' THEN 'EUBANK ELEMENTARY SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Marie M. Hughes Elementary School' THEN 'MARIE M HUGHES ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Mary Ann Binford Elementary School' THEN 'MARY ANN BINFORD ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Matheson Park Elementary School' THEN 'MATHESON PARK ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Mission Avenue Elementary School' THEN 'MISSION AVE ELEMENTARY SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Mountain View Elementary School' THEN 'MOUNTAIN VIEW ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Rudolfo Anaya Elementary School' THEN 'RUDOLFO ANAYA ELEMENTARY SCH'
+		  WHEN ENR.SCHOOL_NAME = 'School On Wheels High School' THEN 'SCHOOL ON WHEELS'
+		  WHEN ENR.SCHOOL_NAME = 'Sombra Del Monte Elementary School' THEN 'SOMBRA DEL MONTE ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Susie Rayos Marmon Elementary School' THEN 'SUSIE RAYOS MARMON ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = '' THEN ''
+		  WHEN ENR.SCHOOL_NAME = '' THEN ''
+	ELSE ENR.SCHOOL_NAME
+	END AS school
+	,TCH.EMP_ID AS district_teacher_id
+	,TCH.EMAIL AS teacher_email
+	,TCH.LAST_NAME AS teacher_last_name
+	,TCH.FIRST_NAME AS teacher_first_name
+	,GRADE AS grade
+	,'' AS period
+	,'' AS curriculum
+	,ENR.SIS_NUMBER AS student_id
+	,REPLACE (PER.LAST_NAME,',','') AS student_last_name
+	,REPLACE (PER.FIRST_NAME, ',','') AS student_first_name
+	,LEFT(PER.LAST_NAME,1) + ENR.SIS_NUMBER AS student_username
+	,'#student1aps' AS student_password
+	,'' AS permanent_login
+	,CONVERT(VARCHAR, BS.BIRTH_DATE, 101) AS birthdate
+	,'' AS mss
+	,'' AS [action]
+
+FROM
+	APS.StudentEnrollmentDetails AS ENR
+	LEFT JOIN
+	rev.EPC_STU AS STU
+	ON ENR.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN
+	rev.REV_PERSON AS PER
+	ON PER.PERSON_GU = STU.STUDENT_GU
+
+	LEFT JOIN
+	APS.BasicStudentWithMoreInfo AS BS
+	ON BS.SIS_NUMBER = ENR.SIS_NUMBER
+
+	LEFT JOIN
+	APS.ScheduleAsOf (GETDATE()) AS SCH  --- Change to getdate when school starts
+	ON SCH.SIS_NUMBER = ENR.SIS_NUMBER
+
+		INNER JOIN 
+			(
+			SELECT  
+			SCH.SIS_NUMBER
+			,SCH.COURSE_ID
+			,SCH.COURSE_TITLE 
+			,SCH.PERIOD_BEGIN
+			,SCH.PERIOD_END
+			,SCH.YEAR_GU
+			,SCH.PRIMARY_STAFF
+			,YR.SCHOOL_YEAR
+			,PER.FIRST_NAME
+			,PER.LAST_NAME
+			,ST.BADGE_NUM
+			,PER.EMAIL
+			,CAST(replace(lower(st.BADGE_NUM), 'e', '')AS INT) AS EMP_ID
+	
+			FROM 
+			APS.ScheduleDetailsAsOf (GETDATE()) AS SCH --- Change to getdate in August
+
+			LEFT JOIN
+			REV.REV_YEAR AS YR
+			ON YR.YEAR_GU = SCH.YEAR_GU
+
+			LEFT JOIN
+			REV.REV_PERSON AS PER
+			ON SCH.STAFF_GU = PER.PERSON_GU
+
+			LEFT JOIN 
+			REV.EPC_STAFF AS ST
+			ON PER.PERSON_GU = ST.STAFF_GU
+			WHERE 1 = 1
+			AND SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
+			AND EXTENSION = 'R'
+			AND PERIOD_BEGIN = 1
+			AND PRIMARY_STAFF = 1
+			AND PER.LAST_NAME NOT LIKE 'TBA%'
+			) AS TCH
+		
+		ON
+		STU.SIS_NUMBER = TCH.SIS_NUMBER
+
+
+WHERE 
+	1 = 1
+	AND ENR.SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
+	AND EXTENSION = 'R'
+	AND GRADE IN ('PK','K','01','02','03','04','05')
+	AND ENR.LEAVE_DATE IS NULL
+	AND ENR.EXCLUDE_ADA_ADM IS NULL
+	AND ENR.SUMMER_WITHDRAWL_CODE IS NULL
+	--AND TCH.EMP_ID = '70652'
+) AS EST
+
+		INNER JOIN
+		OPENROWSET (
+			'Microsoft.ACE.OLEDB.12.0', 
+			'Text;Database=\\SynTempSSIS\Files\TempQuery\;', 
+			'SELECT * FROM admins_8_early_start_schools.csv'  
+		)AS [FILE]
+		ON [FILE].SCHOOL = EST.school
+
+WHERE EST.IID IS NOT NULL
+--ORDER BY grade
+
+UNION
+
+
+
+SELECT
+	[FILE].IID
+	,distric_school_id
+	,ST.school
+	,district_teacher_id
+	,teacher_email
+	,teacher_first_name
+	,teacher_last_name
+	,grade
+	,period
+	,curriculum
+	,student_id
+	,student_last_name
+	,student_first_name
+	,student_username
+	,student_password
+	,permanent_login
+	,birthdate
+	,mss
+	,[action]
+FROM
+(
+
+SELECT 
+	DISTINCT
+	ROW_NUMBER () OVER (PARTITION BY ENR.SIS_NUMBER ORDER BY ENR.SIS_NUMBER DESC) AS RN
+	,'' AS iid
+	,ENR.SCHOOL_CODE AS distric_school_id
+	,CASE WHEN ENR.SCHOOL_NAME = 'Reginald Chavez Elementary School' THEN 'REGINALD CHAVEZ ELEM SCHOOL' 
+	      WHEN ENR.SCHOOL_NAME = 'A. Montoya Elementary School' THEN 'A MONTOYA ELEMENTARY SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Arroyo Del Oso Elementary School' THEN 'ARROYO DEL OSO ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Dolores Gonzales Elementary School' THEN 'DOLORES GONZALES ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'East San Jose Elementary School' THEN 'EAST SAN JOSE ELEMENTARY SCH'
+		  WHEN ENR.SCHOOL_NAME = 'Edmund G. Ross Elementary School' THEN 'EDMUND G ROSS ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Edward Gonzales Elementary School' THEN 'EDWARD GONZALES ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'George I. Sanchez Collaborative Community School' THEN 'GEORGE I SANCHEZ CMTY SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Governor Bent Elementary School' THEN 'GOVERNOR BENT ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Helen Cordero Elementary School' THEN 'HELEN CORDERO PRIMARY SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Janet Kahn Fine Arts Academy a.k.a Eubank Elementary School' THEN 'EUBANK ELEMENTARY SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Marie M. Hughes Elementary School' THEN 'MARIE M HUGHES ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Mary Ann Binford Elementary School' THEN 'MARY ANN BINFORD ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Matheson Park Elementary School' THEN 'MATHESON PARK ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Mission Avenue Elementary School' THEN 'MISSION AVE ELEMENTARY SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Mountain View Elementary School' THEN 'MOUNTAIN VIEW ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Rudolfo Anaya Elementary School' THEN 'RUDOLFO ANAYA ELEMENTARY SCH'
+		  WHEN ENR.SCHOOL_NAME = 'School On Wheels High School' THEN 'SCHOOL ON WHEELS'
+		  WHEN ENR.SCHOOL_NAME = 'Sombra Del Monte Elementary School' THEN 'SOMBRA DEL MONTE ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = 'Susie Rayos Marmon Elementary School' THEN 'SUSIE RAYOS MARMON ELEM SCHOOL'
+		  WHEN ENR.SCHOOL_NAME = '' THEN ''
+		  WHEN ENR.SCHOOL_NAME = '' THEN ''
+	ELSE ENR.SCHOOL_NAME
+	END AS school
+	,TCH.EMP_ID AS district_teacher_id
+	,TCH.EMAIL AS teacher_email
+	,TCH.LAST_NAME AS teacher_last_name
+	,TCH.FIRST_NAME AS teacher_first_name
+	,GRADE AS grade
+	,'' AS period
+	,'' AS curriculum
+	,ENR.SIS_NUMBER AS student_id
+	,REPLACE (PER.LAST_NAME,',','') AS student_last_name
+	,REPLACE (PER.FIRST_NAME, ',','') AS student_first_name
+	,ENR.SIS_NUMBER AS student_username
+	,'#student1aps' AS student_password
+	,'' AS permanent_login
+	,CONVERT(VARCHAR, BS.BIRTH_DATE, 101) AS birthdate
+	,'' AS mss
+	,'' AS [action]
+
+	,TCH.DEPARTMENT
+	,TCH.PRIMARY_STAFF
+	,TCH.PERIOD_BEGIN
+
+FROM
+	APS.StudentEnrollmentDetails AS ENR
+	LEFT JOIN
+	rev.EPC_STU AS STU
+	ON ENR.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN
+	rev.REV_PERSON AS PER
+	ON PER.PERSON_GU = STU.STUDENT_GU
+
+	LEFT JOIN
+	APS.BasicStudentWithMoreInfo AS BS
+	ON BS.SIS_NUMBER = ENR.SIS_NUMBER
+
+	LEFT JOIN
+	APS.ScheduleAsOf (GETDATE()) AS SCH  --- Change to getdate when school starts
+	ON SCH.SIS_NUMBER = ENR.SIS_NUMBER
+
+		INNER JOIN 
+			(
+			SELECT  
+			SCH.SIS_NUMBER
+			,SCH.COURSE_ID
+			,SCH.COURSE_TITLE 
+			,SCH.PERIOD_BEGIN
+			,SCH.PERIOD_END
+			,SCH.YEAR_GU
+			,SCH.PRIMARY_STAFF
+			,YR.SCHOOL_YEAR
+			,PER.FIRST_NAME
+			,PER.LAST_NAME
+			,ST.BADGE_NUM
+			,PER.EMAIL
+			,SCH.DEPARTMENT
+			,CAST(replace(lower(st.BADGE_NUM), 'e', '')AS VARCHAR(9)) AS EMP_ID
+	
+			FROM 
+			APS.ScheduleDetailsAsOf (GETDATE()) AS SCH --- Change to getdate in August
+
+			LEFT JOIN
+			REV.REV_YEAR AS YR
+			ON YR.YEAR_GU = SCH.YEAR_GU
+
+			LEFT JOIN
+			REV.REV_PERSON AS PER
+			ON SCH.STAFF_GU = PER.PERSON_GU
+
+			LEFT JOIN 
+			REV.EPC_STAFF AS ST
+			ON PER.PERSON_GU = ST.STAFF_GU
+			WHERE 1 = 1
+			AND SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
+			AND DEPARTMENT = 'MATH'
+			--AND PERIOD_BEGIN = 1
+			AND PRIMARY_STAFF = 1
+			) AS TCH
+		
+		ON
+		STU.SIS_NUMBER = TCH.SIS_NUMBER
+		
+WHERE 
+	1 = 1
+	AND ENR.SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
+	AND EXTENSION = 'R'
+	AND ENR.LEAVE_DATE IS NULL
+	AND ENR.EXCLUDE_ADA_ADM IS NULL
+	AND ENR.SUMMER_WITHDRAWL_CODE IS NULL
+	--AND TCH.BADGE_NUM NOT LIKE 'SPDPR%'
+	--AND TCH.EMP_ID = '203050'
+) AS ST
+
+		INNER JOIN
+		OPENROWSET (
+			'Microsoft.ACE.OLEDB.12.0', 
+			'Text;Database=\\SynTempSSIS\Files\TempQuery\;', 
+			'SELECT * FROM admins_8_early_start_schools.csv'  
+		)AS [FILE]
+		ON [FILE].SCHOOL = ST.school
+
+WHERE 1 = 1
+AND RN = 1
+AND ST.iid IS NOT NULL
+ORDER BY IID, school
+
+--REVERT
+--GO</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[synergydbdc.aps.edu.actd.ST_Production.queryfileuser]"
+                  connectionManagerRefId="Package.ConnectionManagers[synergydbdc.aps.edu.actd.ST_Production.queryfileuser]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[IID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[IID]"
+                      length="255"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[IID]"
+                      name="IID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[distric_school_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[distric_school_id]"
+                      length="20"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[distric_school_id]"
+                      name="distric_school_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[school]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[school]"
+                      length="100"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[school]"
+                      name="school"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[district_teacher_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[district_teacher_id]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[district_teacher_id]"
+                      name="district_teacher_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[teacher_email]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[teacher_email]"
+                      length="100"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[teacher_email]"
+                      name="teacher_email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[teacher_last_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[teacher_last_name]"
+                      length="60"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[teacher_last_name]"
+                      name="teacher_last_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[teacher_first_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[teacher_first_name]"
+                      length="60"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[teacher_first_name]"
+                      name="teacher_first_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[grade]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[grade]"
+                      length="600"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[grade]"
+                      name="grade"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[period]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[period]"
+                      length="1"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[period]"
+                      name="period"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[curriculum]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[curriculum]"
+                      length="1"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[curriculum]"
+                      name="curriculum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[student_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[student_id]"
+                      length="20"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[student_id]"
+                      name="student_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[student_last_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[student_last_name]"
+                      length="4000"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[student_last_name]"
+                      name="student_last_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[student_first_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[student_first_name]"
+                      length="4000"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[student_first_name]"
+                      name="student_first_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[student_username]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[student_username]"
+                      length="21"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[student_username]"
+                      name="student_username"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[student_password]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[student_password]"
+                      length="12"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[student_password]"
+                      name="student_password"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[permanent_login]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[permanent_login]"
+                      length="1"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[permanent_login]"
+                      name="permanent_login"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[birthdate]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[birthdate]"
+                      length="30"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[birthdate]"
+                      name="birthdate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[mss]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[mss]"
+                      length="1"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[mss]"
+                      name="mss"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[action]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[action]"
+                      length="1"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[action]"
+                      name="action"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[IID]"
+                      dataType="wstr"
+                      length="255"
+                      name="IID" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[distric_school_id]"
+                      dataType="wstr"
+                      length="20"
+                      name="distric_school_id" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[school]"
+                      dataType="wstr"
+                      length="100"
+                      name="school" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[district_teacher_id]"
+                      dataType="i4"
+                      name="district_teacher_id" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[teacher_email]"
+                      dataType="wstr"
+                      length="100"
+                      name="teacher_email" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[teacher_last_name]"
+                      dataType="wstr"
+                      length="60"
+                      name="teacher_last_name" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[teacher_first_name]"
+                      dataType="wstr"
+                      length="60"
+                      name="teacher_first_name" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[grade]"
+                      dataType="wstr"
+                      length="600"
+                      name="grade" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[period]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="period" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[curriculum]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="curriculum" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[student_id]"
+                      dataType="wstr"
+                      length="20"
+                      name="student_id" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[student_last_name]"
+                      dataType="wstr"
+                      length="4000"
+                      name="student_last_name" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[student_first_name]"
+                      dataType="wstr"
+                      length="4000"
+                      name="student_first_name" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[student_username]"
+                      dataType="wstr"
+                      length="21"
+                      name="student_username" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[student_password]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="student_password" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[permanent_login]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="permanent_login" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[birthdate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="birthdate" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[mss]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="mss" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[action]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="action" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[IID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[IID]"
+                      name="IID" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[distric_school_id]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[distric_school_id]"
+                      name="distric_school_id" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[school]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[school]"
+                      name="school" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[district_teacher_id]"
+                      dataType="i4"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[district_teacher_id]"
+                      name="district_teacher_id" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[teacher_email]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[teacher_email]"
+                      name="teacher_email" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[teacher_last_name]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[teacher_last_name]"
+                      name="teacher_last_name" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[teacher_first_name]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[teacher_first_name]"
+                      name="teacher_first_name" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[grade]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[grade]"
+                      name="grade" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[period]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[period]"
+                      name="period" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[curriculum]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[curriculum]"
+                      name="curriculum" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[student_id]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[student_id]"
+                      name="student_id" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[student_last_name]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[student_last_name]"
+                      name="student_last_name" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[student_first_name]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[student_first_name]"
+                      name="student_first_name" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[student_username]"
+                      dataType="wstr"
+                      length="21"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[student_username]"
+                      name="student_username" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[student_password]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[student_password]"
+                      name="student_password" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[permanent_login]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[permanent_login]"
+                      name="permanent_login" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[birthdate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[birthdate]"
+                      name="birthdate" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[mss]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[mss]"
+                      name="mss" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[action]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[action]"
+                      name="action" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ST_MATH_CLASS_LIST\STUDENTS"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="STUDENTS">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ST_MATH_CLASS_LIST]"
+                  connectionManagerRefId="Package.ConnectionManagers[ST_MATH_CLASS_LIST]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[IID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="IID"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[IID]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[IID]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[distric_school_id]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="distric_school_id"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[distric_school_id]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[distric_school_id]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[school]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="school"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[school]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[school]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[district_teacher_id]"
+                      cachedDataType="i4"
+                      cachedName="district_teacher_id"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[district_teacher_id]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[district_teacher_id]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[teacher_email]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="teacher_email"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[teacher_email]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[teacher_email]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[teacher_last_name]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="teacher_last_name"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[teacher_last_name]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[teacher_last_name]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[teacher_first_name]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="teacher_first_name"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[teacher_first_name]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[teacher_first_name]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[grade]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="grade"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[grade]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[grade]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[period]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="period"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[period]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[period]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[curriculum]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="curriculum"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[curriculum]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[curriculum]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[student_id]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="student_id"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[student_id]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[student_id]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[student_last_name]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="student_last_name"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[student_last_name]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[student_last_name]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[student_first_name]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="student_first_name"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[student_first_name]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[student_first_name]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[student_username]"
+                      cachedDataType="wstr"
+                      cachedLength="21"
+                      cachedName="student_username"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[student_username]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[student_username]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[student_password]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="student_password"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[student_password]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[student_password]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[permanent_login]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="permanent_login"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[permanent_login]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[permanent_login]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[birthdate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="birthdate"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[birthdate]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[birthdate]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[mss]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="mss"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[mss]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[mss]" />
+                    <inputColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].Columns[action]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="action"
+                      externalMetadataColumnId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[action]"
+                      lineageId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output].Columns[action]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[IID]"
+                      dataType="wstr"
+                      length="255"
+                      name="IID" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[distric_school_id]"
+                      dataType="wstr"
+                      length="20"
+                      name="distric_school_id" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[school]"
+                      dataType="wstr"
+                      length="100"
+                      name="school" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[district_teacher_id]"
+                      dataType="i4"
+                      name="district_teacher_id" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[teacher_email]"
+                      dataType="wstr"
+                      length="100"
+                      name="teacher_email" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[teacher_last_name]"
+                      dataType="wstr"
+                      length="60"
+                      name="teacher_last_name" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[teacher_first_name]"
+                      dataType="wstr"
+                      length="60"
+                      name="teacher_first_name" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[grade]"
+                      dataType="wstr"
+                      length="600"
+                      name="grade" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[period]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="period" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[curriculum]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="curriculum" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[student_id]"
+                      dataType="wstr"
+                      length="20"
+                      name="student_id" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[student_last_name]"
+                      dataType="wstr"
+                      length="4000"
+                      name="student_last_name" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[student_first_name]"
+                      dataType="wstr"
+                      length="4000"
+                      name="student_first_name" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[student_username]"
+                      dataType="wstr"
+                      length="21"
+                      name="student_username" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[student_password]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="student_password" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[permanent_login]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="permanent_login" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[birthdate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="birthdate" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[mss]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="mss" />
+                    <externalMetadataColumn
+                      refId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input].ExternalColumns[action]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="action" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\ST_MATH_CLASS_LIST.Paths[OLE DB Source Output]"
+              endId="Package\ST_MATH_CLASS_LIST\STUDENTS.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{598C9FC9-3C5F-4B70-9C93-EB5143A7FCB1}"
+      DTS:From="Package\ST_MATH_CLASS_LIST"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\ST_MATH_ADMIN" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\ST_MATH_ADMIN"
+          TopLeft="52.5714294667147,102.776472029636" />
+        <NodeLayout
+          Size="188.8,41.6"
+          Id="Package\ST_MATH_CLASS_LIST"
+          TopLeft="5.5,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="99.9,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="35.0714294667147,55.6764720296365"
+              Start="0,0"
+              End="35.0714294667147,48.1764720296365">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.8382360148182" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.8382360148182"
+                    Point2="0,27.8382360148182"
+                    Point3="4,27.8382360148182" />
+                  <mssgle:LineSegment
+                    End="31.0714294667147,27.8382360148182" />
+                  <mssgle:CubicBezierSegment
+                    Point1="31.0714294667147,27.8382360148182"
+                    Point2="35.0714294667147,27.8382360148182"
+                    Point3="35.0714294667147,31.8382360148182" />
+                  <mssgle:LineSegment
+                    End="35.0714294667147,48.1764720296365" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\ST_MATH_ADMIN">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\ST_MATH_ADMIN\ST_MATH_ADMINS"
+          TopLeft="487.2,50.4" />
+        <NodeLayout
+          Size="113.6,41.6"
+          Id="Package\ST_MATH_ADMIN\admins"
+          TopLeft="544,119.2" />
+        <EdgeLayout
+          Id="Package\ST_MATH_ADMIN.Paths[OLE DB Source Output]"
+          TopLeft="572.8,92">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="27.9999999999998,27.2"
+              Start="0,0"
+              End="27.9999999999998,19.7">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.6" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.6"
+                    Point2="0,13.6"
+                    Point3="4,13.6" />
+                  <mssgle:LineSegment
+                    End="23.9999999999998,13.6" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23.9999999999998,13.6"
+                    Point2="27.9999999999998,13.6"
+                    Point3="27.9999999999998,17.6" />
+                  <mssgle:LineSegment
+                    End="27.9999999999998,19.7" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\ST_MATH_CLASS_LIST">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS"
+          TopLeft="282.285719093011,26.3058827218712" />
+        <NodeLayout
+          Size="132.8,41.6"
+          Id="Package\ST_MATH_CLASS_LIST\STUDENTS"
+          TopLeft="343.428577277125,105.223530887485" />
+        <EdgeLayout
+          Id="Package\ST_MATH_CLASS_LIST.Paths[OLE DB Source Output]"
+          TopLeft="371.885719093012,67.9058827218712">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="37.9428581841138,37.3176481656137"
+              Start="0,0"
+              End="37.9428581841138,29.8176481656137">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.6588240828069" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.6588240828069"
+                    Point2="0,18.6588240828069"
+                    Point3="4,18.6588240828069" />
+                  <mssgle:LineSegment
+                    End="33.9428581841138,18.6588240828069" />
+                  <mssgle:CubicBezierSegment
+                    Point1="33.9428581841138,18.6588240828069"
+                    Point2="37.9428581841138,18.6588240828069"
+                    Point3="37.9428581841138,22.6588240828069" />
+                  <mssgle:LineSegment
+                    End="37.9428581841138,29.8176481656137" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\ST_MATH_CLASS_LIST\ST MATH STUDENTS">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ST_MATH_ADMIN\ST_MATH_ADMINS">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
