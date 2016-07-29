@@ -8,7 +8,7 @@ SELECT
 	,district_school
 	, STAFF.school
 	,district_teacher_id
-	,[E-Mail]
+	,email
 	,[Last Name]
 	,[First Name]
 	,position
@@ -44,7 +44,7 @@ SELECT
 	ELSE ORG.ORGANIZATION_NAME
 	END AS school
 	,STF.BADGE_NUM AS district_teacher_id
-	,PER.EMAIL AS 'E-Mail'
+	,PER.EMAIL AS 'email'
 	,PER.LAST_NAME AS 'Last Name'
 	,PER.FIRST_NAME AS 'First Name'
 	,CASE WHEN STF.TYPE = 'TE' THEN 'teacher'
@@ -95,7 +95,7 @@ AND YR.EXTENSION = 'R'
 
 WHERE [FILE].IID IS NOT NULL
 --and [Last Name] like '%,%'
-ORDER BY [E-Mail]
+--ORDER BY [E-Mail]
 
 
 

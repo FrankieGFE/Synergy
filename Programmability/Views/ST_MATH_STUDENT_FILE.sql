@@ -12,8 +12,8 @@ SELECT
 	,teacher_last_name
 	,teacher_first_name
 	,grade
-	,[group]
-	,fluency
+	,period
+	,curriculum
 	,student_id
 	,student_last_name
 	,student_first_name
@@ -58,8 +58,8 @@ SELECT
 	,TCH.LAST_NAME AS teacher_last_name
 	,TCH.FIRST_NAME AS teacher_first_name
 	,GRADE AS grade
-	,'' AS [group]
-	,'' AS fluency
+	,'' AS period
+	,'' AS curriculum
 	,ENR.SIS_NUMBER AS student_id
 	,REPLACE (PER.LAST_NAME,',','') AS student_last_name
 	,REPLACE (PER.FIRST_NAME, ',','') AS student_first_name
@@ -124,6 +124,7 @@ FROM
 			AND EXTENSION = 'R'
 			AND PERIOD_BEGIN = 1
 			AND PRIMARY_STAFF = 1
+			AND PER.LAST_NAME NOT LIKE 'TBA%'
 			) AS TCH
 		
 		ON
@@ -134,7 +135,7 @@ WHERE
 	1 = 1
 	AND ENR.SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
 	AND EXTENSION = 'R'
-	AND GRADE IN ('K','01','02','03')
+	AND GRADE IN ('PK','K','01','02','03','04','05')
 	AND ENR.LEAVE_DATE IS NULL
 	AND ENR.EXCLUDE_ADA_ADM IS NULL
 	AND ENR.SUMMER_WITHDRAWL_CODE IS NULL
@@ -149,7 +150,7 @@ WHERE
 		)AS [FILE]
 		ON [FILE].SCHOOL = EST.school
 
-WHERE EST.IID IS NULL
+WHERE EST.IID IS NOT NULL
 --ORDER BY grade
 
 UNION
@@ -165,8 +166,8 @@ SELECT
 	,teacher_first_name
 	,teacher_last_name
 	,grade
-	,[group]
-	,fluency
+	,period
+	,curriculum
 	,student_id
 	,student_last_name
 	,student_first_name
@@ -213,8 +214,8 @@ SELECT
 	,TCH.LAST_NAME AS teacher_last_name
 	,TCH.FIRST_NAME AS teacher_first_name
 	,GRADE AS grade
-	,'' AS [group]
-	,'' AS fluency
+	,'' AS period
+	,'' AS curriculum
 	,ENR.SIS_NUMBER AS student_id
 	,REPLACE (PER.LAST_NAME,',','') AS student_last_name
 	,REPLACE (PER.FIRST_NAME, ',','') AS student_first_name
@@ -313,5 +314,5 @@ AND RN = 1
 AND ST.iid IS NOT NULL
 ORDER BY IID, school
 
-REVERT
-GO
+--REVERT
+--GO
