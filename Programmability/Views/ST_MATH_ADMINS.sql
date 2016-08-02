@@ -1,12 +1,14 @@
 
---ALTER VIEW [APS].[ST_MATH_ADMIN] AS 
---EXECUTE AS LOGIN='QueryFileUser'
---GO
 
+
+
+--ALTER VIEW [APS].[ST_MATH_ADMIN] AS 
+EXECUTE AS LOGIN='QueryFileUser'
+GO
 SELECT
 	[FILE].iid
-	,district_school
-	, STAFF.school
+	,district_school_id
+	,STAFF.school
 	,district_teacher_id
 	,email
 	,last_name
@@ -18,7 +20,7 @@ FROM
 SELECT
     distinct
 	'' AS iid
-	,SCH.SCHOOL_CODE AS district_school
+	,SCH.SCHOOL_CODE AS district_school_id
 	,CASE WHEN ORG.ORGANIZATION_NAME = 'Reginald Chavez Elementary School' THEN 'REGINALD CHAVEZ ELEM SCHOOL' 
 	      WHEN ORG.ORGANIZATION_NAME = 'A. Montoya Elementary School' THEN 'A MONTOYA ELEMENTARY SCHOOL'
 		  WHEN ORG.ORGANIZATION_NAME = 'Arroyo Del Oso Elementary School' THEN 'ARROYO DEL OSO ELEM SCHOOL'
@@ -96,6 +98,7 @@ AND YR.EXTENSION = 'R'
 WHERE [FILE].IID IS NOT NULL
 --and [Last Name] like '%,%'
 --ORDER BY [E-Mail]
-
+--REVERT
+--GO
 
 
