@@ -4,9 +4,23 @@
 */
 
 
-ALTER VIEW APS.CleverTeachers AS
+ALTER VIEW [APS].[CleverTeachers] AS
 
-SELECT DISTINCT
+SELECT  
+		[School_id]
+        ,[Teacher_id]
+        ,[Teacher_number]
+        ,[State_teacher_id]
+		,[Last_name]
+        ,[Middle_name]
+        ,[First_name]
+		,[Teacher_email]
+        ,[Title]
+		,[Username]
+		,[password]
+FROM
+(
+SELECT 
          sch.SCHOOL_CODE          AS [School_id]
        , stf.BADGE_NUM            AS [Teacher_id]
        , stf.BADGE_NUM            AS [Teacher_number]
@@ -18,6 +32,7 @@ SELECT DISTINCT
        , stfp.TITLE               AS [Title]
        , ''                       AS [Username]
        , ''                       AS [password]
+	   ,ROW_NUMBER() OVER (PARTITION BY stf.BADGE_NUM ORDER BY stf.BADGE_NUM, SCHOOL_CODE DESC) AS RN
 
 FROM   rev.EPC_SCH_YR_SECT            sect 
        JOIN rev.EPC_SCH_YR_CRS        scrs ON scrs.SCHOOL_YEAR_COURSE_GU = sect.SCHOOL_YEAR_COURSE_GU
@@ -27,4 +42,8 @@ FROM   rev.EPC_SCH_YR_SECT            sect
 	   JOIN rev.EPC_STAFF_SCH_YR      stfy ON stfy.STAFF_SCHOOL_YEAR_GU  = sect.STAFF_SCHOOL_YEAR_GU
 	   JOIN rev.EPC_STAFF             stf  ON stf.STAFF_GU               = stfy.STAFF_GU
        JOIN rev.REV_PERSON            stfp ON stfp.PERSON_GU             = stfy.STAFF_GU
+
+) AS T1
+WHERE RN = 1
 --ORDER BY stf.BADGE_NUM
+GO

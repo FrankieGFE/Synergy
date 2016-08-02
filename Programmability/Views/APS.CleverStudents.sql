@@ -132,6 +132,7 @@ SELECT
 FROM  rev.EPC_STU                    stu
       JOIN rev.EPC_STU_SCH_YR        ssy ON ssy.STUDENT_GU           = stu.STUDENT_GU
                                             and ssy.STATUS is NULL
+											AND EXCLUDE_ADA_ADM IS NULL
       JOIN rev.REV_ORGANIZATION_YEAR oyr ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
                                             and oyr.YEAR_GU          = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
 	  JOIN rev.EPC_SCH               sch ON sch.ORGANIZATION_GU      = oyr.ORGANIZATION_GU
