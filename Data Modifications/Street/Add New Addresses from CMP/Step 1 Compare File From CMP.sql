@@ -1,8 +1,11 @@
 
 /*************************************************************************
-	THIS READS A FILE FROM CMP AND COMPARES TO SEE WHICH EXIST IN SYNERGY
+	Created by Debbie Ann Chavez
+	Date 7/29/2016
+	
+	THIS READS A FILE FROM CMP AND COMPARES TO SEE WHICH EXIST IN SYNERGY 
 
-	CREATE A FILE OF THE RECORDS THAT DO NOT EXIST TO INSERT IN STEP 2
+	CREATE A FILE OF THE RECORDS THAT DO NOT EXIST TO INSERT IN STEP 2 
 
 *************************************************************************/
 
