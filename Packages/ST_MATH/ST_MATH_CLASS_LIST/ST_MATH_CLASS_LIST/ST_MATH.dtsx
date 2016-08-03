@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="ST_MATH"
   DTS:PackageType="5"
-  DTS:VersionBuild="22"
-  DTS:VersionGUID="{7995A43D-E79F-4F07-B78A-68460FD462EE}">
+  DTS:VersionBuild="23"
+  DTS:VersionGUID="{23C945C1-BFA7-47AC-8887-834F59329E09}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -320,7 +320,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAD1k3TCIxDwLY42Wk6JcYpRAAAAAASAAACgAAAAEAAAAEAfzmyjvpbxXxXtXHsgnJswAAAAV+V3Z79jWLWW8qpvZMcfjz3rkm9G1JEP17MDp8erDrldZwQDg5hTGH3FJASOO+eBFAAAAIiiK7cyK898WSvNr8Sw6N2OMxDe</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAD4qPDjTIsOg+a1bbF3zO6AAAAAAASAAACgAAAAEAAAACzr+IaPbRyydftxclBRHDcwAAAA0GRycVDu31MWma0r3txefTDTzRs/UBNUDsSfpIsvLON6DUaYghz+Ec28zF6v0NppFAAAAMcvoYR9WuP7D9Fm/s/ZDY1XJEOU</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -335,7 +335,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADdxfaYQD2jgKohtcqOoP+DAAAAAASAAACgAAAAEAAAAIwZiuEZayz9Sh2s+jb1YpswAAAAaOw8lXKcwFoV3/jioUMUfR+VN+QRKRGJW14vRoncheSQd0PuQrYPvnzcpsNA/8YXFAAAABV7NYwXpzR6M2gkGRHKOfV04a0c</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADmO/BBp3XfJFVsvkMptGpOAAAAAASAAACgAAAAEAAAAKVEVid0QQILv1HKXrIIpT8wAAAAPGlbOVkwynfDEBW6M0ok629j+dIWi3jPtmy6kTAMw8DQ2la8/FTTwspBIc+H8n+8FAAAANRAXQ7mVaC5yw0FGqulXmSekBkF</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -648,7 +648,7 @@ FROM
 	ON PER.PERSON_GU = STF.STAFF_GU
 
 WHERE 1 = 1
-AND STF.TYPE IN ('TE','SSS','SA')
+AND STF.TYPE IN ('TE','SSS','SA','SCA')
 --AND LAST_NAME = 'ST JOHN'
 AND YR.SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
 AND (PER.FIRST_NAME NOT IN ('TEACHER','PLACEMENT','Spedpre','SECTION') AND PER.FIRST_NAME NOT LIKE 'Staff%')
@@ -2093,6 +2093,10 @@ ORDER BY IID, school
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="190.4,41.6"
+          Id="Package\sFTP to ST Math server"
+          TopLeft="120.000002043588,187.200002625409" />
+        <NodeLayout
           Size="164.8,41.6"
           Id="Package\ST_MATH_ADMIN"
           TopLeft="52.5714294667147,102.776472029636" />
@@ -2134,10 +2138,6 @@ ORDER BY IID, school
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="190.4,41.6"
-          Id="Package\sFTP to ST Math server"
-          TopLeft="120.000002043588,187.200002625409" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="134.971429466715,144.376472029636">
