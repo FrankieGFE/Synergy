@@ -1,7 +1,11 @@
+
+--ALTER VIEW [APS].[Edgenuity_Student_Export] AS 
+
+
 SELECT
 	BS.SIS_NUMBER + 'aps' AS Username
 	,BS.SIS_NUMBER AS Password
-	,GENDER AS GENDER
+	,BS.GENDER AS GENDER
 	,'' AS Notes
 	,HOME_ADDRESS AS Street
 	,HOME_CITY AS CITY
@@ -14,16 +18,17 @@ SELECT
 	,SED.GRADE AS GradeLevel
 	,BS.SIS_NUMBER AS LocalID
 	,CLASS_OF AS ProjectedGRaduationDate
+	,'' AS GraduationDate
 	,'' AS Guadrian1Relationship
 	,'' AS Guardian1LastName
 	,'' AS Guardian1FirstName
-	,'' AS Guardian1Email
-	,'' AS Guardian1Pone
+	,SC.Parent1Email AS Guardian1Email
+	,SC.Parent1PrimaryPhone AS Guardian1Pone
 	,'' AS Guardian2Relationship
 	,'' AS Guardian2LastName
 	,'' AS Guardian2FirstName
-	,'' AS Guardian2Email
-	,'' AS Guardian2Phone
+	,SC.Parent2Email AS Guardian2Email
+	,SC.Parent2PrimaryPhone AS Guardian2Phone
 	,CASE WHEN SPED_STATUS = 'Y' THEN 'Yes' ELSE 'No'
 	END AS SPED
 	,'' AS LEP
@@ -31,10 +36,12 @@ SELECT
 	END AS FRL
 	,CASE WHEN ELL_STATUS = 'Y' THEN 'Yes' ELSE 'No'
 	END AS ELL
-	,'' AS IEP
+	,CASE WHEN sped.NEXT_IEP_DATE IS NOT NULL THEN 'Yes' ELSE 'No'
+	END AS IEP
 	,CASE WHEN GIFTED_STATUS = 'Y' THEN 'Yes' ELSE 'No'
 	END AS Gifted
 	,'' AS Section504
+	,'' AS Title1
 	,'' AS SchoolCounselorName
 	,CONVERT (VARCHAR,SED.ENTER_DATE, 101) AS EnrollmentDate
 	,FIRST_NAME AS 'First Name' 
@@ -57,7 +64,22 @@ FROM
 	LEFT HASH JOIN
 		APS.StudentEnrollmentDetails AS SED
 		ON SED.SIS_NUMBER = BS.SIS_NUMBER
-
+    LEFT JOIN
+	[SchoolMessenger].[StudentContact] AS SC
+	ON SC.[STUDENT ID NUMBER] = BS.SIS_NUMBER
+	LEFT JOIN 
+	(
+	SELECT
+				   *
+		FROM
+					REV.EP_STUDENT_SPECIAL_ED AS SPED
+		WHERE
+					NEXT_IEP_DATE IS NOT NULL
+					AND (
+						EXIT_DATE IS NULL 
+						OR EXIT_DATE >= CONVERT(DATE, GETDATE())
+						)
+	) sped ON sped.STUDENT_GU = BS.STUDENT_GU
 WHERE 1 = 1
 --AND SED.SCHOOL_CODE IN ('517','518')
 AND GRADE IN ('08','09','10','11','12')
@@ -67,7 +89,7 @@ AND EXCLUDE_ADA_ADM  IS NULL
 AND SUMMER_WITHDRAWL_CODE IS NULL
 AND EXTENSION = 'R'
 
-ORDER BY LocalID
+--ORDER BY LocalID
 
 
 

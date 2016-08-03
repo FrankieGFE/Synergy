@@ -1,10 +1,12 @@
 
 
 
-
---ALTER VIEW [APS].[ST_MATH_ADMIN] AS 
-EXECUTE AS LOGIN='QueryFileUser'
+ALTER VIEW [APS].[ST_MATH_ADMIN] AS 
 GO
+EXECUTE AS LOGIN='QueryFileUser'
+
+
+
 SELECT
 	[FILE].iid
 	,district_school_id
@@ -78,7 +80,7 @@ FROM
 	ON PER.PERSON_GU = STF.STAFF_GU
 
 WHERE 1 = 1
-AND STF.TYPE IN ('TE','SSS','SA')
+AND STF.TYPE IN ('TE','SSS','SA','SCA')
 --AND LAST_NAME = 'ST JOHN'
 AND YR.SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
 AND (PER.FIRST_NAME NOT IN ('TEACHER','PLACEMENT','Spedpre','SECTION') AND PER.FIRST_NAME NOT LIKE 'Staff%')
@@ -98,7 +100,8 @@ AND YR.EXTENSION = 'R'
 WHERE [FILE].IID IS NOT NULL
 --and [Last Name] like '%,%'
 --ORDER BY [E-Mail]
---REVERT
---GO
+REVERT
+GO
+--AND district_teacher_id = 'e119804'
 
 
