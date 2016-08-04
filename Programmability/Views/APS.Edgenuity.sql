@@ -1,5 +1,5 @@
 
---ALTER VIEW [APS].[Edgenuity_Student_Export] AS 
+ALTER VIEW [APS].[Edgenuity_Student_Export] AS 
 
 
 SELECT
@@ -20,13 +20,13 @@ SELECT
 	,CLASS_OF AS ProjectedGRaduationDate
 	,'' AS GraduationDate
 	,'' AS Guadrian1Relationship
-	,'' AS Guardian1LastName
-	,'' AS Guardian1FirstName
+	,SC.Parent1LastName AS Guardian1LastName
+	,SC.Parent1FirstName AS Guardian1FirstName
 	,SC.Parent1Email AS Guardian1Email
 	,SC.Parent1PrimaryPhone AS Guardian1Pone
-	,'' AS Guardian2Relationship
-	,'' AS Guardian2LastName
-	,'' AS Guardian2FirstName
+	,SC.Parent1Relation AS Guardian2Relationship
+	,SC.Parent2LastName AS Guardian2LastName
+	,SC.Parent2FirstName AS Guardian2FirstName
 	,SC.Parent2Email AS Guardian2Email
 	,SC.Parent2PrimaryPhone AS Guardian2Phone
 	,CASE WHEN SPED_STATUS = 'Y' THEN 'Yes' ELSE 'No'
@@ -60,12 +60,12 @@ SELECT
 	,'' AS GradpointID
 
 FROM
-	APS.BasicStudentWithMoreInfo AS BS
+	APS.BasicStudentWithMoreInfo AS BS WITH (NOLOCK)
 	LEFT HASH JOIN
-		APS.StudentEnrollmentDetails AS SED
+		APS.StudentEnrollmentDetails AS SED WITH(NOLOCK)
 		ON SED.SIS_NUMBER = BS.SIS_NUMBER
-    LEFT JOIN
-	[SchoolMessenger].[StudentContact] AS SC
+    LEFT HASH JOIN
+	[APS].ParentContact AS SC WITH (NOLOCK)
 	ON SC.[STUDENT ID NUMBER] = BS.SIS_NUMBER
 	LEFT JOIN 
 	(
@@ -80,6 +80,7 @@ FROM
 						OR EXIT_DATE >= CONVERT(DATE, GETDATE())
 						)
 	) sped ON sped.STUDENT_GU = BS.STUDENT_GU
+
 WHERE 1 = 1
 --AND SED.SCHOOL_CODE IN ('517','518')
 AND GRADE IN ('08','09','10','11','12')

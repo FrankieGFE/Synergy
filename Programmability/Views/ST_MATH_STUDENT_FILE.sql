@@ -65,23 +65,23 @@ SELECT
 	,REPLACE (PER.FIRST_NAME, ',','') AS student_first_name
 	,LEFT(PER.LAST_NAME,1) + ENR.SIS_NUMBER AS student_username
 	,'#student1aps' AS student_password
-	,'' AS permanent_login
+	,'Visual' AS permanent_login
 	,CONVERT(VARCHAR, BS.BIRTH_DATE, 101) AS birthdate
 	,'' AS mss
 	,'' AS [action]
 
 FROM
-	APS.StudentEnrollmentDetails AS ENR
+	APS.StudentEnrollmentDetails AS ENR WITH (NOLOCK)
 	LEFT JOIN
-	rev.EPC_STU AS STU
+	rev.EPC_STU AS STU WITH (NOLOCK)
 	ON ENR.SIS_NUMBER = STU.SIS_NUMBER
 
 	LEFT JOIN
-	rev.REV_PERSON AS PER
+	rev.REV_PERSON AS PER WITH (NOLOCK)
 	ON PER.PERSON_GU = STU.STUDENT_GU
 
 	LEFT JOIN
-	APS.BasicStudentWithMoreInfo AS BS
+	APS.BasicStudentWithMoreInfo AS BS WITH (NOLOCK)
 	ON BS.SIS_NUMBER = ENR.SIS_NUMBER
 
 	LEFT JOIN
@@ -135,7 +135,7 @@ WHERE
 	1 = 1
 	AND ENR.SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
 	AND EXTENSION = 'R'
-	AND GRADE IN ('PK','K','01','02','03','04','05')
+	AND GRADE IN ('K','01','02','03','04','05')
 	AND ENR.LEAVE_DATE IS NULL
 	AND ENR.EXCLUDE_ADA_ADM IS NULL
 	AND ENR.SUMMER_WITHDRAWL_CODE IS NULL
@@ -221,7 +221,7 @@ SELECT
 	,REPLACE (PER.FIRST_NAME, ',','') AS student_first_name
 	,ENR.SIS_NUMBER AS student_username
 	,'#student1aps' AS student_password
-	,'' AS permanent_login
+	,'Text' AS permanent_login
 	,CONVERT(VARCHAR, BS.BIRTH_DATE, 101) AS birthdate
 	,'' AS mss
 	,'' AS [action]
@@ -231,17 +231,17 @@ SELECT
 	,TCH.PERIOD_BEGIN
 
 FROM
-	APS.StudentEnrollmentDetails AS ENR
+	APS.StudentEnrollmentDetails AS ENR WITH (NOLOCK)
 	LEFT JOIN
-	rev.EPC_STU AS STU
+	rev.EPC_STU AS STU WITH (NOLOCK)
 	ON ENR.SIS_NUMBER = STU.SIS_NUMBER
 
 	LEFT JOIN
-	rev.REV_PERSON AS PER
+	rev.REV_PERSON AS PER WITH (NOLOCK)
 	ON PER.PERSON_GU = STU.STUDENT_GU
 
 	LEFT JOIN
-	APS.BasicStudentWithMoreInfo AS BS
+	APS.BasicStudentWithMoreInfo AS BS WITH (NOLOCK)
 	ON BS.SIS_NUMBER = ENR.SIS_NUMBER
 
 	LEFT JOIN
@@ -312,7 +312,7 @@ WHERE
 WHERE 1 = 1
 AND RN = 1
 AND ST.iid IS NOT NULL
-ORDER BY IID, school
+ORDER BY grade
 
 --REVERT
 --GO
