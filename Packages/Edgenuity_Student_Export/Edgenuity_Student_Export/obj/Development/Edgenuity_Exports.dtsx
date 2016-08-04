@@ -1,0 +1,2954 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/2/2016 8:45:47 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="046-FRGARCIA"
+  DTS:CreatorName="APS\e138796"
+  DTS:DTSID="{B5570CA8-EBD0-44CE-B734-08B1AAA56BE3}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5058.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Edgenuity_Exports"
+  DTS:PackageType="5"
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{CB712ABE-FBA6-44D0-9630-B9B8D382CD78}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Edgenuity Enrollment Export]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="Edgenuity Enrollment Export"
+      DTS:DTSID="{A7EE7BAF-5230-4B27-B210-88AE93608416}"
+      DTS:ObjectName="Edgenuity Enrollment Export">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x007C_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis\files\Export\Edgenuity\enrollment_export.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SUSD"
+              DTS:DTSID="{D73D6EB7-0521-4730-AB0B-0BDEB39964A8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Course Code"
+              DTS:DTSID="{085E6C84-20EC-439D-8B36-70A7C5106FE6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Term"
+              DTS:DTSID="{CEC5DE49-2896-4F6E-9BD4-0E3D2D6071F2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="9"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Status"
+              DTS:DTSID="{B2D53304-64BA-4231-A744-5D677FE31D05}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[student_export]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{BF53F3FA-6078-4639-9275-66F6692F3148}"
+      DTS:ObjectName="student_export">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x007C_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis\files\Export\Edgenuity\student_export.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="23"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Username"
+              DTS:DTSID="{4EAADA81-F673-4BE6-BC5C-CAE92C0F4591}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Password"
+              DTS:DTSID="{DD87240F-8944-4C12-9ABD-5648516D050B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="GENDER"
+              DTS:DTSID="{83A7AD39-B403-4B4D-A07C-B1371DA50845}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Notes"
+              DTS:DTSID="{69596615-160B-491C-BF19-E7956305D343}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Street"
+              DTS:DTSID="{50898900-5032-4EAE-A2B9-2E5108513699}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CITY"
+              DTS:DTSID="{B5676EC1-0DE3-4B9B-9B7F-3E5F1ADB0935}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="STATE"
+              DTS:DTSID="{A34A53FA-FFDB-4EE1-BC27-95C05348127E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Country"
+              DTS:DTSID="{02BE9A41-BFA8-4172-ADA6-004F296B140A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CountryofBirth"
+              DTS:DTSID="{7A69E735-FD72-48E0-AC5F-ABFEAD74D4CE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Race"
+              DTS:DTSID="{E70DCE15-2ACD-422D-A6C0-C9D09D1C9B4F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Hispanic"
+              DTS:DTSID="{7CB7EFBC-FA55-4306-A804-083B6364C819}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="13"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="HomePhone"
+              DTS:DTSID="{8FEF65C8-9961-4F8E-95AA-747C9322C53A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="GradeLevel"
+              DTS:DTSID="{7910792C-4C96-4076-AC6C-A79F2C3A2609}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LocalID"
+              DTS:DTSID="{DF9F877C-A793-4417-809D-BF99CC0DC078}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ProjectedGRaduationDate"
+              DTS:DTSID="{6EDD5AF1-17A4-49EC-BC6B-3B6B8271E5C4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="GraduationDate"
+              DTS:DTSID="{4236279E-3D67-4F7D-AE94-88F3F0ADFEBE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Guadrian1Relationship"
+              DTS:DTSID="{8DB3DC0D-EB5C-4B1F-98D3-EC0FE63B3994}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Guardian1LastName"
+              DTS:DTSID="{0BB136CE-A929-4EB0-BB24-C857FD9840E9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Guardian1FirstName"
+              DTS:DTSID="{35DD5E6F-55AE-4AF9-AD5F-F6819F66A22E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Guardian1Email"
+              DTS:DTSID="{22FBE7D2-44B5-44A1-A991-8C7217CC464E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Guardian1Pone"
+              DTS:DTSID="{3C471EF4-48D5-445F-99E7-4BB7D3631A9B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Guardian2Relationship"
+              DTS:DTSID="{932B96C9-DC19-4B0E-BDFE-1A2F62C6DB1A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Guardian2LastName"
+              DTS:DTSID="{3B1C014C-15A5-4794-8828-2CD95DD4299D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Guardian2FirstName"
+              DTS:DTSID="{9AD4796B-FAB5-4013-9AD7-4719559BF61F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Guardian2Email"
+              DTS:DTSID="{08CE4CD7-C1DA-4106-9895-9D5468DF6D69}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Guardian2Phone"
+              DTS:DTSID="{77B1D13F-48C7-4D13-ACB2-52D39D258049}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="3"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SPED"
+              DTS:DTSID="{BA6ECBD6-682E-47FF-81B1-3B14DB6A2B59}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LEP"
+              DTS:DTSID="{B206AE1B-F1D7-40FB-9B43-5F8A4ABEF091}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="3"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FRL"
+              DTS:DTSID="{C3DBEF50-E373-4EEA-B7DD-0E32D098DCC7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="3"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ELL"
+              DTS:DTSID="{1DCBF0F5-CDC5-4043-A54E-9C7ABAAC4657}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="3"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IEP"
+              DTS:DTSID="{C7A0DA3A-4AE3-4828-8881-C9E339AF2C6D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="3"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Gifted"
+              DTS:DTSID="{B4264200-0B07-47AA-BB7B-68DC31C8BD68}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Section504"
+              DTS:DTSID="{00478836-9A46-43B9-8D3B-6F59484CC1FF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Title1"
+              DTS:DTSID="{2EC09BF2-8123-410E-B700-5D55B967633E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SchoolCounselorName"
+              DTS:DTSID="{45D8A9A5-4999-476C-806B-ED4728D08354}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="EnrollmentDate"
+              DTS:DTSID="{C95578F1-7C02-4315-B36F-F9E295BBF9A5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="First Name"
+              DTS:DTSID="{A40B6EA2-8A98-4712-834B-2B0A0978156C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Last Name"
+              DTS:DTSID="{ACFF3F58-A279-4B97-9612-28307677BFC7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Email Address"
+              DTS:DTSID="{4EB28418-B00A-43E3-B322-0CBF44B3B1C9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="13"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Phone"
+              DTS:DTSID="{1145C01E-A515-4FBA-A9E0-9872298EBDCE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SUSD Student ID"
+              DTS:DTSID="{B07CE13B-3E01-4CA4-8C5A-864D195F7993}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="School ID"
+              DTS:DTSID="{C67F5B3F-F443-47C2-BE95-B7CF684AF369}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Secondary Email"
+              DTS:DTSID="{94499462-AF2A-4AB2-8E4E-6323FE7B3E25}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Cell Phone"
+              DTS:DTSID="{3ED69093-F9BC-4102-B9CC-0A78B181ECB5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Middle Name"
+              DTS:DTSID="{85CDEB1C-D26F-408B-BEFD-A585AB0B8E7A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Preferred Name"
+              DTS:DTSID="{C05A241D-21BB-47B8-AC0E-29B12AF37964}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Date of Birth"
+              DTS:DTSID="{7C2BB7B1-1243-40FC-BA0D-7A654D186C84}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="6"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Zip"
+              DTS:DTSID="{49FCE36F-5FD3-4C7F-B40F-16AB2B0CE923}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Status"
+              DTS:DTSID="{DC641053-BE9D-4126-9FD4-C003C258202D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="GradpointID"
+              DTS:DTSID="{070A9EDC-F3A8-4CCF-8225-80175D965CF0}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[synergydbdc.ST_Production.apsexport]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{0977256F-BDCF-4985-A686-DF72D902B95B}"
+      DTS:ObjectName="synergydbdc.ST_Production.apsexport">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=synergydbdc;User ID=apsexport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAB0quIxAEF9/b/1DB5UqixaAAAAAASAAACgAAAAEAAAAJwDVn9buk3mnMXek5VzXMowAAAAC1XdgnXwWNXbFZxPLYNrX2pjVBBh+7uP6Pi6Fu9utjMjwoIilnvPHkXu+pi4qoWZFAAAANk7Ni2lm5Qay7XySmiliHpm9yHX</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Edgenuity Enrollment Export"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{55E17D9F-1279-4D59-9AC3-F37ED2E66124}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Edgenuity Enrollment Export"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Edgenuity Enrollment Export\Enrollment Export"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Enrollment Export"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+	*
+FROM
+	APS.Edgenuity_Enrollment_Export</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Edgenuity Enrollment Export\Enrollment Export.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[synergydbdc.ST_Production.apsexport]"
+                  connectionManagerRefId="Package.ConnectionManagers[synergydbdc.ST_Production.apsexport]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].Columns[SUSD]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].ExternalColumns[SUSD]"
+                      length="20"
+                      lineageId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].Columns[SUSD]"
+                      name="SUSD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].Columns[Course Code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].ExternalColumns[Course Code]"
+                      length="20"
+                      lineageId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].Columns[Course Code]"
+                      name="Course Code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].Columns[Term]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].ExternalColumns[Term]"
+                      length="5"
+                      lineageId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].Columns[Term]"
+                      name="Term"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].Columns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].ExternalColumns[Status]"
+                      length="9"
+                      lineageId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].Columns[Status]"
+                      name="Status"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].ExternalColumns[SUSD]"
+                      dataType="wstr"
+                      length="20"
+                      name="SUSD" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].ExternalColumns[Course Code]"
+                      dataType="wstr"
+                      length="20"
+                      name="Course Code" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].ExternalColumns[Term]"
+                      dataType="wstr"
+                      length="5"
+                      name="Term" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].ExternalColumns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="9"
+                      name="Status" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Error Output].Columns[SUSD]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Error Output].Columns[SUSD]"
+                      name="SUSD" />
+                    <outputColumn
+                      refId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Error Output].Columns[Course Code]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Error Output].Columns[Course Code]"
+                      name="Course Code" />
+                    <outputColumn
+                      refId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Error Output].Columns[Term]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Error Output].Columns[Term]"
+                      name="Term" />
+                    <outputColumn
+                      refId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Error Output].Columns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="9"
+                      lineageId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Error Output].Columns[Status]"
+                      name="Status" />
+                    <outputColumn
+                      refId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Edgenuity Enrollment Export\enrollment_export"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="enrollment_export">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Edgenuity Enrollment Export\enrollment_export.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Edgenuity Enrollment Export]"
+                  connectionManagerRefId="Package.ConnectionManagers[Edgenuity Enrollment Export]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Edgenuity Enrollment Export\enrollment_export.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Edgenuity Enrollment Export\enrollment_export.Inputs[Flat File Destination Input].Columns[SUSD]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="SUSD"
+                      externalMetadataColumnId="Package\Edgenuity Enrollment Export\enrollment_export.Inputs[Flat File Destination Input].ExternalColumns[SUSD]"
+                      lineageId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].Columns[SUSD]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Enrollment Export\enrollment_export.Inputs[Flat File Destination Input].Columns[Course Code]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Course Code"
+                      externalMetadataColumnId="Package\Edgenuity Enrollment Export\enrollment_export.Inputs[Flat File Destination Input].ExternalColumns[Course Code]"
+                      lineageId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].Columns[Course Code]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Enrollment Export\enrollment_export.Inputs[Flat File Destination Input].Columns[Term]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Term"
+                      externalMetadataColumnId="Package\Edgenuity Enrollment Export\enrollment_export.Inputs[Flat File Destination Input].ExternalColumns[Term]"
+                      lineageId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].Columns[Term]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Enrollment Export\enrollment_export.Inputs[Flat File Destination Input].Columns[Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="9"
+                      cachedName="Status"
+                      externalMetadataColumnId="Package\Edgenuity Enrollment Export\enrollment_export.Inputs[Flat File Destination Input].ExternalColumns[Status]"
+                      lineageId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output].Columns[Status]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Enrollment Export\enrollment_export.Inputs[Flat File Destination Input].ExternalColumns[SUSD]"
+                      dataType="wstr"
+                      length="20"
+                      name="SUSD" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Enrollment Export\enrollment_export.Inputs[Flat File Destination Input].ExternalColumns[Course Code]"
+                      dataType="wstr"
+                      length="20"
+                      name="Course Code" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Enrollment Export\enrollment_export.Inputs[Flat File Destination Input].ExternalColumns[Term]"
+                      dataType="wstr"
+                      length="5"
+                      name="Term" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Enrollment Export\enrollment_export.Inputs[Flat File Destination Input].ExternalColumns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="9"
+                      name="Status" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Edgenuity Enrollment Export.Paths[OLE DB Source Output]"
+              endId="Package\Edgenuity Enrollment Export\enrollment_export.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Edgenuity Enrollment Export\Enrollment Export.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Edgenuity Student Export"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2BBE7906-D76F-49AF-9749-57676FA45799}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Edgenuity Student Export"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Edgenuity Student Export\Student Export"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Student Export"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+	*
+FROM
+	APS.Edgenuity_Student_Export</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Edgenuity Student Export\Student Export.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[synergydbdc.ST_Production.apsexport]"
+                  connectionManagerRefId="Package.ConnectionManagers[synergydbdc.ST_Production.apsexport]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Username]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Username]"
+                      length="23"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Username]"
+                      name="Username"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Password]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Password]"
+                      length="20"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Password]"
+                      name="Password"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[GENDER]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[GENDER]"
+                      length="5"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[GENDER]"
+                      name="GENDER"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Notes]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Notes]"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Notes]"
+                      name="Notes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Street]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Street]"
+                      length="50"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Street]"
+                      name="Street"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[CITY]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[CITY]"
+                      length="50"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[CITY]"
+                      name="CITY"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[STATE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[STATE]"
+                      length="5"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[STATE]"
+                      name="STATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Country]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Country]"
+                      name="Country"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[CountryofBirth]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[CountryofBirth]"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[CountryofBirth]"
+                      name="CountryofBirth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Race]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Race]"
+                      length="600"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Race]"
+                      name="Race"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Hispanic]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Hispanic]"
+                      length="5"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Hispanic]"
+                      name="Hispanic"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[HomePhone]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[HomePhone]"
+                      length="13"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[HomePhone]"
+                      name="HomePhone"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[GradeLevel]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[GradeLevel]"
+                      length="600"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[GradeLevel]"
+                      name="GradeLevel"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[LocalID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[LocalID]"
+                      length="20"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[LocalID]"
+                      name="LocalID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[ProjectedGRaduationDate]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[ProjectedGRaduationDate]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[ProjectedGRaduationDate]"
+                      name="ProjectedGRaduationDate"
+                      precision="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[GraduationDate]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[GraduationDate]"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[GraduationDate]"
+                      name="GraduationDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guadrian1Relationship]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guadrian1Relationship]"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guadrian1Relationship]"
+                      name="Guadrian1Relationship"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian1LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guardian1LastName]"
+                      length="60"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian1LastName]"
+                      name="Guardian1LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian1FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guardian1FirstName]"
+                      length="60"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian1FirstName]"
+                      name="Guardian1FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian1Email]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guardian1Email]"
+                      length="100"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian1Email]"
+                      name="Guardian1Email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian1Pone]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guardian1Pone]"
+                      length="10"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian1Pone]"
+                      name="Guardian1Pone"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian2Relationship]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guardian2Relationship]"
+                      length="5"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian2Relationship]"
+                      name="Guardian2Relationship"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian2LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guardian2LastName]"
+                      length="60"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian2LastName]"
+                      name="Guardian2LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian2FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guardian2FirstName]"
+                      length="60"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian2FirstName]"
+                      name="Guardian2FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian2Email]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guardian2Email]"
+                      length="100"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian2Email]"
+                      name="Guardian2Email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian2Phone]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guardian2Phone]"
+                      length="10"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian2Phone]"
+                      name="Guardian2Phone"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[SPED]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[SPED]"
+                      length="3"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[SPED]"
+                      name="SPED"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[LEP]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[LEP]"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[LEP]"
+                      name="LEP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[FRL]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[FRL]"
+                      length="3"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[FRL]"
+                      name="FRL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[ELL]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[ELL]"
+                      length="3"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[ELL]"
+                      name="ELL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[IEP]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[IEP]"
+                      length="3"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[IEP]"
+                      name="IEP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Gifted]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Gifted]"
+                      length="3"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Gifted]"
+                      name="Gifted"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Section504]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Section504]"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Section504]"
+                      name="Section504"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Title1]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Title1]"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Title1]"
+                      name="Title1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[SchoolCounselorName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[SchoolCounselorName]"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[SchoolCounselorName]"
+                      name="SchoolCounselorName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[EnrollmentDate]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[EnrollmentDate]"
+                      length="30"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[EnrollmentDate]"
+                      name="EnrollmentDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[First Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[First Name]"
+                      length="60"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[First Name]"
+                      name="First Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Last Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Last Name]"
+                      length="60"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Last Name]"
+                      name="Last Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Email Address]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Email Address]"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Email Address]"
+                      name="Email Address"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Phone]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Phone]"
+                      length="13"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Phone]"
+                      name="Phone"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[SUSD Student ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[SUSD Student ID]"
+                      length="20"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[SUSD Student ID]"
+                      name="SUSD Student ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[School ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[School ID]"
+                      length="20"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[School ID]"
+                      name="School ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Secondary Email]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Secondary Email]"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Secondary Email]"
+                      name="Secondary Email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Cell Phone]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Cell Phone]"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Cell Phone]"
+                      name="Cell Phone"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Middle Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Middle Name]"
+                      length="20"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Middle Name]"
+                      name="Middle Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Preferred Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Preferred Name]"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Preferred Name]"
+                      name="Preferred Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Date of Birth]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Date of Birth]"
+                      length="30"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Date of Birth]"
+                      name="Date of Birth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Zip]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Zip]"
+                      length="6"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Zip]"
+                      name="Zip"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Status]"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Status]"
+                      name="Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[GradpointID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[GradpointID]"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[GradpointID]"
+                      name="GradpointID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Username]"
+                      dataType="wstr"
+                      length="23"
+                      name="Username" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Password]"
+                      dataType="wstr"
+                      length="20"
+                      name="Password" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[GENDER]"
+                      dataType="wstr"
+                      length="5"
+                      name="GENDER" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Notes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Notes" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Street]"
+                      dataType="wstr"
+                      length="50"
+                      name="Street" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[CITY]"
+                      dataType="wstr"
+                      length="50"
+                      name="CITY" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[STATE]"
+                      dataType="wstr"
+                      length="5"
+                      name="STATE" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[CountryofBirth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="CountryofBirth" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Race]"
+                      dataType="wstr"
+                      length="600"
+                      name="Race" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Hispanic]"
+                      dataType="wstr"
+                      length="5"
+                      name="Hispanic" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[HomePhone]"
+                      dataType="wstr"
+                      length="13"
+                      name="HomePhone" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[GradeLevel]"
+                      dataType="wstr"
+                      length="600"
+                      name="GradeLevel" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[LocalID]"
+                      dataType="wstr"
+                      length="20"
+                      name="LocalID" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[ProjectedGRaduationDate]"
+                      dataType="numeric"
+                      name="ProjectedGRaduationDate"
+                      precision="4" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[GraduationDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="GraduationDate" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guadrian1Relationship]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Guadrian1Relationship" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guardian1LastName]"
+                      dataType="wstr"
+                      length="60"
+                      name="Guardian1LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guardian1FirstName]"
+                      dataType="wstr"
+                      length="60"
+                      name="Guardian1FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guardian1Email]"
+                      dataType="wstr"
+                      length="100"
+                      name="Guardian1Email" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guardian1Pone]"
+                      dataType="wstr"
+                      length="10"
+                      name="Guardian1Pone" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guardian2Relationship]"
+                      dataType="wstr"
+                      length="5"
+                      name="Guardian2Relationship" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guardian2LastName]"
+                      dataType="wstr"
+                      length="60"
+                      name="Guardian2LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guardian2FirstName]"
+                      dataType="wstr"
+                      length="60"
+                      name="Guardian2FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guardian2Email]"
+                      dataType="wstr"
+                      length="100"
+                      name="Guardian2Email" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Guardian2Phone]"
+                      dataType="wstr"
+                      length="10"
+                      name="Guardian2Phone" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[SPED]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SPED" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[LEP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="LEP" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[FRL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="FRL" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[ELL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="ELL" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[IEP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="IEP" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Gifted]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Gifted" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Section504]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Section504" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Title1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Title1" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[SchoolCounselorName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="SchoolCounselorName" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[EnrollmentDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="EnrollmentDate" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[First Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="First Name" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Email Address]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Email Address" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Phone]"
+                      dataType="wstr"
+                      length="13"
+                      name="Phone" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[SUSD Student ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="SUSD Student ID" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[School ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="School ID" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Secondary Email]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Secondary Email" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Cell Phone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Cell Phone" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Middle Name]"
+                      dataType="wstr"
+                      length="20"
+                      name="Middle Name" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Preferred Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Preferred Name" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Date of Birth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="Date of Birth" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Zip]"
+                      dataType="wstr"
+                      length="6"
+                      name="Zip" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].ExternalColumns[GradpointID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="GradpointID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Username]"
+                      dataType="wstr"
+                      length="23"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Username]"
+                      name="Username" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Password]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Password]"
+                      name="Password" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[GENDER]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[GENDER]"
+                      name="GENDER" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Notes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Notes]"
+                      name="Notes" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Street]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Street]"
+                      name="Street" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[CITY]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[CITY]"
+                      name="CITY" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[STATE]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[STATE]"
+                      name="STATE" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Country]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Country]"
+                      name="Country" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[CountryofBirth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[CountryofBirth]"
+                      name="CountryofBirth" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Race]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Race]"
+                      name="Race" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Hispanic]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Hispanic]"
+                      name="Hispanic" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[HomePhone]"
+                      dataType="wstr"
+                      length="13"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[HomePhone]"
+                      name="HomePhone" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[GradeLevel]"
+                      dataType="wstr"
+                      length="600"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[GradeLevel]"
+                      name="GradeLevel" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[LocalID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[LocalID]"
+                      name="LocalID" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[ProjectedGRaduationDate]"
+                      dataType="numeric"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[ProjectedGRaduationDate]"
+                      name="ProjectedGRaduationDate"
+                      precision="4" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[GraduationDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[GraduationDate]"
+                      name="GraduationDate" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guadrian1Relationship]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guadrian1Relationship]"
+                      name="Guadrian1Relationship" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guardian1LastName]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guardian1LastName]"
+                      name="Guardian1LastName" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guardian1FirstName]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guardian1FirstName]"
+                      name="Guardian1FirstName" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guardian1Email]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guardian1Email]"
+                      name="Guardian1Email" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guardian1Pone]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guardian1Pone]"
+                      name="Guardian1Pone" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guardian2Relationship]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guardian2Relationship]"
+                      name="Guardian2Relationship" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guardian2LastName]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guardian2LastName]"
+                      name="Guardian2LastName" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guardian2FirstName]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guardian2FirstName]"
+                      name="Guardian2FirstName" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guardian2Email]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guardian2Email]"
+                      name="Guardian2Email" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guardian2Phone]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Guardian2Phone]"
+                      name="Guardian2Phone" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[SPED]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[SPED]"
+                      name="SPED" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[LEP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[LEP]"
+                      name="LEP" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[FRL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[FRL]"
+                      name="FRL" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[ELL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[ELL]"
+                      name="ELL" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[IEP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[IEP]"
+                      name="IEP" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Gifted]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Gifted]"
+                      name="Gifted" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Section504]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Section504]"
+                      name="Section504" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Title1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Title1]"
+                      name="Title1" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[SchoolCounselorName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[SchoolCounselorName]"
+                      name="SchoolCounselorName" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[EnrollmentDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[EnrollmentDate]"
+                      name="EnrollmentDate" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[First Name]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[First Name]"
+                      name="First Name" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Last Name]"
+                      name="Last Name" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Email Address]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Email Address]"
+                      name="Email Address" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Phone]"
+                      dataType="wstr"
+                      length="13"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Phone]"
+                      name="Phone" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[SUSD Student ID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[SUSD Student ID]"
+                      name="SUSD Student ID" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[School ID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[School ID]"
+                      name="School ID" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Secondary Email]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Secondary Email]"
+                      name="Secondary Email" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Cell Phone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Cell Phone]"
+                      name="Cell Phone" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Middle Name]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Middle Name]"
+                      name="Middle Name" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Preferred Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Preferred Name]"
+                      name="Preferred Name" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Date of Birth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Date of Birth]"
+                      name="Date of Birth" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Zip]"
+                      dataType="wstr"
+                      length="6"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Zip]"
+                      name="Zip" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[Status]"
+                      name="Status" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[GradpointID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[GradpointID]"
+                      name="GradpointID" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Edgenuity Student Export\student_export"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="student_export">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Edgenuity Student Export\student_export.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[student_export]"
+                  connectionManagerRefId="Package.ConnectionManagers[student_export]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Username]"
+                      cachedDataType="wstr"
+                      cachedLength="23"
+                      cachedName="Username"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Username]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Username]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Password]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Password"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Password]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Password]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[GENDER]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="GENDER"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[GENDER]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[GENDER]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Notes]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Notes"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Notes]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Notes]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Street]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Street"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Street]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Street]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[CITY]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CITY"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[CITY]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[CITY]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[STATE]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="STATE"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[STATE]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[STATE]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Country]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Country"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Country]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Country]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[CountryofBirth]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="CountryofBirth"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[CountryofBirth]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[CountryofBirth]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Race]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="Race"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Race]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Race]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Hispanic]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Hispanic"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Hispanic]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Hispanic]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[HomePhone]"
+                      cachedDataType="wstr"
+                      cachedLength="13"
+                      cachedName="HomePhone"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[HomePhone]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[HomePhone]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[GradeLevel]"
+                      cachedDataType="wstr"
+                      cachedLength="600"
+                      cachedName="GradeLevel"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[GradeLevel]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[GradeLevel]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[LocalID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="LocalID"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[LocalID]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[LocalID]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[ProjectedGRaduationDate]"
+                      cachedDataType="numeric"
+                      cachedName="ProjectedGRaduationDate"
+                      cachedPrecision="4"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[ProjectedGRaduationDate]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[ProjectedGRaduationDate]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[GraduationDate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="GraduationDate"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[GraduationDate]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[GraduationDate]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Guadrian1Relationship]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Guadrian1Relationship"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guadrian1Relationship]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guadrian1Relationship]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Guardian1LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Guardian1LastName"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guardian1LastName]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian1LastName]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Guardian1FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Guardian1FirstName"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guardian1FirstName]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian1FirstName]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Guardian1Email]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Guardian1Email"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guardian1Email]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian1Email]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Guardian1Pone]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Guardian1Pone"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guardian1Pone]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian1Pone]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Guardian2Relationship]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Guardian2Relationship"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guardian2Relationship]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian2Relationship]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Guardian2LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Guardian2LastName"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guardian2LastName]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian2LastName]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Guardian2FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Guardian2FirstName"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guardian2FirstName]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian2FirstName]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Guardian2Email]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Guardian2Email"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guardian2Email]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian2Email]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Guardian2Phone]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Guardian2Phone"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guardian2Phone]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Guardian2Phone]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[SPED]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SPED"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[SPED]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[SPED]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[LEP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="LEP"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[LEP]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[LEP]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[FRL]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="FRL"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[FRL]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[FRL]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[ELL]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="ELL"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[ELL]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[ELL]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[IEP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="IEP"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[IEP]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[IEP]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Gifted]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Gifted"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Gifted]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Gifted]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Section504]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Section504"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Section504]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Section504]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Title1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Title1"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Title1]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Title1]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[SchoolCounselorName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="SchoolCounselorName"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[SchoolCounselorName]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[SchoolCounselorName]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[EnrollmentDate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="EnrollmentDate"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[EnrollmentDate]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[EnrollmentDate]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[First Name]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="First Name"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[First Name]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[First Name]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Last Name]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Last Name"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Last Name]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Last Name]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Email Address]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Email Address"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Email Address]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Email Address]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Phone]"
+                      cachedDataType="wstr"
+                      cachedLength="13"
+                      cachedName="Phone"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Phone]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Phone]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[SUSD Student ID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="SUSD Student ID"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[SUSD Student ID]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[SUSD Student ID]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[School ID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="School ID"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[School ID]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[School ID]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Secondary Email]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Secondary Email"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Secondary Email]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Secondary Email]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Cell Phone]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Cell Phone"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Cell Phone]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Cell Phone]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Middle Name]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Middle Name"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Middle Name]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Middle Name]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Preferred Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Preferred Name"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Preferred Name]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Preferred Name]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Date of Birth]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="Date of Birth"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Date of Birth]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Date of Birth]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Zip]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="Zip"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Zip]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Zip]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Status"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Status]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[Status]" />
+                    <inputColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].Columns[GradpointID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="GradpointID"
+                      externalMetadataColumnId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[GradpointID]"
+                      lineageId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output].Columns[GradpointID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Username]"
+                      dataType="wstr"
+                      length="23"
+                      name="Username" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Password]"
+                      dataType="wstr"
+                      length="20"
+                      name="Password" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[GENDER]"
+                      dataType="wstr"
+                      length="5"
+                      name="GENDER" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Notes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Notes" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Street]"
+                      dataType="wstr"
+                      length="50"
+                      name="Street" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[CITY]"
+                      dataType="wstr"
+                      length="50"
+                      name="CITY" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[STATE]"
+                      dataType="wstr"
+                      length="5"
+                      name="STATE" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Country]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[CountryofBirth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="CountryofBirth" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Race]"
+                      dataType="wstr"
+                      length="600"
+                      name="Race" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Hispanic]"
+                      dataType="wstr"
+                      length="5"
+                      name="Hispanic" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[HomePhone]"
+                      dataType="wstr"
+                      length="13"
+                      name="HomePhone" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[GradeLevel]"
+                      dataType="wstr"
+                      length="600"
+                      name="GradeLevel" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[LocalID]"
+                      dataType="wstr"
+                      length="20"
+                      name="LocalID" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[ProjectedGRaduationDate]"
+                      dataType="numeric"
+                      name="ProjectedGRaduationDate"
+                      precision="4" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[GraduationDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="GraduationDate" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guadrian1Relationship]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Guadrian1Relationship" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guardian1LastName]"
+                      dataType="wstr"
+                      length="60"
+                      name="Guardian1LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guardian1FirstName]"
+                      dataType="wstr"
+                      length="60"
+                      name="Guardian1FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guardian1Email]"
+                      dataType="wstr"
+                      length="100"
+                      name="Guardian1Email" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guardian1Pone]"
+                      dataType="wstr"
+                      length="10"
+                      name="Guardian1Pone" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guardian2Relationship]"
+                      dataType="wstr"
+                      length="5"
+                      name="Guardian2Relationship" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guardian2LastName]"
+                      dataType="wstr"
+                      length="60"
+                      name="Guardian2LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guardian2FirstName]"
+                      dataType="wstr"
+                      length="60"
+                      name="Guardian2FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guardian2Email]"
+                      dataType="wstr"
+                      length="100"
+                      name="Guardian2Email" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Guardian2Phone]"
+                      dataType="wstr"
+                      length="10"
+                      name="Guardian2Phone" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[SPED]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SPED" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[LEP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="LEP" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[FRL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="FRL" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[ELL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="ELL" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[IEP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="IEP" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Gifted]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Gifted" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Section504]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Section504" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Title1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Title1" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[SchoolCounselorName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="SchoolCounselorName" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[EnrollmentDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="EnrollmentDate" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[First Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="First Name" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Last Name]"
+                      dataType="wstr"
+                      length="60"
+                      name="Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Email Address]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Email Address" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Phone]"
+                      dataType="wstr"
+                      length="13"
+                      name="Phone" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[SUSD Student ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="SUSD Student ID" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[School ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="School ID" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Secondary Email]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Secondary Email" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Cell Phone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Cell Phone" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Middle Name]"
+                      dataType="wstr"
+                      length="20"
+                      name="Middle Name" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Preferred Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Preferred Name" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Date of Birth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="Date of Birth" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Zip]"
+                      dataType="wstr"
+                      length="6"
+                      name="Zip" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input].ExternalColumns[GradpointID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="GradpointID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Edgenuity Student Export.Paths[OLE DB Source Output]"
+              endId="Package\Edgenuity Student Export\student_export.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Edgenuity Student Export\Student Export.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{41670DE5-0A35-493B-AA93-EFC84B119968}"
+      DTS:From="Package\Edgenuity Student Export"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Edgenuity Enrollment Export" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="200,41.6"
+          Id="Package\Edgenuity Student Export"
+          TopLeft="49.142857979755,29.3647062941819" />
+        <NodeLayout
+          Size="214.4,41.6"
+          Id="Package\Edgenuity Enrollment Export"
+          TopLeft="96.5714302160302,107.058825030871" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="149.142857979755,70.9647062941819">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="54.6285722362752,36.0941187366895"
+              Start="0,0"
+              End="54.6285722362752,28.5941187366895">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.0470593683447" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.0470593683447"
+                    Point2="0,18.0470593683447"
+                    Point3="4,18.0470593683447" />
+                  <mssgle:LineSegment
+                    End="50.6285722362752,18.0470593683447" />
+                  <mssgle:CubicBezierSegment
+                    Point1="50.6285722362752,18.0470593683447"
+                    Point2="54.6285722362752,18.0470593683447"
+                    Point3="54.6285722362752,22.0470593683447" />
+                  <mssgle:LineSegment
+                    End="54.6285722362752,28.5941187366895" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Edgenuity Student Export">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Edgenuity Student Export\student_export"
+          TopLeft="0.571428581159921,95.4823544597956" />
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\Edgenuity Student Export\Student Export"
+          TopLeft="24.5714289898776,0.51764729047731" />
+        <EdgeLayout
+          Id="Package\Edgenuity Student Export.Paths[OLE DB Source Output]"
+          TopLeft="99.7714289898776,42.1176472904773">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-23.2000004087177,53.3647071693183"
+              Start="0,0"
+              End="-23.2000004087177,45.8647071693183">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.6823535846592" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.6823535846592"
+                    Point2="0,26.6823535846592"
+                    Point3="-4,26.6823535846592" />
+                  <mssgle:LineSegment
+                    End="-19.2000004087177,26.6823535846592" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-19.2000004087177,26.6823535846592"
+                    Point2="-23.2000004087177,26.6823535846592"
+                    Point3="-23.2000004087177,30.6823535846592" />
+                  <mssgle:LineSegment
+                    End="-23.2000004087177,45.8647071693183" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Edgenuity Student Export\Student Export">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Edgenuity Enrollment Export">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\Edgenuity Enrollment Export\Enrollment Export"
+          TopLeft="67.2,12" />
+        <NodeLayout
+          Size="166.4,41.6"
+          Id="Package\Edgenuity Enrollment Export\enrollment_export"
+          TopLeft="154.4,111.2" />
+        <EdgeLayout
+          Id="Package\Edgenuity Enrollment Export.Paths[OLE DB Source Output]"
+          TopLeft="149.6,53.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="88,57.6"
+              Start="0,0"
+              End="88,50.1">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.8" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.8"
+                    Point2="0,28.8"
+                    Point3="4,28.8" />
+                  <mssgle:LineSegment
+                    End="84,28.8" />
+                  <mssgle:CubicBezierSegment
+                    Point1="84,28.8"
+                    Point2="88,28.8"
+                    Point3="88,32.8" />
+                  <mssgle:LineSegment
+                    End="88,50.1" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Edgenuity Enrollment Export\Enrollment Export">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
