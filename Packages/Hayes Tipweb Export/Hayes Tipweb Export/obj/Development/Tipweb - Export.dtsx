@@ -1,0 +1,2315 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/18/2016 2:25:33 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="046-SMCMURRAY"
+  DTS:CreatorName="APS\e207878"
+  DTS:DTSID="{A361AFD9-93BE-48F8-B196-14B81D5A980C}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5058.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Tipweb Export"
+  DTS:PackageType="5"
+  DTS:VersionBuild="24"
+  DTS:VersionGUID="{3F9DD1A8-804B-4D8A-9609-7DFA395514DB}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Damaged Output]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{A189C5AB-E29D-4C34-B323-5F8878803F64}"
+      DTS:ObjectName="Damaged Output">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis\Files\Export\Hayes Tipweb\APS_ChargePayments.tsv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CampusID"
+              DTS:DTSID="{E7390095-8406-440C-8F5C-87E28562617F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="StudentID"
+              DTS:DTSID="{CB96C963-4C71-4FF3-BA00-383F5DB6B0D7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="256"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ISBN"
+              DTS:DTSID="{2FD9F656-5FAE-4BF8-AEBA-BF46467E0884}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="256"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accession"
+              DTS:DTSID="{88A90A12-F14F-47E7-8833-E1AEDFF75ED1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="7"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Status"
+              DTS:DTSID="{01B953B3-0EA3-4483-BB1D-093024641405}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TransactionDate"
+              DTS:DTSID="{23D770BE-FCD7-41F8-87F3-BDB1AE0EC0CA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TransReceiptID"
+              DTS:DTSID="{D5491D6C-9471-419B-9BE8-3F1B1154F77E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:DataScale="2"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PaymentAmount"
+              DTS:DTSID="{3DC77E71-C5A6-487E-BC3A-F60080DAE33E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Notes"
+              DTS:DTSID="{8C5D1DE3-0D1A-4C71-8C74-DE40F2E6B1CB}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Damaged to Tipweb]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{80D4B794-B4EB-48DB-93F2-707260DA10FC}"
+      DTS:ObjectName="Damaged to Tipweb">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\030-tipweb\E$\TipwebIntegration\DamagePayments\APSDamagedPayments.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CampusID"
+              DTS:DTSID="{7B4BF17C-3025-4AB2-A8D0-BB06A7D79178}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="StudentID"
+              DTS:DTSID="{D38E1225-49D5-479A-A295-E33B35DA44CB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="256"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ISBN"
+              DTS:DTSID="{D4BFF0FF-DFEC-4858-9CDE-EA0CA9A47BCD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="256"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accession"
+              DTS:DTSID="{4CBC3BF2-9F57-4777-8CD0-8510ACF83260}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TransactionDate"
+              DTS:DTSID="{82B9F0B0-A757-4DC4-BABA-F5C61889F6E1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TransReceiptID"
+              DTS:DTSID="{E4C1B975-51BC-49B2-ADAD-2DFA49E9FC44}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:DataScale="2"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PaymentAmount"
+              DTS:DTSID="{0167C2BE-7C09-4B56-B9B4-0B4657AFE48C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Notes"
+              DTS:DTSID="{6DFADB18-60F1-4233-90FD-44F2A57FA5E6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ChargeUID"
+              DTS:DTSID="{B5D21986-EE7F-469E-9E2A-CA45D4420AE9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Satisfied"
+              DTS:DTSID="{2878BBF5-EFB7-48D9-B8F7-8CE9B99983F8}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{F09FC7FD-0CE9-48E7-91E8-3A083E0B1514}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\syntempssis\Files\Export\Hayes Tipweb\TextLost.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Lost Output]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{1DE6E6FA-F85B-45C9-87C7-18B28B0F2C8E}"
+      DTS:ObjectName="Lost Output">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis\Files\Export\Hayes Tipweb\APS_LostPayments.tsv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CampusID"
+              DTS:DTSID="{74EF3245-26B6-4336-BD10-2C9CCD78119E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="StudentID"
+              DTS:DTSID="{BD02ED8B-4902-4806-8D1F-B083AF1718EC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="256"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ISBN"
+              DTS:DTSID="{A7FADA5C-2DD6-45AF-B956-685B45753C4A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="256"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accession"
+              DTS:DTSID="{3F201465-127A-4EB6-80A9-9073EEEA0D93}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="7"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Status"
+              DTS:DTSID="{F37579C2-B12C-45C3-8E31-6AE84BFC568E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TransactionDate"
+              DTS:DTSID="{D80BA6FF-3F54-47DE-BB38-B598A0382133}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TransReceiptID"
+              DTS:DTSID="{1A858FB7-BFD6-4B4B-B0FB-2EA6E7AC102B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:DataScale="2"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PaymentAmount"
+              DTS:DTSID="{C4E8E7CA-2C55-4418-8E31-95D1423ABDBB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Notes"
+              DTS:DTSID="{708803A3-483A-4F52-B313-22B174E011BA}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Lost to Tipweb]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{863214C1-EC04-442A-8AFB-3AA30466EC84}"
+      DTS:ObjectName="Lost to Tipweb">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\030-tipweb\E$\TipwebIntegration\LostPayments\APSLostPayments.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CampusID"
+              DTS:DTSID="{BC6AB4D5-B49C-472B-B893-3A96CEEE745C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="StudentID"
+              DTS:DTSID="{AA1F8AC2-BC81-4226-8313-B2A18408B349}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="256"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ISBN"
+              DTS:DTSID="{6A113AB9-B4CE-4C3D-8228-1284F4547B1B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="256"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accession"
+              DTS:DTSID="{68E8C102-CF15-4478-A398-D707BBDDA1AA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="7"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Status"
+              DTS:DTSID="{9615B7FF-DAA1-4847-BC9B-507186E57D56}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TransactionDate"
+              DTS:DTSID="{2B8D80AF-9CB3-47C5-8A12-CF4E5D0694A4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TransReceiptID"
+              DTS:DTSID="{3F8B57CF-BBA2-4ECA-84DD-DF98308C41E3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:DataScale="2"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PaymentAmount"
+              DTS:DTSID="{D4560647-D9DB-45B6-B6E3-0DFBE00041E6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Notes"
+              DTS:DTSID="{78251ED5-0CF2-43A2-96A3-AD1B5365C3C8}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[synergydbdc.ST_Production.QueryFileUser]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{868FEE09-93E6-41CF-99CA-F91A7600BC3A}"
+      DTS:ObjectName="synergydbdc.ST_Production.QueryFileUser">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=synergydbdc;User ID=QueryFileUser;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATewWZ/TlJEy+RoEBYRx+mgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACfisXy/M9G1hgfwrhl1hGqAAAAAASAAACgAAAAEAAAABvfVYr9nMrOlF1plzOgVfAwAAAA39S2hu2EP7bnwzYz4vwuP21USKIR9D1y8sqh+bsiz+RM3TQyJM81QLN6KKYvS2DeFAAAANZjU1MRP1/K2ncGLOmWX3By+p4H</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Temp Table"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{83613848-A76F-4BF1-A8D6-F6EAB620C0AD}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Temp Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{868FEE09-93E6-41CF-99CA-F91A7600BC3A}"
+          SQLTask:SqlStatementSource="IF OBJECT_ID('ST_Production.dbo.##SynFees') IS NOT NULL&#xA;DROP TABLE ##SynFees&#xA;CREATE TABLE ##SynFees&#xA;([PayeeID] VARCHAR(255)&#xA;, [StudentID] INT&#xA;, [SynergyFeeID] UNIQUEIDENTIFIER&#xA;, [Amount] DECIMAL(10,2)&#xA;, [StudentName] TEXT&#xA;, [FeeDate] DATE&#xA;, [CreditCardType] VARCHAR(20)&#xA;, [CreditCardLastFour] VARCHAR(4)&#xA;,[TransID] UNIQUEIDENTIFIER)&#xA;&#xA;DECLARE @SynFees AS TABLE([PayeeID] VARCHAR(255), [StudentID] INT, [SynergyFeeID] UNIQUEIDENTIFIER, [Amount] DECIMAL(10,2), [StudentName] TEXT, [FeeDate] DATE, [CreditCardType] VARCHAR(20), [CreditCardLastFour] VARCHAR(4),[TransID] UNIQUEIDENTIFIER);&#xA;&#xA;&#xA;INSERT INTO&#xA;&#x9;@SynFees&#xA;&#xA;&#x9;SELECT&#xA;&#x9;&#x9;[SynergyFees].*&#xA;&#x9;&#x9;,NEWID() AS [TransID]&#xA;&#x9;FROM&#xA;&#x9;&#x9;OPENROWSET (&#xA;&#x9;&#x9;&#x9;'Microsoft.ACE.OLEDB.12.0', &#xA;&#x9;&#x9;&#x9;'Text;Database=\\syntempssis.aps.edu.actd\Files\TempQuery\SchoolPay;', &#xA;&#x9;&#x9;&#x9;'SELECT * from synergy_fees.csv'&#xA;&#x9;&#x9;) AS [SynergyFees]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Textbooks Damaged Output"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{8AA24158-294F-46D3-A1F3-E76CE086532E}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Textbooks Damaged Output"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Textbooks Damaged Output\Multicast"
+              componentClassID="{EC139FBC-694E-490B-8EA7-35690FB0F445}"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\Textbooks Damaged Output\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Textbooks Damaged Output\Multicast.Outputs[Multicast Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\Textbooks Damaged Output\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Textbooks Damaged Output\Multicast.Outputs[Multicast Output 2]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 2"
+                  synchronousInputId="Package\Textbooks Damaged Output\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Textbooks Damaged Output\Multicast.Outputs[Multicast Output 3]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 3"
+                  synchronousInputId="Package\Textbooks Damaged Output\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Textbooks Damaged Output\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DECLARE @SynFees AS TABLE([PayeeID] VARCHAR(255), [StudentID] INT, [SynergyFeeID] UNIQUEIDENTIFIER, [Amount] DECIMAL(10,2), [StudentName] TEXT, [FeeDate] DATE, [CreditCardType] VARCHAR(20), [CreditCardLastFour] VARCHAR(4),[TransID] UNIQUEIDENTIFIER);
+
+SELECT
+	[ENROLMENT].[SCHOOL_CODE] AS [CampusID]
+	,[STUDENT].[SIS_NUMBER] AS [StudentID]
+	,LEFT(CONVERT(VARCHAR(256),[FEE].[NOTE]),CHARINDEX(' ',[FEE].[NOTE])) AS [ISBN]
+	,RIGHT(LEFT(CONVERT(VARCHAR(256),[FEE].[NOTE]),CHARINDEX(' ',[FEE].[NOTE],CHARINDEX(' ',[FEE].[NOTE])+1)),CHARINDEX(' ',[FEE].[NOTE],CHARINDEX(' ',[FEE].[NOTE])+1) - CHARINDEX(' ',[FEE].[NOTE])) AS [Accession]
+	--,CASE WHEN [PAYMENT].[AMOUNT] = [FEE].[CREDIT_AMOUNT] OR [FEE].[FEE_STATUS] = 1 THEN 'Paid' ELSE 'Partial' END AS [Status]
+	,'' AS [ChargeUID]
+	,[PAYMENT].[AMOUNT] AS [PaymentAmount]
+	,CONVERT(VARCHAR(10),[PAYMENT].[PAYMENT_DATE],101) AS [TransactionDate]
+	,[PAYTRANS].[TRANSACTION_ID] AS [TransReceiptID]
+	,'' AS [Notes]
+	,'' AS [Satisfied]
+	
+FROM
+	[rev].[EPC_STU_FEE] AS [FEE]
+	
+	INNER JOIN
+	APS.BasicStudent AS [STUDENT]
+	ON
+	[FEE].[STUDENT_GU] = [STUDENT].[STUDENT_GU]
+	
+	INNER JOIN
+	@SynFees AS [SYNFEES]
+	ON
+	[FEE].[STUDENT_FEE_GU] = [SYNFEES].[SynergyFeeID]
+	AND [STUDENT].[SIS_NUMBER] = [SYNFEES].[StudentID]
+	
+	INNER JOIN
+	[rev].[EPC_STU_FEE_PAYMENT] AS [PAYMENT]
+	ON
+	[FEE].[STUDENT_FEE_GU] = [PAYMENT].[STU_FEE_GU]
+	--AND [SYNFEES].[FeeDate] = [PAYMENT].[PAYMENT_DATE]
+	AND [SYNFEES].[Amount] = [PAYMENT].[AMOUNT]
+	
+	LEFT OUTER JOIN
+	[rev].[EPC_STU_FEE_PAY_TRANS] AS [PAYTRANS]
+	ON
+	[PAYMENT].[STU_FEE_PAY_TRANS_GU] = [PAYTRANS].[STU_FEE_PAY_TRANS_GU]
+	
+	INNER JOIN
+	[rev].[EPC_SCH_YR_FEE] AS [FEE_CODE]
+	ON
+	[FEE].[FEE_CODE_GU] = [FEE_CODE].[FEE_CODE_GU]
+	
+	LEFT OUTER JOIN
+	APS.StudentEnrollmentDetails AS [ENROLMENT]
+	ON
+	[FEE].[STUDENT_SCHOOL_YEAR_GU] = [ENROLMENT].[STUDENT_SCHOOL_YEAR_GU]
+	
+WHERE
+	[FEE_CODE].[FEE_DESCRIPTION] IN ('Textbook Damaged','Textbooks Damaged')</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Textbooks Damaged Output\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[synergydbdc.ST_Production.QueryFileUser]"
+                  connectionManagerRefId="Package.ConnectionManagers[synergydbdc.ST_Production.QueryFileUser]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[CampusID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CampusID]"
+                      length="20"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[CampusID]"
+                      name="CampusID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[StudentID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StudentID]"
+                      length="20"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[StudentID]"
+                      name="StudentID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[ISBN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ISBN]"
+                      length="256"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[ISBN]"
+                      name="ISBN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Accession]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Accession]"
+                      length="256"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Accession]"
+                      name="Accession"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionDate]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransactionDate]"
+                      length="10"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionDate]"
+                      name="TransactionDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransReceiptID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransReceiptID]"
+                      length="20"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransReceiptID]"
+                      name="TransReceiptID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[PaymentAmount]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PaymentAmount]"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[PaymentAmount]"
+                      name="PaymentAmount"
+                      precision="9"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Notes]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Notes]"
+                      length="1"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Notes]"
+                      name="Notes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[ChargeUID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ChargeUID]"
+                      length="1"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[ChargeUID]"
+                      name="ChargeUID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Satisfied]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Satisfied]"
+                      length="1"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Satisfied]"
+                      name="Satisfied"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CampusID]"
+                      dataType="wstr"
+                      length="20"
+                      name="CampusID" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StudentID]"
+                      dataType="wstr"
+                      length="20"
+                      name="StudentID" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ISBN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      name="ISBN" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Accession]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      name="Accession" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransactionDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="TransactionDate" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransReceiptID]"
+                      dataType="wstr"
+                      length="20"
+                      name="TransReceiptID" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PaymentAmount]"
+                      dataType="numeric"
+                      name="PaymentAmount"
+                      precision="9"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Notes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Notes" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ChargeUID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ChargeUID" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Satisfied]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Satisfied" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CampusID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CampusID]"
+                      name="CampusID" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StudentID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StudentID]"
+                      name="StudentID" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ISBN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ISBN]"
+                      name="ISBN" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Accession]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Accession]"
+                      name="Accession" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ChargeUID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ChargeUID]"
+                      name="ChargeUID" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransactionDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransactionDate]"
+                      name="TransactionDate" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransReceiptID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransReceiptID]"
+                      name="TransReceiptID" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PaymentAmount]"
+                      dataType="numeric"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PaymentAmount]"
+                      name="PaymentAmount"
+                      precision="9"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Notes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Notes]"
+                      name="Notes" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Satisfied]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Satisfied]"
+                      name="Satisfied" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Textbooks Damaged Output\To Syntempssis"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="To Syntempssis">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Textbooks Damaged Output\To Syntempssis.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Damaged Output]"
+                  connectionManagerRefId="Package.ConnectionManagers[Damaged Output]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].Columns[CampusID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="CampusID"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[CampusID]"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[CampusID]" />
+                    <inputColumn
+                      refId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].Columns[StudentID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="StudentID"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[StudentID]"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[StudentID]" />
+                    <inputColumn
+                      refId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].Columns[ISBN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="256"
+                      cachedName="ISBN"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[ISBN]"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[ISBN]" />
+                    <inputColumn
+                      refId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].Columns[Accession]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="256"
+                      cachedName="Accession"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[Accession]"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Accession]" />
+                    <inputColumn
+                      refId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].Columns[TransactionDate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="TransactionDate"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[TransactionDate]"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionDate]" />
+                    <inputColumn
+                      refId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].Columns[TransReceiptID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="TransReceiptID"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[TransReceiptID]"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransReceiptID]" />
+                    <inputColumn
+                      refId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].Columns[PaymentAmount]"
+                      cachedDataType="numeric"
+                      cachedName="PaymentAmount"
+                      cachedPrecision="9"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[PaymentAmount]"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[PaymentAmount]" />
+                    <inputColumn
+                      refId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].Columns[Notes]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Notes"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[Notes]"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Notes]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[CampusID]"
+                      dataType="wstr"
+                      length="20"
+                      name="CampusID" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[StudentID]"
+                      dataType="wstr"
+                      length="20"
+                      name="StudentID" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[ISBN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      name="ISBN" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[Accession]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      name="Accession" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="7"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[TransactionDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="TransactionDate" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[TransReceiptID]"
+                      dataType="wstr"
+                      length="20"
+                      name="TransReceiptID" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[PaymentAmount]"
+                      dataType="numeric"
+                      name="PaymentAmount"
+                      precision="9"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[Notes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Notes" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Textbooks Damaged Output\To Tipweb"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="To Tipweb">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Textbooks Damaged Output\To Tipweb.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Damaged to Tipweb]"
+                  connectionManagerRefId="Package.ConnectionManagers[Damaged to Tipweb]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].Columns[StudentID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="StudentID"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[StudentID]"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[StudentID]" />
+                    <inputColumn
+                      refId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].Columns[ISBN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="256"
+                      cachedName="ISBN"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[ISBN]"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[ISBN]" />
+                    <inputColumn
+                      refId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].Columns[Accession]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="256"
+                      cachedName="Accession"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[Accession]"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Accession]" />
+                    <inputColumn
+                      refId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].Columns[TransactionDate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="TransactionDate"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[TransactionDate]"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionDate]" />
+                    <inputColumn
+                      refId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].Columns[TransReceiptID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="TransReceiptID"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[TransReceiptID]"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransReceiptID]" />
+                    <inputColumn
+                      refId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].Columns[PaymentAmount]"
+                      cachedDataType="numeric"
+                      cachedName="PaymentAmount"
+                      cachedPrecision="9"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[PaymentAmount]"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[PaymentAmount]" />
+                    <inputColumn
+                      refId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].Columns[Notes]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Notes"
+                      externalMetadataColumnId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[Notes]"
+                      lineageId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Notes]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[StudentID]"
+                      dataType="wstr"
+                      length="20"
+                      name="StudentID" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[ISBN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      name="ISBN" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[Accession]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      name="Accession" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[TransactionDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="TransactionDate" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[TransReceiptID]"
+                      dataType="wstr"
+                      length="20"
+                      name="TransReceiptID" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[PaymentAmount]"
+                      dataType="numeric"
+                      name="PaymentAmount"
+                      precision="9"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[Notes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Notes" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[CampusID]"
+                      dataType="wstr"
+                      length="20"
+                      name="CampusID" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[ChargeUID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ChargeUID" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[Satisfied]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Satisfied" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Textbooks Damaged Output.Paths[Multicast Output 1]"
+              endId="Package\Textbooks Damaged Output\To Syntempssis.Inputs[Flat File Destination Input]"
+              name="Multicast Output 1"
+              startId="Package\Textbooks Damaged Output\Multicast.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\Textbooks Damaged Output.Paths[Multicast Output 2]"
+              endId="Package\Textbooks Damaged Output\To Tipweb.Inputs[Flat File Destination Input]"
+              name="Multicast Output 2"
+              startId="Package\Textbooks Damaged Output\Multicast.Outputs[Multicast Output 2]" />
+            <path
+              refId="Package\Textbooks Damaged Output.Paths[OLE DB Source Output]"
+              endId="Package\Textbooks Damaged Output\Multicast.Inputs[Multicast Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Textbooks Damaged Output\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Textbooks Lost Output"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{A1276F51-A4DA-40B2-AEFD-54D84B5DE1AE}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Textbooks Lost Output"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Textbooks Lost Output\Multicast"
+              componentClassID="{EC139FBC-694E-490B-8EA7-35690FB0F445}"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\Textbooks Lost Output\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Textbooks Lost Output\Multicast.Outputs[Multicast Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\Textbooks Lost Output\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Textbooks Lost Output\Multicast.Outputs[Multicast Output 2]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 2"
+                  synchronousInputId="Package\Textbooks Lost Output\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Textbooks Lost Output\Multicast.Outputs[Multicast Output 3]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 3"
+                  synchronousInputId="Package\Textbooks Lost Output\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Textbooks Lost Output\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">DECLARE @SynFees AS TABLE([PayeeID] VARCHAR(255), [StudentID] INT, [SynergyFeeID] UNIQUEIDENTIFIER, [Amount] DECIMAL(10,2), [StudentName] TEXT, [FeeDate] DATE, [CreditCardType] VARCHAR(20), [CreditCardLastFour] VARCHAR(4),[TransID] UNIQUEIDENTIFIER);
+
+SELECT
+	[ENROLMENT].[SCHOOL_CODE] AS [CampusID]
+	,[STUDENT].[SIS_NUMBER] AS [StudentID]
+	,LEFT(CONVERT(VARCHAR(256),[FEE].[NOTE]),CHARINDEX(' ',[FEE].[NOTE])) AS [ISBN]
+	,RIGHT(LEFT(CONVERT(VARCHAR(256),[FEE].[NOTE]),CHARINDEX(' ',[FEE].[NOTE],CHARINDEX(' ',[FEE].[NOTE])+1)),CHARINDEX(' ',[FEE].[NOTE],CHARINDEX(' ',[FEE].[NOTE])+1) - CHARINDEX(' ',[FEE].[NOTE])) AS [Accession]
+	,CASE WHEN [PAYMENT].[AMOUNT] = [FEE].[CREDIT_AMOUNT] OR [FEE].[FEE_STATUS] = 1 THEN 'Paid' ELSE 'Partial' END AS [Status]
+	,CONVERT(VARCHAR(10),[PAYMENT].[PAYMENT_DATE],101) AS [TransactionDate]
+	,[PAYTRANS].[TRANSACTION_ID] AS [TransReceiptID]
+	,[PAYMENT].[AMOUNT] AS [PaymentAmount]
+	,'' AS [Notes]
+	
+FROM
+	[rev].[EPC_STU_FEE] AS [FEE]
+	
+	INNER JOIN
+	APS.BasicStudent AS [STUDENT]
+	ON
+	[FEE].[STUDENT_GU] = [STUDENT].[STUDENT_GU]
+	
+	INNER JOIN
+	@SynFees AS [SYNFEES]
+	ON
+	[FEE].[STUDENT_FEE_GU] = [SYNFEES].[SynergyFeeID]
+	AND [STUDENT].[SIS_NUMBER] = [SYNFEES].[StudentID]
+	
+	INNER JOIN
+	[rev].[EPC_STU_FEE_PAYMENT] AS [PAYMENT]
+	ON
+	[FEE].[STUDENT_FEE_GU] = [PAYMENT].[STU_FEE_GU]
+	--AND [SYNFEES].[FeeDate] = [PAYMENT].[PAYMENT_DATE]
+	AND [SYNFEES].[Amount] = [PAYMENT].[AMOUNT]
+	
+	LEFT OUTER JOIN
+	[rev].[EPC_STU_FEE_PAY_TRANS] AS [PAYTRANS]
+	ON
+	[PAYMENT].[STU_FEE_PAY_TRANS_GU] = [PAYTRANS].[STU_FEE_PAY_TRANS_GU]
+	
+	INNER JOIN
+	[rev].[EPC_SCH_YR_FEE] AS [FEE_CODE]
+	ON
+	[FEE].[FEE_CODE_GU] = [FEE_CODE].[FEE_CODE_GU]
+	
+	LEFT OUTER JOIN
+	APS.StudentEnrollmentDetails AS [ENROLMENT]
+	ON
+	[FEE].[STUDENT_SCHOOL_YEAR_GU] = [ENROLMENT].[STUDENT_SCHOOL_YEAR_GU]
+	
+WHERE
+	[FEE_CODE].[FEE_DESCRIPTION] IN ('Textbook Lost','Textbooks Lost')</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Textbooks Lost Output\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[synergydbdc.ST_Production.QueryFileUser]"
+                  connectionManagerRefId="Package.ConnectionManagers[synergydbdc.ST_Production.QueryFileUser]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[CampusID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CampusID]"
+                      length="20"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[CampusID]"
+                      name="CampusID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[StudentID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StudentID]"
+                      length="20"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[StudentID]"
+                      name="StudentID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[ISBN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ISBN]"
+                      length="256"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[ISBN]"
+                      name="ISBN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Accession]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Accession]"
+                      length="256"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Accession]"
+                      name="Accession"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Status]"
+                      length="7"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Status]"
+                      name="Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionDate]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransactionDate]"
+                      length="10"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionDate]"
+                      name="TransactionDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransReceiptID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransReceiptID]"
+                      length="20"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransReceiptID]"
+                      name="TransReceiptID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[PaymentAmount]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PaymentAmount]"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[PaymentAmount]"
+                      name="PaymentAmount"
+                      precision="9"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Notes]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Notes]"
+                      length="1"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Notes]"
+                      name="Notes"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CampusID]"
+                      dataType="wstr"
+                      length="20"
+                      name="CampusID" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StudentID]"
+                      dataType="wstr"
+                      length="20"
+                      name="StudentID" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ISBN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      name="ISBN" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Accession]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      name="Accession" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="7"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransactionDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="TransactionDate" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransReceiptID]"
+                      dataType="wstr"
+                      length="20"
+                      name="TransReceiptID" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PaymentAmount]"
+                      dataType="numeric"
+                      name="PaymentAmount"
+                      precision="9"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Notes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Notes" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CampusID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CampusID]"
+                      name="CampusID" />
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StudentID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StudentID]"
+                      name="StudentID" />
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ISBN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ISBN]"
+                      name="ISBN" />
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Accession]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Accession]"
+                      name="Accession" />
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="7"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Status]"
+                      name="Status" />
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransactionDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransactionDate]"
+                      name="TransactionDate" />
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransReceiptID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransReceiptID]"
+                      name="TransReceiptID" />
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PaymentAmount]"
+                      dataType="numeric"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PaymentAmount]"
+                      name="PaymentAmount"
+                      precision="9"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Notes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Notes]"
+                      name="Notes" />
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Textbooks Lost Output\To Syntempssis"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="To Syntempssis">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Textbooks Lost Output\To Syntempssis.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Lost Output]"
+                  connectionManagerRefId="Package.ConnectionManagers[Lost Output]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].Columns[StudentID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="StudentID"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[StudentID]"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[StudentID]" />
+                    <inputColumn
+                      refId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].Columns[ISBN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="256"
+                      cachedName="ISBN"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[ISBN]"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[ISBN]" />
+                    <inputColumn
+                      refId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].Columns[Accession]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="256"
+                      cachedName="Accession"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[Accession]"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Accession]" />
+                    <inputColumn
+                      refId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].Columns[Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="7"
+                      cachedName="Status"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[Status]"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Status]" />
+                    <inputColumn
+                      refId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].Columns[TransactionDate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="TransactionDate"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[TransactionDate]"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionDate]" />
+                    <inputColumn
+                      refId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].Columns[TransReceiptID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="TransReceiptID"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[TransReceiptID]"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransReceiptID]" />
+                    <inputColumn
+                      refId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].Columns[PaymentAmount]"
+                      cachedDataType="numeric"
+                      cachedName="PaymentAmount"
+                      cachedPrecision="9"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[PaymentAmount]"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[PaymentAmount]" />
+                    <inputColumn
+                      refId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].Columns[Notes]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Notes"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[Notes]"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Notes]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[StudentID]"
+                      dataType="wstr"
+                      length="20"
+                      name="StudentID" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[ISBN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      name="ISBN" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[Accession]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      name="Accession" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="7"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[TransactionDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="TransactionDate" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[TransReceiptID]"
+                      dataType="wstr"
+                      length="20"
+                      name="TransReceiptID" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[PaymentAmount]"
+                      dataType="numeric"
+                      name="PaymentAmount"
+                      precision="9"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[Notes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Notes" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input].ExternalColumns[CampusID]"
+                      dataType="wstr"
+                      length="20"
+                      name="CampusID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Textbooks Lost Output\To Tipweb"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="To Tipweb">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Textbooks Lost Output\To Tipweb.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Lost to Tipweb]"
+                  connectionManagerRefId="Package.ConnectionManagers[Lost to Tipweb]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].Columns[StudentID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="StudentID"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[StudentID]"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[StudentID]" />
+                    <inputColumn
+                      refId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].Columns[ISBN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="256"
+                      cachedName="ISBN"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[ISBN]"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[ISBN]" />
+                    <inputColumn
+                      refId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].Columns[Accession]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="256"
+                      cachedName="Accession"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[Accession]"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Accession]" />
+                    <inputColumn
+                      refId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].Columns[Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="7"
+                      cachedName="Status"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[Status]"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Status]" />
+                    <inputColumn
+                      refId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].Columns[TransactionDate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="TransactionDate"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[TransactionDate]"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionDate]" />
+                    <inputColumn
+                      refId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].Columns[TransReceiptID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="TransReceiptID"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[TransReceiptID]"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransReceiptID]" />
+                    <inputColumn
+                      refId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].Columns[PaymentAmount]"
+                      cachedDataType="numeric"
+                      cachedName="PaymentAmount"
+                      cachedPrecision="9"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[PaymentAmount]"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[PaymentAmount]" />
+                    <inputColumn
+                      refId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].Columns[Notes]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Notes"
+                      externalMetadataColumnId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[Notes]"
+                      lineageId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output].Columns[Notes]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[StudentID]"
+                      dataType="wstr"
+                      length="20"
+                      name="StudentID" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[ISBN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      name="ISBN" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[Accession]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      name="Accession" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="7"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[TransactionDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="TransactionDate" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[TransReceiptID]"
+                      dataType="wstr"
+                      length="20"
+                      name="TransReceiptID" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[PaymentAmount]"
+                      dataType="numeric"
+                      name="PaymentAmount"
+                      precision="9"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[Notes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Notes" />
+                    <externalMetadataColumn
+                      refId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input].ExternalColumns[CampusID]"
+                      dataType="wstr"
+                      length="20"
+                      name="CampusID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Textbooks Lost Output.Paths[Multicast Output 1]"
+              endId="Package\Textbooks Lost Output\To Syntempssis.Inputs[Flat File Destination Input]"
+              name="Multicast Output 1"
+              startId="Package\Textbooks Lost Output\Multicast.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\Textbooks Lost Output.Paths[Multicast Output 2]"
+              endId="Package\Textbooks Lost Output\To Tipweb.Inputs[Flat File Destination Input]"
+              name="Multicast Output 2"
+              startId="Package\Textbooks Lost Output\Multicast.Outputs[Multicast Output 2]" />
+            <path
+              refId="Package\Textbooks Lost Output.Paths[OLE DB Source Output]"
+              endId="Package\Textbooks Lost Output\Multicast.Inputs[Multicast Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Textbooks Lost Output\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{D76C9595-F4B4-4083-9550-6994D861ED38}"
+      DTS:From="Package\Create Temp Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Textbooks Lost Output" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{7047332E-E8FB-470B-A2B0-300F3E676390}"
+      DTS:From="Package\Textbooks Lost Output"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Textbooks Damaged Output" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Create Temp Table"
+          TopLeft="151,73" />
+        <NodeLayout
+          Size="212.8,41.6"
+          Id="Package\Textbooks Damaged Output"
+          TopLeft="332,267" />
+        <NodeLayout
+          Size="188,41.6"
+          Id="Package\Textbooks Lost Output"
+          TopLeft="235,168" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="236.5,115">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="92.5,53"
+              Start="0,0"
+              End="92.5,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.5"
+                    Point2="0,26.5"
+                    Point3="4,26.5" />
+                  <mssgle:LineSegment
+                    End="88.5,26.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="88.5,26.5"
+                    Point2="92.5,26.5"
+                    Point3="92.5,30.5" />
+                  <mssgle:LineSegment
+                    End="92.5,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="329,210">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="109.5,57"
+              Start="0,0"
+              End="109.5,49.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.5"
+                    Point2="0,28.5"
+                    Point3="4,28.5" />
+                  <mssgle:LineSegment
+                    End="105.5,28.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="105.5,28.5"
+                    Point2="109.5,28.5"
+                    Point3="109.5,32.5" />
+                  <mssgle:LineSegment
+                    End="109.5,49.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Textbooks Damaged Output">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Textbooks Damaged Output\To Tipweb"
+          TopLeft="310,337" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Textbooks Damaged Output\To Syntempssis"
+          TopLeft="33,332" />
+        <NodeLayout
+          Size="122,42"
+          Id="Package\Textbooks Damaged Output\Multicast"
+          TopLeft="178,151" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Textbooks Damaged Output\OLE DB Source"
+          TopLeft="124,60" />
+        <EdgeLayout
+          Id="Package\Textbooks Damaged Output.Paths[Multicast Output 2]"
+          TopLeft="258,193">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="117,144"
+              Start="0,0"
+              End="117,136.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.7184466019418" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,54.7184466019418"
+                    Point2="0,58.7184466019418"
+                    Point3="4,58.7184466019418" />
+                  <mssgle:LineSegment
+                    End="113,58.7184466019418" />
+                  <mssgle:CubicBezierSegment
+                    Point1="113,58.7184466019418"
+                    Point2="117,58.7184466019418"
+                    Point3="117,62.7184466019418" />
+                  <mssgle:LineSegment
+                    End="117,136.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Textbooks Damaged Output.Paths[Multicast Output 1]"
+          TopLeft="220,193">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-110,139"
+              Start="0,0"
+              End="-110,131.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.6796116504854" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,52.6796116504854"
+                    Point2="0,56.6796116504854"
+                    Point3="-4,56.6796116504854" />
+                  <mssgle:LineSegment
+                    End="-106,56.6796116504854" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-106,56.6796116504854"
+                    Point2="-110,56.6796116504854"
+                    Point3="-110,60.6796116504854" />
+                  <mssgle:LineSegment
+                    End="-110,131.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Textbooks Damaged Output.Paths[OLE DB Source Output]"
+          TopLeft="200,102">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="39,49"
+              Start="0,0"
+              End="39,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.5"
+                    Point2="0,24.5"
+                    Point3="4,24.5" />
+                  <mssgle:LineSegment
+                    End="35,24.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="35,24.5"
+                    Point2="39,24.5"
+                    Point3="39,28.5" />
+                  <mssgle:LineSegment
+                    End="39,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Textbooks Damaged Output\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Textbooks Lost Output">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Textbooks Lost Output\To Syntempssis"
+          TopLeft="66,329" />
+        <NodeLayout
+          Size="121.6,41.6"
+          Id="Package\Textbooks Lost Output\Multicast"
+          TopLeft="152.999996798379,185.670587557492" />
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Textbooks Lost Output\To Tipweb"
+          TopLeft="265.428568694056,330.047058711992" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Textbooks Lost Output\OLE DB Source"
+          TopLeft="141,70" />
+        <EdgeLayout
+          Id="Package\Textbooks Lost Output.Paths[OLE DB Source Output]"
+          TopLeft="215.399998399189,111.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,74.0705875574924"
+              Start="0,0"
+              End="0,66.5705875574924">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66.5705875574924" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Textbooks Lost Output.Paths[Multicast Output 2]"
+          TopLeft="232.733330131712,227.270587557492">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="97.495238562344,102.7764711545"
+              Start="0,0"
+              End="97.495238562344,95.2764711545">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.9114440811857" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.9114440811857"
+                    Point2="0,41.9114440811857"
+                    Point3="4,41.9114440811857" />
+                  <mssgle:LineSegment
+                    End="93.495238562344,41.9114440811857" />
+                  <mssgle:CubicBezierSegment
+                    Point1="93.495238562344,41.9114440811857"
+                    Point2="97.495238562344,41.9114440811857"
+                    Point3="97.495238562344,45.9114440811857" />
+                  <mssgle:LineSegment
+                    End="97.495238562344,95.2764711545" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Textbooks Lost Output.Paths[Multicast Output 1]"
+          TopLeft="194.866663465046,227.270587557492">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-52.0666634650456,101.729412442508"
+              Start="0,0"
+              End="-52.0666634650456,94.2294124425076">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.4844616973343" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.4844616973343"
+                    Point2="0,41.4844616973343"
+                    Point3="-4,41.4844616973343" />
+                  <mssgle:LineSegment
+                    End="-48.0666634650456,41.4844616973343" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-48.0666634650456,41.4844616973343"
+                    Point2="-52.0666634650456,41.4844616973343"
+                    Point3="-52.0666634650456,45.4844616973343" />
+                  <mssgle:LineSegment
+                    End="-52.0666634650456,94.2294124425076" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Textbooks Lost Output\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
