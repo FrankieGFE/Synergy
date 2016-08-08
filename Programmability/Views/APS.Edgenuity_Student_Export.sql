@@ -83,9 +83,9 @@ FROM
 
 WHERE 1 = 1
 --AND SED.SCHOOL_CODE IN ('517','518')
-AND GRADE IN ('08','09','10','11','12')
+AND GRADE IN ('08','09','10','11','12') --- Request is for all active student in Grade Levels 8-12
 AND SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
-AND LEAVE_DATE IS NULL
+AND LEAVE_DATE IS NULL  --- Request is for all ACTIVE studentS in Grade Levels 8-12
 AND EXCLUDE_ADA_ADM  IS NULL
 AND SUMMER_WITHDRAWL_CODE IS NULL
 AND EXTENSION = 'R'

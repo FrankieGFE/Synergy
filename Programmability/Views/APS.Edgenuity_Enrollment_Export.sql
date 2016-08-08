@@ -33,6 +33,8 @@ WHERE
 	1 = 1
 	AND YR.SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
 	AND EXTENSION = 'R'
+	AND SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
+	--AND cls.LEAVE_DATE IS NULL  --- Request is for ALL enrollments from Loaction 517 and 518
 	AND EXCLUDE_ADA_ADM IS NULL
 	AND SUMMER_WITHDRAWL_CODE IS NULL
 	AND SCH.SCHOOL_CODE IN ('517','518')
