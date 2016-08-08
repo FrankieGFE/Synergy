@@ -61,9 +61,9 @@ from rev.SIF_22_TermInfo() t
 	   ON trm.OrgGU                  = oyr.ORGANIZATION_GU
                                               and trm.TermCode           = sect.TERM_CODE
 WHERE 
- @RunDate between trm.TermBegin and trm.TermEnd
+ '2016-08-11' between trm.TermBegin and trm.TermEnd
 and
- (cls.LEAVE_DATE is null or cls.LEAVE_DATE > @RunDate)
+ (cls.LEAVE_DATE is null or cls.LEAVE_DATE > '2016-08-11')
 
 END --END STORED PROCEDURE
 GO
