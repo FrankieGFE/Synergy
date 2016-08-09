@@ -13,7 +13,7 @@
  *
  * Tables Referenced: 
  */
-CREATE VIEW APS.Pearson_EasyBridge_Section
+ALTER VIEW APS.Pearson_EasyBridge_Section
 AS
  
 SELECT DISTINCT
@@ -30,10 +30,10 @@ SELECT DISTINCT
 	,[SCHEDULE].[SECTION_ID] AS [section_number]
 	
 FROM
-	APS.PrimaryEnrollmentDetailsAsOf(GETDATE()) AS [ENROLLMENT]
+	APS.PrimaryEnrollmentDetailsAsOf('08/11/2016') AS [ENROLLMENT]
 	
 	INNER JOIN
-	APS.ScheduleDetailsAsOf(GETDATE()) AS [SCHEDULE]
+	APS.ScheduleDetailsAsOf('08/11/2016') AS [SCHEDULE]
 	ON
 	[ENROLLMENT].[STUDENT_GU] = [SCHEDULE].[STUDENT_GU]
 	AND [ENROLLMENT].[ORGANIZATION_YEAR_GU] = [SCHEDULE].[ORGANIZATION_YEAR_GU]

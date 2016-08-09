@@ -13,7 +13,7 @@
  *
  * Tables Referenced: 
  */
- CREATE VIEW APS.Pearson_EasyBridge_Student
+ ALTER VIEW APS.Pearson_EasyBridge_Student
  AS
  
 SELECT
@@ -28,7 +28,7 @@ SELECT
 	,[STUDENT].[SIS_NUMBER] AS [federated_id]
 	
 FROM
-	APS.PrimaryEnrollmentDetailsAsOf(GETDATE()) [ENROLLMENT]
+	APS.PrimaryEnrollmentDetailsAsOf('08/11/2016') [ENROLLMENT]
 	
 	INNER JOIN
 	APS.BasicStudent AS [STUDENT]

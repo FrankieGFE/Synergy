@@ -13,19 +13,19 @@
  *
  * Tables Referenced: 
  */
-ALTER VIEW APS.Pearson_EasyBridge_Staff_S
-AS
 
+ALTER VIEW APS.Pearson_EasyBridge_Assignment
+AS
  
 SELECT DISTINCT	
-	REPLACE([STAFF].[BADGE_NUM],'e','') AS [staff_code]
-	,[STAFF_PERSON].[LAST_NAME] AS [last_name]
-	,[STAFF_PERSON].[FIRST_NAME] AS [first_name]
-	,[STAFF_PERSON].[MIDDLE_NAME] AS [middle_name]
-	,[STAFF_PERSON].[EMAIL] AS [email]
-	,'' AS [title]
-	,REPLACE([STAFF].[BADGE_NUM],'e','') AS [staff_number]
-	,[STAFF].[BADGE_NUM] AS [federated_id]
+	REPLACE([STAFF].[BADGE_NUM],'e','') + '-' + CONVERT(VARCHAR,[ENROLLMENT].[SCHOOL_CODE]) + CONVERT(VARCHAR,[SCHEDULE].[SECTION_ID]) + '-' + CONVERT(VARCHAR,[ENROLLMENT].[SCHOOL_YEAR]) AS [native_assignment_code]
+	,REPLACE([STAFF].[BADGE_NUM],'e','') AS [staff_code]
+	,[ENROLLMENT].[SCHOOL_YEAR] AS [school_year]
+	,[ENROLLMENT].[SCHOOL_CODE] AS [institution_code]
+	,'2015-08-13' AS [date_start]
+	,'2016-05-25' AS [date_end]
+	,CASE WHEN [STAFF].[TYPE] = 'TE' THEN 'Teacher' ELSE 'Staff' END AS [position_code]
+	
 	
 FROM
 	APS.PrimaryEnrollmentDetailsAsOf('08/11/2016') AS [ENROLLMENT]

@@ -13,9 +13,9 @@
  *
  * Tables Referenced: 
  */
- CREATE VIEW
- APS.Pearson_EasyBridge_Staff
- AS
+ --ALTER VIEW
+ --APS.Pearson_EasyBridge_Staff
+ --AS
  
 SELECT DISTINCT	
 	REPLACE([STAFF].[BADGE_NUM],'e','') + '-' + CONVERT(VARCHAR,[ENROLLMENT].[SCHOOL_CODE]) + CONVERT(VARCHAR,[SCHEDULE].[SECTION_ID]) AS [section_teacher_code]
@@ -30,10 +30,10 @@ SELECT DISTINCT
 	--,[SCHEDULE].*
 	
 FROM
-	APS.PrimaryEnrollmentDetailsAsOf(GETDATE()) AS [ENROLLMENT]
+	APS.PrimaryEnrollmentDetailsAsOf('08/11/2016') AS [ENROLLMENT]
 	
 	INNER JOIN
-	APS.ScheduleDetailsAsOf(GETDATE()) AS [SCHEDULE]
+	APS.ScheduleDetailsAsOf('08/11/2016') AS [SCHEDULE]
 	ON
 	[ENROLLMENT].[STUDENT_GU] = [SCHEDULE].[STUDENT_GU]
 	AND [ENROLLMENT].[ORGANIZATION_YEAR_GU] = [SCHEDULE].[ORGANIZATION_YEAR_GU]
