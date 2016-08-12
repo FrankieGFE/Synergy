@@ -15,10 +15,11 @@ SELECT  distinct
 	   --, YR.SCHOOL_YEAR
 	   --, cls.ENTER_DATE
 	   --, cls.LEAVE_DATE
+	   --,sch.SCHOOL_CODE
 FROM   rev.EPC_STU                             stu
        JOIN rev.EPC_STU_SCH_YR                 ssy  ON ssy.STUDENT_GU                    = stu.STUDENT_GU
        JOIN rev.REV_ORGANIZATION_YEAR          oyr  ON oyr.ORGANIZATION_YEAR_GU          = ssy.ORGANIZATION_YEAR_GU
-                                                       --and oyr.YEAR_GU                   = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+                                                       and oyr.YEAR_GU                   = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
 	   JOIN rev.REV_ORGANIZATION               org  ON org.ORGANIZATION_GU               = oyr.ORGANIZATION_GU
        JOIN rev.REV_YEAR                       yr   ON yr.YEAR_GU                        = oyr.YEAR_GU
 	   JOIN rev.EPC_SCH                        sch  ON sch.ORGANIZATION_GU               = oyr.ORGANIZATION_GU
@@ -33,9 +34,8 @@ WHERE
 	1 = 1
 	AND YR.SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
 	AND EXTENSION = 'R'
-	AND SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
-	--AND cls.LEAVE_DATE IS NULL  --- Request is for ALL enrollments from Loaction 517 and 518
-	AND EXCLUDE_ADA_ADM IS NULL
+	AND cls.LEAVE_DATE IS NULL  --- Request is for ALL enrollments from Loaction 517 and 518
+	--AND EXCLUDE_ADA_ADM IS NULL
 	AND SUMMER_WITHDRAWL_CODE IS NULL
 	AND SCH.SCHOOL_CODE IN ('517','518')
 

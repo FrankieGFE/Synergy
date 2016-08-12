@@ -1,7 +1,7 @@
 
 
-EXECUTE AS LOGIN='QueryFileUser'
-GO
+--EXECUTE AS LOGIN='QueryFileUser'
+--GO
 
 SELECT
 	[FILE].IID
@@ -53,7 +53,7 @@ SELECT
 		  WHEN ENR.SCHOOL_NAME = '' THEN ''
 	ELSE ENR.SCHOOL_NAME
 	END AS school
-	,TCH.EMP_ID AS district_teacher_id
+	,TCH.BADGE_NUM AS district_teacher_id
 	,TCH.EMAIL AS teacher_email
 	,TCH.LAST_NAME AS teacher_last_name
 	,TCH.FIRST_NAME AS teacher_first_name

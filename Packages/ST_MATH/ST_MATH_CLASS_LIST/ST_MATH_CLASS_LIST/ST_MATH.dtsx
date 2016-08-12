@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="ST_MATH"
   DTS:PackageType="5"
-  DTS:VersionBuild="32"
-  DTS:VersionGUID="{7D274647-E8F3-4200-8661-2FD6E4B67017}">
+  DTS:VersionBuild="33"
+  DTS:VersionGUID="{78F22785-8A74-45D5-AA3A-91D62F190F6E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -321,7 +321,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABMno9T+tmxyOjQIOJC25S9AAAAAASAAACgAAAAEAAAAK0dFcMizjc4yACILp/gy5wwAAAAZCzd4srn29HTleeLOIi5GWAWpc1QjpAbx6W2JW09OuixDECrPvYlEijGVTIOuYV6FAAAAM0b35I2igbUr+cfnRuVdHQ66kwL</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAQWdqGSwmmZdeEtdlg8svTAAAAAASAAACgAAAAEAAAALCFsJYVb3E5Bk+QCV5QglwwAAAA+dLAk4hlVSR4m2oUBh3cHzih2Y1UHcL5k1jyu9jGqiuebTQBuPWfOYgqAL6upHKeFAAAAOyi25AdGSiciHb0c6ZQaOWkNFEN</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -336,7 +336,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADlLiIG+neHtafP7w+9gySFAAAAAASAAACgAAAAEAAAAFjhvfHM5mwTJLZ3Wup/XvQwAAAAXWy7mSDMFCR0ee5EnZonHVSMEjqW8609gEFrnlyOw3OIaQ1AHg8Mc5br+O6xBZq8FAAAAH5J/VEAQLs0VGSeJKACYFVyu1Rp</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAM9pXJIjtOQpQ6EVjKaOoMAAAAAASAAACgAAAAEAAAAIMghNAdghjvAHP5O98rhYEwAAAALr8NabZT8KCzbwF/h5D5GswHjNeXOjw/2PgLSjNc1x6Fv5EE2n8Uslc1YHt1uz2vFAAAAEhd3FOLuM0zsc30A+CgQD5jtK0U</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -649,7 +649,7 @@ FROM
 	ON PER.PERSON_GU = STF.STAFF_GU
 
 WHERE 1 = 1
-AND STF.TYPE IN ('TE','SSS','SA','SCA')
+AND STF.TYPE IN ('SSS','SA','SCA')
 --AND LAST_NAME = 'ST JOHN'
 AND YR.SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
 AND (PER.FIRST_NAME NOT IN ('TEACHER','PLACEMENT','Spedpre','SECTION') AND PER.FIRST_NAME NOT LIKE 'Staff%')
@@ -667,6 +667,7 @@ AND YR.EXTENSION = 'R'
 		ON [FILE].SCHOOL = STAFF.school
 
 WHERE [FILE].IID IS NOT NULL
+
 --and [Last Name] like '%,%'
 --ORDER BY [E-Mail]
 --REVERT
@@ -2106,40 +2107,6 @@ ORDER BY grade
           Size="164.8,41.6"
           Id="Package\ST_MATH_ADMIN"
           TopLeft="96.5714302160303,116.235295747803" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="178.971430216031,157.835295747803">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="80.2285725768731,42.8235305957733"
-              Start="0,0"
-              End="80.2285725768731,35.3235305957733">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,17.4117652978867" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,17.4117652978867"
-                    Point2="0,21.4117652978867"
-                    Point3="4,21.4117652978867" />
-                  <mssgle:LineSegment
-                    End="76.2285725768731,21.4117652978867" />
-                  <mssgle:CubicBezierSegment
-                    Point1="76.2285725768731,21.4117652978867"
-                    Point2="80.2285725768731,21.4117652978867"
-                    Point3="80.2285725768731,25.4117652978867" />
-                  <mssgle:LineSegment
-                    End="80.2285725768731,35.3235305957733" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
           Size="188.8,41.6"
           Id="Package\ST_MATH_CLASS_LIST"
@@ -2178,6 +2145,40 @@ ORDER BY grade
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="178.971430216031,157.835295747803">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="80.2285725768731,42.8235305957733"
+              Start="0,0"
+              End="80.2285725768731,35.3235305957733">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.4117652978867" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.4117652978867"
+                    Point2="0,21.4117652978867"
+                    Point3="4,21.4117652978867" />
+                  <mssgle:LineSegment
+                    End="76.2285725768731,21.4117652978867" />
+                  <mssgle:CubicBezierSegment
+                    Point1="76.2285725768731,21.4117652978867"
+                    Point2="80.2285725768731,21.4117652978867"
+                    Point3="80.2285725768731,25.4117652978867" />
+                  <mssgle:LineSegment
+                    End="80.2285725768731,35.3235305957733" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -2185,7 +2186,7 @@ ORDER BY grade
     design-time-name="Package\ST_MATH_ADMIN">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\ST_MATH_ADMIN\ST_MATH_ADMINS"
@@ -2225,9 +2226,7 @@ ORDER BY grade
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

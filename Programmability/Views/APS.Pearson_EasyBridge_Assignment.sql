@@ -22,8 +22,8 @@ SELECT DISTINCT
 	,REPLACE([STAFF].[BADGE_NUM],'e','') AS [staff_code]
 	,[ENROLLMENT].[SCHOOL_YEAR] AS [school_year]
 	,[ENROLLMENT].[SCHOOL_CODE] AS [institution_code]
-	,'2015-08-13' AS [date_start]
-	,'2016-05-25' AS [date_end]
+	,'2016-08-11' AS [date_start]
+	,'2017-05-25' AS [date_end]
 	,CASE WHEN [STAFF].[TYPE] = 'TE' THEN 'Teacher' ELSE 'Staff' END AS [position_code]
 	
 	
