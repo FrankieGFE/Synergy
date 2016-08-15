@@ -33,7 +33,7 @@ SELECT DISTINCT
 	,LEFT([Organization].[PHONE],3) + '-' + RIGHT(LEFT([Organization].[PHONE],6),3) + '-' + RIGHT([Organization].[PHONE],4) AS [phone]
 	
 FROM
-	APS.PrimaryEnrollmentDetailsAsOf('08/11/2016') [ENROLLMENT]
+	APS.PrimaryEnrollmentDetailsAsOf(GETDATE()) [ENROLLMENT]
 	
 	INNER JOIN
 	rev.REV_ORGANIZATION AS [Organization] -- Contains the School Name

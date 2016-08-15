@@ -28,7 +28,7 @@ SELECT
 	,[STUDENT].[SIS_NUMBER] AS [federated_id]
 	
 FROM
-	APS.PrimaryEnrollmentDetailsAsOf('08/11/2016') [ENROLLMENT]
+	APS.PrimaryEnrollmentDetailsAsOf(GETDATE()) [ENROLLMENT]
 	
 	INNER JOIN
 	APS.BasicStudent AS [STUDENT]
