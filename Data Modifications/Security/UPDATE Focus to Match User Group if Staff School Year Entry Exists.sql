@@ -1,5 +1,17 @@
 
 
+/************************************************************************************
+CREATED BY DEBBIE ANN CHAVEZ
+DATE 8/15/2016
+
+This sets a user's focus to what their Usergroup school they have assigned only if they have a staff school year entry.
+  Example 'UPDATE - Rio' Will set to Focus to Rio.  
+
+Important to remember this only sets Focus for singleton users.  Meaning only one school assignment.  
+If a user has multiple assignments at different schools Focus has to be set manually per our discussion today
+
+************************************************************************************/
+
 BEGIN TRANSACTION
 
 UPDATE rev.REV_USER 

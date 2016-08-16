@@ -1,4 +1,22 @@
 
+/*********************************************************************************
+Created by Debbie Ann Chavez
+Date  8/15/2016
+
+This pulls active staff from Lawson and for Specific Synergy Staff Types, it creates a Staff School Year Entry. 
+These are the specific TYPE’s that are hardcoded:  ('SSS', 'SCA', 'SA', 'TE')
+
+And this only runs for locations > 200.  
+
+--Change School Year and YEAR GU - hard coded
+
+*This was needed because LDAP was not creating some school year entries.
+
+
+**********************************************************************************/
+
+
+
 BEGIN TRANSACTION 
 
 
