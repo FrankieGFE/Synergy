@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="6/25/2015 7:34:19 AM"
@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="APS - Data Modifications - Fix DCM Credits"
   DTS:PackageType="5"
-  DTS:VersionBuild="3"
-  DTS:VersionGUID="{6C897E9B-6B31-4182-AFC9-F142CD5BE70E}">
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{3896EB30-6D23-409C-B793-0E46DE3C00B8}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -27,7 +27,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATewWZ/TlJEy+RoEBYRx+mgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADSdOMz7efNppZpACFEDvs0AAAAAASAAACgAAAAEAAAAD7f8/FlltL+lmFkDV5GwccwAAAAdX6Cc7XMuA5luBVC7ooVfkh62vRUIcM+VApcPH7MJk7hzANrV+7irZeB+cM3VYYlFAAAAEQ6MJ4q5tv11Zb37qSPLpM9eJxv</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATewWZ/TlJEy+RoEBYRx+mgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACSEg9LXS2KPyhN0Of5HNWOAAAAAASAAACgAAAAEAAAAPiDwcjcZ5Y/IGtQiBOt9AQwAAAAvsy/mlxwjcBJgRczn95veaQzzDOd++bC8btX3H0DdYXs3Fq+qTldhVOey5GqmP9PFAAAAPNisjV1tSr0WacSw5AwuZKqwrbC</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -49,7 +49,7 @@
         <SQLTask:SqlTaskData
           SQLTask:Connection="{5791425F-616F-4E85-8648-52BAB4FBACFF}"
           SQLTask:BypassPrepare="False"
-          SQLTask:SqlStatementSource="BEGIN TRAN&#xA;&#xA;;WITH &#xA;Qry_DCM (COURSE_GU,COURSE_ID,COURSE_TITLE,CREDIT) AS&#xA;(&#xA;SELECT &#xA;    COURSE_GU&#xA;    ,COURSE_ID&#xA;    ,COURSE_TITLE&#xA;    ,CREDIT &#xA;FROM &#xA;    rev.EPC_CRS&#xA;)&#xA;,Qry_SchoolMaster (ORGANIZATION_GU,ORGANIZATION_YEAR_GU,YEAR_GU,COURSE_GU,SECTION_GU,SCHOOL_YEAR,ORGANIZATION_NAME,SCHOOL_CODE,COURSE_ID,COURSE_TITLE,SECTION_ID,CREDIT) AS&#xA;(&#xA;    SELECT&#xA;&#x9;   [ORG].[ORGANIZATION_GU]&#xA;&#x9;   ,[ORGYEAR].[ORGANIZATION_YEAR_GU]&#xA;&#x9;   ,[YEAR].[YEAR_GU]&#xA;&#x9;   ,[CRS].[COURSE_GU]&#xA;&#x9;   ,[SCHYRSECT].[SECTION_GU]&#xA;&#x9;   ,[YEAR].[SCHOOL_YEAR]&#xA;&#x9;   ,[ORG].[ORGANIZATION_NAME]&#xA;&#x9;   ,[SCH].[SCHOOL_CODE]&#xA;&#x9;   ,[CRS].[COURSE_ID]&#xA;&#x9;   ,[CRS].[COURSE_TITLE]&#xA;&#x9;   ,[SCHYRSECT].[SECTION_ID]&#xA;&#x9;   ,[SCHYRSECT].[CREDIT]&#xA;    FROM&#xA;&#x9;   [rev].[EPC_CRS] AS [CRS]&#xA;&#xA;&#x9;   INNER JOIN&#xA;&#x9;   [rev].[EPC_SCH_YR_CRS] AS [SCHYRCRS]&#xA;&#x9;   ON&#xA;&#x9;   [CRS].[COURSE_GU]=[SCHYRCRS].[COURSE_GU]&#xA;&#xA;&#x9;   INNER JOIN&#xA;&#x9;   [rev].[EPC_SCH_YR_SECT] AS [SCHYRSECT]&#xA;&#x9;   ON&#xA;&#x9;   [SCHYRCRS].[SCHOOL_YEAR_COURSE_GU]=[SCHYRSECT].[SCHOOL_YEAR_COURSE_GU]&#xA;&#xA;&#x9;   INNER JOIN&#xA;&#x9;   [rev].[REV_ORGANIZATION_YEAR] AS [ORGYEAR]&#xA;&#x9;   ON&#xA;&#x9;   [SCHYRSECT].[ORGANIZATION_YEAR_GU]=[ORGYEAR].[ORGANIZATION_YEAR_GU]&#xA;&#x9;   &#x9;   &#xA;&#x9;   INNER JOIN&#xA;&#x9;   [rev].[REV_ORGANIZATION] AS [ORG]&#xA;&#x9;   ON&#xA;&#x9;   [ORGYEAR].[ORGANIZATION_GU]=[ORG].[ORGANIZATION_GU]&#xA;&#xA;&#x9;   INNER JOIN&#xA;&#x9;   [rev].[EPC_SCH] AS [SCH]&#xA;&#x9;   ON&#xA;&#x9;   [ORGYEAR].[ORGANIZATION_GU]=[SCH].[ORGANIZATION_GU]&#xA;&#xA;&#x9;   INNER JOIN&#xA;&#x9;   [rev].[REV_YEAR] AS [YEAR]&#xA;&#x9;   ON&#xA;&#x9;   [ORGYEAR].[YEAR_GU]=[YEAR].[YEAR_GU]&#xA;&#xA;WHERE&#xA;    [YEAR].[SCHOOL_YEAR] IN (2015)&#xA;)&#xA;, Qry_WrongCredits (ORGANIZATION_GU,ORGANIZATION_YEAR_GU,YEAR_GU,COURSE_GU,SECTION_GU,SCHOOL_YEAR,ORGANIZATION_NAME,SCHOOL_CODE,COURSE_ID,COURSE_TITLE,SECTION_ID,CREDIT,SchMasterCREDIT) AS&#xA;(&#xA;    SELECT &#xA;&#x9;   Qry_SchoolMaster.ORGANIZATION_GU&#xA;&#x9;   ,Qry_SchoolMaster.ORGANIZATION_YEAR_GU&#xA;&#x9;   ,Qry_SchoolMaster.YEAR_GU&#xA;&#x9;   ,Qry_SchoolMaster.COURSE_GU&#xA;&#x9;   ,Qry_SchoolMaster.SECTION_GU&#xA;&#x9;   ,Qry_SchoolMaster.SCHOOL_YEAR&#xA;&#x9;   ,Qry_SchoolMaster.ORGANIZATION_NAME&#xA;&#x9;   ,Qry_SchoolMaster.SCHOOL_CODE&#xA;&#x9;   ,Qry_SchoolMaster.COURSE_ID&#xA;&#x9;   ,Qry_SchoolMaster.COURSE_TITLE&#xA;&#x9;   ,Qry_SchoolMaster.SECTION_ID&#xA;&#x9;   ,Qry_DCM.CREDIT&#xA;&#x9;   ,Qry_SchoolMaster.CREDIT&#xA;FROM&#xA;    Qry_DCM AS [Qry_DCM]&#xA;    &#xA;    INNER JOIN &#xA;    Qry_SchoolMaster AS [Qry_SchoolMaster] &#xA;    ON &#xA;    [Qry_DCM].COURSE_GU = [Qry_SchoolMaster].COURSE_GU&#xA;&#xA;WHERE&#xA;    ISNULL([Qry_DCM].[CREDIT],0)!=ISNULL([Qry_SchoolMaster].[CREDIT],0)&#xA;)&#xA;&#xA;UPDATE&#xA;    [SCHYRSECT]&#xA;&#xA;    SET&#xA;    [SCHYRSECT].[CREDIT]=[Qry_WrongCredits].[CREDIT]&#xA;/*SELECT&#xA;    [Qry_WrongCredits].[SCHOOL_YEAR]&#xA;    ,[Qry_WrongCredits].[ORGANIZATION_NAME]&#xA;    ,[Qry_WrongCredits].[SCHOOL_CODE]&#xA;    ,[Qry_WrongCredits].[COURSE_ID]&#xA;    ,[Qry_WrongCredits].[COURSE_TITLE]&#xA;    ,[Qry_WrongCredits].[SECTION_ID]&#xA;    ,[Qry_WrongCredits].[CREDIT]&#xA;    ,[Qry_WrongCredits].[SchMasterCredit]*/&#xA;FROM&#xA;    [rev].[EPC_SCH_YR_SECT] AS [SCHYRSECT]&#xA;&#xA;    INNER JOIN&#xA;    [Qry_WrongCredits] AS [Qry_WrongCredits]&#xA;    ON&#xA;    [SCHYRSECT].[SECTION_GU]=[Qry_WrongCredits].[SECTION_GU]&#xA;&#xA;COMMIT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="EXEC APS.FixCredits" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -66,7 +66,7 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="155,42"
+          Size="155.2,41.6"
           Id="Package\Fix DCM Credits"
           TopLeft="22,12" />
       </GraphLayout>
