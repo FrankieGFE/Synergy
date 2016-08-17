@@ -1,6 +1,16 @@
 EXECUTE AS LOGIN='QueryFileUser'
 GO
 
+/**********************************************************************************
+
+	FIRST REPLACE THE .CSV FILE 
+	
+	ALL WE REALLY NEED IS THE STREET_GU TO DELETE
+
+
+***********************************************************************************/
+
+
 BEGIN TRANSACTION 
 
 DELETE rev.EPC_STREET 
@@ -17,6 +27,7 @@ SELECT DISTINCT
                   'SELECT * from DELSTREET.csv'
                 ) AS [T1]
 
+--DONT NEED ALL OF THIS IF SHE IS SUPPLYING THE GRID_GU :O)
 
 --LEFT JOIN 
 --	 (SELECT STREET1.*, VALUE_DESCRIPTION AS STREET_TYPE_DESCR FROM 
