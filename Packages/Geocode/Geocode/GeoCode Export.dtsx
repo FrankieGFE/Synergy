@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="3/31/2014 2:09:04 PM"
@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="GeoCode"
   DTS:PackageType="5"
-  DTS:VersionBuild="35"
-  DTS:VersionGUID="{44E48F3D-A67C-452F-8B0A-4658A4815F4D}">
+  DTS:VersionBuild="46"
+  DTS:VersionGUID="{35E3F5CF-784A-4E79-A580-BC5D2269909A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,15 +29,15 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATewWZ/TlJEy+RoEBYRx+mgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAATy/smbTlJTrVXHzBh7XfoAAAAAASAAACgAAAAEAAAAMjFQ8jQefLloU8nhe7UIAgwAAAA6vy0eF1yF0M8ejZSHO6yS0KepR+d/XfGOkbuSFwiW/XF/FIWBDbPryyZm80Sa3/wFAAAAMfqgYbWnzR6gTzxWw7HdelHDYvs</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATewWZ/TlJEy+RoEBYRx+mgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACK+NjLoJbR3ruRTgVYSo1yAAAAAASAAACgAAAAEAAAAAj/NGoxT6yDKeE4a55028QwAAAAV2z3Z4QiRdtZgmPrbsQdysyXRaLF2C1QXfY0t17Xe9mdOTyAT/uVa4Nu6f0T1j0QFAAAAFfCED5jRFBqhPjrZMx7Kle0IG3J</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:refId="Package.ConnectionManagers[Geocode]"
       DTS:CreationName="FLATFILE"
-      DTS:DTSID="{CA547421-E1B3-4829-A120-ACAF000EFC2A}"
-      DTS:ObjectName="Flat File Connection Manager">
+      DTS:DTSID="{2960C639-AB55-4000-80A2-C434E1B05B53}"
+      DTS:ObjectName="Geocode">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:Format="Delimited"
@@ -46,342 +46,342 @@
           DTS:HeaderRowDelimiter="_x000D__x000A_"
           DTS:ColumnNamesInFirstDataRow="True"
           DTS:RowDelimiter=""
-          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:TextQualifier="_x0022_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\Geocode\GeoCode.txt">
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\files\Export\Geocode\Geocode.txt">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="20"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="SOR School Number"
-              DTS:DTSID="{EB6755B6-3153-4217-A3A0-F6662C2CC96A}"
+              DTS:DTSID="{E1F63E35-73C0-4FDC-9454-A902CFE0BC65}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="20"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student ID Number"
-              DTS:DTSID="{1C765D38-4C65-4ED7-8F69-37B55EC2D5CD}"
+              DTS:DTSID="{1462D52B-3CAC-44B4-B5ED-DD2CB2FD712D}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="20"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="State ID Number"
-              DTS:DTSID="{38C786C0-1041-4F97-813C-8CDD88FBE0D6}"
+              DTS:DTSID="{B358CA23-E296-4834-8810-DA1607EB5378}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="60"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Last Name"
-              DTS:DTSID="{B2711874-D2F4-4F5B-9250-AFF75E55F9A3}"
+              DTS:DTSID="{A3545C88-425E-4561-BFA0-09811FCCE5B4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="60"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="First Name"
-              DTS:DTSID="{1979E5A1-0729-40B9-B2FF-27EC618D83F1}"
+              DTS:DTSID="{3CC95663-2CE6-4A76-AB79-4A6EA3B0370F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="20"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Middle Name"
-              DTS:DTSID="{E23712B4-4E18-4F1E-AFEC-8195D9648E1A}"
+              DTS:DTSID="{2CC44F79-6273-4856-AFE8-9E35AE536681}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="600"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Current SOR Enrollment Grade Level"
-              DTS:DTSID="{0AAB2459-E5DB-4928-A688-8AA375182AD3}"
+              DTS:DTSID="{19633852-1496-42DD-BECC-A6AE93115550}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="13"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Home Phone Number"
-              DTS:DTSID="{79D00B5C-D005-46DF-A396-2A77F0FF9085}"
+              DTS:DTSID="{DD697C16-57AD-4C42-B27E-CB2C258F02C8}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="13"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Secondary Phone Number"
-              DTS:DTSID="{80694F4A-84B8-483E-B509-D7B98A9864AA}"
+              DTS:DTSID="{88F82F65-01B7-4AB1-B664-FD243B13B174}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="4000"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Address"
-              DTS:DTSID="{07133657-CDA1-4440-AF0C-FD89A07885AA}"
+              DTS:DTSID="{0463BC27-B0E8-4D51-AEE4-11A5F2894D0D}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="50"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Home Address City"
-              DTS:DTSID="{F788A8E0-120D-45C8-8949-E58BA1D2F0C3}"
+              DTS:DTSID="{BDC05AE8-F617-4BB5-AABF-BF95B5D9BB18}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="5"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Home Address State"
-              DTS:DTSID="{729B9665-627D-4665-BFB0-FCD0922EA752}"
+              DTS:DTSID="{128FE2CC-029C-40B5-9EB0-79A1D3122E5A}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="50"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Apartment Number"
-              DTS:DTSID="{04BD9F83-073B-4B34-8FB8-DB7C1792BE5F}"
+              DTS:DTSID="{BB3E4CC3-9830-4E55-AD06-619ED1788249}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="10"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Home Zip Code"
-              DTS:DTSID="{2F4AE338-B455-4061-BB71-E1CF50FEFF2B}"
+              DTS:DTSID="{D7E83FC4-FC0A-4BE9-88CF-FF8DC3129388}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="5"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Gender"
-              DTS:DTSID="{6F53E864-06DF-4565-B83E-92D0D28F945E}"
+              DTS:DTSID="{7B7BE261-1086-4EFF-BDFB-A78ACD364FD3}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="100"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Race"
-              DTS:DTSID="{84D70318-7DB3-419A-8168-DAB13FAB9DBB}"
+              DTS:DTSID="{F6C659A4-2715-4A17-96A6-793F575A2736}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="100"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Race2"
-              DTS:DTSID="{63DDFC72-D5FB-46CA-8D24-7AEA18633ED6}"
+              DTS:DTSID="{F38C1262-F586-450C-AC80-362895D1377B}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="100"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Race3"
-              DTS:DTSID="{1A2B9D7A-2919-4593-BA60-90F4AE4EFAF3}"
+              DTS:DTSID="{9B3A7EA5-B200-412F-9E6D-7722A908B075}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="100"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Race4"
-              DTS:DTSID="{FF1FB807-3D99-4DE2-A16E-367E1AF0241C}"
+              DTS:DTSID="{455812B8-A93D-488A-B88C-7CEA7860EB32}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="100"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Race5"
-              DTS:DTSID="{1E73130D-57BD-4580-8D49-71BA36EF0EDF}"
+              DTS:DTSID="{E449059A-B237-43BF-8F9D-9BCE5177614E}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="5"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Hispanic Indicator"
-              DTS:DTSID="{7645FADF-5E88-4E16-8976-802F632ACA01}"
+              DTS:DTSID="{1DFE283C-5BDD-4BDC-9FA1-DA9EA8775E38}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="8"
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Birthdate"
-              DTS:DTSID="{ED7BB746-9EFD-4A53-A0EB-9266839C0ABC}"
+              DTS:DTSID="{F69D6F06-9B73-469B-A98B-B362BF4DF496}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="608"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Home Language"
-              DTS:DTSID="{EEEBECC3-E88C-453A-81B2-036F572AC9B7}"
+              DTS:DTSID="{A3C32671-662A-4F59-B4D7-07C1BBE05F18}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="5"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="FRM Code"
-              DTS:DTSID="{21EA5E05-E227-4558-905B-A6A55CA36346}"
+              DTS:DTSID="{1730342C-4047-4101-803C-E6D0244B08B7}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="3"
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="ELL Status"
-              DTS:DTSID="{84534FDB-3876-4CFA-AE8A-A842F8F43E53}"
+              DTS:DTSID="{B94EB315-B1C5-4697-9720-C8F8DAED4701}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="5"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="PRIM_DISAB"
-              DTS:DTSID="{2C3AC18E-4EF8-46CE-9081-A68D458A5776}"
+              DTS:DTSID="{CA9F3E20-A9D6-49C1-8718-7FCDE8E4F7B7}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="120"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Program Involvment"
-              DTS:DTSID="{F7FCDEC9-5C18-4339-9EBA-CDD10C2E8169}"
+              DTS:DTSID="{B4D9E9B8-6D9A-4EEB-A129-7054E6E2CD81}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="5"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Level Of Service"
-              DTS:DTSID="{CE5807EC-5614-4982-B091-1D706ACBDF64}"
+              DTS:DTSID="{DAFE2A18-3643-4433-9C37-3CCF9332DF5F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="10"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Grid Code"
-              DTS:DTSID="{675DB24B-5F30-4193-A345-1BE172088F58}"
+              DTS:DTSID="{98EF81BB-A5BF-4407-87F6-925EAA46E909}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="50"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Mailing Address"
-              DTS:DTSID="{596A5862-EBC8-4626-997E-AC03AD7D2710}"
+              DTS:DTSID="{533EBB34-B513-4E75-95A2-2A8292EB49E4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="50"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Mailing Address City"
-              DTS:DTSID="{D1E339E4-D019-4142-B469-3CBBB498863C}"
+              DTS:DTSID="{85AD6800-0FA1-4E60-BA03-5BD34923E110}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="5"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Mailing Address State"
-              DTS:DTSID="{43BD21E0-D984-460B-9A95-5C85C5776260}"
+              DTS:DTSID="{643CCF93-2406-4D48-B774-EA3E8D68A524}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="6"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Mailing Address Zip Code"
-              DTS:DTSID="{B8FB1304-CAE5-48E2-99BF-29D1DDE36073}"
+              DTS:DTSID="{7DE36C56-C44B-4EF3-B713-04D4F8A03091}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="492"
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Parent Name(s)"
-              DTS:DTSID="{CFF3A1DD-C2D9-409A-B757-6F7A450F4108}"
+              DTS:DTSID="{033B3E25-F107-4A45-ADFE-681EC3A8A664}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="10"
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="SOR Enrollment Enter Date"
-              DTS:DTSID="{4FA5C5D1-791F-4F65-9788-A69934A6D3B0}"
+              DTS:DTSID="{04F7A248-8F4A-4B8B-A9C8-46319C839A77}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x000D__x000A_"
-              DTS:DataType="302"
+              DTS:DataType="303"
               DTS:TextQualified="True"
               DTS:ObjectName="Concurrent Enrollment Location Numbers"
-              DTS:DTSID="{76C1CCA1-A96F-4DDE-9596-AAFE3077CD5D}"
+              DTS:DTSID="{33D242B7-71E2-4CF7-9F58-63407E14097E}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[Street Segments]"
+      DTS:refId="Package.ConnectionManagers[Street File]"
       DTS:CreationName="FLATFILE"
-      DTS:DTSID="{EAA6A95B-532B-4975-B221-C84537443B10}"
-      DTS:ObjectName="Street Segments">
+      DTS:DTSID="{82078F97-3CC1-482D-8CE6-15C9B77B92D5}"
+      DTS:ObjectName="Street File">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:Format="Delimited"
@@ -396,92 +396,101 @@
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
+              DTS:MaximumWidth="132"
               DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="GRID_GU"
+              DTS:DTSID="{DCAB92BD-1F99-429C-AB12-1CB7C2B0A9AC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="4"
               DTS:TextQualified="True"
               DTS:ObjectName="SCHOOL_YEAR"
-              DTS:DTSID="{8132E497-29C1-41C5-863E-A0F97AFB9C3A}"
+              DTS:DTSID="{649AC7C8-6BAF-49BE-9EEE-AC3B62410DA6}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
+              DTS:MaximumWidth="10"
+              DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="GRID_CODE"
-              DTS:DTSID="{2F7A6336-B7DA-442D-9476-611A0E2F7DDF}"
+              DTS:DTSID="{0891F74C-447B-4DF1-B65E-66C8D092344E}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
               DTS:TextQualified="True"
               DTS:ObjectName="STREET_LOW_ADDRESS"
-              DTS:DTSID="{EB47EC70-3ED6-43F5-8AD0-1377977B1E46}"
+              DTS:DTSID="{78AB1D90-2B35-4C29-97D5-608DA54A337C}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
               DTS:TextQualified="True"
               DTS:ObjectName="STREET_HIGH_ADDRESS"
-              DTS:DTSID="{A70711B3-620D-48C0-A311-404B5B74298B}"
+              DTS:DTSID="{B7AE83CC-EEDB-4A4B-BBF5-800B5C6B36ED}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="50"
-              DTS:DataType="129"
+              DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="STREET_NAME"
-              DTS:DTSID="{3B91CEE8-53C8-43FF-9EA2-66D675311434}"
+              DTS:DTSID="{7F774762-82A4-4535-A53E-7958CE141814}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
+              DTS:MaximumWidth="600"
+              DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="STREET_TYPE"
-              DTS:DTSID="{14498323-27D8-4F63-A3C1-8BC353E38E06}"
+              DTS:DTSID="{6C3BF4D9-8646-4B35-9323-FEAE87E372D2}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
+              DTS:MaximumWidth="5"
+              DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="STREET_POST_DIRECTION"
-              DTS:DTSID="{1DA12FEC-5A91-454F-971B-B008D1EDB028}"
+              DTS:DTSID="{CB5AAC90-3A88-47E3-A563-C51EC7DB8455}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="50"
-              DTS:DataType="129"
+              DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="CITY"
-              DTS:DTSID="{90B4A8A6-F6DB-4E45-B35A-F71FC20677FB}"
+              DTS:DTSID="{7CAEEA4D-E94F-4630-ACBC-C97A8BC9FB3B}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
+              DTS:MaximumWidth="2"
+              DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="STATE"
-              DTS:DTSID="{2BADDEE2-D366-4DFB-B94D-BE3E99E744A5}"
+              DTS:DTSID="{104A73A8-DC42-4405-9721-E5602048D281}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x000D__x000A_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
+              DTS:MaximumWidth="6"
+              DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="ZIP_5"
-              DTS:DTSID="{AD473392-6188-49A6-B6C0-A9CA5008805D}"
+              DTS:DTSID="{19D1C0AF-9B68-4B04-B230-6D76C3AE9FA2}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -545,8 +554,8 @@
               <connections>
                 <connection
                   refId="Package\GeoCode\Flat File Destination.Connections[FlatFileConnection]"
-                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
-                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                  connectionManagerID="Package.ConnectionManagers[Geocode]"
+                  connectionManagerRefId="Package.ConnectionManagers[Geocode]"
                   name="FlatFileConnection" />
               </connections>
               <inputs>
@@ -992,8 +1001,7 @@
                       name="SOR Enrollment Enter Date" />
                     <externalMetadataColumn
                       refId="Package\GeoCode\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Concurrent Enrollment Location Numbers]"
-                      codePage="1252"
-                      dataType="text"
+                      dataType="nText"
                       name="Concurrent Enrollment Location Numbers" />
                   </externalMetadataColumns>
                 </input>
@@ -1898,8 +1906,8 @@ FROM
               <connections>
                 <connection
                   refId="Package\Street Segments\Flat File Destination.Connections[FlatFileConnection]"
-                  connectionManagerID="Package.ConnectionManagers[Street Segments]"
-                  connectionManagerRefId="Package.ConnectionManagers[Street Segments]"
+                  connectionManagerID="Package.ConnectionManagers[Street File]"
+                  connectionManagerRefId="Package.ConnectionManagers[Street File]"
                   name="FlatFileConnection" />
               </connections>
               <inputs>
@@ -1908,6 +1916,14 @@ FROM
                   hasSideEffects="true"
                   name="Flat File Destination Input">
                   <inputColumns>
+                    <inputColumn
+                      refId="Package\Street Segments\Flat File Destination.Inputs[Flat File Destination Input].Columns[GRID_GU]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="132"
+                      cachedName="GRID_GU"
+                      externalMetadataColumnId="Package\Street Segments\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GRID_GU]"
+                      lineageId="Package\Street Segments\OLE DB Source.Outputs[OLE DB Source Output].Columns[GRID_GU]" />
                     <inputColumn
                       refId="Package\Street Segments\Flat File Destination.Inputs[Flat File Destination Input].Columns[SCHOOL_YEAR]"
                       cachedDataType="numeric"
@@ -1982,64 +1998,60 @@ FROM
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Street Segments\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SCHOOL_YEAR]"
+                      refId="Package\Street Segments\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GRID_GU]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
-                      name="SCHOOL_YEAR" />
+                      length="132"
+                      name="GRID_GU" />
+                    <externalMetadataColumn
+                      refId="Package\Street Segments\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SCHOOL_YEAR]"
+                      dataType="numeric"
+                      name="SCHOOL_YEAR"
+                      precision="4" />
                     <externalMetadataColumn
                       refId="Package\Street Segments\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GRID_CODE]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
+                      dataType="wstr"
+                      length="10"
                       name="GRID_CODE" />
                     <externalMetadataColumn
                       refId="Package\Street Segments\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[STREET_LOW_ADDRESS]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
-                      name="STREET_LOW_ADDRESS" />
+                      dataType="numeric"
+                      name="STREET_LOW_ADDRESS"
+                      precision="9" />
                     <externalMetadataColumn
                       refId="Package\Street Segments\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[STREET_HIGH_ADDRESS]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
-                      name="STREET_HIGH_ADDRESS" />
+                      dataType="numeric"
+                      name="STREET_HIGH_ADDRESS"
+                      precision="9" />
                     <externalMetadataColumn
                       refId="Package\Street Segments\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[STREET_NAME]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="50"
                       name="STREET_NAME" />
                     <externalMetadataColumn
                       refId="Package\Street Segments\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[STREET_TYPE]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
+                      dataType="wstr"
+                      length="600"
                       name="STREET_TYPE" />
                     <externalMetadataColumn
                       refId="Package\Street Segments\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[STREET_POST_DIRECTION]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
+                      dataType="wstr"
+                      length="5"
                       name="STREET_POST_DIRECTION" />
                     <externalMetadataColumn
                       refId="Package\Street Segments\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CITY]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="50"
                       name="CITY" />
                     <externalMetadataColumn
                       refId="Package\Street Segments\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[STATE]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
+                      dataType="wstr"
+                      length="2"
                       name="STATE" />
                     <externalMetadataColumn
                       refId="Package\Street Segments\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ZIP_5]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
+                      dataType="wstr"
+                      length="6"
                       name="ZIP_5" />
                   </externalMetadataColumns>
                 </input>
@@ -2070,8 +2082,7 @@ FROM
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
-	*
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT *
 FROM
 	APS.GeoCode_Street_Segments</property>
                 <property
@@ -2109,6 +2120,17 @@ FROM
                   refId="Package\Street Segments\OLE DB Source.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
+                    <outputColumn
+                      refId="Package\Street Segments\OLE DB Source.Outputs[OLE DB Source Output].Columns[GRID_GU]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Street Segments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GRID_GU]"
+                      length="132"
+                      lineageId="Package\Street Segments\OLE DB Source.Outputs[OLE DB Source Output].Columns[GRID_GU]"
+                      name="GRID_GU"
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Street Segments\OLE DB Source.Outputs[OLE DB Source Output].Columns[SCHOOL_YEAR]"
                       dataType="numeric"
@@ -2213,6 +2235,12 @@ FROM
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
+                      refId="Package\Street Segments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GRID_GU]"
+                      codePage="1252"
+                      dataType="str"
+                      length="132"
+                      name="GRID_GU" />
+                    <externalMetadataColumn
                       refId="Package\Street Segments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SCHOOL_YEAR]"
                       dataType="numeric"
                       name="SCHOOL_YEAR"
@@ -2269,6 +2297,13 @@ FROM
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
+                    <outputColumn
+                      refId="Package\Street Segments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GRID_GU]"
+                      codePage="1252"
+                      dataType="str"
+                      length="132"
+                      lineageId="Package\Street Segments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GRID_GU]"
+                      name="GRID_GU" />
                     <outputColumn
                       refId="Package\Street Segments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SCHOOL_YEAR]"
                       dataType="numeric"
@@ -2465,39 +2500,39 @@ FROM
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="172.8,41.6"
+          Id="Package\GeoCode\Flat File Destination"
+          TopLeft="128.8,131.2" />
+        <NodeLayout
           Size="152,41.6"
           Id="Package\GeoCode\OLE DB Source"
-          TopLeft="67,81" />
-        <NodeLayout
-          Size="174.4,41.6"
-          Id="Package\GeoCode\Flat File Destination"
-          TopLeft="117,244" />
+          TopLeft="127.2,36.8" />
         <EdgeLayout
           Id="Package\GeoCode.Paths[OLE DB Source Output]"
-          TopLeft="143,123">
+          TopLeft="203.2,78.4">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="61,121"
+              EndConnector="12.0000000000001,52.8"
               Start="0,0"
-              End="61,113.5">
+              End="12.0000000000001,45.3">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,56.5" />
+                    End="0,22.4" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,56.5"
-                    Point2="0,60.5"
-                    Point3="4,60.5" />
+                    Point1="0,22.4"
+                    Point2="0,26.4"
+                    Point3="4,26.4" />
                   <mssgle:LineSegment
-                    End="57,60.5" />
+                    End="8.00000000000006,26.4" />
                   <mssgle:CubicBezierSegment
-                    Point1="57,60.5"
-                    Point2="61,60.5"
-                    Point3="61,64.5" />
+                    Point1="8.00000000000006,26.4"
+                    Point2="12.0000000000001,26.4"
+                    Point3="12.0000000000001,30.4" />
                   <mssgle:LineSegment
-                    End="61,113.5" />
+                    End="12.0000000000001,45.3" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2509,14 +2544,6 @@ FROM
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\GeoCode\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Street Segments">
     <LayoutInfo>
@@ -2525,37 +2552,37 @@ FROM
         <NodeLayout
           Size="152,41.6"
           Id="Package\Street Segments\OLE DB Source"
-          TopLeft="53.6,37.6" />
+          TopLeft="62.8571439275937,23.2470591495606" />
         <NodeLayout
           Size="172.8,41.6"
           Id="Package\Street Segments\Flat File Destination"
-          TopLeft="89.6,176.8" />
+          TopLeft="80.0000013623919,130.917648894894" />
         <EdgeLayout
           Id="Package\Street Segments.Paths[OLE DB Source Output]"
-          TopLeft="129.6,79.2">
+          TopLeft="138.857143927594,64.8470591495606">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="46.4,97.6"
+              EndConnector="27.5428574347982,66.0705897453335"
               Start="0,0"
-              End="46.4,90.1">
+              End="27.5428574347982,58.5705897453335">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,44.8" />
+                    End="0,29.0352948726667" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,44.8"
-                    Point2="0,48.8"
-                    Point3="4,48.8" />
+                    Point1="0,29.0352948726667"
+                    Point2="0,33.0352948726667"
+                    Point3="4,33.0352948726667" />
                   <mssgle:LineSegment
-                    End="42.4,48.8" />
+                    End="23.5428574347982,33.0352948726667" />
                   <mssgle:CubicBezierSegment
-                    Point1="42.4,48.8"
-                    Point2="46.4,48.8"
-                    Point3="46.4,52.8" />
+                    Point1="23.5428574347982,33.0352948726667"
+                    Point2="27.5428574347982,33.0352948726667"
+                    Point3="27.5428574347982,37.0352948726667" />
                   <mssgle:LineSegment
-                    End="46.4,90.1" />
+                    End="27.5428574347982,58.5705897453335" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2569,6 +2596,14 @@ FROM
   </TaskHost>
   <PipelineComponentMetadata
     design-time-name="Package\Street Segments\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\GeoCode\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
