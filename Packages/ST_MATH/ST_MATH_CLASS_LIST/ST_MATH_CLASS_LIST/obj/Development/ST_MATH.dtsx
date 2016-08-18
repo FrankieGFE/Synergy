@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="ST_MATH"
   DTS:PackageType="5"
-  DTS:VersionBuild="33"
-  DTS:VersionGUID="{78F22785-8A74-45D5-AA3A-91D62F190F6E}">
+  DTS:VersionBuild="35"
+  DTS:VersionGUID="{3A23E784-3589-4D2D-8C49-C51CC4CFFDDD}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -321,7 +321,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACcofFDq4HPYcUu0JVecqLZAAAAAASAAACgAAAAEAAAAKoy5fqMW1gPgJ/SXRm9J8wwAAAASbk94rOKuNM79J/GjiB0jhtirZy5BODh1vordiUl+LTt3lz2V6CGjdFV601x0/z2FAAAACD5LyhK7jY6njRIig2rkS+yaS04</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADcYl++0zdenZfFVwAzxsGFAAAAAASAAACgAAAAEAAAAG3BDkTNFyS56KFVPi8uQXwwAAAAm8g0j6wTgfu7HndOxtrzgJ1zqTKdO8/1vDwKE91Mtm/w9MbL6ztYLMoNXEI7oc0zFAAAAESN+tahZRggwMzXy5s693Mblhaz</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -336,7 +336,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAa+MXrK0a/zAldpQavmrLfAAAAAASAAACgAAAAEAAAADDqUplGUiROJy4+CFX+R14wAAAAW//pqcfLTNSx4XjgxzBluuYldkLl7qQIhDnrFrv3DBNwDOWR2xJJza7Hie6wDbWTFAAAAAfqz348L4ogyQDuWzGbS2l4aJq0</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAC+uMKa2kTVEiYCOdXss60cAAAAAASAAACgAAAAEAAAAKelzQ86t9IfwuiRdgqNZjYwAAAA4X6QMttskpHmiwfgdy7YKGSceSIe3NKwG8SDtu6OtwbhbtGkYAir29lyQL26c6VnFAAAAFvOk9El4/zWW6Ti7t0KbCUzbFCC</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -1363,6 +1363,7 @@ FROM
 			,ST.BADGE_NUM
 			,PER.EMAIL
 			,CAST(replace(lower(st.BADGE_NUM), 'e', '')AS INT) AS EMP_ID
+			,SCH.ORGANIZATION_NAME
 	
 			FROM 
 			APS.ScheduleDetailsAsOf (GETDATE()) AS SCH --- Change to getdate in August
@@ -1388,6 +1389,7 @@ FROM
 		
 		ON
 		STU.SIS_NUMBER = TCH.SIS_NUMBER
+		AND TCH.ORGANIZATION_NAME = ENR.SCHOOL_NAME
 
 
 WHERE 
@@ -1524,6 +1526,7 @@ FROM
 			,PER.EMAIL
 			,SCH.DEPARTMENT
 			,CAST(replace(lower(st.BADGE_NUM), 'e', '')AS VARCHAR(9)) AS EMP_ID
+			,SCH.ORGANIZATION_NAME
 	
 			FROM 
 			APS.ScheduleDetailsAsOf (GETDATE()) AS SCH --- Change to getdate in August
@@ -1548,6 +1551,7 @@ FROM
 		
 		ON
 		STU.SIS_NUMBER = TCH.SIS_NUMBER
+		AND TCH.ORGANIZATION_NAME = ENR.SCHOOL_NAME
 		
 WHERE 
 	1 = 1
