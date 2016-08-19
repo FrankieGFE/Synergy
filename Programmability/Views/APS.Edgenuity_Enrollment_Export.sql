@@ -8,6 +8,7 @@ SELECT  distinct
         
 		stu.SIS_NUMBER                            AS SUSD
        , crs.COURSE_ID                            AS 'Course Code'
+	   , crs.COURSE_SHORT_TITLE					  AS 'Course Title'
 	   , TERM_CODE								  AS 'Term'
 	   , CASE WHEN cls.LEAVE_DATE IS NULL THEN 'Active' 
 	          ELSE 'Withdrawn'

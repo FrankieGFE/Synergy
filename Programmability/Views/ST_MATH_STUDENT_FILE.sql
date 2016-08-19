@@ -104,6 +104,7 @@ FROM
 			,ST.BADGE_NUM
 			,PER.EMAIL
 			,CAST(replace(lower(st.BADGE_NUM), 'e', '')AS INT) AS EMP_ID
+			,SCH.ORGANIZATION_NAME
 	
 			FROM 
 			APS.ScheduleDetailsAsOf (GETDATE()) AS SCH --- Change to getdate in August
@@ -129,6 +130,7 @@ FROM
 		
 		ON
 		STU.SIS_NUMBER = TCH.SIS_NUMBER
+		AND TCH.ORGANIZATION_NAME = ENR.SCHOOL_NAME
 
 
 WHERE 
@@ -265,6 +267,7 @@ FROM
 			,PER.EMAIL
 			,SCH.DEPARTMENT
 			,CAST(replace(lower(st.BADGE_NUM), 'e', '')AS VARCHAR(9)) AS EMP_ID
+			,SCH.ORGANIZATION_NAME
 	
 			FROM 
 			APS.ScheduleDetailsAsOf (GETDATE()) AS SCH --- Change to getdate in August
@@ -289,6 +292,7 @@ FROM
 		
 		ON
 		STU.SIS_NUMBER = TCH.SIS_NUMBER
+		AND TCH.ORGANIZATION_NAME = ENR.SCHOOL_NAME
 		
 WHERE 
 	1 = 1

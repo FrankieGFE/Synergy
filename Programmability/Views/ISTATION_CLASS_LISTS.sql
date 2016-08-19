@@ -52,7 +52,7 @@ FROM
 	ON BS.SIS_NUMBER = ENR.SIS_NUMBER
 
 	LEFT JOIN
-	APS.ScheduleAsOf ('08/11/2016') AS SCH  --- Change to getdate when school starts
+	APS.ScheduleAsOf (GETDATE()) AS SCH  --- Change to getdate when school starts
 	ON SCH.SIS_NUMBER = ENR.SIS_NUMBER
 
 		INNER JOIN 
@@ -73,7 +73,7 @@ FROM
 			,CAST(replace(lower(st.BADGE_NUM), 'e', '')AS INT) AS EMP_ID
 	
 			FROM 
-			APS.ScheduleDetailsAsOf ('08/11/2016') AS SCH
+			APS.ScheduleDetailsAsOf (GETDATE()) AS SCH
 
 			LEFT JOIN
 			REV.REV_YEAR AS YR
@@ -107,6 +107,6 @@ WHERE
 	AND ENR.SUMMER_WITHDRAWL_CODE IS NULL
 	AND TCH.EMAIL IS NOT NULL
 	AND STU.STATE_STUDENT_NUMBER IS NOT NULL
-	--AND  ENR.SIS_NUMBER = '970065821'
+	--AND  ENR.SIS_NUMBER = '980005810'
 
 --ORDER BY id
