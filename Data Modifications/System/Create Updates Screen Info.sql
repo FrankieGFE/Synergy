@@ -1,3 +1,17 @@
+/*
+	Created by Debbie Ann Chavez
+	Date 2016-04-12
+
+	JUST CHANGE:  
+
+		REFRESH DATE
+		ENTER THE URL
+		NOTES
+		AND ROLLBACK IF LOOKS GOOD THEN COMMIT
+
+*/
+
+
 
 BEGIN TRANSACTION
 
@@ -11,13 +25,13 @@ SELECT
 	,NULL AS CHANGE_ID_STAMP
 		
 	--ENTER IN THE REFRESH DATE
-	,'2016-02-11' AS REFRESH_DATE
+	,'2016-05-25' AS REFRESH_DATE
 	
 	--ENTER THE USER INTERFACE URL
-	,'http://synsped.aps.edu.actd/' AS URL
+	,'http://synexp.aps.edu.actd/' AS URL
 
 	--ENTER IN ANY NOTES FOR ENVIRONMENT
-	,'Check with Special Ed Department' AS NOTES
+	,'Shayne working on Audit Trail' AS NOTES
 
 		
 
@@ -34,7 +48,7 @@ WHERE
 RN = 1
 ) AS MOSTRECENTVER
 
-SELECT * FROM 
+SELECT *  FROM 
 rev.UD_VER
 
 ROLLBACK
