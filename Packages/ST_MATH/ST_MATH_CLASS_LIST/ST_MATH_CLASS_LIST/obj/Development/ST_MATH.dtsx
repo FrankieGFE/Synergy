@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="ST_MATH"
   DTS:PackageType="5"
-  DTS:VersionBuild="35"
-  DTS:VersionGUID="{3A23E784-3589-4D2D-8C49-C51CC4CFFDDD}">
+  DTS:VersionBuild="39"
+  DTS:VersionGUID="{FFD98634-7512-44C3-A2A4-0BF417981860}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -321,7 +321,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADcYl++0zdenZfFVwAzxsGFAAAAAASAAACgAAAAEAAAAG3BDkTNFyS56KFVPi8uQXwwAAAAm8g0j6wTgfu7HndOxtrzgJ1zqTKdO8/1vDwKE91Mtm/w9MbL6ztYLMoNXEI7oc0zFAAAAESN+tahZRggwMzXy5s693Mblhaz</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADdOGJZPO/QjiUgQQqS2AzfAAAAAASAAACgAAAAEAAAAEq/isbbXbJpXDz8Q2PMr4EwAAAAgB4qHMEXfcmw4XmRk1PBEnnsacQe00wk1nYn7Iu1AYbo+j6A9+LBkuVi3OO7gg3hFAAAAHOpv9QDYLQSktvcdVosClKZoMDK</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -336,7 +336,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAC+uMKa2kTVEiYCOdXss60cAAAAAASAAACgAAAAEAAAAKelzQ86t9IfwuiRdgqNZjYwAAAA4X6QMttskpHmiwfgdy7YKGSceSIe3NKwG8SDtu6OtwbhbtGkYAir29lyQL26c6VnFAAAAFvOk9El4/zWW6Ti7t0KbCUzbFCC</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABlV69L+j1GQjUYQMyrlQf9AAAAAASAAACgAAAAEAAAABw2DdYgggCOYHlho+dXNFQwAAAAq6+UAPaRSva/BCn4OCRCYZKPIgmknFjQhMpoUbVUWmf6emhOidDEASSVXFTn/fdfFAAAABWkojalCYhYYrA9aXrA9GSPoj+E</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -1322,7 +1322,7 @@ SELECT
 	,ENR.SIS_NUMBER AS student_id
 	,REPLACE (PER.LAST_NAME,',','') AS student_last_name
 	,REPLACE (PER.FIRST_NAME, ',','') AS student_first_name
-	,LEFT(PER.LAST_NAME,1) + ENR.SIS_NUMBER AS student_username
+	,ENR.SIS_NUMBER AS student_username
 	,'#student1aps' AS student_password
 	,'Visual' AS permanent_login
 	,CONVERT(VARCHAR, BS.BIRTH_DATE, 101) AS birthdate
@@ -1399,7 +1399,8 @@ WHERE
 	AND GRADE IN ('K','01','02','03','04','05')
 	AND ENR.LEAVE_DATE IS NULL
 	AND ENR.EXCLUDE_ADA_ADM IS NULL
-	AND ENR.SUMMER_WITHDRAWL_CODE IS NULL
+	AND ENR.ENTER_DATE IS NOT NULL
+	--AND ENR.SUMMER_WITHDRAWL_CODE IS NULL
 	--AND TCH.EMP_ID = '70652'
 ) AS EST
 
@@ -1424,8 +1425,8 @@ SELECT
 	,ST.school
 	,district_teacher_id
 	,teacher_email
-	,teacher_first_name
 	,teacher_last_name
+	,teacher_first_name
 	,grade
 	,period
 	,curriculum
@@ -1470,7 +1471,7 @@ SELECT
 		  WHEN ENR.SCHOOL_NAME = '' THEN ''
 	ELSE ENR.SCHOOL_NAME
 	END AS school
-	,TCH.EMP_ID AS district_teacher_id
+	,TCH.BADGE_NUM district_teacher_id
 	,TCH.EMAIL AS teacher_email
 	,TCH.LAST_NAME AS teacher_last_name
 	,TCH.FIRST_NAME AS teacher_first_name
@@ -1559,7 +1560,8 @@ WHERE
 	AND EXTENSION = 'R'
 	AND ENR.LEAVE_DATE IS NULL
 	AND ENR.EXCLUDE_ADA_ADM IS NULL
-	AND ENR.SUMMER_WITHDRAWL_CODE IS NULL
+	AND ENR.ENTER_DATE IS NOT NULL
+	--AND ENR.SUMMER_WITHDRAWL_CODE IS NULL
 	--AND TCH.BADGE_NUM NOT LIKE 'SPDPR%'
 	--AND TCH.EMP_ID = '203050'
 ) AS ST
@@ -1884,7 +1886,7 @@ ORDER BY grade
                     <externalMetadataColumn
                       refId="Package\ST_MATH_CLASS_LIST\ST_MATH_STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[student_username]"
                       dataType="wstr"
-                      length="21"
+                      length="20"
                       name="student_username" />
                     <externalMetadataColumn
                       refId="Package\ST_MATH_CLASS_LIST\ST_MATH_STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[student_password]"
@@ -2006,7 +2008,7 @@ ORDER BY grade
                     <outputColumn
                       refId="Package\ST_MATH_CLASS_LIST\ST_MATH_STUDENTS.Outputs[OLE DB Source Error Output].Columns[student_username]"
                       dataType="wstr"
-                      length="21"
+                      length="20"
                       lineageId="Package\ST_MATH_CLASS_LIST\ST_MATH_STUDENTS.Outputs[OLE DB Source Error Output].Columns[student_username]"
                       name="student_username" />
                     <outputColumn
