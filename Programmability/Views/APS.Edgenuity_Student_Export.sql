@@ -157,8 +157,9 @@ WHERE 1 = 1
 AND GRADE IN ('08','09','10','11','12') --- Request is for all active student in Grade Levels 8-12
 AND SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
 AND LEAVE_DATE IS NULL  --- Request is for all ACTIVE studentS in Grade Levels 8-12
+AND ENTER_DATE IS NOT NULL
 AND EXCLUDE_ADA_ADM  IS NULL
-AND SUMMER_WITHDRAWL_CODE IS NULL
+--AND SUMMER_WITHDRAWL_CODE IS NULL
 AND EXTENSION = 'R'
 ) AS T1
 WHERE 1 = 1

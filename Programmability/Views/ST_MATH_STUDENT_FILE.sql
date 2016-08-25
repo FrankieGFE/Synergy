@@ -1,7 +1,7 @@
 
 
---EXECUTE AS LOGIN='QueryFileUser'
---GO
+EXECUTE AS LOGIN='QueryFileUser'
+GO
 
 SELECT
 	[FILE].IID
@@ -63,7 +63,7 @@ SELECT
 	,ENR.SIS_NUMBER AS student_id
 	,REPLACE (PER.LAST_NAME,',','') AS student_last_name
 	,REPLACE (PER.FIRST_NAME, ',','') AS student_first_name
-	,LEFT(PER.LAST_NAME,1) + ENR.SIS_NUMBER AS student_username
+	,ENR.SIS_NUMBER AS student_username
 	,'#student1aps' AS student_password
 	,'Visual' AS permanent_login
 	,CONVERT(VARCHAR, BS.BIRTH_DATE, 101) AS birthdate
@@ -165,8 +165,8 @@ SELECT
 	,ST.school
 	,district_teacher_id
 	,teacher_email
-	,teacher_first_name
 	,teacher_last_name
+	,teacher_first_name
 	,grade
 	,period
 	,curriculum
@@ -211,7 +211,7 @@ SELECT
 		  WHEN ENR.SCHOOL_NAME = '' THEN ''
 	ELSE ENR.SCHOOL_NAME
 	END AS school
-	,TCH.EMP_ID AS district_teacher_id
+	,TCH.BADGE_NUM district_teacher_id
 	,TCH.EMAIL AS teacher_email
 	,TCH.LAST_NAME AS teacher_last_name
 	,TCH.FIRST_NAME AS teacher_first_name
@@ -318,5 +318,5 @@ AND RN = 1
 AND ST.iid IS NOT NULL
 ORDER BY grade
 
---REVERT
---GO
+REVERT
+GO
