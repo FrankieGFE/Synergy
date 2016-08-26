@@ -1,5 +1,5 @@
 
-CREATE VIEW APS.SchoolpayExport AS
+ALTER VIEW APS.SchoolpayExport AS
 
 SELECT
     [Student].[SIS_NUMBER] AS [Student ID]
@@ -42,6 +42,6 @@ FROM
     [SSY].[GRADE]=[Grades].[VALUE_CODE]
 
 WHERE
-    [SSY].[YEAR_GU]=(SELECT [YEAR_GU] FROM [rev].[REV_YEAR] WHERE [SCHOOL_YEAR]=2015 AND [EXTENSION]='R')
+    [SSY].[YEAR_GU]=(SELECT [YEAR_GU] FROM [rev].[REV_YEAR] WHERE [SCHOOL_YEAR]=2016 AND [EXTENSION]='R')
     AND [Enrollment].[EXCLUDE_ADA_ADM] IS NULL
     AND ([Enrollment].[LEAVE_DATE] IS NULL)
