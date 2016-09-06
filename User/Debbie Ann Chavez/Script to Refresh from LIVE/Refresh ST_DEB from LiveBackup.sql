@@ -54,8 +54,8 @@ IF @DayOfWeek = 0
 			ST_DEB 
 		FROM DISK=@FileName
 		WITH 
-			MOVE 'ST_Production' TO 'D:\DATABASES\ST_DEB.mdf'
-			,MOVE 'ST_Production_log' TO 'L:\LOGS\ST_DEB_log.ldf'
+			MOVE 'ST_Production' TO 'E:\DATABASES\ST_DEB.mdf'
+			,MOVE 'ST_Production_log' TO 'E:\LOGS\ST_DEB_log.ldf'
 			,REPLACE
 	END --endif
 ELSE
@@ -66,8 +66,8 @@ ELSE
 			ST_DEB 
 		FROM DISK=@FileName
 		WITH 
-			MOVE 'ST_Production' TO 'D:\DATABASES\ST_DEB.mdf'
-			,MOVE 'ST_Production_log' TO 'L:\LOGS\ST_DEB_log.ldf'
+			MOVE 'ST_Production' TO 'E:\DATABASES\ST_DEB.mdf'
+			,MOVE 'ST_Production_log' TO 'E:\LOGS\ST_DEB_log.ldf'
 			,REPLACE
 			,NORECOVERY -- We use Norecovery if there are no differentials to restore.
 	END --endelse
@@ -151,7 +151,7 @@ GRANT EXECUTE TO [APS\SynAdministratorSPED]
 GRANT SELECT TO [APS\SynAdministratorSPED]
 GRANT VIEW DEFINITION TO [APS\SynAdministratorSPED]
 
-EXEC sp_addrolemember 'db_datawriter', 'APS\Gary.Corbaley'; -- adding role data_reader
+--EXEC sp_addrolemember 'db_datawriter', 'APS\Gary.Corbaley'; -- adding role data_reader
 
 --Clearing Job Queue
 -- -------------------------------------------------------
@@ -218,4 +218,4 @@ WHERE
  * restore
  * ****************************************************************/
 PRINT '*** Creating Local Backup'
-BACKUP DATABASE [ST_DEB] TO DISK='D:\BACKUPS\MANUAL\ST_DEB.BAK' WITH FORMAT
+BACKUP DATABASE [ST_DEB] TO DISK='E:\BACKUPS\MANUAL\ST_DEB.BAK' WITH FORMAT
