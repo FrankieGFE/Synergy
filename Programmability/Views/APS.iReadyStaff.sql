@@ -1,6 +1,6 @@
 
 
-CREATE VIEW APS.iReadyStaff AS
+ALTER VIEW APS.iReadyStaff AS
 
 SELECT
 	[Client ID]
@@ -32,14 +32,15 @@ SELECT DISTINCT
 	,REPLACE([STAFF].[BADGE_NUM],'e','') AS [Staff Member SIS ID]
 	,[STAFF_PERSON].[FIRST_NAME] AS [First Name]
 	,[STAFF_PERSON].[LAST_NAME] AS [Last Name]
-	,CASE 
-		WHEN [STAFF].[TYPE] = 'TE' THEN 'Teacher'
-		WHEN [STAFF].[TYPE] = 'DA' THEN 'SchoolAdministrator'
-		WHEN [STAFF].[TYPE] = 'SA' THEN 'SchoolAdministrator'
-		WHEN [STAFF].[TYPE] = 'SCA' THEN 'SchoolAdministrator'
-		WHEN [STAFF].[TYPE] = 'ED' THEN 'Teacher'
-		ELSE 'SchoolAdministrator'
-	END AS [Role]
+	,'Teacher' AS [ROLE]
+	--,CASE 
+	--	WHEN [STAFF].[TYPE] = 'TE' THEN 'Teacher'
+	--	WHEN [STAFF].[TYPE] = 'DA' THEN 'SchoolAdministrator'
+	--	WHEN [STAFF].[TYPE] = 'SA' THEN 'SchoolAdministrator'
+	--	WHEN [STAFF].[TYPE] = 'SCA' THEN 'SchoolAdministrator'
+	--	WHEN [STAFF].[TYPE] = 'ED' THEN 'Teacher'
+	--	ELSE 'SchoolAdministrator'
+	--END AS [Role]
 	,[STAFF_PERSON].[EMAIL]
 	,[STAFF_PERSON].[EMAIL] AS [User Name]
 	,'teacher' AS [Password]
