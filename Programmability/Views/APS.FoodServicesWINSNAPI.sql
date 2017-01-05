@@ -6,10 +6,10 @@
 */
 
 
--- Drop view if it exists
-IF NOT EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[APS].[APS.FoodServicesWINSNAPI]'))
-	EXEC ('CREATE VIEW APS.FoodServicesWINSNAPI AS SELECT 0 AS DUMMY')
-GO
+ --Drop view if it exists
+--IF NOT EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[APS].[APS.FoodServicesWINSNAPI]'))
+--	EXEC ('CREATE VIEW APS.FoodServicesWINSNAPI AS SELECT 0 AS DUMMY')
+--GO
 
 ALTER VIEW APS.FoodServicesWINSNAPI AS
 
@@ -104,7 +104,7 @@ SELECT DISTINCT
 FROM rev.EPC_STU                    stu
      JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
                                             and ssy.STATUS is NULL
-                                            and ssy.EXCLUDE_ADA_ADM is null --exclude concurrent enrollment
+                                            --and ssy.EXCLUDE_ADA_ADM is null --exclude concurrent enrollment
 											/*and ssy.SUMMER_WITHDRAWL_CODE is null -- exclude summer withdrawal
 											and ssy.SUMMER_WITHDRAWL_DATE is null -- exclude summer withdrawal*/
      JOIN rev.REV_ORGANIZATION_YEAR oyr  ON oyr.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
@@ -112,11 +112,11 @@ FROM rev.EPC_STU                    stu
                                             --and yr.SCHOOL_YEAR = 2015
 											--and yr.EXTENSION = 'R'
 								    /**/
-									and ((yr.SCHOOL_YEAR=2015 AND yr.EXTENSION='S') OR (yr.SCHOOL_YEAR=2016 AND yr.EXTENSION='N'))
+									and (yr.SCHOOL_YEAR=2016 AND yr.EXTENSION='R')
 											and ssy.LEAVE_DATE is null
      JOIN rev.EPC_SCH               sch  ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU 
      JOIN rev.REV_PERSON            per  ON per.PERSON_GU = stu.STUDENT_GU
-     LEFT JOIN rev.REV_ADDRESS      hadr ON hadr.ADDRESS_GU = per.HOME_ADDRESS_GU
+     LEFT JOIN rev.REV_ADDRESS      hadr ON hadr.ADDRESS_GU = per.MAIL_ADDRESS_GU
      LEFT JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd ON grd.VALUE_CODE = ssy.GRADE
      LEFT JOIN ParentNames          pnm  ON pnm.STUDENT_GU = stu.STUDENT_GU and pnm.rn = 1
      LEFT JOIN rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') eth on eth.VALUE_CODE = per.RESOLVED_ETHNICITY_RACE
@@ -144,4 +144,5 @@ FROM rev.EPC_STU                    stu
 
 	 -- to select only 1 reguler school enrollment
 WHERE sch.SCHOOL_CODE NOT IN ('510')
---AND stu.SIS_NUMBER IN (970077014,104448246,970084685)
+AND (EXCLUDE_ADA_ADM IS NULL OR ENR_USER_DD_4 = 'PEER')
+--AND stu.SIS_NUMBER IN (980032521)
