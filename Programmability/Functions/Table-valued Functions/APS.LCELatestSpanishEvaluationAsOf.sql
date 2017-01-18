@@ -1,6 +1,6 @@
-/* $Revision$
- * $LastChangedBy$
- * $LastChangedDate$
+/* $Revision: 219 $
+ * $LastChangedBy: e201594 $
+ * $LastChangedDate: 2014-10-09 09:46:12 -0600 (Thu, 09 Oct 2014) $
  */
  IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[LCELatestSpanishEvaluationAsOf]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
 	EXEC('CREATE FUNCTION APS.LCELatestSpanishEvaluationAsOf()RETURNS TABLE AS RETURN (SELECT 0 AS DUMMY)')

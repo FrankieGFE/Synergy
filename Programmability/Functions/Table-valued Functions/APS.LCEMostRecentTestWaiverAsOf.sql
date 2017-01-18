@@ -1,8 +1,8 @@
 
 /**
  * $Revision:1 $
- * $LastChangedBy$
- * $LastChangedDate$
+ * $LastChangedBy: e201594 $
+ * $LastChangedDate: 2014-10-02 07:50:52 -0600 (Thu, 02 Oct 2014) $
  */
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[LCEMostRecentTestWaiverAsOf]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
 	EXEC('CREATE FUNCTION APS.LCEMostRecentTestWaiverAsOf()RETURNS TABLE AS RETURN (SELECT 0 AS DUMMY)')

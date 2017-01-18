@@ -1,7 +1,7 @@
 /**
  * 
  * $LastChangedBy: DEBBIE ANN CHAVEZ
- * $LastChangedDate$
+ * $LastChangedDate: 2015-02-23 13:19:24 -0700 (Mon, 23 Feb 2015) $
  *
  * 
  * This View pulls one record per student class (schedule)with pertinenet informaiton

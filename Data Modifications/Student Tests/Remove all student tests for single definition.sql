@@ -8,12 +8,14 @@
 
 -- delete the student scores
 BEGIN TRANSACTION
-DECLARE @TestName NVARCHAR(MAX) = 'WAPT'
+DECLARE @TestName NVARCHAR(MAX) = 'ADC APS MATH'
+DECLARE @TestDate DATE = '2016-05-01'
 
-DELETE
-	StudentTestPartScore
---SELECT
+--DELETE
+--	StudentTestPartScore
+--SELECT top 50 *
 --	COUNT(*)
+update rev.epc_test set SCHOOL_YEAR  = ''
 FROM
 	rev.EPC_STU_TEST AS StudentTest
 	INNER JOIN
@@ -33,12 +35,13 @@ FROM
 
 WHERE
 	Test.TEST_NAME = @TestName
+	AND STUDENTTEST.ADMIN_DATE between '2015-07-01 00:00:00' and '2016-06-30 00:00:00'
 
 -- delete the student test parts
 -- ---------------------------------------------------------------------------------------
-DELETE
-	StudentTestPart
---SELECT
+--DELETE
+--	StudentTestPart
+SELECT top 50 *
 --	COUNT(*)
 FROM
 	rev.EPC_STU_TEST AS StudentTest
@@ -53,12 +56,13 @@ FROM
 	StudentTest.STUDENT_TEST_GU = StudentTestPart.STUDENT_TEST_GU
 WHERE
 	Test.TEST_NAME = @TestName
+	AND STUDENTTEST.ADMIN_DATE =@TestDate
 
 -- Delete the student test
 -- ---------------------------------------------------------------------------------------
-DELETE
-	StudentTest
---SELECT
+--DELETE
+--	StudentTest
+SELECT top 50 *
 --	COUNT(*)
 FROM
 	rev.EPC_STU_TEST AS StudentTest
@@ -68,5 +72,6 @@ FROM
 	StudentTest.TEST_GU = Test.TEST_GU
 WHERE
 	Test.TEST_NAME = @TestName
+	AND STUDENTTEST.ADMIN_DATE =@TestDate
 
 ROLLBACK

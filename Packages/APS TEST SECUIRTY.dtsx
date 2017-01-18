@@ -1,0 +1,1981 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/19/2016 9:07:18 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="046-FRGARCIA"
+  DTS:CreatorName="APS\e138796"
+  DTS:DTSID="{3819CF6A-EFBE-4D0F-9D5F-0ECE6752BC70}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5058.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{2CE1B0C4-5954-4C93-A1B4-FC57B47C4A10}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[180-SMAXODS-01.ReportMaxRW 1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C9C7D79E-9CDA-42C5-BB9E-1867A5F559F9}"
+      DTS:ObjectName="180-SMAXODS-01.ReportMaxRW 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=180-SMAXODS-01;User ID=LinkedSynergy;Initial Catalog=LAWSON;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAlMOZbcQO20yXq/z9+hBAzQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAD7UShcK7k+nGj+av+qxB79AAAAAASAAACgAAAAEAAAAL+/qAJwCwxxilRhNPec4gIwAAAAuncFHZVxYdRI63x42P6AawGGcjtkIIMg8OlaBNcWnNtqgMoNabZBW4tMHoiUKFkJFAAAAE/H+6yZkoGp0CZTOhipvW+3gyEP</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[TEST_SECURITY_BASIC]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="TEST_SECURITY_BASIC"
+      DTS:DTSID="{F341653C-8300-4DC0-AC4A-38C2821B5698}"
+      DTS:ObjectName="TEST_SECURITY_BASIC">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\046-fs01\RDA Files\SIS\Blackboard Test Security Results\gc_044_Test_Secuirty_Basic.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Last Name"
+              DTS:DTSID="{D9570EC5-A2D6-457E-96C6-D27D9C2C3097}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="First Name"
+              DTS:DTSID="{14EA8D34-6918-4A57-B7DF-4B66821F2516}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Username"
+              DTS:DTSID="{8E79A2D4-A359-40A6-9C99-14DDF022444E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student ID"
+              DTS:DTSID="{A0024EE4-9495-422A-9CA8-3C4D2B14EBA8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Last Access"
+              DTS:DTSID="{E01B08A8-58F8-46EF-8279-752BA3A06A65}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Availability"
+              DTS:DTSID="{575647EF-3328-4390-958B-C8C3D3E019DA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Test Administration Security Quiz"
+              DTS:DTSID="{66F43228-7666-4E1F-806F-A2540126763C}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[TEST_SECURITY_BASIC_DESTINATION]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="TEST_SECURITY_BASIC_DESTINATION"
+      DTS:DTSID="{E792374A-5F30-4112-98B9-1A952D1CA8A0}"
+      DTS:ObjectName="TEST_SECURITY_BASIC_DESTINATION">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\180-SMAXODS-01\SQLWorkingFiles\gc_044_Test_Secuirty_Basic.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Last Name"
+              DTS:DTSID="{37803811-DF3C-4EB3-9BE4-7A2377091ECA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="First Name"
+              DTS:DTSID="{15185824-E711-4DE4-B865-3081BEFBB342}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Username"
+              DTS:DTSID="{A57E8662-472D-4FD1-9F56-2A0D18BFCCF4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student ID"
+              DTS:DTSID="{04166C34-C43D-4B05-9D49-BA69AB720C8D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Last Access"
+              DTS:DTSID="{0E3C6E7B-76BE-49AB-9A71-49C888BA57B9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Availability"
+              DTS:DTSID="{469F399B-3557-41D2-BCBD-4A36C55425D5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Test Administration Security Quiz"
+              DTS:DTSID="{7A052021-7174-42B2-992A-D23CE487E14B}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[TEST_SECURITY_SCHOOL_TEST_ADMIN]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="TEST_SECURITY_SCHOOL_TEST_ADMIN"
+      DTS:DTSID="{68F11144-BB56-47A0-AB2D-C9345535DF4B}"
+      DTS:ObjectName="TEST_SECURITY_SCHOOL_TEST_ADMIN">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\046-fs01\RDA Files\SIS\Blackboard Test Security Results\gc_044_Test_Secuirty_School_Test_Admin.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Last Name"
+              DTS:DTSID="{4E784777-6621-47C4-8F53-17265F6D0CF0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="First Name"
+              DTS:DTSID="{519AB594-3A9B-4104-91BA-F408E2249F35}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Username"
+              DTS:DTSID="{9824B026-005A-4D3C-9AC3-D6DC7E0B03CA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student ID"
+              DTS:DTSID="{0459CFB4-6C1F-4D6F-9E74-4C6081A33F3F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Last Access"
+              DTS:DTSID="{D6464D8B-1699-4603-B33E-700B0C997350}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Availability"
+              DTS:DTSID="{7125E6F0-F8E0-45D5-B31F-3137B144C3BE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="STC Test Security Quiz "
+              DTS:DTSID="{C59F08B8-907A-4872-BD53-B353198452AA}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION"
+      DTS:DTSID="{BF507E50-7EA2-486D-8782-CBE2F0BF4D2E}"
+      DTS:ObjectName="TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\180-SMAXODS-01\SQLWorkingFiles\gc_044_Test_Secuirty_School_Test_Admin.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Last Name"
+              DTS:DTSID="{FF54EE0F-6D3A-4055-91A8-012002E3BC54}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="First Name"
+              DTS:DTSID="{F4B0C0ED-C189-46C8-917B-FAE2173FB457}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Username"
+              DTS:DTSID="{5BFE3778-DE01-4A85-8D4C-BF66C44DB6A1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student ID"
+              DTS:DTSID="{E91A6EF9-CD3E-4032-9958-4422F18264F7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Last Access"
+              DTS:DTSID="{83C313AC-2544-4317-972F-261F159DDFDF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Availability"
+              DTS:DTSID="{9C346F5D-9F2E-4CB0-AEFB-22329604057E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="STC Test Security Quiz"
+              DTS:DTSID="{350ED81B-9D6C-4FB4-9641-13175810E0A7}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[TEST_SECURITY_TEST_ADMIN]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="TEST_SECURITY_TEST_ADMIN"
+      DTS:DTSID="{1AFE6C35-B674-4F19-818A-3E3E37C4AEBF}"
+      DTS:ObjectName="TEST_SECURITY_TEST_ADMIN">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\046-fs01\RDA Files\SIS\Blackboard Test Security Results\gc_044_Test_Security_Test_Admin.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Last Name"
+              DTS:DTSID="{59E2A569-770C-4511-9B7A-FD3B04F86106}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="First Name"
+              DTS:DTSID="{A8F587B3-E03B-485D-BBE2-B80BEAF8E054}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Username"
+              DTS:DTSID="{CB5CA923-A864-4077-B50A-E1CDE5E60E39}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student ID"
+              DTS:DTSID="{C92D8F78-53B9-4B5B-BBB2-FD04F2179BF9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Last Access"
+              DTS:DTSID="{A8E853CD-5E83-42D3-9E8B-BFFE4EFF1E89}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Availability"
+              DTS:DTSID="{2B892659-CA7A-4644-8A35-C3D11F412872}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Test Security Certification Quiz"
+              DTS:DTSID="{329A947C-F21C-409B-A36B-08D7B547B3F2}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[TEST_SECURITY_TEST_ADMIN_DESTINATION]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="TEST_SECURITY_TEST_ADMIN_DESTINATION"
+      DTS:DTSID="{9CDEFC04-B1C8-441C-B9C8-89D745459DD9}"
+      DTS:ObjectName="TEST_SECURITY_TEST_ADMIN_DESTINATION">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\180-SMAXODS-01\SQLWorkingFiles\gc_044_Test_Security_Test_Admin.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Last Name"
+              DTS:DTSID="{B7515D67-7E81-4337-9F10-67E4F10DFBDC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="First Name"
+              DTS:DTSID="{EC7B9031-562B-4FC2-9574-16B2AF4D25A7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Username"
+              DTS:DTSID="{232A46FA-234F-4F0C-B181-280F6D919F4D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Student ID"
+              DTS:DTSID="{4AD5D024-A2A0-4935-BEE6-8B62C4DAB269}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Last Access"
+              DTS:DTSID="{9DE11798-B90C-4088-A044-6C557DF593A1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Availability"
+              DTS:DTSID="{667235EE-2510-45AD-BF32-A7C619A071D4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Test Security Certification"
+              DTS:DTSID="{C4601C29-9B85-4356-9FE4-305E71074660}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\EXECUTE APS TEST_SECURITY"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{ADF5DE8F-FAC3-4FB9-AA5B-A10591382AAA}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EXECUTE APS TEST_SECURITY"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C9C7D79E-9CDA-42C5-BB9E-1867A5F559F9}"
+          SQLTask:SqlStatementSource="EXECUTE [APS].[TEST_SECURITY] " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TEST_SECUIRTY_FILE"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{44E940CE-3DD2-4013-869D-A9D267FCCAEF}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TEST_SECUIRTY_FILE"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN"
+              componentClassID="{D23FD76B-F51D-420F-BBCB-19CBF6AC1AB4}"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="TEST_SECUIRTY_TEST_ADMIN"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[TEST_SECURITY_TEST_ADMIN]"
+                  connectionManagerRefId="Package.ConnectionManagers[TEST_SECURITY_TEST_ADMIN]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Last Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Last Name]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Last Name]"
+                      name="Last Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[First Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[First Name]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[First Name]"
+                      name="First Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Username]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Username]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Username]"
+                      name="Username"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Student ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Student ID]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Student ID]"
+                      name="Student ID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Last Access]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Last Access]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Last Access]"
+                      name="Last Access"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Availability]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Availability]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Availability]"
+                      name="Availability"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Test Security Certification Quiz]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Test Security Certification Quiz]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Test Security Certification Quiz]"
+                      name="Test Security Certification Quiz"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Last Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[First Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="First Name" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Username]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Username" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Student ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Student ID" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Last Access]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Last Access" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Availability]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Availability" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Test Security Certification Quiz]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Test Security Certification Quiz" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC"
+              componentClassID="{D23FD76B-F51D-420F-BBCB-19CBF6AC1AB4}"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="TEST_SECURITY_BASIC"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[TEST_SECURITY_BASIC]"
+                  connectionManagerRefId="Package.ConnectionManagers[TEST_SECURITY_BASIC]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[Last Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].ExternalColumns[Last Name]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[Last Name]"
+                      name="Last Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[First Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].ExternalColumns[First Name]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[First Name]"
+                      name="First Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[Username]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].ExternalColumns[Username]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[Username]"
+                      name="Username"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[Student ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].ExternalColumns[Student ID]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[Student ID]"
+                      name="Student ID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[Last Access]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].ExternalColumns[Last Access]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[Last Access]"
+                      name="Last Access"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[Availability]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].ExternalColumns[Availability]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[Availability]"
+                      name="Availability"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[Test Administration Security Quiz]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].ExternalColumns[Test Administration Security Quiz]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[Test Administration Security Quiz]"
+                      name="Test Administration Security Quiz"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].ExternalColumns[Last Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].ExternalColumns[First Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="First Name" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].ExternalColumns[Username]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Username" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].ExternalColumns[Student ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Student ID" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].ExternalColumns[Last Access]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Last Access" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].ExternalColumns[Availability]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Availability" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].ExternalColumns[Test Administration Security Quiz]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Test Administration Security Quiz" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="TEST_SECURITY_BASIC_Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[TEST_SECURITY_BASIC_DESTINATION]"
+                  connectionManagerRefId="Package.ConnectionManagers[TEST_SECURITY_BASIC_DESTINATION]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].Columns[Last Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Last Name"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].ExternalColumns[Last Name]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[Last Name]" />
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].Columns[First Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="First Name"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].ExternalColumns[First Name]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[First Name]" />
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].Columns[Username]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Username"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].ExternalColumns[Username]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[Username]" />
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].Columns[Student ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Student ID"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].ExternalColumns[Student ID]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[Student ID]" />
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].Columns[Last Access]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Last Access"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].ExternalColumns[Last Access]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[Last Access]" />
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].Columns[Availability]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Availability"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].ExternalColumns[Availability]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[Availability]" />
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].Columns[Test Administration Security Quiz]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Test Administration Security Quiz"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].ExternalColumns[Test Administration Security Quiz]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output].Columns[Test Administration Security Quiz]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].ExternalColumns[Last Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].ExternalColumns[First Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="First Name" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].ExternalColumns[Username]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Username" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].ExternalColumns[Student ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Student ID" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].ExternalColumns[Last Access]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Last Access" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].ExternalColumns[Availability]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Availability" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input].ExternalColumns[Test Administration Security Quiz]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Test Administration Security Quiz" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN"
+              componentClassID="{D23FD76B-F51D-420F-BBCB-19CBF6AC1AB4}"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="TEST_SECURITY_SCHOOL_TEST_ADMIN"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[TEST_SECURITY_SCHOOL_TEST_ADMIN]"
+                  connectionManagerRefId="Package.ConnectionManagers[TEST_SECURITY_SCHOOL_TEST_ADMIN]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Last Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Last Name]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Last Name]"
+                      name="Last Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[First Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[First Name]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[First Name]"
+                      name="First Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Username]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Username]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Username]"
+                      name="Username"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Student ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Student ID]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Student ID]"
+                      name="Student ID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Last Access]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Last Access]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Last Access]"
+                      name="Last Access"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Availability]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Availability]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Availability]"
+                      name="Availability"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[STC Test Security Quiz ]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[STC Test Security Quiz ]"
+                      length="50"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[STC Test Security Quiz ]"
+                      name="STC Test Security Quiz "
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Last Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[First Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="First Name" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Username]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Username" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Student ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Student ID" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Last Access]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Last Access" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[Availability]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Availability" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].ExternalColumns[STC Test Security Quiz ]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="STC Test Security Quiz " />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION]"
+                  connectionManagerRefId="Package.ConnectionManagers[TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].Columns[Last Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Last Name"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Last Name]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Last Name]" />
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].Columns[First Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="First Name"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[First Name]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[First Name]" />
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].Columns[Username]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Username"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Username]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Username]" />
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].Columns[Student ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Student ID"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Student ID]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Student ID]" />
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].Columns[Last Access]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Last Access"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Last Access]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Last Access]" />
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].Columns[Availability]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Availability"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Availability]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Availability]" />
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].Columns[STC Test Security Quiz ]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="STC Test Security Quiz "
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[STC Test Security Quiz]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output].Columns[STC Test Security Quiz ]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Last Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[First Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="First Name" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Username]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Username" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Student ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Student ID" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Last Access]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Last Access" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Availability]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Availability" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[STC Test Security Quiz]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="STC Test Security Quiz" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION"
+              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="TEST_SECURITY_TEST_ADMIN_DESTINATION">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[TEST_SECURITY_TEST_ADMIN_DESTINATION]"
+                  connectionManagerRefId="Package.ConnectionManagers[TEST_SECURITY_TEST_ADMIN_DESTINATION]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].Columns[Last Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Last Name"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Last Name]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Last Name]" />
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].Columns[First Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="First Name"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[First Name]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[First Name]" />
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].Columns[Username]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Username"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Username]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Username]" />
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].Columns[Student ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Student ID"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Student ID]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Student ID]" />
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].Columns[Last Access]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Last Access"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Last Access]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Last Access]" />
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].Columns[Availability]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Availability"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Availability]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Availability]" />
+                    <inputColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].Columns[Test Security Certification Quiz]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Test Security Certification Quiz"
+                      externalMetadataColumnId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Test Security Certification]"
+                      lineageId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output].Columns[Test Security Certification Quiz]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Last Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Last Name" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[First Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="First Name" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Username]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Username" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Student ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Student ID" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Last Access]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Last Access" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Availability]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Availability" />
+                    <externalMetadataColumn
+                      refId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input].ExternalColumns[Test Security Certification]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Test Security Certification" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\TEST_SECUIRTY_FILE.Paths[Flat File Source Output2]"
+              endId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input]"
+              name="Flat File Source Output"
+              startId="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN.Outputs[Flat File Source Output]" />
+            <path
+              refId="Package\TEST_SECUIRTY_FILE.Paths[Flat File Source Output1]"
+              endId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION.Inputs[Flat File Destination Input]"
+              name="Flat File Source Output"
+              startId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN.Outputs[Flat File Source Output]" />
+            <path
+              refId="Package\TEST_SECUIRTY_FILE.Paths[Flat File Source Output]"
+              endId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination.Inputs[Flat File Destination Input]"
+              name="Flat File Source Output"
+              startId="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{DB94E757-9D94-43D9-8D59-7CA6E2ED54B6}"
+      DTS:From="Package\TEST_SECUIRTY_FILE"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\EXECUTE APS TEST_SECURITY" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="185.6,41.6"
+          Id="Package\TEST_SECUIRTY_FILE"
+          TopLeft="59.428572440634,40.9882358689622" />
+        <NodeLayout
+          Size="227.2,41.6"
+          Id="Package\EXECUTE APS TEST_SECURITY"
+          TopLeft="182.857145971181,114.400001604417" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="152.228572440634,82.5882358689622">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="144.228573530548,31.8117657354546"
+              Start="0,0"
+              End="144.228573530548,24.3117657354546">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.9058828677273" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.9058828677273"
+                    Point2="0,15.9058828677273"
+                    Point3="4,15.9058828677273" />
+                  <mssgle:LineSegment
+                    End="140.228573530548,15.9058828677273" />
+                  <mssgle:CubicBezierSegment
+                    Point1="140.228573530548,15.9058828677273"
+                    Point2="144.228573530548,15.9058828677273"
+                    Point3="144.228573530548,19.9058828677273" />
+                  <mssgle:LineSegment
+                    End="144.228573530548,24.3117657354546" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\TEST_SECUIRTY_FILE">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="193.6,41.6"
+          Id="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC"
+          TopLeft="27.4285718956773,13.4588237181667" />
+        <NodeLayout
+          Size="252.8,41.6"
+          Id="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_BASIC_Destination"
+          TopLeft="21.7142860840778,75.8588245933031" />
+        <EdgeLayout
+          Id="Package\TEST_SECUIRTY_FILE.Paths[Flat File Source Output]"
+          TopLeft="221.028571895677,34.2588237181667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-72.9142858115995,41.6000008751364"
+              Start="0,0"
+              End="-72.9142858115995,34.1000008751364">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-68.9142858115995,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-68.9142858115995,0"
+                    Point2="-72.9142858115995,0"
+                    Point3="-72.9142858115995,4" />
+                  <mssgle:LineSegment
+                    End="-72.9142858115995,34.1000008751364" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="273.6,41.6"
+          Id="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN"
+          TopLeft="252.571432872694,11.6235295747803" />
+        <NodeLayout
+          Size="347.2,41.6"
+          Id="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_SCHOOL_TEST_ADMIN_DESTINATION"
+          TopLeft="321.142862611887,88.7058835970077" />
+        <EdgeLayout
+          Id="Package\TEST_SECUIRTY_FILE.Paths[Flat File Source Output1]"
+          TopLeft="389.371432872694,53.2235295747803">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="105.371429739193,35.4823540222274"
+              Start="0,0"
+              End="105.371429739193,27.9823540222274">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.7411770111137" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.7411770111137"
+                    Point2="0,17.7411770111137"
+                    Point3="4,17.7411770111137" />
+                  <mssgle:LineSegment
+                    End="101.371429739193,17.7411770111137" />
+                  <mssgle:CubicBezierSegment
+                    Point1="101.371429739193,17.7411770111137"
+                    Point2="105.371429739193,17.7411770111137"
+                    Point3="105.371429739193,21.7411770111137" />
+                  <mssgle:LineSegment
+                    End="105.371429739193,27.9823540222274" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="227.2,41.6"
+          Id="Package\TEST_SECUIRTY_FILE\TEST_SECUIRTY_TEST_ADMIN"
+          TopLeft="69.7142869015129,148.658825614296" />
+        <NodeLayout
+          Size="300.8,41.6"
+          Id="Package\TEST_SECUIRTY_FILE\TEST_SECURITY_TEST_ADMIN_DESTINATION"
+          TopLeft="107.428573258069,213.835297060508" />
+        <EdgeLayout
+          Id="Package\TEST_SECUIRTY_FILE.Paths[Flat File Source Output2]"
+          TopLeft="183.314286901513,190.258825614296">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="74.5142863565562,23.5764714462122"
+              Start="0,0"
+              End="74.5142863565562,16.0764714462122">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,7.78823572310611" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,7.78823572310611"
+                    Point2="0,11.7882357231061"
+                    Point3="4,11.7882357231061" />
+                  <mssgle:LineSegment
+                    End="70.5142863565562,11.7882357231061" />
+                  <mssgle:CubicBezierSegment
+                    Point1="70.5142863565562,11.7882357231061"
+                    Point2="74.5142863565562,11.7882357231061"
+                    Point3="74.5142863565562,15.7882357231061" />
+                  <mssgle:LineSegment
+                    End="74.5142863565562,16.0764714462122" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

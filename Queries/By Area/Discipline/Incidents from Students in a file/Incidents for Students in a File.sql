@@ -1,7 +1,7 @@
 /**
- * $Revision$
- * $LastChangedBy$
- * $LastChangedDate$
+ * $Revision: 261 $
+ * $LastChangedBy: e201594 $
+ * $LastChangedDate: 2014-10-28 10:28:11 -0600 (Tue, 28 Oct 2014) $
  *
  * This query pulls participants of type offender (1) for the year
  * that are on a list in a file.  It includes incident information, as well as SOR information

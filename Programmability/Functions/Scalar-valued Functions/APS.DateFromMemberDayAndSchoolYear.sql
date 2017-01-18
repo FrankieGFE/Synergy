@@ -1,7 +1,7 @@
 /**
  * 
  * $LastChangedBy: Gary Corbaley
- * $LastChangedDate$
+ * $LastChangedDate: 2014-10-02 07:50:52 -0600 (Thu, 02 Oct 2014) $
  * 
  * This function will return a single date for any given member day for a specific school year and extension.
  * The date is calculated from the given member day by first generating(at run time) a list of all the callendar dates for the specific year and assigning each date a member day value and marks them with a flag to identify if they are valid school days or just a weekend or holiday. The given member day is then compared to the day counter in the generated list and returning the first occuring date.

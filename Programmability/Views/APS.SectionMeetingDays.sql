@@ -1,7 +1,7 @@
 /**
- * $Revision$
- * $LastChangedBy$
- * $LastChangedDate$
+ * $Revision: 270 $
+ * $LastChangedBy: e201594 $
+ * $LastChangedDate: 2014-11-04 10:01:32 -0700 (Tue, 04 Nov 2014) $
  *
  * This view returns a nicely formatted set of meeting days for a section
  * Be very careful when joining this view in as it may slow down your query considerably 

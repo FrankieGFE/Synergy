@@ -1,7 +1,7 @@
 /**
- * $Revision$
- * $LastChangedBy$
- * $LastChangedDate$
+ * $Revision: 268 $
+ * $LastChangedBy: e201594 $
+ * $LastChangedDate: 2014-11-03 14:27:18 -0700 (Mon, 03 Nov 2014) $
  *
  * Teacher assigned classes by school that are not in Lawson.  This query is used in the credentials report.
  */

@@ -1,7 +1,7 @@
 /**
- * $Revision$
- * $LastChangedBy$
- * $LastChangedDate$
+ * $Revision: 181 $
+ * $LastChangedBy: e201594 $
+ * $LastChangedDate: 2014-10-02 07:50:52 -0600 (Thu, 02 Oct 2014) $
  */
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[PHLOTEAsOf]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
 	EXEC('CREATE FUNCTION APS.PHLOTEAsOf()RETURNS TABLE AS RETURN (SELECT 0 AS DUMMY)')

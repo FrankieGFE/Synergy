@@ -48,7 +48,8 @@ SELECT
 		  WHEN ENR.SCHOOL_NAME = 'Sombra Del Monte Elementary School' THEN 'SOMBRA DEL MONTE ELEM SCHOOL'
 		  WHEN ENR.SCHOOL_NAME = 'Susie Rayos Marmon Elementary School' THEN 'SUSIE RAYOS MARMON ELEM SCHOOL'
 		  WHEN ENR.SCHOOL_NAME = 'Atrisco Heritage Academy High School' THEN 'ATRISCO HERITAGE ACADEMY'
-		  WHEN ENR.SCHOOL_NAME = '' THEN ''
+		  WHEN ENR.SCHOOL_NAME = 'Juvenile Detention Center' THEN 'JUVENILE DETENTION CTR ALT SCH'
+		  WHEN ENR.SCHOOL_NAME = 'Vision Quest Alternative Middle School' THEN 'VISION QUEST ALT MIDDLE SCHOOL'
 	ELSE ENR.SCHOOL_NAME
 	END AS school
 	,TCH.BADGE_NUM AS district_teacher_id
@@ -158,7 +159,7 @@ UNION
 
 
 
-SELECT
+SELECT DISTINCT
 	[FILE].IID
 	,distric_school_id
 	,ST.school
@@ -207,6 +208,8 @@ SELECT
 		  WHEN ENR.SCHOOL_NAME = 'Sombra Del Monte Elementary School' THEN 'SOMBRA DEL MONTE ELEM SCHOOL'
 		  WHEN ENR.SCHOOL_NAME = 'Susie Rayos Marmon Elementary School' THEN 'SUSIE RAYOS MARMON ELEM SCHOOL'
 		  WHEN ENR.SCHOOL_NAME = 'Atrisco Heritage Academy High School' THEN 'ATRISCO HERITAGE ACADEMY'
+		  WHEN ENR.SCHOOL_NAME = 'Juvenile Detention Center' THEN 'JUVENILE DETENTION CTR ALT SCH'
+		  WHEN ENR.SCHOOL_NAME = 'Vision Quest Alternative Middle School' THEN 'VISION QUEST ALT MIDDLE SCHOOL'
 		  WHEN ENR.SCHOOL_NAME = '' THEN ''
 	ELSE ENR.SCHOOL_NAME
 	END AS school
@@ -284,7 +287,7 @@ FROM
 			ON PER.PERSON_GU = ST.STAFF_GU
 			WHERE 1 = 1
 			AND SCHOOL_YEAR = (SELECT * FROM rev.SIF_22_Common_CurrentYear)
-			AND DEPARTMENT = 'MATH'
+			AND (DEPARTMENT = 'MATH' OR ORGANIZATION_NAME = 'Juvenile Detention Center')
 			--AND PERIOD_BEGIN = 1
 			AND PRIMARY_STAFF = 1
 			) AS TCH
@@ -314,7 +317,8 @@ WHERE
 		ON [FILE].SCHOOL = ST.school
 
 WHERE 1 = 1
-AND RN = 1
+--AND RN = 1
+--AND student_id = '970018694'
 AND ST.iid IS NOT NULL
 ORDER BY grade
 

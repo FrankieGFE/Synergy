@@ -1,7 +1,7 @@
 /**
- * $Revision$
- * $LastChangedBy$
- * $LastChangedDate$
+ * $Revision: 256 $
+ * $LastChangedBy: e201594 $
+ * $LastChangedDate: 2014-10-27 09:51:15 -0600 (Mon, 27 Oct 2014) $
  *
  * Class counts of current sections for certain subject areas (health, econ, gov, and NM history)
  */

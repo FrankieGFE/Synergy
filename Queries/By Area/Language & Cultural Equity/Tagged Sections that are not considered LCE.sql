@@ -1,7 +1,7 @@
 /**
- * $Revision$
- * $LastChangedBy$
- * $LastChangedDate$
+ * $Revision: 231 $
+ * $LastChangedBy: e201594 $
+ * $LastChangedDate: 2014-10-14 16:28:19 -0600 (Tue, 14 Oct 2014) $
  *
  * Pulls sections that have kids in them for a given date that are tagged
  * But are not considered ELL calasses (due mostly to bad licensures or incorrect tagging) 

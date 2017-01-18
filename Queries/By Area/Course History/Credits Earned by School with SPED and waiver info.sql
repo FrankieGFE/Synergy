@@ -1,7 +1,7 @@
 /**
- * $Revision$
- * $LastChangedBy$
- * $LastChangedDate$
+ * $Revision: 239 $
+ * $LastChangedBy: e201594 $
+ * $LastChangedDate: 2014-10-15 16:59:45 -0600 (Wed, 15 Oct 2014) $
  *
  * Used on a report, this pulls total credits earned, total waiver amount and sped status
  * for kids at a school (high school only)

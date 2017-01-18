@@ -1,7 +1,7 @@
 /**
- * $Revision$
- * $LastChangedBy$
- * $LastChangedDate$
+ * $Revision: 266 $
+ * $LastChangedBy: e201594 $
+ * $LastChangedDate: 2014-11-03 11:54:47 -0700 (Mon, 03 Nov 2014) $
  *
  * A series of update and delete statement wiping data from staff.
  * For the record, I believe the idea of "wipe everything EXCEPT x"

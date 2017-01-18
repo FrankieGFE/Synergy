@@ -1,7 +1,7 @@
 /**
- * $Revision$
- * $LastChangedBy$
- * $LastChangedDate$
+ * $Revision: 244 $
+ * $LastChangedBy: e201594 $
+ * $LastChangedDate: 2014-10-16 12:37:51 -0600 (Thu, 16 Oct 2014) $
  *
  * Used to possibly identify duplicate students. It starts with kids added in the last x days
  * And then uses a ranking system.  To even be ranked, you have to share a birthday, last name, or firstname (exact match)

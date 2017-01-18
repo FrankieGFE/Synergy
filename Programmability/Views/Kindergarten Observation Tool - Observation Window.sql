@@ -3,7 +3,7 @@
 ALTER VIEW [APS].[KOTObservationWindow] AS
 
 	SELECT
-		'K3P' AS [WindowName]
+		'BOY' AS [WindowName]
 		,'001' AS [DistrictCode]
 		,[School].[SCHOOL_CODE] AS [LocationCode]
 		,CONVERT(VARCHAR(10),CalendarOptions.START_DATE,126) AS START_DATE

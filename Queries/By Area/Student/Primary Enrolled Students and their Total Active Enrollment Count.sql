@@ -1,5 +1,5 @@
-/* $Revision$
- * $LastChangedBy$
+/* $Revision: 217 $
+ * $LastChangedBy: e201594 $
  * $LastChangedDate: 2014-10-03 12:55:48 -0600 (Fri, 03 Oct 2014) $
  *
  * List kids, with their primary enrollments and their total active enrollment count for a specific day

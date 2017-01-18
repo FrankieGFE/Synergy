@@ -1,7 +1,7 @@
 /**
- * $Revision$
- * $LastChangedBy$
- * $LastChangedDate$
+ * $Revision: 227 $
+ * $LastChangedBy: e201594 $
+ * $LastChangedDate: 2014-10-13 10:09:18 -0600 (Mon, 13 Oct 2014) $
  *
  * This query can help locate table/field from business object/property or vice/versa.
  * Out of the box, you must change what/how you are looking for.  As such, it may not be

@@ -1,7 +1,7 @@
 /**
- * $Revision$
- * $LastChangedBy$
- * $LastChangedDate$
+ * $Revision: 1104 $
+ * $LastChangedBy: e104090 $
+ * $LastChangedDate: 2016-05-31 17:34:00 -0600 (Tue, 31 May 2016) $
  */
 
 USE ST_Production
