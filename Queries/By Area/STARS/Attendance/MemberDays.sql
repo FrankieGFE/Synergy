@@ -1,18 +1,19 @@
+--DROP TABLE STUDENT_SCHOOL_MEMBERDAYS_80D
 
 
-CREATE TABLE STUDENT_SCHOOL_MEMBERDAYS
-(
- startDate datetime,
- endDate datetime,
- org_year_gu VARCHAR (200),
- STUID VARCHAR (9),
- ORIGENTERDATE DATE,
- SCHOOL VARCHAR (50),
- MEMBER_DAYS VARCHAR (3),
-SCHOOL_CODE VARCHAR (3)
- )
+--CREATE TABLE STUDENT_SCHOOL_MEMBERDAYS_80D
+--(
+-- startDate datetime,
+-- endDate datetime,
+-- org_year_gu VARCHAR (200),
+-- STUID VARCHAR (9),
+-- ORIGENTERDATE DATE,
+-- SCHOOL VARCHAR (50),
+--SCHOOL_CODE VARCHAR (3),
+--EXCLUDE_ADA_ADM VARCHAR(5), 
+--MEMBER_DAYS VARCHAR (3)
+-- )
  
-
 
 declare @startDate datetime;
 declare @endDate datetime;
@@ -21,6 +22,7 @@ DECLARE @STUID VARCHAR (9);
 DECLARE @ORIGENTERDATE DATE;
 DECLARE @SCHOOL VARCHAR (50);
 DECLARE @SCHOOL_CODE VARCHAR (3)
+DECLARE @EXCLUDE_ADA_ADM VARCHAR(5)
 
 deallocate x_cur;  --after the first time running you'll need this to avoid warning
 declare x_cur cursor for
@@ -29,26 +31,37 @@ declare x_cur cursor for
 
 SELECT                    --ENR.ENTER_DATE 
 					--'2016-02-03' 
-					case when enter_date < '20140811' then '20140811' else ENTER_DATE end as new_enter_date
-                    ,CASE WHEN LEAVE_DATE IS NULL THEN '20150522' ELSE LEAVE_DATE END AS NEWLEAVE
+					case when ENROLL.enter_date < '20161013' then '20161013' else ENROLL.ENTER_DATE end as new_enter_date
+                    ,CASE WHEN ENROLL.LEAVE_DATE IS NULL OR ENROLL.LEAVE_DATE > '20161201' THEN '20161201' 
+					ELSE ENROLL.LEAVE_DATE END AS NEWLEAVE
                     ,ORGANIZATION_YEAR_GU
 					,ENR.SIS_NUMBER
-					,ENTER_DATE
+					,ENROLL.ENTER_DATE
 					,SCHOOL_NAME
 					,SCHOOL_CODE
-
+					,ENROLL.EXCLUDE_ADA_ADM
              FROM
              APS.StudentEnrollmentDetails AS ENR
 			 INNER JOIN 
 			 rev.EPC_STU AS STU
 			 ON 
 			 STU.STUDENT_GU = ENR.STUDENT_GU
+			 --TAKE THIS OUT
+			 --AND EXCLUDE_ADA_ADM IS NULL
+
+			--ADDED THIS TO INCLUDE ENROLLMENTS WHERE A STUDENT LEFT AND RETURNED TO SAME SCHOOL, NOT IN SSY
+			LEFT JOIN 
+			rev.EPC_STU_ENROLL AS ENROLL
+			ON
+			ENR.STUDENT_SCHOOL_YEAR_GU = ENROLL.STUDENT_SCHOOL_YEAR_GU
+
              WHERE
-             SCHOOL_YEAR = '2014'
+             SCHOOL_YEAR = '2016'
              AND EXTENSION = 'R'
-             AND SCHOOL_CODE BETWEEN '200' AND '599'
+             --AND SCHOOL_CODE BETWEEN '200' AND '599'
              AND SCHOOL_CODE != '533'
-             AND (ENTER_DATE <= '20150522' AND LEAVE_DATE IS NULL OR LEAVE_DATE BETWEEN '20140811' AND '20150522')
+             AND (ENROLL.ENTER_DATE <= '20161201' AND ENROLL.LEAVE_DATE IS NULL OR ENROLL.LEAVE_DATE BETWEEN '20161013' AND '20161201' or ENROLL.LEAVE_DATE > '20161201')
+			
 
 open x_cur
  fetch next from x_cur into
@@ -59,13 +72,14 @@ open x_cur
 ,@ORIGENTERDATE
 ,@SCHOOL
 ,@SCHOOL_CODE
+,@EXCLUDE_ADA_ADM
 --select 'first', @startDate as startdate, @endDate as enddate, @org_year_gu org_gu
 
 --print @@fetch_status
 while @@FETCH_STATUS = 0 
 begin
 
-INSERT INTO STUDENT_SCHOOL_MEMBERDAYS
+INSERT INTO STUDENT_SCHOOL_MEMBERDAYS_80D
 
 SELECT
 	@startDate
@@ -74,7 +88,8 @@ SELECT
 	,@STUID
 	,@ORIGENTERDATE
 	,@SCHOOL
-	
+	,@SCHOOL_CODE
+	,@EXCLUDE_ADA_ADM
 ,CASE 
 -- if the passed date is large than the last day, then return zero as invalid
 WHEN @endDate < @startDate THEN 0
@@ -87,7 +102,7 @@ ELSE
 - NumNonDays -- number of holidays 
 END
 AS MemberDay
-,@SCHOOL_CODE
+
 
 FROM
 -- this subselect gives you first and last day of calendar along with number of holidays before passed date
@@ -127,6 +142,7 @@ CalOption.ORG_YEAR_GU
 ,@ORIGENTERDATE
 ,@SCHOOL
 ,@SCHOOL_CODE
+,@EXCLUDE_ADA_ADM
 --select @startDate as startdate, @endDate as enddate, @org_year_gu org_gu
 
 end

@@ -100,7 +100,8 @@ SELECT
 		               FROM rev.EPC_STU_PGM_FRM_HIS frm 
 		               WHERE frm.STUDENT_GU = stu.STUDENT_GU 
 					   and (frm.EXIT_DATE is null or frm.EXIT_DATE > GETDATE())
-			    )   
+						AND FRM_CODE IN ('2', 'F', 'R')
+				)   
           THEN 'Y' 
 		  ELSE 'N'
 	    END                                      AS [Frl_Status]

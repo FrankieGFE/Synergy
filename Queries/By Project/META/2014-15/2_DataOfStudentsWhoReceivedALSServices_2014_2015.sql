@@ -9,8 +9,14 @@ DECLARE @AsOfDate AS DATETIME = '2014-12-15'
 	   SELECT 
 		'2015' AS SY
 		--, SCH.SCHOOL_CODE		
-		, CASE WHEN [LOCATION CODE] > '900' THEN ENR.SCHOOL_CODE ELSE [LOCATION CODE] END AS SCHOOL
-		, CASE WHEN [LOCATION CODE] > '900' THEN ENR.SCHOOL_NAME ELSE ORG.ORGANIZATION_NAME END AS SCHOOL_NAME
+		, CASE 
+			WHEN [LOCATION CODE] > '900' THEN ENR.SCHOOL_CODE 
+			WHEN [LOCATION CODE] = '040' THEN ENR.SCHOOL_CODE
+			ELSE [LOCATION CODE] END AS SCHOOL
+		, CASE 
+			WHEN [LOCATION CODE] > '900' THEN ENR.SCHOOL_NAME 
+			WHEN [LOCATION CODE] = '040' THEN ENR.SCHOOL_NAME
+			ELSE ORG.ORGANIZATION_NAME END AS SCHOOL_NAME
 		,ALS.SIS_NUMBER
 		,[LAST NAME LONG]
 		,[FIRST NAME LONG]
@@ -41,28 +47,42 @@ DECLARE @AsOfDate AS DATETIME = '2014-12-15'
 		,CHILD_FIRST_LANGUAGE
 		,BS.HOME_LANGUAGE AS PRIMARY_LANGUAGE
 
-		,ACCESS.PERFORMANCE_LEVEL AS ACCESS_PERFORMANCE_LEVEL
-		,ACCESS.TEST_NAME AS ACCESS_TEST_NAME
-		,ACCESS.TEST_SCORE AS ACCESS_TEST_SCORE
-		,ACCESS.SCORE_DESCRIPTION AS ACCESS_SCORE_DESCRIPTION
+		,ISNULL(ACCESS.PERFORMANCE_LEVEL,'') AS ACCESS_PERFORMANCE_LEVEL
+		,ISNULL(ACCESS.TEST_NAME,'')  AS ACCESS_TEST_NAME
+		,ISNULL(ACCESS.TEST_SCORE,'')  AS ACCESS_TEST_SCORE
+		,ISNULL(ACCESS.SCORE_DESCRIPTION,'')  AS ACCESS_SCORE_DESCRIPTION
 
 		/*
 		,CASE WHEN [ENGMODEL].[Field5] = 'BEP' THEN 'Bilingual Model'
 			  WHEN [ENGMODEL].[Field5] = 'ESL' THEN 'English Model'
 		ELSE ''
 		END AS BILINGUAL_ENGLISH_MODEL
-		*/
+		
 
-		,[English Model]
-		,[Bilingual Model]
+		--DONT COUNT KIDS IN BOTH, EVEN THOUGH STARS HAS THEM IN BOTH MODELS-----------------------------------------------------  
+		,CASE WHEN [ENGLISH PROFICIENCY] = 1 AND [Bilingual Model] = 'BEP' THEN '' 
+			  WHEN [ENGLISH PROFICIENCY] = 1 AND [English Model] = 'ESL' THEN [English Model]
+		ELSE '' END AS [English Model]
+		
+		,CASE WHEN [ENGLISH PROFICIENCY] = 1 AND [Bilingual Model] = 'BEP' THEN [Bilingual Model] ELSE '' END AS [Bilingual Model]
+		---------------------------------------------------------------------------------------------------------------------------
+*/
+		,ISNULL([English Model],'') AS [English Model]
+		,ISNULL([Bilingual Model],'') AS [Bilingual Model]
 
-		,MODELTAGS.[Dual Language Immersion]
-		,MODELTAGS.[Maintenance Bilingual]
-		,MODELTAGS.[Enrichment]
-		,MODELTAGS.[Content Based English as a Second Language] 
+		
+		,ISNULL(BEPProgramDescription,'') AS BEPProgramDescription
+		, ISNULL(ALS2W,'')  AS [Dual Language Immersion]
+		, ISNULL(ALSMP,'') AS [Maintenance Bilingual]
+		, ISNULL(ALSES,'') AS [Content Based English as a Second Language] 
+		, ISNULL(ALSED,'') AS ALSED
+		, ISNULL(ALSSH,'') AS ALSSH
 
-		,CASE WHEN FRSTSENIOR.STUDENT_GU IS NOT NULL THEN 'Y' ELSE 'N' END AS FIRST_TIME_SENIOR
-		,CASE WHEN GRADS.GRADUATION_DATE IS NOT NULL THEN CAST(GRADUATION_DATE AS DATE) ELSE NULL END AS GRADUATED
+		,ISNULL([Parent Refused],'') AS [Parent Refused]
+		,ISNULL([Not Receiving Service],'') AS [Not Receiving Service]
+		
+		,CASE WHEN FRSTSENIOR.STUDENT_GU IS NULL AND ENR.GRADE = '12' THEN 'Y' ELSE 'N' END AS FIRST_TIME_SENIOR
+		,ISNULL(CAST(CASE WHEN GRADS.GRADUATION_DATE IS NOT NULL THEN CAST(GRADUATION_DATE AS DATE) ELSE NULL END AS VARCHAR),'') AS GRADUATED
 		,CASE WHEN GRADS.DIPLOMA_TYPE IS NOT NULL THEN DIPLOMA_TYPE ELSE '' END AS DIPLOMA_TYPE
 
 		,CASE WHEN DROPOUT.State_ID IS NOT NULL THEN 'Y' ELSE 'N' END AS DROPOUT
@@ -225,6 +245,7 @@ ACCESS.STUDENT_GU = ALS.STUDENT_GU
 /*-----------------------------------------------------------------------------------------------
 
 --PULL ENGLISH AND BILINGUAL MODEL FROM STARS - BEP AND ESL 
+--STARS DATABASE HAS THIS INCORRECT SO READING SYNERGY INSTEAD
 -------------------------------------------------------------------------------------------------*/
 /*
 LEFT JOIN 
@@ -244,36 +265,53 @@ ON
 ALS.STATE_STUDENT_NUMBER = ENGMODEL.[STUDENT ID]
 */
 
+
+
+/*-----------------------------------------------------------------------------------------------------------
+
+--Students and Their Providers for English Model
+------------------------------------------------------------------------------------------------------------*/
+
 LEFT JOIN
-(SELECT 
-	[Student_ID], [BEP] AS [Bilingual Model], [ESL] AS [English Model]
-FROM(
-SELECT 
-*
- FROM
- OPENROWSET (
-                  'Microsoft.ACE.OLEDB.12.0', 
-                 'Text;Database=\\SYNTEMPSSIS\Files\TempQuery;',
-                  'SELECT DISTINCT [Student_ID], [Program_ID] from 80DBEP.csv'
-                ) AS [B1]
-
-PIVOT 
 (
-MAX([Program_ID])
-FOR Program_ID IN ([BEP], [ESL])
-) AS PIVOTME
-)  AS M1
-) AS MODELS
+	SELECT DISTINCT
+	SIS_NUMBER
+	,CASE WHEN RCVINGSERV.COURSE_ID IS NOT NULL THEN 'ESL' ELSE '' END AS [English Model]
+	,RCVINGSERV.PARENT_REFUSED AS [Parent Refused]
+	,CASE WHEN RCVINGSERV.STATUS = 'No Appropriate Course Assigned' THEN 'Y' ELSE '' END AS [Not Receiving Service]
+    FROM 
+	APS.LCEStudentsAndProvidersAsOf('2014-12-15') AS RCVINGSERV
+	) AS RCVINGSERV
 ON
-MODELS.[Student_ID] = ALS.STATE_STUDENT_NUMBER
+RCVINGSERV.SIS_NUMBER = ALS.SIS_NUMBER
+
+/*-----------------------------------------------------------------------------------------------------------
+
+--Bilingual Students for Bilingual Model
+------------------------------------------------------------------------------------------------------------*/
+
+LEFT JOIN 
+(SELECT 
+SIS_NUMBER
+,CASE WHEN SIS_NUMBER IS NOT NULL THEN 'BEP' ELSE '' END AS [Bilingual Model] 
+FROM 
+APS.LCEBilingualAsOf('2014-12-15') AS BP
+INNER JOIN 
+REV.EPC_STU AS STU
+ON BP.STUDENT_GU = STU.STUDENT_GU
+) AS BEP
+ON
+ALS.SIS_NUMBER = BEP.SIS_NUMBER
 
 
-/*-----------------------------------------------------------------------------------------------
+/*-----------------------------------------------------------------------------------------------------------
 
 --PULL ENGLISH AND BILINGUAL MODEL FROM STARS - BEP AND ESL
--------------------------------------------------------------------------------------------------*/
+
+** STARS DATABASE REPORTING ALL STUDENTS WITH TAGS (100% RECEIVING SERVICE) SO WE'RE USING SYNERGY INSTEAD
+------------------------------------------------------------------------------------------------------------*/
 LEFT JOIN 
-(
+/*(
 SELECT 
 *
 FROM 
@@ -308,6 +346,21 @@ FOR [TAGS] IN ([Dual Language Immersion], [Maintenance Bilingual], [Enrichment],
 ) AS MODELTAGS
 ON
 MODELTAGS.[Student_ID] = ALS.STATE_STUDENT_NUMBER
+*/
+
+/*-----------------------------------------------------------------------------------------------------------
+
+--Use Bilingual Model and Hours Function for Tags and Indicators
+------------------------------------------------------------------------------------------------------------*/
+
+(SELECT StudentID, MAX(BEPProgramDescription) AS BEPProgramDescription, MAX(ALS2W) AS ALS2W, MAX(ALSED) AS ALSED, MAX(ALSSH) AS ALSSH, MAX(ALSES) AS ALSES, MAX(ALSMP) AS ALSMP FROM 
+APS.BilingualModelAndHoursDetailsAsOf('2014-12-15') AS BEPKIDS
+GROUP BY StudentID
+) AS MODELTAGS
+
+ON
+MODELTAGS.StudentID = ALS.SIS_NUMBER
+
 -----------------------------------------------------------------------------------------------
 
 --PULL FIRST TIME SENIORS

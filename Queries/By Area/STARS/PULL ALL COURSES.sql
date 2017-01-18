@@ -6,7 +6,7 @@
 */
 
 
-DECLARE @asOfDate DATE = '02-10-2016'
+DECLARE @asOfDate DATE = '10-12-2016'
 
 SELECT
 

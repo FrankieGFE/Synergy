@@ -1,5 +1,5 @@
 /**
- * Brian Rieb
+ * Debbie Ann Chavez
  * 8/21/2014
  * 
  * APS.CredentialsSync
@@ -57,6 +57,10 @@ BEGIN
 		AND 1=2 -- look for different expiration dates
 	*/
 
+
+	--FIRST WE DELETE EVERYTHING IN THE CREDENTIALS TABLE
+	DELETE FROM rev.EPC_STAFF_CRD
+	
 	-- This one is for putting in new ones in not already there
 	INSERT INTO
 		rev.EPC_STAFF_CRD

@@ -16,7 +16,7 @@ INSERT INTO
 		OPENROWSET (
 			'Microsoft.ACE.OLEDB.12.0', 
 			'Text;Database=\\syntempssis.aps.edu.actd\Files\TempQuery\SchoolPay\Archive;HDR=NO;', 
-			'SELECT * from Abigail.csv'
+			'SELECT * from 20161106.csv'
 		) AS [SynergyFees]
 
 INSERT INTO
@@ -282,8 +282,7 @@ FROM
 WHERE
 	[Fee].[STUDENT_FEE_GU] IS NOT NULL
 
-
-
+	
 COMMIT
 
 REVERT

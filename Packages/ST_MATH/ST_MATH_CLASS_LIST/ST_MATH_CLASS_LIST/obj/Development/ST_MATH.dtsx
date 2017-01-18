@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="ST_MATH"
   DTS:PackageType="5"
-  DTS:VersionBuild="39"
-  DTS:VersionGUID="{FFD98634-7512-44C3-A2A4-0BF417981860}">
+  DTS:VersionBuild="33"
+  DTS:VersionGUID="{78F22785-8A74-45D5-AA3A-91D62F190F6E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -321,7 +321,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADdOGJZPO/QjiUgQQqS2AzfAAAAAASAAACgAAAAEAAAAEq/isbbXbJpXDz8Q2PMr4EwAAAAgB4qHMEXfcmw4XmRk1PBEnnsacQe00wk1nYn7Iu1AYbo+j6A9+LBkuVi3OO7gg3hFAAAAHOpv9QDYLQSktvcdVosClKZoMDK</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACcofFDq4HPYcUu0JVecqLZAAAAAASAAACgAAAAEAAAAKoy5fqMW1gPgJ/SXRm9J8wwAAAASbk94rOKuNM79J/GjiB0jhtirZy5BODh1vordiUl+LTt3lz2V6CGjdFV601x0/z2FAAAACD5LyhK7jY6njRIig2rkS+yaS04</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -336,7 +336,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABlV69L+j1GQjUYQMyrlQf9AAAAAASAAACgAAAAEAAAABw2DdYgggCOYHlho+dXNFQwAAAAq6+UAPaRSva/BCn4OCRCYZKPIgmknFjQhMpoUbVUWmf6emhOidDEASSVXFTn/fdfFAAAABWkojalCYhYYrA9aXrA9GSPoj+E</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwiQRDatADUGst2VJjGFKLQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAa+MXrK0a/zAldpQavmrLfAAAAAASAAACgAAAAEAAAADDqUplGUiROJy4+CFX+R14wAAAAW//pqcfLTNSx4XjgxzBluuYldkLl7qQIhDnrFrv3DBNwDOWR2xJJza7Hie6wDbWTFAAAAAfqz348L4ogyQDuWzGbS2l4aJq0</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -1322,7 +1322,7 @@ SELECT
 	,ENR.SIS_NUMBER AS student_id
 	,REPLACE (PER.LAST_NAME,',','') AS student_last_name
 	,REPLACE (PER.FIRST_NAME, ',','') AS student_first_name
-	,ENR.SIS_NUMBER AS student_username
+	,LEFT(PER.LAST_NAME,1) + ENR.SIS_NUMBER AS student_username
 	,'#student1aps' AS student_password
 	,'Visual' AS permanent_login
 	,CONVERT(VARCHAR, BS.BIRTH_DATE, 101) AS birthdate
@@ -1363,7 +1363,6 @@ FROM
 			,ST.BADGE_NUM
 			,PER.EMAIL
 			,CAST(replace(lower(st.BADGE_NUM), 'e', '')AS INT) AS EMP_ID
-			,SCH.ORGANIZATION_NAME
 	
 			FROM 
 			APS.ScheduleDetailsAsOf (GETDATE()) AS SCH --- Change to getdate in August
@@ -1389,7 +1388,6 @@ FROM
 		
 		ON
 		STU.SIS_NUMBER = TCH.SIS_NUMBER
-		AND TCH.ORGANIZATION_NAME = ENR.SCHOOL_NAME
 
 
 WHERE 
@@ -1399,8 +1397,7 @@ WHERE
 	AND GRADE IN ('K','01','02','03','04','05')
 	AND ENR.LEAVE_DATE IS NULL
 	AND ENR.EXCLUDE_ADA_ADM IS NULL
-	AND ENR.ENTER_DATE IS NOT NULL
-	--AND ENR.SUMMER_WITHDRAWL_CODE IS NULL
+	AND ENR.SUMMER_WITHDRAWL_CODE IS NULL
 	--AND TCH.EMP_ID = '70652'
 ) AS EST
 
@@ -1425,8 +1422,8 @@ SELECT
 	,ST.school
 	,district_teacher_id
 	,teacher_email
-	,teacher_last_name
 	,teacher_first_name
+	,teacher_last_name
 	,grade
 	,period
 	,curriculum
@@ -1471,7 +1468,7 @@ SELECT
 		  WHEN ENR.SCHOOL_NAME = '' THEN ''
 	ELSE ENR.SCHOOL_NAME
 	END AS school
-	,TCH.BADGE_NUM district_teacher_id
+	,TCH.EMP_ID AS district_teacher_id
 	,TCH.EMAIL AS teacher_email
 	,TCH.LAST_NAME AS teacher_last_name
 	,TCH.FIRST_NAME AS teacher_first_name
@@ -1527,7 +1524,6 @@ FROM
 			,PER.EMAIL
 			,SCH.DEPARTMENT
 			,CAST(replace(lower(st.BADGE_NUM), 'e', '')AS VARCHAR(9)) AS EMP_ID
-			,SCH.ORGANIZATION_NAME
 	
 			FROM 
 			APS.ScheduleDetailsAsOf (GETDATE()) AS SCH --- Change to getdate in August
@@ -1552,7 +1548,6 @@ FROM
 		
 		ON
 		STU.SIS_NUMBER = TCH.SIS_NUMBER
-		AND TCH.ORGANIZATION_NAME = ENR.SCHOOL_NAME
 		
 WHERE 
 	1 = 1
@@ -1560,8 +1555,7 @@ WHERE
 	AND EXTENSION = 'R'
 	AND ENR.LEAVE_DATE IS NULL
 	AND ENR.EXCLUDE_ADA_ADM IS NULL
-	AND ENR.ENTER_DATE IS NOT NULL
-	--AND ENR.SUMMER_WITHDRAWL_CODE IS NULL
+	AND ENR.SUMMER_WITHDRAWL_CODE IS NULL
 	--AND TCH.BADGE_NUM NOT LIKE 'SPDPR%'
 	--AND TCH.EMP_ID = '203050'
 ) AS ST
@@ -1886,7 +1880,7 @@ ORDER BY grade
                     <externalMetadataColumn
                       refId="Package\ST_MATH_CLASS_LIST\ST_MATH_STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[student_username]"
                       dataType="wstr"
-                      length="20"
+                      length="21"
                       name="student_username" />
                     <externalMetadataColumn
                       refId="Package\ST_MATH_CLASS_LIST\ST_MATH_STUDENTS.Outputs[OLE DB Source Output].ExternalColumns[student_password]"
@@ -2008,7 +2002,7 @@ ORDER BY grade
                     <outputColumn
                       refId="Package\ST_MATH_CLASS_LIST\ST_MATH_STUDENTS.Outputs[OLE DB Source Error Output].Columns[student_username]"
                       dataType="wstr"
-                      length="20"
+                      length="21"
                       lineageId="Package\ST_MATH_CLASS_LIST\ST_MATH_STUDENTS.Outputs[OLE DB Source Error Output].Columns[student_username]"
                       name="student_username" />
                     <outputColumn

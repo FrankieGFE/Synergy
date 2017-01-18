@@ -7,7 +7,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE FUNCTION [APS].[NonPrimaryEnrollmentsAsOf](@AsOfDate DATE)
+ALTER FUNCTION [APS].[NonPrimaryEnrollmentsAsOf](@AsOfDate DATE)
 RETURNS TABLE
 AS
 RETURN	

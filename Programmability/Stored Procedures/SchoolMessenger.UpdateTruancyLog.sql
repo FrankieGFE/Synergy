@@ -1,0 +1,161 @@
+USE [ST_Production]
+GO
+
+/****** Object:  StoredProcedure [SchoolMessenger].[UpdateTruancyLog]    Script Date: 9/14/2016 1:11:17 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+ALTER PROC [SchoolMessenger].[UpdateTruancyLog]
+
+AS
+BEGIN
+
+DECLARE @Truant AS TABLE ([STUDENT_GU] UNIQUEIDENTIFIER,[SIS_NUMBER] INT,[DATE] DATE)
+
+PRINT '-- BEGIN 2 DAY TRUANT'
+INSERT INTO
+	@Truant
+	
+	SELECT
+		[Student].[STUDENT_GU] AS [STUDENT_GU]
+		,[Truant].[SIS_NUMBER] AS [SIS_NUMBER]
+		,CONVERT(DATE,GETDATE(),101) AS [DATE]
+	FROM
+		[SchoolMessenger].[TwoDayTruant] AS [Truant]
+
+		INNER JOIN
+		[rev].[EPC_STU] AS [Student]
+		ON
+		[Truant].[SIS_NUMBER]=[Student].[SIS_NUMBER]
+	
+		LEFT JOIN
+		[rev].[UD_TRUANT_STUDENT] AS [Log]
+		ON
+		[Student].[STUDENT_GU]=[Log].[STUDENT_GU]
+		AND [Log].[TWO_DAY_TRUANT]='Y'
+WHERE
+	[Log].[STUDENT_GU] IS NULL
+
+
+INSERT INTO
+	[rev].[UD_TRUANT_STUDENT]
+
+	SELECT
+		NEWID() AS [UD_TRUANT_STUDENT_GU]
+		,GETDATE() AS [ADD_DATE_TIME_STAMP]
+		,'27CDCD0E-BF93-4071-94B2-5DB792BB735F' AS [ADD_ID_STAMP]
+		,NULL AS [CHANGE_DATE_TIME_STAMP]
+		,NULL AS [CHANGE_ID_STAMP]
+		,'N' AS [FIVE_DAY_TRUANT]
+		,(SELECT * FROM 
+rev.SIF_22_Common_CurrentYear) AS [SCHOOL_YEAR]
+		,[Truant].[STUDENT_GU] AS [STUDENT_GU]
+		,'N' AS [TEN_DAY_TRUANT]
+		,'Y' AS [TWO_DAY_TRUANT]
+	FROM
+		@Truant AS [Truant]
+
+DELETE FROM @Truant
+
+PRINT '-- BEGIN 5 DAY TRUANT'
+INSERT INTO
+	@Truant
+	
+	SELECT
+		[Student].[STUDENT_GU] AS [STUDENT_GU]
+		,[Truant].[SIS_NUMBER] AS [SIS_NUMBER]
+		,CONVERT(DATE,GETDATE(),101) AS [DATE]
+	FROM
+		[SchoolMessenger].[FiveDayTruant] AS [Truant]
+
+		INNER JOIN
+		[rev].[EPC_STU] AS [Student]
+		ON
+		[Truant].[SIS_NUMBER]=[Student].[SIS_NUMBER]
+	
+		LEFT JOIN
+		[rev].[UD_TRUANT_STUDENT] AS [Log]
+		ON
+		[Student].[STUDENT_GU]=[Log].[STUDENT_GU]
+		AND [Log].[FIVE_DAY_TRUANT]='Y'
+
+WHERE
+	[Log].[STUDENT_GU] IS NULL
+
+
+INSERT INTO
+	[rev].[UD_TRUANT_STUDENT]
+
+	SELECT
+		NEWID() AS [UD_TRUANT_STUDENT_GU]
+		,GETDATE() AS [ADD_DATE_TIME_STAMP]
+		,'27CDCD0E-BF93-4071-94B2-5DB792BB735F' AS [ADD_ID_STAMP]
+		,NULL AS [CHANGE_DATE_TIME_STAMP]
+		,NULL AS [CHANGE_ID_STAMP]
+		,'Y' AS [FIVE_DAY_TRUANT]
+		,(SELECT * FROM 
+rev.SIF_22_Common_CurrentYear)  AS [SCHOOL_YEAR]
+		,[Truant].[STUDENT_GU] AS [STUDENT_GU]
+		,'N' AS [TEN_DAY_TRUANT]
+		,'N' AS [TWO_DAY_TRUANT]
+	FROM
+		@Truant AS [Truant]
+
+DELETE FROM @Truant
+
+PRINT '-- BEGIN 10 DAY TRUANT'
+INSERT INTO
+	@Truant
+	
+	SELECT
+		[Student].[STUDENT_GU] AS [STUDENT_GU]
+		,[Truant].[SIS_NUMBER] AS [SIS_NUMBER]
+		,CONVERT(DATE,GETDATE(),101) AS [DATE]
+	FROM
+		[SchoolMessenger].[TenDayTruant] AS [Truant]
+
+		INNER JOIN
+		[rev].[EPC_STU] AS [Student]
+		ON
+		[Truant].[SIS_NUMBER]=[Student].[SIS_NUMBER]
+	
+		LEFT JOIN
+		[rev].[UD_TRUANT_STUDENT] AS [Log]
+		ON
+		[Student].[STUDENT_GU]=[Log].[STUDENT_GU]
+		AND [Log].[TEN_DAY_TRUANT]='Y'
+
+WHERE
+	[Log].[STUDENT_GU] IS NULL
+
+
+INSERT INTO
+	[rev].[UD_TRUANT_STUDENT]
+
+	SELECT
+		NEWID() AS [UD_TRUANT_STUDENT_GU]
+		,GETDATE() AS [ADD_DATE_TIME_STAMP]
+		,'27CDCD0E-BF93-4071-94B2-5DB792BB735F' AS [ADD_ID_STAMP]
+		,NULL AS [CHANGE_DATE_TIME_STAMP]
+		,NULL AS [CHANGE_ID_STAMP]
+		,'N' AS [FIVE_DAY_TRUANT]
+		,(SELECT * FROM 
+rev.SIF_22_Common_CurrentYear)  AS [SCHOOL_YEAR]
+		,[Truant].[STUDENT_GU] AS [STUDENT_GU]
+		,'Y' AS [TEN_DAY_TRUANT]
+		,'N' AS [TWO_DAY_TRUANT]
+	FROM
+		@Truant AS [Truant]
+
+END
+
+
+
+GO
+
+

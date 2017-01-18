@@ -31,7 +31,7 @@ DECLARE @TEMP TABLE
 DistrictNumber VARCHAR (3), 
 SchoolYear VARCHAR (8),
 StudentIDNumber VARCHAR (9),
-SORSchoolNumber VARCHAR(3),
+SORSchoolNumber VARCHAR(5),
 SchoolName VARCHAR (100),
 Grade VARCHAR (2),
 EnterDate VARCHAR (8),
@@ -39,7 +39,13 @@ AddDelStatus VARCHAR (1),
 LastName VARCHAR (100),
 FirstName VARCHAR (100),
 StudentMiddleName VARCHAR (100),
-SchooLOfRecord VARCHAR (1)
+SchooLOfRecord VARCHAR (1),
+ALTLOC1 VARCHAR (5),
+ALTLOC2 VARCHAR (5),
+ALTLOC3 VARCHAR (5),
+ALTLOC4 VARCHAR (5),
+ALTLOC5 VARCHAR (5),
+BIRTH_DATE VARCHAR (10)
 )
 
 INSERT INTO 

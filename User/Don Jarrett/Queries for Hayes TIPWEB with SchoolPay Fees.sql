@@ -46,7 +46,7 @@ INSERT INTO
 		OPENROWSET (
 		'Microsoft.ACE.OLEDB.12.0', 
 		'Text;Database=\\SynTempSSIS.aps.edu.actd\Files\TempQuery\;HDR=YES;', 
-		'SELECT * from APSDamagedBooks.csv'
+		'SELECT * from APS_DamagedBooks.csv'
 		) AS [Damaged]
 
 		INNER JOIN
@@ -108,7 +108,7 @@ INSERT INTO
 		OPENROWSET (
 		'Microsoft.ACE.OLEDB.12.0', 
 		'Text;Database=\\SynTempSSIS.aps.edu.actd\Files\TempQuery\;HDR=YES;', 
-		'SELECT * from APSLostBooks.csv'
+		'SELECT * from APS_LostBooks.csv'
 		) AS [Lost]
 
 		INNER JOIN

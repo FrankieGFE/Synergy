@@ -1,7 +1,7 @@
 /**
  * $Revision: 973 $
  * $LastChangedBy: e104090 $
- * $LastChangedDate: 2016-04-08 16:49:09 -0600 (Fri, 08 Apr 2016) $
+ * $LastChangedDate: 2016-12-07 16:49:09 -0600 (Fri, 08 Apr 2016) $
  */
  
 
@@ -73,12 +73,12 @@ FROM
 	STAFF.BADGE_NUM = LAWSON.LAW_BADGE_NUMBER
 
 WHERE
-	GENDER != LAWSON.LAW_GENDER
-	OR BIRTH_DATE != LAWSON.LAW_BIRTHDATE
-	OR ETHNIC_CODE != LAWSON.LAW_ETHNIC_CODE
-	OR HISPANIC_INDICATOR != LAWSON.LAW_HISPANIC_INDICATOR
+	ISNULL(GENDER,'') != LAWSON.LAW_GENDER
+	OR ISNULL(BIRTH_DATE,'') != LAWSON.LAW_BIRTHDATE
+	OR ISNULL(ETHNIC_CODE,'') != LAWSON.LAW_ETHNIC_CODE
+	OR ISNULL(HISPANIC_INDICATOR,'') != LAWSON.LAW_HISPANIC_INDICATOR
 	--OR PRIMARY_PHONE != LAWSON.LAW_PHONE
-	OR LAST_NAME != LAWSON.LAW_LAST_NAME
+	OR ISNULL(LAST_NAME,'') != LAWSON.LAW_LAST_NAME
 
 	
 ----------------------------------------------------------------------------------------------------------------------------------------
@@ -106,12 +106,13 @@ SET
 		[180-SMAXODS-01.APS.EDU.ACTD].Lawson.APS.SynergyExtraStaffInfo AS LAWSON
 		ON
 		STAFF.BADGE_NUM = LAWSON.LAW_BADGE_NUMBER
+		AND LAWSON.LAW_EMPLOYEE != 210177
 
 WHERE
-	STATE_ID = LAW_EMPLOYEE
-	OR BADGE_NUM = LAW_BADGE_NUMBER
-	OR HIRE_DATE = LAW_HIRE_DATE
-	OR TYPE = LAW_TYPE
+	ISNULL(STATE_ID,0) = LAW_EMPLOYEE
+	OR ISNULL(BADGE_NUM,'') = LAW_BADGE_NUMBER
+	OR ISNULL(HIRE_DATE,'') = LAW_HIRE_DATE
+	OR ISNULL(TYPE,'') = LAW_TYPE
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------
@@ -358,6 +359,8 @@ FROM
 
 
 ---------------------------------------------------------------------------------------------------------------------------------------
+--WHY IS THIS IN HERE????  I'M TAKING THIS OUT FOR NOW DAC 9/15/2016, ONLY STAFF IS DONE ABOVE
+/*
 UPDATE 
 	PERSON
 SET		
@@ -369,11 +372,18 @@ SET
 
 FROM
 	rev.REV_PERSON AS PERSON
-
+*/
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------	
+
+UPDATE REV.REV_USER
+SET NAVIGATION = 2
+WHERE
+ADD_DATE_TIME_STAMP > '20161205'
+
+
 
 --Validation Check to see how many records will be processed, 0 = INSERT AND UPDATE, 1 = ROLLBACK - WILL NOT - UPDATE/INSERT
 IF @ValidateOnly = 0
@@ -388,4 +398,8 @@ ELSE
 
 END -- END SPROC
 
+
+
 GO
+
+

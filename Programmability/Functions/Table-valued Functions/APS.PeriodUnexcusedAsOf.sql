@@ -1,7 +1,7 @@
 USE [ST_Production]
 GO
 
-/****** Object:  UserDefinedFunction [APS].[PeriodUnexcusedAsOf]    Script Date: 9/29/2015 10:48:49 AM ******/
+/****** Object:  UserDefinedFunction [APS].[PeriodUnexcusedAsOf]    Script Date: 1/18/2017 10:32:52 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -11,10 +11,11 @@ GO
 
 
 
+
 ALTER FUNCTION [APS].[PeriodUnexcusedAsOf](@AsOfDate DATE)
 RETURNS TABLE
 AS
-RETURN	
+RETURN
 
 WITH [HighSchoolTruant] AS 
 (
@@ -22,74 +23,76 @@ SELECT
     [stu].[STUDENT_GU]
     ,[stu].[SIS_NUMBER]
     ,[sch].[SCHOOL_CODE]
+	,SSY.EXCLUDE_ADA_ADM
     ,[atd].[ABS_DATE]
     ,[cal].[ROTATION]
     ,CAST(COUNT(*) AS DECIMAL(5,2)) AS [Unexcused Count For Day]
 FROM
-    [rev].[EPC_STU_ATT_DAILY] AS [atd]
+    [rev].[EPC_STU_ATT_DAILY] AS [atd] WITH (NOLOCK)
 
-    INNER HASH JOIN
-    [rev].[EPC_STU_ATT_PERIOD] AS [atp]
+    INNER JOIN
+    [rev].[EPC_STU_ATT_PERIOD] AS [atp] WITH (NOLOCK)
     ON
     [atd].[DAILY_ATTEND_GU]=[atp].[DAILY_ATTEND_GU]
 
-    INNER HASH JOIN
-    [rev].[EPC_STU_ENROLL] AS [enr]
+    INNER JOIN
+    [rev].[EPC_STU_ENROLL] AS [enr] WITH (NOLOCK)
     ON
     [atd].[ENROLLMENT_GU]=[enr].[ENROLLMENT_GU]
     AND [enr].[EXCLUDE_ADA_ADM] IS NULL
 
-    INNER HASH JOIN
-    [rev].[EPC_STU_SCH_YR] AS [ssy]
+    INNER JOIN
+    [rev].[EPC_STU_SCH_YR] AS [ssy] WITH (NOLOCK)
     ON
     [enr].[STUDENT_SCHOOL_YEAR_GU]=[ssy].[STUDENT_SCHOOL_YEAR_GU]
     AND [ssy].[EXCLUDE_ADA_ADM] IS NULL
 
-    INNER HASH JOIN
-    [rev].[REV_ORGANIZATION_YEAR] AS [oy]
+    INNER JOIN
+    [rev].[REV_ORGANIZATION_YEAR] AS [oy] WITH (NOLOCK)
     ON
     [ssy].[ORGANIZATION_YEAR_GU]=[oy].[ORGANIZATION_YEAR_GU]
 
-    INNER HASH JOIN
-    [rev].[EPC_SCH] AS [sch]
+    INNER JOIN
+    [rev].[EPC_SCH] AS [sch] WITH (NOLOCK)
     ON
     [oy].[ORGANIZATION_GU]=[sch].[ORGANIZATION_GU]
 
-    INNER HASH JOIN
-    [rev].[REV_YEAR] AS [yr]
-    ON
-    [oy].[YEAR_GU]=[yr].[YEAR_GU]
-
-    LEFT HASH JOIN
-    [rev].[EPC_SCH_ATT_CAL] AS [cal]
+	INNER JOIN
+	[APS].[YearDates] AS [yr] WITH (NOLOCK)
+	ON
+	[oy].[YEAR_GU]=[yr].[YEAR_GU]
+	AND (@asOfDate BETWEEN [yr].[START_DATE] AND [yr].[END_DATE])
+	AND [yr].EXTENSION = 'R'
+    LEFT JOIN
+    [rev].[EPC_SCH_ATT_CAL] AS [cal] WITH (NOLOCK)
     ON
     [oy].[ORGANIZATION_YEAR_GU]=[cal].[SCHOOL_YEAR_GU] 
     AND [atd].[ABS_DATE]=[cal].[CAL_DATE]
 
-    LEFT HASH JOIN
-    [rev].[EPC_SCH_YR_BELL_SCHED] AS [bs]
+    LEFT JOIN
+    [rev].[EPC_SCH_YR_BELL_SCHED] AS [bs] WITH (NOLOCK)
     ON
     [oy].[ORGANIZATION_YEAR_GU]=[bs].[ORGANIZATION_YEAR_GU]
     AND [cal].[BELL_SCHEDULE]=[bs].[BELL_SCHEDULE_CODE]
 
-    LEFT HASH JOIN
-    [rev].[EPC_SCH_YR_BELL_SCHED_PER] AS [bel]
+    LEFT JOIN
+    [rev].[EPC_SCH_YR_BELL_SCHED_PER] AS [bel] WITH (NOLOCK)
     ON
     [bs].[BELL_SCHEDULE_GU]=[bel].[BELL_SCHEDULE_GU]
     AND [atp].[BELL_PERIOD]=[bel].[BELL_PERIOD]
 
-    LEFT HASH JOIN
-    [rev].[EPC_CODE_ABS_REAS_SCH_YR] AS [abry]
+    LEFT JOIN
+    [rev].[EPC_CODE_ABS_REAS_SCH_YR] AS [abry] WITH (NOLOCK)
     ON
     [atp].[CODE_ABS_REAS_GU]=[abry].[CODE_ABS_REAS_SCH_YEAR_GU]
 
-    LEFT HASH JOIN
-    [rev].[EPC_CODE_ABS_REAS] AS [abr]
+    LEFT JOIN
+    [rev].[EPC_CODE_ABS_REAS] AS [abr] WITH (NOLOCK)
     ON
     [abry].[CODE_ABS_REAS_GU]=[abr].[CODE_ABS_REAS_GU]
 
-    INNER HASH JOIN
-    [rev].[EPC_STU_CLASS] AS [scls]
+    INNER JOIN
+    [rev].[EPC_STU_CLASS] AS [scls] WITH (NOLOCK)
     ON
     [ssy].[STUDENT_SCHOOL_YEAR_GU]=[scls].[STUDENT_SCHOOL_YEAR_GU]
     AND
@@ -97,27 +100,30 @@ FROM
     AND 
     [atd].[ABS_DATE]>=[scls].[ENTER_DATE]
 
-    INNER HASH JOIN
-    [rev].[EPC_SCH_YR_SECT] AS [sect]
+    INNER JOIN
+    [rev].[EPC_SCH_YR_SECT] AS [sect] WITH (NOLOCK)
     ON
     [scls].[SECTION_GU]=[sect].[SECTION_GU]
     AND
     ([atp].[BELL_PERIOD]=[sect].[PERIOD_BEGIN] OR [atp].[BELL_PERIOD]=[sect].[PERIOD_END])
     
-    INNER HASH JOIN
-    [rev].[EPC_STU] AS [stu]
+    INNER JOIN
+    [rev].[EPC_STU] AS [stu] WITH (NOLOCK)
     ON
     [ssy].[STUDENT_GU]=[stu].[STUDENT_GU]
 
 WHERE
-    [yr].[YEAR_GU]=(SELECT [YEAR_GU] FROM [rev].[SIF_22_Common_CurrentYearGU])
-    AND [abr].[TYPE]='UNE'
-    AND [sch].[SCHOOL_CODE] BETWEEN '500' AND '599'
+    [abr].[TYPE]='UNE'
+    --AND ([sch].[SCHOOL_CODE] BETWEEN '500' AND '599' OR [sch].[SCHOOL_CODE]!='496')
+	AND ([sch].[SCHOOL_CODE] BETWEEN '500' AND '599' 
+	OR [sch].[SCHOOL_CODE] IN ('035', '048', '188', '192', '611', '840', '846', '847', '848', '998', '701', '702', '703', '705', '900', '901'))
+	
 
 GROUP BY
     [stu].[STUDENT_GU]
     ,[stu].[SIS_NUMBER]
     ,[sch].[SCHOOL_CODE]
+	,SSY.EXCLUDE_ADA_ADM
     ,[atd].[ABS_DATE]
     ,[cal].[ROTATION]
 ), [MiddleSchoolTruant] AS 
@@ -126,73 +132,75 @@ SELECT
     [stu].[STUDENT_GU]
     ,[stu].[SIS_NUMBER]
     ,[sch].[SCHOOL_CODE]
+	,SSY.EXCLUDE_ADA_ADM
     ,[atd].[ABS_DATE]
     ,[cal].[ROTATION]
     ,CAST(COUNT(*) AS DECIMAL(5,2)) AS [Unexcused Count For Day]
 FROM
-    [rev].[EPC_STU_ATT_DAILY] AS [atd]
+    [rev].[EPC_STU_ATT_DAILY] AS [atd] WITH (NOLOCK)
 
-    INNER HASH JOIN
-    [rev].[EPC_STU_ATT_PERIOD] AS [atp]
+    INNER JOIN
+    [rev].[EPC_STU_ATT_PERIOD] AS [atp] WITH (NOLOCK)
     ON
     [atd].[DAILY_ATTEND_GU]=[atp].[DAILY_ATTEND_GU]
 
-    INNER HASH JOIN
-    [rev].[EPC_STU_ENROLL] AS [enr]
+    INNER JOIN
+    [rev].[EPC_STU_ENROLL] AS [enr] WITH (NOLOCK)
     ON
     [atd].[ENROLLMENT_GU]=[enr].[ENROLLMENT_GU]
     AND [enr].[EXCLUDE_ADA_ADM] IS NULL
 
-    INNER HASH JOIN
-    [rev].[EPC_STU_SCH_YR] AS [ssy]
+    INNER JOIN
+    [rev].[EPC_STU_SCH_YR] AS [ssy] WITH (NOLOCK)
     ON
     [enr].[STUDENT_SCHOOL_YEAR_GU]=[ssy].[STUDENT_SCHOOL_YEAR_GU]
     AND [ssy].[EXCLUDE_ADA_ADM] IS NULL
 
-    INNER HASH JOIN
-    [rev].[REV_ORGANIZATION_YEAR] AS [oy]
+    INNER JOIN
+    [rev].[REV_ORGANIZATION_YEAR] AS [oy] WITH (NOLOCK)
     ON
     [ssy].[ORGANIZATION_YEAR_GU]=[oy].[ORGANIZATION_YEAR_GU]
 
-    INNER HASH JOIN
-    [rev].[EPC_SCH] AS [sch]
+    INNER JOIN
+    [rev].[EPC_SCH] AS [sch] WITH (NOLOCK)
     ON
     [oy].[ORGANIZATION_GU]=[sch].[ORGANIZATION_GU]
 
-    INNER HASH JOIN
-    [rev].[REV_YEAR] AS [yr]
-    ON
-    [oy].[YEAR_GU]=[yr].[YEAR_GU]
-
-    LEFT HASH JOIN
-    [rev].[EPC_SCH_ATT_CAL] AS [cal]
+	INNER JOIN
+	[APS].[YearDates] AS [yr] WITH (NOLOCK)
+	ON
+	[oy].[YEAR_GU]=[yr].[YEAR_GU]
+	AND (@asOfDate BETWEEN [yr].[START_DATE] AND [yr].[END_DATE])
+	AND [yr].EXTENSION = 'R'
+    LEFT JOIN
+    [rev].[EPC_SCH_ATT_CAL] AS [cal] WITH (NOLOCK)
     ON
     [oy].[ORGANIZATION_YEAR_GU]=[cal].[SCHOOL_YEAR_GU] AND [atd].[ABS_DATE]=[cal].[CAL_DATE]
 
-    LEFT HASH JOIN
-    [rev].[EPC_SCH_YR_BELL_SCHED] AS [bs]
+    LEFT JOIN
+    [rev].[EPC_SCH_YR_BELL_SCHED] AS [bs] WITH (NOLOCK)
     ON
     [oy].[ORGANIZATION_YEAR_GU]=[bs].[ORGANIZATION_YEAR_GU]
     AND [cal].[BELL_SCHEDULE]=[bs].[BELL_SCHEDULE_CODE]
 
-    LEFT HASH JOIN
-    [rev].[EPC_SCH_YR_BELL_SCHED_PER] AS [bel]
+    LEFT JOIN
+    [rev].[EPC_SCH_YR_BELL_SCHED_PER] AS [bel] WITH (NOLOCK)
     ON
     [bs].[BELL_SCHEDULE_GU]=[bel].[BELL_SCHEDULE_GU]
     AND [atp].[BELL_PERIOD]=[bel].[BELL_PERIOD]
 
-    LEFT HASH JOIN
-    [rev].[EPC_CODE_ABS_REAS_SCH_YR] AS [abry]
+    LEFT JOIN
+    [rev].[EPC_CODE_ABS_REAS_SCH_YR] AS [abry] WITH (NOLOCK)
     ON
     [atp].[CODE_ABS_REAS_GU]=[abry].[CODE_ABS_REAS_SCH_YEAR_GU]
 
-    LEFT HASH JOIN
-    [rev].[EPC_CODE_ABS_REAS] AS [abr]
+    LEFT JOIN
+    [rev].[EPC_CODE_ABS_REAS] AS [abr] WITH (NOLOCK)
     ON
     [abry].[CODE_ABS_REAS_GU]=[abr].[CODE_ABS_REAS_GU]
 
-    INNER HASH JOIN
-    [rev].[EPC_STU_CLASS] AS [scls]
+    INNER JOIN
+    [rev].[EPC_STU_CLASS] AS [scls] WITH (NOLOCK)
     ON
     [ssy].[STUDENT_SCHOOL_YEAR_GU]=[scls].[STUDENT_SCHOOL_YEAR_GU]
     AND
@@ -200,27 +208,29 @@ FROM
     AND 
     [atd].[ABS_DATE]>=[scls].[ENTER_DATE]
 
-    INNER HASH JOIN
-    [rev].[EPC_SCH_YR_SECT] AS [sect]
+    INNER JOIN
+    [rev].[EPC_SCH_YR_SECT] AS [sect] WITH (NOLOCK)
     ON
     [scls].[SECTION_GU]=[sect].[SECTION_GU]
     AND
     ([atp].[BELL_PERIOD]=[sect].[PERIOD_BEGIN] OR [atp].[BELL_PERIOD]=[sect].[PERIOD_END])
     
-    INNER HASH JOIN
-    [rev].[EPC_STU] AS [stu]
+    INNER JOIN
+    [rev].[EPC_STU] AS [stu] WITH (NOLOCK)
     ON
     [ssy].[STUDENT_GU]=[stu].[STUDENT_GU]
 
 WHERE
-    [yr].[YEAR_GU]=(SELECT [YEAR_GU] FROM [rev].[SIF_22_Common_CurrentYearGU])
-    AND [abr].[TYPE]='UNE'
-    AND [sch].[SCHOOL_CODE] BETWEEN '400' AND '499'
+	[abr].[TYPE]='UNE'
+    AND ([sch].[SCHOOL_CODE] BETWEEN '400' AND '499' 
+	OR [sch].[SCHOOL_CODE]='496')
+	AND [Cal].[CAL_DATE]<=@AsOfDate
 
 GROUP BY
     [stu].[STUDENT_GU]
     ,[stu].[SIS_NUMBER]
     ,[sch].[SCHOOL_CODE]
+	,SSY.EXCLUDE_ADA_ADM
     ,[atd].[ABS_DATE]
     ,[cal].[ROTATION]
 ), [HSSchedCount] AS 
@@ -228,40 +238,133 @@ GROUP BY
 SELECT
     [stu].[STUDENT_GU]
     ,[stu].[SIS_NUMBER]
+	,SCH.SCHOOL_CODE
     ,[Section].[TERM_CODE]
     ,[cal].[CAL_DATE]
     ,[cal].[ROTATION]
     ,COUNT(*) AS [Total Classes]
 FROM
-    [rev].[EPC_STU_CLASS] AS [Class]
+    [rev].[EPC_STU_CLASS] AS [Class] WITH (NOLOCK)
 
-    INNER HASH JOIN
-    [rev].[EPC_SCH_YR_SECT] AS [Section]
+    INNER JOIN
+    [rev].[EPC_SCH_YR_SECT] AS [Section] WITH (NOLOCK)
     ON
     [Class].[SECTION_GU]=[Section].[SECTION_GU]
     AND [Section].[EXCLUDE_ATTENDANCE]='Y'
 
-    	INNER HASH JOIN 
-	rev.[EPC_SCH_YR_CRS] AS [SchoolYearCourse]
+    INNER JOIN 
+	rev.[EPC_SCH_YR_CRS] AS [SchoolYearCourse] WITH (NOLOCK)
 	ON [Section].[SCHOOL_YEAR_COURSE_GU] = [SchoolYearCourse].[SCHOOL_YEAR_COURSE_GU]
 
-	INNER HASH JOIN
-	rev.[REV_ORGANIZATION_YEAR] AS [OrgYear]
+	INNER JOIN
+	rev.[REV_ORGANIZATION_YEAR] AS [OrgYear] WITH (NOLOCK)
 	ON [Section].[ORGANIZATION_YEAR_GU] = [OrgYear].[ORGANIZATION_YEAR_GU]
 
-	INNER HASH JOIN
-	[rev].[REV_YEAR] AS [Year]
+	INNER JOIN 
+	rev.EPC_SCH AS SCH
+	ON
+	[OrgYear].ORGANIZATION_GU = SCH.ORGANIZATION_GU
+
+	INNER JOIN
+	[APS].[YearDates] AS [Year] WITH (NOLOCK)
 	ON
 	[OrgYear].[YEAR_GU]=[Year].[YEAR_GU]
-
-	LEFT OUTER HASH JOIN
-	rev.[EPC_STU_SCH_YR] AS [StudentSchoolYear] -- Contains Grade and Start Date 	
+	AND (@asOfDate BETWEEN [Year].[START_DATE] AND [Year].[END_DATE])
+	AND [Year].EXTENSION = 'R'
+	LEFT OUTER JOIN
+	rev.[EPC_STU_SCH_YR] AS [StudentSchoolYear] WITH (NOLOCK) -- Contains Grade and Start Date 	
 	ON
 	[Class].[STUDENT_SCHOOL_YEAR_GU] = [StudentSchoolYear].[STUDENT_SCHOOL_YEAR_GU]
 	AND [StudentSchoolYear].[EXCLUDE_ADA_ADM] IS NULL
 
-    INNER HASH JOIN
-    [rev].[EPC_SCH_ATT_CAL] AS [cal]
+    INNER JOIN
+    [rev].[EPC_STU] AS [stu] WITH (NOLOCK)
+    ON
+    [StudentSchoolYear].[STUDENT_GU]=[stu].[STUDENT_GU]
+
+    INNER JOIN
+    [rev].[EPC_SCH_ATT_CAL] AS [cal] WITH (NOLOCK)
+    ON
+    [OrgYear].[ORGANIZATION_YEAR_GU]=[cal].[SCHOOL_YEAR_GU]
+    AND
+    [cal].[CAL_DATE]>=[StudentSchoolYear].[ENTER_DATE] AND ([cal].[CAL_DATE]<=[StudentSchoolYear].[LEAVE_DATE] OR [StudentSchoolYear].[LEAVE_DATE] IS NULL)
+    AND
+    [cal].[CAL_DATE]>=[Class].[ENTER_DATE] AND ([cal].[CAL_DATE]<=[Class].[LEAVE_DATE] OR [Class].[LEAVE_DATE] IS NULL)
+
+    INNER JOIN 
+    rev.EPC_SCH_YR_SECT_MET_DY AS sysmd  WITH (NOLOCK)
+    ON 
+    sysmd.SECTION_GU      = [Section].SECTION_GU
+    
+    INNER JOIN 
+    rev.EPC_SCH_YR_MET_DY AS symd  WITH (NOLOCK)
+    ON 
+    symd.SCH_YR_MET_DY_GU = sysmd.SCH_YR_MET_DY_GU 
+    AND 
+    [cal].[ROTATION]=[symd].[MEET_DAY_CODE]
+
+WHERE
+    [Cal].[ROTATION] IS NOT NULL
+    AND [Cal].[CAL_DATE]<=@AsOfDate
+
+GROUP BY
+    [stu].[STUDENT_GU]
+    ,[stu].[SIS_NUMBER]
+	,SCH.SCHOOL_CODE
+    ,[Section].[TERM_CODE]
+    ,[cal].[CAL_DATE]
+    ,[cal].[ROTATION]
+), [MSSchedCount] AS 
+(
+SELECT
+    [stu].[STUDENT_GU]
+    ,[stu].[SIS_NUMBER]
+	,SCH.SCHOOL_CODE
+    ,[Section].[TERM_CODE]
+    ,[cal].[CAL_DATE]
+    ,[cal].[ROTATION]
+    ,COUNT(*) AS [Total Classes]
+FROM
+    [rev].[EPC_STU_CLASS] AS [Class] WITH (NOLOCK)
+
+    INNER JOIN
+    [rev].[EPC_SCH_YR_SECT] AS [Section] WITH (NOLOCK)
+    ON
+    [Class].[SECTION_GU]=[Section].[SECTION_GU]
+    AND [Section].[EXCLUDE_ATTENDANCE]='Y'
+
+    INNER JOIN 
+	rev.[EPC_SCH_YR_CRS] AS [SchoolYearCourse] WITH (NOLOCK)
+	ON [Section].[SCHOOL_YEAR_COURSE_GU] = [SchoolYearCourse].[SCHOOL_YEAR_COURSE_GU]
+
+	INNER JOIN
+	rev.[REV_ORGANIZATION_YEAR] AS [OrgYear] WITH (NOLOCK)
+	ON [Section].[ORGANIZATION_YEAR_GU] = [OrgYear].[ORGANIZATION_YEAR_GU]
+
+	INNER JOIN 
+	rev.EPC_SCH AS SCH
+	ON
+	[OrgYear].ORGANIZATION_GU = SCH.ORGANIZATION_GU
+
+	INNER JOIN
+	[APS].[YearDates] AS [Year] WITH (NOLOCK)
+	ON
+	[OrgYear].[YEAR_GU]=[Year].[YEAR_GU]
+	AND (@asOfDate BETWEEN [Year].[START_DATE] AND [Year].[END_DATE])
+	AND [Year].EXTENSION = 'R'
+	LEFT OUTER JOIN
+	rev.[EPC_STU_SCH_YR] AS [StudentSchoolYear]  WITH (NOLOCK) -- Contains Grade and Start Date 	
+	ON
+	[Class].[STUDENT_SCHOOL_YEAR_GU] = [StudentSchoolYear].[STUDENT_SCHOOL_YEAR_GU]
+	AND [StudentSchoolYear].[EXCLUDE_ADA_ADM] IS NULL
+
+    INNER JOIN
+    [rev].[EPC_STU] AS [stu] WITH (NOLOCK)
+    ON
+    [StudentSchoolYear].[STUDENT_GU]=[stu].[STUDENT_GU]
+
+    INNER JOIN
+    [rev].[EPC_SCH_ATT_CAL] AS [cal] WITH (NOLOCK)
     ON
     [OrgYear].[ORGANIZATION_YEAR_GU]=[cal].[SCHOOL_YEAR_GU] /*AND [atd].[ABS_DATE]=[cal].[CAL_DATE]*/
     AND
@@ -269,38 +372,44 @@ FROM
     AND
     [cal].[CAL_DATE]>=[Class].[ENTER_DATE] AND ([cal].[CAL_DATE]<=[Class].[LEAVE_DATE] OR [Class].[LEAVE_DATE] IS NULL)
 
-    INNER HASH JOIN
-    [rev].[EPC_STU] AS [stu]
-    ON
-    [StudentSchoolYear].[STUDENT_GU]=[stu].[STUDENT_GU]
-
-    INNER HASH JOIN 
-    rev.EPC_SCH_YR_SECT_MET_DY AS sysmd 
+    INNER JOIN 
+    rev.EPC_SCH_YR_SECT_MET_DY AS sysmd  WITH (NOLOCK)
     ON 
     sysmd.SECTION_GU      = [Section].SECTION_GU
     
-    INNER HASH JOIN 
-    rev.EPC_SCH_YR_MET_DY AS symd  
+    LEFT JOIN 
+    rev.EPC_SCH_YR_MET_DY AS symd  WITH (NOLOCK)
     ON 
     symd.SCH_YR_MET_DY_GU = sysmd.SCH_YR_MET_DY_GU 
     AND 
     [cal].[ROTATION]=[symd].[MEET_DAY_CODE]
 
 WHERE
-    [Year].[YEAR_GU]=(SELECT [YEAR_GU] FROM [rev].[SIF_22_Common_CurrentYearGU])
-    AND [Cal].[ROTATION] IS NOT NULL
-    
+    [Cal].[ROTATION] IS NOT NULL
+    AND [Cal].[CAL_DATE]<=@AsOfDate
+
 GROUP BY
     [stu].[STUDENT_GU]
     ,[stu].[SIS_NUMBER]
+	,SCH.SCHOOL_CODE
     ,[Section].[TERM_CODE]
     ,[cal].[CAL_DATE]
     ,[cal].[ROTATION]
 )
 
+SELECT
+	[Truants].[SIS_NUMBER]
+	,[Truants].[SCHOOL_CODE]
+	,Truants.EXCLUDE_ADA_ADM
+	,SUM([Truants].[Half Days Unexcused]) AS [Half Days Unexcused]
+	,SUM([Truants].[Full Days Unexcused]) AS [Full Days Unexcused]
+	,SUM([Truants].[Total Unexcused]) AS [Total Unexcused]
+FROM
+(
 SELECT --start with high schoolers
     [Truant].[SIS_NUMBER]
     ,[Truant].[SCHOOL_CODE]
+	,Truant.EXCLUDE_ADA_ADM
     ,ISNULL(SUM(CASE
 	   WHEN [Truant].[Unexcused Count For Day] >= 2 THEN
 		  CASE WHEN [Truant].[Truant Percentage]<=50.00 THEN 1.00
@@ -335,11 +444,12 @@ SELECT
 FROM
 [HighSchoolTruant] AS [Truant1]
 
-LEFT HASH JOIN
+LEFT JOIN
 (
 SELECT
     [STUDENT_GU]
     ,[SIS_NUMBER]
+	,SCHOOL_CODE
     ,[CAL_DATE]
     ,[ROTATION]
     ,CAST(SUM([Total Classes]) AS DECIMAL(5,2)) AS [Total Classes]
@@ -349,24 +459,35 @@ FROM
 GROUP BY
     [STUDENT_GU]
     ,[SIS_NUMBER]
+	,SCHOOL_CODE
     ,[CAL_DATE]
     ,[ROTATION]
 ) AS [SchedCount]
 ON
 [Truant1].[STUDENT_GU]=[SchedCount].[STUDENT_GU]
+AND [Truant1].SCHOOL_CODE = [SchedCount].SCHOOL_CODE
 AND [Truant1].[ABS_DATE]=[SchedCount].[CAL_DATE]
+--AND [Truant1].[ROTATION]=[SchedCount].[ROTATION]
 AND [Truant1].[Unexcused Count For Day]>=2
 ) AS [Truant]
 
+WHERE
+	--[Truant].[SCHOOL_CODE] BETWEEN '500' AND '599'
+	 ([Truant].[SCHOOL_CODE] BETWEEN '500' AND '599' 
+	OR [Truant].[SCHOOL_CODE] IN ('035', '048', '188', '192', '611', '840', '846', '847', '848', '998', '701', '702', '703', '705', '900', '901'))
+
+
+	AND [Truant].[ABS_DATE]<=@asOfDate
 GROUP BY
     [Truant].[SIS_NUMBER]
     ,[Truant].[SCHOOL_CODE]
-
+	,truant.EXCLUDE_ADA_ADM
 UNION
 
 SELECT --pull middle school truancy
     [Truant].[SIS_NUMBER]
     ,[Truant].[SCHOOL_CODE]
+	,truant.EXCLUDE_ADA_ADM
     ,ISNULL(SUM(CASE
 	   WHEN [Truant].[Unexcused Count For Day] >= 2 THEN
 		  CASE WHEN [Truant].[Truant Percentage]<=50.00 THEN 1.00
@@ -395,11 +516,12 @@ SELECT
 FROM
 	[MiddleSchoolTruant] AS [Truant1]
 
-LEFT HASH JOIN
+LEFT JOIN
 (
 SELECT
     [STUDENT_GU]
     ,[SIS_NUMBER]
+	,SCHOOL_CODE
     ,[CAL_DATE]
     ,[ROTATION]
     ,CAST(SUM([Total Classes]) AS DECIMAL(5,2)) AS [Total Classes]
@@ -409,19 +531,35 @@ FROM
 GROUP BY
     [STUDENT_GU]
     ,[SIS_NUMBER]
+	,SCHOOL_CODE
     ,[CAL_DATE]
     ,[ROTATION]
 ) AS [SchedCount]
 ON
 [Truant1].[STUDENT_GU]=[SchedCount].[STUDENT_GU]
+AND [Truant1].SCHOOL_CODE = SchedCount.SCHOOL_CODE
 AND [Truant1].[ABS_DATE]=[SchedCount].[CAL_DATE]
+--AND [Truant1].[ROTATION]=[SchedCount].[ROTATION]
 ) AS [Truant]
 
 WHERE
     [Truant].[ABS_DATE]<=@asOfDate
+	AND [Truant].[SCHOOL_CODE] BETWEEN '400' AND '499'
 GROUP BY
     [Truant].[SIS_NUMBER]
     ,[Truant].[SCHOOL_CODE]
+	,truant.EXCLUDE_ADA_ADM
+) AS [Truants]
+
+GROUP BY
+	[Truants].[SIS_NUMBER]
+	,[Truants].[SCHOOL_CODE]
+	,Truants.EXCLUDE_ADA_ADM
+	
+
+
+
+
 
 
 GO

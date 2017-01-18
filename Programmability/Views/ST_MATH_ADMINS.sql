@@ -1,6 +1,13 @@
+
+
+
 --ALTER VIEW [APS].[ST_MATH_ADMIN] AS 
---EXECUTE AS LOGIN='QueryFileUser'
 --GO
+EXECUTE AS LOGIN='QueryFileUser'
+GO
+
+
+
 SELECT
 	[FILE].iid
 	,district_school_id
@@ -37,9 +44,7 @@ SELECT
 		  WHEN ORG.ORGANIZATION_NAME = 'School On Wheels High School' THEN 'SCHOOL ON WHEELS'
 		  WHEN ORG.ORGANIZATION_NAME = 'Sombra Del Monte Elementary School' THEN 'SOMBRA DEL MONTE ELEM SCHOOL'
 		  WHEN ORG.ORGANIZATION_NAME = 'Susie Rayos Marmon Elementary School' THEN 'SUSIE RAYOS MARMON ELEM SCHOOL'
-		  WHEN ORG.ORGANIZATION_NAME = 'Atrisco Heritage Academy High School' THEN 'ATRISCO HERITAGE ACADEMY'
-		  WHEN ORG.ORGANIZATION_NAME = 'Juvenile Detention Center' THEN 'JUVENILE DETENTION CTR ALT SCH'
-		  WHEN ORG.ORGANIZATION_NAME = 'Vision Quest Alternative Middle School' THEN 'VISION QUEST ALT MIDDLE SCHOOL'
+		  WHEN ORG.ORGANIZATION_NAME = '' THEN ''
 		  WHEN ORG.ORGANIZATION_NAME = '' THEN ''
 	ELSE ORG.ORGANIZATION_NAME
 	END AS school
@@ -94,8 +99,10 @@ AND YR.EXTENSION = 'R'
 		ON [FILE].SCHOOL = STAFF.school
 
 WHERE [FILE].IID IS NOT NULL
-
 --and [Last Name] like '%,%'
 --ORDER BY [E-Mail]
 --REVERT
 --GO
+--AND district_teacher_id = 'e119804'
+
+

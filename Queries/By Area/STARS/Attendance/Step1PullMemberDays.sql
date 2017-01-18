@@ -29,10 +29,10 @@ declare x_cur cursor for
 
 SELECT                    --ENR.ENTER_DATE 
 					--'2016-02-03' 
-					case when enter_date < '20151202' then '20151202' else ENTER_DATE end as new_enter_date
-                    ,CASE WHEN LEAVE_DATE IS NULL THEN '20160210' ELSE LEAVE_DATE END AS NEWLEAVE
+					case when enter_date < '20160811' then ENTER_DATE else ENTER_DATE end as new_enter_date
+                    ,CASE WHEN LEAVE_DATE IS NULL THEN '20161012' ELSE LEAVE_DATE END AS NEWLEAVE
                     ,ORGANIZATION_YEAR_GU
-					,SIS_NUMBER
+					,ENR.SIS_NUMBER
 					,ENTER_DATE
 					,SCHOOL_NAME
 					,SCHOOL_CODE
@@ -44,11 +44,11 @@ SELECT                    --ENR.ENTER_DATE
 			 ON 
 			 STU.STUDENT_GU = ENR.STUDENT_GU
              WHERE
-             SCHOOL_YEAR = '2015'
+             SCHOOL_YEAR = '2016'
              AND EXTENSION = 'R'
              AND SCHOOL_CODE BETWEEN '200' AND '599'
              AND SCHOOL_CODE != '533'
-             AND (ENTER_DATE <= '20160210' AND LEAVE_DATE IS NULL OR LEAVE_DATE BETWEEN '20151202' AND '20160210')
+             AND (ENTER_DATE <= '20161012' AND LEAVE_DATE IS NULL OR LEAVE_DATE BETWEEN '20160811' AND '20161012')
 
 open x_cur
  fetch next from x_cur into
@@ -104,7 +104,8 @@ LEFT JOIN
 REV.EPC_SCH_ATT_CAL AS SchoolCal
 ON
 SchoolCal.SCHOOL_YEAR_GU = CalOption.ORG_YEAR_GU
-AND SchoolCal.HOLIDAY IN ('Hol','Sta')
+AND SchoolCal.HOLIDAY IN ('Hol','Sta', 'Oth','Non','Ema', 'Vac')
+
 AND CAL_DATE <= @endDate
 AND CAL_DATE >= @startDate
 where ORG_YEAR_GU = @org_year_gu

@@ -90,7 +90,7 @@ SELECT
 	,ALTLOC3
 	,ALTLOC4
 	,ALTLOC5
-
+	,CAST(per.BIRTH_DATE AS DATE) AS BIRTH_DATE
 FROM rev.EPC_STU               stu
 JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
                                        and ssy.STATUS is NULL
@@ -113,7 +113,7 @@ SELECT
 	,ALTLOC3
 	,ALTLOC4
 	,ALTLOC5
-
+	,CAST(BIRTH_DATE AS DATE) AS BIRTH_DATE
 FROM (
 SELECT 
 	[DistrictNumber]
@@ -132,6 +132,7 @@ SELECT
 	,[FirstName]
 	,[StudentMiddleName]
 	,[SchoolOfRecord]
+	,CAST(BIRTH_DATE AS DATE) AS BIRTH_DATE
  FROM 
 
 (
@@ -157,6 +158,7 @@ SELECT
  , per.MIDDLE_NAME                          AS [StudentMiddleName]
  , 'S'                                      AS [SchoolOfRecord]
  ,ROW_NUMBER() over (partition by stu.student_gu order by stu.student_gu) rn
+ ,CAST(per.BIRTH_DATE AS DATE) AS BIRTH_DATE
 
 FROM rev.EPC_STU               stu
 JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
@@ -190,6 +192,7 @@ GROUP BY
 	,[FirstName]
 	,[StudentMiddleName]
 	,[SchoolOfRecord]
+	,CAST(BIRTH_DATE AS DATE)
 
 ) AS T2
 
@@ -233,6 +236,7 @@ SELECT
 	,ALTLOC3
 	,ALTLOC4
 	,ALTLOC5
+	,CAST(PER.BIRTH_DATE AS DATE) AS BIRTH_DATE
 FROM rev.EPC_STU               stu
 JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
                                        and ssy.STATUS is NULL
@@ -256,7 +260,7 @@ SELECT
 	,ALTLOC3
 	,ALTLOC4
 	,ALTLOC5
-
+	,CAST(BIRTH_DATE AS DATE) AS BIRTH_DATE
 	--,Min_Grade
 	--,Min_Enter_Date
 	--,[AddDelStatus]
@@ -283,6 +287,7 @@ SELECT
 	,[FirstName]
 	,[StudentMiddleName]
 	,[SchoolOfRecord]
+	,BIRTH_DATE
  FROM 
 
 (
@@ -308,7 +313,7 @@ SELECT
  , per.MIDDLE_NAME                          AS [StudentMiddleName]
  , 'S'                                      AS [SchoolOfRecord]
  ,ROW_NUMBER() over (partition by stu.student_gu order by stu.student_gu) rn
-
+ ,BIRTH_DATE
 FROM rev.EPC_STU               stu
 JOIN rev.EPC_STU_SCH_YR        ssy  ON ssy.STUDENT_GU = stu.STUDENT_GU
                                        and ssy.STATUS is NULL
@@ -341,7 +346,7 @@ GROUP BY
 	,[FirstName]
 	,[StudentMiddleName]
 	,[SchoolOfRecord]
-
+	,BIRTH_DATE
 ) AS T2
 
 ) AS JOINALLTHIS2

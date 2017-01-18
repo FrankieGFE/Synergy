@@ -1,13 +1,13 @@
-/**
- * $Revision: 181 $
- * $LastChangedBy: e201594 $
- * $LastChangedDate: 2014-10-02 07:50:52 -0600 (Thu, 02 Oct 2014) $
- */
- 
--- Removing function if it exists
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[LCETeacherEndorsementsAsOf]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
-	EXEC('CREATE FUNCTION APS.LCETeacherEndorsementsAsOf()RETURNS TABLE AS RETURN (SELECT 0 AS DUMMY)')
+USE [ST_Production]
 GO
+
+/****** Object:  UserDefinedFunction [APS].[LCETeacherEndorsementsAsOf]    Script Date: 10/19/2016 12:15:26 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
 
 /**
  * FUNCTION APS.LCETeacherEndorsementsAsOf
@@ -18,7 +18,7 @@ GO
  * 
  * #return TABLE Teacher Records with summarized LCE specific endorsment information
  */
-ALTER FUNCTION APS.LCETeacherEndorsementsAsOf(@asOfDate DATETIME)
+ALTER FUNCTION [APS].[LCETeacherEndorsementsAsOf](@asOfDate DATETIME)
 RETURNS TABLE
 AS
 RETURN
@@ -45,22 +45,22 @@ FROM
 	SELECT
 		STAFF_GU
 		,CASE WHEN 
-			AUTHORIZED_TCH_AREA = '27' AND CREDENTIAL_TYPE IN ('0006', '0150', '0200', '0208', '0250', '0400', '0500', '0505', '0901') 
+			AUTHORIZED_TCH_AREA = '27' AND CREDENTIAL_TYPE IN ('0006', '0150', '0200', '0208', '0250', '0400', '0408', '0500', '0505', '0901') 
 			THEN CREDENTIAL_TYPE ELSE '0' 
 		END AS ElementaryTESOL
 			
 		,CASE WHEN 
-			(AUTHORIZED_TCH_AREA = '67' AND CREDENTIAL_TYPE IN ('0006', '0150', '0200', '0208', '0250', '0400', '0500', '0505', '0901'))
+			(AUTHORIZED_TCH_AREA = '67' AND CREDENTIAL_TYPE IN ('0006', '0150', '0200', '0208', '0250', '0400',  '0408', '0500', '0505', '0901'))
 			THEN CREDENTIAL_TYPE ELSE '0' 
 		END AS ElementaryBilingual
 			
 		,CASE WHEN 
-			AUTHORIZED_TCH_AREA = '27' AND CREDENTIAL_TYPE IN ('0006', '0150', '0300', '0308', '0350', '0400', '0500', '0501', '0505', '0901') 
+			AUTHORIZED_TCH_AREA = '27' AND CREDENTIAL_TYPE IN ('0006', '0150', '0300', '0308', '0350', '0400','0408', '0500', '0501', '0505', '0901') 
 			THEN CREDENTIAL_TYPE ELSE '0' 
 		END AS SecondaryTESOL
 					
 		,CASE WHEN 
-			(AUTHORIZED_TCH_AREA = '67' AND CREDENTIAL_TYPE IN ('0006','0150', '0300', '0308', '0350', '0400', '0500', '0501', '0505', '0901'))
+			(AUTHORIZED_TCH_AREA = '67' AND CREDENTIAL_TYPE IN ('0006','0150', '0300', '0308', '0350', '0400','0408', '0500', '0501', '0505', '0901'))
 			THEN CREDENTIAL_TYPE ELSE '0' 
 		END AS SecondaryBilingual
 			
@@ -73,3 +73,6 @@ FROM
 	) AS AllCreds
 GROUP BY
 	STAFF_GU
+GO
+
+
