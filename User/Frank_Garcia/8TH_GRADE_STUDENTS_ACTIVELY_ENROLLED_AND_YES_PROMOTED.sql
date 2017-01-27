@@ -5,8 +5,7 @@ They want counts from 2010-2011 thru 2014-2015 (5 years).
 
 Count of all 8th graders by school in each year who ended the year actively enrolled.
 Count of all 8th graders by school in each year who ended the year actively enrolled *and* Year End Status=Promoted.
-
-17 AUGUST 2016
+18 Aug 2016
 
 */
 
