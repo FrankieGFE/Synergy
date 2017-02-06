@@ -1,7 +1,7 @@
 USE [ST_Production]
 GO
 
-/****** Object:  View [APS].[ActiveGiftedHighSchoolStudents]    Script Date: 1/20/2017 12:37:07 PM ******/
+/****** Object:  View [APS].[ActiveGiftedHighSchoolStudents]    Script Date: 2/6/2017 11:36:17 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,7 +12,7 @@ GO
 
 
 
-CREATE VIEW [APS].[ActiveGiftedHighSchoolStudents] AS
+ALTER VIEW [APS].[ActiveGiftedHighSchoolStudents] AS
 
 SELECT 
 	ORGANIZATION_NAME, SIS_NUMBER, LAST_NAME, FIRST_NAME, COURSE_ID, COURSE_TITLE, GFT,  [Staff Name]
@@ -32,9 +32,14 @@ SELECT
  FROM
 	APS.PrimaryEnrollmentsAsOf(GETDATE()) AS Enroll
 	INNER JOIN
-	APS.ScheduleAsOf(GETDATE()) AS Schedule
+	APS.ScheduleDetailsAsOf(GETDATE()) AS Schedule
 	ON
 	Enroll.STUDENT_GU = Schedule.STUDENT_GU
+	INNER JOIN 
+	APS.TermDatesAsOf(GETDATE()) AS TRM
+	ON
+	Schedule.ORGANIZATION_YEAR_GU = TRM.OrgYearGU
+	AND Schedule.TERM_CODE = TRM.TermCode
 	INNER JOIN
 	rev.EPC_CRS AS CourseMaster
 	ON
