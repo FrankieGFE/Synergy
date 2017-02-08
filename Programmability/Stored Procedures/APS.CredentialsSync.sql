@@ -94,7 +94,8 @@ BEGIN
 		-- only legit ones
 		License.Certification_Status IN('Approved', 'Approved Waiver', 'REINSTATED')
 		AND StaffCredentials.STAFF_GU IS NULL
-		AND License.Certification_Expiration_Date >= CONVERT(DATE, GETDATE())--THis is only in here if we do not have
+		--took out to pull in future dates - future dates are renewals
+		--AND License.Certification_Expiration_Date >= CONVERT(DATE, GETDATE())--THis is only in here if we do not have
 
 
 	--ACTUALLY REMOVE THE BAD ONES
