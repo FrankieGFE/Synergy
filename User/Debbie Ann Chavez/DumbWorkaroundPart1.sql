@@ -1,0 +1,141 @@
+
+--CREATE TABLE PART1LASTUNE
+--(
+-- student_gu uniqueidentifier,
+-- SIS_NUMBER VARCHAR (9),
+-- SCHOOL_CODE VARCHAR (4),
+-- EXCLUDE_ADA_ADM VARCHAR(5),
+-- ABS_DATE DATE,
+-- ROTATION VARCHAR (5),
+-- ABSENCE_COUNT DECIMAL (5,2)
+-- )
+ 
+
+
+DECLARE @startDate DATE = '20161202'
+DECLARE @endDate DATE = '20170208'
+
+INSERT INTO dbo.PART1LASTUNE
+
+SELECT
+    [stu].[STUDENT_GU]
+    ,[stu].[SIS_NUMBER]
+    ,[sch].[SCHOOL_CODE]
+	,[ssy].EXCLUDE_ADA_ADM
+    ,[atd].[ABS_DATE]
+    ,[cal].[ROTATION]
+    ,CAST(COUNT(*) AS DECIMAL(5,2)) AS [Unexcused Count For Day]
+FROM
+    [rev].[EPC_STU_ATT_DAILY] AS [atd] WITH (NOLOCK)
+
+    INNER JOIN
+    [rev].[EPC_STU_ATT_PERIOD] AS [atp] WITH (NOLOCK)
+    ON
+    [atd].[DAILY_ATTEND_GU]=[atp].[DAILY_ATTEND_GU]
+
+    INNER JOIN
+    [rev].[EPC_STU_ENROLL] AS [enr] WITH (NOLOCK)
+    ON
+    [atd].[ENROLLMENT_GU]=[enr].[ENROLLMENT_GU]
+    AND [enr].[EXCLUDE_ADA_ADM] IS NULL
+
+    INNER JOIN
+    [rev].[EPC_STU_SCH_YR] AS [ssy] WITH (NOLOCK)
+    ON
+    [enr].[STUDENT_SCHOOL_YEAR_GU]=[ssy].[STUDENT_SCHOOL_YEAR_GU]
+    AND [ssy].[EXCLUDE_ADA_ADM] IS NULL
+
+    INNER JOIN
+    [rev].[REV_ORGANIZATION_YEAR] AS [oy] WITH (NOLOCK)
+    ON
+    [ssy].[ORGANIZATION_YEAR_GU]=[oy].[ORGANIZATION_YEAR_GU]
+
+    INNER JOIN
+    [rev].[EPC_SCH] AS [sch] WITH (NOLOCK)
+    ON
+    [oy].[ORGANIZATION_GU]=[sch].[ORGANIZATION_GU]
+
+	INNER JOIN
+	[APS].[YearDates] AS [yr] WITH (NOLOCK)
+	ON
+	[oy].[YEAR_GU]=[yr].[YEAR_GU]
+	AND ('20160218' BETWEEN [yr].[START_DATE] AND [yr].[END_DATE])
+	AND [yr].EXTENSION = 'R'
+    LEFT JOIN
+    [rev].[EPC_SCH_ATT_CAL] AS [cal] WITH (NOLOCK)
+    ON
+    [oy].[ORGANIZATION_YEAR_GU]=[cal].[SCHOOL_YEAR_GU] 
+    AND [atd].[ABS_DATE]=[cal].[CAL_DATE]
+
+    LEFT JOIN
+    [rev].[EPC_SCH_YR_BELL_SCHED] AS [bs] WITH (NOLOCK)
+    ON
+    [oy].[ORGANIZATION_YEAR_GU]=[bs].[ORGANIZATION_YEAR_GU]
+    AND [cal].[BELL_SCHEDULE]=[bs].[BELL_SCHEDULE_CODE]
+
+    LEFT JOIN
+    [rev].[EPC_SCH_YR_BELL_SCHED_PER] AS [bel] WITH (NOLOCK)
+    ON
+    [bs].[BELL_SCHEDULE_GU]=[bel].[BELL_SCHEDULE_GU]
+    AND [atp].[BELL_PERIOD]=[bel].[BELL_PERIOD]
+
+    LEFT JOIN
+    [rev].[EPC_CODE_ABS_REAS_SCH_YR] AS [abry] WITH (NOLOCK)
+    ON
+    [atp].[CODE_ABS_REAS_GU]=[abry].[CODE_ABS_REAS_SCH_YEAR_GU]
+
+    LEFT JOIN
+    [rev].[EPC_CODE_ABS_REAS] AS [abr] WITH (NOLOCK)
+    ON
+    [abry].[CODE_ABS_REAS_GU]=[abr].[CODE_ABS_REAS_GU]
+
+	INNER JOIN 
+	(SELECT * FROM 
+		APS.TermDates()
+		WHERE
+		SCHOOL_YEAR = '2015' AND EXTENSION = 'R' 
+)	 AS TERMS
+	ON
+	TERMS.OrgYearGU = SSY.ORGANIZATION_YEAR_GU
+	AND ATD.ABS_DATE BETWEEN TERMS.TermBegin AND TERMS.TermEnd
+	AND TERMS.YEAR_GU = YR.YEAR_GU
+	
+    INNER JOIN
+    [rev].[EPC_STU_CLASS] AS [scls] WITH (NOLOCK)
+    ON
+    [ssy].[STUDENT_SCHOOL_YEAR_GU]=[scls].[STUDENT_SCHOOL_YEAR_GU]
+    AND
+    ([atd].[ABS_DATE]<=[scls].[LEAVE_DATE] OR [scls].[LEAVE_DATE] IS NULL)
+    AND 
+    [atd].[ABS_DATE]>=[scls].[ENTER_DATE]
+
+    INNER JOIN
+    [rev].[EPC_SCH_YR_SECT] AS [sect] WITH (NOLOCK)
+    ON
+    [scls].[SECTION_GU]=[sect].[SECTION_GU]
+    AND
+    ([atp].[BELL_PERIOD]=[sect].[PERIOD_BEGIN] OR [atp].[BELL_PERIOD]=[sect].[PERIOD_END])
+	AND sect.TERM_CODE = TERMS.TermCode
+    
+    INNER JOIN
+    [rev].[EPC_STU] AS [stu] WITH (NOLOCK)
+    ON
+    [ssy].[STUDENT_GU]=[stu].[STUDENT_GU]
+
+	INNER JOIN 
+	REV.EPC_SCH_YR_OPT AS SETUP
+	ON
+	SETUP.ORGANIZATION_YEAR_GU = OY.ORGANIZATION_YEAR_GU
+
+WHERE
+    [abr].[TYPE] IN ('UNE')
+  	AND SETUP.SCHOOL_ATT_TYPE IN ('P', 'B')
+	--AND ([cal].[CAL_DATE]>=@startDate AND [cal].[CAL_DATE]<=@endDate)
+	AND CAL.CAL_DATE = '20160218'
+GROUP BY
+    [stu].[STUDENT_GU]
+    ,[stu].[SIS_NUMBER]
+    ,[sch].[SCHOOL_CODE]
+	,[ssy].EXCLUDE_ADA_ADM
+    ,[atd].[ABS_DATE]
+    ,[cal].[ROTATION]
