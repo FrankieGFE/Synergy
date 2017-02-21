@@ -1,28 +1,28 @@
+USE [ST_Production]
+GO
+
+/****** Object:  UserDefinedFunction [APS].[AttendanceTotalsByPeriod]    Script Date: 2/17/2017 2:29:13 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
 
 
 
-CREATE FUNCTION [APS].[AttendanceTotalsByPeriod](@AsOfDate DATETIME)
+ALTER FUNCTION [APS].[AttendanceTotalsByPeriod](@AsOfDate DATETIME)
 RETURNS TABLE
 AS
 RETURN
 
 
-SELECT 
-	SIS_NUMBER
-	,SCHOOL_CODE
-	,EXCLUDE_ADA_ADM
-	,PERIOD_BEGIN
-	,CAST(COUNT(*) AS DECIMAL(5,2)) AS [Unexcused Count For Day]
-FROM ( 
---gets unique records by date first
 SELECT
     [stu].[STUDENT_GU]
     ,[stu].[SIS_NUMBER]
     ,[sch].[SCHOOL_CODE]
 	,[ssy].EXCLUDE_ADA_ADM
 	,SECT.PERIOD_BEGIN
-	,CAL.CAL_DATE
-    --,CAST(COUNT(*) AS DECIMAL(5,2)) AS [Unexcused Count For Day]
+    ,CAST(COUNT(*) AS DECIMAL(5,2)) AS [Total Count By Period]
 FROM
     [rev].[EPC_STU_ATT_DAILY] AS [atd] WITH (NOLOCK)
 
@@ -87,6 +87,13 @@ FROM
     ON
     [abry].[CODE_ABS_REAS_GU]=[abr].[CODE_ABS_REAS_GU]
 
+	INNER JOIN 
+	APS.TermDates()	 AS TERMS
+	ON
+	TERMS.OrgYearGU = SSY.ORGANIZATION_YEAR_GU
+	AND ATD.ABS_DATE BETWEEN TERMS.TermBegin AND TERMS.TermEnd
+	AND TERMS.YEAR_GU = YR.YEAR_GU
+
     INNER JOIN
     [rev].[EPC_STU_CLASS] AS [scls] WITH (NOLOCK)
     ON
@@ -102,6 +109,7 @@ FROM
     [scls].[SECTION_GU]=[sect].[SECTION_GU]
     AND
     ([atp].[BELL_PERIOD]=[sect].[PERIOD_BEGIN] OR [atp].[BELL_PERIOD]=[sect].[PERIOD_END])
+	AND sect.TERM_CODE = TERMS.TermCode
     
     INNER JOIN
     [rev].[EPC_STU] AS [stu] WITH (NOLOCK)
@@ -116,6 +124,7 @@ FROM
 WHERE
     [abr].[TYPE] IN ('UNE', 'EXC')
   	AND SETUP.SCHOOL_ATT_TYPE IN ('P', 'B')
+	AND SIS_NUMBER = 102790268
 
 GROUP BY
     [stu].[STUDENT_GU]
@@ -123,13 +132,8 @@ GROUP BY
     ,[sch].[SCHOOL_CODE]
 	,[ssy].EXCLUDE_ADA_ADM
 	,SECT.PERIOD_BEGIN
-	,CAL.CAL_DATE
 
-) AS T1
 
-GROUP BY
-   [STUDENT_GU]
-    ,[SIS_NUMBER]
-    ,[SCHOOL_CODE]
-	,EXCLUDE_ADA_ADM
-	,PERIOD_BEGIN
+GO
+
+

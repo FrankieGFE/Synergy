@@ -1,19 +1,30 @@
+USE [ST_Stars]
+GO
+
+/****** Object:  UserDefinedFunction [APS].[PeriodAllDateRange]    Script Date: 2/15/2017 2:48:51 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
 
 
---ALTER FUNCTION [APS].[PeriodAllDateRange](@startDate DATE, @endDate DATE)
---RETURNS TABLE
---AS
---RETURN	
+ALTER FUNCTION [APS].[PeriodAllDateRange](@startDate DATE, @endDate DATE)
+RETURNS TABLE
+AS
+RETURN	
 
 /*-------------------PART 1 - COUNT THE NUMBER OF ABSENCES ON EACH DAY -----------------------------
 
 ----------------------------------------------------------------------------------------------------*/
-
-DECLARE @startDate DATE = '20161201'
-DECLARE @endDate DATE = '20170208'
+--;
 
 
-;WITH [HighSchoolTruant] AS 
+--DECLARE @startDate DATE = '20161201'
+--DECLARE @endDate DATE = '20170208'
+
+
+WITH [HighSchoolTruant] AS 
 (
 SELECT
     [stu].[STUDENT_GU]
@@ -87,6 +98,17 @@ FROM
     ON
     [abry].[CODE_ABS_REAS_GU]=[abr].[CODE_ABS_REAS_GU]
 
+	INNER JOIN 
+	(SELECT * FROM 
+		APS.TermDates()
+		WHERE
+		YEAR_GU = (SELECT * FROM rev.SIF_22_Common_CurrentYearGU) 
+)	 AS TERMS
+	ON
+	TERMS.OrgYearGU = SSY.ORGANIZATION_YEAR_GU
+	AND ATD.ABS_DATE BETWEEN TERMS.TermBegin AND TERMS.TermEnd
+	AND TERMS.YEAR_GU = YR.YEAR_GU
+	
     INNER JOIN
     [rev].[EPC_STU_CLASS] AS [scls] WITH (NOLOCK)
     ON
@@ -102,6 +124,7 @@ FROM
     [scls].[SECTION_GU]=[sect].[SECTION_GU]
     AND
     ([atp].[BELL_PERIOD]=[sect].[PERIOD_BEGIN] OR [atp].[BELL_PERIOD]=[sect].[PERIOD_END])
+	AND sect.TERM_CODE = TERMS.TermCode
     
     INNER JOIN
     [rev].[EPC_STU] AS [stu] WITH (NOLOCK)
@@ -117,7 +140,6 @@ WHERE
     [abr].[TYPE]= 'UNE'
   	AND SETUP.SCHOOL_ATT_TYPE IN ('P', 'B')
 	AND ([cal].[CAL_DATE]>=@startDate AND [cal].[CAL_DATE]<=@endDate)
-	AND SIS_NUMBER = 970030399
 
 GROUP BY
     [stu].[STUDENT_GU]
@@ -201,6 +223,7 @@ WHERE
 
 ----------------------------------------------------------------------------------------------------*/
 
+/*
 SELECT
 
 	SIS_NUMBER
@@ -210,8 +233,8 @@ SELECT
     ,[Period].[Full Days Unexcused] AS [Full-Day Unexcused]
 	,([Period].[Half Days Unexcused]*0.5)+[Period].[Full Days Unexcused] AS [Total Unexcused]
 
-
 FROM (
+*/
 
 SELECT
 	[Truants].[SIS_NUMBER]
@@ -301,7 +324,7 @@ GROUP BY
 	,[Truants].[SCHOOL_CODE]
 	,Truants.EXCLUDE_ADA_ADM
 
-) AS Period
+--) AS Period
 
 
 
@@ -310,5 +333,11 @@ GROUP BY
 
 
 
+
+
+
+
+
+GO
 
 
