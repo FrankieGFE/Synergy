@@ -1,12 +1,13 @@
-USE [ST_Stars]
+USE [ST_Production]
 GO
 
-/****** Object:  UserDefinedFunction [APS].[PeriodAllDateRange]    Script Date: 2/15/2017 2:48:51 PM ******/
+/****** Object:  UserDefinedFunction [APS].[PeriodAllDateRange]    Script Date: 2/23/2017 12:22:40 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 ALTER FUNCTION [APS].[PeriodAllDateRange](@startDate DATE, @endDate DATE)
@@ -18,22 +19,26 @@ RETURN
 
 ----------------------------------------------------------------------------------------------------*/
 --;
-
-
---DECLARE @startDate DATE = '20161201'
---DECLARE @endDate DATE = '20170208'
-
-
 WITH [HighSchoolTruant] AS 
 (
 SELECT
-    [stu].[STUDENT_GU]
+    [STUDENT_GU]
+    ,[SIS_NUMBER]
+    ,[SCHOOL_CODE]
+	,EXCLUDE_ADA_ADM
+    ,[ABS_DATE]
+    ,[ROTATION]
+    ,CAST(COUNT(*) AS DECIMAL(5,2)) AS [Unexcused Count For Day]
+FROM (
+SELECT
+	 [stu].[STUDENT_GU]
     ,[stu].[SIS_NUMBER]
     ,[sch].[SCHOOL_CODE]
 	,[ssy].EXCLUDE_ADA_ADM
     ,[atd].[ABS_DATE]
     ,[cal].[ROTATION]
-    ,CAST(COUNT(*) AS DECIMAL(5,2)) AS [Unexcused Count For Day]
+	,ssy.ORGANIZATION_YEAR_GU
+	,sect.TERM_CODE
 FROM
     [rev].[EPC_STU_ATT_DAILY] AS [atd] WITH (NOLOCK)
 
@@ -98,18 +103,7 @@ FROM
     ON
     [abry].[CODE_ABS_REAS_GU]=[abr].[CODE_ABS_REAS_GU]
 
-	INNER JOIN 
-	(SELECT * FROM 
-		APS.TermDates()
-		WHERE
-		YEAR_GU = (SELECT * FROM rev.SIF_22_Common_CurrentYearGU) 
-)	 AS TERMS
-	ON
-	TERMS.OrgYearGU = SSY.ORGANIZATION_YEAR_GU
-	AND ATD.ABS_DATE BETWEEN TERMS.TermBegin AND TERMS.TermEnd
-	AND TERMS.YEAR_GU = YR.YEAR_GU
-	
-    INNER JOIN
+	    INNER JOIN
     [rev].[EPC_STU_CLASS] AS [scls] WITH (NOLOCK)
     ON
     [ssy].[STUDENT_SCHOOL_YEAR_GU]=[scls].[STUDENT_SCHOOL_YEAR_GU]
@@ -124,7 +118,6 @@ FROM
     [scls].[SECTION_GU]=[sect].[SECTION_GU]
     AND
     ([atp].[BELL_PERIOD]=[sect].[PERIOD_BEGIN] OR [atp].[BELL_PERIOD]=[sect].[PERIOD_END])
-	AND sect.TERM_CODE = TERMS.TermCode
     
     INNER JOIN
     [rev].[EPC_STU] AS [stu] WITH (NOLOCK)
@@ -141,13 +134,23 @@ WHERE
   	AND SETUP.SCHOOL_ATT_TYPE IN ('P', 'B')
 	AND ([cal].[CAL_DATE]>=@startDate AND [cal].[CAL_DATE]<=@endDate)
 
+	) AS T1
+
+INNER HASH JOIN 
+	APS.TermDates()	 AS TERMS
+	ON
+	TERMS.OrgYearGU = T1.ORGANIZATION_YEAR_GU
+	AND T1.ABS_DATE BETWEEN TERMS.TermBegin AND TERMS.TermEnd
+	AND T1.TERM_CODE = TERMS.TermCode
+
 GROUP BY
-    [stu].[STUDENT_GU]
-    ,[stu].[SIS_NUMBER]
-    ,[sch].[SCHOOL_CODE]
-	,[ssy].EXCLUDE_ADA_ADM
-    ,[atd].[ABS_DATE]
-    ,[cal].[ROTATION]
+    [STUDENT_GU]
+    ,[SIS_NUMBER]
+    ,[SCHOOL_CODE]
+	,EXCLUDE_ADA_ADM
+    ,[ABS_DATE]
+    ,[ROTATION]
+
 
 /*-------------------PART 2 - COUNT THE NUMBER OF CLASSES ON EACH DAY -----------------------------
 
@@ -223,7 +226,6 @@ WHERE
 
 ----------------------------------------------------------------------------------------------------*/
 
-/*
 SELECT
 
 	SIS_NUMBER
@@ -234,7 +236,6 @@ SELECT
 	,([Period].[Half Days Unexcused]*0.5)+[Period].[Full Days Unexcused] AS [Total Unexcused]
 
 FROM (
-*/
 
 SELECT
 	[Truants].[SIS_NUMBER]
@@ -324,9 +325,7 @@ GROUP BY
 	,[Truants].[SCHOOL_CODE]
 	,Truants.EXCLUDE_ADA_ADM
 
---) AS Period
-
-
+) AS Period
 
 
 

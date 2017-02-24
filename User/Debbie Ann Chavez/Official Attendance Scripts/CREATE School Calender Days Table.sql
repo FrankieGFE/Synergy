@@ -1,6 +1,6 @@
 -- Fill Calendar days for each school
-IF OBJECT_ID('dbo.CalDayTable2015') IS NOT NULL DROP TABLE dbo.CalDayTable2015
-CREATE TABLE dbo.CalDayTable2015(
+IF OBJECT_ID('dbo.CalDayTable') IS NOT NULL DROP TABLE dbo.CalDayTable
+CREATE TABLE dbo.CalDayTable(
    OrgGu            uniqueidentifier
  , OrgYrGu          uniqueidentifier
  , SchoolStartDt    smalldatetime
@@ -9,11 +9,11 @@ CREATE TABLE dbo.CalDayTable2015(
  , DayType          varchar(10)
  , SchoolDayNumber  int
 )
-create index idx1 on dbo.CalDayTable2015 (OrgGu)
-create index idx2 on dbo.CalDayTable2015 (OrgYrGu)
-create index idx3 on dbo.CalDayTable2015 (CalDate)
-declare   @CurYear                varchar(4)    = '2015'--(select school_year from rev.SIF_22_Common_CurrentYear) 
-        , @SchoolYear             int           = '2015'--(SELECT SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)   
+create index idx1 on dbo.CalDayTable (OrgGu)
+create index idx2 on dbo.CalDayTable (OrgYrGu)
+create index idx3 on dbo.CalDayTable (CalDate)
+declare   @CurYear                varchar(4)    = (select school_year from rev.SIF_22_Common_CurrentYear) 
+        , @SchoolYear             int           = (SELECT SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)   
         , @LoopDt                 smalldatetime
         , @TempOrgGU              uniqueidentifier
         , @TempOrgYrGU            uniqueidentifier
@@ -30,10 +30,10 @@ begin
                      , copt.END_DATE
               from rev.REV_ORGANIZATION       org
               join  rev.REV_ORGANIZATION_YEAR oyr  on oyr.ORGANIZATION_GU       = org.ORGANIZATION_GU
-																		--2015 	-- 'BCFE2270-A461-4260-BA2B-0087CB8EC26A'	
-													  and oyr.YEAR_GU     = 'BCFE2270-A461-4260-BA2B-0087CB8EC26A'	
-																			-- 2014 --'26F066A3-ABFC-4EDB-B397-43412EDABC8B'      																			
-													  						 -- (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+																		-- 2014 --'26F066A3-ABFC-4EDB-B397-43412EDABC8B' 
+																		-- 2015 	-- 'BCFE2270-A461-4260-BA2B-0087CB8EC26A'	
+													  and oyr.YEAR_GU     = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)     																			
+													  						 
               join  rev.EPC_SCH               sch  on sch.ORGANIZATION_GU       = oyr.ORGANIZATION_GU
               join  rev.EPC_SCH_YR_OPT        sopt on sopt.ORGANIZATION_YEAR_GU = oyr.ORGANIZATION_YEAR_GU
               join  rev.EPC_SCH_ATT_CAL_OPT   copt on copt.ORG_YEAR_GU          = oyr.ORGANIZATION_YEAR_GU
@@ -56,7 +56,7 @@ begin
                        and @LoopDt <= @TempEndDate
                       )
                       begin
-                          insert into dbo.CalDayTable2015
+                          insert into dbo.CalDayTable
                           (OrgGu, OrgYrGu,  SchoolStartDt, SchoolEndDt, CalDate)
                           values (@TempOrgGU, @TempOrgYrGU,  @TempStartDate, @TempEndDate, @LoopDt)
                       end
@@ -69,17 +69,16 @@ begin
      deallocate Org_cursor
 end 
 ---- Update SchoolDayType
-update dbo.CalDayTable2015
+update dbo.CalDayTable
 set DayType = (case
                    when scal.HOLIDAY is not null --Adjust this if any any specific calendar types like Hol, Stf, Non etc should be used insted of null
                    then '0'
                    else '1'
                end)
-from dbo.CalDayTable2015         dt
+from dbo.CalDayTable         dt
 join rev.REV_ORGANIZATION      org  on org.ORGANIZATION_GU  = dt.OrgGu
 join rev.REV_ORGANIZATION_YEAR oyr  on oyr.ORGANIZATION_GU  = org.ORGANIZATION_GU
-                                       and oyr.YEAR_GU      = 'BCFE2270-A461-4260-BA2B-0087CB8EC26A'
-									   --(select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
+                                       and oyr.YEAR_GU      = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)
 left join rev.EPC_SCH_ATT_CAL  scal on scal.SCHOOL_YEAR_GU  = oyr.ORGANIZATION_YEAR_GU  
                                        and   dt.CalDate     = scal.CAL_DATE
 
@@ -91,13 +90,13 @@ and   dt.CalDate = CalDate
 select 
 * 
 , row_number() over(partition by OrgGU order by Caldate) rn
-from dbo.CalDayTable2015 t
+from dbo.CalDayTable t
 where DayType = 1
 )
-update dbo.CalDayTable2015
+update dbo.CalDayTable
 set SchoolDayNumber = sd.rn
 from SchDy sd
-where sd.CalDate = dbo.CalDayTable2015.CalDate
-and sd.OrgGu     = dbo.CalDayTable2015.OrgGu
+where sd.CalDate = dbo.CalDayTable.CalDate
+and sd.OrgGu     = dbo.CalDayTable.OrgGu
 
 --select * from dbo.CalDayTable

@@ -1,5 +1,5 @@
 
---DROP TABLE dbo.STUDENT_SCHOOL_MEMBERDAYS_2015
+--DROP TABLE dbo.STUDENT_SCHOOL_MEMBERDAYS
 --CREATE TABLE dbo.STUDENT_SCHOOL_MEMBERDAYS_2015
 
 --(
@@ -15,8 +15,9 @@
 --	,MEMBERDAYS VARCHAR (3)
 --)
 
+--change dates and table
 
-INSERT INTO dbo.STUDENT_SCHOOL_MEMBERDAYS_2015
+INSERT INTO dbo.STUDENT_SCHOOL_MEMBERDAYS
 
 select
   stu.SIS_NUMBER                            as SIS_NUMBER
@@ -60,7 +61,9 @@ join rev.REV_ORGANIZATION_YEAR oyr  on oyr.ORGANIZATION_YEAR_GU   = ssy.ORGANIZA
 join rev.REV_ORGANIZATION      org  on org.ORGANIZATION_GU        = oyr.ORGANIZATION_GU
 join rev.EPC_SCH               sch  on sch.ORGANIZATION_GU        = oyr.ORGANIZATION_GU
 join rev.EPC_SCH_ATT_CAL_OPT   copt on copt.ORG_YEAR_GU           = oyr.ORGANIZATION_YEAR_GU
-join dbo.CalDayTable2015       ct   on ct.OrgGU                   = oyr.ORGANIZATION_GU
+
+--CHANGE THIS
+join dbo.CalDayTable       ct   on ct.OrgGU                   = oyr.ORGANIZATION_GU
                                        and ct.OrgYrGu             = oyr.ORGANIZATION_YEAR_GU
 where ct.caldate between enr.ENTER_DATE and coalesce(enr.leave_date, '20160525')
 

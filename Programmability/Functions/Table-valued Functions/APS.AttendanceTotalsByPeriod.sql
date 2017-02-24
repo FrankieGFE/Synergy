@@ -1,7 +1,7 @@
 USE [ST_Production]
 GO
 
-/****** Object:  UserDefinedFunction [APS].[AttendanceTotalsByPeriod]    Script Date: 2/17/2017 2:29:13 PM ******/
+/****** Object:  UserDefinedFunction [APS].[AttendanceTotalsByPeriod]    Script Date: 2/23/2017 12:03:21 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -17,12 +17,23 @@ RETURN
 
 
 SELECT
-    [stu].[STUDENT_GU]
+    [STUDENT_GU]
+    ,[SIS_NUMBER]
+    ,[SCHOOL_CODE]
+	,EXCLUDE_ADA_ADM
+	,PERIOD_BEGIN
+    ,CAST(COUNT(*) AS DECIMAL(5,2)) AS [Total Count By Period]
+FROM (
+SELECT
+	 [stu].[STUDENT_GU]
     ,[stu].[SIS_NUMBER]
     ,[sch].[SCHOOL_CODE]
 	,[ssy].EXCLUDE_ADA_ADM
+    ,[atd].[ABS_DATE]
+    ,[cal].[ROTATION]
+	,ssy.ORGANIZATION_YEAR_GU
+	,sect.TERM_CODE
 	,SECT.PERIOD_BEGIN
-    ,CAST(COUNT(*) AS DECIMAL(5,2)) AS [Total Count By Period]
 FROM
     [rev].[EPC_STU_ATT_DAILY] AS [atd] WITH (NOLOCK)
 
@@ -57,7 +68,7 @@ FROM
 	[APS].[YearDates] AS [yr] WITH (NOLOCK)
 	ON
 	[oy].[YEAR_GU]=[yr].[YEAR_GU]
-	AND (GETDATE() BETWEEN [yr].[START_DATE] AND [yr].[END_DATE])
+	AND (@AsOfDate BETWEEN [yr].[START_DATE] AND [yr].[END_DATE])
 	AND [yr].EXTENSION = 'R'
     LEFT JOIN
     [rev].[EPC_SCH_ATT_CAL] AS [cal] WITH (NOLOCK)
@@ -124,15 +135,24 @@ FROM
 WHERE
     [abr].[TYPE] IN ('UNE', 'EXC')
   	AND SETUP.SCHOOL_ATT_TYPE IN ('P', 'B')
-	AND SIS_NUMBER = 102790268
+	--AND SIS_NUMBER = 102790268
+	) AS T1
+
+INNER HASH JOIN 
+	APS.TermDates()	 AS TERMS
+	ON
+	TERMS.OrgYearGU = T1.ORGANIZATION_YEAR_GU
+	AND T1.ABS_DATE BETWEEN TERMS.TermBegin AND TERMS.TermEnd
+	AND T1.TERM_CODE = TERMS.TermCode
 
 GROUP BY
-    [stu].[STUDENT_GU]
-    ,[stu].[SIS_NUMBER]
-    ,[sch].[SCHOOL_CODE]
-	,[ssy].EXCLUDE_ADA_ADM
-	,SECT.PERIOD_BEGIN
+    [STUDENT_GU]
+    ,[SIS_NUMBER]
+    ,[SCHOOL_CODE]
+	,EXCLUDE_ADA_ADM
+	,PERIOD_BEGIN
 
+	
 
 GO
 

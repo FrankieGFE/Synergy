@@ -3,7 +3,7 @@
 
 
 
-	SELECT DISTINCT
+	SELECT 
 		[ENROLLMENTS].[SCHOOL_YEAR]
 		,[ENROLLMENTS].[SCHOOL_CODE]
 		,[ENROLLMENTS].[SCHOOL_NAME]
@@ -12,6 +12,7 @@
 		,[STUDENT].[LAST_NAME]
 		,[ENROLLMENTS].[GRADE]
 		,[STUDENT].[GENDER]
+		,STUDENT.BIRTH_DATE
 		,[STUDENT].[ELL_STATUS]
 		,[STUDENT].[SPED_STATUS]
 		
@@ -34,6 +35,13 @@
 		--,[Violation].[SEVERITY_LEVEL]
 		,[Violation_Code].[SEVERITY_LEVEL]
 		
+	
+	, REFERRED_BY_LNAME
+	, REFERRED_BY_FNAME
+	, REFERRER_TYPE
+	, Violation.ADDITIONAL_TEXT
+	,INCIDENT.[DESCRIPTION]
+	,PRIVATE_DESCRIPTION
 		--,[Violation].*
 		--,[INCIDENT].*
 		--,[Violation_Code].*
@@ -50,7 +58,7 @@
 			APS.StudentEnrollmentDetails
 			
 		WHERE
-			SCHOOL_YEAR = 2014
+			SCHOOL_YEAR = 2016
 			AND EXTENSION = 'R'
 			--AND EXCLUDE_ADA_ADM IS NULL
 		) AS [ENROLLMENTS]
@@ -93,5 +101,8 @@
 	WHERE
 	--	[Disposition_Code].[DISP_CODE] IN ()
 		--[Violation_Code].[DESCRIPTION] LIKE '%BULLY%'
-		[Violation_Code].[DISC_CODE] IN ('12', '1EXTO', '1HRDS', '2BLG')
-		
+		--[Violation_Code].[DISC_CODE] IN ('12', '1EXTO', '1HRDS', '2BLG')
+		[ENROLLMENTS].SCHOOL_CODE = '550'
+
+
+		ORDER BY INCIDENT_ID

@@ -1,3 +1,13 @@
+USE [ST_Production]
+GO
+
+/****** Object:  UserDefinedFunction [APS].[PeriodExcusedAsOf]    Script Date: 2/23/2017 11:57:03 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
 
 /*********************************************************************
 Last Changed by Debbie Ann Chavez
@@ -25,13 +35,23 @@ RETURN
 WITH [HighSchoolTruant] AS 
 (
 SELECT
-    [stu].[STUDENT_GU]
+    [STUDENT_GU]
+    ,[SIS_NUMBER]
+    ,[SCHOOL_CODE]
+	,EXCLUDE_ADA_ADM
+    ,[ABS_DATE]
+    ,[ROTATION]
+    ,CAST(COUNT(*) AS DECIMAL(5,2)) AS [Excused Count For Day]
+FROM (
+SELECT
+	 [stu].[STUDENT_GU]
     ,[stu].[SIS_NUMBER]
     ,[sch].[SCHOOL_CODE]
 	,[ssy].EXCLUDE_ADA_ADM
     ,[atd].[ABS_DATE]
     ,[cal].[ROTATION]
-    ,CAST(COUNT(*) AS DECIMAL(5,2)) AS [Excused Count For Day]
+	,ssy.ORGANIZATION_YEAR_GU
+	,sect.TERM_CODE
 FROM
     [rev].[EPC_STU_ATT_DAILY] AS [atd] WITH (NOLOCK)
 
@@ -126,13 +146,22 @@ WHERE
     [abr].[TYPE]= 'EXC'
   	AND SETUP.SCHOOL_ATT_TYPE IN ('P', 'B')
 
+	) AS T1
+
+INNER HASH JOIN 
+	APS.TermDates()	 AS TERMS
+	ON
+	TERMS.OrgYearGU = T1.ORGANIZATION_YEAR_GU
+	AND T1.ABS_DATE BETWEEN TERMS.TermBegin AND TERMS.TermEnd
+	AND T1.TERM_CODE = TERMS.TermCode
+
 GROUP BY
-    [stu].[STUDENT_GU]
-    ,[stu].[SIS_NUMBER]
-    ,[sch].[SCHOOL_CODE]
-	,[ssy].EXCLUDE_ADA_ADM
-    ,[atd].[ABS_DATE]
-    ,[cal].[ROTATION]
+    [STUDENT_GU]
+    ,[SIS_NUMBER]
+    ,[SCHOOL_CODE]
+	,EXCLUDE_ADA_ADM
+    ,[ABS_DATE]
+    ,[ROTATION]
 
 /*-------------------PART 2 - COUNT THE NUMBER OF CLASSES ON EACH DAY -----------------------------
 
@@ -294,6 +323,7 @@ GROUP BY
 	[Truants].[SIS_NUMBER]
 	,[Truants].[SCHOOL_CODE]
 	,Truants.EXCLUDE_ADA_ADM
+
 
 GO
 
