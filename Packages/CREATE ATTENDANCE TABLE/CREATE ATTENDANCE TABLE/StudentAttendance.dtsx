@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/27/2016 4:12:49 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="046-DEBBCHAVEZ"
+  DTS:CreatorName="APS\e104090"
+  DTS:DTSID="{D260D92D-89CA-4EE4-AA3C-8042B0122A23}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="StudentAttendance"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{DEECFC19-46E7-4DD7-8EF4-96F1B9B497B1}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SYNERGYDBDC.ST_Production.APSImport]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{DB05BD0A-2917-4732-BAA5-E6D141449610}"
+      DTS:ObjectName="SYNERGYDBDC.ST_Production.APSImport">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SYNERGYDBDC;User ID=APSImport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAz/TKVFUOIEKEJojHPPyQPQAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACbOc8lhNsSiMkVSfXT4LOeAAAAAASAAACgAAAAEAAAAI0cWbSREcmPyTGHt57zKfYwAAAANw6iGhMeYqAr+NHJKiWd6JfO5V68samysG+s44kU1DUhiN34fIDJifSYjt4u7GmnFAAAALWM+6jmLcg7OgzNtEMkoYz9DcYl</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{81EB65E9-0220-4E25-B0C2-635A9A28EFCF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DB05BD0A-2917-4732-BAA5-E6D141449610}"
+          SQLTask:SqlStatementSource="&#xA;DROP TABLE STUDENT_ATTENDANCE&#xA;&#xA;CREATE TABLE STUDENT_ATTENDANCE&#xA;&#x9;&#x9;([SIS Number] VARCHAR (9)&#xA;&#x9;&#x9;,[School Code] VARCHAR (20)&#xA;&#x9;&#x9;,[School Name] VARCHAR (100)&#xA;&#x9;&#x9;,Grade VARCHAR (2)&#xA;&#x9;&#x9;,Gender VARCHAR (2)&#xA;&#x9;&#x9;,[Hispanic Indicator] VARCHAR (1)&#xA;&#x9;&#x9;, [Race1] VARCHAR (50)&#xA;&#x9;&#x9;, [Race2] VARCHAR (50)&#xA;&#x9;&#x9;, [Race3] VARCHAR (50)&#xA;&#x9;&#x9;, [Race4] VARCHAR (50)&#xA;&#x9;&#x9;, [Race5] VARCHAR (50)&#xA;&#x9;&#x9;,[ELL Status] VARCHAR (1)&#xA;&#x9;&#x9;,[Sped Status] VARCHAR (1)&#xA;&#x9;&#x9;,[Gifted Status] VARCHAR (1)&#xA;&#x9;&#x9;,[Lunch Status] VARCHAR (20)&#xA;&#x9;&#x9;,[Home Address] VARCHAR (100)&#xA;&#x9;&#x9;,[Home City] VARCHAR (100)&#xA;&#x9;&#x9;,[Home State] VARCHAR (10)&#xA;&#x9;&#x9;,[Home Zip] VARCHAR (10)&#xA;&#x9;&#x9;,[Half-Day Unexcused] DECIMAL(5,2)&#xA;&#x9;&#x9;,[Full-Day Unexcused] DECIMAL(5,2)&#xA;&#x9;&#x9;,[Total Unexcused] DECIMAL(5,2)&#xA;&#x9;&#x9;,[Half-Day Excused] DECIMAL(5,2)&#xA;&#x9;&#x9;,[Full-Day Excused] DECIMAL(5,2)&#xA;&#x9;&#x9;,[Total Excused] DECIMAL(5,2)&#xA;&#x9;&#x9;,[Member Days] NUMERIC&#xA;&#x9;&#x9;,Total_Exc_Unex DECIMAL(5,2)&#xA;&#x9;&#x9;--,ORGANIZATION_GU VARCHAR (300)&#xA;&#x9;&#x9;) &#xA;&#xA;INSERT INTO STUDENT_ATTENDANCE&#xA;&#xA;SELECT&#xA;&#x9;&#x9;[SIS Number]&#xA;&#x9;&#x9;,[School Code]&#xA;&#x9;&#x9;,[School Name]&#xA;&#x9;&#x9;,Grade&#xA;&#x9;&#x9;,Gender&#xA;&#x9;&#x9;,[Hispanic Indicator]&#xA;&#x9;&#x9;,ISNULL(Race1,'') AS [Race1]&#xA;&#x9;&#x9;,ISNULL(Race2,'') AS [Race2]&#xA;&#x9;&#x9;,ISNULL(Race3,'') AS [Race3]&#xA;&#x9;&#x9;,ISNULL(Race4,'') AS [Race4]&#xA;&#x9;&#x9;,ISNULL(Race5,'') AS [Race5]&#xA;&#x9;&#x9;,[ELL Status]&#xA;&#x9;&#x9;,[Sped Status]&#xA;&#x9;&#x9;,[Gifted Status]&#xA;&#x9;&#x9;,[Lunch Status]&#xA;&#x9;&#x9;,[Home Address]&#xA;&#x9;&#x9;,[Home City]&#xA;&#x9;&#x9;,[Home State] &#xA;&#x9;&#x9;,[Home Zip]&#xA;&#x9;&#x9;,[Half-Day Unexcused]&#xA;&#x9;&#x9;,[Full-Day Unexcused]&#xA;&#x9;&#x9;,[Total Unexcused]&#xA;&#x9;&#x9;,[Half-Day Excused]&#xA;&#x9;&#x9;,[Full-Day Excused]&#xA;&#x9;&#x9;,[Total Excused]&#xA;&#x9;&#x9;,[Member Days]&#xA;&#x9;,SUM([Total Unexcused] + [Total Excused]) AS Total_Exc_Unex&#xA;&#x9;--,CAST(ORGANIZATION_GU AS VARCHAR) AS ORGANIZATION_GU&#xA; FROM &#xA;(&#xA;SELECT &#xA;&#x9;ATT.[SIS Number]&#xA;&#x9;,ATT.[School Code]&#xA;&#x9;,ORG.ORGANIZATION_NAME AS [School Name]&#xA;&#x9;,ENR.GRADE AS [Grade]&#xA;&#x9;,ENR.GENDER AS [Gender]&#xA;&#x9;, ENR.HISPANIC_INDICATOR AS [Hispanic Indicator]&#xA;&#x9;, ENR.RACE_1 AS Race1&#xA;&#x9;, ENR.RACE_2 AS Race2&#xA;&#x9;, ENR.RACE_3 AS Race3&#xA;&#x9;, ENR.RACE_4 AS Race4&#xA;&#x9;, ENR.RACE_5 AS Race5&#xA;&#x9;,ENR.ELL_STATUS AS [ELL Status]&#xA;&#x9;,ENR.SPED_STATUS AS [Sped Status]&#xA;&#x9;,ENR.GIFTED_STATUS AS [Gifted Status]&#xA;&#x9;,CASE WHEN ENR.LUNCH_STATUS = 'F' THEN 'Free' &#xA;&#x9;&#x9;  WHEN ENR.LUNCH_STATUS = 'R' THEN 'Reduced'&#xA;&#x9;&#x9;  WHEN ENR.LUNCH_STATUS = 'N' THEN 'Non Participant'&#xA;&#x9;&#x9;  WHEN ENR.LUNCH_STATUS = '2' THEN 'Priority 2'&#xA;&#x9;ELSE '' END AS [Lunch Status]&#xA;&#x9;,HOME_ADDRESS AS [Home Address]&#xA;&#x9;,HOME_CITY AS [Home City]&#xA;&#x9;,HOME_STATE AS [Home State] &#xA;&#x9;,HOME_ZIP AS [Home Zip]&#xA;&#x9;&#x9;&#xA;&#x9;,CASE WHEN ATT.[Half-Day Unexcused] IS NULL THEN 0 ELSE ATT.[Half-Day Unexcused] END AS [Half-Day Unexcused]&#xA;&#x9;,CASE WHEN ATT.[Full-Day Unexcused] IS NULL THEN 0 ELSE ATT.[Full-Day Unexcused] END AS [Full-Day Unexcused]&#xA;&#x9;,CASE WHEN ATT.[Total Unexcused] IS NULL THEN 0 ELSE ATT.[Total Unexcused] END AS [Total Unexcused]&#xA;&#x9;,CASE WHEN ATT.[Half-Day Excused] IS NULL THEN 0 ELSE ATT.[Half-Day Excused] END AS [Half-Day Excused]&#xA;&#x9;,CASE WHEN ATT.[Full-Day Excused] IS NULL THEN 0 ELSE ATT.[Full-Day Excused] END AS [Full-Day Excused]&#xA;&#x9;,CASE WHEN ATT.[Total Excused] IS NULL THEN 0 ELSE ATT.[Total Excused] END AS [Total Excused]&#xA;&#x9;,CASE WHEN  MEMBER_DAYS IS NULL THEN 0 ELSE MEMBER_DAYS END AS [Member Days]&#xA;&#xA;&#x9;--,ORG.ORGANIZATION_GU&#xA;&#xA;FROM &#xA;APS.AttendanceExcUnexTotalsAsOf(GETDATE()) AS ATT&#xA;LEFT JOIN &#xA;STUDENT_SCHOOL_MEMBERDAYS AS MEMDAYS&#xA;ON &#xA;ATT.[SIS NUMBER] = MEMDAYS.STUID&#xA;AND ATT.[SCHOOL CODE] = MEMDAYS.SCHOOL_CODE&#xA;&#xA;LEFT JOIN &#xA;rev.EPC_SCH AS SCH&#xA;ON&#xA;SCH.SCHOOL_CODE = ATT.[School Code]&#xA;&#xA;LEFT JOIN &#xA;rev.REV_ORGANIZATION AS ORG&#xA;ON&#xA;ORG.ORGANIZATION_GU = SCH.ORGANIZATION_GU&#xA;&#xA;-- 2014:  26F066A3-ABFC-4EDB-B397-43412EDABC8B&#xA;-- 2015:  BCFE2270-A461-4260-BA2B-0087CB8EC26A&#xA;-- 2016:  F7D112F7-354D-4630-A4BC-65F586BA42EC&#xA;&#xA;LEFT JOIN &#xA;(&#xA;SELECT MAX(VALUE_DESCRIPTION) AS GRADE,SIS_NUMBER, STU.GENDER, STU.HISPANIC_INDICATOR, STU.RACE_1, STU.RACE_2, STU.RACE_3, STU.RACE_4, STU.RACE_5&#xA;,ELL_STATUS, SPED_STATUS, GIFTED_STATUS, LUNCH_STATUS&#xA;,HOME_ADDRESS, HOME_CITY, HOME_STATE, HOME_ZIP&#xA;&#xA;FROM &#xA;APS.EnrollmentsForYear('F7D112F7-354D-4630-A4BC-65F586BA42EC') AS ENR&#xA;INNER JOIN &#xA;APS.LookupTable('K12','GRADE') AS LU&#xA;ON&#xA;ENR.GRADE = LU.VALUE_CODE&#xA;INNER JOIN &#xA;APS.BasicStudentWithMoreInfo AS STU&#xA;ON&#xA;STU.STUDENT_GU = ENR.STUDENT_GU&#xA;GROUP BY SIS_NUMBER, STU.GENDER, STU.HISPANIC_INDICATOR, STU.RACE_1, STU.RACE_2, STU.RACE_3, STU.RACE_4, STU.RACE_5,&#xA;ELL_STATUS, SPED_STATUS, GIFTED_STATUS, LUNCH_STATUS&#xA;,HOME_ADDRESS, HOME_CITY, HOME_STATE, HOME_ZIP&#xA;) AS ENR&#xA;ON&#xA;ENR.SIS_NUMBER = ATT.[SIS Number]&#xA;&#xA;) AS T1&#xA;&#xA;GROUP BY &#xA;&#x9;&#x9;[SIS Number]&#xA;&#x9;&#x9;,[School Code]&#xA;&#x9;&#x9;,[School Name]&#xA;&#x9;&#x9;,Grade&#xA;&#x9;&#x9;,Gender&#xA;&#x9;&#x9;,[Hispanic Indicator]&#xA;&#x9;&#x9;,Race1&#xA;&#x9;&#x9;,Race2&#xA;&#x9;&#x9;,Race3&#xA;&#x9;&#x9;,Race4&#xA;&#x9;&#x9;,Race5&#xA;&#x9;&#x9;,[ELL Status]&#xA;&#x9;&#x9;,[Sped Status]&#xA;&#x9;&#x9;,[Gifted Status]&#xA;&#x9;&#x9;,[Lunch Status]&#xA;&#x9;&#x9;,[Home Address]&#xA;&#x9;&#x9;,[Home City]&#xA;&#x9;&#x9;,[Home State] &#xA;&#x9;&#x9;,[Home Zip]&#xA;&#x9;&#x9;,[Half-Day Unexcused]&#xA;&#x9;&#x9;,[Full-Day Unexcused]&#xA;&#x9;&#x9;,[Total Unexcused]&#xA;&#x9;&#x9;,[Half-Day Excused]&#xA;&#x9;&#x9;,[Full-Day Excused]&#xA;&#x9;&#x9;,[Total Excused]&#xA;&#x9;&#x9;,[Member Days]&#xA;&#x9;&#x9;--,ORGANIZATION_GU" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\Execute SQL Task"
+          TopLeft="40.000000681196,19.5764708627879" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
