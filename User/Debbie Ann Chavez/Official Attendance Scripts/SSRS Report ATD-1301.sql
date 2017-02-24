@@ -1,5 +1,5 @@
 
---DECLARE @AsOfDate DATE = GETDATE()
+DECLARE @AsOfDate DATE = GETDATE()
 
 SELECT * FROM (
 
@@ -41,10 +41,10 @@ SELECT
  FROM 
 (
 SELECT 
-	ATT.[SIS Number]
-	,LAST_NAME AS [Last_Name]
-	,FIRST_NAME AS [First_Name]
-	,ATT.[School Code]
+	MEMDAYS.SIS_NUMBER AS [SIS Number]
+	,MEMDAYS.LastName AS [Last_Name]
+	,MEMDAYS.FirstName AS [First_Name]
+	,MEMDAYS.SCHOOL_CODE AS [School Code]
 	,MEMDAYS.EXCLUDE_ADA_ADM
 	,ORG.ORGANIZATION_NAME AS [School Name]
 	,MIN(MEMDAYS.EnterDate) AS ENTER_DATE
@@ -83,26 +83,25 @@ SELECT
 	,ORG.ORGANIZATION_GU
 
 FROM 
-APS.AttendanceExcUnexTotalsAsOf(@AsOfDate) AS ATT
-LEFT JOIN 
+
 --dbo.STUDENT_SCHOOL_MEMBERDAYS 
 (select
   stu.SIS_NUMBER                            as SIS_NUMBER
 , per.FIRST_NAME                            as FirstName
 , per.LAST_NAME                             as LastName
 , grd.VALUE_DESCRIPTION                     as GradeLevel
-, convert(varchar(10), enr.enter_date, 101) as EnterDate
-, case 
-     when enr.LEAVE_DATE is not null then convert(varchar(10), enr.LEAVE_DATE, 101) 
-     when @AsOfDate > copt.END_DATE   then convert(varchar(10), copt.END_DATE, 101) 
-     else convert(varchar(10), @AsOfDate, 101)
-  end 
-as LeaveDate
+, MIN(convert(varchar(10), enr.enter_date, 101)) as EnterDate
+--, case 
+--     when enr.LEAVE_DATE is not null then convert(varchar(10), enr.LEAVE_DATE, 101) 
+--     when @AsOfDate > copt.END_DATE   then convert(varchar(10), copt.END_DATE, 101) 
+--     else convert(varchar(10), @AsOfDate, 101)
+--  end 
+--as LeaveDate
 , yr.SCHOOL_YEAR                            as SchoolYear
 , sch.SCHOOL_CODE                           as SCHOOL_CODE
 ,ENR.EXCLUDE_ADA_ADM						AS EXCLUDE_ADA_ADM
 , MembershipDays.MbDays                     as MembershipDays
-,ENR.LEAVE_DATE
+,MAX(ENR.LEAVE_DATE) AS LEAVE_DATE
 from rev.EPC_STU               stu
 join rev.REV_PERSON            per  on  per.PERSON_GU              = stu.STUDENT_GU
 join rev.EPC_STU_SCH_YR        ssy  on  ssy.STUDENT_GU             = stu.STUDENT_GU
@@ -139,9 +138,13 @@ where ct.caldate between enr.ENTER_DATE and coalesce(enr.leave_date, @AsOfDate)
 on  MembershipDays.OrgGu            = oyr.ORGANIZATION_GU
 	and MembershipDays.OrgYrGU                 = oyr.ORGANIZATION_YEAR_GU
 	and MembershipDays.STUDENT_GU              = stu.STUDENT_GU
-
+GROUP BY 
+SIS_NUMBER, FIRST_NAME, LAST_NAME, VALUE_DESCRIPTION, SCHOOL_YEAR, SCHOOL_CODE, ENR.EXCLUDE_ADA_ADM, MbDays
 )
 AS MEMDAYS
+
+LEFT JOIN 
+APS.AttendanceExcUnexTotalsAsOf(@AsOfDate) AS ATT
 
 ON 
 ATT.[SIS NUMBER] = MEMDAYS.SIS_NUMBER
@@ -150,7 +153,7 @@ AND ATT.[SCHOOL CODE] = MEMDAYS.SCHOOL_CODE
 LEFT JOIN 
 rev.EPC_SCH AS SCH
 ON
-SCH.SCHOOL_CODE = ATT.[School Code]
+SCH.SCHOOL_CODE = MEMDAYS.SCHOOL_CODE
 
 LEFT JOIN 
 rev.REV_ORGANIZATION AS ORG
@@ -186,13 +189,13 @@ ELL_STATUS, SPED_STATUS, GIFTED_STATUS, LUNCH_STATUS, HOME_LESS
 ,HOME_ADDRESS, HOME_CITY, HOME_STATE, HOME_ZIP 
 ) AS ENR
 ON
-ENR.SIS_NUMBER = ATT.[SIS Number]
+ENR.SIS_NUMBER = MEMDAYS.SIS_NUMBER
 
 GROUP BY 
-ATT.[SIS Number]
-,LAST_NAME
-,FIRST_NAME
-	,ATT.[School Code]
+MEMDAYS.SIS_NUMBER
+,MEMDAYS.LastName
+,MEMDAYS.FirstName
+	,MEMDAYS.SCHOOL_CODE
 	,MEMDAYS.EXCLUDE_ADA_ADM
 	,ORG.ORGANIZATION_NAME 
 	,ENR.GRADE 
