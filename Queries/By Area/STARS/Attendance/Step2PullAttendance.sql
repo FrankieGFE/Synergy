@@ -57,11 +57,11 @@ GROUP BY
 (SELECT
 			[udr].[SIS_NUMBER]
 			,CAST([udr].[SCHOOL_CODE] AS VARCHAR) AS [SCHOOL_CODE]
-			,SUM([udr].[Total Unexcused]) AS [Total Unexcused]
+			,SUM([udr].[Total]) AS [Total Unexcused]
 			,[o].[ORGANIZATION_NAME]
 
 		FROM
-			[APS].[PeriodAllDateRange]('20161202','20170208') AS [udr]
+			dbo.PART3 AS [udr]
 			
 			INNER JOIN
 			[rev].[EPC_SCH] AS [s]

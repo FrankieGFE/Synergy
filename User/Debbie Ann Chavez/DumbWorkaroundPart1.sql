@@ -1,28 +1,30 @@
-USE [ST_Production]
-GO
 
-/****** Object:  UserDefinedFunction [APS].[AttendanceTotalsByPeriod]    Script Date: 2/17/2017 2:29:13 PM ******/
-SET ANSI_NULLS ON
-GO
+--CREATE TABLE PART1LASTUNE
+--(
+-- student_gu uniqueidentifier,
+-- SIS_NUMBER VARCHAR (9),
+-- SCHOOL_CODE VARCHAR (4),
+-- EXCLUDE_ADA_ADM VARCHAR(5),
+-- ABS_DATE DATE,
+-- ROTATION VARCHAR (5),
+-- ABSENCE_COUNT DECIMAL (5,2)
+-- )
+ 
 
-SET QUOTED_IDENTIFIER ON
-GO
 
+DECLARE @startDate DATE = '20161202'
+DECLARE @endDate DATE = '20170208'
 
-
-ALTER FUNCTION [APS].[AttendanceTotalsByPeriod](@AsOfDate DATETIME)
-RETURNS TABLE
-AS
-RETURN
-
+INSERT INTO dbo.PART1LASTUNE
 
 SELECT
     [stu].[STUDENT_GU]
     ,[stu].[SIS_NUMBER]
     ,[sch].[SCHOOL_CODE]
 	,[ssy].EXCLUDE_ADA_ADM
-	,SECT.PERIOD_BEGIN
-    ,CAST(COUNT(*) AS DECIMAL(5,2)) AS [Total Count By Period]
+    ,[atd].[ABS_DATE]
+    ,[cal].[ROTATION]
+    ,CAST(COUNT(*) AS DECIMAL(5,2)) AS [Unexcused Count For Day]
 FROM
     [rev].[EPC_STU_ATT_DAILY] AS [atd] WITH (NOLOCK)
 
@@ -57,7 +59,7 @@ FROM
 	[APS].[YearDates] AS [yr] WITH (NOLOCK)
 	ON
 	[oy].[YEAR_GU]=[yr].[YEAR_GU]
-	AND (GETDATE() BETWEEN [yr].[START_DATE] AND [yr].[END_DATE])
+	AND ('20160218' BETWEEN [yr].[START_DATE] AND [yr].[END_DATE])
 	AND [yr].EXTENSION = 'R'
     LEFT JOIN
     [rev].[EPC_SCH_ATT_CAL] AS [cal] WITH (NOLOCK)
@@ -88,12 +90,16 @@ FROM
     [abry].[CODE_ABS_REAS_GU]=[abr].[CODE_ABS_REAS_GU]
 
 	INNER JOIN 
-	APS.TermDates()	 AS TERMS
+	(SELECT * FROM 
+		APS.TermDates()
+		WHERE
+		SCHOOL_YEAR = '2015' AND EXTENSION = 'R' 
+)	 AS TERMS
 	ON
 	TERMS.OrgYearGU = SSY.ORGANIZATION_YEAR_GU
 	AND ATD.ABS_DATE BETWEEN TERMS.TermBegin AND TERMS.TermEnd
 	AND TERMS.YEAR_GU = YR.YEAR_GU
-
+	
     INNER JOIN
     [rev].[EPC_STU_CLASS] AS [scls] WITH (NOLOCK)
     ON
@@ -122,18 +128,14 @@ FROM
 	SETUP.ORGANIZATION_YEAR_GU = OY.ORGANIZATION_YEAR_GU
 
 WHERE
-    [abr].[TYPE] IN ('UNE', 'EXC')
+    [abr].[TYPE] IN ('UNE')
   	AND SETUP.SCHOOL_ATT_TYPE IN ('P', 'B')
-	AND SIS_NUMBER = 102790268
-
+	--AND ([cal].[CAL_DATE]>=@startDate AND [cal].[CAL_DATE]<=@endDate)
+	AND CAL.CAL_DATE = '20160218'
 GROUP BY
     [stu].[STUDENT_GU]
     ,[stu].[SIS_NUMBER]
     ,[sch].[SCHOOL_CODE]
 	,[ssy].EXCLUDE_ADA_ADM
-	,SECT.PERIOD_BEGIN
-
-
-GO
-
-
+    ,[atd].[ABS_DATE]
+    ,[cal].[ROTATION]
