@@ -58,20 +58,138 @@ DECLARE @EVALDate AS DATETIME = '2013-05-22'
 
 --  CHANGE EOY Stars File FOR GRAD DATA HARDCODED IN SUBSELECT = '2014-06-01'
 
+SELECT 
+	FINALFINAL.*
+	,CASE 
+WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'ENTER' THEN 'ENTERING' 
+WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'EMERG' THEN 'EMERGING'
+WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'DEVEL' THEN 'DEVELOPING'
+WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'EXPAN' THEN 'EXPANDING'
+WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'BRIDG' THEN 'BRIDGING'
+WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'REACH' THEN 'REACHING'
+WHEN [Most Recent Test] = 'LAS' AND [Ell Level] = 'FEP' THEN 'BRIDGING'
+WHEN [Most Recent Test] = 'LAS' AND [Ell Level] = 'LEP' THEN 'DEVELOPING'
+WHEN [Most Recent Test] = 'LAS' AND [Ell Level] = 'NEP' THEN 'ENTERING'
+WHEN [Most Recent Test] = 'NMELPA' AND [Ell Level] = 'BEG' THEN 'ENTERING'
+WHEN [Most Recent Test] = 'NMELPA' AND [Ell Level] = 'EARLI' THEN 'EMERGING'
+WHEN [Most Recent Test] = 'NMELPA' AND [Ell Level] = 'IMM' THEN 'DEVELOPING'
+WHEN [Most Recent Test] = 'NMELPA' AND [Ell Level] = 'EARLA' THEN 'EXPANDING'
+WHEN [Most Recent Test] = 'NMELPA' AND [Ell Level] = 'ADV' THEN 'BRIDGING'
+WHEN [Most Recent Test] = 'PRE-LAS' AND [Ell Level] = 'FEP' THEN 'Initial FEP'
+WHEN [Most Recent Test] = 'PRE-LAS' AND [Ell Level] = 'LEP' THEN 'DEVELOPING'
+WHEN [Most Recent Test] = 'PRE-LAS' AND [Ell Level] = 'NEP' THEN 'ENTERING'
+WHEN [Most Recent Test] = 'SCREENER' AND [Ell Level] = 'ELL' THEN 'ENTERING'
+WHEN [Most Recent Test] = 'SCREENER' AND [Ell Level] = 'NULL' THEN 'NULL'
+WHEN [Most Recent Test] = 'SCREENER' AND [Ell Level] = 'C-PRO' THEN 'Initial FEP'
+WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'ELL' THEN 'ENTERING'
+WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'ENTER' THEN 'ENTERING'
+WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'EMERG' THEN 'EMERGING'
+WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'DEVEL' THEN 'DEVELOPING'
+WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'EXPAN' THEN 'EXPANDING'
+WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'BRIDG' THEN 'Initial FEP'
+WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'ADV' THEN 'Initial FEP'
+WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'REACH' THEN 'Initial FEP'
+
+ELSE [Ell Level] END AS CONSOLIDATED_PERFORMANCE_LEVEL
+
+
+
+FROM (
+SELECT 
+
+SY
+,SCHOOL
+,SCHOOL_NAME
+,ID_NBR
+,[LAST NAME LONG]
+,[FIRST NAME LONG]
+,[HISPANIC INDICATOR]
+,[ETHNIC CODE SHORT]
+,[GENDER CODE]
+
+,GRADE AS ORIGINAL_GRADE 
+,CASE 
+			WHEN GRADE = 'KF' THEN 'K'
+			WHEN GRADE IN ('C1', 'C2', 'C3', 'C4', 'T1', 'T2', 'T3', 'T4') THEN 'Continuing Special Education Student'
+ELSE GRADE END AS GRADE
+
+,PHLOTE AS ORIGINAL_PHLOTE
+, CASE 
+		WHEN PHLOTE = 'N' AND [Ell Level] != '' THEN 'Y' 
+ELSE PHLOTE END AS PHLOTE
+
+
+,[ENGLISH PROFICIENCY] AS ORIGINAL_ENGLISH_PROFICIENCY
+,CASE 
+				
+				WHEN [ENGLISH PROFICIENCY] = '' AND [ELL Eligible] = '' AND [Most Recent Test] NOT IN ('WAPT', 'SCREENER', 'PRE-LAS') AND [Test Date] < '20100630' THEN 'FEPE'
+				WHEN [ENGLISH PROFICIENCY] = '' AND [ELL Eligible]  = ''  AND [Most Recent Test] NOT IN ('WAPT', 'SCREENER', 'PRE-LAS') AND [Test Date] BETWEEN '20100630' AND '20110630' THEN 'FEPM'
+				WHEN [ENGLISH PROFICIENCY] = '' AND [ELL Eligible]  = ''  AND [Most Recent Test] NOT IN ('WAPT', 'SCREENER', 'PRE-LAS') AND [Test Date] > '20120630' THEN 'FEP'
+				WHEN [ENGLISH PROFICIENCY] = '' AND [ELL Eligible]  = 'X' THEN 'ELL'
+				WHEN [ENGLISH PROFICIENCY] != '' AND [Most Recent Test] IN ('WAPT', 'SCREENER', 'PRE-LAS') AND [ELL Eligible]  = ''   THEN 'InitialFEP'
+				WHEN [ENGLISH PROFICIENCY] = '' AND [Most Recent Test] IN ('WAPT', 'SCREENER', 'PRE-LAS') AND [ELL Eligible]  = ''   THEN 'InitialFEP'
+
+				WHEN PHLOTE = 'Y' AND [Test Date] IS NULL AND  PRIMARY_LANGUAGE != 'American Sign language' THEN 'NOT DETERMINABLE'
+				WHEN PHLOTE = 'N' AND [Test Date] IS NULL THEN '' 
+		ELSE  [ENGLISH PROFICIENCY] 
+END AS [ENGLISH PROFICIENCY]
+
+
+,STATE_ID
+
+,YEAR_END_STATUS
+,Retained
+
+,[Students with first language Non-English]
+,[Students with first language English]
+,PRIMARY_LANGUAGE
+
+,[Ell Level]
+,[Most Recent Test]
+,Score
+
+,[English Model]
+,[Bilingual Model]
+
+,BEPProgramDescription
+,[Dual Language Immersion]
+,[Maintenance Bilingual]
+,[Content Based English as a Second Language]
+,ALSED
+,ALSSH
+,[Parent Refused]
+,[Not Receiving Service]
+,[Students that were Seniors at the start of the SY]
+,[Students that were Seniors at the start of the SY that graduated]
+,[Students that were Seniors at the start of the SY that earned a Career Diploma]
+,Dropout
+
+FROM (
 SELECT
 		
 		ALS.[SY]
 		,ALS.[LOCATION CODE] AS SCHOOL
 		,SCHNME.SCH_NME_27 AS SCHOOL_NAME
+		
+		
 		,ALS.ID_NBR
 		,ALS.[LAST NAME LONG]
 		,ALS.[FIRST NAME LONG]
 		,ALS.[HISPANIC INDICATOR]
 		,ALS.[ETHNIC CODE SHORT]
 		,ALS.[GENDER CODE]
-		,ALS.[Field11] AS GRADE
 		
-		,CASE WHEN Phlote120.PHLOTE IS NOT NULL THEN Phlote120.PHLOTE ELSE Phlote.PHLOTE END AS PHLOTE
+		,ALS.[Field11] AS [GRADE]
+		/*
+		,CASE 
+			WHEN ALS.[Field11] = '12' THEN ENROLL.GRDE
+			--WHEN [CURRENT GRADE LEVEL] = 'PK' THEN ENR.GRADE
+			WHEN ALS.[Field11] = 'KF' THEN ENROLL.GRDE
+			WHEN ENROLL.GRDE IS NULL THEN ALS.[Field11]
+		ELSE ALS.[Field11] END AS GRADE
+		*/
+
+		,ISNULL(CASE WHEN Phlote120.PHLOTE IS NOT NULL THEN Phlote120.PHLOTE ELSE Phlote.PHLOTE END, 'NOT IDENTIFIED AS OF 80TH DAY') AS PHLOTE
 		
 		,CASE 
 			  WHEN THE120DAY.[ENGLISH PROFICIENCY] = 1 THEN 'ELL' 
@@ -106,6 +224,8 @@ SELECT
 	,ISNULL([ELL Level].[ELL Level],'') AS [Ell Level]
 	,ISNULL([ELL Level].[Most Recent Test],'') AS [Most Recent Test]
 	,ISNULL([ELL Level].Score,'') AS [Score]
+	,[ELL Eligible] 
+	,[Test Date]
 
 	,Language.LANG_DESCR AS PRIMARY_LANGUAGE
 
@@ -113,23 +233,36 @@ SELECT
 
 	,CASE WHEN Dropout.[State ID] IS NOT NULL THEN 'Y' ELSE '' END AS Dropout
 
-	--THESE ARE THE BILINGUAL TAGS FROM STARS PROGRAMS FACT 
+	/*--THESE ARE THE BILINGUAL TAGS FROM STARS PROGRAMS FACT 
 	,ISNULL(CASE WHEN BilingualModel.[Field5] = 'ESL' AND [Field18] = 9  THEN 'X' END,'') AS ESL
 	,ISNULL(CASE WHEN BilingualModel.[Field5] = 'ESL' AND [Field18] = 12 THEN 'X' END,'') AS ELD
 	,ISNULL(CASE WHEN BilingualModel.[Field5] = 'BEP' AND [Field18] = 2 THEN 'X' END,'') AS MAINTPRG
 	,ISNULL(CASE WHEN BilingualModel.[Field5] = 'BEP' AND [Field18] = 4 THEN 'X' END,'') AS TRANSITL
 	,ISNULL(CASE WHEN BilingualModel.[Field5] = 'BEP' AND [Field18] = 1 THEN 'X' END,'') AS TWO_W_DUAL	
+	*/
 
+		,ISNULL([English Model],'') AS [English Model]
+		,ISNULL([Bilingual Model],'') AS [Bilingual Model]
 
+		
+		,ISNULL(BEPProgramDescription,'') AS BEPProgramDescription
+		, ISNULL(ALS2W,'')  AS [Dual Language Immersion]
+		, ISNULL(ALSMP,'') AS [Maintenance Bilingual]
+		, ISNULL(ALSES,'') AS [Content Based English as a Second Language] 
+		, ISNULL(ALSED,'') AS ALSED
+		, ISNULL(ALSSH,'') AS ALSSH
+	
+	,CASE WHEN PARENTREFUSED.ID_NBR IS NOT NULL THEN 'Y' ELSE '' END AS [Parent Refused]
+	,CASE WHEN NOTRECEIVINGSERVICE.ID_NBR IS NOT NULL THEN 'Y' ELSE '' END AS [Not Receiving Service]
+
+	
 	,CASE WHEN SENIORS.ID_NBR IS NOT NULL THEN 'Y' ELSE '' END AS [Students that were Seniors at the start of the SY]
 
 	,CASE WHEN GRADS.GRAD IS NOT NULL THEN 'Y' ELSE '' END AS [Students that were Seniors at the start of the SY that graduated]
 
 	,CASE WHEN CAREER.CAREERDIP IS NOT NULL THEN 'Y' ELSE '' END AS [Students that were Seniors at the start of the SY that earned a Career Diploma]
 
-	,CASE WHEN PARENTREFUSED.ID_NBR IS NOT NULL THEN 'Y' ELSE '' END AS [Parent Refused]
 
-	,CASE WHEN NOTRECEIVINGSERVICE.ID_NBR IS NOT NULL THEN 'Y' ELSE '' END AS [Not Receiving Service]
 
 	FROM
 		
@@ -256,71 +389,6 @@ CALCULATE FEP STUDENTS
 	Phlote.DST_NBR = FEP.DST_NBR
 	AND Phlote.ID_NBR = FEP.ID_NBR
 
-/********************************************************************************************************
-
-PULL SBA TESTS - (FRANK IS PULLING INSTEAD)
-
-********************************************************************************************************/
-
-/*
-	LEFT JOIN
-	(
-	SELECT 
-		*
-	FROM
-		(SELECT
-			ROW_NUMBER() OVER (PARTITION BY DST_NBR, SCH_YR, TEST_ID, TEST_SUB, ID_NBR ORDER BY TEST_DT DESC) AS RN,
-			DST_NBR
-			,ID_NBR
-			,SCH_YR
-			,TEST_ID
-			,TEST_SUB
-			,TEST_DT
-			,SCORE_1
-			,SCORE_2			
-		 FROM
-			DBTSIS.GS055_V
-		 WHERE
-			DST_NBR = 1
-			AND TEST_ID = 'SBA'
-			AND TEST_SUB IN ('REAE', 'REAS')
-			AND SCH_YR = @SchoolYear
-		)AS SBA_Tests
-	WHERE
-		RN = 1
-	) AS SBA_READ
-ON
-Phlote.ID_NBR = SBA_READ.ID_NBR
-
-LEFT JOIN
-	(
-	SELECT 
-		*
-	FROM
-		(SELECT
-			ROW_NUMBER() OVER (PARTITION BY DST_NBR, SCH_YR, TEST_ID, TEST_SUB, ID_NBR ORDER BY TEST_DT DESC) AS RN,
-			DST_NBR
-			,ID_NBR
-			,SCH_YR
-			,TEST_ID
-			,TEST_SUB
-			,TEST_DT
-			,SCORE_1
-			,SCORE_2			
-		 FROM
-			DBTSIS.GS055_V
-		 WHERE
-			DST_NBR = 1
-			AND TEST_ID = 'SBA'
-			AND TEST_SUB IN ('MATE', 'MATS')
-			AND SCH_YR = @SchoolYear
-		)AS SBA_Tests
-	WHERE
-		RN = 1
-	) AS SBA_MATH
-ON
-Phlote.ID_NBR = SBA_MATH.ID_NBR
-*/
 
 
 /********************************************************************************************************
@@ -340,7 +408,7 @@ AND SCHNME.SCH_NBR = ALS.[LOCATION CODE] collate DATABASE_DEFAULT
 ********************************************************************************************************/
 
 LEFT JOIN 
-(SELECT DISTINCT ENR.ID_NBR, ENR.END_STAT FROM 
+(SELECT DISTINCT ENR.ID_NBR, ENR.END_STAT,ENR.GRDE, MRE.SCH_NBR FROM 
 APS.MostRecentPrimaryEnrollBySchYr(@SchoolYear) AS MRE
 INNER JOIN 
 DBTSIS.ST010 AS ENR
@@ -437,9 +505,8 @@ LEFT JOIN
 	Pull Indicator For Bilingual Tags for Bilingual from PED 
 ***********************************************************************/	
 
-	LEFT JOIN
-				
-				(SELECT 
+					---- THIS DATA WAS NOT REPORTED CORRECTLY -- 
+				/*(SELECT 
 				[Field5], [Field18], [STUDENT ID], Period
 				FROM
 				[RDAVM.APS.EDU.ACTD].[db_STARS_History].[dbo].[PROGRAMS_FACT] 
@@ -449,7 +516,61 @@ LEFT JOIN
 				) AS BilingualModel
 				ON
 				ALS.STATE_ID = BilingualModel.[STUDENT ID] collate database_default
-				AND BilingualModel.Period = ALS.Period
+				AND BilingualModel.Period = ALS.Period*/
+
+LEFT JOIN
+(
+	SELECT DISTINCT
+	ID_NBR
+	,CASE WHEN RCVINGSERV.COURSE IS NOT NULL THEN 'ESL' ELSE '' END AS [English Model]
+	,RCVINGSERV.PARENT_REFUSAL AS [Parent Refused]
+	,CASE WHEN RCVINGSERV.COURSE IS NULL AND PARENT_REFUSAL = 'N' THEN 'Y' ELSE '' END AS [Not Receiving Service]
+    FROM 
+	APS.LCEStudentsAndProvidersAsOf('2012-12-15') AS RCVINGSERV
+	) AS RCVINGSERV
+ON
+RCVINGSERV.ID_NBR = ALS.ID_NBR
+
+
+/*-----------------------------------------------------------------------------------------------------------
+
+--Bilingual Students for Bilingual Model
+------------------------------------------------------------------------------------------------------------*/
+
+LEFT JOIN 
+(
+SELECT DISTINCT
+ID_NBR
+,CASE WHEN ID_NBR IS NOT NULL THEN 'BEP' ELSE '' END AS [Bilingual Model] 
+FROM 
+dbo.BilingualModelHours_2013_80D AS BP
+WHERE [Bilingual Model] != 'No Model'
+
+) AS BEP
+ON
+ALS.ID_NBR = BEP.ID_NBR
+
+
+
+/*-----------------------------------------------------------------------------------------------------------
+
+--Use Bilingual Model and Hours Function for Tags and Indicators
+------------------------------------------------------------------------------------------------------------*/
+LEFT JOIN 
+(SELECT ID_NBR
+,MAX([Bilingual Model]) AS BEPProgramDescription
+,MAX(CASE WHEN [Bilingual Model] = 'Two-Way' THEN 'Two-Way' ELSE '' END) AS ALS2W
+,MAX(CASE WHEN [Course Tags] LIKE '%ELD%' THEN 'ELD' ELSE '' END) AS ALSED
+,MAX(CASE WHEN [Course Tags] LIKE '%SH%' THEN 'SH' ELSE '' END) AS ALSSH
+,MAX(CASE WHEN [Course Tags] LIKE '%ESL%' THEN 'ESL' ELSE '' END) AS ALSES
+,MAX(CASE WHEN [Bilingual Model] = 'Maintenance' THEN 'Maintenance' ELSE '' END) AS ALSMP 
+FROM 
+dbo.BilingualModelHours_2013_80D AS BEPKIDS
+GROUP BY ID_NBR
+) AS MODELTAGS
+
+ON
+MODELTAGS.ID_NBR = ALS.ID_NBR 
 
 
 
@@ -649,9 +770,15 @@ NOTRECEIVINGSERVICE.ID_NBR = ALS.ID_NBR
 
 WHERE
 	ALS.ID_NBR IS NOT NULL
-	--AND ALS.ID_NBR != 0
+	AND ALS.ID_NBR != 0
 
 --GROUP BY
 --ALS.[SY]
+
+) AS FINAL
+) AS FINALFINAL
+
+
+
 
 ORDER BY [ENGLISH PROFICIENCY] ASC
