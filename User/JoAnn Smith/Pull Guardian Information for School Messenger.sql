@@ -1,7 +1,7 @@
 /*
  * Revision 1
  * Last Changed By:    JoAnn Smith
- * Last Changed Date:  2/23/17
+ * Last Changed Date:  3/7/17
  * Written by:         JoAnn Smith
  ******************************************************
  Pull Guardian information for School Messenger extract
@@ -90,7 +90,22 @@ select
 	end as [Guardian Category],
 	per.FIRST_NAME AS [Parent First Name],
 	per.LAST_NAME  AS [Parent Last Name],
-	per.PRIMARY_PHONE,
+	ph.phone,
+	ph.phone_type,
+	case	
+		when PRIMARY_PHONE_TYPE = 'H'
+			then 'Home Phone'
+		when PRIMARY_PHONE_TYPE = 'C' 
+			then 'Cell Phone'
+		when PRIMARY_PHONE_TYPE = 'M'
+			then 'Mobile Phone'
+		when PRIMARY_PHONE_TYPE = 'P'
+			then 'Pager'
+		when PRIMARY_PHONE_TYPE = 'W'
+			then 'Work Phone'
+	end as [Primary Phone Type],
+
+	per.PRIMARY_PHONE_TYPE as [Phone Type],
 	ISNULL([Contact_Language].[VALUE_DESCRIPTION], 'English') AS [Home/Correspondence Language],
 	per.EMAIL
 
@@ -101,6 +116,10 @@ inner  join
 on
 	i.parent_gu = stupar.parent_gu
 	and i.student_gu = stupar.student_gu
+inner join
+	rev.rev_person_phone ph 
+on
+	stupar.parent_gu = ph.person_gu
 inner join 
 	rev.REV_PERSON per
 ON
@@ -122,15 +141,19 @@ ON
 IDCTE
 as
 (
+SELECT *
+FROM
+(
 select
 		BS.SIS_NUMBER as [Associated Student ID Number],
-		ISNULL(PAR.ADULT_ID, BS.SIS_NUMBER + CAST(ORDERBY AS NVARCHAR(2))) AS [Guardian ID Number],
+		ISNULL(PAR.ADULT_ID, BS.SIS_NUMBER + ISNULL((CAST(ORDERBY AS NVARCHAR(2))),1)) AS [Guardian ID Number],
 		d.[Guardian Category],
 		D.[Parent First Name] AS [First Name],
 		D.[Parent Last Name] as [Last Name],
-		d.[PRIMARY_PHONE] as [Phone Number w/ area code],
+		d.[Primary Phone Type],
+		d.[PHONE] AS Phone,
 		d.[Home/Correspondence Language],
-		d.EMAIL as [Email Address]
+		d.EMAIL as [Email Address]	
 		
 from
 	DetailsCTE D
@@ -141,9 +164,15 @@ on
 INNER JOIN
 	REV.EPC_PARENT PAR
 ON PAR.PARENT_GU = D.PARENT_GU
+)AS s
+	PIVOT(
+		MAX(Phone) 
+		FOR [Primary Phone Type] IN ([Cell Phone], [Home Phone], [Mobile Phone], [Work Phone], [Pager])
+		)
+		as pivtable	
 )
 select * from IDCTE
-order by [Associated Student ID Number], [Guardian ID Number]
+
 
 
 
