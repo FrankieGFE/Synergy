@@ -1,17 +1,18 @@
 /*
  * Revision 1
  * Last Changed By:    JoAnn Smith
- * Last Changed Date:  2/27/17
+ * Last Changed Date:  3/10/17
  * Written by:         JoAnn Smith
  ******************************************************
  Pull Demographic Data for Middle School Students in
  Schools 410, 413, 416, 420, 427, 440, 448, 470
  ******************************************************
  */
-declare @AsOfDate datetime2 = '2016-05-25'
+declare @AsOfDate datetime2 = '2014-05-22'
 select
 	ped.SCHOOL_YEAR as [School Year],
 	bs.SIS_NUMBER as [Student APS ID],
+	bs.STATE_STUDENT_NUMBER as [Student State ID],
 	bs.LAST_NAME + ', ' + bs.FIRST_NAME as [Student Name],
 	ped.SCHOOL_CODE as [School Location Number],
 	ped.SCHOOL_NAME as [School Name],
