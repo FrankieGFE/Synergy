@@ -1,5 +1,3 @@
---select * from dbo.MEMBERDAYS_2013
---where SCHNBR in ('410', '413', '416', '420', '427', '440', '448',  '470')
 --SELECT * FROM DBTSIS.CA005_V 
 
 
