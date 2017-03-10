@@ -8,7 +8,7 @@
  Schools 410, 413, 416, 420, 427, 440, 448, 470
  ******************************************************
  */
-declare @AsOfDate datetime2 = '2014-05-22'
+declare @AsOfDate datetime2 = '2016-05-25'
 select
 	ped.SCHOOL_YEAR as [School Year],
 	bs.SIS_NUMBER as [Student APS ID],
