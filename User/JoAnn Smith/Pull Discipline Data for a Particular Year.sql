@@ -12,7 +12,7 @@ SELECT
 	OPENROWSET (
 		'Microsoft.ACE.OLEDB.12.0', 
 		'Text;Database=\\SYNTEMPSSIS\Files\TempQuery;',
-		'SELECT * from edlead2013.csv'
+		'SELECT * from edlead2015.csv'
                 ) AS [T1]
 )
 --select * from StudentCTE
@@ -86,7 +86,7 @@ as
                      APS.StudentEnrollmentDetails
                      
               WHERE
-                     SCHOOL_YEAR = 2013
+                     SCHOOL_YEAR = 2015
                      AND EXTENSION = 'R'
                      --AND EXCLUDE_ADA_ADM IS NULL
               ) AS [ENROLLMENTS]
@@ -155,8 +155,8 @@ left outer join
 	DisciplineCTE D
 on
 	S.[Student APS ID] = D.SIS_NUMBER
---where
---	s.[Student APS ID] = 741587125
+where
+	d.[Offender/Victim] = 'Offender'
 
 
 
