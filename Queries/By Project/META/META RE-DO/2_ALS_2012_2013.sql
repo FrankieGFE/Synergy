@@ -61,34 +61,37 @@ DECLARE @EVALDate AS DATETIME = '2013-05-22'
 SELECT 
 	FINALFINAL.*
 	,CASE 
-WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'ENTER' THEN 'ENTERING' 
-WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'EMERG' THEN 'EMERGING'
-WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'DEVEL' THEN 'DEVELOPING'
-WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'EXPAN' THEN 'EXPANDING'
-WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'BRIDG' THEN 'BRIDGING'
-WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'REACH' THEN 'REACHING'
-WHEN [Most Recent Test] = 'LAS' AND [Ell Level] = 'FEP' THEN 'BRIDGING'
-WHEN [Most Recent Test] = 'LAS' AND [Ell Level] = 'LEP' THEN 'DEVELOPING'
-WHEN [Most Recent Test] = 'LAS' AND [Ell Level] = 'NEP' THEN 'ENTERING'
-WHEN [Most Recent Test] = 'NMELPA' AND [Ell Level] = 'BEG' THEN 'ENTERING'
-WHEN [Most Recent Test] = 'NMELPA' AND [Ell Level] = 'EARLI' THEN 'EMERGING'
-WHEN [Most Recent Test] = 'NMELPA' AND [Ell Level] = 'IMM' THEN 'DEVELOPING'
-WHEN [Most Recent Test] = 'NMELPA' AND [Ell Level] = 'EARLA' THEN 'EXPANDING'
-WHEN [Most Recent Test] = 'NMELPA' AND [Ell Level] = 'ADV' THEN 'BRIDGING'
-WHEN [Most Recent Test] = 'PRE-LAS' AND [Ell Level] = 'FEP' THEN 'Initial FEP'
-WHEN [Most Recent Test] = 'PRE-LAS' AND [Ell Level] = 'LEP' THEN 'DEVELOPING'
-WHEN [Most Recent Test] = 'PRE-LAS' AND [Ell Level] = 'NEP' THEN 'ENTERING'
-WHEN [Most Recent Test] = 'SCREENER' AND [Ell Level] = 'ELL' THEN 'ENTERING'
-WHEN [Most Recent Test] = 'SCREENER' AND [Ell Level] = 'NULL' THEN 'NULL'
-WHEN [Most Recent Test] = 'SCREENER' AND [Ell Level] = 'C-PRO' THEN 'Initial FEP'
+WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'Entering' THEN 'ENTERING' 
+WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'Emerging' THEN 'EMERGING'
+WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'Developing' THEN 'DEVELOPING'
+WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'Expanding' THEN 'EXPANDING'
+WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'Bridging' THEN 'BRIDGING'
+WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'Reaching' THEN 'REACHING'
+WHEN [Most Recent Test] = 'LAS' AND [Ell Level] = 'Fully English Proficient' THEN 'BRIDGING'
+WHEN [Most Recent Test] = 'LAS' AND [Ell Level] = 'Limited English Proficient' THEN 'DEVELOPING'
+WHEN [Most Recent Test] = 'LAS' AND [Ell Level] = 'Non-English Proficient' THEN 'ENTERING'
+
+WHEN [Most Recent Test] = 'ELPA' AND [Ell Level] = 'Beginning' THEN 'ENTERING'
+WHEN [Most Recent Test] = 'ELPA' AND [Ell Level] = 'Early Intermediate' THEN 'EMERGING'
+WHEN [Most Recent Test] = 'ELPA' AND [Ell Level] = 'Intermediate' THEN 'DEVELOPING'
+WHEN [Most Recent Test] = 'ELPA' AND [Ell Level] = 'Early Advanced' THEN 'EXPANDING'
+WHEN [Most Recent Test] = 'ELPA' AND [Ell Level] = 'Advanced' THEN 'BRIDGING'
+
+WHEN [Most Recent Test] = 'PRE-LAS' AND [Ell Level] = 'Fully English Proficient' THEN 'Initial FEP'
+WHEN [Most Recent Test] = 'PRE-LAS' AND [Ell Level] = 'Limited English Proficient' THEN 'DEVELOPING'
+WHEN [Most Recent Test] = 'PRE-LAS' AND [Ell Level] = 'Non-English Proficient' THEN 'ENTERING'
+
+WHEN [Most Recent Test] = 'SCRE' AND [Ell Level] = 'English Language Learner' THEN 'ENTERING'
+WHEN [Most Recent Test] = 'SCRE' AND [Ell Level] = 'NULL' THEN 'NULL'
+WHEN [Most Recent Test] = 'SCRE' AND [Ell Level] = 'Proficient' THEN 'Initial FEP'
+
 WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'ELL' THEN 'ENTERING'
-WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'ENTER' THEN 'ENTERING'
-WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'EMERG' THEN 'EMERGING'
-WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'DEVEL' THEN 'DEVELOPING'
-WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'EXPAN' THEN 'EXPANDING'
-WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'BRIDG' THEN 'Initial FEP'
-WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'ADV' THEN 'Initial FEP'
-WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'REACH' THEN 'Initial FEP'
+WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'Entering' THEN 'ENTERING'
+WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'Emerging' THEN 'EMERGING'
+WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'Developing' THEN 'DEVELOPING'
+WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'Expanding' THEN 'EXPANDING'
+WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'Bridging' THEN 'Initial FEP'
+WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'Reaching' THEN 'Initial FEP'
 
 ELSE [Ell Level] END AS CONSOLIDATED_PERFORMANCE_LEVEL
 
@@ -122,9 +125,9 @@ ELSE PHLOTE END AS PHLOTE
 ,[ENGLISH PROFICIENCY] AS ORIGINAL_ENGLISH_PROFICIENCY
 ,CASE 
 				
-				WHEN [ENGLISH PROFICIENCY] = '' AND [ELL Eligible] = '' AND [Most Recent Test] NOT IN ('WAPT', 'SCREENER', 'PRE-LAS') AND [Test Date] < '20100630' THEN 'FEPE'
-				WHEN [ENGLISH PROFICIENCY] = '' AND [ELL Eligible]  = ''  AND [Most Recent Test] NOT IN ('WAPT', 'SCREENER', 'PRE-LAS') AND [Test Date] BETWEEN '20100630' AND '20110630' THEN 'FEPM'
-				WHEN [ENGLISH PROFICIENCY] = '' AND [ELL Eligible]  = ''  AND [Most Recent Test] NOT IN ('WAPT', 'SCREENER', 'PRE-LAS') AND [Test Date] > '20120630' THEN 'FEP'
+				WHEN [ENGLISH PROFICIENCY] = '' AND [ELL Eligible] = '' AND [Most Recent Test] NOT IN ('WAPT', 'SCREENER', 'PRE-LAS') AND [Test Date] < '20100701' THEN 'FEPE'
+				WHEN [ENGLISH PROFICIENCY] = '' AND [ELL Eligible]  = ''  AND [Most Recent Test] NOT IN ('WAPT', 'SCREENER', 'PRE-LAS') AND [Test Date] BETWEEN '20100701' AND '20110701' THEN 'FEPM'
+				WHEN [ENGLISH PROFICIENCY] = '' AND [ELL Eligible]  = ''  AND [Most Recent Test] NOT IN ('WAPT', 'SCREENER', 'PRE-LAS') AND [Test Date] BETWEEN  '20110701' AND '20120701' THEN 'FEP'
 				WHEN [ENGLISH PROFICIENCY] = '' AND [ELL Eligible]  = 'X' THEN 'ELL'
 				WHEN [ENGLISH PROFICIENCY] != '' AND [Most Recent Test] IN ('WAPT', 'SCREENER', 'PRE-LAS') AND [ELL Eligible]  = ''   THEN 'InitialFEP'
 				WHEN [ENGLISH PROFICIENCY] = '' AND [Most Recent Test] IN ('WAPT', 'SCREENER', 'PRE-LAS') AND [ELL Eligible]  = ''   THEN 'InitialFEP'
@@ -777,8 +780,9 @@ WHERE
 
 ) AS FINAL
 ) AS FINALFINAL
-
-
+WHERE
+SCHOOL < '900'
+AND ORIGINAL_GRADE NOT IN ('P1', 'P2', 'PK')
 
 
 ORDER BY [ENGLISH PROFICIENCY] ASC
