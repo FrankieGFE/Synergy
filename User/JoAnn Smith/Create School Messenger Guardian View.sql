@@ -1,15 +1,16 @@
-/*
- * Revision 1
- * Last Changed By:    JoAnn Smith
- * Last Changed Date:  3/7/17
- * Written by:         JoAnn Smith
- ******************************************************
- Pull Guardian information for School Messenger extract
- Pull parent information for each student
- ******************************************************
- */
---get all students and parents with contact = 'Y'
-;
+USE [ST_Daily]
+GO
+
+/****** Object:  View [SchoolMessenger].[Parent]    Script Date: 3/7/2017 8:22:48 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE VIEW [SchoolMessenger].[Guardian] AS
+
 with GuardianCTE
 as
 (
@@ -134,17 +135,17 @@ ON
 	ELL.[LANGUAGE_TO_HOME] = [Contact_Language].[VALUE_CODE]
 
 )
-
 --now put together Guardian ID which is Adult-ID if the field is not null
 --or sis number plus orderby if the adult id is null
 ,
 IDCTE
 as
 (
-SELECT *
+SELECT
+	 *
 FROM
 (
-select
+	select
 		BS.SIS_NUMBER as [Associated Student ID Number],
 		ISNULL(PAR.ADULT_ID, BS.SIS_NUMBER + ISNULL((CAST(ORDERBY AS NVARCHAR(2))),1)) AS [Guardian ID Number],
 		d.[Guardian Category],
@@ -153,18 +154,17 @@ select
 		d.[Primary Phone Type],
 		d.[PHONE] AS Phone,
 		d.[Home/Correspondence Language],
-		d.EMAIL as [Email Address]	
-		
-from
-	DetailsCTE D
-inner join
-	aps.BasicStudent bs
-on
-	d.STUDENT_GU = bs.STUDENT_GU
-INNER JOIN
-	REV.EPC_PARENT PAR
-ON PAR.PARENT_GU = D.PARENT_GU
-)AS s
+		d.EMAIL as [Email Address]			
+	from
+		DetailsCTE D
+	inner join
+		aps.BasicStudent bs
+	on
+		d.STUDENT_GU = bs.STUDENT_GU
+	INNER JOIN
+		REV.EPC_PARENT PAR
+	ON PAR.PARENT_GU = D.PARENT_GU
+	) AS s	
 	PIVOT(
 		MAX(Phone) 
 		FOR [Primary Phone Type] IN ([Cell Phone], [Home Phone], [Mobile Phone], [Work Phone], [Pager])
@@ -173,9 +173,7 @@ ON PAR.PARENT_GU = D.PARENT_GU
 )
 select * from IDCTE
 
-
-
-
+GO
 
 
 
