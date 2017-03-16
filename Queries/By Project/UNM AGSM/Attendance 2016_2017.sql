@@ -1,0 +1,80 @@
+
+
+
+--2013 -- 1E61EA89-3410-49F8-909B-1B749957EDDA
+--2014 -- 26F066A3-ABFC-4EDB-B397-43412EDABC8B
+--2015 -- BCFE2270-A461-4260-BA2B-0087CB8EC26A
+--2016 -- F7D112F7-354D-4630-A4BC-65F586BA42EC
+
+
+SELECT 
+	SCHOOL_YEAR, SIS_NUMBER, GETENROLL.SCHOOL_CODE, GRADE, MEMBER_DAYS, [1/2-day Unexcused Absences], [Full-day Unexcused Absences], [1/2-day Excused Absences], [Full-Day Excused Absences]
+
+ FROM 
+
+(
+SELECT 
+	ENROLLS.SCHOOL_YEAR, ENROLLS.SIS_NUMBER, GETMEM.SCHOOL_CODE, SUM(CAST(GETMEM.MEMBERDAYS AS INT)) AS MEMBER_DAYS
+	,ENROLLS.GRADE
+ FROM 
+(
+SELECT * FROM 
+APS.LatestPrimaryEnrollmentInYear('F7D112F7-354D-4630-A4BC-65F586BA42EC') AS LATEST
+WHERE
+SCHOOL_CODE IN  ('410', '413', '416', '420', '427', '440', '448', '470')
+) AS ENROLLS
+
+INNER JOIN 
+dbo.ATTENDANCE_2016 AS GETMEM
+ON
+ENROLLS.SIS_NUMBER = GETMEM.SIS_NUMBER
+AND ENROLLS.SCHOOL_CODE = GETMEM.SCHOOL_CODE
+
+INNER JOIN 
+(SELECT 
+	SUM(CAST(MEMBERDAYS AS INT)) AS TOTAL_MEMBER, SIS_NUMBER 
+FROM 
+dbo.ATTENDANCE_2016
+--WHERE EXCLUDE_ADA_ADM IS NULL
+GROUP BY SIS_NUMBER
+) AS TOTALS
+ON
+ENROLLS.SIS_NUMBER = TOTALS.SIS_NUMBER
+
+GROUP BY ENROLLS.SCHOOL_YEAR, ENROLLS.SIS_NUMBER, GETMEM.SCHOOL_CODE, ENROLLS.GRADE
+) AS GETENROLL
+
+
+
+
+LEFT HASH JOIN 
+(
+SELECT
+	
+	 att.SIS_NUMBER as [Student APS ID],
+	 ATT.SCHOOL_CODE,
+	 case 
+		when sa.[SIS Number] is null then '0.00' else	sa.[Half-Day Unexcused] end as [1/2-day Unexcused Absences],
+	 case 
+		when sa.[SIS Number] is null then '0.00' else SA.[Full-Day Unexcused] end as [Full-day Unexcused Absences],
+	 case 
+		when sa.[SIS Number] is null then '0.00' else SA.[Half-Day Excused] end as [1/2-day Excused Absences],
+	 case 
+		when sa.[SIS Number] is null then '0.00' else SA.[Full-Day Excused] end as [Full-Day Excused Absences]
+	 
+FROM 
+	dbo.ATTENDANCE_2016 ATT
+LEFT JOIN 	
+	STUDENT_ATTENDANCE AS SA
+on
+	sa.[SIS Number] = att.SIS_NUMBER
+	and sa.[School Code]= att.SCHOOL_CODE 
+) AS GETATT
+
+ON
+GETENROLL.SIS_NUMBER = GETATT.[Student APS ID]
+AND GETENROLL.SCHOOL_CODE = GETATT.SCHOOL_CODE
+
+order by SIS_NUMBER
+
+

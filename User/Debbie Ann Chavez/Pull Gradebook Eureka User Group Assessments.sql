@@ -1,0 +1,53 @@
+
+
+SELECT * 
+FROM (
+
+SELECT LOGIN_NAME, USERGROUP_NAME FROM 
+REV.REV_USER AS USERS
+INNER JOIN 
+REV.REV_USER_USERGROUP AS GRP
+ON
+USERS.USER_GU = GRP.USER_GU
+INNER JOIN 
+rev.REV_USERGROUP AS Groups
+ON
+GRP.USERGROUP_GU = Groups.USERGROUP_GU
+
+WHERE
+USERGROUP_NAME = 'Eureka Math Pilot'
+) AS T1
+
+LEFT JOIN 
+(
+
+SELECT 
+SCHOOLNAME AS School
+, STU2.SIS_NUMBER AS SIS_Number
+, stu.LASTNAME AS Stu_Last_Name
+, stu.FIRSTNAME AS Stu_First_Name
+,  MEASURE AS Measure
+, GBR.SCORE AS Score
+, tch.LASTNAME AS Tch_Last_Name
+, tch.FIRSTNAME AS Tch_First_Name
+, tch.STUDENTID AS TeacherID
+,MEASURETYPE
+
+FROM rev.EGB_GRADEBOOK gb  --assignments
+join rev.EGB_GBRESULT gbr on gbr.GRADEBOOKID = gb.ID  --student results
+join rev.EGB_PEOPLE stu on stu.id = gbr.studentid
+join rev.EGB_CLASS c on c.id = gb.CLASSID
+join rev.EGB_SCHOOL s on s.id = c.SCHOOLID
+join rev.EGB_GBSCORETYPES sct on sct.id = gb.SCORETYPEID
+join rev.EGB_MEASURETYPE mt on mt.id = gb.MEASURETYPEID
+join rev.EPC_STU AS STU2 ON STU2.STUDENT_GU = STU.GENESISID
+join rev.EGB_PEOPLE tch ON TCH.ID = C.TEACHERID
+WHERE
+GBR.DATEADDED >= '20170101'
+AND MEASURETYPE = 'Assessment'
+
+) AS T2
+
+ON
+T1.LOGIN_NAME = T2.TeacherID
+
