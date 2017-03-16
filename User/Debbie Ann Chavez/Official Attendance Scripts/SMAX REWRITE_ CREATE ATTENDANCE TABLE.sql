@@ -4,10 +4,10 @@
 --AND 2012-2013- 20130522 
 --AND 2011-2012- 20120529
 
-DECLARE @asOfDate DECIMAL (8,0) = 20120529
+DECLARE @asOfDate DECIMAL (8,0) = 20140522
 
 --INTERESTING, TAKES FOREVER TO RUN USING THIS, SO YEAR IS HARD-CODED *CHANGE 2 SPOTS*
-DECLARE @SchoolYear INT = 2012
+DECLARE @SchoolYear INT = 2014
 
 ---------------------PART 1 COUNT ABSENCES ON CYCLE DAY ---------------------------------------------
 ;WITH [HighSchoolTruant] AS 
@@ -38,9 +38,9 @@ DECLARE @SchoolYear INT = 2012
 
     WHERE
 	   PERIOD.DST_NBR = 1
-	   AND PERIOD.SCH_YR = 2012
+	   AND PERIOD.SCH_YR = 2014
 	   AND PERIOD.ATT_STAT = 'A'
-	   AND (CODES.EXCSD_ABS IN ('E', 'U') AND CODES.REAS_CD != 'AC'	   )
+	   AND (CODES.EXCSD_ABS IN ('U') AND CODES.REAS_CD != 'AC'	   )
 	   AND PERIOD.CAL_DT<= @asOfDate
 	   --AND ID_NBR = 102785458
 	   --AND PERIOD.SCH_NBR = '550'
@@ -110,7 +110,7 @@ WHERE
 --AND CAL.CAL_DT = '20130820'
 
 SCH.DST_NBR = 1
-AND SCH.SCH_YR = 2012
+AND SCH.SCH_YR = 2014
 AND SCH.VERSION = '00'
 --AND SCH.SCH_NBR = '550'
 
@@ -126,11 +126,25 @@ GROUP BY
 ---------------------PART 3 DIVIDE AND SUM UP HALF DAY AND FULL DAY ----------------------------------
 ---------------------SAME LOGIC AS SYNERGY -----------------------------------------------------------
 
-INSERT INTO dbo.ATTENDANCE_2011
+--CREATE TABLE dbo.ATTENDANCE_2013_2
+
+--( [ID_NBR]  VARCHAR (9)
+--      ,[SCH_NBR]  VARCHAR (4)
+--	  ,[ATT_TYPE] VARCHAR (1)
+--      ,[HALF_DAY]  VARCHAR (9)
+--      ,[FULL_DAY]  VARCHAR (9)
+--	  ,[TOTAL_ABSENCES] VARCHAR (9)
+--	  )
+
+
+
+
+INSERT INTO dbo.ATTENDANCE_2013_2
 
 SELECT
  ID_NBR
  ,SCH_NBR
+ ,ATT_TYPE
 	,[Half Days]*0.5 AS [Half Day]
     ,[Full Days] AS [Full Day]
 	,([Half Days]*0.5)+[Full Days]  AS [Total]
@@ -142,6 +156,7 @@ FROM
 SELECT
 	[Truants].ID_NBR
 	,[Truants].SCH_NBR
+	,'U' AS ATT_TYPE
 	,SUM([Truants].[Half Days]) AS [Half Days]
 	,SUM([Truants].[Full Days]) AS [Full Days]
 
@@ -235,13 +250,14 @@ SELECT
 SELECT 
 	ID_NBR
 	,SCH_NBR
+	,'U' AS ATT_TYPE
 	,SUM(CASE WHEN HALF_DAYS = 1 THEN .5 ELSE 0 END) AS HALF_DAYS
 	,SUM(CASE WHEN HALF_DAYS = 2 THEN 1 ELSE 0 END) AS FULL_DAYS
  FROM 
 DBTSIS.AT020_V AS DAILY
 WHERE
 DST_NBR = 1
-AND SCH_YR = 2012
+AND SCH_YR = 2014
 --AND SCH_NBR = '276'
 AND ATT_STAT = 'A'
 --AND ID_NBR = 970086956

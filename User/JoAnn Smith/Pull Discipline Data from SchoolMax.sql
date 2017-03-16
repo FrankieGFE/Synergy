@@ -35,7 +35,7 @@ SELECT
 	EV2.ID_NBR,
 	EV1.SCH_YR,
 	CE.STATE_ID,
-	EV2.ID_NBR as [Incident Nbr],
+	EV2.EV_SEQ_NBR [Incident Nbr],
 	EV1.DATE_8,
 	EV1.EVENT_CD,
 	EV2.PART_TYPE
@@ -86,18 +86,21 @@ FROM
 		
 WHERE
 	EV1.DST_NBR = 1
-	AND EV1.SCH_YR = 2013
+	AND EV1.SCH_YR = 2014
 	--AND EV1.EVENT_CD = '2BUL*'
 	AND EV2.PART_TYPE = 'O'
 )
-select
+
+--ADDED CODES TABLE TO PULL IN DESCRIPTION OF INFRACTION CODE 3/14/17 DAC 
+select DISTINCT 
 	S.[Student APS ID],
 	D.SCH_YR as [School Year],
 	D.STATE_ID as [State Student ID],
 	D.[Incident Nbr] as [Event Identifier],
 	D.DATE_8 as [Infraction Date],
 	D.EVENT_CD as [Infraction Code],
-	D.PART_TYPE as [Description],
+	CODES.EVENT_DESC AS [Description],
+	
 	CASE 
 		WHEN D.PART_TYPE = 'O'
 		   THEN 'Offender'
@@ -107,6 +110,16 @@ from
 left outer join
 	DisciplineCTE D
 on S.[Student APS ID] = D.ID_NBR
+INNER JOIN 
+(SELECT DISTINCT 
+      [EVENT_CD]
+      ,[EVENT_DESC]
+
+  FROM [PR].[DBTSIS].[EV060_V]
+ WHERE DST_NBR = 1) AS CODES
+ON
+D.EVENT_CD = CODES.EVENT_CD
+
 
 	
 
