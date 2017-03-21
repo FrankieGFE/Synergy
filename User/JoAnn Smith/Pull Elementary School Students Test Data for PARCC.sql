@@ -1,3 +1,28 @@
+/*
+Written by:  JoAnn Smith
+             3-21-2017
+Southwest Creations Collaborative Evaluation
+Data Request
+
+Pull PARCC data for Elementary School Students
+enrolled during 2015-2016 SY
+for Wendy Kappy
+Uses CTEs for Reading and Math and
+then joins them together for the final
+results
+
+PARCC tests for elemetary are given in the spring
+so need to subtract 1 from admin date
+Change the @AsOfDate to the last day of school for that school year
+Change the @TestYear to the school year you want
+
+*/
+
+declare @AsOfDate datetime2 = '2016-05-25'
+declare @TestYear varchar(4) = '2015'
+
+
+
 ;with StudentCTE
 as
 (
@@ -7,7 +32,7 @@ select
 	bs.STATE_STUDENT_NUMBER
 	
 from
-	aps.PrimaryEnrollmentDetailsAsOf('2016-05-25') PED
+	aps.PrimaryEnrollmentDetailsAsOf(@AsOfDate) PED
 inner join
 	aps.BasicStudentWithMoreInfo bs
 on
@@ -90,7 +115,7 @@ INNER JOIN
 ON
 	Person.PERSON_GU = StudentTest.STUDENT_GU
 LEFT JOIN
-	APS.PrimaryEnrollmentDetailsAsOf('2016-05-25') AS Enroll
+	APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS Enroll
 ON
 	StudentTest.STUDENT_GU = Enroll.STUDENT_GU	
 LEFT JOIN
@@ -109,7 +134,7 @@ WHERE
 	1 = 1
 	and test_name = 'PARCC ES ELA'
 	and SCORE_DESCRIPTION = 'Raw'
-	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = 2015
+	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = @TestYear
 	and PART_DESCRIPTION = 'PARCC ES ELA'
 )
 ,ESMath
@@ -186,7 +211,7 @@ INNER JOIN
 ON
 	Person.PERSON_GU = StudentTest.STUDENT_GU
 LEFT JOIN
-	APS.PrimaryEnrollmentDetailsAsOf('2016-05-25') AS Enroll
+	APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS Enroll
 ON
 	StudentTest.STUDENT_GU = Enroll.STUDENT_GU	
 LEFT JOIN
@@ -205,26 +230,27 @@ WHERE
 	1 = 1
 	and test_name = 'PARCC ES Math'
 	and SCORE_DESCRIPTION = 'Raw'
-	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = 2015
+	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = @TestYear
 	and PART_DESCRIPTION = 'PARCC ES Math'
 )
 ,ResultsCTE
 as
 	(
 		select
+			 s.SCHOOL_YEAR as [School Year],
 			 S.SIS_NUMBER as [Student APS ID],			 
 			 s.[STATE_STUDENT_NUMBER] as [State Student ID],
-			 ESE.[ELA Admin Date] as [ES ELA Admin Date],
-			 ESE.[PARCC ELA Proficiency Level] as [ES ELA Proficiency Level],
-			 ESE.[PARCC ELA Scaled Score] as [ES ELA Scaled Score],
+			 --ESE.[ELA Admin Date] as [ES ELA Admin Date],
+			 --ESE.[PARCC ELA Proficiency Level] as [ES ELA Proficiency Level],
 			 ESE.[Score Group Code] as [ES ELA Score Group Code],
 			 ESE.[Score Group Name] as [ES ELA Score Group Name],
-			 ESM.[ELA Admin Date] as [ES Math Admin Date],
-			 ESM.[PARCC ELA Proficiency Level] as [ES Math Proficiency Level],
-			 ESM.[PARCC ELA Scaled Score] as [ES Math Scaled Score],
-			 ESM.[Score Group Name]
+			 ESE.[PARCC ELA Scaled Score] as [ES ELA Scaled Score],
+			 --ESM.[ELA Admin Date] as [ES Math Admin Date],
+			 --ESM.[PARCC ELA Proficiency Level] as [ES Math Proficiency Level],
+			 ESM.[Score Group Code] as [ES Math Score Group Code],
+			 ESM.[Score Group Name] as [ES Math Score Group Name],
+			 ESM.[PARCC ELA Scaled Score] as [ES Math Scaled Score]
  
-			 --ROWNUM, FIRSTNAME, LASTNAME, SISNUMBER, TESTNAME,  PERFLEVEL, TESTSCORE, ADMINDATE           
 		FROM
 			StudentCTE S
 		left outer join
