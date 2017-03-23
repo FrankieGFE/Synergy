@@ -6,13 +6,12 @@ Uses CTEs for Reading and Math and
 then joins them together for the final
 results
 
-Change the date for primaryenrollmentdetailsasof
-to the last day of school for that school year
-Change the cast(datepart(year, studenttest.admin_date) as int) -1 
-to the school year you want
+Change the @AsOfDate to the last day of school for that school year
+Change the @TestYear to the school year you want
 
 */
-
+declare @AsOfDate datetime2 = '2016-05-25'
+declare @TestYear varchar(4) = '2015'
 ;with StudentCTE
 as
 (
@@ -22,7 +21,7 @@ select
 	bs.STATE_STUDENT_NUMBER
 	
 from
-	aps.PrimaryEnrollmentDetailsAsOf('2016-05-25') PED
+	aps.PrimaryEnrollmentDetailsAsOf(@AsOfDate) PED
 inner join
 	aps.BasicStudentWithMoreInfo bs
 on
@@ -30,7 +29,7 @@ on
 where
 	GRADE in ('09', '10', '11', '12')
 )
-
+--select * from StudentCTE
 ,English9CTE
 AS
 (
@@ -105,7 +104,7 @@ INNER JOIN
 ON
 	Person.PERSON_GU = StudentTest.STUDENT_GU
 LEFT JOIN
-	APS.PrimaryEnrollmentDetailsAsOf('2016-05-25') AS Enroll
+	APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS Enroll
 ON
 	StudentTest.STUDENT_GU = Enroll.STUDENT_GU	
 LEFT JOIN
@@ -124,9 +123,10 @@ WHERE
 	1 = 1
 	and test_name = 'PARCC HS ELA/L English 9'
 	and SCORE_DESCRIPTION = 'Raw'
-	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = 2015
+	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 =@TestYear
 	and PART_DESCRIPTION = 'ELA/L English 9'
 )
+--select * from English9CTE
 ,English10CTE
 AS
 (
@@ -201,7 +201,7 @@ INNER JOIN
 ON
 	Person.PERSON_GU = StudentTest.STUDENT_GU
 LEFT JOIN
-	APS.PrimaryEnrollmentDetailsAsOf('2016-05-25') AS Enroll
+	APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS Enroll
 ON
 	StudentTest.STUDENT_GU = Enroll.STUDENT_GU	
 LEFT JOIN
@@ -220,7 +220,7 @@ WHERE
 	1 = 1
 	and test_name = 'PARCC HS ELA/L English 10'
 	and SCORE_DESCRIPTION = 'Raw'
-	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = 2015
+	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = @TestYear
 	and PART_DESCRIPTION = 'ELA/L English 10'
 )
 ,English11CTE
@@ -297,7 +297,7 @@ INNER JOIN
 ON
 	Person.PERSON_GU = StudentTest.STUDENT_GU
 LEFT JOIN
-	APS.PrimaryEnrollmentDetailsAsOf('2016-05-25') AS Enroll
+	APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS Enroll
 ON
 	StudentTest.STUDENT_GU = Enroll.STUDENT_GU	
 LEFT JOIN
@@ -316,7 +316,7 @@ WHERE
 	1 = 1
 	and test_name = 'PARCC HS ELA/L English 11'
 	and SCORE_DESCRIPTION = 'Raw'
-	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = 2015
+	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = @TestYear
 	and PART_DESCRIPTION = 'ELA/L English 11'
 )
 
@@ -394,7 +394,7 @@ INNER JOIN
 ON
 	Person.PERSON_GU = StudentTest.STUDENT_GU
 LEFT JOIN
-	APS.PrimaryEnrollmentDetailsAsOf('2016-05-25') AS Enroll
+	APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS Enroll
 ON
 	StudentTest.STUDENT_GU = Enroll.STUDENT_GU	
 LEFT JOIN
@@ -413,7 +413,7 @@ WHERE
 	1 = 1
 	and test_name = 'PARCC ELA 11 Reading Subscore'
 	and SCORE_DESCRIPTION = 'Raw'
-	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = 2015
+	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = @TestYear
 	and PART_DESCRIPTION = 'Parcc ELA 11 Reading Subtest'
 )
 ,ELAWriting11
@@ -490,7 +490,7 @@ INNER JOIN
 ON
 	Person.PERSON_GU = StudentTest.STUDENT_GU
 LEFT JOIN
-	APS.PrimaryEnrollmentDetailsAsOf('2016-05-25') AS Enroll
+	APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS Enroll
 ON
 	StudentTest.STUDENT_GU = Enroll.STUDENT_GU	
 LEFT JOIN
@@ -509,7 +509,7 @@ WHERE
 	1 = 1
 	and test_name = 'PARCC ELA 11 Writing Subscore'
 	and SCORE_DESCRIPTION = 'Raw'
-	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = 2015
+	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = @TestYear
 	and PART_DESCRIPTION = 'Parcc ELA 11 Writing Subtest'
 )
 
@@ -589,7 +589,7 @@ INNER JOIN
 ON
 	Person.PERSON_GU = StudentTest.STUDENT_GU
 LEFT JOIN
-	APS.PrimaryEnrollmentDetailsAsOf('2016-05-25') AS Enroll
+	APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS Enroll
 ON
 	StudentTest.STUDENT_GU = Enroll.STUDENT_GU	
 LEFT JOIN
@@ -608,7 +608,7 @@ WHERE
 	1 = 1
     AND TEST_NAME = 'PARCC HS Algebra 1'
 	and SCORE_DESCRIPTION = 'Raw'
-	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = 2015
+	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = @TestYear
 	and PART_DESCRIPTION = 'Algebra 1'
 )
 ,AlgebraIICTE
@@ -685,7 +685,7 @@ INNER JOIN
 ON
 	Person.PERSON_GU = StudentTest.STUDENT_GU
 LEFT JOIN
-	APS.PrimaryEnrollmentDetailsAsOf('2016-05-25') AS Enroll
+	APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS Enroll
 ON
 	StudentTest.STUDENT_GU = Enroll.STUDENT_GU	
 LEFT JOIN
@@ -704,7 +704,7 @@ WHERE
 	1 = 1
     AND TEST_NAME = 'PARCC HS Algebra II'
 	and SCORE_DESCRIPTION = 'Raw'
-	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = 2015
+	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = @TestYear
 	and PART_DESCRIPTION = 'PARCC HS Algebra II'
 )
 ,GeometryCTE
@@ -781,7 +781,7 @@ INNER JOIN
 ON
 	Person.PERSON_GU = StudentTest.STUDENT_GU
 LEFT JOIN
-	APS.PrimaryEnrollmentDetailsAsOf('2016-05-25') AS Enroll
+	APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS Enroll
 ON
 	StudentTest.STUDENT_GU = Enroll.STUDENT_GU	
 LEFT JOIN
@@ -800,7 +800,7 @@ WHERE
 	1 = 1
     AND TEST_NAME = 'PARCC HS Geometry'
 	and SCORE_DESCRIPTION = 'Raw'
-	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = 2015
+	and cast(datepart(year, STUDENTTEST.ADMIN_DATE) as int) -1 = @TestYear
 	and PART_DESCRIPTION = 'PARCC HS Geometry'
 )
 --select * from GeometryCTE
@@ -808,58 +808,41 @@ WHERE
 as
 	(
 		select
+			 s.SCHOOL_YEAR as [School Year],
 			 S.SIS_NUMBER as [Student APS ID],			 
 			 s.[STATE_STUDENT_NUMBER] as [State Student ID],
-			 E9.[School Year] as [English 9 School Year], 
-			 E9.[PARCC ELA Proficiency Level] as [English 9 Proficiency Level],
-			 E9.[PARCC ELA Scaled Score] as [English 9 Scaled Score],
-			 e9.[ELA Admin Date] as [English 9 Admin Date],
+			 --E9.[PARCC ELA Proficiency Level] as [English 9 Proficiency Level],
 			 e9.[Score Group Code] as [English 9 Score Group Code],
 			 e9.[Score Group Name] as [English 9 Score Group Name],
-			 E10.[School Year] as [English 10 School Year],
-			 e10.[PARCC ELA Proficiency Level] as [English 10 Proficiency Level],
-			 E10.[PARCC ELA Scaled Score] as [English 10 Scaled Score],
-			 e10.[ELA Admin Date] as [English 10 Admin Date],
+			 E9.[PARCC ELA Scaled Score] as [English 9 Scaled Score],
+			 --e10.[PARCC ELA Proficiency Level] as [English 10 Proficiency Level],
 			 e10.[Score Group Code] as [English 10 Score Group Code],
 			 e10.[Score Group Name] as [English 10 Score Group Name],
-			 E11.[School Year] as [English 11 School Year],
-			 e11.[PARCC ELA Proficiency Level] as [English 11 Proficiency Level],
-			 e11.[PARCC ELA Scaled Score] as [English 11 Scaled Score],
-			 e11.[ELA Admin Date] as [English 11 Admin Date],
+			 E10.[PARCC ELA Scaled Score] as [English 10 Scaled Score],
+			 --e11.[PARCC ELA Proficiency Level] as [English 11 Proficiency Level],
 			 e11.[Score Group Code] as [English 11 Score Group Code],
 			 e11.[Score Group Name] as [English 11 Score Group Name],
-			 e11r.[School Year] as [English 11 Reading Subtest School Year],
-			 e11r.[PARCC ELA Proficiency Level] as [English 11 Reading Subtest Proficiency Level],
-			 e11r.[PARCC ELA Scaled Score] as [English 11 Reading Subtest Scaled Score],
+			 e11.[PARCC ELA Scaled Score] as [English 11 Scaled Score],
+			 --e11r.[PARCC ELA Proficiency Level] as [English 11 Reading Subtest Proficiency Level],
 			 e11r.[Score Group Code] as [English 11 Reading Score Group Code],
 			 e11r.[Score Group Name] as [English 11 Reading Score Group Name],
-			 e11w.[School Year] as [English 11 Writing Subtest School Year],
-			 e11w.[PARCC ELA Proficiency Level] as [English 11 Writing Subtest Proficiency Level],
-			 e11w.[PARCC ELA Scaled Score] as [English 11 Writing Subtest Scaled Score],
+			 e11r.[PARCC ELA Scaled Score] as [English 11 Reading Subtest Scaled Score],
+			 --e11w.[PARCC ELA Proficiency Level] as [English 11 Writing Subtest Proficiency Level],
 			 e11w.[Score Group Code] as [English 11 Writing Score Group Code],
 			 e11w.[Score Group Name] as [English 11 Writing Score Group Name],
-
-			 A1.[School Year] as [Algebra I School Year],
-			 a1.[PARCC Math Proficiency Level] as [Algebra I Proficiency Level],
-			 a1.[PARCC Math Scaled Score] as [Algebra I Scaled Score],
-			 a1.[Math Admin Date] as [Algebra I Admin Date],
+			 e11w.[PARCC ELA Scaled Score] as [English 11 Writing Subtest Scaled Score],
+			 --a1.[PARCC Math Proficiency Level] as [Algebra I Proficiency Level],
 			 a1.[Score Group Code] as [Algebra I Score Group Code],
 			 a1.[Score Group Name] as [Algebra I Score Group Name],
-			 a2.[School Year] as [Algebra II School Year],
-			 a2.[PARCC Math Proficiency Level] as [Algebra II Proficiency Level],
-			 a2.[PARCC Math Scaled Score] as [Algebra II Scaled Score],
-			 a2.[Math Admin Date] as [Algebra II Admin Date],
+			 a1.[PARCC Math Scaled Score] as [Algebra I Scaled Score],
+			 --a2.[PARCC Math Proficiency Level] as [Algebra II Proficiency Level],
 			 a2.[Score Group Code] as [Algebra II Score Group Code],
 			 a2.[Score Group Name] as [Algebra II Score Group Name],
-			 G.[School Year] as [Geometry School Year],
-			 g.[PARCC Math Proficiency Level] as [Geometry Proficiency Level],
-			 g.[PARCC Math Scaled Score] as [Geometry Scaled Score],
-			 g.[Math Admin Date] as [Geometry Admin Date],
+			 a2.[PARCC Math Scaled Score] as [Algebra II Scaled Score],
+			 --g.[PARCC Math Proficiency Level] as [Geometry Proficiency Level],
 			 g.[Score Group Code] as [Geometry Score Group Code],
-			 g.[Score Group Name] as [Geometry Score Group Name]
-
- 
-			 --ROWNUM, FIRSTNAME, LASTNAME, SISNUMBER, TESTNAME,  PERFLEVEL, TESTSCORE, ADMINDATE           
+			 g.[Score Group Name] as [Geometry Score Group Name],
+			 g.[PARCC Math Scaled Score] as [Geometry Scaled Score] 
 		FROM
 			StudentCTE S
 		left outer join
