@@ -108,8 +108,8 @@ FROM
 
 
 WHERE
-       TEST_NAME like '%NMAPA%'
-	   AND ADMIN_DATE = '2015-10-01 00:00:00'
+       TEST_NAME like '%SBA%'
+	   AND ADMIN_DATE = '2016-10-01 00:00:00'
 	   --AND PART_DESCRIPTION LIKE '%Science%'
 
        --AND SIS_NUMBER = '102785458'
