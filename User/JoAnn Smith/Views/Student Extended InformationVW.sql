@@ -1,12 +1,13 @@
 USE [ST_Production]
 GO
 
-/****** Object:  View [APS].[ExtendedStudentInformation]    Script Date: 3/30/2017 9:49:20 AM ******/
+/****** Object:  View [APS].[ExtendedStudentInformation]    Script Date: 3/30/2017 10:53:36 AM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -106,6 +107,7 @@ AS
 
  SELECT 
 	STUDENT_GU
+	,PARENT_GU
 	,MAX(CASE WHEN RN = 1 THEN PARENT_GU END) AS P1GU
 	,MAX(CASE WHEN RN = 1 THEN LAST_NAME END) AS P1LN
 	,MAX(CASE WHEN RN = 1 THEN FIRST_NAME END) AS P1FN
@@ -150,7 +152,7 @@ AS
 	   PARENT_GU = PER.PERSON_GU
        ) AS ST
        
-	  GROUP BY STUDENT_GU 
+	  GROUP BY STUDENT_GU, PARENT_GU
 	
 )
 
@@ -163,6 +165,7 @@ SELECT
 	row_number() over (partition by s.student_gu order by SIS_NUMBER) as RN,
 	S.STUDENT_GU,
 	s.ORGANIZATION_GU,
+	I.PARENT_GU,
 	S.SCHOOL_NAME,
 	S.GRADE_LEVEL,
 	S.FIRST_NAME + ' ' + S.LAST_NAME AS STU_NAME,
@@ -212,6 +215,7 @@ ON
 SELECT
 	ST.STUDENT_GU,
 	ST.ORGANIZATION_GU,
+	ST.PARENT_GU,
 	ST.SCHOOL_NAME,
 	ST.GRADE_LEVEL,
 	ST.STU_NAME,
@@ -249,6 +253,6 @@ SELECT
 FROM STUPAR st where RN = 1
 
 
-GO
 
+GO
 
