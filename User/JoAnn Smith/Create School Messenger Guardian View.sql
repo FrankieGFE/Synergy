@@ -1,7 +1,7 @@
-USE [ST_Daily]
+USE [ST_Production]
 GO
 
-/****** Object:  View [SchoolMessenger].[Parent]    Script Date: 3/7/2017 8:22:48 AM ******/
+/****** Object:  View [SchoolMessenger].[Guardian]    Script Date: 4/12/2017 8:49:53 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -9,8 +9,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE VIEW [SchoolMessenger].[Guardian] AS
 
+CREATE VIEW [SchoolMessenger].[Guardian] AS
+--get all students with parent(s) gu for the current school year
 with GuardianCTE
 as
 (
@@ -43,19 +44,6 @@ JOIN
 ON
 	 per.PERSON_GU = stupar.PARENT_GU and stupar.CONTACT_ALLOWED = 'Y'
 )
-
---now get the unique parent gu and student gu combinations
-,
-InterimCTE
-as
-(
-select
-	DISTINCT student_gu, parent_gu
-
-from
-	GuardianCTE GD
-)
-
 --now get the Guardian Category, First/LastName, Home Language, Phone and Email
 ,DetailsCTE
 as
@@ -91,27 +79,11 @@ select
 	end as [Guardian Category],
 	per.FIRST_NAME AS [Parent First Name],
 	per.LAST_NAME  AS [Parent Last Name],
-	ph.phone,
-	ph.phone_type,
-	case	
-		when PRIMARY_PHONE_TYPE = 'H'
-			then 'Home Phone'
-		when PRIMARY_PHONE_TYPE = 'C' 
-			then 'Cell Phone'
-		when PRIMARY_PHONE_TYPE = 'M'
-			then 'Mobile Phone'
-		when PRIMARY_PHONE_TYPE = 'P'
-			then 'Pager'
-		when PRIMARY_PHONE_TYPE = 'W'
-			then 'Work Phone'
-	end as [Primary Phone Type],
-
-	per.PRIMARY_PHONE_TYPE as [Phone Type],
 	ISNULL([Contact_Language].[VALUE_DESCRIPTION], 'English') AS [Home/Correspondence Language],
 	per.EMAIL
 
 from
-	InterimCTE I
+	GuardianCTE I
 inner  join 
 	rev.EPC_STU_PARENT stupar
 on
@@ -133,48 +105,147 @@ LEFT JOIN
 	APS.LookupTable ('K12', 'Language') AS [Contact_Language]	
 ON
 	ELL.[LANGUAGE_TO_HOME] = [Contact_Language].[VALUE_CODE]
+)
+-- get the distinct results from the
+,DistinctDetails
+as
+( 
+select * from DetailsCTE
+group by student_gu, parent_gu, ORDERBY, [Guardian Category], [Parent First Name], [Parent Last Name], [Home/Correspondence Language], EMAIL
+)
+--select * from DistinctDetails
+--where student_gu = '63C2A378-B235-48CE-8579-9FE6C16A22F9'
+
+,PHONECTE
+AS
+(
+--combine phone numbers in person table
+SELECT
+	PERSON_GU,
+	MAX(CASE WHEN RN = 1 THEN PHONE END) AS PHONE1,
+	MAX(CASE WHEN RN = 1 THEN PHONE_TYPE end) as PHONE1TYPE,
+	MAX(CASE WHEN RN = 2 THEN PHONE END) AS PHONE2,
+	MAX(CASE WHEN RN = 2 THEN PHONE_TYPE END) AS PHONE2TYPE,
+	MAX(CASE WHEN RN = 3 THEN PHONE END) AS PHONE3,
+	MAX(CASE WHEN RN = 3 THEN PHONE_TYPE END) AS PHONE3TYPE
+  FROM
+       (
+       SELECT 
+          PERSON_GU,
+		  PHONE,
+		  PHONE_TYPE
+		  ,ROW_NUMBER() OVER (PARTITION BY PERSON_GU ORDER BY PRIMARY_PHONE DESC, CONTACT_PHONE DESC ) AS RN
+       FROM
+       REV.REV_PERSON_PHONE 
+       ) AS ST
+       
+	  GROUP BY person_gu) 
+--select * from PHONECTE
+,DETAILSWITHPHONE
+AS
+(
+SELECT
+	PARENT_GU,
+	STUDENT_GU,
+	D.[Guardian Category],
+	D.[Parent First Name],
+	D.[Parent Last Name],
+	D.[Home/Correspondence Language],
+	D.EMAIL as [Email Address],
+	PHONE1 as [Phone Number 1],
+	PHONE1TYPE as [Phone Number 1 Type],
+	CASE
+		WHEN [PHONE1TYPE] = 'H' THEN 'Home Phone' 
+		WHEN [PHONE1TYPE] = 'C' THEN 'Cell Phone'
+		WHEN [PHONE1TYPE] = 'W' THEN 'Work Phone'
+	END as [Phone Type 1], 
+	PHONE2 as [Phone Number 2],
+	PHONE2TYPE as [Phone Number 2 Type],
+		CASE
+		WHEN [PHONE2TYPE] = 'H' THEN 'Home Phone'
+		WHEN [PHONE2TYPE] = 'C' THEN 'Cell Phone'
+		WHEN [PHONE2TYPE] = 'W' THEN 'Work Phone'
+	END as [Phone Type 2],
+
+	PHONE3 as [Phone Number 3],
+	PHONE3TYPE as [Phone Number 3 Type],
+			CASE
+		WHEN [PHONE3TYPE] = 'H' THEN 'Home Phone'
+		WHEN [PHONE3TYPE] = 'C' THEN 'Cell Phone'
+		WHEN [PHONE3TYPE] = 'W' THEN 'Work Phone'
+	END as [Phone Type 3], 
+
+	row_number() over (partition by parent_gu order by student_gu) as RN
+FROM
+	PHONECTE PH
+INNER JOIN
+	DistinctDetails D
+on
+	D.PARENT_GU = PH.PERSON_GU
 
 )
+--select * from DETAILSWITHPHONE	
 --now put together Guardian ID which is Adult-ID if the field is not null
 --or sis number plus orderby if the adult id is null
 ,
 IDCTE
 as
 (
-SELECT
-	 *
-FROM
-(
-	select
+select
+		d.STUDENT_GU,	
+		D.PARENT_GU,
 		BS.SIS_NUMBER as [Associated Student ID Number],
 		ISNULL(PAR.ADULT_ID, BS.SIS_NUMBER + ISNULL((CAST(ORDERBY AS NVARCHAR(2))),1)) AS [Guardian ID Number],
 		d.[Guardian Category],
 		D.[Parent First Name] AS [First Name],
 		D.[Parent Last Name] as [Last Name],
-		d.[Primary Phone Type],
-		d.[PHONE] AS Phone,
 		d.[Home/Correspondence Language],
-		d.EMAIL as [Email Address]			
-	from
-		DetailsCTE D
-	inner join
-		aps.BasicStudent bs
-	on
-		d.STUDENT_GU = bs.STUDENT_GU
-	INNER JOIN
-		REV.EPC_PARENT PAR
-	ON PAR.PARENT_GU = D.PARENT_GU
-	) AS s	
-	PIVOT(
-		MAX(Phone) 
-		FOR [Primary Phone Type] IN ([Cell Phone], [Home Phone], [Mobile Phone], [Work Phone], [Pager])
-		)
-		as pivtable	
+		d.EMAIL as [Email Address],
+		ph.[Phone Number 1],
+		ph.[Phone Type 1],
+		ph.[Phone Number 1 Type],
+		ph.[Phone Number 2],
+		ph.[Phone Type 2],
+		ph.[Phone Number 3],
+		ph.[Phone Type 3],
+		ROW_NUMBER() OVER (PARTITION BY D.PARENT_GU ORDER BY BS.SIS_NUMBER) AS RN
+		
+from
+	DistinctDetails D
+inner join
+	aps.BasicStudent bs
+on
+	d.STUDENT_GU = bs.STUDENT_GU
+INNER JOIN
+	REV.EPC_PARENT PAR
+ON PAR.PARENT_GU = D.PARENT_GU
+inner join
+	DETAILSWITHPHONE PH
+on
+	PH.PARENT_GU = par.PARENT_GU
 )
-select * from IDCTE
+select
+	I.[Associated Student ID Number],
+	I.[Guardian ID Number],
+	I.[Guardian Category],
+	I.[First Name],
+	I.[Last Name],
+	I.[Home/Correspondence Language],
+	I.[Email Address],
+	I.[Phone Number 1],
+	I.[Phone Type 1],
+	I.[Phone Number 2],
+	I.[Phone Type 2],
+	I.[Phone Number 3],
+	I.[Phone Type 3]
+
+from
+	IDCTE i
+where
+	rn = 1
+
+
 
 GO
-
-
 
 
