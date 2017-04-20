@@ -6,7 +6,7 @@ GO
 DECLARE @AsOfDate AS DATETIME = '2014-12-15'
 	   
 
-SELECT FINAL.*
+SELECT DISTINCT FINAL.*
 ,CASE 
 
 	WHEN TEST_NAME = 'ACCESS' AND PERFORMANCE_LEVEL = 'ENTER' THEN 'ENTERING' 
@@ -57,7 +57,7 @@ FROM (
 			WHEN GRADE IN ('C1', 'C2', 'C3', 'C4', 'T1', 'T2', 'T3', 'T4') THEN 'Continuing Special Education Student'
 		ELSE GRADE END AS GRADE
 
-		
+			,PHLOTE AS ORIGINAL_PHLOTE
 		, CASE 
 			WHEN PHLOTE = 'N' AND PERFORMANCE_LEVEL != '' THEN 'Y' 
 		ELSE PHLOTE END AS PHLOTE
@@ -65,7 +65,7 @@ FROM (
 
 		--,PHLOTE
 
-		
+		,[ENGLISH PROFICIENCY] AS ORIGINAL_ENGLISH_PROF
 		,CASE 
 				
 				WHEN [ENGLISH PROFICIENCY] = '' AND IS_ELL = 0 AND TEST_NAME NOT IN ('WAPT', 'SCREENER', 'PRE-LAS') AND ADMIN_DATE < '20120630' THEN 'FEPE'
@@ -91,7 +91,7 @@ FROM (
 		, PERFORMANCE_LEVEL
 		, TEST_NAME
 		, TEST_SCORE
-		, SCORE_DESCRIPTION
+		--, SCORE_DESCRIPTION
 
 		, [English Model]
 		, [Bilingual Model]
@@ -112,7 +112,8 @@ FROM (
 		, DIPLOMA_TYPE
 
 		,DROPOUT
-
+		,SPED
+		,GIFTED
 	
 	
 	 FROM (
@@ -157,14 +158,14 @@ FROM (
 		END AS [ENGLISH PROFICIENCY]
 
 		,ALS.STATE_STUDENT_NUMBER
-	    ,ENR.YEAR_END_STATUS
+	    ,CASE WHEN YEARENDSTATUS.STUDENT_GU IS NULL THEN 'NO ENROLLMENT FOUND - DUP STATEID' ELSE YEARENDSTATUS.YEAR_END_STATUS END AS YEAR_END_STATUS
 		,CHILD_FIRST_LANGUAGE
 		,BS.HOME_LANGUAGE AS PRIMARY_LANGUAGE
 
 		,ISNULL(ACCESS.PERFORMANCE_LEVEL,'') AS PERFORMANCE_LEVEL
 		,ISNULL(ACCESS.TEST_NAME,'')  AS TEST_NAME
 		,ISNULL(ACCESS.TEST_SCORE,'')  AS TEST_SCORE
-		,ISNULL(ACCESS.SCORE_DESCRIPTION,'')  AS SCORE_DESCRIPTION
+		--,ISNULL(ACCESS.SCORE_DESCRIPTION,'')  AS SCORE_DESCRIPTION
 		,ACCESS.IS_ELL
 		,ACCESS.ADMIN_DATE
 /*
@@ -201,6 +202,9 @@ FROM (
 		,CASE WHEN GRADS.DIPLOMA_TYPE IS NOT NULL THEN DIPLOMA_TYPE ELSE '' END AS DIPLOMA_TYPE
 
 		,CASE WHEN DROPOUT.State_ID IS NOT NULL THEN 'Y' ELSE 'N' END AS DROPOUT
+
+		,CASE WHEN SPED.PRIMARY_DISABILITY_CODE = 'GI' THEN 'Y' ELSE '' END AS GIFTED
+		,CASE WHEN SPED.SIS_NUMBER IS NOT NULL THEN SPED.PRIMARY_DISABILITY_CODE ELSE '' END AS SPED
 
 
 	    FROM 
@@ -270,6 +274,26 @@ APS.PrimaryEnrollmentDetailsAsOf('2014-12-15') AS ENR
 ON
 ALS.STUDENT_GU = ENR.STUDENT_GU
 ----------------------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------------------------
+
+--GET LAST ENROLLMENT FOR YEAR END STATUS - G, P, R
+LEFT JOIN 
+(
+SELECT STUDENT_GU, YEAR_END_STATUS FROM 
+APS.LatestPrimaryEnrollmentInYear('26F066A3-ABFC-4EDB-B397-43412EDABC8B')
+) AS YEARENDSTATUS
+
+ON
+YEARENDSTATUS.STUDENT_GU = ALS.STUDENT_GU
+
+
+------------------------------------------------------------------------------------------------
+
+
+
+
 
 --PULL STUDENTS FIRST LANGUAGE
 LEFT JOIN 
@@ -542,8 +566,58 @@ ON
 DROPOUT.State_ID = ALS.STATE_STUDENT_NUMBER
 
 
+
+-----------------------------------------------------------------------------------------------
+
+--PULL SPED AND GIFTED
+-------------------------------------------------------------------------------------------------
+
+
+LEFT JOIN 
+	(
+SELECT
+            CurrentSPED.SIS_NUMBER
+            ,CurrentSPED.PRIMARY_DISABILITY_CODE
+FROM   
+            APS.PrimaryEnrollmentsAsOf(GETDATE()) AS Enrollment
+            LEFT JOIN
+            (
+            SELECT
+                        STU.SIS_NUMBER
+						,SPED.STUDENT_GU
+                        ,PRIMARY_DISABILITY_CODE
+            FROM
+                        REV.EP_STUDENT_SPECIAL_ED AS SPED
+						INNER JOIN
+						rev.EPC_STU AS STU
+						ON
+						SPED.STUDENT_GU = STU.STUDENT_GU
+
+            WHERE
+                        NEXT_IEP_DATE IS NOT NULL
+                        AND (
+                                    EXIT_DATE IS NULL 
+                                    OR EXIT_DATE >= CONVERT(DATE, GETDATE())
+                                    )
+            ) AS CurrentSPED
+            ON
+            Enrollment.STUDENT_GU = CurrentSPED.STUDENT_GU
+WHERE 
+            CurrentSPED.STUDENT_GU IS NOT NULL
+	)
+
+AS SPED
+ON
+SPED.SIS_NUMBER = ALS.SIS_NUMBER
+
+
+
 ) AS T1
+
+
 WHERE
 SCHOOL NOT IN ('901', '910', '983', '973')
 
 ) AS FINAL
+
+
