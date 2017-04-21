@@ -577,7 +577,7 @@ SELECT
             CurrentSPED.SIS_NUMBER
             ,CurrentSPED.PRIMARY_DISABILITY_CODE
 FROM   
-            APS.PrimaryEnrollmentsAsOf(GETDATE()) AS Enrollment
+            APS.PrimaryEnrollmentsAsOf(@AsOfDate) AS Enrollment
             LEFT JOIN
             (
             SELECT
@@ -595,7 +595,7 @@ FROM
                         NEXT_IEP_DATE IS NOT NULL
                         AND (
                                     EXIT_DATE IS NULL 
-                                    OR EXIT_DATE >= CONVERT(DATE, GETDATE())
+                                    OR EXIT_DATE >= CONVERT(DATE, @AsOfDate)
                                     )
             ) AS CurrentSPED
             ON

@@ -233,7 +233,7 @@ SELECT
 
 
 
-	,CASE WHEN Dropout.[State_ID] IS NOT NULL THEN 'Y' ELSE '' END AS Dropout
+	,CASE WHEN Dropout.[State ID] IS NOT NULL THEN 'Y' ELSE '' END AS Dropout
 
 	/*--THESE ARE THE BILINGUAL TAGS FROM STARS PROGRAMS FACT 
 	,ISNULL(CASE WHEN BilingualModel.[Field5] = 'ESL' AND [Field18] = 9  THEN 'X' END,'') AS ESL
@@ -474,10 +474,10 @@ LEFT JOIN
 		LEFT JOIN 
 		(
 		SELECT * FROM 
-	OPENROWSET ('MSDASQL', 'Driver={Microsoft Access Text Driver (*.txt, *.csv)};DBQ=E:\SQLWorkingFiles;', 'SELECT * from "Dropout2014.csv"')
+	OPENROWSET ('MSDASQL', 'Driver={Microsoft Access Text Driver (*.txt, *.csv)};DBQ=E:\SQLWorkingFiles;', 'SELECT * from "Dropout2013.csv"')
 		) AS Dropout
 
-		ON Dropout.[State_ID]  = ALS.STATE_ID
+		ON Dropout.[State ID]  = ALS.STATE_ID
 
 
 LEFT JOIN
@@ -603,6 +603,8 @@ MODELTAGS.ID_NBR = ALS.ID_NBR
 	AND TN010.DST_NBR = TN082.DST_NBR
 	WHERE
 	TN010.DST_NBR = 1
+	--AND GRAD_DT BETWEEN '20130730' AND '20140730'
+	AND GRAD_DT < '20140730'
 ) AS GRADS
 
 		ON
@@ -675,7 +677,7 @@ SELECT ID_NBR, [Primary Disability]
 FROM 
 APS.SpedAsOf(@AsOfDate)
 WHERE
-DST_NBR = 1 AND SCH_YR = 2013
+DST_NBR = 1 AND SCH_YR = 2014
 ) AS SPED
 ON
 SPED.ID_NBR = ALS.ID_NBR

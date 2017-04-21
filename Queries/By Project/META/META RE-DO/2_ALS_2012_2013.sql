@@ -58,7 +58,7 @@ DECLARE @EVALDate AS DATETIME = '2013-05-22'
 
 --  CHANGE EOY Stars File FOR GRAD DATA HARDCODED IN SUBSELECT = '2014-06-01'
 
-SELECT 
+SELECT DISTINCT
 	FINALFINAL.*
 	,CASE 
 WHEN [Most Recent Test] = 'ACCESS' AND [Ell Level] = 'Entering' THEN 'ENTERING' 
@@ -242,7 +242,7 @@ SELECT
 
 	--,CASE WHEN Retained.ID_NBR IS NOT NULL THEN 'Y' ELSE '' END AS Retained
 
-	,CASE WHEN Dropout.[State ID] IS NOT NULL THEN 'Y' ELSE '' END AS Dropout
+	,CASE WHEN Dropout.[Student ID] IS NOT NULL THEN 'Y' ELSE '' END AS Dropout
 
 	/*--THESE ARE THE BILINGUAL TAGS FROM STARS PROGRAMS FACT 
 	,ISNULL(CASE WHEN BilingualModel.[Field5] = 'ESL' AND [Field18] = 9  THEN 'X' END,'') AS ESL
@@ -486,10 +486,10 @@ LEFT JOIN
 		LEFT JOIN 
 		(
 		SELECT * FROM 
-	OPENROWSET ('MSDASQL', 'Driver={Microsoft Access Text Driver (*.txt, *.csv)};DBQ=E:\SQLWorkingFiles;', 'SELECT * from "Dropout2013.csv"')
+	OPENROWSET ('MSDASQL', 'Driver={Microsoft Access Text Driver (*.txt, *.csv)};DBQ=E:\SQLWorkingFiles;', 'SELECT * from "Dropout2012.csv"')
 		) AS Dropout
 
-		ON Dropout.[State ID]  = ALS.STATE_ID
+		ON Dropout.[Student ID]  = ALS.STATE_ID
 
 
 /**********************************************************************
@@ -633,6 +633,7 @@ MODELTAGS.ID_NBR = ALS.ID_NBR
 	AND TN010.DST_NBR = TN082.DST_NBR
 WHERE
 TN010.DST_NBR = 1
+AND GRAD_DT < '20130730'
 		) AS GRADS
 
 		ON

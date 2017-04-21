@@ -1,12 +1,14 @@
 
 
---2014-2015 ---------------------------------------------------------------------------------------
-SELECT SIS_NUMBER, ORGANIZATION_NAME, YEAR_END_STATUS, LEAVE_DATE FROM 
+--2014-2015 -------------------------------------------------------------------------------------------------------------
+SELECT SIS_NUMBER, ORGANIZATION_NAME, YEAR_END_STATUS, LEAVE_DATE, SUMMER_WITHDRAWL_CODE, SUMMER_WITHDRAWL_DATE 
+FROM 
 APS.LatestPrimaryEnrollmentInYear('26F066A3-ABFC-4EDB-B397-43412EDABC8B') AS LASTENROLL
 INNER JOIN 
 REV.REV_ORGANIZATION AS ORG
 ON
 LASTENROLL.ORGANIZATION_GU = ORG.ORGANIZATION_GU
+
 
 SELECT 
 YEAR_END_STATUS, COUNT (*) AS TOTAL_COUNT
@@ -17,10 +19,11 @@ REV.REV_ORGANIZATION AS ORG
 ON
 LASTENROLL.ORGANIZATION_GU = ORG.ORGANIZATION_GU
 GROUP BY YEAR_END_STATUS
---------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 
 --2015-2016
-SELECT SIS_NUMBER, ORGANIZATION_NAME, YEAR_END_STATUS, LEAVE_DATE FROM 
+SELECT SIS_NUMBER, ORGANIZATION_NAME, YEAR_END_STATUS, LEAVE_DATE, SUMMER_WITHDRAWL_CODE, SUMMER_WITHDRAWL_DATE 
+FROM 
 APS.LatestPrimaryEnrollmentInYear('BCFE2270-A461-4260-BA2B-0087CB8EC26A')AS LASTENROLL
 INNER JOIN 
 REV.REV_ORGANIZATION AS ORG
@@ -36,12 +39,14 @@ REV.REV_ORGANIZATION AS ORG
 ON
 LASTENROLL.ORGANIZATION_GU = ORG.ORGANIZATION_GU
 GROUP BY YEAR_END_STATUS
---------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------
 
---------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------
 
 --2016-2017
-SELECT SIS_NUMBER, ORGANIZATION_NAME, YEAR_END_STATUS, LEAVE_DATE FROM 
+SELECT SIS_NUMBER, ORGANIZATION_NAME, YEAR_END_STATUS, LEAVE_DATE, SUMMER_WITHDRAWL_CODE, SUMMER_WITHDRAWL_DATE
+
+ FROM 
 APS.LatestPrimaryEnrollmentInYear('F7D112F7-354D-4630-A4BC-65F586BA42EC')AS LASTENROLL
 INNER JOIN 
 REV.REV_ORGANIZATION AS ORG
@@ -57,5 +62,5 @@ REV.REV_ORGANIZATION AS ORG
 ON
 LASTENROLL.ORGANIZATION_GU = ORG.ORGANIZATION_GU
 GROUP BY YEAR_END_STATUS
---------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
 
