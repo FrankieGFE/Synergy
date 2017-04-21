@@ -140,11 +140,11 @@ END AS [ENGLISH PROFICIENCY]
 
 ,STATE_ID
 
-,YEAR_END_STATUS
-,Retained
+ ,YEAR_END_STATUS
+		
 
-,[Students with first language Non-English]
-,[Students with first language English]
+
+,[Students First Language]
 ,PRIMARY_LANGUAGE
 
 ,[Ell Level]
@@ -163,9 +163,13 @@ END AS [ENGLISH PROFICIENCY]
 ,[Parent Refused]
 ,[Not Receiving Service]
 ,[Students that were Seniors at the start of the SY]
-,[Students that were Seniors at the start of the SY that graduated]
-,[Students that were Seniors at the start of the SY that earned a Career Diploma]
+,GRADUATED
+,DIPLOMA_TYPE
+--,[Students that were Seniors at the start of the SY that earned a Career Diploma]
 ,Dropout
+,GIFTED
+,SPED
+
 
 FROM (
 
@@ -207,14 +211,17 @@ SELECT
 		--,ISNULL(CASE WHEN SBA_MATH.TEST_SUB IN ('MATE','MATS') THEN SBA_MATH.SCORE_2 END, '') AS SBA_MATH_SS
 		,ALS.STATE_ID 
 		
-		, CASE WHEN ENROLL.END_STAT = 57 THEN 'P' 
+	
+	
+	,CASE WHEN ENROLL.ID_NBR IS NULL THEN 'NO ENROLLMENT FOUND - DUP STATEID' 
+		WHEN ENROLL.END_STAT = 57 THEN 'P' 
 				WHEN ENROLL.END_STAT = 63 THEN 'R'
-				WHEN ENROLL.END_STAT = 59 THEN 'G'
-				ELSE ''
-			END AS YEAR_END_STATUS
+				WHEN ENROLL.END_STAT IN (59,60) THEN 'G'
+			ELSE ''
+	END AS YEAR_END_STATUS
 
-		,CASE WHEN Phlote2.HLS_Q_2 != 0 THEN 'Y' ELSE '' END AS [Students with first language Non-English]
-		,CASE WHEN Phlote2.HLS_Q_2 = 0 THEN 'Y' ELSE '' END AS [Students with first language English]
+
+			,ISNULL(FRSTLANG.LANG_DESCR, '') AS [Students First Language]
 
 	,ISNULL([ELL Level].[ELL Level],'') AS [Ell Level]
 	,ISNULL([ELL Level].[Most Recent Test],'') AS [Most Recent Test]
@@ -224,9 +231,9 @@ SELECT
 
 	,Language.LANG_DESCR AS PRIMARY_LANGUAGE
 
-	,CASE WHEN Retained.ID_NBR IS NOT NULL THEN 'Y' ELSE '' END AS Retained
 
-	,CASE WHEN Dropout.[State_ID] IS NOT NULL THEN 'Y' ELSE '' END AS Dropout
+
+	,CASE WHEN Dropout.[State ID] IS NOT NULL THEN 'Y' ELSE '' END AS Dropout
 
 	/*--THESE ARE THE BILINGUAL TAGS FROM STARS PROGRAMS FACT 
 	,ISNULL(CASE WHEN BilingualModel.[Field5] = 'ESL' AND [Field18] = 9  THEN 'X' END,'') AS ESL
@@ -253,9 +260,13 @@ SELECT
 
 	,CASE WHEN SENIORS.ID_NBR IS NOT NULL THEN 'Y' ELSE '' END AS [Students that were Seniors at the start of the SY]
 
-	,CASE WHEN GRADS.GRAD IS NOT NULL THEN 'Y' ELSE '' END AS [Students that were Seniors at the start of the SY that graduated]
+	, GRADS.GRAD  AS GRADUATED
 
-	,CASE WHEN CAREER.CAREERDIP IS NOT NULL THEN 'Y' ELSE '' END AS [Students that were Seniors at the start of the SY that earned a Career Diploma]
+	--,CASE WHEN CAREER.CAREERDIP IS NOT NULL THEN 'Y' ELSE '' END AS [Students that were Seniors at the start of the SY that earned a Career Diploma]
+	,CAREER.DIPLOMA_TYPE
+
+	,CASE WHEN SPED.[Primary Disability] = 'GI' THEN 'Y' ELSE '' END AS GIFTED
+	,CASE WHEN SPED.ID_NBR IS NOT NULL THEN SPED.[Primary Disability] ELSE '' END AS SPED
 
 
 	FROM
@@ -426,7 +437,11 @@ LEFT JOIN
 DBTSIS.NM030 AS Phlote2 WITH (NOLOCK)
 ON
 Phlote.NM030_Id = Phlote2._Id
-
+LEFT JOIN 
+DBTSIS.CE030_V AS FRSTLANG
+ON
+FRSTLANG.DST_NBR = 1 AND
+FRSTLANG.LANG_CD = Phlote2.HLS_Q_2
 
 /**********************************************************************
 		PULL ACCESS SCORES
@@ -450,37 +465,6 @@ LEFT JOIN
 
 
 
-/**********************************************************************
-		Get Retained
-***********************************************************************/	
-LEFT JOIN 
-(
-	SELECT 
-		Enrolled.ID_NBR
-		,Enrolled.DST_NBR
-	FROM
-		(
-		SELECT
-			ROW_NUMBER() OVER (PARTITION BY DST_NBR, ID_NBR ORDER BY BEG_ENR_DT DESC) AS RN
-			,DST_NBR
-			,ID_NBR
-			,SCH_YR
-		FROM
-			DBTSIS.ST010_V
-		WHERE
-			 DST_NBR = 1
-			 AND NONADA_SCH != 'X' 
-			 AND SCH_YR = @SchoolYear
-			 AND CAST(BEG_ENR_DT AS VARCHAR) <= @AsOfDate
-			 AND END_ENR_DT NOT LIKE '%0000'
-			 AND END_STAT = 63
-		) AS Enrolled
-	WHERE
-		RN = 1
-	) AS Retained
-	ON
-	Phlote.DST_NBR = Retained.DST_NBR
-	AND Phlote.ID_NBR = Retained.ID_NBR
 
 /************************************************************************************************
 --READ FILE OF DROPOUTS FROM DOLORES/STATE PED
@@ -490,10 +474,10 @@ LEFT JOIN
 		LEFT JOIN 
 		(
 		SELECT * FROM 
-	OPENROWSET ('MSDASQL', 'Driver={Microsoft Access Text Driver (*.txt, *.csv)};DBQ=E:\SQLWorkingFiles;', 'SELECT * from "Dropout2014.csv"')
+	OPENROWSET ('MSDASQL', 'Driver={Microsoft Access Text Driver (*.txt, *.csv)};DBQ=E:\SQLWorkingFiles;', 'SELECT * from "Dropout2013.csv"')
 		) AS Dropout
 
-		ON Dropout.[State_ID]  = ALS.STATE_ID
+		ON Dropout.[State ID]  = ALS.STATE_ID
 
 
 LEFT JOIN
@@ -607,51 +591,21 @@ MODELTAGS.ID_NBR = ALS.ID_NBR
 	LEFT JOIN
 
 (		
-		SELECT 
-		CASE WHEN CensusState.STATE_ID IS NOT NULL THEN CensusState.ID_NBR ELSE
-				CASE WHEN CensusID.ID_NBR IS NOT NULL THEN CensusID.ID_NBR ELSE
-				CASE WHEN CensusPrior.PRIOR_ID IS NOT NULL THEN CAST(CensusPrior.ID_NBR AS INT)
-				ELSE '' END END END 
-				AS ID_NBR
-		,STUDENT.[DIPLOMA TYPE CODE] AS GRAD 
-		FROM
-				--STARS 40-day Student Snapshot				
-				[RDAVM.APS.EDU.ACTD].[db_STARS_History].[dbo].[STUD_SNAPSHOT] AS STARS
-
-				--READ STUDENT DATABASE END OF YEAR FOR GRAD DATA
-				INNER JOIN
-				[RDAVM.APS.EDU.ACTD].[db_STARS_History].[dbo].[STUDENT] AS STUDENT
-				ON
-				STARS.[STUDENT ID] = STUDENT.[STUDENT ID]
-				AND STUDENT.[Period] = '2014-06-01'
-				AND STUDENT.[DISTRICT CODE] = '001'
-				
-				--MATCH STATEID TO GET ID NUMBER
-				LEFT JOIN
-				DBTSIS.CE020_V AS CensusState
-				ON
-				CensusState.DST_NBR = 1 
-				AND STARS.[STUDENT ID] = CensusState.STATE_ID collate database_default
-	            	            
-				--MATCH STARSID TO GET ID NUMBER
-				LEFT JOIN
-				DBTSIS.CE020_V AS CensusID
-				ON
-				CensusID.DST_NBR = 1
-				AND STARS.[Field13] = CensusID.ID_NBR 
-	            
-	            
-				--MATCH STATEID TO GET PRIORID
-				LEFT JOIN
-				DBTSIS.CE020_V AS CensusPrior
-				ON
-				CensusPrior.DST_NBR = 1
-				AND STARS.[STUDENT ID] = CensusPrior.PRIOR_ID collate database_default                 
-		WHERE
-				STARS.[DISTRICT CODE] = '001'
-				AND STARS.[Field11] = '12'
-				AND STARS.[Period] = '2013-10-01'
-		) AS GRADS
+	SELECT DISTINCT TN010.ID_NBR, TN082.CODE_DESCR AS DIPLOMA_TYPE, GRAD_DT AS GRAD
+	--, DIPCODES.CODE_DESCR
+	FROM 
+	DBTSIS.TN010 AS TN010
+	INNER JOIN 
+	DBTSIS.TN082_V AS TN082
+	ON
+	TN010.GRAD_TYP = TN082.CODE_NME
+	AND TN082.CODE_TYPE = 'GRDTY'
+	AND TN010.DST_NBR = TN082.DST_NBR
+	WHERE
+	TN010.DST_NBR = 1
+	--AND GRAD_DT BETWEEN '20130730' AND '20140730'
+	AND GRAD_DT < '20140730'
+) AS GRADS
 
 		ON
 		GRADS.ID_NBR = ALS.ID_NBR
@@ -664,50 +618,18 @@ MODELTAGS.ID_NBR = ALS.ID_NBR
 
 LEFT JOIN 
 (
-SELECT 
-		CASE WHEN CensusState.STATE_ID IS NOT NULL THEN CensusState.ID_NBR ELSE
-				CASE WHEN CensusID.ID_NBR IS NOT NULL THEN CensusID.ID_NBR ELSE
-				CASE WHEN CensusPrior.PRIOR_ID IS NOT NULL THEN CAST(CensusPrior.ID_NBR AS INT)
-				ELSE '' END END END 
-				AS ID_NBR
-		,STUDENT.[21_Expected_Diploma_Type] AS CAREERDIP 
-		FROM
-				--STARS 40-day Student Snapshot				
-				[RDAVM.APS.EDU.ACTD].[db_STARS_History].[dbo].[STUD_SNAPSHOT] AS STARS
-
-				--READ STUDENT DATABASE END OF YEAR FOR GRAD DATA
-				INNER JOIN
-				[RDAVM.APS.EDU.ACTD].[db_STARS_History].[dbo].[SPECIAL_ED_SNAP] AS STUDENT
-				ON
-				STARS.[STUDENT ID] = STUDENT.[STUDENT ID]
-				AND STUDENT.[Period] = '2014-06-01'
-				AND STUDENT.[DISTRICT CODE] = '001'
-				
-				--MATCH STATEID TO GET ID NUMBER
-				LEFT JOIN
-				DBTSIS.CE020_V AS CensusState
-				ON
-				CensusState.DST_NBR = 1 
-				AND STARS.[STUDENT ID] = CensusState.STATE_ID collate database_default
-	            	            
-				--MATCH STARSID TO GET ID NUMBER
-				LEFT JOIN
-				DBTSIS.CE020_V AS CensusID
-				ON
-				CensusID.DST_NBR = 1
-				AND STARS.[Field13] = CensusID.ID_NBR 
-	            
-	            
-				--MATCH STATEID TO GET PRIORID
-				LEFT JOIN
-				DBTSIS.CE020_V AS CensusPrior
-				ON
-				CensusPrior.DST_NBR = 1
-				AND STARS.[STUDENT ID] = CensusPrior.PRIOR_ID collate database_default                 
-		WHERE
-				STARS.[DISTRICT CODE] = '001'
-				AND STARS.[Field11] = '12'
-				AND STARS.[Period] = '2013-10-01'
+SELECT DISTINCT TN010.ID_NBR, TN082.CODE_DESCR AS DIPLOMA_TYPE
+--, DIPCODES.CODE_DESCR
+ FROM 
+DBTSIS.TN010 AS TN010
+INNER JOIN 
+DBTSIS.TN082_V AS TN082
+ON
+TN010.GRAD_TYP = TN082.CODE_NME
+AND TN082.CODE_TYPE = 'GRDTY'
+AND TN010.DST_NBR = TN082.DST_NBR
+WHERE
+TN010.DST_NBR = 1
 ) AS CAREER
 
 ON
@@ -745,6 +667,24 @@ ON
 NOTRECEIVINGSERVICE.ID_NBR = ALS.ID_NBR
 
 
+/******************************************************************************
+	SPED AND GIFTED
+*******************************************************************************/	
+
+LEFT JOIN 
+(
+SELECT ID_NBR, [Primary Disability] 
+FROM 
+APS.SpedAsOf(@AsOfDate)
+WHERE
+DST_NBR = 1 AND SCH_YR = 2014
+) AS SPED
+ON
+SPED.ID_NBR = ALS.ID_NBR
+
+
+
+
 WHERE
 	ALS.ID_NBR IS NOT NULL
 	AND ALS.ID_NBR != 0
@@ -754,6 +694,9 @@ WHERE
 
 ) AS FINAL
 ) AS FINALFINAL
+
+
+
 WHERE
 SCHOOL < '900'
 AND ORIGINAL_GRADE NOT IN ('P1', 'P2', 'PK')

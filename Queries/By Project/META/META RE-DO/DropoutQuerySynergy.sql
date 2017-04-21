@@ -1,0 +1,52 @@
+
+
+EXECUTE AS LOGIN='QueryFileUser'
+GO
+
+
+SELECT  D1.[State_ID] AS DROPOUT_FILE_STATEID,STU.SIS_NUMBER, STATE_STUDENT_NUMBER
+, CASE WHEN ENR.STUDENT_SCHOOL_YEAR_GU IS NULL THEN 'NO ENROLLMENT FOUND' ELSE 'Y' END AS PRIMARY_ENROLLMENT_FOUND
+, ENR.ENTER_DATE, ENR.LEAVE_DATE, ENR.SCHOOL_NAME, ENR.SUMMER_WITHDRAWL_CODE, ENR.SUMMER_WITHDRAWL_DATE
+
+ FROM
+ OPENROWSET (
+                  'Microsoft.ACE.OLEDB.12.0', 
+                 'Text;Database=\\SYNTEMPSSIS\Files\TempQuery;',
+                  'SELECT * from DROPOUT20152016.csv'
+                ) AS [D1]
+
+LEFT JOIN 
+rev.EPC_STU AS STU
+ON
+D1.State_ID = stu.STATE_STUDENT_NUMBER
+LEFT JOIN 
+APS.LatestPrimaryEnrollmentInYear('BCFE2270-A461-4260-BA2B-0087CB8EC26A') AS ENR
+ON
+ENR.STUDENT_GU = STU.STUDENT_GU
+
+ORDER BY ENR.STUDENT_SCHOOL_YEAR_GU
+
+---------------------------------------------------------------------------------------------------------------------------
+SELECT  D1.[State_ID] AS DROPOUT_FILE_STATEID,STU.SIS_NUMBER, STATE_STUDENT_NUMBER
+, CASE WHEN ENR.STUDENT_SCHOOL_YEAR_GU IS NULL THEN 'NO ENROLLMENT FOUND' ELSE 'Y' END AS PRIMARY_ENROLLMENT_FOUND
+, ENR.ENTER_DATE, ENR.LEAVE_DATE, ENR.SCHOOL_NAME, ENR.SUMMER_WITHDRAWL_CODE, ENR.SUMMER_WITHDRAWL_DATE
+
+ FROM
+ OPENROWSET (
+                  'Microsoft.ACE.OLEDB.12.0', 
+                 'Text;Database=\\SYNTEMPSSIS\Files\TempQuery;',
+                  'SELECT * from DROPOUT20142015.csv'
+                ) AS [D1]
+
+LEFT JOIN 
+rev.EPC_STU AS STU
+ON
+D1.State_ID = stu.STATE_STUDENT_NUMBER
+LEFT JOIN 
+APS.LatestPrimaryEnrollmentInYear('26F066A3-ABFC-4EDB-B397-43412EDABC8B') AS ENR
+ON
+ENR.STUDENT_GU = STU.STUDENT_GU
+
+ORDER BY ENR.STUDENT_SCHOOL_YEAR_GU
+
+------------------------------------------------------------------------------------------------------------------------------
