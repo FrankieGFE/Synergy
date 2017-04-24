@@ -1,7 +1,7 @@
 /**
  * $Revision: 1 $
- * $LastChangedBy: e204042 $
- * $LastChangedDate: 2015-04-20 $
+ * $LastChangedBy: e104090 $
+ * $LastChangedDate: 2017-04-21 $
  */
 
 BEGIN TRAN
@@ -12,16 +12,18 @@ BEGIN TRAN
     --Graduation Semester='02'
 
 SELECT
-    [Student].[SIS_NUMBER]
+    EXPECTED_GRADUATION_YEAR
+	,[Student].[SIS_NUMBER]
     ,[Person].[LAST_NAME]
     ,[Person].[FIRST_NAME]
     ,[O].[ORGANIZATION_NAME]
-    ,[Diplomas].[VALUE_DESCRIPTION]
-    ,[Grades].[VALUE_DESCRIPTION]
+    ,[Diplomas].[VALUE_DESCRIPTION] AS DIPLOMA_TYPE
+    ,[Grades].[VALUE_DESCRIPTION] AS GRADE
     ,[Student].[GRADUATION_DATE]
     ,[Student].[GRADUATION_STATUS]
     ,[Student].[GRADUATION_SEMESTER]
     ,[Student].[POST_SECONDARY]
+	,SSY.YEAR_END_STATUS
 FROM
     [rev].[EPC_STU] AS [Student]
 
@@ -55,15 +57,22 @@ FROM
     ON
     [Student].[DIPLOMA_TYPE]=[Diplomas].[VALUE_CODE]
 
+	INNER JOIN 
+	rev.EPC_STU_SCH_YR AS SSY
+	ON
+	Enroll.STUDENT_SCHOOL_YEAR_GU = SSY.STUDENT_SCHOOL_YEAR_GU
+
 WHERE
     [Grades].[VALUE_DESCRIPTION]='12'
-    AND [Student].[EXPECTED_GRADUATION_YEAR]=2016
-    AND ([Student].[GRADUATION_DATE] IS NULL
-    AND [Student].[GRADUATION_STATUS] IS NULL
-    AND [Student].[GRADUATION_SEMESTER] IS NULL
-    AND [Student].[POST_SECONDARY] IS NULL
-    OR [Student].[DIPLOMA_TYPE] IS NULL)
+    AND [Student].[EXPECTED_GRADUATION_YEAR]=2017
+    --AND ([Student].[GRADUATION_DATE] IS NULL
+    --AND [Student].[GRADUATION_STATUS] IS NULL
+    --AND [Student].[GRADUATION_SEMESTER] IS NULL
+    --AND [Student].[POST_SECONDARY] IS NULL
+    --OR [Student].[DIPLOMA_TYPE] IS NULL)
 	AND ORGANIZATION_NAME NOT IN ('Career Enrichment Center', 'Homebound', 'Private School', 'Title One School') 
+
+	ORDER BY ORGANIZATION_NAME
 
 UPDATE
     [rev].[EPC_STU]
@@ -101,7 +110,7 @@ FROM
 
 WHERE
     [Grades].[VALUE_DESCRIPTION]='12'
-    AND [Student].[EXPECTED_GRADUATION_YEAR]=2016
+    AND [Student].[EXPECTED_GRADUATION_YEAR]=2017
     AND ([Student].[GRADUATION_DATE] IS NULL
     AND [Student].[GRADUATION_STATUS] IS NULL
     AND [Student].[GRADUATION_SEMESTER] IS NULL
@@ -132,7 +141,7 @@ FROM
 
 WHERE
     [Grades].[VALUE_DESCRIPTION]='12'
-    AND [Student].[EXPECTED_GRADUATION_YEAR]=2016
+    AND [Student].[EXPECTED_GRADUATION_YEAR]=2017
 	AND STUDENT.CHANGE_ID_STAMP = '27CDCD0E-BF93-4071-94B2-5DB792BB735F'
 	
 ROLLBACK
