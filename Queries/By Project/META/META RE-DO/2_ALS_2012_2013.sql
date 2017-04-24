@@ -141,7 +141,7 @@ END AS [ENGLISH PROFICIENCY]
 ,STATE_ID
 
 ,YEAR_END_STATUS
-		
+,END_ENR_DT		
 
 
 --,[Students with first language Non-English]
@@ -228,6 +228,8 @@ SELECT
 				WHEN ENROLL.END_STAT IN (59,60) THEN 'G'
 			ELSE ''
 	END AS YEAR_END_STATUS
+	,ENROLL.END_ENR_DT
+
 
 		,ISNULL(FRSTLANG.LANG_DESCR, '') AS [Students First Language]
 
@@ -420,7 +422,8 @@ AND SCHNME.SCH_NBR = ALS.[LOCATION CODE] collate DATABASE_DEFAULT
 ********************************************************************************************************/
 
 LEFT JOIN 
-(SELECT DISTINCT ENR.ID_NBR, ENR.END_STAT,ENR.GRDE, MRE.SCH_NBR FROM 
+(SELECT DISTINCT ENR.ID_NBR, ENR.END_STAT,ENR.GRDE, MRE.SCH_NBR, ENR.END_ENR_DT
+ FROM 
 APS.MostRecentPrimaryEnrollBySchYr(@SchoolYear) AS MRE
 INNER JOIN 
 DBTSIS.ST010 AS ENR
