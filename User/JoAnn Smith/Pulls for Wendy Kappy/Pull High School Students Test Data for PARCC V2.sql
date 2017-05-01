@@ -1,4 +1,8 @@
+/*
+use this query for SW Creative Collaborations
+data request from Wendy K
 
+*/
 
 --WITH PARCC_ALGII_PL 
 --as
@@ -38,9 +42,12 @@
 --	AND TEST_NAME = 'PARCC – 07-12 - Algebra II – Overall'
 --)
 
-
-SELECT
-       SIS_NUMBER AS 'APS STUDENT ID'
+; WITH CTE1
+AS
+(
+SELECT 
+	   ROW_NUMBER() OVER(PARTITION BY SIS_NUMBER, TEST_NAME ORDER BY SIS_NUMBER) AS ROWNUM
+       ,SIS_NUMBER AS 'APS STUDENT ID'
        ,STATE_ID AS 'STATE ID'
        ,'PARCC' AS 'TEST TYPE NAME'
        ,TEST_NAME as 'TEST SECTION NAME'
@@ -105,10 +112,17 @@ AND DTBL_TESTS.TEST_SUBGROUP IN ('Reading','Writing','Overall')
 --PIVOT
 --       (MAX(SCORE) FOR CONTENT_AREA IN ([MathEMATICS],[English Language Arts],[Writing],[READING],[ALGEBRA],[GEOMETRY])) AS UP1
 --WHERE TEST_LEVEL in ('K', '01', '02', '03', '04', '05') 
-WHERE TEST_LEVEL in ('06', '07', '08')  
---WHERE TEST_LEVEL in ('09', '10', '11', '12')
-  
-ORDER BY SIS_NUMBER
+--WHERE TEST_LEVEL in ('06', '07', '08')  
+WHERE TEST_LEVEL in ('09', '10', '11', '12')
+)
+SELECT * FROM CTE1 WHERE ROWNUM = 1
+
+--FIND DUPS
+--SELECT COUNT([APS STUDENT ID]) AS [CT], [APS STUDENT ID]
+--FROM CTE1 
+--group by [APS STUDENT ID]
+--HAVING COUNT([APS STUDENT ID]) >= 7
+--ORDER BY [APS STUDENT ID]
 
 
 
