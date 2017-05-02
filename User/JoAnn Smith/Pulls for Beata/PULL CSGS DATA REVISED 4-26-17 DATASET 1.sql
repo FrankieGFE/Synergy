@@ -116,7 +116,7 @@ FROM
 WHERE
 	RN = 1
 )
---SELECT * FROM STUDENTCTE1 
+--SELECT * FROM STUDENTCTE1 where [APS ID] = 100028992
 ,ENROLLED_GRADE2014
 AS
 (
@@ -241,7 +241,8 @@ WHERE
 ) AS T1
 WHERE RN = 1
 )
---SELECT * FROM AP_EXAM where SIS_NUMBER = 100004464
+--SELECT * FROM AP_EXAM where SIS_NUMBER = 100029214
+
 
 --Found students who had N as AP Indicator but had test results for an AP Exam
 --example:  100016310 who was enrolled in AP EngLitComp12 but entered and left on the
@@ -253,26 +254,49 @@ WHERE RN = 1
 ,AP_RESULTS
 AS
 (
-SELECT 
-	*
+SELECT	
+	s.[APS ID],
+	s.[AP_INDICATOR],
+	max(CASE WHEN TEST_NAME = 'AP Caluclus AB' THEN TEST_SCORE ELSE '' END) AS [AP Calculus AB],
+	max(CASE WHEN TEST_NAME = 'AP English Language and Composition' THEN TEST_SCORE ELSE '' END) AS [AP English Language and Composition],
+	max(CASE WHEN TEST_NAME = 'AP US History' THEN TEST_SCORE ELSE '' END) AS [AP US History],
+	max(CASE WHEN TEST_NAME = 'AP Calculus BC' THEN TEST_SCORE ELSE '' END) AS [AP Calculus BC],
+	max(CASE WHEN TEST_NAME = 'AP German Language' THEN TEST_SCORE ELSE '' END) AS [AP German Language],
+	max(CASE WHEN TEST_NAME = 'AP Physics C Mechanics' THEN TEST_SCORE ELSE '' END) AS [AP Physics C Mechanics],
+	max(CASE WHEN TEST_NAME = 'AP Spanish Literature' THEN TEST_SCORE ELSE '' END) AS [AP Spanish Literature],
+	max(CASE WHEN TEST_NAME = 'AP Biology' THEN TEST_SCORE ELSE '' END) AS [AP Biology],
+	max(CASE WHEN TEST_NAME = 'AP Chemistry' THEN TEST_SCORE ELSE '' END) AS [AP Chemistry],
+	max(CASE WHEN TEST_NAME = 'AP Italian Language And Culture' THEN TEST_SCORE ELSE '' END) AS [AP Italian Language And Culture],
+	max(CASE WHEN TEST_NAME = 'AP Microeconomics' THEN TEST_SCORE ELSE '' END) AS [AP Microeconomics],
+	max(CASE WHEN TEST_NAME = 'AP Music Theory' THEN TEST_SCORE ELSE '' END) AS [AP Music Theory],
+	max(CASE WHEN TEST_NAME = 'AP Physics C Electricity and Magnetism' THEN TEST_SCORE ELSE '' END) AS [AP Physics C Electricity and Magnetism],
+	max(CASE WHEN TEST_NAME = 'AP Psychology' THEN TEST_SCORE ELSE '' END) AS [AP Psychology],
+	max(CASE WHEN TEST_NAME = 'AP Spanish Language' THEN TEST_SCORE ELSE '' END) AS [AP Spanish Language],
+	max(CASE WHEN TEST_NAME = 'AP Studio Art Drawing' THEN TEST_SCORE ELSE '' END) AS [AP Studio Art Drawing],
+	max(CASE WHEN TEST_NAME = 'AP Government and Politics: United States' THEN TEST_SCORE ELSE '' END) AS [AP Government and Politics: United States],
+	max(CASE WHEN TEST_NAME = 'AP English Literature And Composition' THEN TEST_SCORE ELSE '' END) AS [AP English Literature And Composition],
+	max(CASE WHEN TEST_NAME = 'AP Japanese Language And Culture' THEN TEST_SCORE ELSE '' END) AS [AP Japanese Language And Culture],
+	max(CASE WHEN TEST_NAME = 'AP Studio Art: 2-D Design' THEN TEST_SCORE ELSE '' END) AS [AP Studio Art: 2-D Design],
+	max(CASE WHEN TEST_NAME = 'AP Chinese Language and Culture' THEN TEST_SCORE ELSE '' END) AS [AP Chinese Language and Culture],
+	max(CASE WHEN TEST_NAME = 'AP Computer Science A' THEN TEST_SCORE ELSE '' END) AS [AP Computer Science A],
+	max(CASE WHEN TEST_NAME = 'AP Environmental Science' THEN TEST_SCORE ELSE '' END) AS [AP Environmental Science],
+	max(CASE WHEN TEST_NAME = 'AP European History' THEN TEST_SCORE ELSE '' END) AS [AP European History],
+	max(CASE WHEN TEST_NAME = 'AP French Language' THEN TEST_SCORE ELSE '' END) AS [AP French Language],
+	max(CASE WHEN TEST_NAME = 'AP Human Geography' THEN TEST_SCORE ELSE '' END) AS [AP Human Geography],
+	max(CASE WHEN TEST_NAME = 'AP Macroeconomics' THEN TEST_SCORE ELSE '' END) AS [AP Macroeconomics],
+	max(CASE WHEN TEST_NAME = 'AP Statistics' THEN TEST_SCORE ELSE '' END) AS [AP Statistics],
+	max(CASE WHEN TEST_NAME = 'AP Studio Art: 3-D Design' THEN TEST_SCORE ELSE '' END) AS [AP Studio Art: 3-D Design],
+	max(CASE WHEN TEST_NAME = 'AP World History' THEN TEST_SCORE ELSE '' END) AS [AP World History]
 FROM STUDENTCTE1 S
 LEFT OUTER JOIN
 	AP_EXAM e
 ON
 	E.SIS_NUMBER = S.[APS ID]
-
-PIVOT
-(
-	MAX(TEST_SCORE)
-	FOR TEST_NAME
-	IN ([AP Calculus BC],[AP German Language], [AP Physics C Mechanics], [AP Spanish Literature], [AP Biology], [AP Chemistry], [AP English Language and Composition], [AP Italian Language And Culture],
-	[AP Microeconomics], [AP Music Theory], [AP Physics C Electricity and Magnetism], [AP Psychology], [AP Spanish Language], [AP Studio Art Drawing],  [AP US History], [ [AP US History], 
-	[AP Caluclus AB], [AP Government and Politics: United States], [AP English Literature And Composition], [AP Japanese Language And Culture], [AP Studio Art: 2-D Design], [AP Chinese Language and Culture],
-	[AP Computer Science A], [AP Environmental Science], [AP European History], [AP French Language], [AP Human Geography], [AP Macroeconomics], [AP Statistics],
-	[AP Studio Art: 3-D Design], [AP World History])
-	) AS PIVTBL
+group by
+	[APS ID], AP_INDICATOR	
 )
---select * from ap_exam where SIS_NUMBER = 100004464
+--select * from AP_RESULTS where [APS ID] = 100029214
+
 ,DUAL_CREDIT
 as
 (
@@ -342,15 +366,15 @@ SELECT
 	[APS ID],
 	SIS_NUMBER,
 	DUAL_CREDIT,
-		MAX(CASE WHEN D.RN = 1 AND DUAL_CREDIT = 'Y' THEN MARK ELSE NULL END) AS DUAL_CREDIT1,
-		MAX(CASE WHEN D.RN = 2 AND DUAL_CREDIT = 'Y'THEN MARK ELSE NULL END) as DUAL_CREDIT2,
-		MAX(CASE WHEN D.RN = 3 AND DUAL_CREDIT = 'Y'THEN MARK ELSE NULL END) AS DUAL_CREDIT3,
-		MAX(CASE WHEN D.RN = 4 AND DUAL_CREDIT = 'Y'THEN MARK ELSE NULL END) AS DUAL_CREDIT4,
-		MAX(CASE WHEN D.RN = 5 AND DUAL_CREDIT = 'Y'THEN MARK ELSE NULL END) AS DUAL_CREDIT5,
-		MAX(CASE WHEN D.RN = 6 AND DUAL_CREDIT = 'Y'THEN MARK ELSE NULL END) AS DUAL_CREDIT6,
-		MAX(CASE WHEN D.RN = 7 AND DUAL_CREDIT = 'Y'THEN MARK ELSE NULL END) AS DUAL_CREDIT7,
-		MAX(CASE WHEN D.RN = 8 AND DUAL_CREDIT = 'Y'THEN MARK ELSE NULL END) AS DUAL_CREDIT8,
-		MAX(CASE WHEN D.RN = 9 AND DUAL_CREDIT = 'Y'THEN MARK ELSE NULL END) AS DUAL_CREDIT9
+		MAX(CASE WHEN D.RN = 1 AND DUAL_CREDIT = 'Y' THEN MARK ELSE '' END) AS DUAL_CREDIT1,
+		MAX(CASE WHEN D.RN = 2 AND DUAL_CREDIT = 'Y'THEN MARK ELSE '' END) as DUAL_CREDIT2,
+		MAX(CASE WHEN D.RN = 3 AND DUAL_CREDIT = 'Y'THEN MARK ELSE '' END) AS DUAL_CREDIT3,
+		MAX(CASE WHEN D.RN = 4 AND DUAL_CREDIT = 'Y'THEN MARK ELSE '' END) AS DUAL_CREDIT4,
+		MAX(CASE WHEN D.RN = 5 AND DUAL_CREDIT = 'Y'THEN MARK ELSE '' END) AS DUAL_CREDIT5,
+		MAX(CASE WHEN D.RN = 6 AND DUAL_CREDIT = 'Y'THEN MARK ELSE '' END) AS DUAL_CREDIT6,
+		MAX(CASE WHEN D.RN = 7 AND DUAL_CREDIT = 'Y'THEN MARK ELSE '' END) AS DUAL_CREDIT7,
+		MAX(CASE WHEN D.RN = 8 AND DUAL_CREDIT = 'Y'THEN MARK ELSE '' END) AS DUAL_CREDIT8,
+		MAX(CASE WHEN D.RN = 9 AND DUAL_CREDIT = 'Y'THEN MARK ELSE '' END) AS DUAL_CREDIT9
 FROM
 	 STUDENTCTE1 S
 LEFT JOIN
@@ -534,7 +558,7 @@ SELECT DISTINCT
 	,[STUDENT].[SIS_NUMBER]
 	,[ENROLLMENTS].[SCHOOL_NAME]
 	,[ENROLLMENTS].[GRADE]	
-	,[DISCIPLINE].[SUSPENSION_DAYS]	
+	,isNull([DISCIPLINE].[SUSPENSION_DAYS], 0) as [SUSPENSION DAYS]
 FROM
 	(
 	SELECT
@@ -617,7 +641,7 @@ SELECT
 
 	T.[Total Excused],
 	T.[Total Unexcused],
-	SU.SUSPENSION_DAYS,
+	SU.[SUSPENSION DAYS],
 	A.AP_INDICATOR,
 	S.IB_INDICATOR,
 	A.[AP Calculus BC],
@@ -635,7 +659,7 @@ SELECT
 	A.[AP Spanish Language], 
 	A.[AP Studio Art Drawing],  
 	A.[AP US History], 
-	A.[AP Caluclus AB], 
+	A.[AP Calculus AB], 
 	A.[AP Government and Politics: United States], 
 	A.[AP Japanese Language And Culture], 
 	A.[AP Studio Art: 2-D Design], 
