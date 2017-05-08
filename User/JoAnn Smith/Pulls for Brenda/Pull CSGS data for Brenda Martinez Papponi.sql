@@ -14,7 +14,7 @@ declare @SchoolYear nvarchar(4) = '2015'
 AS
 (
 SELECT 
-       SY = '2015-2016',
+       SY = '2013-2014',
        --[STUDENT ID] AS [STATE_ID],
           --[Field13] AS [SIS NUMBER],
        [CURRENT GRADE LEVEL] AS [GRADE],
@@ -29,7 +29,7 @@ FROM
           [RDAVM.APS.EDU.ACTD].db_STARS_History.dbo.STUD_SNAPSHOT S
           WHERE 
           [DISTRICT CODE] = '001'
-              AND [PERIOD] = '2014-10-01'
+              AND [PERIOD] = '2012-10-01'
 			  AND [ENGLISH PROFICIENCY] = '1'
 			  AND [CURRENT GRADE LEVEL] IN ('KF', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12')
               ) AS S
@@ -39,7 +39,7 @@ ON
        s.[ALTERNATE STUDENT ID] = B.SIS_NUMBER
 
 INNER HASH JOIN
-APS.LCELatestEvaluationAsOf('2015-10-01') AS LATEST
+APS.LCELatestEvaluationAsOf('2013-10-01') AS LATEST
 ON
        LATEST.STUDENT_GU = B.STUDENT_GU
 INNER JOIN 

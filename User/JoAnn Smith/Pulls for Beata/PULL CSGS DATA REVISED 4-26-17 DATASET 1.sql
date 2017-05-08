@@ -2,6 +2,33 @@
 Pull data for for Beata
 Council of the Great City Schools CGCS
 KPI Request
+
+Data Set 1
+ALL DATA ARE FOR 2015-16 Enrolled Students unless otherwise noted. 
+80 DAY. WIDE FORMAT (1 record per student)
+
+Student ID APS 
+Student ID State
+Gender
+Race (resolved Race with two or more)
+Special Ed Status (NOT Including gifted)
+Primary Disability
+ELL Status (the STARS Definition – 0 = never enrolled; 1 currently enrolled; 2 exited one year, etc)
+ELL Exit Date
+FRPL Status
+Grade enrolled 2014-15 (Including P1 & PK) 
+Grade enrolled 2015-16 
+PARCC ELA Performance Level
+PARCC Math Performance Level
+Total Absences (UX & EX)
+Total Suspension Days
+AP Enrollment 
+AP Exam Scores
+IB Enrollment
+Dual Credit Enrollment
+Dual Credit Completion
+Core course (math, English, science and social studies) grade
+GPA (cumulative) 
 */
 
 
@@ -15,9 +42,7 @@ SELECT
 		,BS.SIS_NUMBER AS [APS ID]
 		,BS.STUDENT_GU
 		,[STUDENT ID] AS [STATE ID]
-		--,ORG.ORGANIZATION_NAME AS [SCHOOL NAME]
 		,BS.GENDER
-		--,BS.HISPANIC_INDICATOR
 		,BS.RACE_1
 		,BS.RACE_2
 		,BS.RACE_3
@@ -41,12 +66,14 @@ SELECT
 			WHEN [ENGLISH PROFICIENCY] = '3' THEN 'Exited Two Years'
 			WHEN [ENGLISH PROFICIENCY] = '4' THEN 'Exited Three + Years'
 		END AS [ELL STATUS]
-		,E.EXIT_DATE
+		--show the RDAVM data versus Synergy
+		,CASE WHEN [ENGLISH PROFICIENCY] > 1 THEN CAST(EXIT_DATE AS DATE) 
+		      WHEN [ENGLISH PROFICIENCY] = 0 THEN NULL
+		END AS [EXIT_DATE]
 		,STARS.[ECONOMIC STATUS /FOOD PGM PARTICIPATION/] AS FRPL_STATUS
 		,[CURRENT GRADE LEVEL] AS [STUDENT GRADE LEVEL 2015]
 		,isnull(C.AP_INDICATOR, 'N') AS AP_INDICATOR
-		--,isnull(p.DUAL_CREDIT, 'N') AS DUAL_CREDIT
-		--,ISNULL(c.IB_INDICATOR, 'N') AS IB_INDICATOR
+		,ISNULL(c.IB_INDICATOR, 'N') AS IB_INDICATOR
 		,ROW_NUMBER() over(partition by BS.SIS_NUMBER order by BS.SIS_NUMBER, C.AP_INDICATOR DESC) as RN
 	FROM
 	[RDAVM.APS.EDU.ACTD].[db_STARS_History].[dbo].[STUD_SNAPSHOT]  AS STARS
@@ -67,7 +94,7 @@ SELECT
 	ON
 	E.STUDENT_GU = BS.STUDENT_GU
 	left join
-	aps.ScheduleDetailsAsOf('2016-05-22') P
+	aps.ScheduleDetailsAsOf('2015-12-15') P
 	on
 	p.SIS_NUMBER = bs.SIS_NUMBER
 	left join
@@ -89,7 +116,7 @@ FROM
 WHERE
 	RN = 1
 )
---SELECT * FROM STUDENTCTE1 
+--SELECT * FROM STUDENTCTE1 where [APS ID] = 100028992
 ,ENROLLED_GRADE2014
 AS
 (
@@ -116,8 +143,7 @@ WHERE
 )
 --SELECT * FROM ENROLLED_GRADE2014
 /*
-EXAM information for Data Set 1
-AP
+AP EXAM information for Data Set 1
 */
 
 ,AP_EXAM
@@ -215,36 +241,61 @@ WHERE
 ) AS T1
 WHERE RN = 1
 )
---SELECT * FROM AP_EXAM 
+--SELECT * FROM AP_EXAM where SIS_NUMBER = 100029214
+
 
 --Found students who had N as AP Indicator but had test results for an AP Exam
 --example:  100016310 who was enrolled in AP EngLitComp12 but entered and left on the
 --same date, but who has an exam score
---most of the AP indicators who are N were registered for an AP class and left
---before the school year was over but took the test
+--most of the AP indicators who are N with no AP score were registered for an AP class
+--and left before the school year was over but took the test
 --others took the test but were not in AP classes - 100104884 didn't pass the test
+--also found students with ap_indicator of Y but no AP exam scores 100004464
 ,AP_RESULTS
 AS
 (
-SELECT 
-	*
+SELECT	
+	s.[APS ID],
+	s.[AP_INDICATOR],
+	max(CASE WHEN TEST_NAME = 'AP Caluclus AB' THEN TEST_SCORE ELSE '' END) AS [AP Calculus AB],
+	max(CASE WHEN TEST_NAME = 'AP English Language and Composition' THEN TEST_SCORE ELSE '' END) AS [AP English Language and Composition],
+	max(CASE WHEN TEST_NAME = 'AP US History' THEN TEST_SCORE ELSE '' END) AS [AP US History],
+	max(CASE WHEN TEST_NAME = 'AP Calculus BC' THEN TEST_SCORE ELSE '' END) AS [AP Calculus BC],
+	max(CASE WHEN TEST_NAME = 'AP German Language' THEN TEST_SCORE ELSE '' END) AS [AP German Language],
+	max(CASE WHEN TEST_NAME = 'AP Physics C Mechanics' THEN TEST_SCORE ELSE '' END) AS [AP Physics C Mechanics],
+	max(CASE WHEN TEST_NAME = 'AP Spanish Literature' THEN TEST_SCORE ELSE '' END) AS [AP Spanish Literature],
+	max(CASE WHEN TEST_NAME = 'AP Biology' THEN TEST_SCORE ELSE '' END) AS [AP Biology],
+	max(CASE WHEN TEST_NAME = 'AP Chemistry' THEN TEST_SCORE ELSE '' END) AS [AP Chemistry],
+	max(CASE WHEN TEST_NAME = 'AP Italian Language And Culture' THEN TEST_SCORE ELSE '' END) AS [AP Italian Language And Culture],
+	max(CASE WHEN TEST_NAME = 'AP Microeconomics' THEN TEST_SCORE ELSE '' END) AS [AP Microeconomics],
+	max(CASE WHEN TEST_NAME = 'AP Music Theory' THEN TEST_SCORE ELSE '' END) AS [AP Music Theory],
+	max(CASE WHEN TEST_NAME = 'AP Physics C Electricity and Magnetism' THEN TEST_SCORE ELSE '' END) AS [AP Physics C Electricity and Magnetism],
+	max(CASE WHEN TEST_NAME = 'AP Psychology' THEN TEST_SCORE ELSE '' END) AS [AP Psychology],
+	max(CASE WHEN TEST_NAME = 'AP Spanish Language' THEN TEST_SCORE ELSE '' END) AS [AP Spanish Language],
+	max(CASE WHEN TEST_NAME = 'AP Studio Art Drawing' THEN TEST_SCORE ELSE '' END) AS [AP Studio Art Drawing],
+	max(CASE WHEN TEST_NAME = 'AP Government and Politics: United States' THEN TEST_SCORE ELSE '' END) AS [AP Government and Politics: United States],
+	max(CASE WHEN TEST_NAME = 'AP English Literature And Composition' THEN TEST_SCORE ELSE '' END) AS [AP English Literature And Composition],
+	max(CASE WHEN TEST_NAME = 'AP Japanese Language And Culture' THEN TEST_SCORE ELSE '' END) AS [AP Japanese Language And Culture],
+	max(CASE WHEN TEST_NAME = 'AP Studio Art: 2-D Design' THEN TEST_SCORE ELSE '' END) AS [AP Studio Art: 2-D Design],
+	max(CASE WHEN TEST_NAME = 'AP Chinese Language and Culture' THEN TEST_SCORE ELSE '' END) AS [AP Chinese Language and Culture],
+	max(CASE WHEN TEST_NAME = 'AP Computer Science A' THEN TEST_SCORE ELSE '' END) AS [AP Computer Science A],
+	max(CASE WHEN TEST_NAME = 'AP Environmental Science' THEN TEST_SCORE ELSE '' END) AS [AP Environmental Science],
+	max(CASE WHEN TEST_NAME = 'AP European History' THEN TEST_SCORE ELSE '' END) AS [AP European History],
+	max(CASE WHEN TEST_NAME = 'AP French Language' THEN TEST_SCORE ELSE '' END) AS [AP French Language],
+	max(CASE WHEN TEST_NAME = 'AP Human Geography' THEN TEST_SCORE ELSE '' END) AS [AP Human Geography],
+	max(CASE WHEN TEST_NAME = 'AP Macroeconomics' THEN TEST_SCORE ELSE '' END) AS [AP Macroeconomics],
+	max(CASE WHEN TEST_NAME = 'AP Statistics' THEN TEST_SCORE ELSE '' END) AS [AP Statistics],
+	max(CASE WHEN TEST_NAME = 'AP Studio Art: 3-D Design' THEN TEST_SCORE ELSE '' END) AS [AP Studio Art: 3-D Design],
+	max(CASE WHEN TEST_NAME = 'AP World History' THEN TEST_SCORE ELSE '' END) AS [AP World History]
 FROM STUDENTCTE1 S
 LEFT OUTER JOIN
 	AP_EXAM e
 ON
 	E.SIS_NUMBER = S.[APS ID]
-
-PIVOT
-(
-	MAX(TEST_SCORE)
-	FOR TEST_NAME
-	IN ([AP Calculus BC],[AP German Language], [AP Physics C Mechanics], [AP Spanish Literature], [AP Biology], [AP Chemistry], [AP English Language and Composition], [AP Italian Language And Culture],
-	[AP Microeconomics], [AP Music Theory], [AP Physics C Electricity and Magnetism], [AP Psychology], [AP Spanish Language], [AP Studio Art Drawing],  [AP US History], [ [AP US History], 
-	[AP Caluclus AB], [AP Government and Politics: United States], [AP English Literature And Composition], [AP Japanese Language And Culture], [AP Studio Art: 2-D Design], [AP Chinese Language and Culture],
-	[AP Computer Science A], [AP Environmental Science], [AP European History], [AP French Language], [AP Human Geography], [AP Macroeconomics], [AP Statistics],
-	[AP Studio Art: 3-D Design], [AP World History])
-	) AS PIVTBL
+group by
+	[APS ID], AP_INDICATOR	
 )
+--select * from AP_RESULTS where [APS ID] = 100029214
 
 ,DUAL_CREDIT
 as
@@ -254,7 +305,8 @@ SELECT
 	SIS_NUMBER,
 	COURSE.COURSE_SHORT_TITLE, 
 	DUAL_CREDIT,
-	CREDIT_COMPLETED
+	CREDIT_COMPLETED,
+	MARK
 FROM
 	APS.BasicSchedule AS [BASIC_SCHEDULE]	
 	INNER JOIN
@@ -270,20 +322,17 @@ FROM
 	INNER JOIN
 	rev.EPC_STU AS [STUDENT]
 	ON
-	[BASIC_SCHEDULE].[STUDENT_GU] = [STUDENT].[STUDENT_GU]
-	
+	[BASIC_SCHEDULE].[STUDENT_GU] = [STUDENT].[STUDENT_GU]	
     -- Get school name
 	INNER JOIN 
 	rev.REV_ORGANIZATION AS [Organization] -- Contains the School Name
 	ON 
-	[BASIC_SCHEDULE].[ORGANIZATION_GU] = [Organization].[ORGANIZATION_GU]
-    
+	[BASIC_SCHEDULE].[ORGANIZATION_GU] = [Organization].[ORGANIZATION_GU]   
     -- Get school number
 	LEFT JOIN 
 	rev.EPC_SCH AS [School] -- Contains the School Code / Number
 	ON 
 	[BASIC_SCHEDULE].[ORGANIZATION_GU] = [School].[ORGANIZATION_GU]
-
 	LEFT HASH JOIN 
 	(	 SELECT  CREDIT_COMPLETED, MARK, TERM_CODE, STU.STUDENT_GU, COURSE_ID, SECTION_ID
 	 
@@ -307,26 +356,25 @@ WHERE
 	[RevYear].[SCHOOL_YEAR] IN ('2015')
 	AND [RevYear].[EXTENSION] = 'R'
 	and  SUBJECT_AREA_1 <> 'NOC'
-	--and SIS_NUMBER = 100004712	
 ) 
 --SELECT * FROM DUAL_CREDIT
 , DUAL_CREDIT1
 AS
 (
 SELECT
-	ROW_NUMBER() OVER(PARTITION BY SIS_NUMBER ORDER BY SIS_NUMBER) AS RN, 
+	ROW_NUMBER() OVER(PARTITION BY SIS_NUMBER ORDER BY SIS_NUMBER, DUAL_CREDIT DESC) AS RN, 
 	[APS ID],
 	SIS_NUMBER,
 	DUAL_CREDIT,
-		MAX(CASE WHEN D.RN = 1 AND DUAL_CREDIT = 'Y' THEN CREDIT_COMPLETED ELSE 0 END) AS DUAL_CREDIT1,
-		MAX(CASE WHEN D.RN = 2 AND DUAL_CREDIT = 'Y'THEN CREDIT_COMPLETED ELSE 0 END) as DUAL_CREDIT2,
-		MAX(CASE WHEN D.RN = 3 AND DUAL_CREDIT = 'Y'THEN CREDIT_COMPLETED ELSE 0 END) AS DUAL_CREDIT3,
-		MAX(CASE WHEN D.RN = 4 AND DUAL_CREDIT = 'Y'THEN CREDIT_COMPLETED ELSE 0 END) AS DUAL_CREDIT4,
-		MAX(CASE WHEN D.RN = 5 AND DUAL_CREDIT = 'Y'THEN CREDIT_COMPLETED ELSE 0 END) AS DUAL_CREDIT5,
-		MAX(CASE WHEN D.RN = 6 AND DUAL_CREDIT = 'Y'THEN CREDIT_COMPLETED ELSE 0 END) AS DUAL_CREDIT6,
-		MAX(CASE WHEN D.RN = 7 AND DUAL_CREDIT = 'Y'THEN CREDIT_COMPLETED ELSE 0 END) AS DUAL_CREDIT7,
-		MAX(CASE WHEN D.RN = 8 AND DUAL_CREDIT = 'Y'THEN CREDIT_COMPLETED ELSE 0 END) AS DUAL_CREDIT8,
-		MAX(CASE WHEN D.RN = 9 AND DUAL_CREDIT = 'Y'THEN CREDIT_COMPLETED ELSE 0 END) AS DUAL_CREDIT9
+		MAX(CASE WHEN D.RN = 1 AND DUAL_CREDIT = 'Y' THEN MARK ELSE '' END) AS DUAL_CREDIT1,
+		MAX(CASE WHEN D.RN = 2 AND DUAL_CREDIT = 'Y'THEN MARK ELSE '' END) as DUAL_CREDIT2,
+		MAX(CASE WHEN D.RN = 3 AND DUAL_CREDIT = 'Y'THEN MARK ELSE '' END) AS DUAL_CREDIT3,
+		MAX(CASE WHEN D.RN = 4 AND DUAL_CREDIT = 'Y'THEN MARK ELSE '' END) AS DUAL_CREDIT4,
+		MAX(CASE WHEN D.RN = 5 AND DUAL_CREDIT = 'Y'THEN MARK ELSE '' END) AS DUAL_CREDIT5,
+		MAX(CASE WHEN D.RN = 6 AND DUAL_CREDIT = 'Y'THEN MARK ELSE '' END) AS DUAL_CREDIT6,
+		MAX(CASE WHEN D.RN = 7 AND DUAL_CREDIT = 'Y'THEN MARK ELSE '' END) AS DUAL_CREDIT7,
+		MAX(CASE WHEN D.RN = 8 AND DUAL_CREDIT = 'Y'THEN MARK ELSE '' END) AS DUAL_CREDIT8,
+		MAX(CASE WHEN D.RN = 9 AND DUAL_CREDIT = 'Y'THEN MARK ELSE '' END) AS DUAL_CREDIT9
 FROM
 	 STUDENTCTE1 S
 LEFT JOIN
@@ -387,9 +435,7 @@ AND
 	C.DEPARTMENT = 'ENG'
 AND
 	H.SCHOOL_YEAR = '2015'
-)
-	
---SELECT * FROM DUAL_CREDIT2
+)	
 ,CORE_ENGLISH2
 AS
 (
@@ -486,13 +532,91 @@ AS
 (
 SELECT * FROM CORE_SOCIAL_STUDIES WHERE RN = 1
 )
-TOTAL_ABSENCES
+,TOTAL_ABSENCES
+AS
+(
+SELECT
+
+	 SA.[SIS Number] as [Student APS ID],
+	 ISNULL(SA.[Total Excused],0)  as [Total Excused],
+	 ISNULL(SA.[Total Unexcused],0) as [Total Unexcused]
+	 
+FROM 
+	dbo.STUDENT_ATTENDANCE_2015 sa
+LEFT JOIN
+	STUDENTCTE1 S
+ON
+	SA.[SIS Number] = S.[APS ID]	
+)
+--select * from TOTAL_ABSENCES
+,SUSPENSIONS
+AS
+(
+SELECT DISTINCT
+	[ENROLLMENTS].[SCHOOL_YEAR]
+	,ENROLLMENTS.STUDENT_SCHOOL_YEAR_GU
+	,[STUDENT].[SIS_NUMBER]
+	,[ENROLLMENTS].[SCHOOL_NAME]
+	,[ENROLLMENTS].[GRADE]	
+	,isNull([DISCIPLINE].[SUSPENSION_DAYS], 0) as [SUSPENSION DAYS]
+FROM
+	(
+	SELECT
+		*
+		,ROW_NUMBER() OVER (PARTITION BY [ENR].[STUDENT_GU] ORDER BY [ENR].[ENTER_DATE] DESC) AS [RN]
+	FROM
+		APS.StudentEnrollmentDetails AS [ENR]		
+	WHERE
+		[ENR].SCHOOL_YEAR = '2015'
+		AND [ENR].[EXTENSION] = 'R'
+		AND [ENR].[EXCLUDE_ADA_ADM] IS NULL
+		AND [ENR].[SUMMER_WITHDRAWL_CODE] IS NULL
+	) AS [ENROLLMENTS]	
+	INNER JOIN
+		APS.BasicStudentWithMoreInfo AS [STUDENT]
+	ON
+		[ENROLLMENTS].[STUDENT_GU] = [STUDENT].[STUDENT_GU]	
+	LEFT OUTER JOIN
+	(
+	SELECT
+		SUM([Discipline].[DAYS]) AS [SUSPENSION_DAYS]
+		,[Disposition_Code].[DISP_CODE]
+		,[Disposition_Code].[DESCRIPTION] AS [DISPOSITION_DESCRIPTION]
+		,Discipline.STUDENT_GU
+		,discipline.STUDENT_SCHOOL_YEAR_GU
+	FROM	
+		[REV].[EPC_STU_INC_DISCIPLINE] AS [Discipline]	
+	LEFT OUTER JOIN
+		REV.EPC_SCH_INCIDENT AS [INCIDENT]
+	ON
+		[Discipline].[SCH_INCIDENT_GU] = [INCIDENT].[SCH_INCIDENT_GU]
+	LEFT OUTER JOIN
+		[rev].[EPC_STU_INC_DISPOSITION] AS [Disposition]
+	ON
+		[Discipline].[STU_INC_DISPOSITION_GU] = [Disposition].[STU_INC_DISPOSITION_GU]
+	LEFT OUTER JOIN
+		[rev].[EPC_CODE_DISP] AS [Disposition_Code]
+	ON
+		[Disposition].[CODE_DISP_GU] = [Disposition_Code].[CODE_DISP_GU]
+	WHERE
+		[Disposition_Code].[DISP_CODE] IN ('S OSS','S ISS', 'ZHLTSCON', 'ZHLTSCV', 'ZHLTSNRS', 'ZHLTSOTH', 'ZHLTSVQP')		
+	GROUP BY
+		[Discipline].[STUDENT_SCHOOL_YEAR_GU], Discipline.student_gu, Disposition_Code.DESCRIPTION, Disposition_CODE.DISP_CODE
+	) AS [DISCIPLINE]
+ON
+	[ENROLLMENTS].[STUDENT_SCHOOL_YEAR_GU] = [DISCIPLINE].[STUDENT_SCHOOL_YEAR_GU]		
+WHERE
+	[ENROLLMENTS].[RN] = 1
+)
+,PARCC_RESULTS
 AS
 (
 SELECT
 	*
 FROM
-	
+	DBO.PARCC_ELA_MATH_2015 
+)
+--SELECT * FROM PARCC_RESULTS
 ,RESULTSCTE
 AS
 (
@@ -512,8 +636,14 @@ SELECT
 	S.[ELL STATUS],
 	CAST(S.EXIT_DATE AS DATE) AS [ELL EXIT DATE],
 	S.FRPL_STATUS,
+	GR.[GRADE LEVEL 2014] AS [STUDENT GRADE LEVEL 2014],
 	S.[STUDENT GRADE LEVEL 2015],
+
+	T.[Total Excused],
+	T.[Total Unexcused],
+	SU.[SUSPENSION DAYS],
 	A.AP_INDICATOR,
+	S.IB_INDICATOR,
 	A.[AP Calculus BC],
 	A.[AP German Language], 
 	A.[AP Physics C Mechanics], 
@@ -529,7 +659,7 @@ SELECT
 	A.[AP Spanish Language], 
 	A.[AP Studio Art Drawing],  
 	A.[AP US History], 
-	A.[AP Caluclus AB], 
+	A.[AP Calculus AB], 
 	A.[AP Government and Politics: United States], 
 	A.[AP Japanese Language And Culture], 
 	A.[AP Studio Art: 2-D Design], 
@@ -590,6 +720,22 @@ LEFT JOIN
 	DUAL_CREDIT2 D
 ON
 	D.[APS ID] = S.[APS ID]
-
+LEFT JOIN
+	TOTAL_ABSENCES T
+ON
+	T.[Student APS ID] = S.[APS ID]
+LEFT JOIN
+	SUSPENSIONS SU
+ON
+	SU.SIS_NUMBER = S.[APS ID]
+LEFT JOIN
+	ENROLLED_GRADE2014 GR
+ON
+	GR.[APS ID] = S.[APS ID]
+LEFT JOIN
+	PARCC_RESULTS P
+ON
+	P.[STUDENT APS ID] = S.[APS ID]	
+	
 )
 SELECT * FROM RESULTSCTE WHERE ROWNUM = 1
