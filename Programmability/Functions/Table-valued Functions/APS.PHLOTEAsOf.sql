@@ -1,11 +1,14 @@
-/**
- * $Revision: 181 $
- * $LastChangedBy: e201594 $
- * $LastChangedDate: 2014-10-02 07:50:52 -0600 (Thu, 02 Oct 2014) $
- */
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[PHLOTEAsOf]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
-	EXEC('CREATE FUNCTION APS.PHLOTEAsOf()RETURNS TABLE AS RETURN (SELECT 0 AS DUMMY)')
+USE [ST_Production]
 GO
+
+/****** Object:  UserDefinedFunction [APS].[PHLOTEAsOf]    Script Date: 5/5/2017 10:32:42 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
 
 /**
  * FUNCTION APS.PhloteStatusAsOf
@@ -16,10 +19,22 @@ GO
  * 
  * #return TABLE PHLOTE Info as of date
  */
-ALTER FUNCTION APS.PHLOTEAsOf(@asOfDate DATETIME)
+ALTER FUNCTION [APS].[PHLOTEAsOf](@asOfDate DATETIME)
 RETURNS TABLE
 AS
 RETURN
+SELECT STUDENT_GU
+	,DATE_ASSIGNED 
+FROM(
+SELECT 
+	STUDENT_GU
+	,DATE_ASSIGNED
+	,ROW_NUMBER() OVER (PARTITION BY STUDENT_GU ORDER BY DATE_ASSIGNED DESC) AS RN
+
+FROM (
+SELECT 
+*
+FROM (
 SELECT
 	STUDENT_GU
 	,DATE_ASSIGNED
@@ -42,4 +57,47 @@ FROM
 WHERE
 	RN = 1
 	AND Q1_LANGUAGE_SPOKEN_MOST + Q2_CHILD_FIRST_LANGUAGE + Q3_LANGUAGES_SPOKEN + Q4_OTHER_LANG_UNDERSTOOD + Q5_OTHER_LANG_COMMUNICATED != '0000000000'
-	
+
+) AS OLDPHLOTE
+
+/***********************************************************************************************************************************************
+
+DAC 5/3/2017 - ADDED LOGIC TO PULL NEW LUS HLS SURVEY QUESTIONS IF ENTERED.  IF STUDENT HAS RECORDS IN BOTH TABLES, MOST RECENT RECORD IS CHOSEN.
+
+*************************************************************************************************************************************************/
+
+UNION ALL
+
+SELECT 
+	STUDENT_GU
+	,DATE_ASSIGNED
+	--,LUS_Q1_STUDENT
+	--,LUS_Q2_STUDENT
+	--,LUS_Q3_STUDENT
+	--,LUS_Q4_STUDENT
+	--,LUS_Q5_STUDENT
+	--,LUS_Q6_STUDENT
+	--,LUS_Q7A_STUDENT
+	--,LUS_Q7B_STUDENT
+	--,LUS_Q7C_STUDENT
+
+ FROM 
+REV.UD_LUS_HISTORY
+
+WHERE
+(Q1_STUDENT = 'Y' OR
+ Q2_STUDENT = 'Y' OR
+ Q3_STUDENT = 'Y' OR
+ Q4_STUDENT = 'Y' OR
+ Q5_STUDENT = 'Y' OR
+ Q6_STUDENT = 'Y' OR
+ Q7A_STUDENT != '00' OR
+ Q7B_STUDENT != '00' OR
+ Q7C_STUDENT != '00'
+)
+ ) AS ALLPHLOTE
+ ) AS GETONEPHLOTE
+ WHERE RN = 1
+GO
+
+
