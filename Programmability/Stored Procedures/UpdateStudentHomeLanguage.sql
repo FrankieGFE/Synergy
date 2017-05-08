@@ -1,12 +1,13 @@
 USE [ST_Production]
 GO
 
-/****** Object:  StoredProcedure [APS].[UpdateHomeLanguage]    Script Date: 5/5/2017 11:59:08 AM ******/
+/****** Object:  StoredProcedure [APS].[UpdateHomeLanguage]    Script Date: 5/8/2017 11:06:09 AM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -80,12 +81,12 @@ BEGIN TRANSACTION
 											(                                  
 											SELECT
 												STUDENT_GU
-												,Q1
-												,Q2
-												,Q3
-												,Q4
-												,Q5
-												,Q6
+												,CASE WHEN Q1 IN ('Y', 'N') THEN '' ELSE Q1 END AS Q1
+												,CASE WHEN Q2 IN ('Y', 'N') THEN '' ELSE Q2 END AS Q2
+												,CASE WHEN Q3 IN ('Y', 'N') THEN '' ELSE Q3 END AS Q3
+												,CASE WHEN Q4 IN ('Y', 'N') THEN '' ELSE Q4 END AS Q4
+												,CASE WHEN Q5 IN ('Y', 'N') THEN '' ELSE Q5 END AS Q5
+												,CASE WHEN Q6 IN ('Y', 'N') THEN '' ELSE Q6 END AS Q6
 													,Q7A
 													,Q7B
 													,Q7C
@@ -95,7 +96,8 @@ BEGIN TRANSACTION
 											) AS HLS
                            			  UNPIVOT
 											  (LANGUAGE_CODE FOR QUESTIONS IN 
-													(Q1
+													(
+													Q1
 													 ,Q2
 													 ,Q3
 													 ,Q4
@@ -200,6 +202,7 @@ WHERE HOME_LANGUAGE_DATE > CAST(LEFT(GETDATE(),11)AS DATE)
 */
 
 END
+
 
 
 GO
