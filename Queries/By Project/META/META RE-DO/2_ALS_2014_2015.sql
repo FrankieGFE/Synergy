@@ -3,7 +3,7 @@ EXECUTE AS LOGIN='QueryFileUser'
 GO
 
 
-DECLARE @AsOfDate AS DATETIME = '2014-12-15'
+--DECLARE @AsOfDate AS DATETIME = '2014-12-15'
 	   
 
 SELECT DISTINCT FINAL.*
@@ -238,8 +238,8 @@ FROM (
 				ON STARS.[STUDENT ID] = STU.STATE_STUDENT_NUMBER
 				           
 		  WHERE
-				[Period] = @AsOfDate
-				--[Period] =  @AsOfDate
+				[Period] = '2014-12-15'
+				--[Period] =  '2014-12-15'
 				AND [DISTRICT CODE] = '001'
 				AND [CURRENT GRADE LEVEL] != 'PK'
 				--SKIPPING THIS CHILD BECAUSE HE WAS REPORTED AS 'KF' AND IN SYNERGY THE GRADE IS 'PK' AND WE DON'T WANT PRE-K'S
@@ -248,7 +248,7 @@ FROM (
 ) AS ALS
 
 LEFT JOIN 
-APS.PHLOTEAsOf(@AsOfDate) AS PHL
+APS.PHLOTEAsOf('2014-12-15') AS PHL
 ON
 ALS.STUDENT_GU = PHL.STUDENT_GU
 
@@ -275,7 +275,7 @@ SCH.ORGANIZATION_GU = ORG.ORGANIZATION_GU
 
 --GET SYNERGY LOCATION AND NAME WHERE STARS LOCATIONS ARE ROLLED UP, STATE LOCATIONS
 LEFT JOIN 
-APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS ENR
+APS.PrimaryEnrollmentDetailsAsOf('2014-12-15') AS ENR
 ON
 ALS.STUDENT_GU = ENR.STUDENT_GU
 ----------------------------------------------------------------------------------------
@@ -327,7 +327,7 @@ FROM
 		ON
 		LU.VALUE_CODE = Q2_CHILD_FIRST_LANGUAGE
 	WHERE
-		DATE_ASSIGNED <= (@AsOfDate)
+		DATE_ASSIGNED <= ('2014-12-15')
 	) AS RowedHLS
 WHERE
 	RN = 1
@@ -355,7 +355,7 @@ SELECT
 	,LCETEST.IS_ELL
 	,LCETEST.ADMIN_DATE
 FROM 
-APS.LCELatestEvaluationAsOf(@AsOfDate) AS LCETEST
+APS.LCELatestEvaluationAsOf('2014-12-15') AS LCETEST
 
 INNER HASH JOIN
 rev.EPC_TEST_PART AS PART
@@ -406,7 +406,7 @@ SELECT
 				[RDAVM.APS.EDU.ACTD].[db_STARS_History].[dbo].[PROGRAMS_FACT] AS BilingualModel
 
   WHERE
-				[Period] = @AsOfDate
+				[Period] = '2014-12-15'
 				AND [DISTRICT CODE] = '001'
 				AND BilingualModel.[Field5] IN ('ESL','BEP')
 ) AS ENGMODEL
@@ -429,7 +429,7 @@ LEFT JOIN
 	,RCVINGSERV.PARENT_REFUSED AS [Parent Refused]
 	,CASE WHEN RCVINGSERV.STATUS = 'No Appropriate Course Assigned' THEN 'Y' ELSE '' END AS [Not Receiving Service]
     FROM 
-	APS.LCEStudentsAndProvidersAsOf(@AsOfDate) AS RCVINGSERV
+	APS.LCEStudentsAndProvidersAsOf('2014-12-15') AS RCVINGSERV
 	) AS RCVINGSERV
 ON
 RCVINGSERV.SIS_NUMBER = ALS.SIS_NUMBER
@@ -444,7 +444,7 @@ LEFT JOIN
 SIS_NUMBER
 ,CASE WHEN SIS_NUMBER IS NOT NULL THEN 'BEP' ELSE '' END AS [Bilingual Model] 
 FROM 
-APS.LCEBilingualAsOf(@AsOfDate) AS BP
+APS.LCEBilingualAsOf('2014-12-15') AS BP
 INNER JOIN 
 REV.EPC_STU AS STU
 ON BP.STUDENT_GU = STU.STUDENT_GU
@@ -506,7 +506,7 @@ MODELTAGS.[Student_ID] = ALS.STATE_STUDENT_NUMBER
 (SELECT StudentID, MAX(BEPProgramDescription) AS BEPProgramDescription
 --, MAX(ALS2W) AS ALS2W, MAX(ALSED) AS ALSED, MAX(ALSSH) AS ALSSH, MAX(ALSES) AS ALSES, MAX(ALSMP) AS ALSMP 
 FROM 
-APS.BilingualModelAndHoursDetailsAsOf(@AsOfDate) AS BEPKIDS
+APS.BilingualModelAndHoursDetailsAsOf('2014-12-15') AS BEPKIDS
 GROUP BY StudentID
 ) AS MODELTAGS
 
@@ -535,9 +535,9 @@ SELECT
 	,CASE WHEN LCECLASS.ALSES IS NOT NULL THEN 1 ELSE 0 END AS ALSES
 	
  FROM 
-APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+APS.ScheduleDetailsAsOf('2014-12-15') AS SCH
 INNER JOIN 
-APS.LCEClassesWithMoreInfoAsOf(@AsOfDate) AS LCECLASS
+APS.LCEClassesWithMoreInfoAsOf('2014-12-15') AS LCECLASS
 ON
 LCECLASS.ORGANIZATION_YEAR_GU = SCH.ORGANIZATION_YEAR_GU
 AND LCECLASS.COURSE_GU = SCH.COURSE_GU
@@ -564,7 +564,7 @@ ALS.SIS_NUMBER = TAGSFORALL.SIS_NUMBER
 LEFT JOIN 
 (
 SELECT SIS_NUMBER, GRADE, BS.CLASS_OF, BS.STUDENT_GU FROM 
-APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS PRIM
+APS.PrimaryEnrollmentDetailsAsOf('2014-12-15') AS PRIM
 INNER JOIN 
 APS.BasicStudent AS BS
 ON
@@ -583,7 +583,7 @@ FRSTSENIOR.STUDENT_GU = ALS.STUDENT_GU
 LEFT JOIN 
 (
 SELECT bs.GRADUATION_DATE, BS.STUDENT_GU, LU.VALUE_DESCRIPTION AS DIPLOMA_TYPE FROM 
-APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS PRIM
+APS.PrimaryEnrollmentDetailsAsOf('2014-12-15') AS PRIM
 INNER JOIN 
 rev.epc_stu AS BS
 ON
@@ -631,7 +631,7 @@ SELECT
             CurrentSPED.SIS_NUMBER
             ,CurrentSPED.PRIMARY_DISABILITY_CODE
 FROM   
-            APS.PrimaryEnrollmentsAsOf(@AsOfDate) AS Enrollment
+            APS.PrimaryEnrollmentsAsOf('2014-12-15') AS Enrollment
             LEFT JOIN
             (
             SELECT
@@ -649,7 +649,7 @@ FROM
                         NEXT_IEP_DATE IS NOT NULL
                         AND (
                                     EXIT_DATE IS NULL 
-                                    OR EXIT_DATE >= CONVERT(DATE, @AsOfDate)
+                                    OR EXIT_DATE >= CONVERT(DATE, '2014-12-15')
                                     )
             ) AS CurrentSPED
             ON
