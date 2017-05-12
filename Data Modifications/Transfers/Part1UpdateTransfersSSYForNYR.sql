@@ -11,7 +11,7 @@ EXECUTE AS LOGIN='QueryFileUser'
 GO
 
 
-
+/*
 BEGIN TRANSACTION
 UPDATE rev.EPC_STU_SCH_YR
 	SET NEXT_GRADE_LEVEL = VALUE_CODE, NEXT_SCHOOL_GU = ORGANIZATION_GU
@@ -39,8 +39,13 @@ SELECT
  FROM 
 
 (
+*/
 
+/*****************************************************************************************************
 
+--COMMENT OUT EVERYTHING ABOVE THIS TO ONLY PULL DETAILS
+
+******************************************************************************************************/
 
 SELECT 
 	[Approvals].*
@@ -217,7 +222,7 @@ NXTYRENR.STUDENT_GU = STU2.STUDENT_GU
 --THIS NEEDED FOR THE UPDATE
 --COMMENT ALL THIS OUT BELOW FOR THE DETAILS FOR THE FILE TO REVIEW
 **************************************************************/
-
+/*
 ) AS T1
 
 WHERE 
@@ -250,7 +255,7 @@ WHERE
 
 COMMIT
 
-
+*/
 
       REVERT
 GO
