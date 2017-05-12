@@ -3,7 +3,7 @@ EXECUTE AS LOGIN='QueryFileUser'
 GO
 
 
-DECLARE @AsOfDate AS DATETIME = '2015-12-15'
+--DECLARE @AsOfDate AS DATETIME = '2015-12-15'
 	   
 
 SELECT DISTINCT FINAL.*
@@ -113,7 +113,7 @@ FROM (
 		,  [Content Based English as a Second Language] 
 		,  ALSED
 		,  ALSSH
-
+		
 		, [Parent Refused]
 		,[Not Receiving Service]
 		
@@ -178,12 +178,12 @@ FROM (
 		--,ISNULL(ACCESS.SCORE_DESCRIPTION,'')  AS SCORE_DESCRIPTION
 		,ACCESS.IS_ELL
 		,ACCESS.ADMIN_DATE
-/*
+
+		/***************************************************************OLD STARS STUFF*******************************************
 		,CASE WHEN [ENGMODEL].[Field5] = 'BEP' THEN 'Bilingual Model'
 			  WHEN [ENGMODEL].[Field5] = 'ESL' THEN 'English Model'
 		ELSE ''
 		END AS BILINGUAL_ENGLISH_MODEL
-		
 
 		--DONT COUNT KIDS IN BOTH, EVEN THOUGH STARS HAS THEM IN BOTH MODELS-----------------------------------------------------  
 		,CASE WHEN [ENGLISH PROFICIENCY] = 1 AND [Bilingual Model] = 'BEP' THEN '' 
@@ -191,12 +191,13 @@ FROM (
 		ELSE '' END AS [English Model]
 		
 		,CASE WHEN [ENGLISH PROFICIENCY] = 1 AND [Bilingual Model] = 'BEP' THEN [Bilingual Model] ELSE '' END AS [Bilingual Model]
-		---------------------------------------------------------------------------------------------------------------------------
-*/
+		**************************************************************************************************************************/
+
 		,ISNULL([English Model],'') AS [English Model]
 		,ISNULL([Bilingual Model],'') AS [Bilingual Model]
 
 		,ISNULL(BEPProgramDescription,'') AS BEPProgramDescription
+		
 		
 		, CASE WHEN ALS2W > 0 THEN 'ALS2W' ELSE '' END  AS [Dual Language Immersion]
 		, CASE WHEN ALSMP > 0 THEN 'ALSMP' ELSE '' END  AS [Maintenance Bilingual]
@@ -204,6 +205,7 @@ FROM (
 		, CASE WHEN ALSES > 0 THEN 'ALSES' ELSE '' END AS [Content Based English as a Second Language] 
 		, CASE WHEN ALSED > 0 THEN 'ALSED' ELSE '' END AS ALSED
 		, CASE WHEN ALSSH > 0 THEN 'ALSSH' ELSE '' END AS ALSSH
+		
 
 		,ISNULL([Parent Refused],'') AS [Parent Refused]
 		,ISNULL([Not Receiving Service],'') AS [Not Receiving Service]
@@ -301,9 +303,6 @@ YEARENDSTATUS.STUDENT_GU = ALS.STUDENT_GU
 
 
 ------------------------------------------------------------------------------------------------
-
-
-
 
 
 --PULL STUDENTS FIRST LANGUAGE
