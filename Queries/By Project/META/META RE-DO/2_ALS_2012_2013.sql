@@ -78,25 +78,25 @@ WHEN [Most Recent Test] = 'ELPA' AND [Ell Level] = 'Intermediate' THEN 'DEVELOPI
 WHEN [Most Recent Test] = 'ELPA' AND [Ell Level] = 'Early Advanced' THEN 'EXPANDING'
 WHEN [Most Recent Test] = 'ELPA' AND [Ell Level] = 'Advanced' THEN 'BRIDGING'
 
-WHEN [Most Recent Test] = 'PRE-LAS' AND [Ell Level] = 'Fully English Proficient' THEN 'Initial FEP'
+WHEN [Most Recent Test] = 'PRE-LAS' AND [Ell Level] = 'Fully English Proficient' THEN 'IFEP'
 WHEN [Most Recent Test] = 'PRE-LAS' AND [Ell Level] = 'Limited English Proficient' THEN 'DEVELOPING'
 WHEN [Most Recent Test] = 'PRE-LAS' AND [Ell Level] = 'Non-English Proficient' THEN 'ENTERING'
 
 WHEN [Most Recent Test] = 'SCRE' AND [Ell Level] = 'English Language Learner' THEN 'ENTERING'
 WHEN [Most Recent Test] = 'SCRE' AND [Ell Level] = 'NULL' THEN 'NULL'
-WHEN [Most Recent Test] = 'SCRE' AND [Ell Level] = 'Proficient' THEN 'Initial FEP'
+WHEN [Most Recent Test] = 'SCRE' AND [Ell Level] = 'Proficient' THEN 'IFEP'
 
 WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'ELL' THEN 'ENTERING'
 WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'Entering' THEN 'ENTERING'
 WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'Emerging' THEN 'EMERGING'
 WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'Developing' THEN 'DEVELOPING'
 WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'Expanding' THEN 'EXPANDING'
-WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'Bridging' THEN 'Initial FEP'
-WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'Reaching' THEN 'Initial FEP'
+WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'Bridging' THEN 'IFEP'
+WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'Reaching' THEN 'IFEP'
 
 ELSE [Ell Level] END AS CONSOLIDATED_PERFORMANCE_LEVEL
 
-,ROW_NUMBER() OVER (PARTITION BY STATE_ID ORDER BY YEAR_END_STATUS DESC) AS RN
+,ROW_NUMBER() OVER (PARTITION BY STATE_ID ORDER BY YEAR_END_STATUS) AS RN
 
 
 FROM (
@@ -119,8 +119,12 @@ SY
 ELSE GRADE END AS GRADE
 
 ,PHLOTE AS PHLOTE
+
 , CASE 
 		WHEN PHLOTE = 'N' AND [Ell Level] != '' THEN 'Y' 
+		WHEN PHLOTE = 'N' AND [ENGLISH PROFICIENCY] != '' AND [Most Recent Test] IN ('WAPT', 'SCRE', 'PRE-LAS') AND [ELL Eligible]  = ''   THEN 'Y'
+		WHEN PHLOTE = 'N' AND [ENGLISH PROFICIENCY] = '' AND [Most Recent Test] IN ('WAPT', 'SCRE', 'PRE-LAS') AND [ELL Eligible]  = ''   THEN 'Y'
+
 ELSE PHLOTE END AS [ADJUSTED PHLOTE]
 
 
@@ -129,8 +133,13 @@ ELSE PHLOTE END AS [ADJUSTED PHLOTE]
 				
 				
 				WHEN [ENGLISH PROFICIENCY] = '' AND [ELL Eligible]  = 'X' THEN 'ELL'
-				WHEN [ENGLISH PROFICIENCY] != '' AND [Most Recent Test] IN ('WAPT', 'SCREENER', 'PRE-LAS') AND [ELL Eligible]  = ''   THEN 'IFEP'
-				WHEN [ENGLISH PROFICIENCY] = '' AND [Most Recent Test] IN ('WAPT', 'SCREENER', 'PRE-LAS') AND [ELL Eligible]  = ''   THEN 'IFEP'
+				
+				WHEN [ENGLISH PROFICIENCY] != '' AND [Most Recent Test] IN ('WAPT', 'SCRE', 'PRE-LAS') AND [ELL Eligible]  = ''   THEN 'IFEP'
+				
+				WHEN [ENGLISH PROFICIENCY] = '' AND [Most Recent Test] IN ('WAPT', 'SCRE', 'PRE-LAS') AND [ELL Eligible]  = ''   THEN 'IFEP'
+
+
+				WHEN [ENGLISH PROFICIENCY] = '' AND [Most Recent Test] IN ('LAS', 'ELPA', 'ACCESS') AND [ELL Eligible]  = ''   THEN 'FEPE'
 
 				WHEN PHLOTE = 'Y' AND [Test Date] IS NULL AND  PRIMARY_LANGUAGE != 'American Sign language' THEN 'NOT DETERMINABLE'
 				WHEN PHLOTE = 'N' AND [Test Date] IS NULL THEN '' 
@@ -141,6 +150,8 @@ END AS [ADJUSTED ENGLISH PROFICIENCY]
 ,STATE_ID
 
 ,YEAR_END_STATUS
+,YEAR_END_CODE
+,YEAR_END_DESCRIPTION
 ,END_ENR_DT		
 
 
@@ -152,6 +163,7 @@ END AS [ADJUSTED ENGLISH PROFICIENCY]
 ,PRIMARY_LANGUAGE
 
 ,[Ell Level]
+,[Test Date]
 ,[Most Recent Test]
 ,Score
 
@@ -165,7 +177,7 @@ END AS [ADJUSTED ENGLISH PROFICIENCY]
 ,ALSED
 ,ALSSH
 ,[Parent Refused]
-,[Not Receiving Service]
+,[Receiving Service]
 ,[Students that were Seniors at the start of the SY]
 ,GRADUATED
 --,[Students that were Seniors at the start of the SY that earned a Career Diploma]
@@ -221,6 +233,8 @@ SELECT
 			ELSE ''
 	END AS YEAR_END_STATUS
 	,ENROLL.END_ENR_DT
+	,ENROLL.END_STAT AS YEAR_END_CODE
+	,ENROLL.STAT_DESCR AS YEAR_END_DESCRIPTION
 
 
 		,ISNULL(FRSTLANG.LANG_DESCR, '') AS [Students First Language]
@@ -263,7 +277,7 @@ SELECT
 
 	
 	,CASE WHEN PARENTREFUSED.ID_NBR IS NOT NULL THEN 'Y' ELSE '' END AS [Parent Refused]
-	,CASE WHEN NOTRECEIVINGSERVICE.ID_NBR IS NOT NULL THEN 'Y' ELSE '' END AS [Not Receiving Service]
+	,CASE WHEN [English Model] = 'ESL' THEN 'Receiving Service' ELSE '' END AS [Receiving Service]
 
 	
 	,CASE WHEN SENIORS.ID_NBR IS NOT NULL THEN 'Y' ELSE '' END AS [Students that were Seniors at the start of the SY]
@@ -419,7 +433,7 @@ AND SCHNME.SCH_NBR = ALS.[LOCATION CODE] collate DATABASE_DEFAULT
 ********************************************************************************************************/
 
 LEFT JOIN 
-(SELECT DISTINCT ENR.ID_NBR, ENR.END_STAT,ENR.GRDE, MRE.SCH_NBR, ENR.END_ENR_DT
+(SELECT DISTINCT ENR.ID_NBR, ENR.END_STAT,ENR.GRDE, MRE.SCH_NBR, ENR.END_ENR_DT, CODES.STAT_DESCR
  FROM 
 APS.MostRecentPrimaryEnrollBySchYr(@SchoolYear) AS MRE
 INNER JOIN 
@@ -430,6 +444,13 @@ INNER JOIN
 DBTSIS.CE020_V AS CEN
 ON
 ENR.ID_NBR = CEN.ID_NBR
+INNER JOIN 
+DBTSIS.ST080_V AS CODES
+ON
+ENR.END_STAT = CODES.END_STAT
+AND ENR.DST_NBR = CODES.DST_NBR
+AND ENR.SCH_YR = CODES.SCH_YR
+
 WHERE
 MRE.DST_NBR = 1
 ) AS ENROLL
