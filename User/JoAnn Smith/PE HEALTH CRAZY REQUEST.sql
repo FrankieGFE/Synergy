@@ -6,24 +6,25 @@ FIRST PULL KIDS WITH PE OR HEALTH ON THEIR SCHEDULES---------------
 ***********************************************************************/
 SELECT 
 	SCHEDULES.[W SCHOOL NAME] AS [School Name]
-	,SCHEDULES.[W FIRST NAME] + ' ' + SCHEDULES.[W LAST NAME] AS [Student Name]
+	--,SCHEDULES.[W FIRST NAME] + ' ' + SCHEDULES.[W LAST NAME] AS [Student Name]
 	,SCHEDULES.[W SIS NUMBER] AS [Student ID]
-	,SCHEDULES.[W GRADE] AS [Grade Level]
-	,SCHEDULES.[W COURSE ID]
-	,SCHEDULES.[W COURSE TITLE]
-	,SCHEDULES.[W CREDIT]
-	,SCHEDULES.SUBJECT_AREA_1 AS [Subject Area]
+	--,SCHEDULES.[W GRADE] AS [Grade Level]
+	,SCHEDULES.[W COURSE ID] as [In Progress Course ID]
+	,SCHEDULES.[W COURSE TITLE] as [In Progress Course Title]
+	,SCHEDULES.[W CREDIT] as [In Progress Credit]
 
+	,TRANSCRIPTS.[C SCHOOL NAME] AS [School Name]
+	,TRANSCRIPTS.[C SIS NUMBER] AS [Student ID]
+	,TRANSCRIPTS.[C COURSE ID] as [Completed Course ID]
+	,TRANSCRIPTS.[C COURSE TITLE] as [Completed Course Title]
+	,TRANSCRIPTS.[C MARK] as [Mark]
+	,TRANSCRIPTS.[C CREDIT ATTEMPTED] as [Credits Attempted]
+	,TRANSCRIPTS.[C CREDIT COMPLETED] as [Credits Completed]
 
-	,TRANSCRIPTS.[C CREDIT ATTEMPTED] AS [Attempt Credits]
-	,TRANSCRIPTS.[C COURSE ID]
-	,TRANSCRIPTS.[C COURSE TITLE]
-	,TRANSCRIPTS.[C MARK]
-	,TRANSCRIPTS.[C CREDIT COMPLETED]
-
-	,[F COURSE ID]
-	,[F COURSE TITLE]
-	,[F SIS NUMBER]
+	,[F SIS NUMBER] AS [Student ID]
+	,[F COURSE ID] AS [Future Course Request Course ID]
+	,[F COURSE TITLE] AS [Future Course Request Course Title]
+	,[F CREDIT] AS [Future Course Request Credit]
 	
 
 
@@ -35,13 +36,13 @@ SELECT
        enr.SCHOOL_NAME as [W SCHOOL NAME],
        B.STUDENT_GU AS [W STUDENT GU],
        B.SIS_NUMBER AS [W SIS NUMBER],
-       B.LAST_NAME AS [W LAST NAME],
-       B.FIRST_NAME AS [W FIRST NAME],
-       ENR.GRADE AS [W GRADE],
+       --B.LAST_NAME AS [W LAST NAME],
+       --B.FIRST_NAME AS [W FIRST NAME],
+       --ENR.GRADE AS [W GRADE],
        BS.COURSE_ID AS [W COURSE ID],
        BS.COURSE_TITLE [W COURSE TITLE],
        .5 AS [W CREDIT]
-	   ,SUBJECT_AREA_1
+	   --,SUBJECT_AREA_1
 FROM 
        (SELECT * FROM APS.PrimaryEnrollmentDetailsAsOf(GETDATE())
               WHERE grade in ('06', '07', '08'))
@@ -82,9 +83,9 @@ SELECT
        enr.SCHOOL_NAME AS [C SCHOOL NAME],
        B.STUDENT_GU AS [C STUDENT GU],
        B.SIS_NUMBER AS [C SIS NUMBER],
-       B.LAST_NAME AS [C LAST NAME],
-       B.FIRST_NAME AS [C FIRST NAME],
-       ENR.GRADE AS [C GRADE],
+       --B.LAST_NAME AS [C LAST NAME],
+       --B.FIRST_NAME AS [C FIRST NAME],
+       --ENR.GRADE AS [C GRADE],
        h.COURSE_ID AS [C COURSE ID],
        h.COURSE_TITLE AS [C COURSE TITLE],
        h.MARK AS [C MARK],
@@ -119,15 +120,11 @@ H.COURSE_GU = CRS.COURSE_GU
 
 WHERE
        [GROUP] IN ('008', '009') --PE
-	  -- and SIS_NUMBER = 970045594
 ) AS TRANSCRIPTS
 
 ON
 SCHEDULES.[W STUDENT GU] = TRANSCRIPTS.[C STUDENT GU]
---AND SCHEDULES.[W COURSE ID] = TRANSCRIPTS.[C COURSE ID]
 
---WHERE
---[W SIS NUMBER] = 970045594
 
 
 /*********************************************************************
@@ -139,12 +136,11 @@ FULL OUTER JOIN
 
 (
 SELECT DISTINCT
-       --ROW_NUMBER() over(partition by b.SIS_NUMBER order by b.SIS_NUMBER) as RN,
        Student.STUDENT_GU AS [F STUDENT GU],
        B.SIS_NUMBER AS [F SIS NUMBER],
-       b.LAST_NAME AS [F LAST NAME],
-       b.FIRST_NAME AS [F FIRST NAME],
-       Levels.VALUE_DESCRIPTION as [F GRADE],
+       --b.LAST_NAME AS [F LAST NAME],
+       --b.FIRST_NAME AS [F FIRST NAME],
+       --Levels.VALUE_DESCRIPTION as [F GRADE],
        Courses.COURSE_ID as [F COURSE ID],
        Courses.COURSE_TITLE as [F COURSE TITLE],
        .5 as [F CREDIT]
