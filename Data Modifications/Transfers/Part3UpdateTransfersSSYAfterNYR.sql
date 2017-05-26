@@ -38,7 +38,7 @@ FROM
        OPENROWSET (
                   'Microsoft.ACE.OLEDB.12.0', 
                   'Text;Database=\\SynTempSSIS\Files\TempQuery\;', 
-                  'SELECT * from TFRSPART3.csv'
+                  'SELECT * from Approvals.csv'
                 ) AS [Approvals]
 
 /*				

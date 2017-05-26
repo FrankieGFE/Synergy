@@ -35,7 +35,7 @@ SELECT
 	,EXCLUDE_ADA_ADM
 	,MEMBERDAYS
 FROM 
-   STUDENT_SCHOOL_MEMBERDAYS_120D
+   STUDENT_SCHOOL_MEMBERDAYS_EOY
 WHERE
 	SCHOOL_CODE != '517'
 
@@ -91,7 +91,7 @@ LEFT HASH JOIN
 			,SUM([udr].[Unexcused Absence Count]) AS [Total Unexcused]
 			,[o].[ORGANIZATION_NAME]
 		FROM	
-			[APS].[DailyAllDateRange]('20161202','20170208') AS [udr]
+			[APS].[DailyAllDateRange]('20170208','20170525') AS [udr]
 
 			INNER JOIN
 			[rev].[EPC_SCH] AS [s]

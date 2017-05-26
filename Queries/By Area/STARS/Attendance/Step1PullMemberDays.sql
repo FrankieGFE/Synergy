@@ -1,6 +1,6 @@
 
 --DROP TABLE dbo.STUDENT_SCHOOL_MEMBERDAYS_120D
---CREATE TABLE dbo.STUDENT_SCHOOL_MEMBERDAYS_120D
+--CREATE TABLE dbo.STUDENT_SCHOOL_MEMBERDAYS_EOY
 
 --(
 --	SIS_NUMBER VARCHAR(9)
@@ -16,7 +16,7 @@
 --)
 
 
-INSERT INTO dbo.STUDENT_SCHOOL_MEMBERDAYS_120D
+INSERT INTO dbo.STUDENT_SCHOOL_MEMBERDAYS_EOY
 
 select
   stu.SIS_NUMBER                            as SIS_NUMBER
@@ -26,8 +26,8 @@ select
 , convert(varchar(10), enr.enter_date, 101) as EnterDate
 , case 
      when enr.LEAVE_DATE is not null then convert(varchar(10), enr.LEAVE_DATE, 101) 
-     when '20170208' > copt.END_DATE   then convert(varchar(10), copt.END_DATE, 101) 
-     else convert(varchar(10), '20170208', 101)
+     when '20170525' > copt.END_DATE   then convert(varchar(10), copt.END_DATE, 101) 
+     else convert(varchar(10), '20170525', 101)
   end 
 as LeaveDate
 , yr.SCHOOL_YEAR                            as SchoolYear
@@ -63,9 +63,9 @@ join rev.EPC_SCH               sch  on sch.ORGANIZATION_GU        = oyr.ORGANIZA
 join rev.EPC_SCH_ATT_CAL_OPT   copt on copt.ORG_YEAR_GU           = oyr.ORGANIZATION_YEAR_GU
 join dbo.CalDayTable       ct   on ct.OrgGU                   = oyr.ORGANIZATION_GU
                                        and ct.OrgYrGu             = oyr.ORGANIZATION_YEAR_GU
-where ct.caldate between (CASE WHEN ENR.ENTER_DATE <= '20161202' THEN '20161202' 
-								WHEN ENR.ENTER_DATE > '20161202' THEN ENR.ENTER_DATE ELSE '' END) 
- and coalesce(enr.leave_date, '20170208')
+where ct.caldate between (CASE WHEN ENR.ENTER_DATE <= '20170208' THEN '20170208' 
+								WHEN ENR.ENTER_DATE > '20170208' THEN ENR.ENTER_DATE ELSE '' END) 
+ and coalesce(enr.leave_date, '20170525')
 
 
 --AND SIS_NUMBER = 100039718
