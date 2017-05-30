@@ -1,0 +1,260 @@
+
+
+
+/******************************************************************
+
+CREATED BY DEBBIE ANN CHAVEZ
+DATE 5/23/2017
+
+--FUNCTION FOR 2017-2018 AND FORWARD
+--NEW ESL AND BEP RULES 
+
+*******************************************************************/
+
+
+ALTER FUNCTION [APS].[LCEClassesAsOf_2](@AsOfDate DATE)
+RETURNS TABLE
+AS
+RETURN
+
+SELECT
+	SECTION_GU
+	,SECTION_ID
+	,ORGANIZATION_YEAR_GU 
+	,COURSE_GU
+	,COURSE_ID
+	,COURSE_TITLE
+	,STAFF_GU
+	,SCHOOL_TYPE
+	,AdditionalStaff
+	,ElementaryTESOL
+	,ElementaryBilingual
+	,ElementaryESL
+	,SecondaryTESOL
+	,SecondaryBilingual
+	,SecondaryESL
+	,Navajo
+	,ElementaryTESOLWaiverOnly
+	,ElementaryBilingualWaiverOnly
+	,SecondaryTESOLWaiverOnly
+	,SecondaryBilingualWaiverOnly
+FROM
+	(
+	SELECT
+		AllBEPESLSections.*
+		,Course.COURSE_ID
+		,Course.COURSE_TITLE
+		,Course.COURSE_GU
+		,SchoolYearCourse.ORGANIZATION_YEAR_GU
+		
+		,ROW_NUMBER() OVER (PARTITION BY AllBEPESLSections.SECTION_GU ORDER BY AllBEPESLSections.AdditionalStaff) AS RN
+	FROM
+	(
+		SELECT 
+			SECTIONS.SECTION_GU
+			,SECTIONS.SCHOOL_YEAR_COURSE_GU
+			,SECTIONS.SCHOOL_TYPE
+			,SECTIONS.SECTION_ID
+			,TAG
+			,Endorsement.*
+			,0 AS AdditionalStaff
+		FROM
+			(SELECT 
+				SECTION_GU
+				,SECT.SCHOOL_YEAR_COURSE_GU
+				,SCHSETUP.SCHOOL_TYPE
+				,SECT.SECTION_ID
+				,STAFF_SCHOOL_YEAR_GU
+				,COURSE_LEVEL AS TAG
+			 FROM 
+			rev.EPC_CRS AS CRS
+			INNER JOIN 
+			rev.EPC_SCH_YR_CRS AS CRSYR
+			ON
+			CRS.COURSE_GU = CRSYR.COURSE_GU
+			INNER JOIN 
+			rev.EPC_SCH_YR_SECT AS SECT
+			ON
+			CRSYR.SCHOOL_YEAR_COURSE_GU = SECT.SCHOOL_YEAR_COURSE_GU
+			INNER JOIN 
+			rev.REV_ORGANIZATION_YEAR AS ORGYR
+			ON
+			CRSYR.ORGANIZATION_YEAR_GU = ORGYR.ORGANIZATION_YEAR_GU
+			INNER JOIN 
+			rev.REV_ORGANIZATION AS ORG
+			ON
+			ORGYR.ORGANIZATION_GU = ORG.ORGANIZATION_GU
+			INNER JOIN 
+			rev.EPC_CRS_LEVEL_LST AS LST
+			ON
+			LST.COURSE_GU = CRS.COURSE_GU 
+			INNER JOIN 
+			rev.REV_YEAR AS YRS
+			ON
+			ORGYR.YEAR_GU = YRS.YEAR_GU
+			INNER JOIN 
+			REV.EPC_SCH_YR_OPT AS SCHSETUP
+			ON
+			SCHSETUP.ORGANIZATION_YEAR_GU = ORGYR.ORGANIZATION_YEAR_GU
+
+			WHERE
+			LST.COURSE_LEVEL IN ('BEP', 'ESL')
+			AND SCHOOL_YEAR = (SELECT SCHOOL_YEAR FROM 
+	[APS].[YearDates] AS [yr] 
+	INNER JOIN 
+	REV.REV_YEAR AS YRS
+	ON
+	YR.YEAR_GU = YRS.YEAR_GU
+	WHERE 
+	(@AsOfDate BETWEEN [yr].[START_DATE] AND [yr].[END_DATE])
+	AND [yr].EXTENSION = 'R')
+
+			) AS SECTIONS
+
+			INNER JOIN
+			rev.EPC_STAFF_SCH_YR AS StaffSchoolYear
+			ON
+			SECTIONS.STAFF_SCHOOL_YEAR_GU = StaffSchoolYear.STAFF_SCHOOL_YEAR_GU
+	
+			INNER JOIN
+			APS.LCETeacherEndorsementsAsOf(@AsOfDate) AS Endorsement
+			ON
+			StaffSchoolYear.STAFF_GU = Endorsement.STAFF_GU
+
+		UNION ALL
+
+		SELECT 
+			SECTIONS2.SECTION_GU
+			,SECTIONS2.SCHOOL_YEAR_COURSE_GU
+			,SECTIONS2.SCHOOL_TYPE
+			,SECTIONS2.SECTION_ID
+			,TAG
+			,Endorsement.*
+			,1 AS AdditionalStaff
+		FROM
+			(SELECT 
+				SECTION_GU
+				,SECT.SCHOOL_YEAR_COURSE_GU
+				,SCHSETUP.SCHOOL_TYPE
+				,SECT.SECTION_ID
+				,STAFF_SCHOOL_YEAR_GU
+				,LST.COURSE_LEVEL AS TAG
+			 FROM 
+			rev.EPC_CRS AS CRS
+			INNER JOIN 
+			rev.EPC_SCH_YR_CRS AS CRSYR
+			ON
+			CRS.COURSE_GU = CRSYR.COURSE_GU
+			INNER JOIN 
+			rev.EPC_SCH_YR_SECT AS SECT
+			ON
+			CRSYR.SCHOOL_YEAR_COURSE_GU = SECT.SCHOOL_YEAR_COURSE_GU
+			INNER JOIN 
+			rev.REV_ORGANIZATION_YEAR AS ORGYR
+			ON
+			CRSYR.ORGANIZATION_YEAR_GU = ORGYR.ORGANIZATION_YEAR_GU
+			INNER JOIN 
+			rev.REV_ORGANIZATION AS ORG
+			ON
+			ORGYR.ORGANIZATION_GU = ORG.ORGANIZATION_GU
+			INNER JOIN 
+			rev.EPC_CRS_LEVEL_LST AS LST
+			ON
+			LST.COURSE_GU = CRS.COURSE_GU 
+			INNER JOIN 
+			rev.REV_YEAR AS YRS
+			ON
+			ORGYR.YEAR_GU = YRS.YEAR_GU
+			INNER JOIN 
+			REV.EPC_SCH_YR_OPT AS SCHSETUP
+			ON
+			SCHSETUP.ORGANIZATION_YEAR_GU = ORGYR.ORGANIZATION_YEAR_GU
+
+			WHERE
+			LST.COURSE_LEVEL IN ('BEP', 'ESL')
+			AND SCHOOL_YEAR = (SELECT SCHOOL_YEAR FROM 
+	[APS].[YearDates] AS [yr] 
+	INNER JOIN 
+	REV.REV_YEAR AS YRS
+	ON
+	YR.YEAR_GU = YRS.YEAR_GU
+	WHERE 
+	(@AsOfDate BETWEEN [yr].[START_DATE] AND [yr].[END_DATE])
+	AND [yr].EXTENSION = 'R')
+
+			) AS SECTIONS2
+
+			INNER JOIN
+			rev.EPC_SCH_YR_SECT_STF AS AdditionalStaff
+			ON
+			SECTIONS2.SECTION_GU = AdditionalStaff.SECTION_GU
+
+			INNER JOIN
+			rev.EPC_STAFF_SCH_YR AS StaffSchoolYear
+			ON
+			AdditionalStaff.STAFF_SCHOOL_YEAR_GU = StaffSchoolYear.STAFF_SCHOOL_YEAR_GU
+	
+			INNER JOIN
+			APS.LCETeacherEndorsementsAsOf(@AsOfDate) AS Endorsement
+			ON
+			StaffSchoolYear.STAFF_GU = Endorsement.STAFF_GU
+		) AS AllBEPESLSections
+
+		INNER JOIN
+		rev.EPC_SCH_YR_CRS AS SchoolYearCourse
+		ON
+		AllBEPESLSections.SCHOOL_YEAR_COURSE_GU = SchoolYearCourse.SCHOOL_YEAR_COURSE_GU
+
+	
+		INNER JOIN
+		rev.EPC_CRS AS Course
+		ON
+		SchoolYearCourse.COURSE_GU = Course.COURSE_GU
+	
+		WHERE
+		--Elementary
+		(
+			AllBEPESLSections.SCHOOL_TYPE IN (1,2)
+			AND AllBEPESLSections.ElementaryESL = 1
+		)
+	OR 
+		--Secondary
+		(
+			AllBEPESLSections.SCHOOL_TYPE IN (2,3,4)
+			AND 
+			(
+				--secondary ESL
+				(
+					AllBEPESLSections.SecondaryESL = 1 
+					AND AllBEPESLSections.TAG= 'ESL'
+				)
+				OR
+				-- Secondary Bilingual
+				(
+					AllBEPESLSections.SecondaryBilingual= 1 
+					--Maintenance or 2WayDual Codes
+					AND AllBEPESLSections.TAG IN('BEP')
+				)
+			)
+		)
+		OR
+		--Navajo endorsements
+		(			
+			AllBEPESLSections.Navajo = 1 
+			AND 
+			(
+				--elementary navajo
+				Course.COURSE_ID ='12748008'
+				OR
+				--secondary navajo
+				Course.COURSE_ID LIKE '6111%'
+			)
+		)
+		
+
+	) AS RowNumberedQualifiedSections
+WHERE
+RowNumberedQualifiedSections.RN = 1
+GO
+
+
