@@ -254,7 +254,7 @@ WHERE
 						YEAR_END_STATUS 
 						FTE 	
 ************************************************************************************************************************************************/
-
+/*
 UPDATE
     [SSY]
 
@@ -275,7 +275,8 @@ FROM
     INNER JOIN
     (
 	   SELECT
-    [Person].[LAST_NAME]
+    [STUDENT_SCHOOL_YEAR_GU]
+	,[Person].[LAST_NAME]
     ,[Person].[FIRST_NAME]
     ,[Student].[SIS_NUMBER]
     ,[Org].[ORGANIZATION_NAME]
@@ -437,7 +438,7 @@ WHERE
     [SSY].[STUDENT_SCHOOL_YEAR_GU]=[Retained].[STUDENT_SCHOOL_YEAR_GU]
 	 AND RETAINED.Retain = 'X'
 
-	 
+	*/ 
 
 
 /**********************************************************************************************************************************************	
@@ -450,9 +451,11 @@ WHERE
 
 -- RUN THIS QUERY FIRST AND SEND RESULTS --------------------------------------------------------------------------------------------------------
 
+/*
+
 SELECT 
-COUNT (*) AS [COUNT], GRADE
---SIS_NUMBER, SCHOOL_CODE, SCHOOL_NAME, GRADE, YEAR_END_STATUS 
+--COUNT (*) AS [COUNT], GRADE
+SIS_NUMBER, SCHOOL_CODE, SCHOOL_NAME, GRADE, YEAR_END_STATUS 
 FROM 
 APS.PrimaryEnrollmentDetailsAsOf('20170525') AS PRIM 
 INNER JOIN 
@@ -461,7 +464,7 @@ ON
 PRIM.STUDENT_GU = STU.STUDENT_GU
 WHERE
 YEAR_END_STATUS IS NULL
-GROUP BY GRADE
+--GROUP BY GRADE
 ORDER BY GRADE
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
@@ -511,7 +514,7 @@ WHERE
     AND [SSY2].[EXCLUDE_ADA_ADM] IS NULL
 
 
-
+*/
 
 
 
@@ -585,8 +588,8 @@ FROM
 
 
 WHERE
-    [SSY].[YEAR_GU]=(SELECT [YEAR_GU] FROM [rev].[REV_YEAR] WHERE [SCHOOL_YEAR]=2015 AND [EXTENSION]='R')
-    AND [SSY2].[YEAR_GU]=(SELECT [YEAR_GU] FROM [rev].[REV_YEAR] WHERE [SCHOOL_YEAR]=2016 AND [EXTENSION]='R')
+    [SSY].[YEAR_GU]=(SELECT [YEAR_GU] FROM [rev].[REV_YEAR] WHERE [SCHOOL_YEAR]=2016 AND [EXTENSION]='R')
+    AND [SSY2].[YEAR_GU]=(SELECT [YEAR_GU] FROM [rev].[REV_YEAR] WHERE [SCHOOL_YEAR]=2017 AND [EXTENSION]='R')
     AND [SSY].[STATUS] IS NULL
     AND [SSY].[EXCLUDE_ADA_ADM] IS NULL
     AND [SSY2].[STATUS] IS NULL
@@ -598,7 +601,7 @@ WHERE
 
 
 -----SAME QUERY AS ABOVE, COPY AND PASTE IF CHANGES WERE MADE, THIS IS JUST TO SHOW RESULTS AFTER UPDATES---------------------------------------------------
-
+/*
 
 SELECT
     *
@@ -766,8 +769,10 @@ WHERE
 
 WHERE
     [Retain].[Retain]='X'
-
+*/
 --COMMIT
 
-ROLLBACK
+
+
+COMMIT
 
