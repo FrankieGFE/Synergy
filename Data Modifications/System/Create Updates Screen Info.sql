@@ -9,6 +9,11 @@
 		NOTES
 		AND ROLLBACK IF LOOKS GOOD THEN COMMIT
 
+		For JoAnn's info:
+		Run the script on the environment you're refreshing (e.g. SynergyTraining)
+		There should only be one record when you run this.  If there's more than one use
+		the delete statement at the bottom.
+
 */
 
 
@@ -20,18 +25,18 @@ INSERT INTO rev.UD_VER
 SELECT
 	MOSTRECENTVER.VER_GU AS VER_GU
 	,GETDATE() AS ADD_DATE_TIME_STAMP
-	,'27CDCD0E-BF93-4071-94B2-5DB792BB735F' AS ADD_ID_STAMP
+	,'CCD645FF-DA2A-489D-8FDB-2B3E650E6E85' AS ADD_ID_STAMP
 	,NULL AS CHANGE_DATE_TIME_STAMP
 	,NULL AS CHANGE_ID_STAMP
 		
 	--ENTER IN THE REFRESH DATE
-	,'2016-05-25' AS REFRESH_DATE
+	,'2017-06-12' AS REFRESH_DATE
 	
 	--ENTER THE USER INTERFACE URL
-	,'http://synexp.aps.edu.actd/' AS URL
+	,'http://synergytraining/aps.edu' AS URL
 
 	--ENTER IN ANY NOTES FOR ENVIRONMENT
-	,'Shayne working on Audit Trail' AS NOTES
+	,'Restore from Daily' AS NOTES
 
 		
 
@@ -51,4 +56,7 @@ RN = 1
 SELECT *  FROM 
 rev.UD_VER
 
+--delete from rev.rev_ver
+--where ver_gu = '088850F2-B972-46F5-9667-E7F8D844F959'
 ROLLBACK
+
