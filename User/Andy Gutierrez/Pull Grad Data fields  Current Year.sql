@@ -7,6 +7,7 @@ SELECT
 	,LAST_NAME
 	,FIRST_NAME
 	,MIDDLE_NAME
+	,
     ,Diplomas.VALUE_DESCRIPTION AS DIPLOMA_TYPE
     
     ,[Student].[GRADUATION_DATE]
@@ -61,7 +62,7 @@ WHERE
 	[Student].[GRADUATION_DATE] IS NOT NULL
     --[Grades].[VALUE_DESCRIPTION]='12'
     --AND [Student].[EXPECTED_GRADUATION_YEAR]=2016
-	AND ORGANIZATION_NAME NOT IN ('Career Enrichment Center', 'Homebound', 'Private School', 'Title One School') 
+	AND ORGANIZATION_NAME NOT IN ('Career Enrichment Center', 'Private School') 
 	--AND STUDENT.CHANGE_ID_STAMP =  '27CDCD0E-BF93-4071-94B2-5DB792BB735F'
 	ORDER BY 
 	SCHOOL,

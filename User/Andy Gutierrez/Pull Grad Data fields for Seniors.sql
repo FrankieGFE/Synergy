@@ -16,8 +16,8 @@ FROM
     [rev].[EPC_STU] AS [Student]
 
     INNER JOIN
-    --[APS].[PrimaryEnrollmentsAsOf](GETDATE()) AS [Enroll]
-	[APS].[PrimaryEnrollmentsAsOf]('05/22/2015') AS [Enroll]
+    [APS].[PrimaryEnrollmentsAsOf](GETDATE()) AS [Enroll]
+	--[APS].[PrimaryEnrollmentsAsOf]('05/22/2015') AS [Enroll]
     ON
     [Student].[STUDENT_GU]=[Enroll].[STUDENT_GU]
 
@@ -57,9 +57,9 @@ FROM
     [Student].POST_SECONDARY=PostSecondary.[VALUE_CODE]
 
 WHERE
-	[Student].[GRADUATION_DATE] IS NOT NULL
+	--[Student].[GRADUATION_DATE] IS NOT NULL
     --[Grades].[VALUE_DESCRIPTION]='12'
-    --AND [Student].[EXPECTED_GRADUATION_YEAR]=2016
+    [Student].[EXPECTED_GRADUATION_YEAR]=2017
 	AND ORGANIZATION_NAME NOT IN ('Career Enrichment Center', 'Homebound', 'Private School', 'Title One School') 
 	--AND STUDENT.CHANGE_ID_STAMP =  '27CDCD0E-BF93-4071-94B2-5DB792BB735F'
 	ORDER BY 
