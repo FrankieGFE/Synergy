@@ -1,0 +1,45 @@
+
+SELECT distinct 
+	[SIS Number]
+	,[School Code]
+	,ORGANIZATION_NAME
+	,Grade
+	,[Member Days]
+	,[Total Unexcused]
+	--,RN
+FROM
+(
+SELECT 
+      ROW_NUMBER () OVER (PARTITION BY [SIS Number] ORDER BY [SIS Number], ENR.ORGANIZATION_GU) AS RN
+	  ,ATT.[SIS Number]
+      ,ATT.[School Code]
+	  ,ORG.ORGANIZATION_NAME
+      --,[EXCLUDE_ADA_ADM]
+      ,ATT.Grade
+      ,[Member Days]
+      --,[Total Excused]
+      ,[Total Unexcused]
+      --,[TOTAL_ABSENCE_DAYS]
+FROM
+	APS.EnrollmentsForYear ('F7D112F7-354D-4630-A4BC-65F586BA42EC') ENR
+
+	JOIN
+	REV.REV_ORGANIZATION ORG
+	ON ORG.ORGANIZATION_GU = ENR.ORGANIZATION_GU
+
+	JOIN
+	REV.EPC_STU STU
+	ON STU.STUDENT_GU = ENR.STUDENT_GU
+
+	LEFT JOIN
+	[STUDENT_ATTENDANCE_2016] ATT
+	ON ATT.[SIS Number] = STU.SIS_NUMBER
+	AND ATT.ORGANIZATION_GU = ORG.ORGANIZATION_GU
+  WHERE 1 = 1
+  AND ATT.EXCLUDE_ADA_ADM IS NULL
+  AND ATT.[School Code] IN ('496','416','413','420','427','450','425','492','457','465','475','448')
+  AND ATT.GRADE IN ('06','07','08')
+) T1
+WHERE 1 = 1
+ORDER BY [SIS Number]
+--AND RN = 1

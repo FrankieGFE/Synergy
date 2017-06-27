@@ -1,20 +1,35 @@
+
+USE
+ST_Production
+GO
+
 SELECT
 	SCHOOL_CODE
 	,SCHOOL_NAME
 	,SIS_NUMBER
 	,GRADE
 	,DAYS
-	,CASE WHEN DISC_CODE = '2' THEN 'In-School Suspension'
-	      WHEN DISC_CODE = '3' THEN 'Out-Of-School Suspension'
-		  WHEN DISC_CODE = '4' THEN 'Expulsion'
-		  ELSE DISC_CODE
-	END AS DISC_CODE
+	,CASE WHEN disp_STATE_CODE = '2' THEN 'In-School Suspension'
+	      WHEN disp_STATE_CODE = '3' THEN 'Out-Of-School Suspension'
+		  WHEN disp_STATE_CODE = '4' THEN 'Expulsion'
+		  WHEN disp_STATE_CODE = '5' THEN 'LTS'
+		  ELSE disp_STATE_CODE
+	END AS disp_STATE_CODE_
+	,STATE_CODE
+	,disp_state_code
+	--,DISC_CODE
+	,DISP_CODE
+	,[DESCRIPTION]
+	,INCIDENT_ID
+	,INCIDENT_DATE
+	,DISPOSITION_DESCRIPTION
+	,rn1
 FROM
 	(
 
 	SELECT 
 		--[ENROLLMENTS].[SCHOOL_YEAR]
-		ROW_NUMBER () OVER (PARTITION BY [STUDENT].[SIS_NUMBER], [Disposition].[DISPOSITION_DATE] ORDER BY [Disposition].[DISPOSITION_DATE] DESC) AS RN
+		ROW_NUMBER () OVER (PARTITION BY [STUDENT].[SIS_NUMBER], [INCIDENT].[INCIDENT_ID] ORDER BY [INCIDENT].[INCIDENT_ID]) AS RN1
 		,[ENROLLMENTS].[SCHOOL_CODE]
 		,[ENROLLMENTS].[SCHOOL_NAME]
 		,[STUDENT].[SIS_NUMBER]
@@ -25,9 +40,10 @@ FROM
 		--,STUDENT.BIRTH_DATE
 		--,[STUDENT].[ELL_STATUS]
 		--,[STUDENT].[SPED_STATUS]
+
 		
-		--,[INCIDENT].[INCIDENT_DATE]
-		--,[INCIDENT].[INCIDENT_ID]
+		,[INCIDENT].[INCIDENT_DATE]
+		,[INCIDENT].[INCIDENT_ID]
 		
 		,[Disposition].[DISPOSITION_DATE]
 		--,[Disposition].[DISPOSITION_ID]
@@ -37,10 +53,12 @@ FROM
 		,[Disposition].[REASSIGNMENT_DAYS]
 		--,[Disposition].[DISPOSITION_START_DATE]
 		--,[Disposition].[DISPOSITION_END_DATE]
+		,[Disposition_Code].STATE_CODE as disp_state_code
 		
 		
 		--,[Violation].[VIOLATION_ID]
 		,[Violation_Code].[DISC_CODE]
+		,Violation_Code.STATE_CODE
 		--,[Violation_Code].[DESCRIPTION] AS [VIOLATION_DESCRIPTION]
 		--,[Violation].[SEVERITY_LEVEL]
 		--,[Violation_Code].[SEVERITY_LEVEL]
@@ -54,7 +72,7 @@ FROM
 	--,PRIVATE_DESCRIPTION
 		--,[Violation].*
 		--,[INCIDENT].*
-		--,[Violation_Code].*
+		,[Violation_Code].[DESCRIPTION]
 		
 		--[Violation_Code].[DISC_CODE]
 		--,[Violation_Code].[DESCRIPTION]
@@ -68,9 +86,8 @@ FROM
 			APS.StudentEnrollmentDetails
 			
 		WHERE
-			SCHOOL_YEAR = 2015
+			SCHOOL_YEAR = 2016
 			AND EXTENSION = 'R'
-			--AND EXCLUDE_ADA_ADM IS NULL
 		) AS [ENROLLMENTS]
 		
 		INNER JOIN
@@ -93,7 +110,7 @@ FROM
 		ON
 		[Discipline].[STU_INC_DISCIPLINE_GU] = [Disposition].[STU_INC_DISCIPLINE_GU]
 	    
-		INNER JOIN
+		 JOIN
 		[rev].[EPC_CODE_DISP] AS [Disposition_Code]
 		ON
 		[Disposition].[CODE_DISP_GU] = [Disposition_Code].[CODE_DISP_GU]
@@ -112,8 +129,10 @@ FROM
 	WHERE 1 = 1
 	--	[Disposition_Code].[DISP_CODE] IN ()
 		--[Violation_Code].[DESCRIPTION] LIKE '%BULLY%'
-		AND [Violation_Code].[DISC_CODE] IN ('2','3','4')
-	    AND SCHOOL_CODE IN ('496','416','413','420','427','450','425','492','457','418','475','448')
+		AND (disposition_code.STATE_CODE IN ('2','3','4','5')  OR [Disposition_Code].[DESCRIPTION] = 'Referral: Arrest/Legal/Justice System')
+		--AND Violation_Code IN ('S OSS','S ISS')
+	    AND SCHOOL_CODE IN ('496','416','413','420','427','450','425','492','457','465','475','448')
 	    AND GRADE IN ('06','07','08')
 ) T1
-		ORDER BY grade
+--WHERE SIS_NUMBER = '104465794'
+		ORDER BY SCHOOL_NAME, disp_state_code
