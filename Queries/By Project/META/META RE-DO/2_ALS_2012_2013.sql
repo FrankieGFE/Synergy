@@ -96,6 +96,44 @@ WHEN [Most Recent Test] = 'WAPT' AND [Ell Level] = 'Reaching' THEN 'IFEP'
 
 ELSE [Ell Level] END AS CONSOLIDATED_PERFORMANCE_LEVEL
 
+
+,CASE 
+WHEN [EOY Most Recent Test] = 'ACCESS' AND [EOY Ell Level] = 'Entering' THEN 'ENTERING' 
+WHEN [EOY Most Recent Test] = 'ACCESS' AND [EOY Ell Level] = 'Emerging' THEN 'EMERGING'
+WHEN [EOY Most Recent Test] = 'ACCESS' AND [EOY Ell Level] = 'Developing' THEN 'DEVELOPING'
+WHEN [EOY Most Recent Test] = 'ACCESS' AND [EOY Ell Level] = 'Expanding' THEN 'EXPANDING'
+WHEN [EOY Most Recent Test] = 'ACCESS' AND [EOY Ell Level] = 'Bridging' THEN 'BRIDGING'
+WHEN [EOY Most Recent Test] = 'ACCESS' AND [EOY Ell Level] = 'Reaching' THEN 'REACHING'
+
+WHEN [EOY Most Recent Test] = 'LAS' AND [EOY Ell Level] = 'Fully English Proficient' THEN 'BRIDGING'
+WHEN [EOY Most Recent Test] = 'LAS' AND [EOY Ell Level] = 'Limited English Proficient' THEN 'DEVELOPING'
+WHEN [EOY Most Recent Test] = 'LAS' AND [EOY Ell Level] = 'Non-English Proficient' THEN 'ENTERING'
+
+WHEN [EOY Most Recent Test] = 'ELPA' AND [EOY Ell Level] = 'Beginning' THEN 'ENTERING'
+WHEN [EOY Most Recent Test] = 'ELPA' AND [EOY Ell Level] = 'Early Intermediate' THEN 'EMERGING'
+WHEN [EOY Most Recent Test] = 'ELPA' AND [EOY Ell Level] = 'Intermediate' THEN 'DEVELOPING'
+WHEN [EOY Most Recent Test] = 'ELPA' AND [EOY Ell Level] = 'Early Advanced' THEN 'EXPANDING'
+WHEN [EOY Most Recent Test] = 'ELPA' AND [EOY Ell Level] = 'Advanced' THEN 'BRIDGING'
+
+WHEN [EOY Most Recent Test] = 'PRE-LAS' AND [EOY Ell Level] = 'Fully English Proficient' THEN 'IFEP'
+WHEN [EOY Most Recent Test] = 'PRE-LAS' AND [EOY Ell Level] = 'Limited English Proficient' THEN 'DEVELOPING'
+WHEN [EOY Most Recent Test] = 'PRE-LAS' AND [EOY Ell Level] = 'Non-English Proficient' THEN 'ENTERING'
+
+WHEN [EOY Most Recent Test] = 'SCRE' AND [EOY Ell Level] = 'English Language Learner' THEN 'ENTERING'
+WHEN [EOY Most Recent Test] = 'SCRE' AND [EOY Ell Level] = 'NULL' THEN 'NULL'
+WHEN [EOY Most Recent Test] = 'SCRE' AND [EOY Ell Level] = 'Proficient' THEN 'IFEP'
+
+WHEN [EOY Most Recent Test] = 'WAPT' AND [EOY Ell Level] = 'ELL' THEN 'ENTERING'
+WHEN [EOY Most Recent Test] = 'WAPT' AND [EOY Ell Level] = 'Entering' THEN 'ENTERING'
+WHEN [EOY Most Recent Test] = 'WAPT' AND [EOY Ell Level] = 'Emerging' THEN 'EMERGING'
+WHEN [EOY Most Recent Test] = 'WAPT' AND [EOY Ell Level] = 'Developing' THEN 'DEVELOPING'
+WHEN [EOY Most Recent Test] = 'WAPT' AND [EOY Ell Level] = 'Expanding' THEN 'EXPANDING'
+WHEN [EOY Most Recent Test] = 'WAPT' AND [EOY Ell Level] = 'Bridging' THEN 'IFEP'
+WHEN [EOY Most Recent Test] = 'WAPT' AND [EOY Ell Level] = 'Reaching' THEN 'IFEP'
+
+ELSE [EOY Ell Level] END AS EOY_CONSOLIDATED_PERFORMANCE_LEVEL
+
+
 ,ROW_NUMBER() OVER (PARTITION BY STATE_ID ORDER BY YEAR_END_STATUS) AS RN
 
 
@@ -167,6 +205,32 @@ END AS [ADJUSTED ENGLISH PROFICIENCY]
 ,[Most Recent Test]
 ,Score
 
+
+		, CASE 
+			WHEN [Most Recent Test] = 'LAS' AND Score  = 'FEP' THEN '5 '
+			WHEN [Most Recent Test] = 'LAS' AND Score  ='LEP'	THEN '3'
+
+			WHEN [Most Recent Test] = 'LAS' AND Score  ='LEPA' THEN	'3'
+			WHEN [Most Recent Test] = 'LAS' AND Score  ='LEPa' THEN	'3'
+			WHEN [Most Recent Test] = 'LAS' AND Score  ='LEPB' THEN	'3'
+			WHEN [Most Recent Test] = 'LAS' AND Score  ='LEPb' THEN	'3'
+			WHEN [Most Recent Test] = 'LAS' AND Score  ='LEPC' THEN	'3'
+			WHEN [Most Recent Test] = 'LAS' AND Score  ='LEPc' THEN '3'
+
+			WHEN [Most Recent Test] = 'LAS' AND Score  ='LEPd' THEN '3'
+			WHEN [Most Recent Test] = 'LAS' AND Score  ='LEPD' THEN '3'
+			WHEN [Most Recent Test] = 'LAS' AND Score  ='LEPe' THEN '3'
+			WHEN [Most Recent Test] = 'LAS' AND Score  ='NEP'  THEN '1'
+			WHEN [Most Recent Test] = 'PRE-LAS' AND Score  ='FEP' THEN	'5'
+
+			WHEN [Most Recent Test] = 'PRE-LAS' AND Score  ='Fully Engl' THEN '5'
+			WHEN [Most Recent Test] = 'PRE-LAS' AND Score  = 'LEP' THEN	'3'
+			WHEN [Most Recent Test] = 'PRE-LAS' AND Score  = 'Limited En' THEN	'3'
+			WHEN [Most Recent Test] = 'PRE-LAS' AND Score  = 'NEP' THEN	'1'
+			WHEN [Most Recent Test] = 'PRE-LAS' AND Score  = 'Non-Englis' THEN	'1'
+		ELSE Score END AS ACCESS_EQUIVALENT_SCORE
+
+
 ,[English Model]
 ,[Bilingual Model]
 
@@ -185,6 +249,36 @@ END AS [ADJUSTED ENGLISH PROFICIENCY]
 ,Dropout
 ,GIFTED
 ,SPED
+
+	, [EOY Ell Level]
+	, [EOY Most Recent Test]
+	, [EOY Score]
+	, [EOY Test Date]
+
+		, CASE 
+			WHEN [EOY Most Recent Test] = 'LAS' AND [EOY Score]  = 'FEP' THEN '5 '
+			WHEN [EOY Most Recent Test] = 'LAS' AND [EOY Score]  ='LEP'	THEN '3'
+
+			WHEN [EOY Most Recent Test] = 'LAS' AND [EOY Score]  ='LEPA' THEN	'3'
+			WHEN [EOY Most Recent Test] = 'LAS' AND [EOY Score]  ='LEPa' THEN	'3'
+			WHEN [EOY Most Recent Test] = 'LAS' AND [EOY Score]  ='LEPB' THEN	'3'
+			WHEN [EOY Most Recent Test] = 'LAS' AND [EOY Score]  ='LEPb' THEN	'3'
+			WHEN [EOY Most Recent Test] = 'LAS' AND [EOY Score]  ='LEPC' THEN	'3'
+			WHEN [EOY Most Recent Test] = 'LAS' AND [EOY Score]  ='LEPc' THEN '3'
+
+			WHEN [EOY Most Recent Test] = 'LAS' AND [EOY Score]  ='LEPd' THEN '3'
+			WHEN [EOY Most Recent Test] = 'LAS' AND [EOY Score]  ='LEPD' THEN '3'
+			WHEN [EOY Most Recent Test] = 'LAS' AND [EOY Score]  ='LEPe' THEN '3'
+			WHEN [EOY Most Recent Test] = 'LAS' AND [EOY Score]  ='NEP'  THEN '1'
+			WHEN [EOY Most Recent Test] = 'PRE-LAS' AND [EOY Score]  ='FEP' THEN	'5'
+
+			WHEN [EOY Most Recent Test] = 'PRE-LAS' AND [EOY Score]  ='Fully Engl' THEN '5'
+			WHEN [EOY Most Recent Test] = 'PRE-LAS' AND [EOY Score]  = 'LEP' THEN	'3'
+			WHEN [EOY Most Recent Test] = 'PRE-LAS' AND [EOY Score]  = 'Limited En' THEN	'3'
+			WHEN [EOY Most Recent Test] = 'PRE-LAS' AND [EOY Score]  = 'NEP' THEN	'1'
+			WHEN [EOY Most Recent Test] = 'PRE-LAS' AND [EOY Score]  = 'Non-Englis' THEN	'1'
+		ELSE [EOY Score] END AS EOY_ACCESS_EQUIVALENT_SCORE
+
 
 FROM (
 SELECT
@@ -243,8 +337,8 @@ SELECT
 	,ISNULL([ELL Level].[ELL Level],'') AS [Ell Level]
 	,ISNULL([ELL Level].[Most Recent Test],'') AS [Most Recent Test]
 	,ISNULL([ELL Level].Score,'') AS [Score]
-	,[ELL Eligible] 
-	,[Test Date]
+	,[ELL Level].[ELL Eligible] 
+	,[ELL Level].[Test Date]
 
 	,Language.LANG_DESCR AS PRIMARY_LANGUAGE
 
@@ -288,6 +382,13 @@ SELECT
 
 	,CASE WHEN SPED.[Primary Disability] = 'GI' THEN 'Y' ELSE '' END AS GIFTED
 	,CASE WHEN SPED.ID_NBR IS NOT NULL THEN SPED.[Primary Disability] ELSE '' END AS SPED
+
+	
+	,ISNULL([EOY_TESTS].[ELL Level],'') AS [EOY Ell Level]
+	,ISNULL([EOY_TESTS].[Most Recent Test],'') AS [EOY Most Recent Test]
+	,ISNULL([EOY_TESTS].Score,'') AS [EOY Score]
+	,[EOY_TESTS].[Test Date] AS [EOY Test Date]
+
 
 	FROM
 		
@@ -787,6 +888,16 @@ DST_NBR = 1 AND SCH_YR = 2013
 ON
 SPED.ID_NBR = ALS.ID_NBR
 
+
+
+/**********************************************************************
+		PULL EOY ACCESS SCORES
+***********************************************************************/	
+	
+LEFT JOIN
+	APS.LCELatestEvaluationAsOf ('07-01-2013') AS EOY_TESTS
+ON
+	ALS.ID_NBR = EOY_TESTS.ID_NBR
 
 
 
