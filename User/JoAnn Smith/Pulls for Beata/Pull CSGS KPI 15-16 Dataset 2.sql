@@ -118,7 +118,7 @@ ON
 	S.STUDENT_GU = H.STUDENT_GU
 where 1 = 1		
 AND
-	g.[GROUP] in ('ALG 1 S1', 'ALG 1 S2', 'ALG II S1', 'ALG II S2')
+	g.[GROUP] in ('ALG 1 S1', 'ALG 1 S2', 'ALG 2 S1', 'ALG 2 S2')
 AND
 	SCHOOL_YEAR = 2015
 GROUP BY
