@@ -1,12 +1,13 @@
 USE [ST_Production]
 GO
 
-/****** Object:  StoredProcedure [APS].[UpdateHomeLanguage]    Script Date: 5/8/2017 11:06:09 AM ******/
+/****** Object:  StoredProcedure [APS].[UpdateHomeLanguage]    Script Date: 7/13/2017 2:37:35 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -126,11 +127,14 @@ BEGIN TRANSACTION
 					 ,DATE_ASSIGNED
               FROM
                      (
-							 SELECT
-								* 
+							SELECT * FROM (
+							SELECT
+								*
+								,CASE WHEN Q7B = '00' OR Q7B IS NULL THEN 1 ELSE 0 END AS GOOD
+								,CASE WHEN Q7C = '00' OR Q7C IS NULL THEN 1 ELSE 0 END AS GOOD2
 							FROM
-							APS.LCEMostRecentHLSAsOf(GETDATE())
-					 
+							APS.LCEMostRecentHLSAsOf(GETDATE()) AS HLS
+										 
 							WHERE
 							 Q1 + Q2 + Q3 + Q4 + Q5 = '0000000000' OR
 							( Q1  = 'N' AND
@@ -139,10 +143,13 @@ BEGIN TRANSACTION
 							 Q4 = 'N' AND
 							 Q5 = 'N' AND
 							 Q6 = 'N' AND
-							 Q7A = '00' AND
-							 Q7B = '00' AND
-							 Q7C = '00'
-							 )
+							 Q7A = '00' )
+						
+							 ) AS FILTEROUT
+							 WHERE
+							 GOOD + GOOD2 = 2 OR
+							 Q1 + Q2 + Q3 + Q4 + Q5 = '0000000000'
+					 
 					) AS WHY
 		) AS ALLHLS
 
@@ -202,6 +209,7 @@ WHERE HOME_LANGUAGE_DATE > CAST(LEFT(GETDATE(),11)AS DATE)
 */
 
 END
+
 
 
 

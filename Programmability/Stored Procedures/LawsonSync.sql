@@ -1,28 +1,13 @@
-/**
- * $Revision: 973 $
- * $LastChangedBy: e104090 $
- * $LastChangedDate: 2016-12-07 16:49:09 -0600 (Fri, 08 Apr 2016) $
- */
- 
-
-/*
-	This process updates Synergy PERSON and STAFF tables with data from Lawson that are not updated with LDAP (ex. LAST NAME, FIRST NAME, EMAIL)
-	AND Updates the User records for New Staff to Disabled, and Exempt until employees attend training.
-	AND Creates records for the Staff Role Type.
-	 - Active staff only (not DISABLED in USER table in Synergy)
-	 - Uses Staff Crosswalk to determine TYPE
-	 - This takes about 1 min 04 seconds to run
-*/
-
-
-USE ST_Production
+USE [ST_Production]
 GO
 
-
--- Remove Procedure if it exists
-IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[LawsonSync]') AND type in (N'P', N'PC'))
-	EXEC ('CREATE PROCEDURE [APS].LawsonSync AS SELECT 0')
+/****** Object:  StoredProcedure [APS].[LawsonSync]    Script Date: 7/13/2017 2:21:17 PM ******/
+SET ANSI_NULLS ON
 GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
 
 /**
  * STORED PROC APS.LawsonSync
@@ -57,6 +42,10 @@ SET
 	--APS.LAWSONSYNC USER GU
 	, CHANGE_ID_STAMP = @LAWSONGU
 	,LAST_NAME = APS.FormatTitleCase(LAWSON.LAW_LAST_NAME)
+	,FIRST_NAME = APS.FormatTitleCase(LAWSON.LAW_FIRST_NAME)
+	,SOCIAL_SECURITY_NUMBER = LAWSON.LAW_SSN
+
+
 FROM
 	--ONLY UPDATE STAFF AND PERSON RECORDS THAT ARE NOT DISABLED IN SYNERGY (ACTIVE STAFF ONLY)
 	rev.EPC_STAFF AS STAFF
@@ -79,6 +68,8 @@ WHERE
 	OR ISNULL(HISPANIC_INDICATOR,'') != LAWSON.LAW_HISPANIC_INDICATOR
 	--OR PRIMARY_PHONE != LAWSON.LAW_PHONE
 	OR ISNULL(LAST_NAME,'') != LAWSON.LAW_LAST_NAME
+	OR ISNULL(FIRST_NAME,'') != LAWSON.LAW_FIRST_NAME
+	OR ISNULL(SOCIAL_SECURITY_NUMBER,'') != LAWSON.LAW_SSN
 
 	
 ----------------------------------------------------------------------------------------------------------------------------------------
@@ -397,6 +388,7 @@ ELSE
 	
 
 END -- END SPROC
+
 
 
 
