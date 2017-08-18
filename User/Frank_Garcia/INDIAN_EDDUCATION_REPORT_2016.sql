@@ -108,7 +108,7 @@ WHERE 1 = 1
 --AND RN = 1
 )
 
-SELECT
+SELECT distinct
 	[ALTERNATE STUDENT ID] AS [Student ID]
 	,[STUDENT ID] AS [STARS ID]
 	,[CURRENT GRADE LEVEL] AS [Grade Level]
@@ -135,7 +135,7 @@ SELECT
 
 	,ABSENSES_16.[Total Excused] AS [#Total Excused Absenses 2016]
 	,ABSENSES_16.[Total Unexcused] AS [#Total Unexcused Absenses 2016]
-	,ABSENSES_16.[School Code]
+	--,ABSENSES_16.[School Code]
 
 FROM
 		OPENROWSET (
@@ -159,6 +159,7 @@ WHERE 1 = 1
 	--AND STU.PERIOD = '2017-03-01'
 	--AND STU.[DISTRICT CODE] = '001'
 	--and STU.[ALTERNATE STUDENT ID] = '186787'
+	--and GRADUATION_DATE < getdate()
 ORDER BY [ALTERNATE STUDENT ID]
 
 
