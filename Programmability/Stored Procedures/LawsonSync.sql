@@ -1,12 +1,13 @@
 USE [ST_Production]
 GO
 
-/****** Object:  StoredProcedure [APS].[LawsonSync]    Script Date: 7/13/2017 2:21:17 PM ******/
+/****** Object:  StoredProcedure [APS].[LawsonSync]    Script Date: 8/22/2017 10:40:30 AM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 /**
@@ -41,7 +42,7 @@ SET
 	, CHANGE_DATE_TIME_STAMP = GETDATE()
 	--APS.LAWSONSYNC USER GU
 	, CHANGE_ID_STAMP = @LAWSONGU
-	,LAST_NAME = APS.FormatTitleCase(LAWSON.LAW_LAST_NAME)
+	,LAST_NAME = CASE WHEN LAWSON.LAW_LAST_NAME LIKE 'MC%' THEN 'Mc' + UPPER(SUBSTRING(LAWSON.LAW_LAST_NAME,3,1)) + SUBSTRING(LAWSON.LAW_LAST_NAME,4,50) ELSE APS.FormatTitleCase(LAWSON.LAW_LAST_NAME) END
 	,FIRST_NAME = APS.FormatTitleCase(LAWSON.LAW_FIRST_NAME)
 	,SOCIAL_SECURITY_NUMBER = LAWSON.LAW_SSN
 
@@ -76,10 +77,11 @@ WHERE
 ----------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------
 
+
 UPDATE 
 	STAFF
 SET		
-	STATE_ID = LAW_EMPLOYEE
+	STATE_ID = LAW_SSN
 	, BADGE_NUM = LAW_BADGE_NUMBER
 	, HIRE_DATE = LAW_HIRE_DATE
 	, TYPE = LAW_TYPE
@@ -100,7 +102,7 @@ SET
 		AND LAWSON.LAW_EMPLOYEE != 210177
 
 WHERE
-	ISNULL(STATE_ID,0) = LAW_EMPLOYEE
+	ISNULL(STATE_ID,0) = LAW_SSN
 	OR ISNULL(BADGE_NUM,'') = LAW_BADGE_NUMBER
 	OR ISNULL(HIRE_DATE,'') = LAW_HIRE_DATE
 	OR ISNULL(TYPE,'') = LAW_TYPE
@@ -351,19 +353,21 @@ FROM
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 --WHY IS THIS IN HERE????  I'M TAKING THIS OUT FOR NOW DAC 9/15/2016, ONLY STAFF IS DONE ABOVE
-/*
+--8/22/2017 DAC - PUTTING THIS BACK BECAUSE WE NEED *ALL* PERSONS IN PROPER CASE
+
+
 UPDATE 
 	PERSON
 SET		
 	CHANGE_DATE_TIME_STAMP = GETDATE()
 	,CHANGE_ID_STAMP = @LAWSONGU
-	,LAST_NAME = APS.FormatTitleCase(LAST_NAME)
+	,LAST_NAME = CASE WHEN LAST_NAME LIKE 'MC%' THEN 'Mc' + UPPER(SUBSTRING(LAST_NAME,3,1)) + SUBSTRING(LAST_NAME,4,50) ELSE APS.FormatTitleCase(LAST_NAME) END 
 	,FIRST_NAME = APS.FormatTitleCase(FIRST_NAME)
 	,MIDDLE_NAME = APS.FormatTitleCase(MIDDLE_NAME)
 
 FROM
 	rev.REV_PERSON AS PERSON
-*/
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------
@@ -388,6 +392,9 @@ ELSE
 	
 
 END -- END SPROC
+
+
+
 
 
 
