@@ -1,12 +1,14 @@
-/*
- * Brian Rieb
- * 8/26/2014
- */
- 
--- Add Procedure if it does not exist
-IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[ELLStatFromELLHistory]') AND type in (N'P', N'PC'))
-	EXEC ('CREATE PROCEDURE [APS].ELLStatFromELLHistory AS SELECT 0')
+USE [ST_Production]
 GO
+
+/****** Object:  StoredProcedure [APS].[ELLStatFromELLHistory]    Script Date: 8/17/2017 11:46:47 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
 
 /**
  * STORED PROCEDURE APS.ELLStatFromELLHistory
@@ -17,7 +19,7 @@ GO
  * #param INT @ValidateOnly Whether to commit changes or not. If value = 1 then rollback changes.  
  *                          Any other value commits changes
  */
-ALTER PROC [APS].[ELLStatFromELLHistory](
+CREATE PROC [APS].[ELLStatFromELLHistory](
 	@ValidateOnly INT
 )
 
@@ -53,7 +55,7 @@ FROM
 			,PROGRAM_QUALIFICATION
 			,EXIT_DATE
 			,EXIT_REASON
-			,ROW_NUMBER() OVER (PARTITION BY STUDENT_GU ORDER BY COALESCE(EXIT_DATE, CONVERT(DATE, GETDATE())) DESC, ENTRY_DATE) AS RN
+			,ROW_NUMBER() OVER (PARTITION BY STUDENT_GU ORDER BY COALESCE(EXIT_DATE, CONVERT(DATE, GETDATE())) DESC) AS RN
 		FROM
 			Rev.EPC_STU_PGM_ELL_HIS
 		)AS ELLHistory
@@ -66,9 +68,9 @@ FROM
 	ON
 	MostRecentELLHistory.STUDENT_GU = ELL.STUDENT_GU
 WHERE
-	-- change only if different (Deb's idea: COALESCE as Nulls goof all sorts of compares up - good catch)
-	COALESCE(ELL.ENTRY_DATE,'1974-07-07') != COALESCE(MostRecentELLHistory.ENTRY_DATE,'1974-07-07')
-	OR COALESCE(ELL.EXIT_DATE,'1974-07-07') != COALESCE(MostRecentELLHistory.EXIT_DATE,'1974-07-07')
+
+	COALESCE(ELL.ENTRY_DATE,'1976-10-20') != COALESCE(MostRecentELLHistory.ENTRY_DATE,'1976-10-20')
+	OR COALESCE(ELL.EXIT_DATE,'1976-10-20') != COALESCE(MostRecentELLHistory.EXIT_DATE,'1976-10-20')
 	OR COALESCE(ELL.EXIT_REASON,'') != COALESCE(MostRecentELLHistory.EXIT_REASON,'')
 	OR COALESCE(ELL.PROGRAM_CODE,'') != COALESCE(MostRecentELLHistory.PROGRAM_CODE,'')
 
@@ -112,7 +114,7 @@ FROM
 			,PROGRAM_QUALIFICATION
 			,EXIT_DATE
 			,EXIT_REASON
-			,ROW_NUMBER() OVER (PARTITION BY STUDENT_GU ORDER BY COALESCE(EXIT_DATE, CONVERT(DATE, GETDATE())) DESC, ENTRY_DATE) AS RN
+			,ROW_NUMBER() OVER (PARTITION BY STUDENT_GU ORDER BY COALESCE(EXIT_DATE, CONVERT(DATE, GETDATE())) DESC) AS RN
 		FROM
 			Rev.EPC_STU_PGM_ELL_HIS
 		)AS ELLHistory
@@ -138,3 +140,7 @@ ELSE
 		ROLLBACK
 	END
 END -- END SPROC
+
+GO
+
+

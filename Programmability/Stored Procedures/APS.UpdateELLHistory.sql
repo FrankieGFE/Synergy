@@ -1,22 +1,23 @@
-/*
- * Brian Rieb
- * 8/28/2014
- */
- 
--- Add Procedure if it does not exist
-IF  NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[UpdateELLHistory]') AND type in (N'P', N'PC'))
-	EXEC ('CREATE PROCEDURE [APS].UpdateELLHistory AS SELECT 0')
+USE [ST_Production]
 GO
+
+/****** Object:  StoredProcedure [APS].[UpdateELLHistory]    Script Date: 8/17/2017 11:38:17 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
 
 /**
  * STORED PROCEDURE APS.UpdateELLHistory
  * Creates or closes ELL History based on ELL Calculated As OF (most recent assessments
  * Also updates or creates a main ell record based on this new history.
  *
- * NOTE: This does not update exit year status.  This is something we will **probably* want to do once a year?
+ * NOTE: This does not CLOSE OUT ANY ELL RECORDS OR CREATE EXIT YEAR RECORDS.
  *
- * Tables Used: ELLCalculatedAsOf, ELLAsOf, EPC_STU_PGM_ELL_HIS, PHLOTEAsOf, PrimaryEnrollmentsAsOf
- *
+ * 
  * #param INT @ValidateOnly Whether to commit changes or not. If value = 1 then rollback changes.  
  *                          Any other value commits changes
  */
@@ -27,11 +28,9 @@ ALTER PROC [APS].[UpdateELLHistory](
 AS
 BEGIN
 
--- (Frank is loading records right now)
---SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
--- First, The ones we need to add to ELL Transactions
--- ----------------------------------------------------------------------------------
+-- Create ELL Record if it does not exist, students enroll nightly and some may be ELL because of their last WAPT/SCREENER/PRE-LAS assessment
+-- ------------------------------------------------------------------------------------------------------------------------------------------
 
 BEGIN TRANSACTION
 
@@ -45,6 +44,7 @@ INSERT INTO
 	,ENTRY_DATE
 	,ELL_GRADE
 	,ADD_DATE_TIME_STAMP
+	,ADD_ID_STAMP
 	)
 
 SELECT
@@ -55,65 +55,18 @@ SELECT
 	,ADMIN_DATE AS ENTRY_DATE
 	,CalculatedELL.GRADE AS ELL_GRADE
 	,GETDATE() ADD_DATE_TIME_STAMP
+	,'96870498-10C3-4D16-8B11-27BA3651C2CE' AS ADD_ID_STAMP
 FROM
-	-- ALL ELL Kiddos
 	APS.ELLCalculatedAsOf(GETDATE()) As CalculatedELL
 	LEFT JOIN
-	-- Current ELL Status
-	APS.ELLAsOf(GETDATE()) AS ELL
+	(SELECT DISTINCT STUDENT_GU FROM REV.EPC_STU_PGM_ELL_HIS) AS ELL
 	ON
 	CalculatedELL.STUDENT_GU = ELL.STUDENT_GU
 
-	LEFT JOIN
-	APS.PHLOTEAsOf(GETDATE()) AS PHLOTE
-	ON
-	CalculatedELL.STUDENT_GU = PHLOTE.STUDENT_GU
 WHERE
-	(
 	ELL.STUDENT_GU IS NULL
-	--WHY IS THIS HERE???
-	--OR ELL.LEAVE_DATE IS NOT NULL
-	)
-	AND PHLOTE.STUDENT_GU IS NOT NULL
+	
 
--- Then the onese we need to close. We may need to 
--- join in MostRecent ELL To get the STU_PGM_ELL_HIS_GU (for the record we are actually going to update)
--- ----------------------------------------------------------------------------------
-
-/*
-UPDATE 
-	EllHistory
-SET
-	EXIT_DATE = Evaluation.ADMIN_DATE
-	,EXIT_REASON = 'EY1' -- Always Exit Year 1
-	,CHANGE_DATE_TIME_STAMP = GETDATE()
-FROM
-	APS.PrimaryEnrollmentsAsOf(GETDATE()) AS Enroll
-	INNER JOIN
-	APS.ELLAsOf(GETDATE()) AS ELL
-	ON
-	Enroll.STUDENT_GU = ELL.STUDENT_GU
-
-	-- need to re-get that last record, cuz that is the one we will be closing (updating)
-	INNER JOIN
-	rev.EPC_STU_PGM_ELL_HIS AS ELLHistory
-	ON
-	ELL.STU_PGM_ELL_HIS_GU = ELLHistory.STU_PGM_ELL_HIS_GU
-
-	LEFT JOIN
-	APS.ELLCalculatedAsOf(GETDATE()) AS CalculatedELL
-	ON
-	Enroll.STUDENT_GU = CalculatedELL.STUDENT_GU
-
-	LEFT JOIN
-	APS.LCELatestEvaluationAsOf(GETDATE()) AS Evaluation
-	ON
-	Enroll.STUDENT_GU = Evaluation.STUDENT_GU
-
-WHERE
-	CalculatedELL.STUDENT_GU IS NULL
-
-*/
 
 --Validation Check to see how many records will be processed, 0 = INSERT AND UPDATE, 1 = ROLLBACK - WILL NOT - UPDATE/INSERT
 IF @ValidateOnly = 0
@@ -124,13 +77,23 @@ ELSE
 	BEGIN
 		ROLLBACK
 	END
+	
 		
+-- These 2 STORED PROCEDURES NEED TO BE RUN AFTER ELL RECORD HAS BEEN CREATED 
+--need to be done outside other transaction (can't have transactions within transactions.
 
--- Lastly, need to update(or create) all the ELL records to match most recent ELL History
--- This needs to be done outside other transaction (can't have transactions within
--- transactions.
+
+--  Update Participation Status for ELL Students
+EXEC APS.UpdateELLParticipationStatus @ValidateOnly
+
+
+-- Lastly, update or create ELL table with most recent record from ELL History
 -- ----------------------------------------------------------------------------------
 EXEC APS.ELLStatFromELLHistory @ValidateOnly
 
 
 END -- END SPROC
+
+GO
+
+

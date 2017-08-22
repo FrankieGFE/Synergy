@@ -1,10 +1,24 @@
+USE [ST_Production]
+GO
+
+/****** Object:  View [APS].[CleverSchools]    Script Date: 8/21/2017 1:49:12 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
 /*
 	Created by Debbie Ann Chavez (ORIGINAL CODE FROM MLM/EDUPOINT)
 	Date 7/18/2016
 */
 
 
-ALTER VIEW APS.CleverSchools AS
+CREATE VIEW [APS].[CleverSchools] AS
 
 SELECT
          sch.SCHOOL_CODE                      AS [School_id]
@@ -60,3 +74,48 @@ FROM   rev.REV_ORGANIZATION           org
 	                                                                       = (select max(grade) from rev.EPC_SCH_GRADE sg
 																		      where sg.ORGANIZATION_YEAR_GU = oyr.ORGANIZATION_YEAR_GU
 																			  and cast(sg.grade as int) <= 230)
+
+
+
+-- THIS IS NEEDED FOR TECHNOLOGY EMPLOYEES IN CLEVERADMIN FILE
+UNION 
+
+SELECT 
+
+'068' AS SCH
+,'Technology' AS SCHOOL
+,'068' AS STATE
+,'Uptown' AS STREET
+,'Albuquerque' AS CITY
+,'NM' AS STATE
+,'87110' AS ZIP
+,'5058308082' AS PHONE
+,'' AS LOWGRADE
+,'' AS HIGHGRADE
+,'Aaron Jaramillo' AS PRINCIPAL
+,'jaramillo_ab@aps.edu' AS EMAIL
+
+UNION 
+
+SELECT
+
+'053' AS SCH
+,'Technology Hardware' AS SCHOOL
+,'053' AS STATE
+,'Uptown' AS STREET
+,'Albuquerque' AS CITY
+,'NM' AS STATE
+,'87110' AS ZIP
+,'5058308082' AS PHONE
+,'' AS LOWGRADE
+,'' AS HIGHGRADE
+,'Aaron Jaramillo' AS PRINCIPAL
+,'jaramillo_ab@aps.edu' AS EMAIL
+
+
+
+
+
+GO
+
+
