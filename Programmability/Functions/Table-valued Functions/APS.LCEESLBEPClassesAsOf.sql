@@ -5,11 +5,14 @@
 
 
 **********************************************************************************/
-
+ALTER FUNCTION [APS].[LCEESLBEPClassesAsOf](@AsOfDate DATE)
+RETURNS TABLE
+AS
+RETURN	
 
 SELECT 
 	ORGANIZATION_NAME
-	COURSE_ID
+	,COURSE_ID
 	,COURSE_TITLE
 	,SECTION_ID
 	,CASE WHEN LST.COURSE_LEVEL = 'BEP' THEN 'BEP' ELSE '' END AS BEP
@@ -31,7 +34,7 @@ SELECT
 	,CASE WHEN CRED.SecondaryTESOLWaiverOnly = 1 THEN 'Y' ELSE '' END AS [Secondary TESOL Waiver Only]
 
 	,CASE WHEN CRED.Navajo = 1 THEN 'Y' ELSE '' END AS [Navajo]
-
+	, ORGANIZATION_GU
  FROM 
 APS.ScheduleDetailsAsOf(GETDATE()) AS SCH
 INNER JOIN 
@@ -76,9 +79,9 @@ GROUP BY
 	,CASE WHEN CRED.SecondaryTESOLWaiverOnly = 1 THEN 'Y' ELSE '' END 
 
 	,CASE WHEN CRED.Navajo = 1 THEN 'Y' ELSE '' END 
+	,ORGANIZATION_GU
 
-
-ORDER BY ORGANIZATION_NAME
+--ORDER BY ORGANIZATION_NAME
 
 
 
