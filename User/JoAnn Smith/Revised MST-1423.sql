@@ -1,0 +1,152 @@
+	
+	/* Query for Report MST-1423 
+	Student Concurrent Schedule with Home School Location
+
+	Originally written by:	Debbie Chavez
+	Modified by:			JoAnn Smith
+	Modified by Date:		8/31/2017
+
+	*/
+
+	
+	
+	
+	--declare @AsOfDate datetime = '2018-05-23'
+	--declare @School nvarchar(100) = '%'
+
+SELECT
+	[STUDENT].[FIRST_NAME]
+	,[STUDENT].[LAST_NAME]
+	,[STUDENT].[MIDDLE_NAME]
+	,[STUDENT].[SIS_NUMBER]
+	,[STUDENT].[SPED_STATUS]
+	,[STUDENT].[PRIMARY_DISABILITY_CODE]
+	,[STU].[EXPECTED_GRADUATION_YEAR]
+	,[COURSE].[COURSE_ID]
+	,[COURSE].[COURSE_TITLE]
+	,[SCHEDULE].[SECTION_ID]
+	,[SCHEDULE].[PERIOD_BEGIN]
+	,[SCHEDULE].[PERIOD_END]
+	,[SCHEDULE].[TERM_CODE]
+	,[STAFF_PERSON].[FIRST_NAME] +' '+ [STAFF_PERSON].[LAST_NAME] AS [TEACHER NAME]
+	,REPLACE([STAFF].[BADGE_NUM],'e','') AS [BADGE_NUM]
+	,CASE WHEN [PRIMARY_ENROLLMENT].[SCHOOL_NAME] IS NULL THEN SCHOOL_NAME ELSE [PRIMARY_ENROLLMENT].[SCHOOL_NAME] END AS [HOME_SCHOOL_LOCATION]
+	,CASE WHEN [PRIMARY_ENROLLMENT].[GRADE] IS NULL THEN [Enrollments].[GRADE] ELSE [PRIMARY_ENROLLMENT].[GRADE] END AS [HOME_GRADE]
+	,SchoolName AS [COURSE_LOCATION]
+	,PRIMARY_ENROLLMENT.SCHOOL_CODE AS PRIMARY_SCHOOL_CODE
+	,ENROLLMENTS.SCHOOL_CODE AS CONCURRENT_SCHOOL_CODE
+	,LU.VALUE_DESCRIPTION AS [CONCURRENT GRADE]
+	--,[Enrollments].[GRADE] AS [CONCURRENT_GRADE]
+	,[Enrollments].[EXCLUDE_ADA_ADM] AS [ADA/ADM CODE]
+	,CASE WHEN [Enrollments].[EXCLUDE_ADA_ADM] = 2 THEN 'CONCURRENT'
+		WHEN [Enrollments].[EXCLUDE_ADA_ADM] = 1 THEN 'NON ADA/ADM'
+		ELSE '' END AS [CONCURRENT]
+	
+	
+	,[GRADES].[1st 6 Wk]
+	,[GRADES].[2nd 6 Wk]
+	,[GRADES].[3rd 6 Wk]
+	,[GRADES].[4th 6 Wk]
+	,[GRADES].[5th 6 Wk]
+	,[GRADES].[S1 Exam]
+	,[GRADES].[S1 Grade]
+	,[GRADES].[S2 Exam]
+	,[GRADES].[S2 Grade]
+	
+FROM
+	(
+	--declare @AsOfDate datetime2 = '2017-05-23'
+	SELECT
+		E.*
+		,ROW_NUMBER() OVER(PARTITION BY e.[STUDENT_GU] order by e.[ENTER_DATE]) AS [RN]
+		,o.ORGANIZATION_NAME as SchoolName
+		,o.ORGANIZATION_GU
+		,SCHOOL.SCHOOL_CODE
+	FROM
+		APS.EnrollmentsAsOf(@AsOfDate) E
+	left join	
+		rev.REV_ORGANIZATION_YEAR oy 
+	on
+		oy.ORGANIZATION_YEAR_GU = e.ORGANIZATION_YEAR_GU
+	left join
+		rev.rev_organization o
+	on
+		o.ORGANIZATION_GU = oy.organization_gu
+	left join
+		rev.epc_sch SCHOOL
+	on
+		school.ORGANIZATION_GU = o.ORGANIZATION_gu
+	WHERE
+	SCHOOL.SCHOOL_CODE IN ('517','592','701','702', '703') /* added IAIA */
+	AND e.[EXCLUDE_ADA_ADM] IS NOT NULL	
+	) AS [Enrollments]
+	
+	INNER JOIN
+	APS.BasicStudentWithMoreInfo AS [STUDENT]
+	ON
+	[Enrollments].[STUDENT_GU] = [STUDENT].[STUDENT_GU]
+	
+	INNER JOIN
+	rev.EPC_STU [STU]
+	ON
+	[Enrollments].[STUDENT_GU] = [STU].[STUDENT_GU]
+	
+	INNER JOIN
+	APS.ScheduleAsOf(@AsOfDate) AS [SCHEDULE]
+	ON
+	[Enrollments].[STUDENT_GU] = [SCHEDULE].[STUDENT_GU]
+	AND [Enrollments].[ORGANIZATION_YEAR_GU] = [SCHEDULE].[ORGANIZATION_YEAR_GU]
+	
+	INNER JOIN
+	rev.EPC_CRS AS [COURSE]
+	ON
+	[SCHEDULE].[COURSE_GU] = [COURSE].[COURSE_GU]
+	
+	LEFT JOIN
+	rev.[EPC_STAFF] AS [STAFF]
+	ON
+	[SCHEDULE].[STAFF_GU] = [STAFF].[STAFF_GU]
+
+	LEFT JOIN
+	rev.[REV_PERSON] AS [STAFF_PERSON]
+	ON
+	[STAFF].[STAFF_GU] = [STAFF_PERSON].[PERSON_GU]
+	
+	LEFT OUTER JOIN
+	APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS [PRIMARY_ENROLLMENT]
+	ON
+	[Enrollments].[STUDENT_GU] = [PRIMARY_ENROLLMENT].[STUDENT_GU]
+
+	left join
+	aps.LookupTable('K12', 'Grade') LU
+	ON
+	LU.VALUE_CODE = ENROLLMENT_GRADE_LEVEL
+	
+	LEFT HASH JOIN
+	(
+
+	SELECT
+		*
+	FROM
+		(
+		SELECT 
+			[STUDENT_SCHOOL_YEAR_GU]
+			,[SECTION_GU]
+			,[GRADE_PERIOD]
+			,[MARK]
+		FROM
+			APS.StudentGrades
+		) [GRADE_PERIODS]
+		PIVOT (MAX([MARK]) FOR [GRADE_PERIOD] IN ([1st 6 Wk],[2nd 6 Wk],[3rd 6 Wk],[4th 6 Wk],[5th 6 Wk],[S1 Exam],[S1 Grade],[S2 Exam],[S2 Grade])) AS [GRADES_PIVOT]
+	) AS [GRADES]
+	ON
+	[ENROLLMENTs].[STUDENT_SCHOOL_YEAR_GU] = [GRADES].[STUDENT_SCHOOL_YEAR_GU]
+	AND [SCHEDULE].[SECTION_GU] = [GRADES].[SECTION_GU]
+
+	where enrollments.organization_gu like @School
+
+
+		
+
+
+	--E0D7118A-BA4D-4D97-B57E-AE9FE9F1559E student school year gu from aps.enrollmentsasof  sisnumber = 189094
