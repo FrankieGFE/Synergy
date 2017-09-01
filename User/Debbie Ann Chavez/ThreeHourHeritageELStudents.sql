@@ -4,11 +4,15 @@
 
 THREE HOUR HERITAGE FOR EL STUDENTS
 
---HERITAGE 3 HOUR IS ONLY FOR THE FOLLOWING SCHOOLS	('282', '324', '448', '460','520', '570')
+--HERITAGE 3 HOUR IS ONLY FOR SCHOOLS NOT IN LIST BELOW:  
+
+('206', '210', '213', '215', '216', '225', '339', '243', '244', '249', '252', '262', '255',
+ '496', '285', '291', '300', '250', '327', '275', '333', '330', '392', '280', '370', '376', '379', '385', 
+ '405', '450', '415', '416', '475', '465', '470', '590', '576' )
 
 *************************************************************************************************/
 
-SELECT * FROM (
+SELECT T7.*, PERS.LAST_NAME, PERS.FIRST_NAME FROM (
 SELECT 
 	DISTINCT STUDENT_GU
 FROM( 
@@ -47,7 +51,9 @@ WHERE
 (LST.COURSE_LEVEL = 'BEP'
 AND LEFT(CRS.STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274')
 --HERITAGE 3 HOUR IS ONLY FOR THE FOLLOWING SCHOOLS
-AND PRIM.SCHOOL_CODE IN ('282', '324', '448', '460','520', '570')
+AND PRIM.SCHOOL_CODE NOT IN ('206', '210', '213', '215', '216', '225', '339', '243', '244', '249', '252', '262', '255',
+ '496', '285', '291', '300', '250', '327', '275', '333', '330', '392', '280', '370', '376', '379', '385', 
+ '405', '450', '415', '416', '475', '465', '470', '590', '576' )
 ) AS T1
 
 ---------------------------------------------------------------------------------------------------------------
@@ -154,5 +160,10 @@ COURSE_LEVEL IN ('BEP', 'ESL')
 ) AS T7
 
 ON T6.STUDENT_GU = T7.STUDENT_GU 
+
+INNER JOIN 
+REV.REV_PERSON AS PERS
+ON
+T7.STUDENT_GU = PERS.PERSON_GU
 
 ORDER BY ORGANIZATION_NAME, SIS_NUMBER, COURSE_LEVEL, STATE_COURSE_CODE
