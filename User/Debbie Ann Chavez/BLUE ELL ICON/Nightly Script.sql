@@ -1,11 +1,26 @@
 
 
+/**********************************************************************************************************************************************************
+
+Created by:  Debbie Ann Chavez
+Date:  9/19/2017
+
+THIS REPLACES THE RULES SETUP/RULE GROUP IN SYNERGY - ELL Notification - it was not working correctly consistently, and problems after each patch/upgrade.
+
+This will create new records for students as they become EL.
+And this will close out recrods where students are no longer EL. 
+
+***********************************************************************************************************************************************************/
+
+
+
 BEGIN TRAN
 
---UPDATE rev.REV_PERSON_NOT 
 
---SET END_DATE = '20170630'
+/**************************************************************************************************************************
+-- CREATE A NOTIFICATION IF THEY CURRENTLY DO NOT HAVE ONE
 
+***************************************************************************************************************************/
 
 INSERT INTO rev.REV_PERSON_NOT
 
@@ -27,10 +42,10 @@ NEWID() AS PERSON_NOT_GU
 FROM 
 APS.ELLCalculatedAsOf(GETDATE()) AS ELL
 LEFT JOIN 
-rev.REV_PERSON_NOT AS NOTE
+(SELECT * FROM rev.REV_PERSON_NOT WHERE NOT_CFG_GU = '256096C9-A40D-4654-8322-3E17FAF8EE2D' AND END_DATE IS NULL
+)  AS NOTE 
 ON
 NOTE.PERSON_GU = ELL.STUDENT_GU
-AND NOTE.NOT_CFG_GU = '256096C9-A40D-4654-8322-3E17FAF8EE2D'
 
 INNER JOIN 
 REV.epc_stu as stu
@@ -43,9 +58,13 @@ NOTE.PERSON_GU IS NULL
 
 
 
+/**************************************************************************************************************************
+-- CLOSE OUT ANY OPEN ELL NOTIFICATIONS IF THEY ARE NOT CURRENTLY ELL 
+
+***************************************************************************************************************************/
 
 UPDATE REV.REV_PERSON_NOT
-SET END_DATE = GETDATE() 
+SET END_DATE = GETDATE() , CHANGE_ID_STAMP = '27CDCD0E-BF93-4071-94B2-5DB792BB735F', CHANGE_DATE_TIME_STAMP = GETDATE()
 
 FROM 
 (SELECT * FROM
@@ -61,6 +80,5 @@ ELL.STUDENT_GU IS NULL
 
 WHERE 
 T1.PERSON_NOT_GU = REV.REV_PERSON_NOT.PERSON_NOT_GU
-
 
 COMMIT
