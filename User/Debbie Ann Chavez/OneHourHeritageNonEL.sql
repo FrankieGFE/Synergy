@@ -12,13 +12,42 @@ ONE HOUR HERITAGE FOR NON EL STUDENTS
 
 -------------------------------------------------------------------------------------------------
 
+
+
 SELECT 
-	T1.*, PERS.LAST_NAME, PERS.FIRST_NAME		
+	T1.*, PERS.LAST_NAME, PERS.FIRST_NAME, 1 AS [HOUR], 'Heritage' AS MODEL	
+	
+	, CASE 
+			WHEN GRADE IN ('K', '01', '02', '03', '04', '05') AND [67] = '67' AND ELEM = 'Y' THEN 'Y'
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' THEN 'Y' 
+			ELSE 'N' END AS QUALIFIED
+		
 FROM 
 (
 SELECT 
 	PRIM.SCHOOL_CODE, SCHOOL_NAME,
 	PRIM.STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+	,CASE WHEN ADMIN_DATE IS NOT NULL THEN 'Y' ELSE 'N' END AS EL
+	,PRIM.GRADE
+	,[01]
+      ,[03]
+      ,[04]
+      ,[05]
+      ,[10]
+      ,[20]
+      ,[27]
+      ,[32]
+      ,[45]
+      ,[47]
+      ,[51]
+      ,[60]
+      ,[67]
+      ,[ELEM]
+      ,[MID]
+      ,[HIGH]
+	  ,SCH.[TEACHER NAME]
+	  ,BADGE_NUM
  FROM 
 APS.PrimaryEnrollmentDetailsAsOf(GETDATE()) AS PRIM
 LEFT JOIN 
@@ -37,6 +66,17 @@ INNER JOIN
 REV.EPC_CRS AS CRS
 ON
 SCH.COURSE_GU = CRS.COURSE_GU
+
+LEFT JOIN 
+APS.LCETeacherEndorsements AS CRED
+ON
+SCH.STAFF_GU = CRED.STAFF_GU
+
+LEFT JOIN 
+rev.EPC_STAFF AS STF
+ON
+CRED.STAFF_GU = STF.STAFF_GU
+
 WHERE
 LST.COURSE_LEVEL = 'BEP'
 AND LEFT(CRS.STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274'
@@ -74,6 +114,8 @@ T1.STUDENT_GU = PERS.PERSON_GU
 
 WHERE
 T2.STUDENT_GU IS NULL
+
+
 
 
 
