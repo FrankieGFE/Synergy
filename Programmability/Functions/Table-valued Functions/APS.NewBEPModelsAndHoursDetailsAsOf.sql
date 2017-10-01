@@ -1,11 +1,13 @@
+USE [ST_Production]
+GO
 
-
-/****** Object:  UserDefinedFunction [APS].[NewBEPModelsAndHoursDetailsAsOf]    Script Date: 9/29/2017 2:00:12 PM ******/
+/****** Object:  UserDefinedFunction [APS].[NewBEPModelsAndHoursDetailsAsOf]    Script Date: 10/1/2017 12:39:22 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -92,7 +94,7 @@ INNER JOIN
 
 (SELECT * FROM 
 (SELECT 
-	 SIS_NUMBER
+	 SIS_NUMBER, PRIM.STUDENT_GU
 	 , LAST_NAME, FIRST_NAME
 	 ,SCHOOL_NAME
 	 , SCH.COURSE_ID, SCH.SECTION_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
@@ -203,6 +205,7 @@ QUALIFIED = 'Y'
 
 ON
 STEP2.SIS_NUMBER = STEP1.SIS_NUMBER
+
 GO
 
 
