@@ -1,0 +1,48 @@
+
+
+--DROP TABLE dbo.BEPModelsAndHours
+
+--CREATE TABLE dbo.BEPModelsAndHours
+--(
+--	SCHOOL_NAME VARCHAR(50)
+--	,STUDENT_GU VARCHAR(300)
+--	,SIS_NUMBER VARCHAR(9)
+--	,COURSE_ID VARCHAR(20)
+--	,COURSE_TITLE VARCHAR(50)
+--	,COURSE_LEVEL VARCHAR(10)
+--	,STATE_COURSE_CODE VARCHAR(20)
+--	,GRADE VARCHAR(2)
+--	,[01] VARCHAR (3)
+--	   ,[03] VARCHAR (3)
+--      ,[04] VARCHAR (3)
+--      ,[05] VARCHAR (3)
+--      ,[10] VARCHAR (3)
+--      ,[20] VARCHAR (3)
+--      ,[27] VARCHAR (3)
+--      ,[32] VARCHAR (3)
+--      ,[45] VARCHAR (3)
+--      ,[47] VARCHAR (3)
+--      ,[51] VARCHAR (3)
+--      ,[60] VARCHAR (3)
+--      ,[67] VARCHAR (3)
+--      ,[ELEM] VARCHAR (3)
+--      ,[MID] VARCHAR (3)
+--      ,[HIGH] VARCHAR (3)
+--	  ,[TEACHER NAME] VARCHAR (100)
+--	  ,BADGE_NUM VARCHAR (10)
+--	  ,EL VARCHAR (10)
+--	  ,DEPARTMENT VARCHAR (10)
+--	  ,LAST_NAME VARCHAR (50)
+--	  ,FIRST_NAME VARCHAR (50)
+--	  ,[HOUR] VARCHAR (2)
+--	  ,MODEL VARCHAR (20)
+--	  ,QUALIFIED VARCHAR (10)
+
+--)
+
+
+INSERT INTO dbo.BEPModelsAndHours
+
+SELECT * 
+FROM 
+	APS.BEPModelsAndHoursAsOf(GETDATE())
