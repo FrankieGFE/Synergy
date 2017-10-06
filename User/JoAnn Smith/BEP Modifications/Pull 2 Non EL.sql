@@ -1,0 +1,187 @@
+
+
+
+
+/***********************************************************************************************
+
+TWO HOUR HERITAGE FOR NON EL STUDENTS
+
+
+*************************************************************************************************/
+
+--THIS SELECT THRU T7 
+SELECT 
+       ORGANIZATION_NAME, T6.SIS_NUMBER, COURSE_ID, COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE,
+	   pers.LAST_NAME, pers.FIRST_NAME, STAFF_GU, T7.FIRST_NAME as TEACHER_FIRST_NAME, T7.LAST_NAME AS TEACHER_LAST_NAME, crd00, crd01, crd02, crd03,
+	   crd04, crd05, crd07, crd08, crd09, crd10, crd20, crd24, crd27, crd32, crd43, crd45, crd47, crd51, crd52, crd60, crd64, crd67, crd72, 
+	   crd82, crd90, CONVERT(VARCHAR(101),T7.DATE_ACQUIRED,101) AS DATE_ACQUIRED
+FROM(
+----THESE TWO SELECTS GROUPS AND REMOVES TO CHOOSE STUDENTS WITH 2 HOURS
+SELECT * FROM(
+SELECT 
+       STUDENT_GU, SIS_NUMBER, MAX(RN) AS MAXCOUNT 
+FROM( 
+SELECT 
+       T4.*   
+       ,ROW_NUMBER() OVER (PARTITION BY T4.SIS_NUMBER, T4.COURSE_LEVEL ORDER BY T4.COURSE_LEVEL) AS RN
+FROM
+(
+--THIS PULLS THRU T3
+SELECT 
+       *
+FROM 
+(
+-------------------------------------------------------------------------------------------------
+--FIRST PULL NON ELL STUDENTS THAT HAVE A BEP TAGGED COURSE BETWEEN 1274-1274 STATE COURSE CODES
+-------------------------------------------------------------------------------------------------
+
+SELECT 
+       PRIM.STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE, SCH.STAFF_GU
+FROM 
+APS.PrimaryEnrollmentDetailsAsOf(GETDATE()) AS PRIM
+LEFT JOIN 
+APS.ELLCalculatedAsOf(GETDATE()) AS ELL
+ON
+PRIM.STUDENT_GU = ELL.STUDENT_GU
+LEFT JOIN 
+APS.ScheduleDetailsAsOf(GETDATE()) AS SCH
+ON
+PRIM.STUDENT_GU = SCH.STUDENT_GU
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+WHERE
+LST.COURSE_LEVEL = 'BEP'
+AND LEFT(CRS.STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274'
+-- non-EL STUDENTS
+AND ELL.STUDENT_GU IS NULL
+) AS T1
+
+--6,173 ROWS
+
+---------------------------------------------------------------------------------------------------------------
+-- REMOVE STUDENTS ABOVE IF THEY HAVE ANY COURSES TAGGED ESL
+---------------------------------------------------------------------------------------------------------------
+
+LEFT JOIN 
+(SELECT DISTINCT RESTOFSCH.STUDENT_GU AS RESTSCHGU
+FROM
+APS.ScheduleDetailsAsOf(GETDATE()) AS RESTOFSCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+RESTOFSCH.COURSE_GU = LST.COURSE_GU
+AND LST.COURSE_LEVEL IN ('ESL') 
+INNER JOIN 
+REV.EPC_CRS AS CRS2
+ON
+RESTOFSCH.COURSE_GU = CRS2.COURSE_GU
+
+) AS T2
+
+ON
+T1.STUDENT_GU = T2.RESTSCHGU
+
+WHERE
+T2.RESTSCHGU IS NULL
+
+)AS T3
+
+
+-------------------------------------------------------------------------------------------------
+--FOR STUDENTS ABOVE PULL ALL BEP CLASSES NOW THEN FILTER FOR STUDENTS THAT ONLY HAVE 2
+-------------------------------------------------------------------------------------------------
+
+INNER JOIN 
+(
+SELECT 
+       STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE, SCH.STAFF_GU
+FROM 
+
+APS.ScheduleDetailsAsOf(GETDATE()) AS SCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+WHERE
+COURSE_LEVEL IN ('BEP')
+
+) AS T4
+
+ON
+T3.STUDENT_GU = T4.STUDENT_GU
+
+) AS T4
+GROUP BY T4.STUDENT_GU, T4.SIS_NUMBER
+) AS T5
+WHERE 
+       MAXCOUNT = 2
+) AS T6
+
+-------------------------------------------------------------------------------------------------
+--FOR STUDENTS ABOVE THAT ONLY HAVE 2 BEP PULL DETAILS
+-------------------------------------------------------------------------------------------------
+
+INNER JOIN 
+(
+SELECT 
+		ROW_NUMBER() OVER(PARTITION BY SIS_NUMBER, SCH.COURSE_ID ORDER BY SIS_NUMBER) AS RN,
+
+       SCH.ORGANIZATION_NAME,
+       STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE, SCH.STAFF_GU,
+	   PER.LAST_NAME, PER.FIRST_NAME,
+	   tc.crd00, tc.crd01, tc.crd02,
+	   tc.crd03, tc.crd04, tc.crd05, tc.crd07, tc.crd08, tc.crd09, tc.crd10, tc.crd20, tc.crd24, tc.crd27, tc.crd32, tc.crd43,
+	   tc.crd45, tc.crd47, tc.crd51, tc.crd52, tc.crd60, tc.crd64, tc.crd67, tc.crd72, tc.crd82, tc.crd90, tc.date_ACQUIRED
+FROM 
+
+APS.ScheduleDetailsAsOf(GETDATE()) AS SCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+INNER JOIN
+REV.EPC_STAFF STF
+ON
+STF.STAFF_GU = SCH.STAFF_GU
+LEFT JOIN
+REV.REV_PERSON PER
+ON
+PER.PERSON_GU = STF.STAFF_GU
+LEFT JOIN
+[180-SMAXODS-01.APS.EDU.ACTD].[LAWSON].aps.TeacherCredentials TC
+on
+STF.BADGE_NUM = TC.BADGE_NUMBER
+
+
+WHERE
+COURSE_LEVEL IN ('BEP')
+
+
+) AS T7
+
+ON
+T6.STUDENT_GU = T7.STUDENT_GU
+
+INNER JOIN 
+REV.REV_PERSON AS PERS
+ON
+T7.STUDENT_GU = PERS.PERSON_GU
+
+where rn = 1
+ORDER BY ORGANIZATION_NAME, SIS_NUMBER, STATE_COURSE_CODE
+
+
