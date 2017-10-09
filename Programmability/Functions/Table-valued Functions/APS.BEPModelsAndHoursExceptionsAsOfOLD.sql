@@ -1,0 +1,1683 @@
+USE [ST_Production]
+GO
+
+/****** Object:  UserDefinedFunction [APS].[BEPModelsAndHoursExceptionsAsOf]    Script Date: 9/29/2017 4:19:59 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
+
+
+CREATE FUNCTION [APS].[BEPModelsAndHoursExceptionsAsOf](@AsOfDate DATE)
+RETURNS TABLE
+AS
+RETURN	
+
+
+/***********************************************************************************************
+
+ONE HOUR HERITAGE FOR NON EL STUDENTS
+
+
+*************************************************************************************************/
+
+-------------------------------------------------------------------------------------------------
+--FIRST PULL NON-ELL STUDENTS THAT HAVE A BEP TAGGED COURSE BETWEEN 1274-1274 STATE COURSE CODES
+
+-------------------------------------------------------------------------------------------------
+
+
+
+SELECT 
+	T1.SCHOOL_NAME, T1.STUDENT_GU, T1.SIS_NUMBER, T1.COURSE_ID, T1.COURSE_TITLE, T1.COURSE_LEVEL, T1.STATE_COURSE_CODE, T1.GRADE, 
+	[01],[03],[04],[05],[10],[20],[27],[32],[45],[47],[51],[60],[67],[ELEM],[MID],[HIGH],[TEACHER NAME],BADGE_NUM, EL, DEPARTMENT AS DEPARTMENT
+	
+	, PERS.LAST_NAME, PERS.FIRST_NAME, 1 AS [HOUR], 'Heritage' AS MODEL	
+	
+	, CASE 
+			WHEN GRADE IN ('K', '01', '02', '03', '04', '05') AND [67] = '67' AND ELEM = 'Y' THEN 'Y'
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' THEN 'Y' 
+			ELSE 'N' END AS QUALIFIED
+   ,ORGANIZATION_GU
+		
+FROM 
+(
+SELECT 
+	SCHOOL_NAME,
+	PRIM.STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE, prim.ORGANIZATION_GU
+	,CASE WHEN ADMIN_DATE IS NOT NULL THEN 'Y' ELSE 'N' END AS EL
+	,PRIM.GRADE
+	,[01]
+      ,[03]
+      ,[04]
+      ,[05]
+      ,[10]
+      ,[20]
+      ,[27]
+      ,[32]
+      ,[45]
+      ,[47]
+      ,[51]
+      ,[60]
+      ,[67]
+      ,[ELEM]
+      ,[MID]
+      ,[HIGH]
+	  ,SCH.[TEACHER NAME]
+	  ,BADGE_NUM
+	  ,SCH.DEPARTMENT
+ FROM 
+APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS PRIM
+LEFT JOIN 
+APS.ELLCalculatedAsOf(@AsOfDate) AS ELL
+ON
+PRIM.STUDENT_GU = ELL.STUDENT_GU
+LEFT JOIN 
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+ON
+PRIM.STUDENT_GU = SCH.STUDENT_GU
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+
+LEFT JOIN 
+APS.LCETeacherEndorsements AS CRED
+ON
+SCH.STAFF_GU = CRED.STAFF_GU
+
+LEFT JOIN 
+rev.EPC_STAFF AS STF
+ON
+CRED.STAFF_GU = STF.STAFF_GU
+
+WHERE
+LST.COURSE_LEVEL = 'BEP'
+AND LEFT(CRS.STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274'
+-- non-EL STUDENTS
+AND ELL.STUDENT_GU IS NULL
+) AS T1
+
+---------------------------------------------------------------------------------------------------------------
+-- REMOVE STUDENTS ABOVE IF THEY HAVE ANY OTHER COURSES TAGGED BEP AND/OR ESL THAT IS NOT IN THE COURSE CODE RANGE
+---------------------------------------------------------------------------------------------------------------
+
+LEFT JOIN 
+(SELECT DISTINCT RESTOFSCH.STUDENT_GU 
+FROM
+APS.ScheduleDetailsAsOf(@AsOfDate) AS RESTOFSCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+RESTOFSCH.COURSE_GU = LST.COURSE_GU
+AND LST.COURSE_LEVEL IN ('BEP', 'ESL') 
+INNER JOIN 
+REV.EPC_CRS AS CRS2
+ON
+RESTOFSCH.COURSE_GU = CRS2.COURSE_GU
+AND LEFT(CRS2.STATE_COURSE_CODE,4) NOT BETWEEN '1271' AND '1274'
+) AS T2
+
+ON
+T1.STUDENT_GU = T2.STUDENT_GU
+INNER JOIN 
+REV.REV_PERSON AS PERS
+ON
+T1.STUDENT_GU = PERS.PERSON_GU
+
+
+WHERE
+T2.STUDENT_GU IS NULL
+
+
+
+UNION ALL
+
+
+/***********************************************************************************************
+
+TWO HOUR HERITAGE FOR EL STUDENTS
+
+
+*************************************************************************************************/
+
+
+SELECT 
+	T6.SCHOOL_NAME, T6.STUDENT_GU, T6.SIS_NUMBER, T6.COURSE_ID, T6.COURSE_TITLE, T6.COURSE_LEVEL, T6.STATE_COURSE_CODE, T6.GRADE, 
+	[01],[03],[04],[05],[10],[20],[27],[32],[45],[47],[51],[60],[67],[ELEM],[MID],[HIGH],[TEACHER NAME],BADGE_NUM, EL, DEPARTMENT AS DEPARTMENT
+
+	
+	,PERS.LAST_NAME, PERS.FIRST_NAME
+	, 2 AS [HOUR]
+	,'Heritage' AS MODEL
+
+	, CASE 
+			WHEN GRADE IN ('K', '01', '02', '03', '04', '05') AND [67] = '67' AND ELEM = 'Y' THEN 'Y'
+			WHEN GRADE IN ('K', '01', '02', '03', '04', '05') AND LEFT(T6.STATE_COURSE_CODE,4) = '1062' AND ELEM = 'Y' AND [27] = '27' THEN 'Y'
+
+			--SECONDARY
+			-- (1202-1203, 1254-1255, 1299)
+			
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1202' AND '1203'  THEN 'Y' 
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1254' AND '1255'  THEN 'Y' 
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1299'  THEN 'Y' 
+			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1202' AND '1203'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1254' AND '1255'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1299'  THEN 'Y' 
+
+
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(T6.STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274'  THEN 'Y' 
+			WHEN GRADE IN ('06', '07', '08') AND [27] = '27' AND [20] = '20' AND MID = 'Y' AND LEFT(T6.STATE_COURSE_CODE,4) = '1063'  THEN 'Y' 
+			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(T6.STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [27] = '27' AND [20] = '20' AND HIGH = 'Y' AND LEFT(T6.STATE_COURSE_CODE,4) = '1063'   THEN 'Y' 
+
+			--1150
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [01] = '01' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1150'  THEN 'Y'			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [01] = '01'  AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1150'   THEN 'Y' 
+
+			--0304	
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND ([03] = '03' OR [45] = '45' OR [47] = '47') AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '0304'  THEN 'Y'			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND ([03] = '03' OR [45] = '45' OR [47] = '47') AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '0304'   THEN 'Y' 
+
+			--Health
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [04] = '04' AND [05] = '05'AND MID = 'Y' AND DEPARTMENT = 'Hea'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [04] = '04' AND [05] = '05' AND HIGH = 'Y' AND DEPARTMENT = 'Hea'  THEN 'Y' 
+
+			--Math
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [51] = '51' AND MID = 'Y' AND DEPARTMENT = 'Math'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [51] = '51' AND HIGH = 'Y' AND DEPARTMENT = 'Math'  THEN 'Y' 
+
+			--Social Studies
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [10] = '10' AND MID = 'Y' AND DEPARTMENT = 'Soc'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [10] = '10' AND HIGH = 'Y' AND DEPARTMENT = 'Soc'  THEN 'Y' 
+
+			--Science
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [32] = '32' AND MID = 'Y' AND DEPARTMENT = 'Sci'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [32] = '32' AND HIGH = 'Y' AND DEPARTMENT = 'Sci'  THEN 'Y' 
+
+
+
+			ELSE 'N' END AS QUALIFIED
+			,ORGANIZATION_GU
+	
+
+
+FROM
+(
+--THIS PULLS THRU T5
+SELECT 
+	DISTINCT STUDENT_GU
+FROM 
+(
+-------------------------------------------------------------------------------------------------
+--FIRST PULL ELL STUDENTS THAT HAVE A BEP TAGGED COURSE BETWEEN 1274-1274 STATE COURSE CODES
+-------------------------------------------------------------------------------------------------
+
+SELECT 
+	STUDENT_GU, SIS_NUMBER, COURSE_ID, COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+
+ FROM(
+SELECT 
+	PRIM.STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+ FROM 
+APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS PRIM
+INNER JOIN 
+APS.ELLCalculatedAsOf(@AsOfDate) AS ELL
+ON
+PRIM.STUDENT_GU = ELL.STUDENT_GU
+
+INNER JOIN 
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+ON
+PRIM.STUDENT_GU = SCH.STUDENT_GU
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+WHERE
+(LST.COURSE_LEVEL = 'BEP'
+AND LEFT(CRS.STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274')
+) AS T1
+
+---------------------------------------------------------------------------------------------------------------
+-- REMOVE STUDENTS ABOVE IF THEY HAVE ANY OTHER COURSES TAGGED BEP THAT IS NOT IN THE COURSE CODE RANGE
+---------------------------------------------------------------------------------------------------------------
+
+LEFT JOIN 
+(SELECT DISTINCT RESTOFSCH.STUDENT_GU AS RESTSCHGU
+FROM
+APS.ScheduleDetailsAsOf(@AsOfDate) AS RESTOFSCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+RESTOFSCH.COURSE_GU = LST.COURSE_GU
+AND LST.COURSE_LEVEL IN ('BEP') 
+INNER JOIN 
+REV.EPC_CRS AS CRS2
+ON
+RESTOFSCH.COURSE_GU = CRS2.COURSE_GU
+AND LEFT(CRS2.STATE_COURSE_CODE,4) NOT BETWEEN '1271' AND '1274'
+) AS T2
+
+ON
+T1.STUDENT_GU = T2.RESTSCHGU
+
+WHERE
+T2.RESTSCHGU IS NULL
+
+)AS T3
+
+--640 ROWS
+
+INNER JOIN 
+-------------------------------------------------------------------------------------------------
+--PULL ELL STUDENTS ABOVE THAT ALSO HAVE AN ESL TAGGED COURSE
+-------------------------------------------------------------------------------------------------
+(
+SELECT DISTINCT PRIM.STUDENT_GU AS HASESLGU
+	--PRIM.STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+ FROM 
+APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS PRIM
+INNER JOIN 
+APS.ELLCalculatedAsOf(@AsOfDate) AS ELL
+ON
+PRIM.STUDENT_GU = ELL.STUDENT_GU
+
+INNER JOIN 
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+ON
+PRIM.STUDENT_GU = SCH.STUDENT_GU
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+WHERE
+COURSE_LEVEL = 'ESL'
+
+) AS T4
+
+ON T3.STUDENT_GU = T4.HASESLGU
+
+) AS T5
+
+--488 ROWS
+
+-------------------------------------------------------------------------------------------------
+--FOR STUDENTS ABOVE PULL ALL BEP AND ESL CLASSES NOW
+-------------------------------------------------------------------------------------------------
+
+INNER JOIN 
+(
+SELECT 
+	prim.SCHOOL_CODE, SCHOOL_NAME,
+	PRIM.STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+	,PRIM.GRADE
+	,[01]
+      ,[03]
+      ,[04]
+      ,[05]
+      ,[10]
+      ,[20]
+      ,[27]
+      ,[32]
+      ,[45]
+      ,[47]
+      ,[51]
+      ,[60]
+      ,[67]
+      ,[ELEM]
+      ,[MID]
+      ,[HIGH]
+	  ,SCH.[TEACHER NAME]
+	  ,STF.BADGE_NUM
+	  ,CASE WHEN ADMIN_DATE IS NOT NULL THEN 'Y' ELSE 'N' END AS EL
+	  ,SCH.DEPARTMENT
+	  ,prim.ORGANIZATION_GU
+ FROM 
+APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS PRIM
+INNER JOIN 
+APS.ELLCalculatedAsOf(@AsOfDate) AS ELL
+ON
+PRIM.STUDENT_GU = ELL.STUDENT_GU
+
+INNER JOIN 
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+ON
+PRIM.STUDENT_GU = SCH.STUDENT_GU
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+
+LEFT JOIN 
+APS.LCETeacherEndorsements AS CRED
+ON
+SCH.STAFF_GU = CRED.STAFF_GU
+
+LEFT JOIN 
+rev.EPC_STAFF AS STF
+ON
+CRED.STAFF_GU = STF.STAFF_GU
+
+WHERE
+COURSE_LEVEL IN ('BEP','ESL')
+
+) AS T6
+
+ON
+T5.STUDENT_GU = T6.STUDENT_GU
+
+INNER JOIN 
+REV.REV_PERSON AS PERS
+ON
+T6.STUDENT_GU = PERS.PERSON_GU
+
+
+--ORDER BY SCHOOL_NAME, SIS_NUMBER, COURSE_LEVEL
+
+UNION ALL
+
+
+/***********************************************************************************************
+
+TWO HOUR HERITAGE FOR NON EL STUDENTS
+
+
+*************************************************************************************************/
+
+--THIS SELECT THRU T7 
+SELECT 
+	--ORGANIZATION_NAME, T6.SIS_NUMBER, COURSE_ID, COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+	T7.ORGANIZATION_NAME, T7.STUDENT_GU, T7.SIS_NUMBER, T7.COURSE_ID, T7.COURSE_TITLE, T7.COURSE_LEVEL, T7.STATE_COURSE_CODE, T7.GRADE, 
+	[01],[03],[04],[05],[10],[20],[27],[32],[45],[47],[51],[60],[67],[ELEM],[MID],[HIGH],[TEACHER NAME],BADGE_NUM, EL
+	, DEPARTMENT AS DEPARTMENT
+	,pers.LAST_NAME, pers.FIRST_NAME
+
+,2 AS [HOUR]
+,'Heritage' AS MODEL
+
+
+, CASE 
+			WHEN GRADE IN ('K', '01', '02', '03', '04', '05') AND [67] = '67' AND ELEM = 'Y' THEN 'Y'
+			WHEN GRADE IN ('K', '01', '02', '03', '04', '05') AND LEFT(STATE_COURSE_CODE,4) = '1062' AND ELEM = 'Y' AND [27] = '27' THEN 'Y'
+
+
+			--SECONDARY
+			-- (1202-1203, 1254-1255, 1299)
+			
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1202' AND '1203'  THEN 'Y' 
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1254' AND '1255'  THEN 'Y' 
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1299'  THEN 'Y' 
+			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1202' AND '1203'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1254' AND '1255'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1299'  THEN 'Y' 
+
+
+			--(1271-1274)
+
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274'  THEN 'Y' 
+			WHEN GRADE IN ('06', '07', '08') AND [27] = '27' AND [20] = '20' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1063'  THEN 'Y' 
+			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [27] = '27' AND [20] = '20' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1063'   THEN 'Y' 
+
+			--1150
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [01] = '01' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1150'  THEN 'Y'			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [01] = '01'  AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1150'   THEN 'Y' 
+
+			--0304	
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND ([03] = '03' OR [45] = '45' OR [47] = '47') AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '0304'  THEN 'Y'			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND ([03] = '03' OR [45] = '45' OR [47] = '47') AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '0304'   THEN 'Y' 
+
+			--Health
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [04] = '04' AND [05] = '05'AND MID = 'Y' AND DEPARTMENT = 'Hea'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [04] = '04' AND [05] = '05' AND HIGH = 'Y' AND DEPARTMENT = 'Hea'  THEN 'Y' 
+
+			--Math
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [51] = '51' AND MID = 'Y' AND DEPARTMENT = 'Math'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [51] = '51' AND HIGH = 'Y' AND DEPARTMENT = 'Math'  THEN 'Y' 
+
+			--Social Studies
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [10] = '10' AND MID = 'Y' AND DEPARTMENT = 'Soc'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [10] = '10' AND HIGH = 'Y' AND DEPARTMENT = 'Soc'  THEN 'Y' 
+
+			--Science
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [32] = '32' AND MID = 'Y' AND DEPARTMENT = 'Sci'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [32] = '32' AND HIGH = 'Y' AND DEPARTMENT = 'Sci'  THEN 'Y' 
+			
+			ELSE 'N' END AS QUALIFIED
+	,ORGANIZATION_GU
+			
+
+ FROM(
+----THESE TWO SELECTS GROUPS AND REMOVES TO CHOOSE STUDENTS WITH 2 HOURS
+SELECT * FROM(
+SELECT 
+	STUDENT_GU, SIS_NUMBER, MAX(RN) AS MAXCOUNT 
+FROM( 
+SELECT 
+	T4.*	
+	,ROW_NUMBER() OVER (PARTITION BY T4.SIS_NUMBER, T4.COURSE_LEVEL ORDER BY T4.COURSE_LEVEL) AS RN
+FROM
+(
+--THIS PULLS THRU T3
+SELECT 
+	*
+FROM 
+(
+-------------------------------------------------------------------------------------------------
+--FIRST PULL NON ELL STUDENTS THAT HAVE A BEP TAGGED COURSE BETWEEN 1274-1274 STATE COURSE CODES
+-------------------------------------------------------------------------------------------------
+
+SELECT 
+	PRIM.STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+ FROM 
+APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS PRIM
+LEFT JOIN 
+APS.ELLCalculatedAsOf(@AsOfDate) AS ELL
+ON
+PRIM.STUDENT_GU = ELL.STUDENT_GU
+LEFT JOIN 
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+ON
+PRIM.STUDENT_GU = SCH.STUDENT_GU
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+WHERE
+LST.COURSE_LEVEL = 'BEP'
+AND LEFT(CRS.STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274'
+-- non-EL STUDENTS
+AND ELL.STUDENT_GU IS NULL
+) AS T1
+
+--6,173 ROWS
+
+---------------------------------------------------------------------------------------------------------------
+-- REMOVE STUDENTS ABOVE IF THEY HAVE ANY COURSES TAGGED ESL
+---------------------------------------------------------------------------------------------------------------
+
+LEFT JOIN 
+(SELECT DISTINCT RESTOFSCH.STUDENT_GU AS RESTSCHGU
+FROM
+APS.ScheduleDetailsAsOf(@AsOfDate) AS RESTOFSCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+RESTOFSCH.COURSE_GU = LST.COURSE_GU
+AND LST.COURSE_LEVEL IN ('ESL') 
+INNER JOIN 
+REV.EPC_CRS AS CRS2
+ON
+RESTOFSCH.COURSE_GU = CRS2.COURSE_GU
+
+) AS T2
+
+ON
+T1.STUDENT_GU = T2.RESTSCHGU
+
+WHERE
+T2.RESTSCHGU IS NULL
+
+)AS T3
+
+
+-------------------------------------------------------------------------------------------------
+--FOR STUDENTS ABOVE PULL ALL BEP CLASSES NOW THEN FILTER FOR STUDENTS THAT ONLY HAVE 2
+-------------------------------------------------------------------------------------------------
+
+INNER JOIN 
+(
+SELECT 
+	STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+ FROM 
+
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+WHERE
+COURSE_LEVEL IN ('BEP')
+
+) AS T4
+
+ON
+T3.STUDENT_GU = T4.STUDENT_GU
+
+) AS T4
+GROUP BY T4.STUDENT_GU, T4.SIS_NUMBER
+) AS T5
+WHERE 
+	MAXCOUNT = 2
+) AS T6
+
+-------------------------------------------------------------------------------------------------
+--FOR STUDENTS ABOVE THAT ONLY HAVE 2 BEP PULL DETAILS
+-------------------------------------------------------------------------------------------------
+
+INNER JOIN 
+(
+SELECT 
+	SCH.ORGANIZATION_NAME,
+	SCH.STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+	,PRIM.GRADE
+	,[01]
+      ,[03]
+      ,[04]
+      ,[05]
+      ,[10]
+      ,[20]
+      ,[27]
+      ,[32]
+      ,[45]
+      ,[47]
+      ,[51]
+      ,[60]
+      ,[67]
+      ,[ELEM]
+      ,[MID]
+      ,[HIGH]
+	  ,SCH.[TEACHER NAME]
+	  ,STF.BADGE_NUM
+	  ,CASE WHEN ADMIN_DATE IS NOT NULL THEN 'Y' ELSE 'N' END AS EL
+	  ,SCH.DEPARTMENT
+	  ,PRIM.ORGANIZATION_GU
+
+ FROM 
+
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+
+LEFT JOIN 
+APS.LCETeacherEndorsements AS CRED
+ON
+SCH.STAFF_GU = CRED.STAFF_GU
+
+LEFT JOIN 
+rev.EPC_STAFF AS STF
+ON
+CRED.STAFF_GU = STF.STAFF_GU
+
+INNER JOIN 
+APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS PRIM
+ON
+SCH.STUDENT_GU = PRIM.STUDENT_GU
+
+LEFT JOIN 
+APS.ELLCalculatedAsOf(@AsOfDate) AS ELL
+ON
+PRIM.STUDENT_GU = ELL.STUDENT_GU
+
+
+WHERE
+COURSE_LEVEL IN ('BEP')
+
+) AS T7
+
+ON
+T6.STUDENT_GU = T7.STUDENT_GU
+
+INNER JOIN 
+REV.REV_PERSON AS PERS
+ON
+T7.STUDENT_GU = PERS.PERSON_GU
+
+
+--ORDER BY ORGANIZATION_NAME, SIS_NUMBER, STATE_COURSE_CODE
+
+UNION ALL
+
+/***********************************************************************************************
+
+THREE HOUR HERITAGE FOR NON EL STUDENTS
+
+--HERITAGE 3 HOUR IS ONLY FOR THE REST OF THE SCHOOLS THAT ARE NOT IN THIS LIST:  
+NOT IN ('206', '210', '213', '215', '216', '225', '339', '243', '244', '249', '252', '262', '255',
+ '496', '285', '291', '300', '250', '327', '275', '333', '330', '392', '280', '370', '376', '379', '385', 
+ '405', '415', '416', '475', '465', '470', '590', '576' )
+
+*************************************************************************************************/
+
+
+SELECT 
+T6.ORGANIZATION_NAME, T6.STUDENT_GU, T6.SIS_NUMBER, T6.COURSE_ID, T6.COURSE_TITLE, T6.COURSE_LEVEL, T6.STATE_COURSE_CODE, T6.GRADE, 
+	[01],[03],[04],[05],[10],[20],[27],[32],[45],[47],[51],[60],[67],[ELEM],[MID],[HIGH],[TEACHER NAME],BADGE_NUM, EL, DEPARTMENT AS DEPARTMENT
+
+, PERS.LAST_NAME, PERS.FIRST_NAME
+,3 AS [HOUR]
+,'Heritage' AS MODEL
+
+, CASE 
+			--ELEMENTARY
+			WHEN GRADE IN ('K', '01', '02', '03', '04', '05') AND [67] = '67' AND ELEM = 'Y' THEN 'Y'
+			WHEN GRADE IN ('K', '01', '02', '03', '04', '05') AND LEFT(STATE_COURSE_CODE,4) = '1062' AND ELEM = 'Y' AND [27] = '27' THEN 'Y'
+
+			--SECONDARY
+			--(1271-1274, 1202-1203, 1254-1255, 1299)
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274'  THEN 'Y' 
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1202' AND '1203'  THEN 'Y' 
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1254' AND '1255'  THEN 'Y' 
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1299'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1202' AND '1203'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1254' AND '1255'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1299'  THEN 'Y' 
+			
+			--1063
+			WHEN GRADE IN ('06', '07', '08') AND [27] = '27' AND [20] = '20' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1063'  THEN 'Y'			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [27] = '27' AND [20] = '20' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1063'   THEN 'Y' 
+			
+			--1150
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [01] = '01' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1150'  THEN 'Y'			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [01] = '01'  AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1150'   THEN 'Y' 
+
+			--0304	
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND ([03] = '03' OR [45] = '45' OR [47] = '47') AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '0304'  THEN 'Y'			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND ([03] = '03' OR [45] = '45' OR [47] = '47') AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '0304'   THEN 'Y' 
+
+			--Health
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [04] = '04' AND [05] = '05'AND MID = 'Y' AND DEPARTMENT = 'Hea'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [04] = '04' AND [05] = '05' AND HIGH = 'Y' AND DEPARTMENT = 'Hea'  THEN 'Y' 
+
+			--Math
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [51] = '51' AND MID = 'Y' AND DEPARTMENT = 'Math'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [51] = '51' AND HIGH = 'Y' AND DEPARTMENT = 'Math'  THEN 'Y' 
+
+			--Social Studies
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [10] = '10' AND MID = 'Y' AND DEPARTMENT = 'Soc'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [10] = '10' AND HIGH = 'Y' AND DEPARTMENT = 'Soc'  THEN 'Y' 
+
+			--Science
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [32] = '32' AND MID = 'Y' AND DEPARTMENT = 'Sci'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [32] = '32' AND HIGH = 'Y' AND DEPARTMENT = 'Sci'  THEN 'Y' 
+
+	ELSE 'N' END AS QUALIFIED
+	,ORGANIZATION_GU
+
+
+
+FROM (
+SELECT * FROM 
+(
+SELECT 
+	STUDENT_GU, SIS_NUMBER, MAX(RN) AS MAXCOUNT 
+FROM( 
+--THIS IS BOTH T1 AND T2
+SELECT 
+	T2.STUDENT_GU, T2.SIS_NUMBER
+	,ROW_NUMBER() OVER (PARTITION BY SIS_NUMBER, COURSE_LEVEL ORDER BY STATE_COURSE_CODE) AS RN
+FROM 
+(
+-------------------------------------------------------------------------------------------------
+--FIRST PULL NON ELL STUDENTS THAT HAVE A BEP TAGGED COURSE BETWEEN 1274-1274 STATE COURSE CODES
+-------------------------------------------------------------------------------------------------
+
+SELECT DISTINCT PRIM.STUDENT_GU
+ FROM 
+APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS PRIM
+LEFT JOIN 
+APS.ELLCalculatedAsOf(@AsOfDate) AS ELL
+ON
+PRIM.STUDENT_GU = ELL.STUDENT_GU
+LEFT JOIN 
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+ON
+PRIM.STUDENT_GU = SCH.STUDENT_GU
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+WHERE
+LST.COURSE_LEVEL = 'BEP'
+AND LEFT(CRS.STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274'
+-- non-EL STUDENTS
+AND ELL.STUDENT_GU IS NULL
+
+--HERITAGE 3 HOUR IS ONLY FOR THE FOLLOWING SCHOOLS
+AND PRIM.SCHOOL_CODE NOT IN ('206', '210', '213', '215', '216', '225', '339', '243', '244', '249', '252', '262', '255',
+ '496', '285', '291', '300', '250', '327', '275', '333', '330', '392', '280', '370', '376', '379', '385', 
+ '405', '415', '416', '475', '465', '470', '590', '576' )
+
+
+) AS T1
+
+--6,173 ROWS
+
+-------------------------------------------------------------------------------------------------
+--FOR STUDENTS ABOVE PULL ALL BEP CLASSES THEN FILTER FOR STUDENTS THAT HAVE 3 TOTAL
+-------------------------------------------------------------------------------------------------
+
+INNER JOIN 
+(
+SELECT 
+	STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+ FROM 
+
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+WHERE
+COURSE_LEVEL IN ('BEP')
+
+) AS T2
+ON
+T1.STUDENT_GU = T2.STUDENT_GU
+) AS T3
+GROUP BY STUDENT_GU, SIS_NUMBER
+
+) AS T4
+
+WHERE
+	MAXCOUNT > 2
+) AS T5
+
+---------------------------------------------------------------------------------------------------
+----FOR STUDENTS ABOVE THAT HAVE MORE THAN 2 OTHER BEP COURSES PULL DETAILS
+---------------------------------------------------------------------------------------------------
+
+INNER JOIN 
+(
+SELECT 
+	ORGANIZATION_NAME,
+	SCH.STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+	,PRIM.GRADE
+	,[01]
+      ,[03]
+      ,[04]
+      ,[05]
+      ,[10]
+      ,[20]
+      ,[27]
+      ,[32]
+      ,[45]
+      ,[47]
+      ,[51]
+      ,[60]
+      ,[67]
+      ,[ELEM]
+      ,[MID]
+      ,[HIGH]
+	  ,SCH.[TEACHER NAME]
+	  ,STF.BADGE_NUM
+	  ,CASE WHEN ADMIN_DATE IS NOT NULL THEN 'Y' ELSE 'N' END AS EL
+	  ,SCH.DEPARTMENT
+	  ,prim.ORGANIZATION_GU
+ FROM 
+
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+
+LEFT JOIN 
+APS.LCETeacherEndorsements AS CRED
+ON
+SCH.STAFF_GU = CRED.STAFF_GU
+
+LEFT JOIN 
+rev.EPC_STAFF AS STF
+ON
+CRED.STAFF_GU = STF.STAFF_GU
+
+INNER JOIN 
+APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS PRIM
+ON
+SCH.STUDENT_GU = PRIM.STUDENT_GU
+
+LEFT JOIN 
+APS.ELLCalculatedAsOf(@AsOfDate) AS ELL
+ON
+PRIM.STUDENT_GU = ELL.STUDENT_GU
+
+WHERE
+COURSE_LEVEL IN ('BEP')
+
+) AS T6
+
+ON
+T5.STUDENT_GU = T6.STUDENT_GU
+
+INNER JOIN 
+REV.REV_PERSON AS PERS
+ON
+T6.STUDENT_GU = PERS.PERSON_GU
+
+--ORDER BY ORGANIZATION_NAME,SIS_NUMBER, STATE_COURSE_CODE
+
+UNION ALL
+
+/***********************************************************************************************
+
+THREE HOUR HERITAGE FOR EL STUDENTS
+
+--HERITAGE 3 HOUR IS ONLY FOR SCHOOLS NOT IN LIST BELOW:  
+
+('206', '210', '213', '215', '216', '225', '339', '243', '244', '249', '252', '262', '255',
+ '496', '285', '291', '300', '250', '327', '275', '333', '330', '392', '280', '370', '376', '379', '385', 
+ '405', '415', '416', '475', '465', '470', '590', '576' )
+
+*************************************************************************************************/
+
+SELECT 
+T7.ORGANIZATION_NAME, T7.STUDENT_GU, T7.SIS_NUMBER, T7.COURSE_ID, T7.COURSE_TITLE, T7.COURSE_LEVEL, T7.STATE_COURSE_CODE, T7.GRADE, 
+	[01],[03],[04],[05],[10],[20],[27],[32],[45],[47],[51],[60],[67],[ELEM],[MID],[HIGH],[TEACHER NAME],BADGE_NUM, EL, DEPARTMENT AS DEPARTMENT
+, PERS.LAST_NAME, PERS.FIRST_NAME
+,3 AS [HOUR]
+,'Heritage' AS MODEL
+
+, CASE 
+			--ELEMENTARY
+			WHEN GRADE IN ('K', '01', '02', '03', '04', '05') AND [67] = '67' AND ELEM = 'Y' THEN 'Y'
+			WHEN GRADE IN ('K', '01', '02', '03', '04', '05') AND LEFT(STATE_COURSE_CODE,4) = '1062' AND ELEM = 'Y' AND [27] = '27' THEN 'Y'
+
+			--SECONDARY
+			--(1271-1274, 1202-1203, 1254-1255, 1299)
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274'  THEN 'Y' 
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1202' AND '1203'  THEN 'Y' 
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1254' AND '1255'  THEN 'Y' 
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1299'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1202' AND '1203'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1254' AND '1255'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1299'  THEN 'Y' 
+			
+			--1063
+			WHEN GRADE IN ('06', '07', '08') AND [27] = '27' AND [20] = '20' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1063'  THEN 'Y'			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [27] = '27' AND [20] = '20' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1063'   THEN 'Y' 
+			
+			--1150
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [01] = '01' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1150'  THEN 'Y'			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [01] = '01'  AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1150'   THEN 'Y' 
+
+			--0304	
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND ([03] = '03' OR [45] = '45' OR [47] = '47') AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '0304'  THEN 'Y'			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND ([03] = '03' OR [45] = '45' OR [47] = '47') AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '0304'   THEN 'Y' 
+
+			--Health
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [04] = '04' AND [05] = '05'AND MID = 'Y' AND DEPARTMENT = 'Hea'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [04] = '04' AND [05] = '05' AND HIGH = 'Y' AND DEPARTMENT = 'Hea'  THEN 'Y' 
+
+			--Math
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [51] = '51' AND MID = 'Y' AND DEPARTMENT = 'Math'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [51] = '51' AND HIGH = 'Y' AND DEPARTMENT = 'Math'  THEN 'Y' 
+
+			--Social Studies
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [10] = '10' AND MID = 'Y' AND DEPARTMENT = 'Soc'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [10] = '10' AND HIGH = 'Y' AND DEPARTMENT = 'Soc'  THEN 'Y' 
+
+			--Science
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [32] = '32' AND MID = 'Y' AND DEPARTMENT = 'Sci'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [32] = '32' AND HIGH = 'Y' AND DEPARTMENT = 'Sci'  THEN 'Y' 
+
+	ELSE 'N' END AS QUALIFIED
+	,ORGANIZATION_GU
+
+
+
+ FROM (
+SELECT 
+	DISTINCT STUDENT_GU
+FROM( 
+SELECT 
+	T4.*
+	,ROW_NUMBER() OVER (PARTITION BY SIS_NUMBER, COURSE_LEVEL ORDER BY COURSE_LEVEL, STATE_COURSE_CODE) AS RN
+ FROM
+(
+
+-------------------------------------------------------------------------------------------------
+--FIRST PULL ELL STUDENTS THAT HAVE A BEP TAGGED COURSE BETWEEN 1274-1274 STATE COURSE CODES
+-------------------------------------------------------------------------------------------------
+
+SELECT DISTINCT PRIM.STUDENT_GU
+	--PRIM.STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+ FROM 
+APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS PRIM
+INNER JOIN 
+APS.ELLCalculatedAsOf(@AsOfDate) AS ELL
+ON
+PRIM.STUDENT_GU = ELL.STUDENT_GU
+
+INNER JOIN 
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+ON
+PRIM.STUDENT_GU = SCH.STUDENT_GU
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+WHERE
+(LST.COURSE_LEVEL = 'BEP'
+AND LEFT(CRS.STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274')
+--HERITAGE 3 HOUR IS ONLY FOR THE FOLLOWING SCHOOLS
+AND PRIM.SCHOOL_CODE NOT IN ('206', '210', '213', '215', '216', '225', '339', '243', '244', '249', '252', '262', '255',
+ '496', '285', '291', '300', '250', '327', '275', '333', '330', '392', '280', '370', '376', '379', '385', 
+ '405', '415', '416', '475', '465', '470', '590', '576' )
+) AS T1
+
+---------------------------------------------------------------------------------------------------------------
+-- AND STUDENTS HAVE TO HAVE A COURSE TAGGED ESL
+---------------------------------------------------------------------------------------------------------------
+
+INNER JOIN 
+(SELECT DISTINCT RESTOFSCH.STUDENT_GU AS ESLGU
+FROM
+APS.ScheduleDetailsAsOf(@AsOfDate) AS RESTOFSCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+RESTOFSCH.COURSE_GU = LST.COURSE_GU
+AND LST.COURSE_LEVEL IN ('ESL') 
+INNER JOIN 
+REV.EPC_CRS AS CRS2
+ON
+RESTOFSCH.COURSE_GU = CRS2.COURSE_GU
+) AS T2
+
+ON
+T1.STUDENT_GU = T2.ESLGU
+
+---------------------------------------------------------------------------------------------------------------
+-- AND STUDENTS HAVE TO HAVE ONE *OTHER* BEP COURSE TAGGED
+---------------------------------------------------------------------------------------------------------------
+
+INNER JOIN 
+(SELECT DISTINCT RESTOFSCH.STUDENT_GU AS BEPGU
+FROM
+APS.ScheduleDetailsAsOf(@AsOfDate) AS RESTOFSCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+RESTOFSCH.COURSE_GU = LST.COURSE_GU
+AND LST.COURSE_LEVEL IN ('BEP') 
+INNER JOIN 
+REV.EPC_CRS AS CRS2
+ON
+RESTOFSCH.COURSE_GU = CRS2.COURSE_GU
+) AS T3
+
+ON
+T2.ESLGU = T3.BEPGU
+
+
+---------------------------------------------------------------------------------------------------
+----FOR STUDENTS ABOVE THAT HAVE ALL 3 CONDITIONS PULL ALL THEIR BEP AND ESL CLASSES AND COUNT THEM
+---------------------------------------------------------------------------------------------------
+
+INNER JOIN 
+(
+SELECT 
+	STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+ FROM 
+
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+WHERE
+COURSE_LEVEL IN ('BEP', 'ESL')
+
+) AS T4
+
+ON
+T3.BEPGU = T4.STUDENT_GU
+) AS T5
+--STUDENTS ALL HAVE ESL SO CHOOSE STUDENTS THAT HAVE MORE THAN ONE BEP ROW
+WHERE
+	COURSE_LEVEL = 'BEP' AND RN >1
+
+) AS T6
+
+---------------------------------------------------------------------------------------------------
+----FOR STUDENTS ABOVE THAT HAVE ALL 3 CONDITIONS AND MORE THAN 2 BEP CLASSES PULL DETAILS
+---------------------------------------------------------------------------------------------------
+
+INNER JOIN 
+(
+SELECT 
+	ORGANIZATION_NAME,
+	SCH.STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+	,PRIM.GRADE
+	,[01]
+      ,[03]
+      ,[04]
+      ,[05]
+      ,[10]
+      ,[20]
+      ,[27]
+      ,[32]
+      ,[45]
+      ,[47]
+      ,[51]
+      ,[60]
+      ,[67]
+      ,[ELEM]
+      ,[MID]
+      ,[HIGH]
+	  ,SCH.[TEACHER NAME]
+	  ,STF.BADGE_NUM
+	  ,CASE WHEN ADMIN_DATE IS NOT NULL THEN 'Y' ELSE 'N' END AS EL
+	  ,CRS.DEPARTMENT
+	  ,prim.ORGANIZATION_GU
+ FROM 
+
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+
+LEFT JOIN 
+APS.LCETeacherEndorsements AS CRED
+ON
+SCH.STAFF_GU = CRED.STAFF_GU
+
+LEFT JOIN 
+rev.EPC_STAFF AS STF
+ON
+CRED.STAFF_GU = STF.STAFF_GU
+
+INNER JOIN 
+APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS PRIM
+ON
+SCH.STUDENT_GU = PRIM.STUDENT_GU
+
+LEFT JOIN 
+APS.ELLCalculatedAsOf(@AsOfDate) AS ELL
+ON
+PRIM.STUDENT_GU = ELL.STUDENT_GU
+
+
+WHERE
+COURSE_LEVEL IN ('BEP', 'ESL')
+
+) AS T7
+
+ON T6.STUDENT_GU = T7.STUDENT_GU 
+
+INNER JOIN 
+REV.REV_PERSON AS PERS
+ON
+T7.STUDENT_GU = PERS.PERSON_GU
+
+--ORDER BY ORGANIZATION_NAME, SIS_NUMBER, COURSE_LEVEL, STATE_COURSE_CODE
+
+
+UNION ALL
+
+
+
+/***********************************************************************************************
+
+THREE HOUR DUAL FOR EL STUDENTS
+
+--HERITAGE 3 HOUR IS ONLY FOR THE FOLLOWING SCHOOLS	('206', '210', '213', '215', '216', '225', '339', '243', '244', '249', '252', '262', '255',
+ '496', '285', '291', '300', '250', '327', '275', '333', '330', '392', '280', '370', '376', '379', '385', 
+ '405', '450', '415', '416', '475', '465', '470', '590', '576' )
+
+*************************************************************************************************/
+
+SELECT 
+T7.ORGANIZATION_NAME, T7.STUDENT_GU, T7.SIS_NUMBER, T7.COURSE_ID, T7.COURSE_TITLE, T7.COURSE_LEVEL, T7.STATE_COURSE_CODE, T7.GRADE, 
+[01],[03],[04],[05],[10],[20],[27],[32],[45],[47],[51],[60],[67],[ELEM],[MID],[HIGH],[TEACHER NAME],BADGE_NUM, EL, DEPARTMENT AS DEPARTMENT
+, PERS.LAST_NAME, PERS.FIRST_NAME  
+,3 AS [HOUR]
+,'Dual' AS MODEL
+
+, CASE 
+			--ELEMENTARY
+			WHEN GRADE IN ('K', '01', '02', '03', '04', '05') AND [67] = '67' AND ELEM = 'Y' THEN 'Y'
+			WHEN GRADE IN ('K', '01', '02', '03', '04', '05') AND LEFT(STATE_COURSE_CODE,4) = '1062' AND ELEM = 'Y' AND [27] = '27' THEN 'Y'
+
+			--SECONDARY
+			--(1271-1274, 1202-1203, 1254-1255, 1299)
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274'  THEN 'Y' 
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1202' AND '1203'  THEN 'Y' 
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1254' AND '1255'  THEN 'Y' 
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1299'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1202' AND '1203'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1254' AND '1255'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1299'  THEN 'Y' 
+			
+			--1063
+			WHEN GRADE IN ('06', '07', '08') AND [27] = '27' AND [20] = '20' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1063'  THEN 'Y'			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [27] = '27' AND [20] = '20' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1063'   THEN 'Y' 
+			
+			--1150
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [01] = '01' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1150'  THEN 'Y'			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [01] = '01'  AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1150'   THEN 'Y' 
+
+			--0304	
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND ([03] = '03' OR [45] = '45' OR [47] = '47') AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '0304'  THEN 'Y'			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND ([03] = '03' OR [45] = '45' OR [47] = '47') AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '0304'   THEN 'Y' 
+
+			--Health
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [04] = '04' AND [05] = '05'AND MID = 'Y' AND DEPARTMENT = 'Hea'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [04] = '04' AND [05] = '05' AND HIGH = 'Y' AND DEPARTMENT = 'Hea'  THEN 'Y' 
+
+			--Math
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [51] = '51' AND MID = 'Y' AND DEPARTMENT = 'Math'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [51] = '51' AND HIGH = 'Y' AND DEPARTMENT = 'Math'  THEN 'Y' 
+
+			--Social Studies
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [10] = '10' AND MID = 'Y' AND DEPARTMENT = 'Soc'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [10] = '10' AND HIGH = 'Y' AND DEPARTMENT = 'Soc'  THEN 'Y' 
+
+			--Science
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [32] = '32' AND MID = 'Y' AND DEPARTMENT = 'Sci'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [32] = '32' AND HIGH = 'Y' AND DEPARTMENT = 'Sci'  THEN 'Y' 
+
+	ELSE 'N' END AS QUALIFIED
+	,ORGANIZATION_GU
+
+FROM (
+SELECT 
+	DISTINCT STUDENT_GU
+FROM( 
+SELECT 
+	T4.*
+	,ROW_NUMBER() OVER (PARTITION BY SIS_NUMBER, COURSE_LEVEL ORDER BY COURSE_LEVEL, STATE_COURSE_CODE) AS RN
+ FROM
+(
+
+-------------------------------------------------------------------------------------------------
+--FIRST PULL ELL STUDENTS THAT HAVE A BEP TAGGED COURSE BETWEEN 1274-1274 STATE COURSE CODES
+-------------------------------------------------------------------------------------------------
+
+SELECT DISTINCT PRIM.STUDENT_GU
+	--PRIM.STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+ FROM 
+APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS PRIM
+INNER JOIN 
+APS.ELLCalculatedAsOf(@AsOfDate) AS ELL
+ON
+PRIM.STUDENT_GU = ELL.STUDENT_GU
+
+INNER JOIN 
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+ON
+PRIM.STUDENT_GU = SCH.STUDENT_GU
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+WHERE
+(LST.COURSE_LEVEL = 'BEP'
+AND LEFT(CRS.STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274')
+--DUAL 3 HOUR IS ONLY FOR THE FOLLOWING SCHOOLS
+AND PRIM.SCHOOL_CODE IN ('206', '210', '213', '215', '216', '225', '339', '243', '244', '249', '252', '262', '255',
+ '496', '285', '291', '300', '250', '327', '275', '333', '330', '392', '280', '370', '376', '379', '385', 
+ '405', '415', '416', '475', '465', '470', '590', '576' )
+) AS T1
+
+---------------------------------------------------------------------------------------------------------------
+-- AND STUDENTS HAVE TO HAVE A COURSE TAGGED ESL
+---------------------------------------------------------------------------------------------------------------
+
+INNER JOIN 
+(SELECT DISTINCT RESTOFSCH.STUDENT_GU AS ESLGU
+FROM
+APS.ScheduleDetailsAsOf(@AsOfDate) AS RESTOFSCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+RESTOFSCH.COURSE_GU = LST.COURSE_GU
+AND LST.COURSE_LEVEL IN ('ESL') 
+INNER JOIN 
+REV.EPC_CRS AS CRS2
+ON
+RESTOFSCH.COURSE_GU = CRS2.COURSE_GU
+) AS T2
+
+ON
+T1.STUDENT_GU = T2.ESLGU
+
+---------------------------------------------------------------------------------------------------------------
+-- AND STUDENTS HAVE TO HAVE ONE *OTHER* BEP COURSE TAGGED
+---------------------------------------------------------------------------------------------------------------
+
+INNER JOIN 
+(SELECT DISTINCT RESTOFSCH.STUDENT_GU AS BEPGU
+FROM
+APS.ScheduleDetailsAsOf(@AsOfDate) AS RESTOFSCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+RESTOFSCH.COURSE_GU = LST.COURSE_GU
+AND LST.COURSE_LEVEL IN ('BEP') 
+INNER JOIN 
+REV.EPC_CRS AS CRS2
+ON
+RESTOFSCH.COURSE_GU = CRS2.COURSE_GU
+) AS T3
+
+ON
+T2.ESLGU = T3.BEPGU
+
+
+---------------------------------------------------------------------------------------------------
+----FOR STUDENTS ABOVE THAT HAVE ALL 3 CONDITIONS PULL ALL THEIR BEP AND ESL CLASSES AND COUNT THEM
+---------------------------------------------------------------------------------------------------
+
+INNER JOIN 
+(
+SELECT 
+	STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+ FROM 
+
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+WHERE
+COURSE_LEVEL IN ('BEP', 'ESL')
+
+) AS T4
+
+ON
+T3.BEPGU = T4.STUDENT_GU
+) AS T5
+--STUDENTS ALL HAVE ESL SO CHOOSE STUDENTS THAT HAVE MORE THAN ONE BEP ROW
+WHERE
+	COURSE_LEVEL = 'BEP' AND RN >2
+
+) AS T6
+
+---------------------------------------------------------------------------------------------------
+----FOR STUDENTS ABOVE THAT HAVE ALL 3 CONDITIONS AND MORE THAN 2 BEP CLASSES PULL DETAILS
+---------------------------------------------------------------------------------------------------
+
+INNER JOIN 
+(
+SELECT 
+	ORGANIZATION_NAME,
+	SCH.STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+	,PRIM.GRADE
+	,[01]
+      ,[03]
+      ,[04]
+      ,[05]
+      ,[10]
+      ,[20]
+      ,[27]
+      ,[32]
+      ,[45]
+      ,[47]
+      ,[51]
+      ,[60]
+      ,[67]
+      ,[ELEM]
+      ,[MID]
+      ,[HIGH]
+	  ,SCH.[TEACHER NAME]
+	  ,STF.BADGE_NUM
+	  ,CASE WHEN ADMIN_DATE IS NOT NULL THEN 'Y' ELSE 'N' END AS EL
+	  ,crs.DEPARTMENT
+	  ,prim.ORGANIZATION_GU
+ FROM 
+
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+
+LEFT JOIN 
+APS.LCETeacherEndorsements AS CRED
+ON
+SCH.STAFF_GU = CRED.STAFF_GU
+
+LEFT JOIN 
+rev.EPC_STAFF AS STF
+ON
+CRED.STAFF_GU = STF.STAFF_GU
+
+INNER JOIN 
+APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS PRIM
+ON
+SCH.STUDENT_GU = PRIM.STUDENT_GU
+
+LEFT JOIN 
+APS.ELLCalculatedAsOf(@AsOfDate) AS ELL
+ON
+PRIM.STUDENT_GU = ELL.STUDENT_GU
+
+WHERE
+COURSE_LEVEL IN ('BEP', 'ESL')
+
+) AS T7
+
+ON T6.STUDENT_GU = T7.STUDENT_GU 
+
+INNER JOIN 
+REV.REV_PERSON AS PERS
+ON
+T7.STUDENT_GU = PERS.PERSON_GU
+
+--ORDER BY ORGANIZATION_NAME, SIS_NUMBER, COURSE_LEVEL, STATE_COURSE_CODE
+
+UNION ALL
+
+
+
+/***********************************************************************************************
+
+THREE HOUR DUAL FOR NON EL STUDENTS
+
+--HERITAGE 3 HOUR IS ONLY FOR THE FOLLOWING SCHOOLS	('206', '210', '213', '215', '216', '225', '339', '243', '244', '249', '252', '262', '255',
+ '496', '285', '291', '300', '250', '327', '275', '333', '330', '392', '280', '370', '376', '379', '385', 
+ '405', '450', '415', '416', '475', '465', '470', '590', '576' )
+
+*************************************************************************************************/
+
+
+SELECT 
+	T6.ORGANIZATION_NAME, T6.STUDENT_GU, T6.SIS_NUMBER, T6.COURSE_ID, T6.COURSE_TITLE, T6.COURSE_LEVEL, T6.STATE_COURSE_CODE, T6.GRADE, 
+	[01],[03],[04],[05],[10],[20],[27],[32],[45],[47],[51],[60],[67],[ELEM],[MID],[HIGH],[TEACHER NAME],BADGE_NUM, EL, DEPARTMENT AS DEPARTMENT
+, PERS.LAST_NAME, PERS.FIRST_NAME
+,3 AS [HOUR]
+,'Dual' AS MODEL
+
+, CASE 
+			--ELEMENTARY
+			WHEN GRADE IN ('K', '01', '02', '03', '04', '05') AND [67] = '67' AND ELEM = 'Y' THEN 'Y'
+			WHEN GRADE IN ('K', '01', '02', '03', '04', '05') AND LEFT(STATE_COURSE_CODE,4) = '1062' AND ELEM = 'Y' AND [27] = '27' THEN 'Y'
+
+			--SECONDARY
+			--(1271-1274, 1202-1203, 1254-1255, 1299)
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274'  THEN 'Y' 
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1202' AND '1203'  THEN 'Y' 
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1254' AND '1255'  THEN 'Y' 
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [60] = '60' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1299'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1202' AND '1203'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) BETWEEN '1254' AND '1255'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [60] = '60' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1299'  THEN 'Y' 
+			
+			--1063
+			WHEN GRADE IN ('06', '07', '08') AND [27] = '27' AND [20] = '20' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1063'  THEN 'Y'			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [27] = '27' AND [20] = '20' AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1063'   THEN 'Y' 
+			
+			--1150
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [01] = '01' AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1150'  THEN 'Y'			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [01] = '01'  AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '1150'   THEN 'Y' 
+
+			--0304	
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND ([03] = '03' OR [45] = '45' OR [47] = '47') AND MID = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '0304'  THEN 'Y'			
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND ([03] = '03' OR [45] = '45' OR [47] = '47') AND HIGH = 'Y' AND LEFT(STATE_COURSE_CODE,4) = '0304'   THEN 'Y' 
+
+			--Health
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [04] = '04' AND [05] = '05'AND MID = 'Y' AND DEPARTMENT = 'Hea'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [04] = '04' AND [05] = '05' AND HIGH = 'Y' AND DEPARTMENT = 'Hea'  THEN 'Y' 
+
+			--Math
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [51] = '51' AND MID = 'Y' AND DEPARTMENT = 'Math'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [51] = '51' AND HIGH = 'Y' AND DEPARTMENT = 'Math'  THEN 'Y' 
+
+			--Social Studies
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [10] = '10' AND MID = 'Y' AND DEPARTMENT = 'Soc'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [10] = '10' AND HIGH = 'Y' AND DEPARTMENT = 'Soc'  THEN 'Y' 
+
+			--Science
+			WHEN GRADE IN ('06', '07', '08') AND [67] = '67' AND [32] = '32' AND MID = 'Y' AND DEPARTMENT = 'Sci'  THEN 'Y' 
+			WHEN GRADE IN ('09', '10', '11', '12') AND [67] = '67' AND [32] = '32' AND HIGH = 'Y' AND DEPARTMENT = 'Sci'  THEN 'Y' 
+
+	ELSE 'N' END AS QUALIFIED
+	,ORGANIZATION_GU
+
+FROM (
+SELECT * FROM 
+(
+SELECT 
+	STUDENT_GU, SIS_NUMBER, MAX(RN) AS MAXCOUNT 
+FROM( 
+--THIS IS BOTH T1 AND T2
+SELECT 
+	T2.STUDENT_GU, T2.SIS_NUMBER
+	,ROW_NUMBER() OVER (PARTITION BY SIS_NUMBER, COURSE_LEVEL ORDER BY STATE_COURSE_CODE) AS RN
+FROM 
+(
+-------------------------------------------------------------------------------------------------
+--FIRST PULL NON ELL STUDENTS THAT HAVE A BEP TAGGED COURSE BETWEEN 1274-1274 STATE COURSE CODES
+-------------------------------------------------------------------------------------------------
+
+SELECT DISTINCT PRIM.STUDENT_GU
+ FROM 
+APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS PRIM
+LEFT JOIN 
+APS.ELLCalculatedAsOf(@AsOfDate) AS ELL
+ON
+PRIM.STUDENT_GU = ELL.STUDENT_GU
+LEFT JOIN 
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+ON
+PRIM.STUDENT_GU = SCH.STUDENT_GU
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+WHERE
+LST.COURSE_LEVEL = 'BEP'
+AND LEFT(CRS.STATE_COURSE_CODE,4) BETWEEN '1271' AND '1274'
+
+-- non-EL STUDENTS
+AND ELL.STUDENT_GU IS NULL
+
+--DUAL 3 HOUR IS ONLY FOR THE FOLLOWING SCHOOLS
+AND PRIM.SCHOOL_CODE IN ('206', '210', '213', '215', '216', '225', '339', '243', '244', '249', '252', '262', '255',
+ '496', '285', '291', '300', '250', '327', '275', '333', '330', '392', '280', '370', '376', '379', '385', 
+ '405', '415', '416', '475', '465', '470', '590', '576' )
+
+) AS T1
+
+--6,173 ROWS
+
+-------------------------------------------------------------------------------------------------
+--FOR STUDENTS ABOVE PULL ALL BEP CLASSES THEN FILTER FOR STUDENTS THAT HAVE 3 TOTAL
+-------------------------------------------------------------------------------------------------
+
+INNER JOIN 
+(
+SELECT 
+	STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+ FROM 
+
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+WHERE
+COURSE_LEVEL IN ('BEP')
+
+) AS T2
+ON
+T1.STUDENT_GU = T2.STUDENT_GU
+) AS T3
+GROUP BY STUDENT_GU, SIS_NUMBER
+
+) AS T4
+
+WHERE
+	MAXCOUNT > 2
+) AS T5
+
+---------------------------------------------------------------------------------------------------
+----FOR STUDENTS ABOVE THAT HAVE MORE THAN 2 OTHER BEP COURSES PULL DETAILS
+---------------------------------------------------------------------------------------------------
+
+INNER JOIN 
+(
+SELECT 
+	ORGANIZATION_NAME,
+	SCH.STUDENT_GU, SIS_NUMBER, SCH.COURSE_ID, SCH.COURSE_TITLE, COURSE_LEVEL, STATE_COURSE_CODE
+		,PRIM.GRADE
+	,[01]
+      ,[03]
+      ,[04]
+      ,[05]
+      ,[10]
+      ,[20]
+      ,[27]
+      ,[32]
+      ,[45]
+      ,[47]
+      ,[51]
+      ,[60]
+      ,[67]
+      ,[ELEM]
+      ,[MID]
+      ,[HIGH]
+	  ,SCH.[TEACHER NAME]
+	  ,STF.BADGE_NUM
+	  ,CASE WHEN ADMIN_DATE IS NOT NULL THEN 'Y' ELSE 'N' END AS EL
+	  ,CRS.DEPARTMENT
+	  ,prim.ORGANIZATION_GU
+ FROM 
+
+APS.ScheduleDetailsAsOf(@AsOfDate) AS SCH
+INNER JOIN 
+rev.EPC_CRS_LEVEL_LST AS LST
+ON
+SCH.COURSE_GU = LST.COURSE_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+SCH.COURSE_GU = CRS.COURSE_GU
+
+LEFT JOIN 
+APS.LCETeacherEndorsements AS CRED
+ON
+SCH.STAFF_GU = CRED.STAFF_GU
+
+LEFT JOIN 
+rev.EPC_STAFF AS STF
+ON
+CRED.STAFF_GU = STF.STAFF_GU
+
+INNER JOIN 
+APS.PrimaryEnrollmentDetailsAsOf(@AsOfDate) AS PRIM
+ON
+SCH.STUDENT_GU = PRIM.STUDENT_GU
+
+LEFT JOIN 
+APS.ELLCalculatedAsOf(@AsOfDate) AS ELL
+ON
+PRIM.STUDENT_GU = ELL.STUDENT_GU
+
+
+WHERE
+COURSE_LEVEL IN ('BEP')
+
+) AS T6
+
+ON
+T5.STUDENT_GU = T6.STUDENT_GU
+
+INNER JOIN 
+REV.REV_PERSON AS PERS
+ON
+T6.STUDENT_GU = PERS.PERSON_GU
+
+--ORDER BY ORGANIZATION_NAME, SIS_NUMBER, STATE_COURSE_CODE
+
+
+
+
+
+
+GO
+
+
