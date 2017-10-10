@@ -1,26 +1,20 @@
-/**
- * $Revision: 322 $
- * $LastChangedBy: e104090 $
- * $LastChangedDate: 2015-01-30 13:38:43 -0700 (Fri, 30 Jan 2015) $
- */
- 
--- Removing function if it exists
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[APS].[ELLCalculatedAsOf]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
-	EXEC('CREATE FUNCTION APS.ELLCalculatedAsOf() RETURNS TABLE AS RETURN (SELECT 0 AS DUMMY)')
+USE [ST_Production]
 GO
 
+/****** Object:  UserDefinedFunction [APS].[ELLCalculatedAsOf]    Script Date: 10/10/2017 4:20:20 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
 /**
- * FUNCTION APS.ELLCalculatedAsOf
- * Pulls ELL kids as of a certain date + Basic enrollment information. It Calculates ELL based on PHLOTE status, and 
- * Most recent assessment.
- *
- * Tables Used: APS.ELLCalculatedAsOf,  EPC_STU_PGM_ELL_HIS
- *
- * #param DATE @AsOfDate date to look for enrollments
- * 
- * #return TABLE basic enrollment information + ELL Infro for all ELL students who are enrolled on that date.
+
  */
-ALTER FUNCTION APS.ELLCalculatedAsOf(@AsOfDate DATE)
+ALTER FUNCTION [APS].[ELLCalculatedAsOf](@AsOfDate DATE)
 RETURNS TABLE
 AS
 RETURN	
@@ -56,6 +50,25 @@ FROM
 	APS.LCELatestEvaluationAsOf(@AsOfDate) AS Assessment
 	ON
 	Enroll.STUDENT_GU = Assessment.STUDENT_GU
+
+
+--SKIP STUDENTS THAT ARE "ADMINISTRATIVELY EXITED" - CHANGED PHLOTE STATUS
+--	LEFT JOIN 
+--	(SELECT STUDENT_GU FROM 
+--	REV.EPC_STU_PGM_ELL AS PGM
+--	WHERE
+--	EXIT_REASON = 'EY-') 
+--	AS ADMINEXITED
+
+--ON 
+--ADMINEXITED.STUDENT_GU = Enroll.STUDENT_GU
+
 WHERE
 	-- Only those where performance level qualifies them for ELL
-	Assessment.IS_ELL = 1
+	Assessment.IS_ELL IN (1, -1)
+	--AND ADMINEXITED.STUDENT_GU IS NULL
+
+
+GO
+
+

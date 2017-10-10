@@ -1,12 +1,13 @@
 USE [ST_Production]
 GO
 
-/****** Object:  View [APS].[LCETeacherEndorsements]    Script Date: 9/20/2017 3:36:05 PM ******/
+/****** Object:  View [APS].[LCETeacherEndorsements]    Script Date: 10/10/2017 4:43:25 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -28,6 +29,8 @@ These are the new LCE Licensure Endorsement requirements for 2017-2018 and beyon
 
 SELECT 
 	LICENSES.*, ENDORSEMENTS.[01],[03], [04] ,[05], [10], [20], [27], [32], [45], [47], [51], [60], [67]
+	,CASE WHEN WAIVERS.STAFF_GU IS NOT NULL  AND CERT_AREA = '27' THEN 'W-27' 
+		  WHEN WAIVERS.STAFF_GU IS NOT NULL  AND CERT_AREA = '67' THEN 'W-67' ELSE '' END AS WAIVER
  FROM 
 
 (
@@ -80,6 +83,17 @@ FOR CERT_AREA IN ([01], [03], [04] ,[05], [10], [20], [27], [32], [45], [47], [5
 ON
 
 LICENSES.STAFF_GU = ENDORSEMENTS.STAFF_GU
+
+LEFT JOIN 
+(SELECT DISTINCT STAFF_GU, CERT_AREA FROM 
+REV.UD_LICENSURE_DATA
+WHERE
+CERT_STATUS = 'Approved Waiver'
+AND CERT_AREA IN ('27', '67')
+) AS WAIVERS
+ON
+LICENSES.STAFF_GU = WAIVERS.STAFF_GU
+
 
 GO
 
