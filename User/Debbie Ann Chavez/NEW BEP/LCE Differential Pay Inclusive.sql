@@ -1,0 +1,157 @@
+USE [ST_Production]
+GO
+
+/****** Object:  UserDefinedFunction [APS].[LCEDifferentialPayAsOf_2]    Script Date: 10/4/2017 2:54:39 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
+
+
+/******************************************************************************************************
+
+NEW DIFFERENTIAL PAY FOR 2017-2018 AND BEYOND
+
+
+*******************************************************************************************************/
+
+
+CREATE FUNCTION [APS].[LCEDifferentialPayInclusiveAsOf_2](@AsOfDate DATETIME)
+RETURNS TABLE
+AS
+RETURN
+
+
+
+
+SELECT 
+	School, Teachername, Badge, HireDate,
+	ISNULL(ESL,'') AS ESL, ISNULL(BEP,'') AS BEP, CASE WHEN ESL IS NOT NULL AND BEP IS NOT NULL THEN 'ESL/BEP' ELSE '' END AS ESL_BEP
+	,Total_ESL, Total_BEP
+	,ORGANIZATION_GU
+ FROM 
+
+(
+SELECT 
+	School, Teachername, Badge, HireDate
+	,MAX(ESL) AS ESL
+	,MAX(BEP) AS BEP
+	,SUM(ESLStudent) AS Total_ESL
+	,SUM(BilingualStudent) AS Total_BEP
+	,ORGANIZATION_GU
+FROM (
+
+SELECT DISTINCT 
+              
+                           Schedules.SCHOOL_NAME AS School
+						   ,ORGANIZATION_GU
+                           ,Schedules.TEACHER_NAME AS TeacherName
+						   ,Schedules.BADGE_NUM AS Badge
+                           ,Staff.HIRE_DATE AS HireDate
+
+                           ,CASE WHEN Schedules.COURSE_LEVEL = 'ESL'  THEN 'ESL' END AS ESL
+                           ,CASE WHEN Schedules.COURSE_LEVEL = 'BEP'  THEN 'BEP' END AS BEP
+                           ,CASE WHEN Schedules.COURSE_LEVEL = 'BEP' AND Schedules.COURSE_LEVEL = 'ESL' THEN 'ESL/BEP' END AS ESL_BEP
+                           
+                           ,(CASE WHEN BEP.STUDENT_GU IS NOT NULL AND COURSE_LEVEL = 'BEP' THEN 1 ELSE 0 END) AS BilingualStudent
+                           ,(CASE WHEN  ELL.STUDENT_GU IS NOT NULL AND COURSE_LEVEL = 'ESL' THEN 1 ELSE 0 END) AS ESLStudent
+						   , STU.STUDENT_GU
+						   ,Schedules.SIS_NUMBER
+
+ FROM 
+
+ (
+SELECT DISTINCT 
+SCHOOL_NAME, ORGANIZATION_GU, BADGE_NUM, COURSE_ID, SECTION_ID, TEACHER_NAME, SIS_NUMBER, COURSE_LEVEL
+
+FROM (
+
+--BEP STUDENTS RECEIVING SERVICE 
+SELECT 
+	SCHOOL_NAME, ORGANIZATION_GU,  BEP.BADGE_NUM, COURSE_ID, SECTION_ID, PERS.LAST_NAME + ', ' + PERS.FIRST_NAME AS TEACHER_NAME, SIS_NUMBER, BEP.COURSE_LEVEL
+
+ FROM 
+APS.BEPModelsAndHoursQualifiedAsOf(@AsOfDate) AS BEP
+INNER JOIN
+REV.EPC_STAFF AS STAFF
+ON
+BEP.BADGE_NUM = STAFF.BADGE_NUM
+INNER JOIN 
+REV.REV_PERSON AS PERS
+ON
+STAFF.STAFF_GU = PERS.PERSON_GU
+
+UNION ALL 
+
+--ESL STUDENTS - EL STUDENTS RECEIVING SERVICE
+SELECT 
+	ORGANIZATION_NAME, ORGANIZATION_GU, ESL.BADGE_NUM, ESL.COURSE_ID, SECTION_ID, PERS.LAST_NAME + ', ' + PERS.FIRST_NAME AS TEACHER_NAME, SIS_NUMBER, LST.COURSE_LEVEL
+ FROM 
+APS.LCEStudentsAndProvidersAsOf_2(@AsOfDate) AS ESL
+INNER JOIN
+REV.EPC_STAFF AS STAFF
+ON
+ESL.BADGE_NUM = STAFF.BADGE_NUM
+INNER JOIN 
+REV.REV_PERSON AS PERS
+ON
+STAFF.STAFF_GU = PERS.PERSON_GU
+INNER JOIN 
+REV.EPC_CRS AS CRS
+ON
+CRS.COURSE_ID = ESL.COURSE_ID
+INNER JOIN 
+REV.EPC_CRS_LEVEL_LST AS LST
+ON
+CRS.COURSE_GU = LST.COURSE_GU
+
+
+WHERE ESL.COURSE_ID IS NOT NULL AND QUALIFIED_CLASS = 'Y'
+
+) AS BEP_AND_ESL
+
+) AS SCHEDULES
+
+	INNER JOIN 
+	REV.EPC_STU AS STU
+	ON
+	SCHEDULES.SIS_NUMBER = STU.SIS_NUMBER
+
+	--COUNT EL KIDS (ESL)
+	LEFT HASH JOIN
+	APS.ELLCalculatedAsOf (@AsOfDate) AS ELL
+	ON
+	STU.STUDENT_GU = ELL.STUDENT_GU
+
+	-- COUNT BEP KIDS
+	LEFT HASH JOIN 
+	rev.EPC_STU_PGM_ELL_BEP AS BEP 
+	ON
+	BEP.STUDENT_GU = STU.STUDENT_GU
+	AND BEP.EXIT_DATE IS NULL
+
+	--NEED TO READ STAFF FOR THE HIRE DATE                               
+	LEFT HASH JOIN
+	rev.EPC_STAFF AS Staff
+	ON
+	Staff.BADGE_NUM = Schedules.BADGE_NUM
+
+	) AS DETAILS
+
+GROUP BY 
+		School, Teachername, Badge, HireDate, ORGANIZATION_GU
+
+) AS TOTALS
+
+
+
+
+GO
+
+
