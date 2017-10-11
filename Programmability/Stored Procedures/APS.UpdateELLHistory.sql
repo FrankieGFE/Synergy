@@ -1,12 +1,13 @@
 USE [ST_Production]
 GO
 
-/****** Object:  StoredProcedure [APS].[UpdateELLHistory]    Script Date: 8/17/2017 11:38:17 AM ******/
+/****** Object:  StoredProcedure [APS].[UpdateELLHistory]    Script Date: 10/9/2017 10:36:27 AM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -65,6 +66,51 @@ FROM
 
 WHERE
 	ELL.STUDENT_GU IS NULL
+
+
+
+/***********************************************************************************************
+
+Check all open EL records and latest test assessment, if tested out, then close the EL Record
+
+************************************************************************************************/
+
+
+UPDATE REV.EPC_STU_PGM_ELL_HIS
+
+SET EXIT_DATE = ADMIN_DATE 
+
+FROM 
+(
+SELECT SIS_NUMBER, ELL.*, LTEST.ADMIN_DATE, LTEST.PERFORMANCE_LEVEL, LTEST.IS_ELL, LTEST.TEST_NAME FROM 
+
+(SELECT ELLL.STUDENT_GU, ELLL.ENTRY_DATE, ELLL.EXIT_DATE FROM REV.EPC_STU_PGM_ELL_HIS  AS ELLL 
+	INNER JOIN APS.PrimaryEnrollmentsAsOf(GETDATE()) AS PRIM 
+	ON ELLL.STUDENT_GU = PRIM.STUDENT_GU 
+	WHERE EXIT_DATE IS NULL 
+) AS ELL
+
+LEFT HASH JOIN 
+APS.ELLCalculatedAsOf(GETDATE()) AS EL
+ON
+ELL.STUDENT_GU = EL.STUDENT_GU
+INNER JOIN 
+REV.EPC_STU AS STU
+ON
+ELL.STUDENT_GU = STU.STUDENT_GU
+
+INNER HASH JOIN 
+APS.LCELatestEvaluationAsOf(GETDATE()) AS LTEST
+ON
+LTEST.STUDENT_GU = ELL.STUDENT_GU
+
+WHERE
+IS_ELL = 0
+) AS T1
+--ORDER BY IS_ELL
+
+WHERE 
+REV.EPC_STU_PGM_ELL_HIS.STUDENT_GU = T1.STUDENT_GU
 	
 
 
@@ -93,6 +139,7 @@ EXEC APS.ELLStatFromELLHistory @ValidateOnly
 
 
 END -- END SPROC
+
 
 GO
 
