@@ -1,12 +1,13 @@
 USE [ST_Production]
 GO
 
-/****** Object:  StoredProcedure [APS].[LawsonSync]    Script Date: 8/24/2017 8:06:42 PM ******/
+/****** Object:  StoredProcedure [APS].[LawsonSync]    Script Date: 10/11/2017 4:56:34 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -389,6 +390,15 @@ ADD_DATE_TIME_STAMP > '20161205'
 
 
 
+UPDATE rev.EPC_STAFF
+SET STATE_ID = NULL 
+FROM 
+rev.EPC_STAFF
+WHERE
+STATE_ID = ''
+
+
+
 --Validation Check to see how many records will be processed, 0 = INSERT AND UPDATE, 1 = ROLLBACK - WILL NOT - UPDATE/INSERT
 IF @ValidateOnly = 0
 	BEGIN
@@ -401,6 +411,7 @@ ELSE
 	
 
 END -- END SPROC
+
 
 
 
