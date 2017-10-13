@@ -5,7 +5,7 @@ Written by:	JoAnn Smith
 I need some data from last 4 years of high school summer school.  Can you help me with the following:
 •	All SPED students enrolled from 2014-2017
 •	All courses taken by summer SPED students
-2013S -AA26EA9A-B72D-45B6-8D7F-F1078FB756EA
+2013S -AA26EA9A-B72D-45B6-8D7F-F1078FB756EA - 2014-05-25 00:00:00
 2014S -6D367A0B-966E-46C0-981F-94F6503784E0 - 2015-05-22 00:00:00
 2015S -9CF3D2D1-99A3-4892-9A72-BE911D339601 - 2016-06-30 00:00:00
 2016S -C501E5D9-1742-4ABC-9E84-0E46C28D2A05 - 2017-06-30 00:00:00
@@ -23,9 +23,9 @@ of the years.  Change the year_gu and school_year to get results.
 
 */
 
-declare @SchoolYearGu uniqueidentifier = 'C501E5D9-1742-4ABC-9E84-0E46C28D2A05'
-declare @SchoolYear nvarchar(10) = '2016'
-declare @AsOfDate datetime2 = '2017-06-30 00:00:00'
+declare @SchoolYearGu uniqueidentifier = 'AA26EA9A-B72D-45B6-8D7F-F1078FB756EA'
+declare @SchoolYear nvarchar(10) = '2013'
+declare @AsOfDate datetime2 = '2014-05-25 00:00:00'
 
 BEGIN
 	IF @SchoolYearGu = 'AA26EA9A-B72D-45B6-8D7F-F1078FB756EA' GOTO Branch_One
@@ -87,6 +87,7 @@ as
 select
 	row_number() over(partition by sis_number, H.course_id order by sis_number) as rn,
 	s.SIS_NUMBER,
+	S.STUDENT_GU,
 	s.LAST_NAME,
 	s.FIRST_NAME,
 	s.SCHOOL_NAME,
@@ -96,7 +97,7 @@ select
 	s.SPED_STATUS,
 	c.COURSE_ID,
 	c.COURSE_TITLE,
-	h.MARK as LETTER_GRADE,
+	h.MARK as FINAL_GRADE,
 	H.TERM_CODE
 from
 	SUMMER_SPED_STUDENTS_FOR_YEAR s
@@ -121,60 +122,112 @@ where
 AND
 	H.TERM_CODE = 'SS'
 )
+--select * from SUMMER_SPED_WITH_CLASSES_FOR_YEAR
 ,InterimResults 
 as
 (	
 select
-	*
+	c.SIS_NUMBER,
+	c.STUDENT_GU,
+	c.LAST_NAME,
+	c.FIRST_NAME,
+	c.SCHOOL_NAME,
+	c.SCHOOL_CODE,
+	c.SCHOOL_YEAR,
+	c.GRADE,
+	c.SPED_STATUS,
+	c.COURSE_ID,
+	c.COURSE_TITLE,
+	c.FINAL_GRADE,
+	c.TERM_CODE,
+	e.ORGANIZATION_YEAR_GU,
+	o.ORGANIZATION_NAME as PRIMARY_SCHOOL
 from
-	SUMMER_SPED_WITH_CLASSES_FOR_YEAR 
+	SUMMER_SPED_WITH_CLASSES_FOR_YEAR c
+left join
+	aps.PrimaryEnrollmentDetailsAsOf(@AsofDate) e
+on
+	c.STUDENT_GU = e.STUDENT_GU
+inner join
+	rev.REV_ORGANIZATION_YEAR y
+on
+	e.ORGANIZATION_YEAR_GU = y.ORGANIZATION_YEAR_GU
+left join
+	rev.rev_organization o
+on
+	y.ORGANIZATION_GU = o.ORGANIZATION_GU
+left join
+	rev.epc_sch s
+on
+	o.ORGANIZATION_GU = s.ORGANIZATION_GU
+where
+	e.EXCLUDE_ADA_ADM is NULL
+)
+,FinalResults 
+as
+(
+select
+	row_number() over(partition by student_gu, course_id order by student_gu) as RN,
+	i.SIS_NUMBER,
+	i.STUDENT_GU,
+	i.LAST_NAME,
+	i.FIRST_NAME,
+	i.SCHOOL_NAME,
+	i.SCHOOL_CODE,
+	i.PRIMARY_SCHOOL,
+	i.SCHOOL_YEAR,
+	i.GRADE,
+	i.SPED_STATUS,
+	i.COURSE_ID,
+	i.COURSE_TITLE,
+	i.FINAL_GRADE
+from
+	InterimResults  i
 WHERE
-	SCHOOL_CODE IN (500
-,	510
-,	511
-,	512
-,	513
-,	514
-,	515
-,	516
-,	517
-,	518
-,	520
-,	521
-,	525
-,	530
-,	533
-,	540
-,	541
-,	542
-,	543
-,	549
-,	550
-,	555
-,	560
-,	570
-,	575
-,	576
-,	580
-,	590
-,	591
-,	592
-,	593
-,	594
-,	596
-,	597
-,   598
-,	701
-,	702)
+	SCHOOL_CODE IN ('500'
+,	'510'
+,	'511'
+,	'512'
+,	'513'
+,	'514'
+,	'515'
+,	'516'
+,	'517'
+,	'518'
+,	'520'
+,	'521'
+,	'525'
+,	'530'
+,	'533'
+,	'540'
+,	'541'
+,	'542'
+,	'543'
+,	'549'
+,	'550'
+,	'555'
+,	'560'
+,	'570'
+,	'575'
+,	'576'
+,	'580'
+,	'590'
+,	'591'
+,	'592'
+,	'593'
+,	'594'
+,	'596'
+,	'597'
+,   '598'
+,	'701'
+,	'702')
 AND TERM_CODE = 'SS'
 OR
-	SCHOOL_CODE >=400 AND SCHOOL_CODE <= 499 
+	SCHOOL_CODE >='400'AND SCHOOL_CODE <= '499' 
 AND
 	COURSE_ID IN ('900001', '900002')
-and
-	 rn = 1
 )
-select * from InterimResults where rn = 1
+select * from FinalResults where rn = 1
 order by SIS_NUMBER, COURSE_ID
 
 
