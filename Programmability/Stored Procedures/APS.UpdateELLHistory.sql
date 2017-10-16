@@ -1,12 +1,13 @@
 USE [ST_Production]
 GO
 
-/****** Object:  StoredProcedure [APS].[UpdateELLHistory]    Script Date: 10/9/2017 10:36:27 AM ******/
+/****** Object:  StoredProcedure [APS].[UpdateELLHistory]    Script Date: 10/12/2017 10:47:10 AM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -22,7 +23,7 @@ GO
  * #param INT @ValidateOnly Whether to commit changes or not. If value = 1 then rollback changes.  
  *                          Any other value commits changes
  */
-ALTER PROC [APS].[UpdateELLHistory](
+CREATE PROC [APS].[UpdateELLHistory](
 	@ValidateOnly INT
 )
 
@@ -139,6 +140,7 @@ EXEC APS.ELLStatFromELLHistory @ValidateOnly
 
 
 END -- END SPROC
+
 
 
 GO
