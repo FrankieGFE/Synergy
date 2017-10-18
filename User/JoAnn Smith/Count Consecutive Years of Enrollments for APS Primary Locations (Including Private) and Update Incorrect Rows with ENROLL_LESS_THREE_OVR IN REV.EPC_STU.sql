@@ -1,0 +1,116 @@
+BEGIN TRAN
+
+;WITH COUNT_YEARS_ENROLLED
+AS
+(
+SELECT
+	[STUDENT_GU],
+	/* CONVERT TO DATETIME TO USE THE DATE FUNCTION BELOW)
+	e.g. 2013 becomes 2003-01-01 00:00:00.000 */
+
+	datetimefromparts(SCHOOL_YEAR, 1,1,0,0,0,0) AS SCHOOL_DATE,
+	ENROLL_LESS_THREE_OVR,
+	SIS_NUMBER
+	
+FROM
+	(	
+	SELECT DISTINCT
+		[StudentSchoolYear].[STUDENT_GU]
+		,[RevYear].[SCHOOL_YEAR]
+		,[RevYear].[EXTENSION]
+		,[OrgYear].[YEAR_GU]
+		,s.SIS_NUMBER
+		,S.ENROLL_LESS_THREE_OVR
+	FROM
+		rev.EPC_STU_SCH_YR AS [StudentSchoolYear]
+				
+		INNER JOIN 
+		rev.REV_ORGANIZATION_YEAR AS [OrgYear] -- Links between School and Year
+		ON 
+		[StudentSchoolYear].[ORGANIZATION_YEAR_GU] = [OrgYear].[ORGANIZATION_YEAR_GU]
+				
+		INNER JOIN 
+		rev.REV_YEAR AS [RevYear] -- Contains the School Year
+		ON 
+		[OrgYear].[YEAR_GU] = [RevYear].[YEAR_GU]
+		
+		INNER JOIN
+		rev.EPC_STU s
+		on
+		s.student_gu = studentschoolyear.student_gu
+	WHERE
+		[StudentSchoolYear].[GRADE] >= 100
+		AND [OrgYear].[YEAR_GU] NOT IN (SELECT [YEAR_GU] FROM APS.YearDates WHERE [END_DATE] >= GETDATE())
+		AND [RevYear].[EXTENSION] NOT IN ('S','N')
+					
+	) AS [STUDENT_YEARS]
+
+GROUP BY
+	[STUDENT_GU],
+	SIS_NUMBER,
+	SCHOOL_YEAR,
+	ENROLL_LESS_THREE_OVR
+)
+--select * from COUNT_YEARS_ENROLLED
+
+
+,ADD_RN
+AS
+(
+   SELECT
+      C.STUDENT_GU,
+	  C.SIS_NUMBER,
+      C.SCHOOL_DATE,
+	  C.ENROLL_LESS_THREE_OVR,
+      ROW_NUMBER() OVER (PARTITION BY C.STUDENT_GU ORDER BY C.SCHOOL_DATE) AS RN
+   FROM
+      COUNT_YEARS_ENROLLED C
+)
+,ENROLLMENT_YEARS
+AS
+(
+   SELECT 
+      A.STUDENT_GU,
+	  A.SIS_NUMBER,
+	  A.ENROLL_LESS_THREE_OVR,
+      (SUM(CASE WHEN DATEDIFF(YYYY, B.SCHOOL_DATE, A.SCHOOL_DATE) = 1 THEN 1 ELSE 0 END)) + 1 AS CONSEC_YEARS     
+   FROM 
+      ADD_RN A
+      LEFT JOIN ADD_RN B
+         ON A.STUDENT_GU = B.STUDENT_GU
+         AND A.RN = B.RN + 1
+
+   GROUP BY 
+      A.STUDENT_GU,
+	  A.SIS_NUMBER,
+	  A.ENROLL_LESS_THREE_OVR
+)
+,RESULTS
+AS
+(
+SELECT 
+	E.STUDENT_GU,
+	E.SIS_NUMBER,
+	E.CONSEC_YEARS,
+	E.ENROLL_LESS_THREE_OVR
+	
+FROM ENROLLMENT_YEARS e
+INNER join
+rev.ud_stu s
+on e.student_gu = s.student_gu
+and
+ENROLL_LESS_THREE_OVR = 'Y'
+and CONSEC_YEARS >= 3
+)
+--SELECT * FROM RESULTS R
+--ORDER BY SIS_NUMBER
+update rev.epc_stu
+set ENROLL_LESS_THREE_OVR = 'N'
+WHERE
+STUDENT_GU IN
+(
+select student_gu from RESULTS
+)
+commit
+
+
