@@ -1,7 +1,7 @@
-USE [ST_Stars]
+USE [ST_Production]
 GO
 
-/****** Object:  UserDefinedFunction [APS].[STARSPeriodUnexcusedAsOf]    Script Date: 10/19/2017 8:50:54 PM ******/
+/****** Object:  UserDefinedFunction [APS].[STARSPeriodUnexcusedAsOf]    Script Date: 10/23/2017 5:16:02 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -16,9 +16,12 @@ GO
 
 
 
+
+
+
 /*********************************************************************
 Last Changed by Debbie Ann Chavez
-Modified on 10/19/2017
+Modified on 6/28/2017
 
 Main Function that pulls Period Attendance
 
@@ -163,8 +166,8 @@ FROM
 
 WHERE
     [abr].[TYPE]= 'UNE'
-  	AND SETUP.SCHOOL_ATT_TYPE IN ('P', 'B')
-
+  	AND SETUP.SCHOOL_ATT_TYPE IN ('P', 'B') AND SSY.GRADE NOT IN ('050','070','090','100', '110','120','130','140','150')
+	
 	) AS T1
 
 INNER HASH JOIN 
@@ -364,6 +367,9 @@ GROUP BY
 	,TRUANTS.STATE_SCHOOL_CODE
 	,Truants.EXCLUDE_ADA_ADM
 	,TRUANTS.ABS_DATE
+
+
+
 
 
 
