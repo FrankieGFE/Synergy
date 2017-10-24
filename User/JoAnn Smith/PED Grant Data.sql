@@ -45,7 +45,7 @@ select
 from
 	aps.PrimaryEnrollmentDetailsAsOf(getdate()) ped
 )
---select * from All_Students
+--select * from All_Students where student_gu = '09BD273F-D418-4EA9-BDE3-48F350160112'
 ,IEP
 AS
 (
@@ -59,7 +59,7 @@ select
 	END AS HAS_IEP
 from
 	All_Students s
-left join
+inner join
 	rev.EP_STUDENT_SPECIAL_ED se
 on
 	se.STUDENT_GU = s.student_gu
@@ -87,23 +87,16 @@ select
 	END AS ACCESS_504
 from
 	All_Students s
-left join
-	rev.EP_STUDENT_SPECIAL_ED se
-on
-	se.STUDENT_GU = s.student_gu
-left join
+inner join
 	rev.epc_stu_sch_yr ssy
 on
 	s.STUDENT_GU = ssy.STUDENT_GU
-left join
+inner join
 	aps.basicstudent bs
 on
 	s.student_gu = bs.student_gu	
-where
-	se.PRIMARY_DISABILITY_CODE != 'GI'
-
 )
---SELECT * FROM IEP WHERE RN = 1 order by STUDENT_GU--where rn = 1 and HAS_IEP = 'N'--14659 rows
+--SELECT * FROM sec_504 WHERE RN = 1  and access_504 = '504 ON FILE'
 ,Suspension_Days
 as
 (
@@ -233,7 +226,7 @@ left join
 on
 	g.STUDENT_GU = s.STUDENT_GU
 )
-select * from Final_Results where rn = 1
+select * from Final_Results where rn = 1 
 --select
 --	rn,
 --	f.SIS_NUMBER,
