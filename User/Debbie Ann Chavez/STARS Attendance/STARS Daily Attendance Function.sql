@@ -1,7 +1,7 @@
-USE [ST_Stars]
+USE [ST_Production]
 GO
 
-/****** Object:  UserDefinedFunction [APS].[STARSDailyAttendanceAsOf]    Script Date: 10/19/2017 8:45:45 PM ******/
+/****** Object:  UserDefinedFunction [APS].[STARSDailyAttendanceAsOf]    Script Date: 10/23/2017 5:16:49 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,7 +10,9 @@ GO
 
 
 
-ALTER FUNCTION [APS].[STARSDailyAttendanceAsOf](@AsOfDate DATE)
+
+
+CREATE FUNCTION [APS].[STARSDailyAttendanceAsOf](@AsOfDate DATE)
 RETURNS TABLE
 AS
 RETURN
@@ -90,8 +92,11 @@ FROM
 	   AND [Year].EXTENSION = 'R'
     WHERE
 	   [Reason].[TYPE]='EXC' AND REASON.ABBREVIATION = 'RC'
-	   AND ([School].[SCHOOL_CODE] BETWEEN '200' AND '399' 
-	   OR [School].[SCHOOL_CODE]IN ('496', '022', '045', '058', '910', '973', '983', '900', '901'))
+	      AND (
+	   [School].[SCHOOL_CODE] BETWEEN '200' AND '399' 
+	   OR [School].[SCHOOL_CODE]IN ('022', '045', '058', '910', '973', '983', '900', '901')
+	   OR ([School].SCHOOL_CODE = '496' AND SSY.GRADE IN ('050','070','090','100', '110','120','130','140','150'))
+	   )
 	   AND [Daily].ABS_DATE<=@AsOfDate
 	   AND SSY.GRADE NOT IN ('050', '070', '090')
 	  -- AND Student.SIS_NUMBER = 980023595
@@ -163,8 +168,11 @@ FROM
 	   AND [Year].EXTENSION = 'R'
     WHERE
 	   [Reason].[TYPE]='UNE'
-	    AND ([School].[SCHOOL_CODE] BETWEEN '200' AND '399' 
-	   OR [School].[SCHOOL_CODE]IN ('496', '022', '045', '058', '910', '973', '983', '900', '901'))
+	       AND (
+	   [School].[SCHOOL_CODE] BETWEEN '200' AND '399' 
+	   OR [School].[SCHOOL_CODE]IN ('022', '045', '058', '910', '973', '983', '900', '901')
+	   OR ([School].SCHOOL_CODE = '496' AND SSY.GRADE IN ('050','070','090','100', '110','120','130','140','150'))
+	   )
 	   AND [Daily].ABS_DATE<=@AsOfDate
 	   AND SSY.GRADE NOT IN ('050', '070', '090')
 	   --AND Student.SIS_NUMBER = 980023595
@@ -177,6 +185,8 @@ FROM
 		 ,Daily.ABS_DATE
 
 ) AS Daily
+
+
 
 
 
