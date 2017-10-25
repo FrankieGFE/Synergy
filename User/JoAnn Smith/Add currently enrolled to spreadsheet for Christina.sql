@@ -20,7 +20,8 @@ as
 select
 	e.STUDENT_GU,
 	e.SIS_NUMBER,
-	'Y' as CURRENTLY_ENROLLED
+	'Y' as CURRENTLY_ENROLLED,
+	ssy.LEAVE_DATE
 from
 	rev.epc_stu e
 inner join
@@ -37,8 +38,12 @@ on
 	oy.YEAR_GU = yr.YEAR_GU
 where
 	yr.SCHOOL_YEAR = '2017' and EXTENSION = 'R'
+and
+	ssy.LEAVE_DATE is null
+AND
+	EXCLUDE_ADA_ADM IS NULL
 )
---select * from Currently_Enrolled
+select * from Currently_Enrolled 
 ,Results
 as
 (
@@ -56,8 +61,6 @@ SELECT
 	s.Balance,
 	s.[Refund Needed],
 	C.CURRENTLY_ENROLLED
-
-
 FROM
 	STUDENTS_WITH_BALANCES S
 left join
@@ -65,5 +68,5 @@ left join
 on
 	s.[Perm ID] = c.SIS_NUMBER
 )
-select * from Results where rn = 1 
+select * from Results where rn = 1  
 --select * from aps.PrimaryEnrollmentsAsOf(getdate()) where STUDENT_GU = 'BD865CE5-01D6-4E0D-AB6D-C9B2DC72A202'
