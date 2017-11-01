@@ -43,7 +43,7 @@ and
 AND
 	EXCLUDE_ADA_ADM IS NULL
 )
-select * from Currently_Enrolled 
+--select * from Currently_Enrolled 
 ,Results
 as
 (
