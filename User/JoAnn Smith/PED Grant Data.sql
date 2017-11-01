@@ -15,6 +15,8 @@ ep_student_iep
 Quarter 1 grades in Language Arts and Math 
 Suspension days - August/September/  rev.epc_stu_inc_discipline
 
+NOTE:  grab REASSIGNMENT DAYS INSTEAD OF DAYS FOR TOTAL DISCIPLINE DAYS FOR THE CODES NEEDED IN THE WHERE CLAUSE
+
 THIS TAKES 23 MINUTES TO RUN 
 
 */
@@ -104,7 +106,8 @@ select
 	d.STUDENT_GU,
 	--d.STUDENT_SCHOOL_YEAR_GU,
 	--CAST(d.INCIDENT_ROLE_DESC AS VARCHAR(MAX)) AS INCIDENT_ROLE,
-	SUM(D.[DAYS]) AS SUSPENSION_DAYS
+	--d.DAYS,
+	SUM(Disposition.REASSIGNMENT_DAYS) AS SUSPENSION_DAYS
 	--d.SUSP_CONFERENCE_DATE,
 	--d.SUSP_CONFERENCE
 	--yr.SCHOOL_YEAR,
@@ -115,6 +118,21 @@ left join
 	rev.EPC_STU_INC_DISCIPLINE D
 on
 	s.STUDENT_GU = d.STUDENT_GU
+
+LEFT OUTER JOIN
+	rev.EPC_SCH_INCIDENT AS [INCIDENT]
+ON
+	D.[SCH_INCIDENT_GU] = [INCIDENT].[SCH_INCIDENT_GU]
+	    
+LEFT OUTER JOIN
+	[rev].[EPC_STU_INC_DISPOSITION] AS [Disposition]
+ON
+	d.[STU_INC_DISCIPLINE_GU] = Disposition.STU_INC_DISCIPLINE_GU
+	    
+LEFT OUTER JOIN
+	[rev].[EPC_CODE_DISP] AS [Disposition_Code]
+ON
+[Disposition].[CODE_DISP_GU] = [Disposition_Code].[CODE_DISP_GU]
 left join
 	rev.EPC_STU_SCH_YR ssy
 on
@@ -132,11 +150,12 @@ where
 and
 	yr.EXTENSION = 'R'
 and
-	 SUSP_CONFERENCE = 'Y'
+	[Disposition_Code].[DISP_CODE] IN ('S OSS','S ISS', 'S BUS', 'S EXTRA')
+
 GROUP BY
 	D.STUDENT_GU
-)
---SELECT * FROM suspension_days
+)		
+--SELECT * FROM suspension_days where student_gu = 'EB79F14D-7FB5-4C12-BD2D-D94C235348EE'
 --ORDER BY STUDENT_GU
 ,Student_Grades
 as
@@ -227,27 +246,6 @@ on
 	g.STUDENT_GU = s.STUDENT_GU
 )
 select * from Final_Results where rn = 1 
---select
---	rn,
---	f.SIS_NUMBER,
---	f.STUDENT_GU,
---	f.LAST_NAME,
---	f.FIRST_NAME,
---	f.SCHOOL_YEAR,
---	f.EXTENSION,
---	f.SCHOOL_NAME,
---	f.GRADE,
---	F.HAS_IEP,
---	F.ACCESS_504,
---	g.COURSE_ID,
---	g.COURSE_ID,
---	g.MARK
---from
---	 Final_Results f
---left join
---	Grade_Results g
---on
---	f.STUDENT_GU = g.STUDENT_GU
 
 
 
