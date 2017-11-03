@@ -1,39 +1,80 @@
-;with Main
+
+
+CREATE FUNCTION [APS].[TeacherCountsAsOf](@AsOfDate DATETIME2)
+RETURNS TABLE
+AS
+RETURN
+
+
+
+/* school code, job title, primary teachers only */
+/* 15-16, 16-17, 17-18 */
+
+with Teachers
 as
 (
 select
 	row_number() over (partition by a.staff_gu order by a.staff_gu) as rn,
 	a.STAFF_GU,
-	st.BADGE_NUM,
-	a.PRIMARY_TEACHER,
 	p.LAST_NAME,
 	p.FIRST_NAME,
-	s.DEPARTMENT,
-	o.ORGANIZATION_NAME
+	s.BADGE_NUM,
+	o.ORGANIZATION_NAME,
+	sch.SCHOOL_CODE,
+	--s.type,
+	--SUBSTRING(POSITION,4,7) as POSITION_CODE,
+	--CAT.POSITION,
+	CAT.JOB_CODE,
+	J.DESCRIPTION
 from 
-	aps.SectionsAndAllStaffAssignedAsOf('2017-10-11') a
+	aps.SectionsAndAllStaffAssignedAsOf(@AsOfDate) a
 inner join
-	rev.EPC_STAFF_SCH_YR s
+	rev.epc_staff s
 on
 	a.STAFF_GU = s.STAFF_GU
 inner join
-	rev.rev_organization_year oy
+	rev.epc_staff_sch_yr ssy
 on
-	oy.ORGANIZATION_YEAR_GU = s.ORGANIZATION_YEAR_GU
+	a.STAFF_SCHOOL_YEAR_GU = ssy.STAFF_SCHOOL_YEAR_GU
+inner join	
+	rev.REV_ORGANIZATION_YEAR oy
+on
+	ssy.ORGANIZATION_YEAR_GU = oy.ORGANIZATION_YEAR_GU
 inner join
-	rev.rev_organization o
+	rev.rev_year yr
 on
-	oy.ORGANIZATION_GU = o.ORGANIZATION_GU
+	oy.YEAR_GU = yr.YEAR_GU
 inner join
-	rev.epc_staff st
+	rev.REV_ORGANIZATION o
 on
-	a.STAFF_GU = st.STAFF_GU
+	o.ORGANIZATION_GU = oy.ORGANIZATION_GU
+inner join
+	rev.epc_sch sch
+on
+	sch.ORGANIZATION_GU = o.ORGANIZATION_GU
 inner join
 	rev.rev_person p
 on
-	p.PERSON_GU = st.STAFF_GU
+	p.PERSON_GU = s.STAFF_GU
+inner join
+	[180-smaxods-01.aps.edu.actd].Lawson.aps.CurrentActiveTeachers CAT
+on
+	CAST(SUBSTRING(S.BADGE_NUM, 2,6) AS INT) = cat.EMPLOYEE
+inner join
+	[180-smaxods-01.aps.edu.actd].Lawson.dbo.Jobcode j
+on
+	j.JOB_CODE = CAT.JOB_CODE
+where
+	s.TYPE = 'TE'
+AND
+	BADGE_NUM != 'Dup203561'
 )
-select * from Main
-where rn = 1
-order by ORGANIZATION_NAME, BADGE_NUM
+select
+	*
+from
+	Teachers
+where
+	rn = 1
 
+
+go
