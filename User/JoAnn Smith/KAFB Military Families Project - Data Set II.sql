@@ -12,8 +12,9 @@ select
 	bs.LAST_NAME,
 	bs.FIRST_NAME,
 	bs.MIDDLE_NAME,
+	convert(varchar(10), bs.BIRTH_DATE, 112) AS BIRTH_DATE,
 	bs.HOME_ADDRESS,
-	ped.GRADE,
+	lu.VALUE_DESCRIPTION as GRADE,
 	o.organization_name as SCHOOL_NAME,
 	PED.EXCLUDE_ADA_ADM,
 	CASE	
@@ -49,11 +50,11 @@ inner join
 	rev.EPC_STU_PARENT SP
 on
 	ped.STUDENT_GU = sp.STUDENT_GU
-inner join
+left join
 	rev.EPC_PARENT p
 on
 	sp.PARENT_GU = p.PARENT_GU
-inner join
+left join
 	rev.REV_PERSON per
 on
 	p.PARENT_GU = per.PERSON_GU
@@ -61,10 +62,14 @@ inner join
 	rev.rev_organization o
 on
 	ped.organization_gu = o.organization_gu
-inner join
+left join
 	rev.ud_parent up
 on
 	sp.PARENT_GU = up.PARENT_GU
+left join
+	aps.LookupTable('K12', 'Grade') LU
+on
+	ped.grade = lu.value_code
 where
 	PED.EXCLUDE_ADA_ADM is null
 )
