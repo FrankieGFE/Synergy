@@ -28,15 +28,15 @@ above and replace the school name with the corresponding GUID
 BEGIN
 
 declare @SCHOOL_GU UNIQUEIDENTIFIER = 'CFC6326C-D678-4338-AA70-21C5ADC4753E'
-declare @AsOfDate datetime2 = '2016-10-01'
+declare @AsOfDate datetime2 = '2017-05-25'
 declare @FallAsOfDate datetime2 = '2016-12-23'
 declare @YearEndDate datetime2 = '2017-05-25'
 declare @SchoolName nvarchar(50) = 'Sandia Base Elementary School'
 declare @SchoolYear nvarchar(4) = '2016'
 
-	IF @SCHOOL_GU = 'CFC6326C-D678-4338-AA70-21C5ADC4753E' GOTO Sandia_Antonito_Branch
-	IF @SCHOOL_GU = '8D50ABCA-A562-481C-B54F-969A5A6B3999' GOTO Roosevelt_Branch
-	IF @SCHOOL_GU = 'C2362AA6-6CA4-4CA3-882F-4EF5B7AC3E30' GOTO Sandia_Antonito_Branch
+	----IF @SCHOOL_GU = 'CFC6326C-D678-4338-AA70-21C5ADC4753E' GOTO Sandia_Antonito_Branch
+	----IF @SCHOOL_GU = '8D50ABCA-A562-481C-B54F-969A5A6B3999' GOTO Roosevelt_Branch
+	----IF @SCHOOL_GU = 'C2362AA6-6CA4-4CA3-882F-4EF5B7AC3E30' GOTO Sandia_Antonito_Branch
 
 /*
 Sandia Base ES
@@ -73,7 +73,7 @@ row_number() over (partition by bs.SIS_NUMBER order by bs.SIS_NUMBER) as rn,
 	sch.SCHOOL_CODE,
 	BS.SIS_NUMBER
 	,BS.STUDENT_GU
-	,sd.ENROLLMENT_GRADE_LEVEL
+	,LU1.VALUE_DESCRIPTION AS GRADE
 	,BS.GENDER
 	,BS.RACE_1
 	,BS.RACE_2
@@ -89,10 +89,13 @@ row_number() over (partition by bs.SIS_NUMBER order by bs.SIS_NUMBER) as rn,
 			THEN 'N'
 		WHEN SPED_STATUS = 'Y' AND GIFTED_STATUS = 'N'
 			THEN 'Y' 
+		ELSE
+			'N'
+
 	END AS SPED_STATUS
 	,bs.ELL_STATUS
-	,BS.PRIMARY_DISABILITY_CODE
-	,up.ACTIVE_MILITARY
+	,ISNULL(LU.VALUE_DESCRIPTION, '') AS PRIMARY_DISABILITY
+	,isnull(up.ACTIVE_MILITARY, 'N') as ACTIVE_MILITARY
 
 FROM
 	APS.BasicStudentWithMoreInfo AS BS
@@ -115,7 +118,7 @@ ON
 left JOIN 
 	rev.EPC_STU_PGM_ELL e
 ON
-	E.STUDENT_GU = BS.STUDENT_GU
+	E.STUDENT_GU = BS.STUDENT_GU	
 left join
 	aps.ScheduleDetailsAsOf(@AsOfDate) sd
 on
@@ -128,6 +131,10 @@ inner join
 	rev.epc_sch sch
 on
 	sch.ORGANIZATION_GU = @SCHOOL_GU
+left join
+	aps.LookupTable('K12', 'Grade') LU1
+on
+	SD.ENROLLMENT_GRADE_LEVEL = LU1.VALUE_CODE
 WHERE sd.ENROLLMENT_GRADE_LEVEL IN ('100', '110', '120', '130', '140', '150')
 and
 	sd.ORGANIZATION_GU = @SCHOOL_GU
@@ -237,7 +244,7 @@ ON
 	E.STUDENT_GU = BS.STUDENT_GU
 
 WHERE
-	E.GRADE IN ('130', '140', '150')
+	E.GRADE IN ('90', '100', '110', '120', '130', '140', '150')
 and
 	subject = 'math'
 )
@@ -323,14 +330,7 @@ SELECT
 	S.HISPANIC_INDICATOR,
 	S.SPED_STATUS,
 	S.ELL_STATUS,
-	case 
-		when ENROLLMENT_GRADE_LEVEL = '130' then '03'
-		when ENROLLMENT_GRADE_LEVEL = '140' then '04'
-		when ENROLLMENT_GRADE_LEVEL = '150' then '05'
-		when ENROLLMENT_GRADE_LEVEL = '160' then '06'
-		when ENROLLMENT_GRADE_LEVEL = '170' then '07'
-		when ENROLLMENT_GRADE_LEVEL	= '180' then '08'
-	end as GRADE,
+	S.GRADE,
 	ISNULL(S.ACTIVE_MILITARY, '') AS ACTIVE_MILITARY,
 	ISNULL(p.PERF_LEVEL, '') AS PARCC_PERF_LEVEL,
 	ISNULL(p.SCALED_SCORE, 0) AS PARCC_SCALED_SCORE,
@@ -402,7 +402,7 @@ row_number() over (partition by bs.SIS_NUMBER order by bs.SIS_NUMBER) as rn,
 	sch.SCHOOL_CODE,
 	BS.SIS_NUMBER
 	,BS.STUDENT_GU
-	,sd.ENROLLMENT_GRADE_LEVEL
+	,LU1.VALUE_DESCRIPTION AS GRADE
 	,BS.GENDER
 	,BS.RACE_1
 	,BS.RACE_2
@@ -418,10 +418,12 @@ row_number() over (partition by bs.SIS_NUMBER order by bs.SIS_NUMBER) as rn,
 			THEN 'N'
 		WHEN SPED_STATUS = 'Y' AND GIFTED_STATUS = 'N'
 			THEN 'Y' 
+		ELSE
+			'N'
 	END AS SPED_STATUS
 	,bs.ELL_STATUS
-	,BS.PRIMARY_DISABILITY_CODE
-	,up.ACTIVE_MILITARY
+	,ISNULL(LU.VALUE_DESCRIPTION, '') AS PRIMARY_DISABILITY
+	,isnull(up.ACTIVE_MILITARY, 'N') as ACTIVE_MILITARY
 
 FROM
 	APS.BasicStudentWithMoreInfo AS BS
@@ -457,6 +459,11 @@ inner join
 	rev.epc_sch sch
 on
 	sch.ORGANIZATION_GU = @SCHOOL_GU
+left join
+	aps.LookupTable('K12', 'Grade') LU1
+on
+	SD.ENROLLMENT_GRADE_LEVEL = LU1.VALUE_CODE
+
 WHERE sd.ENROLLMENT_GRADE_LEVEL IN ('160', '170', '180')
 and
 	sd.ORGANIZATION_GU = @SCHOOL_GU
@@ -488,7 +495,7 @@ AND
 AND
 	H.SCHOOL_YEAR = @SchoolYear
 AND	
-	ENROLLMENT_GRADE_LEVEL IN ('160', '170', '180')
+	s.grade in ('06', '07', '08')
 AND
 	TERM_CODE = 'S1'	
 )
@@ -523,7 +530,7 @@ AND
 AND
 	H.SCHOOL_YEAR = @SchoolYear
 AND	
-	ENROLLMENT_GRADE_LEVEL IN ('160', '170', '180')
+	s.GRADE IN ('06', '07', '08')
 AND
 	TERM_CODE = 'S2'	
 )
@@ -559,7 +566,7 @@ AND
 AND
 	H.SCHOOL_YEAR = @SchoolYear
 AND	
-	ENROLLMENT_GRADE_LEVEL IN ('160', '170', '180')
+	s.grade IN ('06', '07', '08')
 AND
 	TERM_CODE = 'S1'
 
@@ -597,7 +604,7 @@ AND
 AND
 	H.SCHOOL_YEAR = @SchoolYear
 AND	
-	ENROLLMENT_GRADE_LEVEL IN ('160', '170', '180')
+	s.grade IN ('06', '07', '08')
 AND
 	TERM_CODE = 'S2'
 
@@ -792,6 +799,7 @@ where
 AS
 (
 SELECT
+
 	ROW_NUMBER() OVER (PARTITION BY s.sis_number ORDER BY s.sis_number) AS ROWNUM,
 	S.SIS_NUMBER,
 	S.SCHOOL_NAME,
@@ -801,14 +809,7 @@ SELECT
 	S.HISPANIC_INDICATOR,
 	S.SPED_STATUS,
 	S.ELL_STATUS,
-	case 
-		when ENROLLMENT_GRADE_LEVEL = '130' then '03'
-		when ENROLLMENT_GRADE_LEVEL = '140' then '04'
-		when ENROLLMENT_GRADE_LEVEL = '150' then '05'
-		when ENROLLMENT_GRADE_LEVEL = '160' then '06'
-		when ENROLLMENT_GRADE_LEVEL = '170' then '07'
-		when ENROLLMENT_GRADE_LEVEL	= '180' then '08'
-	end as GRADE,
+	S.GRADE,
 	ISNULL(S.ACTIVE_MILITARY, '') AS ACTIVE_MILITARY,
 	ISNULL(p.PERF_LEVEL, '') AS PARCC_PERF_LEVEL,
 	ISNULL(p.SCALED_SCORE, 0) AS PARCC_SCALED_SCORE,
