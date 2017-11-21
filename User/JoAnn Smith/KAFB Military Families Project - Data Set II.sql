@@ -32,9 +32,9 @@ select
 	per.FIRST_NAME as PARENT_FIRST_NAME,
 	per.MIDDLE_NAME as PARENT_MIDDLE_NAME,
 	p.EMPLOYER AS PARENT_EMPLOYER,
-	per.BIRTH_DATE AS PARENT_BIRTHDATE,
+	convert(nvarchar(10), per.BIRTH_DATE,112) AS PARENT_BIRTHDATE,
 	per.EMAIL AS PARENT_EMAIL,
-	up.ACTIVE_MILITARY
+	isnull(up.ACTIVE_MILITARY, 'N') as ACTIVE_MILITARY
 	
 from
 	aps.EnrollmentsForYear(@YearGU) ped
@@ -84,5 +84,3 @@ and
 order by
 	 SIS_NUMBER
 
-
-	
