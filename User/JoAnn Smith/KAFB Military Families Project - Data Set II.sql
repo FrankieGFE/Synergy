@@ -17,8 +17,9 @@ select
 	lu.VALUE_DESCRIPTION as GRADE,
 	o.organization_name as SCHOOL_NAME,
 	PED.EXCLUDE_ADA_ADM,
+	--ssy.ATTEND_PERMIT_CODE,
 	CASE	
-		WHEN E.ENTER_CODE IN ('TWAPS', 'TWNM', 'TOUT') THEN 'TRANSFER'
+		WHEN ssy.ATTEND_PERMIT_CODE = 'TRAN' then 'TRANSFER'
 		ELSE ' '
 	END AS TRANSFER_FLAG,
 	--ped.SCHOOL_NAME,
@@ -42,6 +43,10 @@ INNER JOIN
 	REV.EPC_STU_ENROLL E
 ON
 	PED.STUDENT_SCHOOL_YEAR_GU = E.STUDENT_SCHOOL_YEAR_GU
+inner join
+	rev.epc_stu_sch_yr ssy
+on
+	e.student_school_year_gu = ssy.student_school_year_gu
 inner join
 	aps.BasicStudentWithMoreInfo bs
 on
