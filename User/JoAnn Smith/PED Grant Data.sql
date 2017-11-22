@@ -99,6 +99,102 @@ on
 	s.student_gu = bs.student_gu	
 )
 --SELECT * FROM sec_504 WHERE RN = 1  and access_504 = '504 ON FILE'
+
+,Student_Grades
+as
+(
+select
+	row_number() over(partition by s.STUDENT_GU, COURSE_ID, GRADE_PERIOD ORDER BY S.STUDENT_GU) AS RN,
+	s.STUDENT_GU,
+	g.SIS_NUMBER,
+	g.MARK,
+	g.GRADE_PERIOD,
+	g.COURSE_ID,
+	g.COURSE_TITLE
+from
+	All_Students s
+left join
+	aps.StudentGrades g
+on
+	s.STUDENT_GU = g.STUDENT_GU
+where
+	g.DEPARTMENT in ('ENG', 'MATH')
+)
+--select * from Student_Grades
+,Grade_Results
+as
+(
+select
+	g.STUDENT_GU,
+	g.SIS_NUMBER,
+	g.MARK,
+	g.GRADE_PERIOD,
+	g.COURSE_ID,
+	g.COURSE_TITLE 
+from
+	 Student_Grades g
+WHERE
+	 RN = 1
+)
+--select * from Grade_Results
+,Final_Results
+as
+(
+select
+	row_number() over(partition by a.SIS_NUMBER, course_id order by a.SIS_NUMBER) as rn,
+	a.SIS_NUMBER,
+	a.STUDENT_GU,
+	a.LAST_NAME,
+	a.FIRST_NAME,
+	s.SCHOOL_YEAR,
+	s.EXTENSION,
+	s.SCHOOL_NAME,
+	s.GRADE,
+	case
+		when (i.HAS_IEP is null) then 'N'
+		else
+		i.HAS_IEP
+	end as HAS_IEP,
+	case	
+		when (s5.ACCESS_504 is null) then 'NOT ON FILE'
+	else
+		s5.ACCESS_504
+	end as ACCESS_504,
+	g.COURSE_ID,
+	g.COURSE_TITLE,
+	g.MARK,
+	g.GRADE_PERIOD
+	--d.DISP_CODE,
+	--convert(VARCHAR(10), D.DISPOSITION_START_DATE, 101) AS DISPOSITION_START_DATE,
+	--CONVERT(VARCHAR(10), d.DISPOSITION_END_DATE, 101) as DISPOSITION_END_DATE,
+	--d.SUSPENSION_DAYS,
+	--d.DESCRIPTION
+
+
+from
+	All_Students s
+left join
+	IEP i
+on
+	s.STUDENT_GU = i.STUDENT_GU
+left join
+	SEC_504 s5
+on
+	s.STUDENT_GU = s5.STUDENT_GU
+--full outer join
+--	Suspension_Days d
+--on
+--	s.STUDENT_GU = d.STUDENT_GU
+left join
+	aps.BasicStudent a
+on
+	a.STUDENT_GU = s.STUDENT_GU
+left join
+	 Student_Grades G
+on
+	g.STUDENT_GU = s.STUDENT_GU
+)
+--select * from Final_Results WHERE RN = 1
 ,Suspension_Days
 as
 (
@@ -166,103 +262,39 @@ GROUP BY
 	Disposition_Code.DESCRIPTION
 
 )		
---SELECT * FROM suspension_days where student_gu = 'EB79F14D-7FB5-4C12-BD2D-D94C235348EE'
+--SELECT * FROM suspension_days where student_gu = '2E679F28-0212-44B8-A3A5-CBBEF0DA5A72'
 --ORDER BY STUDENT_GU
-,Student_Grades
-as
+,
+SUSPENSIONS
+AS
 (
-select
-	row_number() over(partition by s.STUDENT_GU, COURSE_ID, GRADE_PERIOD ORDER BY S.STUDENT_GU) AS RN,
-	s.STUDENT_GU,
-	g.SIS_NUMBER,
-	g.MARK,
-	g.GRADE_PERIOD,
-	g.COURSE_ID,
-	g.COURSE_TITLE
-from
-	All_Students s
-left join
-	aps.StudentGrades g
-on
-	s.STUDENT_GU = g.STUDENT_GU
-where
-	g.DEPARTMENT in ('ENG', 'MATH')
-)
---select * from Student_Grades
-,Grade_Results
-as
-(
-select
-	g.STUDENT_GU,
-	g.SIS_NUMBER,
-	g.MARK,
-	g.GRADE_PERIOD,
-	g.COURSE_ID,
-	g.COURSE_TITLE 
-from
-	 Student_Grades g
-WHERE
-	 RN = 1
-)
---select * from Grade_Results
-,Final_Results
-as
-(
-select
-	row_number() over(partition by a.SIS_NUMBER, course_id order by a.SIS_NUMBER) as rn,
-	a.SIS_NUMBER,
-	a.STUDENT_GU,
-	a.LAST_NAME,
-	a.FIRST_NAME,
-	s.SCHOOL_YEAR,
-	s.EXTENSION,
-	s.SCHOOL_NAME,
-	s.GRADE,
-	case
-		when (i.HAS_IEP is null) then 'N'
-		else
-		i.HAS_IEP
-	end as HAS_IEP,
-	case	
-		when (s5.ACCESS_504 is null) then 'NOT ON FILE'
-	else
-		s5.ACCESS_504
-	end as ACCESS_504,
-	g.COURSE_ID,
-	g.COURSE_TITLE,
-	g.MARK,
-	g.GRADE_PERIOD,
-	d.DISP_CODE,
-	convert(VARCHAR(10), D.DISPOSITION_START_DATE, 101) AS DISPOSITION_START_DATE,
-	CONVERT(VARCHAR(10), d.DISPOSITION_END_DATE, 101) as DISPOSITION_END_DATE,
-	d.SUSPENSION_DAYS,
-	d.DESCRIPTION
-
+select 
+	row_number() over(partition by F.SIS_NUMBER, DISPOSITION_START_DATE order by F.SIS_NUMBER) as ROWNUM,
+	F.SIS_NUMBER,
+	f.LAST_NAME,
+	f.FIRST_NAME,
+	isnull(d.DISP_CODE,'') as DISP_CODE,
+	isnull(convert(VARCHAR(10), D.DISPOSITION_START_DATE, 101), '') AS DISPOSITION_START_DATE,
+	isnull(CONVERT(VARCHAR(10), d.DISPOSITION_END_DATE, 101), '') as DISPOSITION_END_DATE,
+	ISNULL(d.SUSPENSION_DAYS,0) AS SUSPENSION_DAYS,
+	ISNULL(d.DESCRIPTION, '') AS DESCRIPTION
 
 from
-	All_Students s
-left join
-	IEP i
-on
-	s.STUDENT_GU = i.STUDENT_GU
-left join
-	SEC_504 s5
-on
-	s.STUDENT_GU = s5.STUDENT_GU
-left join
+	 Final_Results f
+LEFT OUTER join
 	Suspension_Days d
 on
-	s.STUDENT_GU = d.STUDENT_GU
-left join
-	aps.BasicStudent a
-on
-	a.STUDENT_GU = s.STUDENT_GU
-left join
-	 Student_Grades G
-on
-	g.STUDENT_GU = s.STUDENT_GU
+	d.STUDENT_GU = f.STUDENT_GU
+where RN = 1 
+--AND
+--	SIS_NUMBER = 468772819
 )
-select * from Final_Results where rn = 1 
+SELECT
+	*
+FROM
+	SUSPENSIONS
+WHERE ROWNUM = 1 
 
-
+ORDER BY SIS_NUMBER,
+DISPOSITION_START_DATE
 
