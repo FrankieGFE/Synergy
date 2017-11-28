@@ -104,7 +104,7 @@ on
 as
 (
 select
-	row_number() over(partition by s.STUDENT_GU, COURSE_ID, GRADE_PERIOD ORDER BY S.STUDENT_GU) AS RN,
+	row_number() over(partition by s.STUDENT_GU, COURSE_ID, GRADE_PERIOD ORDER BY S.STUDENT_GU, GRADE_PERIOD DESC) AS RN,
 	s.STUDENT_GU,
 	g.SIS_NUMBER,
 	g.MARK,
@@ -141,7 +141,7 @@ WHERE
 as
 (
 select
-	row_number() over(partition by a.SIS_NUMBER, course_id order by a.SIS_NUMBER) as rn,
+	row_number() over(partition by a.SIS_NUMBER, course_id order by a.SIS_NUMBER, GRADE_PERIOD DESC) as rn,
 	a.SIS_NUMBER,
 	a.STUDENT_GU,
 	a.LAST_NAME,
@@ -194,7 +194,7 @@ left join
 on
 	g.STUDENT_GU = s.STUDENT_GU
 )
---select * from Final_Results WHERE RN = 1
+--select * from Final_Results WHERE RN = 1 
 ,Suspension_Days
 as
 (
