@@ -1,12 +1,14 @@
 USE [ST_Production]
 GO
 
-/****** Object:  UserDefinedFunction [APS].[LCETeacherEndorsementsAsOf_2]    Script Date: 10/10/2017 8:52:19 PM ******/
+/****** Object:  UserDefinedFunction [APS].[LCETeacherEndorsementsAsOf_2]    Script Date: 11/14/2017 4:24:06 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
 
 
 /**
@@ -15,7 +17,7 @@ GO
  *
  * 
  */
-CREATE FUNCTION [APS].[LCETeacherEndorsementsAsOf_2](@asOfDate DATETIME)
+ALTER FUNCTION [APS].[LCETeacherEndorsementsAsOf_2](@asOfDate DATETIME)
 RETURNS TABLE
 AS
 RETURN
@@ -45,7 +47,8 @@ FROM
 			CERT_AREA = '27' AND CERT_CODE IN ( '0150', '0200', '0208', '0250', '0400', '0408', '0500', '0505', '0901') 
 			AND CERT_STATUS = 'Approved Waiver' THEN 'W'
 			WHEN CERT_AREA = '27' AND CERT_CODE IN ( '0150', '0200', '0208', '0250', '0400', '0408', '0500', '0505', '0901') 
-			AND CERT_STATUS IN ('Approved', 'REINSTATED') THEN CERT_CODE 
+			--AND CERT_STATUS IN ('Approved', 'REINSTATED') 
+			THEN CERT_CODE 
 		 ELSE '0' 
 		END AS ElementaryTESOL
 			
@@ -53,7 +56,8 @@ FROM
 			CERT_AREA = '67' AND CERT_CODE IN ( '0150', '0200', '0208', '0250', '0400',  '0408', '0500', '0505', '0901')
 			AND CERT_STATUS = 'Approved Waiver' THEN 'W'
 			WHEN CERT_AREA = '67' AND CERT_CODE IN ( '0150', '0200', '0208', '0250', '0400',  '0408', '0500', '0505', '0901')
-			AND CERT_STATUS IN ('Approved', 'REINSTATED') THEN CERT_CODE 
+			--AND CERT_STATUS IN ('Approved', 'REINSTATED') 
+			THEN CERT_CODE 
 		ELSE '0' 
 		END AS ElementaryBilingual
 			
@@ -61,7 +65,8 @@ FROM
 			CERT_AREA = '27' AND CERT_CODE IN ( '0150', '0300', '0308', '0350', '0400','0408', '0500', '0501', '0505', '0901') 
 			AND CERT_STATUS = 'Approved Waiver' THEN 'W'
 			WHEN CERT_AREA = '27' AND CERT_CODE IN ( '0150', '0300', '0308', '0350', '0400','0408', '0500', '0501', '0505', '0901') 
-			AND CERT_STATUS IN ('Approved', 'REINSTATED') 	THEN CERT_CODE 
+			--AND CERT_STATUS IN ('Approved', 'REINSTATED') 	
+			THEN CERT_CODE 
 		ELSE '0' 
 		END AS SecondaryTESOL
 					
@@ -69,7 +74,8 @@ FROM
 			CERT_AREA = '67' AND CERT_CODE IN ('0150', '0300', '0308', '0350', '0400','0408', '0500', '0501', '0505', '0901')
 			AND CERT_STATUS = 'Approved Waiver' THEN 'W'
 			WHEN CERT_AREA = '67' AND CERT_CODE IN ('0150', '0300', '0308', '0350', '0400','0408', '0500', '0501', '0505', '0901')
-			AND CERT_STATUS IN ('Approved', 'REINSTATED') THEN CERT_CODE 
+			--AND CERT_STATUS IN ('Approved', 'REINSTATED') 
+			THEN CERT_CODE 
 		ELSE '0' 
 		END AS SecondaryBilingual
 			
@@ -79,7 +85,8 @@ FROM
 		--rev.EPC_STAFF_CRD
 		rev.UD_LICENSURE_DATA
 	--removed this to allow future dates
-	--WHERE
+	WHERE
+		CERT_STATUS NOT IN ('BCKGROUND ISSUE', 'CANCELLED', 'INACTIVE', 'NO BACKGROUND', 'Pending', 'REVOKED', 'SUSPENDED', 'VOL SURRENDER')
 		--DATE_EARNED <= @asOfDate
 	) AS AllCreds
 GROUP BY
@@ -89,5 +96,10 @@ GROUP BY
 
 
 --GO
+
+
+
+
+GO
 
 
