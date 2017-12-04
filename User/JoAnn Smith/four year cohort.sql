@@ -8,7 +8,13 @@ please match to Synergy and provide a file with the data requested in item 1) be
 2.	Last SY Primary enrollment (SY, School Name, Enter Date, Grade Level)
 3.	Last SY  W/D Code (last enrollment with a Leave Date, include SY, School Name Leave Date, Leave Code and Description)
 4.	Expected Grad Year (K12.Student_ExpectedGraduationYear)
-5.	Ninth Grade Entry Year (Other Info tab: K12.Student_InitialNinthGradeYear)
+5.
+
+Update: 12-4-2017
+JoAnn, for Monday please update your script to add the new fields below.
+Graduation Date – EPC_STU; GRADUATION_DATE
+Graduation Status – EPC_STU; GRADUATION_STATUS
+Diploma Type – EPC_STU; DIPLOMA TYPE
 
 */
 
@@ -24,7 +30,7 @@ FROM
 	OPENROWSET (
 		'Microsoft.ACE.OLEDB.12.0', 
 		'Text;Database=\\SYNTEMPSSIS\Files\TempQuery;',
-		'SELECT * from FourYearConsolidatedOutcome.csv')               
+		'SELECT * from FourYearConsolidatedOutcome2.csv')               
 )
 --select distinct studentID from Students
 ,StudentsPlus
@@ -35,6 +41,9 @@ select
 	S.*,
 	st.STUDENT_GU,
 	st.EXPECTED_GRADUATION_YEAR,
+	CAST(st.GRADUATION_DATE AS FLOAT) AS GRADUATION_DATE,
+	ST.GRADUATION_STATUS,
+	ST.DIPLOMA_TYPE,
 	st.INIT_NINTH_GRADE_YEAR
 from
 	Students S
@@ -255,10 +264,10 @@ select
 	sr.SPED_Reason,
 	sr.NumSnapshots,
 	sr.TotalSnapshots,
-	sr.Outcome,
+	--sr.Outcome,
 	sr.[Outcome SchoolYear],
 	sr.[Outcome Unknown],
-	sr.[Outcome Desc],
+	--sr.[Outcome Desc],
 	sr.Entry9thGrade,
 	sr.Entry10thGrade,
 	sr.Entry11thGrade,
@@ -267,6 +276,9 @@ select
 	sr.DualCredit,
 	sr.ID,
 	sr.EXPECTED_GRADUATION_YEAR,
+	sr.GRADUATION_DATE,
+	sr.GRADUATION_STATUS,
+	SR.DIPLOMA_TYPE,
 	sr.INIT_NINTH_GRADE_YEAR,
 	tc.TOTAL_CREDITS_EARNED,
 	lp.SCHOOL_YEAR AS LAST_PRIMARY_YEAR,
