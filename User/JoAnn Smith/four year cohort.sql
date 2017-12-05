@@ -42,8 +42,8 @@ select
 	st.STUDENT_GU,
 	st.EXPECTED_GRADUATION_YEAR,
 	CAST(st.GRADUATION_DATE AS FLOAT) AS GRADUATION_DATE,
-	ST.GRADUATION_STATUS,
-	ST.DIPLOMA_TYPE,
+	LU.VALUE_DESCRIPTION AS GRADUATION_STATUS,
+	LU1.VALUE_DESCRIPTION AS DIPLOMA_TYPE,
 	st.INIT_NINTH_GRADE_YEAR
 from
 	Students S
@@ -51,6 +51,15 @@ left join
 	rev.epc_stu st
 on
 	S.StudentID = st.STATE_STUDENT_NUMBER
+LEFT JOIN
+	APS.LookupTable('K12', 'GRADUATION_STATUS') LU
+ON
+	ST.GRADUATION_STATUS = LU.VALUE_CODE
+LEFT JOIN
+	APS.LookupTable('K12', 'DIPLOMA_TYPE') AS LU1
+ON
+	ST.DIPLOMA_TYPE = LU1.VALUE_CODE
+
 )
 ,StudentsPlusResults
 as
@@ -89,8 +98,8 @@ WHERE
 	COURSE_HISTORY_TYPE = 'HIGH'
 AND
 	REPEAT_TAG_GU IS NULL OR REPEAT_TAG_GU != '92E81AF7-962A-4D66-ADF9-5FD3FD88FA7D'
-AND
-	SCHOOL_YEAR IN ('2013', '2014', '2015', '2016')
+--AND
+--	SCHOOL_YEAR IN ('2013', '2014', '2015', '2016')
 GROUP BY 
 	BS.STUDENT_GU,
 	S.STUDENTID,
@@ -160,13 +169,13 @@ on
 	oy.YEAR_GU = y.YEAR_GU
 where 
 	ssy.EXCLUDE_ADA_ADM is null
-and
-	y.SCHOOL_YEAR in ('2013', '2014', '2015', '2016')
+--and
+--	y.SCHOOL_YEAR in ('2013', '2014', '2015', '2016')
 and
 	e.enter_date is not null
-and
--- no summer school as primary
-	o.organization_gu != 'F9ED2CBB-D65B-4A59-A4D2-36FCFDC56946'
+--and
+---- no summer school as primary
+--	o.organization_gu != 'F9ED2CBB-D65B-4A59-A4D2-36FCFDC56946'
 )
 ,
 LastPrimaryEnrollmentResults
@@ -192,9 +201,9 @@ select
 	o.ORGANIZATION_NAME,
 	o.ORGANIZATION_GU,
 	e.enter_date,
-	e.leave_date,
 	e.LEAVE_CODE,
-	LU.VALUE_DESCRIPTION AS DESCRIPTION,
+	e.LEAVE_DATE,
+	LU.VALUE_DESCRIPTION AS WITHDRAWAL_CODE_DESCRIPTION,
 	y.SCHOOL_YEAR,
 	ssy.EXCLUDE_ADA_ADM as ssy_excl
 from
@@ -227,14 +236,20 @@ left join
 	aps.LookupTable('K12.Enrollment', 'LEAVE_CODE') LU
 ON
 	E.LEAVE_CODE = LU.VALUE_CODE
+left join
+	aps.LookupTable('K12', 'GRADUATION_STATUS') LU1
+ON
+	S.GRADUATION_STATUS = LU1.VALUE_CODE
 where 
-	ssy.EXCLUDE_ADA_ADM is null
-and
-	y.SCHOOL_YEAR in ('2013', '2014', '2015', '2016')
-and
-	e.leave_date is not null
+	--ssy.EXCLUDE_ADA_ADM is null
+--and
+--	y.SCHOOL_YEAR in ('2013', '2014', '2015', '2016')
+--and
+	e.leave_date is not null 
+or
+	ssy.SUMMER_WITHDRAWL_DATE is not null
 )
---select * from LastSchoolYearWithdrawal	
+--select * from LastSchoolYearWithdrawal where STATE_STUDENT_NUMBER = '102808045'
 ,LastSchoolYearWithdrawalResults
 as
 (
@@ -242,11 +257,83 @@ select
 	*
 from
 	LastSchoolYearWithdrawal
-where
+where 
 	rn = 1
 )
 
---select * FROM LastSchoolYearWithdrawalResults
+--select * FROM LastSchoolYearWithdrawalResults where state_student_number = '104129945'
+
+,LastSummerSchoolYearResults
+as
+(
+select
+	row_number() over(partition by bs.student_gu order by bs.student_gu, ssy.summer_withdrawl_date desc) as RN,
+	bs.STUDENT_GU,
+	bs.STATE_STUDENT_NUMBER,
+	ssy.STUDENT_SCHOOL_YEAR_GU,
+	o.ORGANIZATION_NAME,
+	o.ORGANIZATION_GU,
+	ssy.SUMMER_WITHDRAWL_CODE,
+	ssy.SUMMER_WITHDRAWL_DATE,
+	CASE
+			WHEN SSY.SUMMER_WITHDRAWL_CODE = '52' THEN 'Withdrawal - No Show. Student was pre-enrolled and expected to attend but never showed up. Never came to APS this year.'
+			WHEN SSY.SUMMER_WITHDRAWL_CODE = '50' THEN 'Transferred to another APS School.'
+			WHEN SSY.SUMMER_WITHDRAWL_CODE = '51' THEN 'Transfer to Non APS School'
+			WHEN SSY.SUMMER_WITHDRAWL_CODE = '62' THEN 'Withdrawal - Death'
+			ELSE
+			lu2.VALUE_DESCRIPTION
+	END AS WITHDRAWAL_CODE_DESCRIPTION,
+
+	y.SCHOOL_YEAR,
+	ssy.EXCLUDE_ADA_ADM as ssy_excl
+from
+	StudentsPlus s
+left join
+	aps.BasicStudent bs
+on
+	s.STUDENTID = bs.STATE_STUDENT_NUMBER
+left join
+	rev.epc_stu_sch_yr ssy
+on
+	bs.student_gu = ssy.student_gu
+left join
+	rev.epc_stu_enroll e
+on
+	ssy.STUDENT_SCHOOL_YEAR_GU = e.STUDENT_SCHOOL_YEAR_GU
+inner join
+	rev.REV_ORGANIZATION_YEAR oy
+on
+	oy.ORGANIZATION_YEAR_GU = ssy.orgANIZATION_YEAR_GU
+inner join
+	rev.rev_organization o
+on
+	o.ORGANIZATION_GU = oy.ORGANIZATION_GU
+inner join
+	rev.REV_YEAR y
+on
+	oy.YEAR_GU = y.YEAR_GU
+left join
+	aps.LookupTable('K12.Demographics', 'SUMMER_WITHDRAWAL_CODE') as LU2
+ON
+	ssy.SUMMER_WITHDRAWL_CODE = lu2.VALUE_CODE
+where 
+	--ssy.EXCLUDE_ADA_ADM is null
+--and
+--	y.SCHOOL_YEAR in ('2013', '2014', '2015', '2016')
+	ssy.SUMMER_WITHDRAWL_DATE is not null
+)
+--select * from LastSummerSchoolYearResults where STATE_STUDENT_NUMBER = 104129945
+,LastSummerSchoolWithdrawalFinalResults
+as
+(
+select
+	*
+from
+	LastSummerSchoolYearResults
+where
+	rn = 1
+)
+--select * from LastSummerSchoolWithdrawalFinalResults where STATE_STUDENT_NUMBER = 104129945
 select
 	sr.DistrictCode,
 	sr.LocationID,
@@ -285,11 +372,24 @@ select
 	lp.ORGANIZATION_NAME AS LAST_PRIMARY_SCHOOL,
 	lp.ENTER_DATE AS LAST_PRIMARY_ENTER_DATE,
 	lu.VALUE_DESCRIPTION as LAST_PRIMARY_GRADE,
-	lsy.SCHOOL_YEAR as WITHDRAWAL_SCHOOL_YEAR,
-	lsy.ORGANIZATION_NAME as WITHDRAWAL_SCHOOL,
-	lsy.LEAVE_DATE AS WITHDRAWAL_DATE,
-	lsy.LEAVE_CODE AS WITHDRAWAL_CODE,
-	lsy.DESCRIPTION AS WITHDRAWAL_DESCRIPTION
+	case
+		when lss.SUMMER_WITHDRAWL_DATE > lsy.LEAVE_DATE then lss.SUMMER_WITHDRAWL_DATE
+		when lsy.LEAVE_DATE > lss.SUMMER_WITHDRAWL_DATE then lsy.LEAVE_DATE
+		when lsy.LEAVE_DATE is null and SUMMER_WITHDRAWL_DATE IS NOT NULL THEN LSS.SUMMER_WITHDRAWL_DATE
+		when lsy.LEAVE_DATE = SUMMER_WITHDRAWL_DATE then LSS.SUMMER_WITHDRAWL_DATE
+	end LEAVE_DATE,
+		case
+		when lss.SUMMER_WITHDRAWL_DATE > lsy.LEAVE_DATE then lss.SUMMER_WITHDRAWL_CODE
+		when lsy.LEAVE_DATE > LSS.SUMMER_WITHDRAWL_DATE THEN LSY.LEAVE_CODE
+		when lsy.LEAVE_DATE is null and lss.SUMMER_WITHDRAWL_DATE is not null then LSS.SUMMER_WITHDRAWL_CODE
+		when lsy.LEAVE_DATE = SUMMER_WITHDRAWL_DATE then LSS.SUMMER_WITHDRAWL_CODE
+		END AS LEAVE_CODE,
+	 case
+		when lss.SUMMER_WITHDRAWL_DATE > lsy.LEAVE_DATE then lss.WITHDRAWAL_CODE_DESCRIPTION
+		when lsy.LEAVE_DATE > lss.SUMMER_WITHDRAWL_DATE then lsy.WITHDRAWAL_CODE_DESCRIPTION
+		when lsy.LEAVE_DATE is null and SUMMER_WITHDRAWL_DATE IS NOT NULL THEN LSS.WITHDRAWAL_CODE_DESCRIPTION
+		when lsy.LEAVE_DATE = SUMMER_WITHDRAWL_DATE then lss.WITHDRAWAL_CODE_DESCRIPTION
+	end as LEAVE_DESCRIPTION		
 from
 	StudentsPlusResults sr
 left join
@@ -304,8 +404,15 @@ left hash join
 	LastSchoolYearWithdrawalResults lsy
 on
 	sr.STUDENT_GU = lsy.STUDENT_GU
+left join
+	LastSummerSchoolWithdrawalFinalResults LSS
+ON
+	SR.STUDENT_GU = LSS.STUDENT_GU
 LEFT JOIN
 	APS.LookupTable('K12', 'Grade') LU
 on
 	lp.grade = lu.VALUE_CODE
-
+--	SR.STUDENTID = 104129945
+--	--SR.STUDENTID = 103643714
+--	--SR.STUDENTID = 1028080
+--SR.STUDENTID = 614454965
