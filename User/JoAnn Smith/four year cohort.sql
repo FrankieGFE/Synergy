@@ -30,21 +30,48 @@ FROM
 	OPENROWSET (
 		'Microsoft.ACE.OLEDB.12.0', 
 		'Text;Database=\\SYNTEMPSSIS\Files\TempQuery;',
-		'SELECT * from FourYearConsolidatedOutcome2.csv')               
+		'SELECT * from FourYearConsolidatedOutcomeNew.csv')               
 )
 --select distinct studentID from Students
 ,StudentsPlus
 as
 (
 select
-	ROW_NUMBER() OVER(PARTITION BY STUDENTID ORDER BY STUDENTID) AS rn,
-	S.*,
+	--ROW_NUMBER() OVER(PARTITION BY STUDENTID ORDER BY STUDENTID) AS rn,
+	S.DistrictCode,
+	cast(S.LocationID as varchar(10)) as LocationID,
+	S.StudentID,
+	S.LastName,
+	S.FirstName,
+	S.DOB,
+	S.Gender,
+	S.Ethnicity,
+	S.EverELL,
+	S.EverIEP,
+	S.FRL,
+	S.Migrant,
+	S.SPED_ReasonCode,
+	S.SPED_Reason,
+	S.NumSnapshots,
+	S.TotalSnapshots,
+	S.Outcome,
+	S.[Outcome SchoolYear],
+	S.[Outcome Unknown],
+	S.[Outcome Desc],
+	S.Entry9thGrade,
+	S.Entry10thGrade,
+	S.Entry11thGrade,
+	S.Entry12thGrade,
+	S.LastLocation,
+	S.DualCredit,
+	S.ID,
 	st.STUDENT_GU,
 	st.EXPECTED_GRADUATION_YEAR,
-	CAST(st.GRADUATION_DATE AS FLOAT) AS GRADUATION_DATE,
+	CONVERT(VARCHAR(10), st.GRADUATION_DATE,101) AS GRADUATION_DATE,
 	LU.VALUE_DESCRIPTION AS GRADUATION_STATUS,
 	LU1.VALUE_DESCRIPTION AS DIPLOMA_TYPE,
-	st.INIT_NINTH_GRADE_YEAR
+	st.INIT_NINTH_GRADE_YEAR,
+	o.ORGANIZATION_NAME as PED_SCHOOL
 from
 	Students S
 left join
@@ -59,7 +86,14 @@ LEFT JOIN
 	APS.LookupTable('K12', 'DIPLOMA_TYPE') AS LU1
 ON
 	ST.DIPLOMA_TYPE = LU1.VALUE_CODE
-
+LEFT JOIN
+	REV.EPC_SCH SCH
+ON
+	SCH.SCHOOL_CODE = cast(S.LocationID as nvarchar(10))
+left join
+	rev.rev_organization o
+on
+	o.ORGANIZATION_gu = sch.ORGANIZATION_GU
 )
 ,StudentsPlusResults
 as
@@ -68,8 +102,8 @@ select
 	 *
 from
 	 StudentsPlus
-where
-	RN = 1
+--where
+--	RN = 1
 )
 --SELECT * FROM StudentsPlusResults
 ,CreditsEarned
@@ -333,10 +367,56 @@ from
 where
 	rn = 1
 )
+,
+StudentWithdrawalTracking
+as
+(
+select
+	row_number() over(partition by t.student_gu order by t.student_gu, RELEASE_DATE desc) as RN,
+	S.STUDENT_GU,
+	s.studentID,
+	t.RELEASE_DATE,
+	t.SCHOOL_NON_DISTRICT_GU,
+	n.NAME as NON_DISTRICT_SCHOOL_NAME,
+	t.PERSON_RELEASED_TO,
+	lu.[VALUE_DESCRIPTION] as PERSON_TITLE,
+	lu1.VALUE_DESCRIPTION as RELEASE_PURPOSE
+from
+	StudentsPlus S
+left join
+	rev.EPC_STU_REQUEST_TRACKING T
+on
+	s.STUDENT_GU = t.STUDENT_GU
+inner join
+	rev.EPC_SCH_NON_DST N
+on
+	t.SCHOOL_NON_DISTRICT_GU = n.SCHOOL_NON_DISTRICT_GU
+left join
+	aps.LookupTable('K12.CourseHistoryInfo', 'PERSON_TITLE') AS lu
+ON
+	t.PERSON_title = lu.VALUE_CODE
+left join
+	aps.LookupTable('k12.CourseHistoryInfo', 'RELEASE_PURPOSE') AS LU1
+on
+	t.RELEASE_PURPOSE = lu1.VALUE_CODE
+)
+,ReleaseResults
+as
+(
+select
+	*
+from
+	StudentWithdrawalTracking t
+where
+	rn = 1
+)
+--select * from ReleaseResults 
+	
 --select * from LastSummerSchoolWithdrawalFinalResults where STATE_STUDENT_NUMBER = 104129945
 select
 	sr.DistrictCode,
 	sr.LocationID,
+	sr.PED_SCHOOL as SCHOOL_NAME,
 	sr.StudentID,
 	sr.LastName,
 	sr.FirstName,
@@ -351,10 +431,10 @@ select
 	sr.SPED_Reason,
 	sr.NumSnapshots,
 	sr.TotalSnapshots,
-	--sr.Outcome,
+	sr.Outcome,
 	sr.[Outcome SchoolYear],
 	sr.[Outcome Unknown],
-	--sr.[Outcome Desc],
+	sr.[Outcome Desc],
 	sr.Entry9thGrade,
 	sr.Entry10thGrade,
 	sr.Entry11thGrade,
@@ -363,14 +443,14 @@ select
 	sr.DualCredit,
 	sr.ID,
 	sr.EXPECTED_GRADUATION_YEAR,
-	sr.GRADUATION_DATE,
+	convert(varchar(10), sr.GRADUATION_DATE,101) as GRADUATION_DATE,
 	sr.GRADUATION_STATUS,
 	SR.DIPLOMA_TYPE,
 	sr.INIT_NINTH_GRADE_YEAR,
 	tc.TOTAL_CREDITS_EARNED,
 	lp.SCHOOL_YEAR AS LAST_PRIMARY_YEAR,
 	lp.ORGANIZATION_NAME AS LAST_PRIMARY_SCHOOL,
-	lp.ENTER_DATE AS LAST_PRIMARY_ENTER_DATE,
+	CONVERT(VARCHAR(10), lp.ENTER_DATE, 101)  AS LAST_PRIMARY_ENTER_DATE,
 	lu.VALUE_DESCRIPTION as LAST_PRIMARY_GRADE,
 	case
 		when lss.SUMMER_WITHDRAWL_DATE > lsy.LEAVE_DATE then lss.SUMMER_WITHDRAWL_DATE
@@ -378,7 +458,7 @@ select
 		when lsy.LEAVE_DATE is null and SUMMER_WITHDRAWL_DATE IS NOT NULL THEN LSS.SUMMER_WITHDRAWL_DATE
 		when lsy.LEAVE_DATE = SUMMER_WITHDRAWL_DATE then LSS.SUMMER_WITHDRAWL_DATE
 		when lsy.LEAVE_DATE is not null and SUMMER_WITHDRAWL_DATE IS NULL THEN LSY.LEAVE_DATE
-	end LEAVE_DATE,
+	end AS LEAVE_DATE,
 		case
 		when lss.SUMMER_WITHDRAWL_DATE > lsy.LEAVE_DATE then lss.SUMMER_WITHDRAWL_CODE
 		when lsy.LEAVE_DATE > LSS.SUMMER_WITHDRAWL_DATE THEN LSY.LEAVE_CODE
@@ -393,7 +473,12 @@ select
 		when lsy.LEAVE_DATE = SUMMER_WITHDRAWL_DATE then lss.WITHDRAWAL_CODE_DESCRIPTION
 		when lsy.LEAVE_DATE is not null and SUMMER_WITHDRAWL_DATE IS NULL THEN LSY.WITHDRAWAL_CODE_DESCRIPTION
 
-	end as LEAVE_DESCRIPTION		
+	end as LEAVE_DESCRIPTION,
+	CONVERT(VARCHAR(10), R.RELEASE_DATE, 101) AS RELEASE_DATE,
+	R.NON_DISTRICT_SCHOOL_NAME,
+	R.PERSON_RELEASED_TO,
+	R.PERSON_TITLE,
+	R.RELEASE_PURPOSE	
 from
 	StudentsPlusResults sr
 left join
@@ -412,10 +497,16 @@ left join
 	LastSummerSchoolWithdrawalFinalResults LSS
 ON
 	SR.STUDENT_GU = LSS.STUDENT_GU
+left join
+	ReleaseResults r
+ON
+	SR.STUDENT_GU = R.STUDENT_GU
 LEFT JOIN
 	APS.LookupTable('K12', 'Grade') LU
 on
 	lp.grade = lu.VALUE_CODE
+order by
+	sr.LastName, sr.FirstName
 --WHERE
 --	SR.STUDENTID = 104129945
 --	--SR.STUDENTID = 103643714
