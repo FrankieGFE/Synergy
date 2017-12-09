@@ -1,12 +1,13 @@
 USE [ST_Production]
 GO
 
-/****** Object:  UserDefinedFunction [APS].[LCEStudentsAndProvidersAsOf_2]    Script Date: 10/10/2017 9:47:59 PM ******/
+/****** Object:  UserDefinedFunction [APS].[LCEStudentsAndProvidersAsOf_2]    Script Date: 12/6/2017 11:51:55 AM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -321,7 +322,17 @@ STAFF2.STAFF_GU = ENDORSEMENTS.STAFF_GU
 --GO
 
 
+WHERE 
+ORGANIZATION_NAME NOT IN (
 
+'Pre-Enrollment',
+'Private School',
+'Special Education Department',
+'Title One School',
+'Transition Services',
+'Homebound',
+'Interim Alternative Ed Setting'
+)
 
 
 

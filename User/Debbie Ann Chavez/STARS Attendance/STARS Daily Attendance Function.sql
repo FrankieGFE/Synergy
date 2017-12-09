@@ -1,5 +1,3 @@
-USE [ST_Production]
-GO
 
 /****** Object:  UserDefinedFunction [APS].[STARSDailyAttendanceAsOf]    Script Date: 10/23/2017 5:16:49 PM ******/
 SET ANSI_NULLS ON

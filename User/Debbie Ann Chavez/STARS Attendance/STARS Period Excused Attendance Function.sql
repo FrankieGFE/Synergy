@@ -1,5 +1,4 @@
-USE [ST_Production]
-GO
+
 
 /****** Object:  UserDefinedFunction [APS].[STARSPeriodExcusedAsOf]    Script Date: 10/23/2017 5:16:30 PM ******/
 SET ANSI_NULLS ON
@@ -7,16 +6,6 @@ GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -33,7 +22,7 @@ Main Function that pulls Period Attendance
 --DECLARE @AsOfDate DATE = GETDATE()
 
 
-CREATE FUNCTION [APS].[STARSPeriodExcusedAsOf](@AsOfDate DATE)
+ALTER FUNCTION [APS].[STARSPeriodExcusedAsOf](@AsOfDate DATE)
 RETURNS TABLE
 AS
 RETURN
