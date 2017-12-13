@@ -1,5 +1,4 @@
-USE [ST_Production]
-GO
+
 
 /****** Object:  UserDefinedFunction [APS].[STARSPeriodUnexcusedAsOf]    Script Date: 10/23/2017 5:16:02 PM ******/
 SET ANSI_NULLS ON
@@ -7,16 +6,6 @@ GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
-
-
-
-
-
-
-
-
-
 
 
 /*********************************************************************
@@ -32,7 +21,7 @@ Main Function that pulls Period Attendance
 --DECLARE @AsOfDate DATE = GETDATE()
 
 
-CREATE FUNCTION [APS].[STARSPeriodUnexcusedAsOf](@AsOfDate DATE)
+ALTER FUNCTION [APS].[STARSPeriodUnexcusedAsOf](@startDate DATE, @endDate DATE)
 RETURNS TABLE
 AS
 RETURN
@@ -100,7 +89,8 @@ FROM
 	[APS].[YearDates] AS [yr] WITH (NOLOCK)
 	ON
 	[oy].[YEAR_GU]=[yr].[YEAR_GU]
-	AND (@asOfDate BETWEEN [yr].[START_DATE] AND [yr].[END_DATE])
+	AND yr.YEAR_GU = (SELECT YEAR_GU FROM REV.SIF_22_Common_CurrentYearGU)
+	--AND (@asOfDate BETWEEN [yr].[START_DATE] AND [yr].[END_DATE])
 	AND [yr].EXTENSION = 'R'
     LEFT JOIN
     [rev].[EPC_SCH_ATT_CAL] AS [cal] WITH (NOLOCK)
@@ -167,6 +157,8 @@ FROM
 WHERE
     [abr].[TYPE]= 'UNE'
   	AND SETUP.SCHOOL_ATT_TYPE IN ('P', 'B') AND SSY.GRADE NOT IN ('050','070','090','100', '110','120','130','140','150')
+	AND [atd].ABS_DATE<=@endDate
+	AND [atd].[ABS_DATE]>=@startDate
 	
 	) AS T1
 
@@ -210,19 +202,19 @@ FROM
 			   ,BS.STUDENT_SCHOOL_YEAR_GU ,BS.COURSE_GU ,BS.SCHOOL_YEAR_COURSE_GU  ,BS.ORGANIZATION_GU
 			   ,BS.ORGANIZATION_YEAR_GU,BS.STUDENT_GU,SYMD.MEET_DAY_CODE,SCHOOL_CODE,STATE_SCHOOL_CODE
 			   FROM 
-				APS.BASICSCHEDULE AS BS
-				INNER JOIN
-			   [APS].[YearDates] AS [yr] WITH (NOLOCK)  ON   BS.[YEAR_GU]=[yr].[YEAR_GU] 
-			   AND (@AsOfDate BETWEEN [yr].[START_DATE] AND [yr].[END_DATE])
-			   AND [yr].EXTENSION = 'R'
+				 (SELECT * FROM APS.BASICSCHEDULE WHERE 
+				 YEAR_GU = (SELECT YEAR_GU FROM REV.SIF_22_Common_CurrentYearGU) 
+				 AND (COURSE_ENTER_DATE IS NULL OR COURSE_ENTER_DATE >= @startDate)
+				 AND (COURSE_LEAVE_DATE IS NULL OR COURSE_LEAVE_DATE <=  @endDate)
+				 ) AS BS
+							   
 			   INNER JOIN rev.EPC_SCH_YR_SECT_MET_DY   sysmd ON sysmd.SECTION_GU      = BS.SECTION_GU
 			   INNER JOIN rev.EPC_SCH_YR_MET_DY        symd  ON symd.SCH_YR_MET_DY_GU = sysmd.SCH_YR_MET_DY_GU
 			   INNER JOIN  rev.EPC_SCH AS SCH    ON    BS.ORGANIZATION_GU = SCH.ORGANIZATION_GU
 			   INNER JOIN  REV.EPC_SCH_YR_OPT AS SETUP	ON	SETUP.ORGANIZATION_YEAR_GU = BS.ORGANIZATION_YEAR_GU
 
 			   WHERE SETUP.SCHOOL_ATT_TYPE IN ('P', 'B')
-
-		)AS Class    
+			)AS Class    
         
     INNER JOIN
     [rev].[EPC_SCH_YR_SECT] AS [Section] WITH (NOLOCK)
@@ -249,7 +241,7 @@ FROM
 
 
 WHERE 
-       CAL.CAL_DATE <= @AsOfDate
+       CAL.CAL_DATE BETWEEN @startDate AND @endDate
        
        GROUP BY 
             [stu].[STUDENT_GU]
@@ -350,7 +342,7 @@ AND [Truant1].[Unexcused Count For Day]>=2
 ) AS [Truant]
 
 WHERE
-	[Truant].[ABS_DATE]<=@asOfDate
+	[Truant].[ABS_DATE] BETWEEN @startDate AND @endDate
 GROUP BY
     [Truant].[SIS_NUMBER]
     ,[Truant].[SCHOOL_CODE]

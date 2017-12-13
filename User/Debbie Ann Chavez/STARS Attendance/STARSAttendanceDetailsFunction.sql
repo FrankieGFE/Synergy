@@ -10,9 +10,7 @@ GO
 
 
 
-
-
-ALTER FUNCTION [APS].[STARSAttendanceDetailsAsOf](@AsOfDate DATETIME)
+ALTER FUNCTION [APS].[STARSAttendanceDetailsAsOf](@startDate DATE, @endDate DATE)
 RETURNS TABLE
 AS
 RETURN
@@ -31,7 +29,7 @@ SELECT
 	,[Excused Religious Full Day]
 
 FROM
-    [APS].[STARSDailyAttendanceAsOf](@AsOfDate) AS [Daily]
+    [APS].[STARSDailyAttendanceAsOf](@startDate, @endDate) AS [Daily]
 
 UNION
 
@@ -64,7 +62,7 @@ FROM
 	,[Full Days Unexcused] AS [Full-Day]
 	,'U' AS EXCUSED
 	FROM 
-   [APS].[STARSPeriodUnexcusedAsOf](@AsOfDate) AS [Period]
+   [APS].[STARSPeriodUnexcusedAsOf](@startDate, @endDate) AS [Period]
 
 	UNION ALL 
 
@@ -78,7 +76,7 @@ FROM
 	,[Half Days Unexcused]*0.5 as [Half-Day]
     ,[Full Days Unexcused] AS [Full-Day]
 	,'E' AS EXCUSED
-	FROM [APS].[STARSPeriodExcusedAsOf](@AsOfDate) AS [Period2]
+	FROM [APS].[STARSPeriodExcusedAsOf](@startDate, @endDate) AS [Period2]
 	
 ) AS T1
 

@@ -1,5 +1,3 @@
-USE [ST_Production]
-GO
 
 /****** Object:  UserDefinedFunction [APS].[STARSDailyAttendanceAsOf]    Script Date: 10/23/2017 5:16:49 PM ******/
 SET ANSI_NULLS ON
@@ -12,7 +10,7 @@ GO
 
 
 
-CREATE FUNCTION [APS].[STARSDailyAttendanceAsOf](@AsOfDate DATE)
+ALTER FUNCTION [APS].[STARSDailyAttendanceAsOf](@startDate DATE, @endDate DATE)
 RETURNS TABLE
 AS
 RETURN
@@ -88,8 +86,9 @@ FROM
 	   [APS].[YearDates] AS [Year] WITH (NOLOCK)
 	   ON
 	   [SSY].[YEAR_GU]=[Year].[YEAR_GU]
-	   AND (@AsOfDate BETWEEN [Year].[START_DATE] AND [Year].[END_DATE])
-	   AND [Year].EXTENSION = 'R'
+	   AND [Year].YEAR_GU = (SELECT YEAR_GU FROM REV.SIF_22_Common_CurrentYearGU)
+	--AND (@asOfDate BETWEEN [yr].[START_DATE] AND [yr].[END_DATE])
+	AND [Year].EXTENSION = 'R'
     WHERE
 	   [Reason].[TYPE]='EXC' AND REASON.ABBREVIATION = 'RC'
 	      AND (
@@ -97,7 +96,8 @@ FROM
 	   OR [School].[SCHOOL_CODE]IN ('022', '045', '058', '910', '973', '983', '900', '901')
 	   OR ([School].SCHOOL_CODE = '496' AND SSY.GRADE IN ('050','070','090','100', '110','120','130','140','150'))
 	   )
-	   AND [Daily].ABS_DATE<=@AsOfDate
+	   AND Daily.ABS_DATE<=@endDate
+		AND Daily.[ABS_DATE]>=@startDate
 	   AND SSY.GRADE NOT IN ('050', '070', '090')
 	  -- AND Student.SIS_NUMBER = 980023595
 
@@ -164,8 +164,9 @@ FROM
 	   [APS].[YearDates] AS [Year] WITH (NOLOCK)
 	   ON
 	   [SSY].[YEAR_GU]=[Year].[YEAR_GU]
-	   AND (@AsOfDate BETWEEN [Year].[START_DATE] AND [Year].[END_DATE])
-	   AND [Year].EXTENSION = 'R'
+	  AND [Year].YEAR_GU = (SELECT YEAR_GU FROM REV.SIF_22_Common_CurrentYearGU)
+	--AND (@asOfDate BETWEEN [yr].[START_DATE] AND [yr].[END_DATE])
+	AND [Year].EXTENSION = 'R'
     WHERE
 	   [Reason].[TYPE]='UNE'
 	       AND (
@@ -173,7 +174,8 @@ FROM
 	   OR [School].[SCHOOL_CODE]IN ('022', '045', '058', '910', '973', '983', '900', '901')
 	   OR ([School].SCHOOL_CODE = '496' AND SSY.GRADE IN ('050','070','090','100', '110','120','130','140','150'))
 	   )
-	   AND [Daily].ABS_DATE<=@AsOfDate
+	  	   AND Daily.ABS_DATE<=@endDate
+		AND Daily.[ABS_DATE]>=@startDate
 	   AND SSY.GRADE NOT IN ('050', '070', '090')
 	   --AND Student.SIS_NUMBER = 980023595
     GROUP BY
