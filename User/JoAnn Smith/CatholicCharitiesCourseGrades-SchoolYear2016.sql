@@ -8,6 +8,8 @@ Here is the final student list for the data request from Catholic Charities. Thi
 •	Final course grades for 2016-17 classes.
 •	Grades for courses taken in 2017-18.
 
+Revision I - include all course grades for 2016 --- redid the Student_Grades CTE
+
 */
 
 EXECUTE AS LOGIN='QueryFileUser'
@@ -59,60 +61,84 @@ on
 ,Student_Grades
 as
 (
-select
-	row_number() over(partition by s.STUDENT_GU, COURSE_ID, TERM_CODE ORDER BY S.STUDENT_GU, TERM_CODE DESC) AS RN,
-	s.STUDENT_GU,
-	h.MARK,
-	h.TERM_CODE,
-	h.SCHOOL_YEAR,
-	h.COURSE_ID,
-	h.COURSE_TITLE
-from
-	All_Students s
-INNER join
-	rev.epc_stu_crs_his h
-on
-	S.STUDENT_GU = H.STUDENT_GU	
+SELECT
+	A.STUDENT_GU,
+	A.SIS_NUMBER,
+	SSYGRD.SCHOOL_YEAR_COURSE_GU,
+	PERIOD.SECTION_GU,
+	PERIODMK.MARK,
+	GRADEPDMK.MARK_NAME AS GRADE_PERIOD,
+	COURSE.COURSE_ID,
+	COURSE.COURSE_TITLE
+FROM
+	ALL_STUDENTS A
+INNER JOIN
+	REV.EPC_STU S
+ON
+	A.STUDENT_GU = S.STUDENT_GU 
+INNER JOIN
+	rev.EPC_STU_SCH_YR AS SSY
+ON
+	SSY.STUDENT_GU = S.STUDENT_GU
+INNER JOIN
+	rev.EPC_STU_SCH_YR_GRD AS SSYGRD
+ON
+	SSYGRD.STUDENT_SCHOOL_YEAR_GU = SSY.STUDENT_SCHOOL_YEAR_GU
+INNER JOIN
+	REV.EPC_STU_SCH_YR_GRD_PRD PERIOD
+ON
+	PERIOD.STU_SCHOOL_YEAR_GRD_GU = SSYGRD.STU_SCHOOL_YEAR_GRD_GU
+INNER JOIN
+	REV.EPC_STU_SCH_YR_GRD_PRD_MK PERIODMK
+ON
+	PERIOD.STU_SCHOOL_YEAR_GRD_PRD_GU= PERIODMK.STU_SCHOOL_YEAR_GRD_PRD_GU
+INNER JOIN
+	rev.EPC_SCH_YR_GRD_PRD_MK GRADEPDMK
+ON
+	GRADEPDMK.SCHOOL_YEAR_GRD_PRD_MK_GU = PERIODMK.SCHOOL_YEAR_GRD_PRD_MK_GU
+INNER JOIN
+	rev.EPC_SCH_YR_CRS AS CRSYR
+ON
+	SSYGRD.SCHOOL_YEAR_COURSE_GU = CRSYR.SCHOOL_YEAR_COURSE_GU
+INNER JOIN
+	rev.EPC_CRS AS COURSE
+ON
+	CRSYR.COURSE_GU = COURSE.COURSE_GU
+INNER JOIN
+	rev.REV_YEAR AS YEARS
+ON
+	SSY.YEAR_GU = YEARS.YEAR_GU
+	AND SCHOOL_YEAR = '2016' and extension = 'R'
+INNER JOIN
+	rev.EPC_STU AS STUDENT
+ON
+	SSY.STUDENT_GU = STUDENT.STUDENT_GU
 WHERE
-
-	SCHOOL_YEAR = '2016'
-AND
-	TERM_CODE = 'S2'
+GRADEPDMK.MARK_NAME  NOT IN ('S1 Exam', 'S2 Exam') 
 )
---select * from Student_Grades WHERE STUDENT_GU = '74C443B4-A953-41B7-B7C7-80F2428B85F2'
-,Grade_Results
-as
-(
-select
-	*
-from
-	 Student_Grades g
-WHERE
-	 RN = 1
-)
---select * from Grade_Results
+--select * from Student_Grades  where sis_number = 970034776 order by SIS_NUMBER, course_ID, GRADE_PERIOD
 ,Final_Results
 as
 (
 select
-	row_number() over(partition by a.SIS_NUMBER, course_id,	TERM_CODE order by a.SIS_NUMBER, TERM_CODE DESC) as rn,
+	row_number() over(partition by a.SIS_NUMBER, course_id,	GRADE_PERIOD order by a.SIS_NUMBER, COURSE_ID, GRADE_PERIOD DESC) as rn,
 	a.SIS_NUMBER,
 	a.STUDENT_GU,
 	a.LAST_NAME,
 	a.FIRST_NAME,
 	A.GENDER,
 	A.BIRTH_DATE,
-	ISNULL(G.SCHOOL_YEAR, 2016) AS SCHOOL_YEAR,
+	'2016' as SCHOOL_YEAR,
 	S.SCHOOL_NAME,
 	S.GRADE_LEVEL,
 	g.COURSE_ID,
 	g.COURSE_TITLE,
 	g.MARK,
-	g.TERM_CODE
+	g.GRADE_PERIOD
 
 from
 	All_Students s
-left join
+INNER join
 	aps.BasicStudent a
 on
 	a.STUDENT_GU = s.STUDENT_GU
@@ -121,6 +147,6 @@ FULL OUTER join
 on
 	g.STUDENT_GU = s.STUDENT_GU
 )
-select * from Final_Results WHERE RN = 1 
-ORDER BY SIS_NUMBER
+select * from Final_Results 
+ORDER BY SIS_NUMBER, COURSE_ID, GRADE_PERIOD
 
