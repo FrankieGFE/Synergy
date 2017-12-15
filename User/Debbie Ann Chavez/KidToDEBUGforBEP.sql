@@ -1,0 +1,5 @@
+
+SELECT * FROM 
+APS.NewBEPStudentsModelsAndHoursAsOf('2017-11-16')
+WHERE
+SIS_NUMBER = 104391180
