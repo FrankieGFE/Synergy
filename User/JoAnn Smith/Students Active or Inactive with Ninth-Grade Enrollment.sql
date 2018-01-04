@@ -2,12 +2,13 @@
 as
 (
 select
-	row_number() over(partition by d.student_gu order by d.student_gu, d.enter_date desc) as rn,
+	row_number() over(partition by d.student_gu order by d.student_gu, d.enter_date) as rn,
 	d.STUDENT_GU,
 	d.SIS_NUMBER,
 	bs.FIRST_NAME,
 	bs.LAST_NAME,
 	ENTER_CODE,
+	enter_date,
 	SCHOOL_NAME as NINTH_GRADE_SCHOOL_NAME,
 	SCHOOL_YEAR AS NINTH_GRADE_SCHOOL_YEAR,
 	GRADE
@@ -21,7 +22,11 @@ where
 	GRADE = '09'
 and 
 	EXCLUDE_ADA_ADM is null
+and
+	ENTER_DATE IS NOT NULL
 )
+--select * from Ninth_Graders where SIS_NUMBER = 100040336
+
 ,N_Results
 as
 (
@@ -32,7 +37,6 @@ from
 where
 	rn = 1
 )
-
 --SELECT * FROM Is_Active where student_gu = '4DADB940-8A51-4D40-9534-0000279F0E6B'
 ,Course_History
 as
