@@ -1,0 +1,434 @@
+/**
+ * 
+ * $LastChangedBy: Frank Garcia
+ * $LastChangedDate: 6/03/2013 $
+ *
+ * Request By: Gina Middleton
+ *			   
+ * InitialRequestDate: 5/16/2013
+ * 
+ * Initial Request:
+ *		Calculate overall scores for Spring K-SBPR ELA and MTH
+ *
+ * Tables Referenced: db_KDPR.Results
+ *
+ * Notes: 
+ *		Un-comment the UPDATE statement at the beginning and the WHERE statement at the end to update Results table.
+*		Also, make necessary changes to the question numbers and the assessment window if this is for other than Spring. 
+ */
+BEGIN TRAN
+
+DECLARE @AssessmentWindow nvarchar(6)
+SET @AssessmentWindow = 'Spring'
+
+DECLARE @ME nvarchar(50)
+SET @ME = 'Meets Expectations'
+
+DECLARE @NE nvarchar(50)
+SET @NE = 'Nearing Expectations'
+
+DECLARE @ED nvarchar(50)
+SET @ED = 'Experiencing Difficulty'
+
+
+UPDATE
+	db_KDPR.dbo.Results_12_13
+SET
+	db_KDPR.dbo.Results_12_13.MATH_PL = PL.MATH_PL
+	,db_KDPR.dbo.Results_12_13.ELA_PL = PL.ELA_PL
+FROM
+	(	
+
+
+	SELECT 
+		fld_ID_NBR
+		,fld_Language
+		--,_MATH.MATH
+		,_MATH.MATH_NA
+		,MATH_S.MATH_SCORE
+		--,ARTS.ELA
+		,ARTS.ELA_NA
+		,ELA_S.ELA_SCORE
+		,CASE
+			WHEN MATH_S.MATH_SCORE <= 9 AND _MATH.MATH_NA = '1'  THEN @ED
+			WHEN MATH_S.MATH_SCORE <= 9 AND _MATH.MATH_NA = '2'  THEN @ED
+			WHEN MATH_S.MATH_SCORE <= 9 AND _MATH.MATH_NA = '3'  THEN @ED
+			WHEN MATH_S.MATH_SCORE <= 9 AND _MATH.MATH_NA = '4'  THEN 'N/A'
+			WHEN MATH_S.MATH_SCORE <= 9 AND _MATH.MATH_NA IS NULL  THEN @ED
+			WHEN MATH_S.MATH_SCORE = 10 AND _MATH.MATH_NA = '1'  THEN @ED
+			WHEN MATH_S.MATH_SCORE = 10 AND _MATH.MATH_NA = '2'  THEN @ED
+			WHEN MATH_S.MATH_SCORE = 10 AND _MATH.MATH_NA = '3'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 10 AND _MATH.MATH_NA = '4'  THEN 'N/A'
+			WHEN MATH_S.MATH_SCORE = 10 AND _MATH.MATH_NA IS NULL  THEN @ED
+			WHEN MATH_S.MATH_SCORE = 11 AND _MATH.MATH_NA = '1'  THEN @ED
+			WHEN MATH_S.MATH_SCORE = 11 AND _MATH.MATH_NA = '2'  THEN @ED
+			WHEN MATH_S.MATH_SCORE = 11 AND _MATH.MATH_NA = '3'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 11 AND _MATH.MATH_NA = '4'  THEN 'N/A'
+			WHEN MATH_S.MATH_SCORE = 11 AND _MATH.MATH_NA IS NULL  THEN @ED
+			WHEN MATH_S.MATH_SCORE = 12 AND _MATH.MATH_NA = '1'  THEN @ED
+			WHEN MATH_S.MATH_SCORE = 12 AND _MATH.MATH_NA = '2'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 12 AND _MATH.MATH_NA = '3'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 12 AND _MATH.MATH_NA = '4'  THEN 'N/A'
+			WHEN MATH_S.MATH_SCORE = 12 AND _MATH.MATH_NA IS NULL  THEN @ED
+			WHEN MATH_S.MATH_SCORE = 13 AND _MATH.MATH_NA = '1'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 13 AND _MATH.MATH_NA = '2'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 13 AND _MATH.MATH_NA = '3'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 13 AND _MATH.MATH_NA IS NULL  THEN @ED
+			WHEN MATH_S.MATH_SCORE = 14 AND _MATH.MATH_NA = '1'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 14 AND _MATH.MATH_NA = '2'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 14 AND _MATH.MATH_NA = '3'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 14 AND _MATH.MATH_NA IS NULL  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 15 AND _MATH.MATH_NA = '1'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 15 AND _MATH.MATH_NA = '2'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 15 AND _MATH.MATH_NA = '3'  THEN @ME
+			WHEN MATH_S.MATH_SCORE = 15 AND _MATH.MATH_NA IS NULL  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 16 AND _MATH.MATH_NA = '1'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 16 AND _MATH.MATH_NA = '2'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 16 AND _MATH.MATH_NA = '3'  THEN @ME
+			WHEN MATH_S.MATH_SCORE = 16 AND _MATH.MATH_NA IS NULL  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 17 AND _MATH.MATH_NA = '1'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 17 AND _MATH.MATH_NA = '2'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 17 AND _MATH.MATH_NA = '3'  THEN @ME
+			WHEN MATH_S.MATH_SCORE = 17 AND _MATH.MATH_NA IS NULL  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 18 AND _MATH.MATH_NA = '1'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 18 AND _MATH.MATH_NA = '2'  THEN @ME
+			WHEN MATH_S.MATH_SCORE = 18 AND _MATH.MATH_NA = '3'  THEN @ME
+			WHEN MATH_S.MATH_SCORE = 18 AND _MATH.MATH_NA IS NULL  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 19 AND _MATH.MATH_NA = '1'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 19 AND _MATH.MATH_NA = '2'  THEN @ME
+			WHEN MATH_S.MATH_SCORE = 19 AND _MATH.MATH_NA = '3'  THEN @ME
+			WHEN MATH_S.MATH_SCORE = 19 AND _MATH.MATH_NA IS NULL  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 20 AND _MATH.MATH_NA = '1'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 20 AND _MATH.MATH_NA = '2'  THEN @ME
+			WHEN MATH_S.MATH_SCORE = 20 AND _MATH.MATH_NA = '3'  THEN @ME
+			WHEN MATH_S.MATH_SCORE = 20 AND _MATH.MATH_NA IS NULL  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 21 AND _MATH.MATH_NA = '1'  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 21 AND _MATH.MATH_NA = '2'  THEN @ME
+			WHEN MATH_S.MATH_SCORE = 21 AND _MATH.MATH_NA IS NULL  THEN @NE
+			WHEN MATH_S.MATH_SCORE = 22 AND _MATH.MATH_NA = '1'  THEN @ME
+			WHEN MATH_S.MATH_SCORE = 22 AND _MATH.MATH_NA = '2'  THEN @ME
+			WHEN MATH_S.MATH_SCORE = 22 AND _MATH.MATH_NA IS NULL  THEN @NE
+			WHEN MATH_S.MATH_SCORE > 22 THEN @ME
+			ELSE
+			'N/A'
+			END 
+			AS
+			[MATH_PL] 
+			
+		,CASE
+			WHEN ELA_S.ELA_SCORE <= 18 THEN @ED
+			WHEN ELA_S.ELA_SCORE = 19 AND ARTS.ELA_NA IS NULL  THEN @ED
+			WHEN ELA_S.ELA_SCORE = 19 AND ARTS.ELA_NA = '1'  THEN @ED
+			WHEN ELA_S.ELA_SCORE = 19 AND ARTS.ELA_NA = '2'  THEN @ED
+			WHEN ELA_S.ELA_SCORE = 19 AND ARTS.ELA_NA = '3'  THEN @ED
+			WHEN ELA_S.ELA_SCORE = 19 AND ARTS.ELA_NA = '4'  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 20 AND ARTS.ELA_NA IS NULL  THEN @ED
+			WHEN ELA_S.ELA_SCORE = 20 AND ARTS.ELA_NA = '1'  THEN @ED
+			WHEN ELA_S.ELA_SCORE = 20 AND ARTS.ELA_NA = '2'  THEN @ED
+			WHEN ELA_S.ELA_SCORE = 20 AND ARTS.ELA_NA = '3'  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 20 AND ARTS.ELA_NA = '4'  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 21 AND ARTS.ELA_NA IS NULL  THEN @ED
+			WHEN ELA_S.ELA_SCORE = 21 AND ARTS.ELA_NA = '1'  THEN @ED
+			WHEN ELA_S.ELA_SCORE = 21 AND ARTS.ELA_NA = '2'  THEN @ED
+			WHEN ELA_S.ELA_SCORE = 21 AND ARTS.ELA_NA = '3'  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 21 AND ARTS.ELA_NA = '4'  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 22 AND ARTS.ELA_NA IS NULL  THEN @ED
+			WHEN ELA_S.ELA_SCORE = 22 AND ARTS.ELA_NA = '1'  THEN @ED
+			WHEN ELA_S.ELA_SCORE = 22 AND ARTS.ELA_NA = '2'  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 22 AND ARTS.ELA_NA = '3'  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 22 AND ARTS.ELA_NA = '4'  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 23 AND ARTS.ELA_NA IS NULL  THEN @ED
+			WHEN ELA_S.ELA_SCORE = 23 AND ARTS.ELA_NA = '1'  THEN @ED
+			WHEN ELA_S.ELA_SCORE = 23 AND ARTS.ELA_NA = '2'  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 23 AND ARTS.ELA_NA = '3'  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 23 AND ARTS.ELA_NA = '4'  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 24 AND ARTS.ELA_NA IS NULL  THEN @ED
+			WHEN ELA_S.ELA_SCORE = 24 AND ARTS.ELA_NA = '1'  THEN @ED
+			WHEN ELA_S.ELA_SCORE = 24 AND ARTS.ELA_NA = '2'  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 24 AND ARTS.ELA_NA = '3'  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 24 AND ARTS.ELA_NA = '4'  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 25 AND ARTS.ELA_NA IS NULL  THEN @ED
+			WHEN ELA_S.ELA_SCORE = 25 AND ARTS.ELA_NA = '1'  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 25 AND ARTS.ELA_NA = '2'  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 25 AND ARTS.ELA_NA = '3'  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 25 AND ARTS.ELA_NA = '4'  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 26 THEN @NE
+			WHEN ELA_S.ELA_SCORE = 27 THEN @NE
+			WHEN ELA_S.ELA_SCORE = 28 THEN @NE
+			WHEN (ELA_S.ELA_SCORE = 29 OR ELA_S.ELA_SCORE = 30 OR ELA_S.ELA_SCORE = 31) AND ARTS.ELA_NA IS NULL  THEN @NE
+			WHEN (ELA_S.ELA_SCORE = 29 OR ELA_S.ELA_SCORE = 30 OR ELA_S.ELA_SCORE = 31) AND ARTS.ELA_NA = '1'  THEN @NE
+			WHEN (ELA_S.ELA_SCORE = 29 OR ELA_S.ELA_SCORE = 30 OR ELA_S.ELA_SCORE = 31) AND ARTS.ELA_NA = '2'  THEN @NE
+			WHEN (ELA_S.ELA_SCORE = 29 OR ELA_S.ELA_SCORE = 30 OR ELA_S.ELA_SCORE = 31) AND ARTS.ELA_NA = '3'  THEN @NE
+			WHEN (ELA_S.ELA_SCORE = 29 OR ELA_S.ELA_SCORE = 30 OR ELA_S.ELA_SCORE = 31) AND ARTS.ELA_NA = '4'  THEN @ME
+			WHEN (ELA_S.ELA_SCORE = 32 OR ELA_S.ELA_SCORE = 33 OR ELA_S.ELA_SCORE = 34) AND ARTS.ELA_NA IS NULL  THEN @NE
+			WHEN (ELA_S.ELA_SCORE = 32 OR ELA_S.ELA_SCORE = 33 OR ELA_S.ELA_SCORE = 34) AND ARTS.ELA_NA = '1'  THEN @NE
+			WHEN (ELA_S.ELA_SCORE = 32 OR ELA_S.ELA_SCORE = 33 OR ELA_S.ELA_SCORE = 34) AND ARTS.ELA_NA = '2'  THEN @NE
+			WHEN (ELA_S.ELA_SCORE = 32 OR ELA_S.ELA_SCORE = 33 OR ELA_S.ELA_SCORE = 34) AND ARTS.ELA_NA = '3'  THEN @ME
+			WHEN (ELA_S.ELA_SCORE = 32 OR ELA_S.ELA_SCORE = 33 OR ELA_S.ELA_SCORE = 34) AND ARTS.ELA_NA = '4'  THEN @ME
+			WHEN (ELA_S.ELA_SCORE = 35 OR ELA_S.ELA_SCORE = 36 OR ELA_S.ELA_SCORE = 37) AND ARTS.ELA_NA IS NULL  THEN @NE
+			WHEN (ELA_S.ELA_SCORE = 35 OR ELA_S.ELA_SCORE = 36 OR ELA_S.ELA_SCORE = 37) AND ARTS.ELA_NA = '1'  THEN @NE
+			WHEN (ELA_S.ELA_SCORE = 35 OR ELA_S.ELA_SCORE = 36 OR ELA_S.ELA_SCORE = 37) AND ARTS.ELA_NA = '2'  THEN @ME
+			WHEN (ELA_S.ELA_SCORE = 35 OR ELA_S.ELA_SCORE = 36 OR ELA_S.ELA_SCORE = 37) AND ARTS.ELA_NA = '3'  THEN @ME
+			WHEN (ELA_S.ELA_SCORE = 35 OR ELA_S.ELA_SCORE = 36 OR ELA_S.ELA_SCORE = 37) AND ARTS.ELA_NA = '4'  THEN @ME
+			WHEN ELA_S.ELA_SCORE = 38 AND ARTS.ELA_NA IS NULL  THEN @NE
+			WHEN ELA_S.ELA_SCORE = 38 AND ARTS.ELA_NA = '1'  THEN @ME
+			WHEN ELA_S.ELA_SCORE = 38 AND ARTS.ELA_NA = '2'  THEN @ME
+			WHEN ELA_S.ELA_SCORE = 38 AND ARTS.ELA_NA = '3'  THEN @ME
+			WHEN ELA_S.ELA_SCORE = 38 AND ARTS.ELA_NA = '4'  THEN @ME
+			WHEN ELA_S.ELA_SCORE >= 39 THEN @ME
+			
+			ELSE
+			'N/A'
+			END 
+			AS
+			[ELA_PL] 
+		
+	-- GET MATH COUNT OF NA'S --	
+	FROM
+		[db_KDPR].[dbo].[Results] AS RESULTS
+		LEFT JOIN
+			(	
+			SELECT
+				ID_NBR
+				,MATH
+				,COUNT (MATH) AS MATH_NA
+				,LANG
+			FROM
+				(
+				SELECT [fld_ID_NBR] AS ID_NBR
+						,[fld_Language] AS LANG
+						,[fld_Q17]
+						,[fld_Q18]
+						,[fld_Q19]
+						,[fld_Q20]
+						,[fld_Q21]
+						,[fld_Q22]
+						,[fld_Q23]
+						,[fld_Q26]
+				FROM [db_KDPR].[dbo].[Results_12_13]
+				WHERE
+					fld_AssessmentWindow = @AssessmentWindow
+				) AS QM	
+				UNPIVOT
+				(MATH FOR QM IN (fld_Q17, fld_Q18, fld_Q19, fld_Q20, fld_Q21, fld_Q22, fld_Q23, fld_Q26)) AS U1
+			WHERE 
+				MATH = 'NA' 
+			GROUP BY ID_NBR, MATH, LANG
+			) AS _MATH
+		ON
+			RESULTS.fld_ID_NBR = _MATH.ID_NBR
+			AND RESULTS.fld_Language = _MATH.LANG
+					
+	-- GET ELA COUNT OF NA'S --	
+		LEFT JOIN
+			(
+			SELECT
+				ID_NBR
+				,ELA
+				,COUNT (ELA) AS ELA_NA
+				,LANG
+			FROM
+				(
+				SELECT [fld_ID_NBR] AS ID_NBR
+					  ,[fld_Language] AS LANG
+					  ,[fld_Q27]
+					  ,[fld_Q28]
+					  ,[fld_Q29]
+					  ,[fld_Q30]
+					  ,[fld_Q31]
+					  ,[fld_Q32]
+					  ,[fld_Q33]
+					  ,[fld_Q34]
+					  ,[fld_Q35]
+					  ,[fld_Q36]
+					  ,[fld_Q37]
+					  ,[fld_Q38]
+					  ,[fld_Q39]
+					  ,[fld_Q40]
+				FROM [db_KDPR].[dbo].[Results_12_13]
+				WHERE
+					fld_AssessmentWindow = 'Spring'
+				) AS QE	
+					UNPIVOT
+					(ELA FOR QE IN (fld_Q27, fld_Q28, fld_Q29, fld_Q30, fld_Q31, fld_Q32, fld_Q33, fld_Q34, fld_Q35, fld_Q36, fld_Q37, fld_Q38, fld_Q39, fld_Q40)) AS U2
+			WHERE 
+				ELA = 'NA' 
+			GROUP BY ID_NBR, ELA, LANG
+			) AS ARTS
+		ON
+			RESULTS.fld_ID_NBR = ARTS.ID_NBR
+			AND RESULTS.fld_Language = ARTS.LANG
+			
+	--- CONVERT MATH Qs TO INT AND REMOVE THE NAs TO GET TOTAL MATH SCORE ---				
+		LEFT JOIN
+			(
+			SELECT
+			ID_NBR
+			,SUM (CAST(MATH AS INT)) AS 'MATH_SCORE'
+			,LANG
+			FROM	
+				(	
+				SELECT [fld_ID_NBR] AS ID_NBR
+					  ,[fld_Language] AS LANG
+					  ,CASE [fld_Q17]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q17
+						END
+						AS Q17
+					  ,CASE [fld_Q18]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q18
+						END
+						AS Q18
+					  ,CASE 
+						[fld_Q19]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q19
+						END
+						AS Q19
+					  ,CASE [fld_Q20]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q20
+						END
+						AS Q20
+					  ,CASE	[fld_Q21]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q21
+						END
+						AS Q21
+					  ,CASE [fld_Q22]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q22
+						END
+						AS Q22
+					  ,CASE	[fld_Q23]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q23
+						END
+						AS Q23
+					  ,CASE	[fld_Q26]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q26
+						END
+						AS Q26
+				FROM [db_KDPR].[dbo].[Results_12_13]
+				WHERE
+					fld_AssessmentWindow = 'Spring'
+			  ) AS QM
+					UNPIVOT
+					(MATH FOR QM IN (Q17, Q18, Q19, Q20, Q21, Q22, Q23, Q26)) AS U3
+			GROUP BY
+				ID_NBR, LANG
+			)AS MATH_S	
+		ON
+			RESULTS.fld_ID_NBR = MATH_S.ID_NBR	
+			AND RESULTS.fld_Language = MATH_S.LANG
+			
+	--- CONVERT ELA Qs TO INT AND REMOVE THE NAs TO GET TOTAL ELA SCORE ---				
+		LEFT JOIN
+			(
+			SELECT
+			ID_NBR
+			,LANG
+			,SUM (CAST(ELA AS INT)) AS 'ELA_SCORE'
+			FROM	
+				(	
+				SELECT [fld_ID_NBR] AS ID_NBR
+					  ,[fld_Language] AS LANG
+					  ,CASE [fld_Q27]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q27
+						END
+						AS Q27
+					  ,CASE [fld_Q28]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q28
+						END
+						AS Q28
+					  ,CASE	[fld_Q29]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q29
+						END
+						AS Q29
+					  ,CASE	[fld_Q30]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q30
+						END
+						AS Q30
+					  ,CASE	[fld_Q31]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q31
+						END
+						AS Q31
+					  ,CASE	[fld_Q32]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q32
+						END
+						AS Q32
+					  ,CASE	[fld_Q33]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q33
+						END
+						AS Q33
+					  ,CASE	[fld_Q34]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q34
+						END
+						AS Q34
+					  ,CASE	[fld_Q35]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q35
+						END
+						AS Q35
+					  ,CASE	[fld_Q36]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q36
+						END
+						AS Q36
+					  ,CASE [fld_Q37]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q37
+						END
+						AS Q37
+					  ,CASE	[fld_Q38]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q38
+						END
+						AS Q38
+					  ,CASE	[fld_Q39]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q39
+						END
+						AS Q39
+					  ,CASE	[fld_Q40]
+							WHEN 'NA' THEN '0'
+							ELSE fld_Q40
+						END
+						AS Q40
+				FROM [db_KDPR].[dbo].[Results_12_13]
+				WHERE
+					fld_AssessmentWindow = 'Spring'
+				) AS QE
+					UNPIVOT
+					(ELA FOR QE IN (Q27, Q28, Q29, Q30, Q31, Q32, Q33, Q34, Q35, Q36, Q37, Q38, Q39, Q40)) AS U4
+				GROUP BY
+					ID_NBR, LANG
+			)AS ELA_S	
+		ON
+			RESULTS.fld_ID_NBR = ELA_S.ID_NBR	
+			AND RESULTS.fld_Language = ELA_S.LANG
+	WHERE
+		fld_AssessmentWindow = 'Spring'
+		--AND FLD_ID_NBR = 970085923 
+	--ORDER BY 
+		--fld_ID_NBR	
+	
+
+) PL
+WHERE
+db_KDPR.dbo.Results_12_13.fld_ID_NBR = PL.fld_ID_NBR
+AND db_KDPR.dbo.Results_12_13.fld_AssessmentWindow = 'Spring'
+AND db_KDPR.dbo.Results_12_13.fld_Language = PL.fld_Language
+
+
+ROLLBACK

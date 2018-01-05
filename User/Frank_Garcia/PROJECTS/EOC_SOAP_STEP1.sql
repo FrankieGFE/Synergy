@@ -1,0 +1,51 @@
+SELECT
+*
+FROM
+(
+SELECT 
+      ASSESSMENT.[DISTRICT CODE] AS [DISTNO]
+      ,ASSESSMENT.[Field2]
+      ,ASSESSMENT.[Field3]
+      ,ASSESSMENT.[Field4] TEST_DESCR
+      ,ASSESSMENT.[Field5] AS [TESTDATE]
+      ,ASSESSMENT.[STUDENT ID] AS [STID]
+      ,ASSESSMENT.[Field19] AS [SCORE]
+      ,[SOAP].[Subtest Description]
+      ,[SOAP].[TEST]
+      ,[SOAP].[CRSE_ENR_COURSEID] AS [COURSEID]
+      ,[COURSES].Period
+      ,[COURSES].[SECCODELONG]
+      ,[COURSES].[LOCATION CODE] AS [SCHNUMB]
+      
+      
+       ,ROW_NUMBER() OVER(PARTITION BY ASSESSMENT.[STUDENT ID], [SOAP].[Subtest Description], COURSES.[SECCODELONG] ORDER BY [COURSES].Period DESC, LEFT(COURSES.COURSECODELONG,4) ) AS RN
+ 
+    
+FROM 
+  (
+  SELECT *
+  FROM [046-WS02].[db_STARS_History].[dbo].[ASSESSMENT_FACT]
+where field4 in
+(select [Subtest Description] from  [180-SMAXODS-01].SCHOOLNET.DBO.[EOC_Convert_Table])
+) AS ASSESSMENT
+
+LEFT JOIN
+(
+SELECT *
+FROM [180-SMAXODS-01].[SchoolNet].[dbo].[EOC_Convert_Table]
+) AS [SOAP]
+
+ON ASSESSMENT.[Field4] = [SOAP].[Subtest Description]
+INNER JOIN
+[046-WS02].[db_STARS_History].[dbo].[COURSE_ENROLL] AS COURSES
+ON
+LEFT(COURSES.COURSECODELONG,4) = [SOAP].[CRSE_ENR_COURSEID]
+AND [COURSES].[STUDENT ID] = [ASSESSMENT].[STUDENT ID]
+
+
+
+) AS STEP1
+
+WHERE
+RN = 1
+ORDER BY [Subtest Description]

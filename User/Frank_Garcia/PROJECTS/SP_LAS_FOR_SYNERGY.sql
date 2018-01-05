@@ -1,0 +1,5 @@
+USE PR
+GO
+
+SELECT * FROM APS.LCETestLevels
+ORDER BY Test

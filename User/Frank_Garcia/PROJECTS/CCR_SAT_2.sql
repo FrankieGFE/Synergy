@@ -1,0 +1,24 @@
+BEGIN TRAN
+
+UPDATE
+	CCR
+SET
+	CCR.APS_ID = TID.STATE_ID
+FROM
+	tem_CCR_SAT AS TID
+INNER JOIN
+	CCR_SAT AS CCR	
+ON
+	CCR.F_Name = TID.F_Name	
+	AND CCR.L_Name = TID.L_Name
+	AND CCR.MI = TID.MI
+	--AND CCR.Ed_Level = TID.Ed_Level
+	--AND CCR.DOB = TID.DOB
+	--AND CCR.Reading = TID.Reading
+	--AND CCR.Math = TID.Math
+	--AND CCR.Writing = TID.Writing
+	--AND CCR.Test_Date = TID.Test_Date
+	
+WHERE (TID.APS_ID IS NULL OR TID.APS_ID ='')
+
+ROLLBACK

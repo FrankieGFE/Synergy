@@ -1,0 +1,55 @@
+
+SELECT 
+	   [Student Name]
+      ,[Student ID]
+      ,[SBA Math]
+	  ,[SBA Math PL]
+      ,[SBA READING]
+	  ,[SBA READING PL]
+      ,[SBA SCIENCE]
+	  ,[SBA SCIENCE PL]
+      ,[SBA WRITING]
+	  ,[SBA WRITING PL]
+      ,[SBA SS]
+	  ,[SBA SS PL]
+      ,[IOWA Form A]
+	  ,[IOWA Form A PL]
+      ,[IOWA Form B]
+	  ,[IOWA Form B PL]
+	  ,CASE WHEN Math IS NULL THEN '' ELSE MATH
+	  END AS MATH
+	  ,CASE WHEN Eng IS NULL THEN '' ELSE ENG
+	  END AS ENG
+	  ,CASE WHEN Sci IS NULL THEN '' ELSE SCI
+	  END AS SCI
+	  ,CASE WHEN Soc IS NULL THEN '' ELSE SOC
+	  END AS SOC
+	  ,[GRADE IN 15-16] AS 'GRADE IN 15-16'
+FROM
+(
+
+SELECT
+	*
+FROM
+(
+
+SELECT
+	SIS_NUMBER
+	,ORGANIZATION_NAME
+	,GRADE_PERIOD
+	,MARK
+	,DEPARTMENT
+	--,COURSE_TITLE
+
+FROM
+	[SYNERGYDBDC].st_production.APS.StudentGrades AS GRD
+) AS T1
+PIVOT
+	(MAX([MARK]) FOR DEPARTMENT IN ([Sci],[Eng],[Math],[Soc])) AS P1
+WHERE ORGANIZATION_NAME = 'Roosevelt Middle School'
+--AND SIS_NUMBER = '100506013'
+AND GRADE_PERIOD = 'S2 GRADE'
+)AS T2
+RIGHT JOIN
+[RDAVM].AIMS.DBO.Roosevelt_Assessment_Data_FINAL AS RAD
+ON T2.SIS_NUMBER = RAD.[Student ID]

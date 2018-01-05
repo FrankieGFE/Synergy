@@ -1,0 +1,31 @@
+BEGIN TRAN
+
+SELECT
+	ID_NBR
+	,FRST_NME
+	,LST_NME
+	,M_NME
+	,BRTH_DT
+	,GENDER
+	--,SCH_NBR
+	--,GRDE
+	,FRPL
+	--,ELL
+	--,SPED
+	--,PRIM_DISAB
+	--,ETHN_CODE
+	,Race
+	--,ETHN_CODE2
+	--,ETHN2
+	--,ETHN_CODE3
+	--,ETHN3
+	--,504
+	--,DATE_CREATE
+	--,HISP_IND
+	,*
+
+FROM
+	APS.BasicStudent AS STUD
+WHERE STUD.DST_NBR = 1	
+
+ROLLBACK

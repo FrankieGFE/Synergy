@@ -1,0 +1,104 @@
+USE Assessments
+GO
+--SELECT
+--	last_name
+--	,LST_NME
+--	,first_name
+--	,FRST_NME
+--	,ID_NBR
+--	,STUDENT_CODE
+	
+--FROM
+--(
+SELECT
+	*
+FROM
+(
+SELECT 
+	  ROW_NUMBER () OVER (PARTITION BY [ID_NBR], [TEST_DT] ORDER BY [ID_NBR], [TEST_DT]) AS RN
+	  ,[DST_NBR]
+      ,[ID_NBR]
+      ,[TEST_ID]
+      ,[TEST_SUB]
+      ,[SCH_YR]
+      ,[TEST_DT]
+      ,[SCH_NBR]
+      ,[GRDE]
+      ,[SCORE1]
+      ,[SCORE2]
+      ,[SCORE3]
+      ,[FRST_NME]
+	  ,STUD.first_name
+      ,[LST_NME]
+	  ,STUD.last_name
+      ,[BRTH_DT]
+      ,[STID]
+      ,LAS.[School_Year]
+	  ,STUD.student_code
+  FROM [dbo].[SP_PRE_LAS] AS LAS
+  LEFT JOIN
+  ALLSTUDENTS AS STUD
+  ON LAS.ID_NBR = STUD.student_code
+  
+  WHERE LAS.School_Year= '2015'
+  and left (las.LST_NME, 3) != left (stud.last_name,3)
+  ) AS T1
+ WHERE RN = 1
+ --AND ID_NBR NOT IN ('970082136','980000259','980008161','970085140','980000369')
+-- AND ID_NBR NOT IN ('970080252',
+--'970084458',
+--'970090582',
+--'970093057',
+--'970094765',
+--'970098070',
+--'970101581',
+--'970106881',
+--'970109363',
+--'970111527',
+--'980000062',
+--'980000784',
+--'980001090',
+--'980001873',
+--'980001875',
+--'980001892',
+--'980001902',
+--'980002047',
+--'980002418',
+--'980002429',
+--'980002432',
+--'980002450',
+--'980002452',
+--'980002454',
+--'980002469',
+--'980002470',
+--'980002480',
+--'980002485',
+--'980002486',
+--'980002494',
+--'980002496',
+--'980002596',
+--'980002600',
+--'980002602',
+--'980002611',
+--'980002638',
+--'980002642',
+--'980002645',
+--'980002648',
+--'980002658',
+--'980002663',
+--'980002669',
+--'980002686',
+--'980002693',
+--'980002846',
+--'980002848',
+--'980002852',
+--'980002856',
+--'980002860',
+--'980007070',
+--'980009813')
+  --WHERE SCHOOL_YEAR = '2014-2015'
+  --and id_nbr = '980007070'
+  ORDER BY TEST_DT
+GO
+
+

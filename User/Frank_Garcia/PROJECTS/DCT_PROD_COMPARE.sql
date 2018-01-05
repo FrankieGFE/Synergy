@@ -1,0 +1,13 @@
+SELECT
+	DCT.[Student Name]
+	,DCT.[Student ID]
+	,DCT.[2014-2015  Withdrawal Type] AS DCT
+	,PROD.[2014-2015  Withdrawal Type] AS PROD
+
+FROM
+	AHS_TOTAL_ENROLLMENTS_DCT AS DCT
+	LEFT JOIN
+	AHS_TOTAL_ENROLLMENTS_PROD AS PROD
+	ON DCT.[Student ID] = PROD.[Student ID]
+WHERE DCT.[Student ID] = '970024892'
+ORDER BY DCT.[2014-2015  Withdrawal Type]
