@@ -1,0 +1,1 @@
+ALTER TABLE accounts ADD id INT IDENTITY(1,1) 

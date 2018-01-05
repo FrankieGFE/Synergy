@@ -1,0 +1,56 @@
+USE PR
+GO
+
+
+SELECT 
+	GRDE
+	,ID_NBR
+	,SCH_NBR
+	,SCH_YR	
+	,SCORE_1
+	,SCORE_2
+	,SCORE_3
+	,TEST_DT
+	,TEST_ID
+	,TEST_SUB
+	,Level AS 'PROFICIENCY LEVEL'
+ FROM
+
+(
+SELECT 
+
+--DISTINCT ID_NBR
+            
+            ID_NBR
+            ,TEST_DT
+            ,SCH_NBR
+            ,GRDE
+            ,SCORE_1
+			,SCORE_2
+			,SCORE_3
+            ,LEVELS.Level
+            ,TEST_SUB
+			,TEST_ID
+			,SCH_YR
+            ,ROW_NUMBER () OVER (PARTITION BY ID_NBR ORDER BY TEST_DT) AS RN
+
+FROM DBTSIS.GS055_V AS TESTS
+LEFT JOIN
+APS.LCETestLevels AS LEVELS
+ON
+LEVELS.Test = 'ELPA'
+AND TESTS.SCORE_1 >= LEVELS.ValueFrom
+AND TESTS.SCORE_1 <= LEVELS.ValueTo
+
+
+WHERE
+DST_NBR = 1
+AND TEST_SUB IN ('ELPA')
+--ORDER BY SCORE_3 DESC
+
+) AS WAPT1
+WHERE RN = 1
+--AND SCORE_1 != ''
+--AND ID_NBR = '516413721'
+ORDER BY SCORE_1
+

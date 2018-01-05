@@ -1,0 +1,243 @@
+EXECUTE AS LOGIN='QueryFileUser'
+GO
+
+SELECT
+	[Fiscal Year]
+	,[Term Code]
+	,[Term Description]
+	,[Student Type]
+	,[Term Start Date]
+	,[Term End Date]
+	,[Course Prefix]
+	,[Course Number]
+	,[STARS ID]
+	,RESOLVED_ID AS [RESOLVED STATE ID]
+	,APS_ID
+	,[Ethnicity Race]
+	,[Gender]
+	,[Date of Birth]
+	,[School District]
+	,[High School]
+	,[Student Name]
+	,[ACT Code]
+	,[PIDM]
+	,CASE WHEN [FISCAL YEAR] = '1112' THEN [2011]
+	      WHEN [FISCAL YEAR] = '1213' THEN [2012]
+		  WHEN [FISCAL YEAR] = '1314' THEN [2013]
+		  WHEN [FISCAL YEAR] = '1415' THEN [2014]
+		  WHEN [FISCAL YEAR] = '1516' THEN [1415]
+		  
+	END AS 'GPA BEFORE'
+	,CASE WHEN [FISCAL YEAR] = '1112' THEN [2012]
+	      WHEN [FISCAL YEAR] = '1213' THEN [2013]
+		  WHEN [FISCAL YEAR] = '1314' THEN [2014]
+		  WHEN [FISCAL YEAR] = '1415' THEN [1415]
+		  WHEN [FISCAL YEAR] = '1516' THEN [1516]
+		  
+	END AS 'GPA AFTER'
+FROM
+(
+SELECT
+	[Fiscal Year]
+	,[Term Code]
+	,[Term Description]
+	,[Student Type]
+	,CONVERT(DATE,[Term Start Date], 120) AS [TERM START DATE]
+	,CONVERT(DATE, [Term End Date], 120) AS [TERM END DATE]
+	,[Course Prefix]
+	,[Course Number]
+	,[FILE].[STARS ID]
+	,[Ethnicity Race]
+	,[Gender]
+	,CONVERT(DATE,[Date of Birth], 120) AS [DATE OF BIRTH]
+	,[School District]
+	,[High School]
+	,[Student Name]
+	,[ACT Code]
+	,[PIDM]
+	,APS_ID
+	,RESOLVED_ID
+	,CUM_SMAX.[2010]
+	,CUM_SMAX.[2011]
+	,CUM_SMAX.[2012]
+	,CUM_SMAX.[2013]
+	,CUM_SMAX.[2014]
+	--,CUM_GPA.[1314]
+	,CUM_GPA.[1415]
+	,CUM_GPA.[1516]
+FROM
+
+		OPENROWSET (
+			'Microsoft.ACE.OLEDB.12.0', 
+			'Text;Database=\\SynTempSSIS\Files\TempQuery\;', 
+			'SELECT * FROM CNM_Outreach_file_w_APS_Schools_Only.csv'  
+		)AS [FILE]
+	
+LEFT JOIN
+	(
+	SELECT 
+	SIS_NUMBER
+	--,SCHOOL_YEAR
+	,[1314]
+	,[1415]
+	,[1516]
+	FROM
+	(
+	SELECT 
+	[StudentSchoolYear].SIS_NUMBER
+	,CASE WHEN SCHOOL_YEAR = '2013' THEN '1213'
+	      WHEN SCHOOL_YEAR = '2014' THEN '1314'
+		  WHEN SCHOOL_YEAR = '2015' THEN '1415'
+		  ELSE SCHOOL_YEAR
+	END AS SCHOOL_YEAR
+	,[HS Cum Flat]
+	,ROW_NUMBER() OVER (PARTITION BY [StudentSchoolYear].STUDENT_GU, SCHOOL_YEAR ORDER BY  ENTER_DATE DESC, [HS Cum Flat] DESC,  [HS Cum Weighted] DESC) AS RN
+	FROM		
+		APS.BasicStudentWithMoreInfo AS [STUDENT]
+		INNER JOIN
+		APS.StudentEnrollmentDetails AS [StudentSchoolYear]
+		ON
+		STUDENT.STUDENT_GU = [StudentSchoolYear].STUDENT_GU
+		LEFT OUTER JOIN
+		(
+		SELECT DISTINCT
+			[GPA].[STUDENT_SCHOOL_YEAR_GU]
+			
+			,SUM(CASE WHEN [GPA_DEF].[GPA_CODE] IN ( 'HSCF', 'HSF') THEN [GPA].[GPA] ELSE 0 END) AS [HS Cum Flat]
+			,SUM(CASE WHEN [GPA_DEF].[GPA_CODE] IN ( 'HSCW', 'HSW') THEN [GPA].[GPA] ELSE 0 END) AS [HS Cum Weighted]
+			
+		FROM	
+			rev.[EPC_STU_GPA] AS [GPA]  
+				
+			INNER JOIN
+			rev.[EPC_SCH_YR_GPA_TYPE_RUN] [GPA_RUN]
+			ON
+			[GPA].[SCHOOL_YEAR_GPA_TYPE_RUN_GU] = [GPA_RUN].[SCHOOL_YEAR_GPA_TYPE_RUN_GU]
+			AND [GPA_RUN].[SCHOOL_YEAR_GRD_PRD_GU] IS NULL
+			
+			INNER JOIN
+			rev.[EPC_GPA_DEF_TYPE] [GPA_TYPE] 
+			ON 
+			[GPA_RUN].[GPA_DEF_TYPE_GU] = [GPA_TYPE].[GPA_DEF_TYPE_GU]
+			AND (
+				[GPA_TYPE].[GPA_TYPE_NAME] = 'HS Cum Flat' 
+				OR
+				[GPA_TYPE].[GPA_TYPE_NAME] = 'HS Cum Weighted' 
+				)
+					
+			INNER JOIN 
+			rev.[EPC_GPA_DEF] [GPA_DEF]  
+			ON 
+			[GPA_TYPE].[GPA_DEF_GU] = [GPA_DEF].[GPA_DEF_GU]
+			GROUP BY
+			[GPA].[STUDENT_SCHOOL_YEAR_GU]
+			
+			)  AS [CUM_GPA_AFTER]
+		ON
+		[StudentSchoolYear].[STUDENT_SCHOOL_YEAR_GU] = [CUM_GPA_AFTER].[STUDENT_SCHOOL_YEAR_GU]
+
+WHERE
+	([HS Cum Flat] IS NOT NULL
+	OR [HS Cum Weighted] IS NOT NULL)
+) AS T1
+
+PIVOT
+	(MAX([HS CUM FLAT]) FOR SCHOOL_YEAR IN ([1314],[1415],[1516])) AS UP1
+WHERE 1 = 1
+AND RN = 1
+) AS CUM_GPA
+ON CUM_GPA.SIS_NUMBER = APS_ID
+
+LEFT JOIN
+(
+SELECT
+	ID_NBR
+	,[2010]
+	,[2011]
+	,[2012]
+	,[2013]
+	,[2014]
+FROM
+(
+SELECT 
+	ID_NBR
+	,[FLAT GPA]
+	,SCH_YR
+FROM
+(
+SELECT
+	DST_NBR
+	,SCH_YR
+	,ID_NBR
+
+	,CASE 
+		WHEN SUM(CASE WHEN EXCL_FR_TN != 'X' THEN ATT_CRD ELSE 0 END) != 0 
+		THEN
+			SUM(CASE WHEN EXCL_FR_TN != 'X' THEN GRAD_VALUE * EARNED_CRS ELSE 0 END)
+			/SUM(
+			CASE 
+				WHEN EXCL_FR_TN != 'X' THEN 
+					CASE 
+						WHEN EARNED_CRS > ATT_CRD THEN EARNED_CRS 
+						ELSE ATT_CRD 
+					END 
+				ELSE 0 
+			END			
+			)
+		ELSE
+			0
+	END AS [FLAT GPA]
+			 
+	,SUM(CASE WHEN HNRS_FLG = 'X' AND EXCL_FR_TN != 'X' THEN EARNED_CRS * WGHT_FACT1 ELSE 0 END) AS [Honors Points]
+	
+	,CASE 
+		WHEN SUM(CASE WHEN EXCL_FR_TN != 'X' THEN ATT_CRD ELSE 0 END) != 0 
+		THEN
+			(SUM(CASE WHEN EXCL_FR_TN != 'X' THEN GRAD_VALUE * EARNED_CRS ELSE 0 END)
+			/SUM(
+			CASE 
+				WHEN EXCL_FR_TN != 'X' THEN 
+					CASE 
+						WHEN EARNED_CRS > ATT_CRD THEN EARNED_CRS 
+						ELSE ATT_CRD 
+					END 
+				ELSE 0 
+			END
+			))
+			+
+			SUM(CASE WHEN HNRS_FLG = 'X' AND EXCL_FR_TN != 'X' THEN EARNED_CRS * WGHT_FACT1 ELSE 0 END)
+		ELSE
+			0
+	END AS [Weighted GPA]
+	,SUM(
+		CASE 
+			WHEN EXCL_FR_TN != 'X' THEN 
+				CASE 
+					WHEN EARNED_CRS > ATT_CRD THEN EARNED_CRS 
+					ELSE ATT_CRD 
+				END 
+			ELSE 0 
+		END
+	) AS [Attempted Credits]
+	,SUM(CASE WHEN EXCL_FR_TN != 'X' THEN EARNED_CRS ELSE 0 END) AS [Earned Credits]
+			
+FROM
+	[180-SMAXODS-01.APS.EDU.ACTD].PR.APS.FinalGradesAndTranscript
+WHERE
+	GPA_USE = 'X'
+	--and  ID_NBR = '102785458'
+GROUP BY
+	DST_NBR
+	,SCH_YR
+	,ID_NBR
+) AS TT
+)GPA_CUM
+PIVOT
+	(MAX([FLAT GPA]) FOR SCH_YR IN ([2010],[2011],[2012],[2013],[2014])) AS UP1
+)CUM_SMAX
+ON CUM_SMAX.ID_NBR = APS_ID
+) AS FLAT_GPA
+
+ORDER BY APS_ID
+REVERT
+GO

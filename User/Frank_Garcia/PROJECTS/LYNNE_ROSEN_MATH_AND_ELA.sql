@@ -1,0 +1,51 @@
+SELECT
+	ID_NBR
+	,LST_NME
+	,FRST_NME
+	,SCH_NBR
+	,GRADE
+	,SCHOOL_YEAR
+	,TEST_NAME
+	,TEST_SCORE
+	,PERFORMANCE_LEVEL
+	,SBA_MATH
+	,SBA_READING
+	,T1.mark_code AS ELA
+	,T2.mark_code AS MATH
+FROM
+	[CHRIS_HS no  SBA or grades] HS
+LEFT JOIN
+	(SELECT	
+		*
+	FROM
+		(
+		SELECT
+			ROW_NUMBER () OVER (PARTITION BY [student_code] ORDER BY [mark_code]) AS RN
+			,STUDENT_CODE
+			,MARK_CODE
+		FROM
+			[DBO].[CHRIS_HS_ENG_COURSES]
+		WHERE mark_code != 'NULL'
+		) AS ENG
+		WHERE RN = 1
+	) AS T1
+	ON T1.STUDENT_CODE = HS.ID_NBR
+	
+
+LEFT JOIN
+	(SELECT	
+		*
+	FROM
+		(
+		SELECT
+			ROW_NUMBER () OVER (PARTITION BY [student_code] ORDER BY [mark_code]) AS RN
+			,STUDENT_CODE
+			,MARK_CODE
+		FROM
+			[DBO].[CHRIS_HS_MATH_COURSES]
+		WHERE mark_code != 'NULL'
+		) AS MATH
+		WHERE RN = 1
+	) AS T2
+	ON T2.STUDENT_CODE = HS.ID_NBR
+

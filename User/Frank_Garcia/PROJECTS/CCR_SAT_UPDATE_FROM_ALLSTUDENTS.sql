@@ -1,0 +1,67 @@
+BEGIN TRAN
+
+UPDATE
+	[180-SMAXODS-01].SchoolNet.dbo.CCR_SAT
+SET
+	SchoolNet.dbo.CCR_SAT.APS_ID = STUDENT.student_code
+	,SchoolNet.dbo.CCR_SAT.State_ID = STUDENT.STATE_ID
+	,SchoolNet.dbo.CCR_SAT.DOB = STUDENT.DOB
+	,SCHOOLNET.DBO.CCR_SAT.LOCATION_CODE = STUDENT.school_code
+	--,[Assessment School Year Date] = '2015-6-30'
+	,[Test_Description] = 'SAT'
+	
+
+	
+--SELECT
+--	STUDENT.student_code
+
+--	,SAT.F_Name
+--	,student.last_name 
+--	,SAT.L_Name
+--	,SAT.DOB_old
+--	,STUDENT.DOB
+--	,'19' + SUBSTRING (SAT.DOB_old,5,2) + '-' + SUBSTRING (SAT.DOB_old, 1,2) + '-' + SUBSTRING (SAT.DOB_old, 3,2) AS DDOB
+
+FROM
+	[180-SMAXODS-01].SchoolNet.dbo.CCR_SAT AS SAT
+	
+LEFT JOIN
+	ALLSTUDENTS AS STUDENT
+	ON
+	SAT.L_Name = STUDENT.last_name
+	AND SAT.F_Name = STUDENT.first_name
+	AND STUDENT.DOB = '19' + SUBSTRING (SAT.DOB_old,5,2) + '-' + SUBSTRING (SAT.DOB_old, 1,2) + '-' + SUBSTRING (SAT.DOB_old, 3,2)
+	AND STUDENT.SCHOOL_YEAR = '2014'
+WHERE SAT.LOCATION_CODE IS NULL
+AND SAT.SCH_YR = '2014-2015'
+--AND SAT.[District Code] = 'FRANK'
+AND SAT.APS_ID IS NULL
+
+
+ROLLBACK
+
+--BEGIN TRAN
+--UPDATE
+--	[180-SMAXODS-01].SchoolNet.dbo.CCR_SAT
+--SET
+--	SchoolNet.dbo.CCR_SAT.LOCATION_CODE = CODES.[PED APS LOC]
+
+--FROM
+--CCR_SAT SAT
+--JOIN
+--school_codes_ACT_SAT_To_APS CODES
+--ON SAT.SAT_School_Code = CODES.[ACT SAT HS Code]
+
+--WHERE SCH_YR = '2014-2015'
+
+--ROLLBACK
+
+
+--BEGIN TRAN
+--UPDATE CCR_SAT
+--	SET ACT_HS_CODE = APS_Sch_Code
+--	FROM CCR_SAT
+--	WHERE ACT_HS_CODE IS NULL
+--	AND SCH_YR = '2014-2015'
+
+--ROLLBACK

@@ -1,0 +1,31 @@
+USE 
+Assessments
+GO
+
+SELECT
+	--*
+	first_name
+	,last_name AS NAME
+	,student_code AS APS_ID
+	,test_level_name
+	,CASE WHEN parent_test_section_code = '0' THEN score_group_name 
+	END AS 'MET REQUIREMENTS'
+	,score_15 AS 'READING REQUIREMENT'
+	,score_16 AS 'WRITING RQUIREMENT'
+	,score_17 AS 'MATH REQUIREMENT'
+	,score_18 AS 'SCIENCE REQUIREMENT'
+	,score_19 AS 'SS REQUIREMENT'
+
+	,CASE WHEN score_15 = 'PASSED' THEN 'PASSED' ELSE 'FAILED' END AS 'READING STATUS'
+	,CASE WHEN score_16 = 'PASSED' THEN 'PASSED' ELSE 'FAILED' END AS 'WRITING STATUS'
+	,CASE WHEN score_17 = 'PASSED' THEN 'PASSED' ELSE 'FAILED' END AS 'MATH STATUS'
+	,CASE WHEN score_18 = 'PASSED' THEN 'PASSED' ELSE 'FAILED' END AS 'SCIENCE STATUS'
+	,CASE WHEN score_19 = 'PASSED' THEN 'PASSED' ELSE 'FAILED' END AS 'SS STATUS'
+
+	,school_code AS SCHOOL
+
+
+FROM
+	test_result_EES
+WHERE parent_test_section_code = '0'
+--AND student_code = '825816523'
