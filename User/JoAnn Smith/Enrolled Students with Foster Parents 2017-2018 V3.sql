@@ -14,6 +14,10 @@ SPED Status
 Enrollment History (Mobility – number of schools attended)
 Test Scores – (Is there an indicator that identifies if they are performing at grade level?)
 
+1/15/2018 - JoAnn, can you please revise the logic for this pull to only include the number of primary enrollments for the 17-18 (2017.R)
+			school year in the Enrollment Count column.  Remember not to count Summer Withdrawals or No Shows.
+
+
 */
 
 ;with Students
@@ -88,21 +92,34 @@ or
 as
 (
 select
-	SED.SIS_NUMBER,
-	SED.SCHOOL_NAME
+	R.SIS_NUMBER,
+	o.ORGANIZATION_NAME as SCHOOL_NAME
 from
 	Students r
 LEFT join
-	aps.StudentEnrollmentDetails sed
+	aps.PrimaryEnrollmentsAsOf(getdate()) sed
 on
-	r.SIS_NUMBER = sed.SIS_NUMBER
+	r.STUDENT_GU = sed.STUDENT_GU
+left join
+	rev.epc_stu_sch_yr ssy
+on
+	sed.STUDENT_SCHOOL_YEAR_GU = ssy.STUDENT_SCHOOL_YEAR_GU
+left join
+	rev.REV_ORGANIZATION_YEAR oy
+on
+	sed.ORGANIZATION_YEAR_GU = oy.ORGANIZATION_YEAR_GU
+left join
+	rev.rev_organization o
+on
+	o.ORGANIZATION_GU = oy.ORGANIZATION_GU
 WHERE
-	EXCLUDE_ADA_ADM IS NULL
+	SUMMER_WITHDRAWL_DATE IS NULL
+OR
+	SUMMER_WITHDRAWL_CODE IS NULL
 GROUP BY
-	SED.SIS_NUMBER, SED.SCHOOL_NAME
+	R.SIS_NUMBER, O.ORGANIZATION_NAME
 )
---SELECT * FROM NumberofSchoolsAttended where sis_number = 104063789
-
+--SELECT * FROM NumberofSchoolsAttended 
 ,Count_Schools
 as
 (
@@ -114,7 +131,7 @@ from
 GROUP BY
 	SIS_NUMBER
 )
---SELECT * FROM COUNT_SCHOOLS
+--SELECT * FROM COUNT_SCHOOLS WHERE NUMBER_OF_SCHOOLS_ATTENDED > 1
 ,I_READY_MATH
 AS
 (
