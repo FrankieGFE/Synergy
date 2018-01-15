@@ -1,3 +1,23 @@
+/*
+Created by:		JoAnn Smith
+Date Created:	12/18/2017
+Modified:		12/21/2017
+				1/4/2018
+				1/15/2018 - added grad status
+
+Description:	JoAnn, can you please take a try at this one.  It’s re-creating a pull Patti and Shayne worked on that apparently
+took them some time to get going, but I’m betting we can re-create it fairly quickly.  A lot of the columns in the attached sample
+file from Patti are similar to the type of data you pulled for the Grad Cohort.  Most of the columns in the file we need to re-create
+are pretty self-explanatory, but below is some additional information on some of the more tricky ones.  Start by pulling any student
+active or in-active that have a 9th Grade enrollment.
+
+CHS_1stTime_9thGrade – this is the year in Student Course History the student first had course history course entry at the 9th grade level.
+
+Enrollment_1stTime_9thGrade – this is the year the student was first enrolled in the 9th grade level
+
+Discrepancy – I’ll find out from Patti how to determine this value
+
+*/
 ; with Ninth_Graders
 as
 (
@@ -107,7 +127,12 @@ select
 	S.FIRST_NAME,
 	S.LAST_NAME,
 	ISNULL(o.ORGANIZATION_NAME, '') AS SCHOOL_NAME,
-	ISNULL(lu.VALUE_DESCRIPTION, '') AS GRADE,
+	ISNULL(luA.VALUE_DESCRIPTION, '') AS GRADE,
+	CASE
+		WHEN GRADUATION_DATE IS NOT NULL THEN 'Y'
+	ELSE	
+		'N'
+	END AS [GRADUATED?],
 	S.CHS_NINTH_GRADE_YEAR,
 	NINTH_GRADE_SCHOOL_YEAR,
 	NINTH_GRADE_SCHOOL_NAME,
@@ -133,9 +158,24 @@ left join
 on
 	s.STUDENT_GU = st.STUDENT_GU
 LEFT JOIN
-	APS.LookupTable('K12', 'Grade') as LU
+	APS.LookupTable('K12', 'Grade') as LUA
 on
-	e.GRADE = lu.VALUE_CODE
+	e.GRADE = luA.VALUE_CODE
+LEFT JOIN 
+	APS.LookupTable('K12', 'GRADUATION_STATUS') AS LU
+ON
+	LU.VALUE_CODE = ST.GRADUATION_STATUS
+
+LEFT JOIN 
+	APS.LookupTable('K12', 'DIPLOMA_TYPE') AS LU2
+ON
+	LU2.VALUE_CODE = ST.DIPLOMA_TYPE
+
+LEFT JOIN 
+	APS.LookupTable('K12.DEMOGRAPHICS', 'POST_SECONDARY') AS LU3
+ON
+	LU3.VALUE_CODE = ST.POST_SECONDARY
+
 where 
 	e.EXCLUDE_ADA_ADM is null
 )
@@ -186,6 +226,11 @@ select
 	I.LAST_NAME,
 	s.SCHOOL_NAME,
 	s.GRADE,
+	CASE	
+		WHEN ST.GRADUATION_DATE IS NOT NULL THEN 'Y'
+	ELSE
+		'N'
+	END AS [GRADUATED?],
 	I.CHS_NINTH_GRADE_YEAR,
 	i.NINTH_GRADE_SCHOOL_YEAR,
 	I.NINTH_GRADE_SCHOOL_NAME,
@@ -202,6 +247,10 @@ inner join
 	aps.StudentEnrollmentDetails s
 on
 	i.STUDENT_GU = s.STUDENT_GU
+INNER JOIN
+	REV.EPC_STU ST
+ON
+	S.STUDENT_GU = ST.STUDENT_GU
 where
 	EXCLUDE_ADA_ADM is null
 )
