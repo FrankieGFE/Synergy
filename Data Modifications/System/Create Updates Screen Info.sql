@@ -30,13 +30,13 @@ SELECT
 	,NULL AS CHANGE_ID_STAMP
 		
 	--ENTER IN THE REFRESH DATE
-	,'2018-01-10' AS REFRESH_DATE
+	,'2018-01-16' AS REFRESH_DATE
 	
 	--ENTER THE USER INTERFACE URL
 	,'http://synfunc/' AS URL
 
 	--ENTER IN ANY NOTES FOR ENVIRONMENT
-	,'Restore from Daily Per Andy - Update Patch' AS NOTES
+	,'Restore from Daily Per Andy' AS NOTES
 
 		
 
@@ -59,5 +59,5 @@ rev.UD_VER
 --delete from rev.rev_ver
 --where ver_gu = 'DE24DB4E-7AD2-4FAF-ACEB-E2C0679204E5'
 --commit
-ROLLBACK
+--ROLLBACK
 
