@@ -45,7 +45,7 @@ and
 and
 	ENTER_DATE IS NOT NULL
 )
---select * from Ninth_Graders where SIS_NUMBER = 100040336
+--select * from Ninth_Graders where SIS_NUMBER = 100076785
 
 ,N_Results
 as
@@ -128,18 +128,21 @@ select
 	S.LAST_NAME,
 	ISNULL(o.ORGANIZATION_NAME, '') AS SCHOOL_NAME,
 	ISNULL(luA.VALUE_DESCRIPTION, '') AS GRADE,
+	S.CHS_NINTH_GRADE_YEAR,
+	NINTH_GRADE_SCHOOL_YEAR,
+	INIT_NINTH_GRADE_YEAR AS INITIAL_NINTH_GRADE_SCHOOL_YEAR_FROM_STU,
+	NINTH_GRADE_SCHOOL_NAME,
+	EXPECTED_GRADUATION_YEAR,
 	CASE
 		WHEN GRADUATION_DATE IS NOT NULL THEN 'Y'
 	ELSE	
 		'N'
 	END AS [GRADUATED?],
-	S.CHS_NINTH_GRADE_YEAR,
-	NINTH_GRADE_SCHOOL_YEAR,
-	NINTH_GRADE_SCHOOL_NAME,
-	EXPECTED_GRADUATION_YEAR,
+	CONVERT(VARCHAR(10),GRADUATION_DATE, 101) AS GRADUATION_DATE,
 	case
-		when s.CHS_NINTH_GRADE_YEAR is null and NINTH_GRADE_SCHOOL_YEAR is not null then 'VERIFY'
+		when s.CHS_NINTH_GRADE_YEAR is null and NINTH_GRADE_SCHOOL_YEAR is not null AND NINTH_GRADE_SCHOOL_YEAR <> '2017' then 'VERIFY'
 		when s.CHS_NINTH_GRADE_YEAR IS NOT NULL AND NINTH_GRADE_SCHOOL_YEAR IS NOT NULL AND s.CHS_NINTH_GRADE_YEAR <> NINTH_GRADE_SCHOOL_YEAR THEN 'VERIFY'
+		WHEN S.CHS_NINTH_GRADE_YEAR IS NULL AND NINTH_GRADE_SCHOOL_YEAR = '2017' THEN 'OK'
 		ELSE
 		'OK' 
 	END AS [DISCREPANCY?]
@@ -201,70 +204,70 @@ where
 )
 --select * from Actives
 --order by sis
-,Inactives
-as
-(
-select
-	 *
-from
-	Results 
-where
-	 rn = 1
-and
-	SCHOOL_NAME = ''
-)
---select * from Inactives
-,InactivesWithSchoolName
-as
-(
-select
-	row_number() over(partition by i.student_gu order by i.student_gu, enter_date desc) as rn,
-	i.STUDENT_GU,
-	I.ACTIVE_STUDENT,
-	i.SIS_NUMBER,
-	I.FIRST_NAME,
-	I.LAST_NAME,
-	s.SCHOOL_NAME,
-	s.GRADE,
-	CASE	
-		WHEN ST.GRADUATION_DATE IS NOT NULL THEN 'Y'
-	ELSE
-		'N'
-	END AS [GRADUATED?],
-	I.CHS_NINTH_GRADE_YEAR,
-	i.NINTH_GRADE_SCHOOL_YEAR,
-	I.NINTH_GRADE_SCHOOL_NAME,
-	I.EXPECTED_GRADUATION_YEAR,
-	case
-		when i.CHS_NINTH_GRADE_YEAR is null and NINTH_GRADE_SCHOOL_YEAR is not null then 'VERIFY'
-		when i.CHS_NINTH_GRADE_YEAR IS NOT NULL AND NINTH_GRADE_SCHOOL_YEAR IS NOT NULL AND I.CHS_NINTH_GRADE_YEAR <> NINTH_GRADE_SCHOOL_YEAR THEN 'VERIFY'
-		ELSE
-		'OK' 
-	END AS [DISCREPANCY?]
-from
-	Inactives i
-inner join
-	aps.StudentEnrollmentDetails s
-on
-	i.STUDENT_GU = s.STUDENT_GU
-INNER JOIN
-	REV.EPC_STU ST
-ON
-	S.STUDENT_GU = ST.STUDENT_GU
-where
-	EXCLUDE_ADA_ADM is null
-)
---select * from InactivesWithSchoolName where SIS_NUMBER = 100136241
-,InactivesResults
-as
-(
-select
-	*
-from
-	InactivesWithSchoolName i
-where
-	rn = 1
-)
+--,Inactives
+--as
+--(
+--select
+--	 *
+--from
+--	Results 
+--where
+--	 rn = 1
+--and
+--	SCHOOL_NAME = ''
+--)
+----select * from Inactives
+--,InactivesWithSchoolName
+--as
+--(
+--select
+--	row_number() over(partition by i.student_gu order by i.student_gu, enter_date desc) as rn,
+--	i.STUDENT_GU,
+--	I.ACTIVE_STUDENT,
+--	i.SIS_NUMBER,
+--	I.FIRST_NAME,
+--	I.LAST_NAME,
+--	s.SCHOOL_NAME,
+--	s.GRADE,
+--	CASE	
+--		WHEN ST.GRADUATION_DATE IS NOT NULL THEN 'Y'
+--	ELSE
+--		'N'
+--	END AS [GRADUATED?],
+--	I.CHS_NINTH_GRADE_YEAR,
+--	i.NINTH_GRADE_SCHOOL_YEAR,
+--	I.NINTH_GRADE_SCHOOL_NAME,
+--	I.EXPECTED_GRADUATION_YEAR,
+--	case
+--		when i.CHS_NINTH_GRADE_YEAR is null and NINTH_GRADE_SCHOOL_YEAR is not null then 'VERIFY'
+--		when i.CHS_NINTH_GRADE_YEAR IS NOT NULL AND NINTH_GRADE_SCHOOL_YEAR IS NOT NULL AND I.CHS_NINTH_GRADE_YEAR <> NINTH_GRADE_SCHOOL_YEAR THEN 'VERIFY'
+--		ELSE
+--		'OK' 
+--	END AS [DISCREPANCY?]
+--from
+--	Inactives i
+--inner join
+--	aps.StudentEnrollmentDetails s
+--on
+--	i.STUDENT_GU = s.STUDENT_GU
+--INNER JOIN
+--	REV.EPC_STU ST
+--ON
+--	S.STUDENT_GU = ST.STUDENT_GU
+--where
+--	EXCLUDE_ADA_ADM is null
+--)
+----select * from InactivesWithSchoolName where SIS_NUMBER = 100136241
+--,InactivesResults
+--as
+--(
+--select
+--	*
+--from
+--	InactivesWithSchoolName i
+--where
+--	rn = 1
+--)
 ,FinalResults	
 as
 (
@@ -272,11 +275,12 @@ select
 	*
 from
 	ActivesResults A
-UNION ALL
-SELECT
-	*
-FROM
-	InactivesResults i
 )
+--UNION ALL
+--SELECT
+--	*
+--FROM
+--	InactivesResults i
+--)
 select * from FinalResults 
 order by SIS_NUMBER
