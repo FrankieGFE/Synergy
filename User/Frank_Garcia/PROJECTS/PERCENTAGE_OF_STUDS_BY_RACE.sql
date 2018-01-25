@@ -1,0 +1,10 @@
+SELECT SIS_NUMBER
+	   ,PrimaryRaceState
+	  --,COUNT (SIS_NUMBER)
+FROM APS.PrimaryEnrollmentsAsOf ('2014-05-10') AS PE
+LEFT JOIN
+rev.SIF_22_StudentPersonal AS PERS
+ON PE.STUDENT_GU = PERS.STUDENT_GU
+WHERE SIS_NUMBER IS NOT NULL
+--GROUP BY PrimaryRaceState
+

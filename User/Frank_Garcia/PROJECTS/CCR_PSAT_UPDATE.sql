@@ -1,0 +1,33 @@
+BEGIN TRAN
+
+UPDATE
+	CCR_PSAT
+SET	
+	APS_ID = ID.APS_ID
+	,STATE_ID = ID.STATE_ID
+	,[APS Sch Code] = ID.[APS Sch Code]
+
+--SELECT
+--	PSAT.LastName
+--	,ID.LastName
+--	,ID.[STARS LAST NAME]
+--	,PSAT.FirstName
+--	,ID.FirstName
+--	,ID.[STARS FIRST NAME]
+--	,PSAT.[APS Sch Code]
+--	,ID.[APS Sch Code]
+--	,PSAT.APS_ID
+--	,ID.APS_ID
+--	,PSAT.STATE_ID
+--	,ID.STATE_ID
+FROM
+	CCR_PSAT AS PSAT
+	INNER JOIN
+	[PSAT_2013-2014_ID_UPDATES] AS ID
+	ON
+		RTRIM (PSAT.FirstName) = RTRIM (ID.FirstName)
+		AND RTRIM (PSAT.LastName) = RTRIM (ID.LastName)
+		--AND PSAT.DOB_orig = ID.DOB_orig
+WHERE PSAT.APS_ID IS NULL	
+
+ROLLBACK

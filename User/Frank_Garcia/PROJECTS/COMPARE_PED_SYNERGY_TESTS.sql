@@ -1,0 +1,1330 @@
+
+
+
+
+WITH SBA_MATH_SCORE AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'SBAMath' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      --,[PerformanceLevel]
+      ,[ScaledScore]
+      --,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'SBA' AND Subtest = 'MATH')
+  ) AS T1
+PIVOT
+(MAX(SCALEDSCORE) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+,SBA_MATH_PL AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'SBAMath' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      ,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'SBA' AND Subtest = 'MATH')
+  ) AS T1
+PIVOT
+(MAX(COMPETENCY) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+, SBA_READING_SCORE AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'SBAReading' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      --,[PerformanceLevel]
+      ,[ScaledScore]
+      --,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'SBA' AND Subtest = 'READING')
+  ) AS T1
+PIVOT
+(MAX(SCALEDSCORE) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+,SBA_READING_PL AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'SBAReading' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      ,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'SBA' AND Subtest = 'READING')
+  ) AS T1
+PIVOT
+(MAX(COMPETENCY) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+, SBA_SCIENCE_SCORE AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'SBAScience' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      --,[PerformanceLevel]
+      ,[ScaledScore]
+      --,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'SBA' AND Subtest = 'SCIENCE')
+  ) AS T1
+PIVOT
+(MAX(SCALEDSCORE) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+,SBA_SCIENCE_PL AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'SBAScience' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      ,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'SBA' AND Subtest = 'SCIENCE')
+  ) AS T1
+PIVOT
+(MAX(COMPETENCY) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+, SBASPA_READING_SCORE AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'SBASSPAReading' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      --,[PerformanceLevel]
+      ,[ScaledScore]
+      --,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'SBASPA' AND Subtest = 'READING')
+  ) AS T1
+PIVOT
+(MAX(SCALEDSCORE) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+,SBASPA_READING_PL AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'SBASSPAReading' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      ,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'SBASPA' AND Subtest = 'READING')
+  ) AS T1
+PIVOT
+(MAX(COMPETENCY) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+, PARCC_ALG01_SCORE AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'PARCCALG01' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      --,[PerformanceLevel]
+      ,[ScaledScore]
+      --,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'PARCC' AND Subtest = 'ALG01')
+  ) AS T1
+PIVOT
+(MAX(SCALEDSCORE) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+,PARCC_ALG01_PL AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'PARCCALG01' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      ,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'PARCC' AND Subtest = 'ALG01')
+  ) AS T1
+PIVOT
+(MAX(COMPETENCY) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+, PARCC_ALG02_SCORE AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'PARCCALG02' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      --,[PerformanceLevel]
+      ,[ScaledScore]
+      --,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'PARCC' AND Subtest = 'ALG02')
+  ) AS T1
+PIVOT
+(MAX(SCALEDSCORE) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+,PARCC_ALG02_PL AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'PARCCALG02' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      ,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'PARCC' AND Subtest = 'ALG02')
+  ) AS T1
+PIVOT
+(MAX(COMPETENCY) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+, PARCC_GEO01_SCORE AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'PARCCGEO01' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      --,[PerformanceLevel]
+      ,[ScaledScore]
+      --,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'PARCC' AND Subtest = 'GEO01')
+  ) AS T1
+PIVOT
+(MAX(SCALEDSCORE) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+,PARCC_GEO01_PL AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'PARCCGEO01' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      ,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'PARCC' AND Subtest = 'GEO01')
+  ) AS T1
+PIVOT
+(MAX(COMPETENCY) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+, PARCC_ELA09_SCORE AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'PARCCELA09' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      --,[PerformanceLevel]
+      ,[ScaledScore]
+      --,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'PARCC' AND Subtest = 'ELA09')
+  ) AS T1
+PIVOT
+(MAX(SCALEDSCORE) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+,PARCC_ELA09_PL AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'PARCCELA09' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      ,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'PARCC' AND Subtest = 'ELA09')
+  ) AS T1
+PIVOT
+(MAX(COMPETENCY) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+, PARCC_ELA10_SCORE AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'PARCCELA10' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      --,[PerformanceLevel]
+      ,[ScaledScore]
+      --,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'PARCC' AND Subtest = 'ELA10')
+  ) AS T1
+PIVOT
+(MAX(SCALEDSCORE) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+,PARCC_ELA10_PL AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'PARCCELA10' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      ,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'PARCC' AND Subtest = 'ELA10')
+  ) AS T1
+PIVOT
+(MAX(COMPETENCY) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+, PARCC_ELA11_SCORE AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'PARCCELA11' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      --,[PerformanceLevel]
+      ,[ScaledScore]
+      --,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'PARCC' AND Subtest = 'ELA11')
+  ) AS T1
+PIVOT
+(MAX(SCALEDSCORE) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+,PARCC_ELA11_PL AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'PARCCELA11' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      ,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'PARCC' AND Subtest = 'ELA11')
+  ) AS T1
+PIVOT
+(MAX(COMPETENCY) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+, NMAPA_READING_SCORE AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'NMAPAREADING' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      --,[PerformanceLevel]
+      ,[ScaledScore]
+      --,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'NMAPA' AND Subtest = 'READING')
+  ) AS T1
+PIVOT
+(MAX(SCALEDSCORE) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+,NMAPA_READING_PL AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'NMAPAREADING' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      ,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'NMAPA' AND Subtest = 'READING')
+  ) AS T1
+PIVOT
+(MAX(COMPETENCY) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+, NMAPA_MATH_SCORE AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'NMAPAMATH' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      --,[PerformanceLevel]
+      ,[ScaledScore]
+      --,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'NMAPA' AND Subtest = 'MATH')
+  ) AS T1
+PIVOT
+(MAX(SCALEDSCORE) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+,NMAPA_MATH_PL AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'NMAPAMATH' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      ,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'NMAPA' AND Subtest = 'MATH')
+  ) AS T1
+PIVOT
+(MAX(COMPETENCY) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+, NMAPA_SCIENCE_SCORE AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'NMAPASCIENCE' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      --,[PerformanceLevel]
+      ,[ScaledScore]
+      --,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'NMAPA' AND Subtest = 'SCIENCE')
+  ) AS T1
+PIVOT
+(MAX(SCALEDSCORE) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+,NMAPA_SCIENCE_PL AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'NMAPASCIENCE' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      ,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'NMAPA' AND Subtest = 'SCIENCE')
+  ) AS T1
+PIVOT
+(MAX(COMPETENCY) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+, NMAPA_SocialStudies_SCORE AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'NMAPASocialStudies' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      --,[PerformanceLevel]
+      ,[ScaledScore]
+      --,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'NMAPA' AND Subtest = 'SocialStudies')
+  ) AS T1
+PIVOT
+(MAX(SCALEDSCORE) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+,NMAPA_SocialStudies_PL AS
+(
+SELECT
+	LAST_NAME
+	,FIRST_NAME
+	,SIS_NUMBER
+	,TEST_NAME
+	,[2012 Fall]
+	,[2012 Spring]
+	,[2013 FALL]
+	,[2013 Spring]
+	,[2014 FALL]
+	,[2014 SPRING]
+	,[2015 FALL]
+	,[2015 SPRING]
+	,[2016 FALL]
+	,[2016 SPRING]
+FROM
+(
+SELECT 
+	  FirstName AS FIRST_NAME
+	  ,LastName AS LAST_NAME
+	  ,[StudentID] AS SIS_NUMBER
+      ,'NMAPASocialStudies' AS TEST_NAME
+	  ,Semester
+      ,[TestName]
+      ,[Subtest]
+      ,[Competency]
+  FROM [ST_Production].[APS].[PED_Student_Test_History_File]
+  WHERE 1 = 1
+  --AND StudentID ='100003557'
+  AND (TestName = 'NMAPA' AND Subtest = 'SocialStudies')
+  ) AS T1
+PIVOT
+(MAX(COMPETENCY) FOR SEMESTER IN ([2012 Fall],[2012 Spring],[2013 Fall],[2013 Spring],[2014 Fall],[2014 Spring],[2015 Fall],[2015 Spring],[2016 Fall],[2016 Spring])) AS PT1
+)
+
+
+	SELECT
+		STU.SIS_NUMBER
+		,STU.STATE_STUDENT_NUMBER
+		,PED.SCHOOL_CODE
+		,PED.SCHOOL_NAME
+		,PED.GRADE
+		,SMS.[2012 Fall] AS SBA_2012_FALL_MATH_SS
+		,SMPL.[2012 Fall] AS SBA_2012_FALL_MATH_PL
+		,SMS.[2012 Spring] AS SBA_2012_SPRING_MATH_SS
+		,SMPL.[2012 Spring] AS SBA_2012_SPRING_MATH_PL
+		,SMS.[2013 Fall] AS SBA_2013_FALL_MATH_SS
+		,SMPL.[2013 FALL] AS SBA_2013_FALL_MATH_PL
+		,SMS.[2013 Spring] AS SBA_2013_SPRING_MATH_SS
+		,SMPL.[2012 Spring] AS SBA_2013_SPRING_MATH_PL
+		,SMS.[2014 Fall] AS SBA_2014_FALL_MATH_SS
+		,SMPL.[2014 Fall] AS SBA_2014_FALL_MATH_PL
+		,SMS.[2014 Spring] AS SBA_2014_SPRING_MATH_SS
+		,SMPL.[2014 Spring] AS SBA_2014_SPRING_MATH_PL
+		,SMS.[2015 Fall] AS SBA_2015_FALL_MATH_SS
+		,SMPL.[2015 Fall] AS SBA_2015_FALL_MATH_PL
+		,SMS.[2015 Spring] AS SBA_2015_SPRING_MATH_SS
+		,SMPL.[2015 Spring] AS SBA_2015_SPRING_MATH_PL
+		,SMS.[2016 Fall] AS SBA_2016_FALL_MATH_SS
+		,SMPL.[2016 Fall] AS SBA_2016_FALL_MATH_PL
+		,SMS.[2016 Spring] AS SBA_2016_SPRING_MATH_SS
+		,SMPL.[2016 Spring] AS SBA_2016_SPRING_MATH_PL
+		,SRS.[2012 Fall] AS SBA_2012_FALL_READING_SS
+		,SRPL.[2012 Fall] AS SBA_2012_FALL_READING_PL
+		,SRS.[2012 Spring] AS SBA_2012_SPRING_READING_SS
+		,SRPL.[2012 Spring] AS SBA_2012_SPRING_READING_PL
+		,SRS.[2013 Fall] AS SBA_2013_FALL_READING_SS
+		,SRPL.[2013 FALL] AS SBA_2013_FALL_READING_PL
+		,SRS.[2013 Spring] AS SBA_2013_SPRING_READING_SS
+		,SRPL.[2012 Spring] AS SBA_2013_SPRING_READING_PL
+		,SRS.[2014 Fall] AS SBA_2014_FALL_READING_SS
+		,SRPL.[2014 Fall] AS SBA_2014_FALL_READING_PL
+		,SRS.[2014 Spring] AS SBA_2014_SPRING_READING_SS
+		,SRPL.[2014 Spring] AS SBA_2014_SPRING_READING_PL
+		,SRS.[2015 Fall] AS SBA_2015_FALL_READING_SS
+		,SRPL.[2015 Fall] AS SBA_2015_FALL_READING_PL
+		,SRS.[2015 Spring] AS SBA_2015_SPRING_READING_SS
+		,SRPL.[2015 Spring] AS SBA_2015_SPRING_READING_PL
+		,SRS.[2016 Fall] AS SBA_2016_FALL_READING_SS
+		,SRPL.[2016 Fall] AS SBA_2016_FALL_READING_PL
+		,SRS.[2016 Spring] AS SBA_2016_SPRING_READING_SS
+		,SRPL.[2016 Spring] AS SBA_2016_SPRING_READING_PL
+		,SSS.[2012 Fall] AS SBA_2012_FALL_SCIENCE_SS
+		,SSPL.[2012 Fall] AS SBA_2012_FALL_SCIENCE_PL
+		,SSS.[2012 Spring] AS SBA_2012_SPRING_SCIENCE_SS
+		,SSPL.[2012 Spring] AS SBA_2012_SPRING_SCIENCE_PL
+		,SSS.[2013 Fall] AS SBA_2013_FALL_SCIENCE_SS
+		,SSPL.[2013 FALL] AS SBA_2013_FALL_SCIENCE_PL
+		,SSS.[2013 Spring] AS SBA_2013_SPRING_SCIENCE_SS
+		,SSPL.[2012 Spring] AS SBA_2013_SPRING_SCIENCE_PL
+		,SSS.[2014 Fall] AS SBA_2014_FALL_SCIENCE_SS
+		,SSPL.[2014 Fall] AS SBA_2014_FALL_SCIENCE_PL
+		,SSS.[2014 Spring] AS SBA_2014_SPRING_SCIENCE_SS
+		,SSPL.[2014 Spring] AS SBA_2014_SPRING_SCIENCE_PL
+		,SSS.[2015 Fall] AS SBA_2015_FALL_SCIENCE_SS
+		,SSPL.[2015 Fall] AS SBA_2015_FALL_SCIENCE_PL
+		,SSS.[2015 Spring] AS SBA_2015_SPRING_SCIENCE_SS
+		,SSPL.[2015 Spring] AS SBA_2015_SPRING_SCIENCE_PL
+		,SSS.[2016 Fall] AS SBA_2016_FALL_SCIENCE_SS
+		,SSPL.[2016 Fall] AS SBA_2016_FALL_SCIENCE_PL
+		,SSS.[2016 Spring] AS SBA_2016_SPRING_SCIENCE_SS
+		,SSPL.[2016 Spring] AS SBA_2016_SPRING_SCIENCE_PL
+		--,SSRS.[2012 Fall] AS SBASPA_2012_FALL_READING_SS
+		--,SSRPL.[2012 Fall] AS SBASPA_2012_FALL_READING_PL
+		--,SSRS.[2012 Spring] AS SBASPA_2012_SPRING_READING_SS
+		--,SSRPL.[2012 Spring] AS SBASPA_2012_SPRING_READING_PL
+		--,SSRS.[2013 Fall] AS SBASPA_2013_FALL_READING_SS
+		--,SSRPL.[2013 FALL] AS SBASPA_2013_FALL_READING_PL
+		--,SSRS.[2013 Spring] AS SBASPA_2013_SPRING_READING_SS
+		--,SSRPL.[2012 Spring] AS SBASPA_2013_SPRING_READING_PL
+		--,SSRS.[2014 Fall] AS SBASPA_2014_FALL_READING_SS
+		--,SSRPL.[2014 Fall] AS SBASPA_2014_FALL_READING_PL
+		--,SSRS.[2014 Spring] AS SBASPA_2014_SPRING_READING_SS
+		--,SSRPL.[2014 Spring] AS SBASPA_2014_SPRING_READING_PL
+		--,SSRS.[2015 Fall] AS SBASPA_2015_FALL_READING_SS
+		--,SSRPL.[2015 Fall] AS SBASPA_2015_FALL_READING_PL
+		,SSRS.[2015 Spring] AS SBASPA_2015_SPRING_READING_SS
+		,SSRPL.[2015 Spring] AS SBASPA_2015_SPRING_READING_PL
+		,SSRS.[2016 Fall] AS SBASPA_2016_FALL_READING_SS
+		,SSRPL.[2016 Fall] AS SBASPA_2016_FALL_READING_PL
+		,SSRS.[2016 Spring] AS SBASPA_2016_SPRING_READING_SS
+		,SSRPL.[2016 Spring] AS SBASPA_2016_SPRING_READING_PL
+		,PALG1S.[2015 Fall] AS PARCC_2015_FALL_ALG01_SS
+		,PALG1PL.[2015 Fall] AS PARCC_2015_FALL_ALG01_PL
+		,PALG1S.[2015 Spring] AS PARCC_2015_SPRING_ALG01_SS
+		,PALG1PL.[2015 Spring] AS PARCC_2015_SPRING_ALG01_PL
+		,PALG1S.[2016 Fall] AS PARCC_2016_FALL_ALG01_SS
+		,PALG1PL.[2016 Fall] AS PARCC_2016_FALL_ALG01_PL
+		,PALG1S.[2016 Spring] AS PARCC_2016_SPRING_ALG01_SS
+		,PALG1PL.[2016 Spring] AS PARCC_2016_SPRING_ALG01_PL
+		,PALG2S.[2015 Fall] AS PARCC_2015_FALL_ALG02_SS
+		,PALG2PL.[2015 Fall] AS PARCC_2015_FALL_ALG02_PL
+		,PALG2S.[2015 Spring] AS PARCC_2015_SPRING_ALG02_SS
+		,PALG2PL.[2015 Spring] AS PARCC_2015_SPRING_ALG02_PL
+		,PALG2S.[2016 Fall] AS PARCC_2016_FALL_ALG02_SS
+		,PALG2PL.[2016 Fall] AS PARCC_2016_FALL_ALG02_PL
+		,PALG2S.[2016 Spring] AS PARCC_2016_SPRING_ALG02_SS
+		,PALG2PL.[2016 Spring] AS PARCC_2016_SPRING_ALG02_PL
+		,PGEO01S.[2015 Fall] AS PARCC_2015_FALL_GEO01_SS
+		,PGEO01PL.[2015 Fall] AS PARCC_2015_FALL_GEO01_PL
+		,PGEO01S.[2015 Spring] AS PARCC_2015_SPRING_GEO01_SS
+		,PGEO01PL.[2015 Spring] AS PARCC_2015_SPRING_GEO01_PL
+		,PGEO01S.[2016 Fall] AS PARCC_2016_FALL_GEO01_SS
+		,PGEO01PL.[2016 Fall] AS PARCC_2016_FALL_GEO01_PL
+		,PGEO01S.[2016 Spring] AS PARCC_2016_SPRING_GEO01_SS
+		,PGEO01PL.[2016 Spring] AS PARCC_2016_SPRING_GEO01_PL
+		,PELA09S.[2015 Fall] AS PARCC_2015_FALL_ELA09_SS
+		,PELA09PL.[2015 Fall] AS PARCC_2015_FALL_ELA09_PL
+		,PELA09S.[2015 Spring] AS PARCC_2015_SPRING_ELA09_SS
+		,PELA09PL.[2015 Spring] AS PARCC_2015_SPRING_ELA09_PL
+		,PELA09S.[2016 Fall] AS PARCC_2016_FALL_ELA09_SS
+		,PELA09PL.[2016 Fall] AS PARCC_2016_FALL_ELA09_PL
+		,PELA09S.[2016 Spring] AS PARCC_2016_SPRING_ELA09_SS
+		,PELA09PL.[2016 Spring] AS PARCC_2016_SPRING_ELA09_PL
+		,PELA10S.[2015 Fall] AS PARCC_2015_FALL_ELA10_SS
+		,PELA10PL.[2015 Fall] AS PARCC_2015_FALL_ELA10_PL
+		,PELA10S.[2015 Spring] AS PARCC_2015_SPRING_ELA10_SS
+		,PELA10PL.[2015 Spring] AS PARCC_2015_SPRING_ELA10_PL
+		,PELA10S.[2016 Fall] AS PARCC_2016_FALL_ELA10_SS
+		,PELA10PL.[2016 Fall] AS PARCC_2016_FALL_ELA10_PL
+		,PELA10S.[2016 Spring] AS PARCC_2016_SPRING_ELA10_SS
+		,PELA10PL.[2016 Spring] AS PARCC_2016_SPRING_ELA10_PL
+		,PELA11S.[2015 Fall] AS PARCC_2015_FALL_ELA11_SS
+		,PELA11PL.[2015 Fall] AS PARCC_2015_FALL_ELA11_PL
+		,PELA11S.[2015 Spring] AS PARCC_2015_SPRING_ELA11_SS
+		,PELA11PL.[2015 Spring] AS PARCC_2015_SPRING_ELA11_PL
+		,PELA11S.[2016 Fall] AS PARCC_2016_FALL_ELA11_SS
+		,PELA11PL.[2016 Fall] AS PARCC_2016_FALL_ELA11_PL
+		,PELA11S.[2016 Spring] AS PARCC_2016_SPRING_ELA11_SS
+		,PELA11PL.[2016 Spring] AS PARCC_2016_SPRING_ELA11_PL
+		,NREADINGS.[2015 Fall] AS NMAPA_2015_FALL_READING_SS
+		,NREADINGPL.[2015 Fall] AS NMAPA_2015_FALL_READING_PL
+		,NREADINGS.[2015 Spring] AS NMAPA_2015_SPRING_READING_SS
+		,NREADINGPL.[2015 Spring] AS NMAPA_2015_SPRING_READING_PL
+		,NREADINGS.[2016 Fall] AS NMAPA_2016_FALL_READING_SS
+		,NREADINGPL.[2016 Fall] AS NMAPA_2016_FALL_READING_PL
+		,NREADINGS.[2016 Spring] AS NMAPA_2016_SPRING_READING_SS
+		,NREADINGPL.[2016 Spring] AS NMAPA_2016_SPRING_READING_PL
+		,NMATHS.[2015 Fall] AS NMAPA_2015_FALL_MATH_SS
+		,NMATHPL.[2015 Fall] AS NMAPA_2015_FALL_MATH_PL
+		,NMATHS.[2015 Spring] AS NMAPA_2015_SPRING_MATH_SS
+		,NMATHPL.[2015 Spring] AS NMAPA_2015_SPRING_MATH_PL
+		,NMATHS.[2016 Fall] AS NMAPA_2016_FALL_MATH_SS
+		,NMATHPL.[2016 Fall] AS NMAPA_2016_FALL_MATH_PL
+		,NMATHS.[2016 Spring] AS NMAPA_2016_SPRING_MATH_SS
+		,NMATHPL.[2016 Spring] AS NMAPA_2016_SPRING_MATH_PL
+		,NSCIENCES.[2015 Fall] AS NMAPA_2015_FALL_SCIENCE_SS
+		,NSCIENCEPL.[2015 Fall] AS NMAPA_2015_FALL_SCIENCE_PL
+		,NSCIENCES.[2015 Spring] AS NMAPA_2015_SPRING_SCIENCE_SS
+		,NSCIENCEPL.[2015 Spring] AS NMAPA_2015_SPRING_SCIENCE_PL
+		,NSCIENCES.[2016 Fall] AS NMAPA_2016_FALL_SCIENCE_SS
+		,NSCIENCEPL.[2016 Fall] AS NMAPA_2016_FALL_SCIENCE_PL
+		,NSCIENCES.[2016 Spring] AS NMAPA_2016_SPRING_SCIENCE_SS
+		,NSCIENCEPL.[2016 Spring] AS NMAPA_2016_SPRING_SCIENCE_PL
+		,NSocialStudiesS.[2015 Fall] AS NMAPA_2015_FALL_SocialStudies_SS
+		,NSocialStudiesPL.[2015 Fall] AS NMAPA_2015_FALL_SocialStudies_PL
+		,NSocialStudiesS.[2015 Spring] AS NMAPA_2015_SPRING_SocialStudies_SS
+		,NSocialStudiesPL.[2015 Spring] AS NMAPA_2015_SPRING_SocialStudies_PL
+		,NSocialStudiesS.[2016 Fall] AS NMAPA_2016_FALL_SocialStudies_SS
+		,NSocialStudiesPL.[2016 Fall] AS NMAPA_2016_FALL_SocialStudies_PL
+		,NSocialStudiesS.[2016 Spring] AS NMAPA_2016_SPRING_SocialStudies_SS
+		,NSocialStudiesPL.[2016 Spring] AS NMAPA_2016_SPRING_SocialStudies_PL
+
+	FROM
+	APS.PrimaryEnrollmentDetailsAsOf (GETDATE()) AS PED
+
+	JOIN REV.EPC_STU AS STU
+	ON STU.STUDENT_GU = PED.STUDENT_GU
+
+	LEFT JOIN SBA_MATH_SCORE AS SMS
+	ON SMS.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN SBA_MATH_PL AS SMPL
+	ON SMPL.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN SBA_READING_SCORE AS SRS
+	ON SRS.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN SBA_READING_PL AS SRPL
+	ON SRPL.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN SBA_SCIENCE_SCORE AS SSS
+	ON SSS.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN SBA_SCIENCE_PL AS SSPL
+	ON SSPL.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN SBASPA_READING_SCORE AS SSRS
+	ON SSRS.SIS_NUMBER =  STU.SIS_NUMBER
+
+	LEFT JOIN SBASPA_READING_PL AS SSRPL
+	ON SSRPL.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN PARCC_ALG01_SCORE AS PALG1S
+	ON PALG1S.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN PARCC_ALG01_PL AS PALG1PL
+	ON PALG1PL.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN PARCC_ALG02_SCORE AS PALG2S
+	ON PALG2S.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN PARCC_ALG02_PL AS PALG2PL
+	ON PALG2PL.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN PARCC_GEO01_SCORE AS PGEO01S
+	ON PGEO01S.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN PARCC_GEO01_PL AS PGEO01PL
+	ON PGEO01PL.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN PARCC_ELA09_SCORE AS PELA09S
+	ON PELA09S.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN PARCC_ELA09_PL AS PELA09PL
+	ON PELA09PL.SIS_NUMBER =  STU.SIS_NUMBER
+
+	LEFT JOIN PARCC_ELA10_SCORE AS PELA10S
+	ON PELA10S.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN PARCC_ELA10_PL AS PELA10PL
+	ON PELA10PL.SIS_NUMBER =  STU.SIS_NUMBER
+
+	LEFT JOIN PARCC_ELA11_SCORE AS PELA11S
+	ON PELA11S.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN PARCC_ELA11_PL AS PELA11PL
+	ON PELA11PL.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN NMAPA_READING_SCORE AS NREADINGS
+	ON NREADINGS.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN NMAPA_READING_PL AS NREADINGPL
+	ON NREADINGPL.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN NMAPA_MATH_SCORE AS NMATHS
+	ON NMATHS.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN NMAPA_MATH_PL AS NMATHPL
+	ON NMATHPL.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN NMAPA_SCIENCE_SCORE AS NSCIENCES
+	ON NSCIENCES.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN NMAPA_SCIENCE_PL AS NSCIENCEPL
+	ON NSCIENCEPL.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN NMAPA_SocialStudies_SCORE AS NSOCIALSTUDIESS
+	ON NSOCIALSTUDIESS.SIS_NUMBER = STU.SIS_NUMBER
+
+	LEFT JOIN NMAPA_SocialStudies_PL AS NSOCIALSTUDIESPL
+	ON NSOCIALSTUDIESPL.SIS_NUMBER = STU.SIS_NUMBER
+
+
+WHERE PED.GRADE IN ('09','10','11','12')
+
+

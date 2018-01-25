@@ -1,0 +1,15 @@
+SELECT
+	DISTINCT StudentID
+	,LastName
+	,FirstName
+	,DOB
+	,[ALTERNATE STUDENT ID]
+	,[LOCATION CODE]
+FROM
+	Soap_Mis_Matches
+INNER JOIN
+	STUDENT
+	ON
+	Soap_Mis_Matches.StudentID = STUDENT.[STUDENT ID]
+ORDER BY 
+	LASTNAME
