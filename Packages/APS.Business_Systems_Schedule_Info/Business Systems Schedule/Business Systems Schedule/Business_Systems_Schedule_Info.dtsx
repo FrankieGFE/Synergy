@@ -1,0 +1,537 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/18/2016 11:03:58 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="046-FRGARCIA"
+  DTS:CreatorName="APS\e138796"
+  DTS:DTSID="{E763CDFE-3174-4DD1-A51A-ABA598F7B586}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Business_Systems_Schedule_Info"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{7BC98CE3-684B-41EA-B632-7BBE01CE66AD}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[APS Business_Systems_Schedule_Info]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="APS Business_Systems_Schedule_Info"
+      DTS:DTSID="{601FD0BE-E50A-4641-BE5E-A4E5FB47B473}"
+      DTS:ObjectName="APS Business_Systems_Schedule_Info">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\APS-DW-DEV\Special Ed Service log\Business_Systems_Schedule_Info.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SCHOOL_CODE"
+              DTS:DTSID="{2D6767B4-B189-476D-A93D-411E282279C8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4000"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BADGE_NUM"
+              DTS:DTSID="{9A6095CD-41CE-4E97-86B1-D2AF2ED7977E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="COURSE_ID"
+              DTS:DTSID="{E3B90E8A-D994-433B-97FE-168B3C8BD8A1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="COURSE_TITLE"
+              DTS:DTSID="{B97D9B2F-5627-40F5-8287-32B4B326F0EB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SECTION_ID"
+              DTS:DTSID="{53277E63-45C4-49E5-A554-8D832C7A2E08}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="STUDENT_COUNT"
+              DTS:DTSID="{0AFFF628-F5BF-4B4E-91E7-877E15361B3D}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[synergydb01.aps.edu.actd.APSExport]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{7FE92864-0B66-470A-A2AE-B41FA6632B2C}"
+      DTS:ObjectName="synergydb01.aps.edu.actd.APSExport">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=synergydb01.aps.edu.actd;User ID=APSExport;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAdQjjlzA4c0+u+IWAl8L4LgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADjfc6TPVvHoWP5IGCxDpSdAAAAAASAAACgAAAAEAAAAALuXtMsmUvtygh9MPLHE+UwAAAAhFx43OVeSa0SZQR40uLrIaHdtCYV5eYf0x/gGSh6riTpagKf1Z7ATuIxAIrE/pjhFAAAABI5x0LUsXSKSgiPmZ20QFIq4efn</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\APS Business_Systems_Schedule_Info"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{67E4D7A2-33BE-437C-87B5-E8AA394382A7}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="APS Business_Systems_Schedule_Info"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="APS Business_Systems_Schedule_Info"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT 
+	*
+FROM
+	APS.Business_Systems_Schedule_Info</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[synergydb01.aps.edu.actd.APSExport]"
+                  connectionManagerRefId="Package.ConnectionManagers[synergydb01.aps.edu.actd.APSExport]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].Columns[SCHOOL_CODE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].ExternalColumns[SCHOOL_CODE]"
+                      length="20"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].Columns[SCHOOL_CODE]"
+                      name="SCHOOL_CODE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].Columns[BADGE_NUM]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].ExternalColumns[BADGE_NUM]"
+                      length="4000"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].Columns[BADGE_NUM]"
+                      name="BADGE_NUM"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].Columns[COURSE_ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].ExternalColumns[COURSE_ID]"
+                      length="20"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].Columns[COURSE_ID]"
+                      name="COURSE_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].Columns[COURSE_TITLE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].ExternalColumns[COURSE_TITLE]"
+                      length="50"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].Columns[COURSE_TITLE]"
+                      name="COURSE_TITLE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].Columns[SECTION_ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].ExternalColumns[SECTION_ID]"
+                      length="30"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].Columns[SECTION_ID]"
+                      name="SECTION_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].Columns[STUDENT_COUNT]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].ExternalColumns[STUDENT_COUNT]"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].Columns[STUDENT_COUNT]"
+                      name="STUDENT_COUNT"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].ExternalColumns[SCHOOL_CODE]"
+                      dataType="wstr"
+                      length="20"
+                      name="SCHOOL_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].ExternalColumns[BADGE_NUM]"
+                      dataType="wstr"
+                      length="4000"
+                      name="BADGE_NUM" />
+                    <externalMetadataColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].ExternalColumns[COURSE_ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="COURSE_ID" />
+                    <externalMetadataColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].ExternalColumns[COURSE_TITLE]"
+                      dataType="wstr"
+                      length="50"
+                      name="COURSE_TITLE" />
+                    <externalMetadataColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].ExternalColumns[SECTION_ID]"
+                      dataType="wstr"
+                      length="30"
+                      name="SECTION_ID" />
+                    <externalMetadataColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].ExternalColumns[STUDENT_COUNT]"
+                      dataType="i4"
+                      name="STUDENT_COUNT" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Error Output].Columns[SCHOOL_CODE]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Error Output].Columns[SCHOOL_CODE]"
+                      name="SCHOOL_CODE" />
+                    <outputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Error Output].Columns[BADGE_NUM]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Error Output].Columns[BADGE_NUM]"
+                      name="BADGE_NUM" />
+                    <outputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Error Output].Columns[COURSE_ID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Error Output].Columns[COURSE_ID]"
+                      name="COURSE_ID" />
+                    <outputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Error Output].Columns[COURSE_TITLE]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Error Output].Columns[COURSE_TITLE]"
+                      name="COURSE_TITLE" />
+                    <outputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Error Output].Columns[SECTION_ID]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Error Output].Columns[SECTION_ID]"
+                      name="SECTION_ID" />
+                    <outputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Error Output].Columns[STUDENT_COUNT]"
+                      dataType="i4"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Error Output].Columns[STUDENT_COUNT]"
+                      name="STUDENT_COUNT" />
+                    <outputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info"
+              componentClassID="DTSAdapter.FlatFileDestination.3"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Business_Systems_Schedule_Info">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[APS Business_Systems_Schedule_Info]"
+                  connectionManagerRefId="Package.ConnectionManagers[APS Business_Systems_Schedule_Info]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input].Columns[SCHOOL_CODE]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="SCHOOL_CODE"
+                      externalMetadataColumnId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input].ExternalColumns[SCHOOL_CODE]"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].Columns[SCHOOL_CODE]" />
+                    <inputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input].Columns[BADGE_NUM]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="BADGE_NUM"
+                      externalMetadataColumnId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input].ExternalColumns[BADGE_NUM]"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].Columns[BADGE_NUM]" />
+                    <inputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input].Columns[COURSE_ID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="COURSE_ID"
+                      externalMetadataColumnId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input].ExternalColumns[COURSE_ID]"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].Columns[COURSE_ID]" />
+                    <inputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input].Columns[COURSE_TITLE]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="COURSE_TITLE"
+                      externalMetadataColumnId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input].ExternalColumns[COURSE_TITLE]"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].Columns[COURSE_TITLE]" />
+                    <inputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input].Columns[SECTION_ID]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="SECTION_ID"
+                      externalMetadataColumnId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input].ExternalColumns[SECTION_ID]"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].Columns[SECTION_ID]" />
+                    <inputColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input].Columns[STUDENT_COUNT]"
+                      cachedDataType="i4"
+                      cachedName="STUDENT_COUNT"
+                      externalMetadataColumnId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input].ExternalColumns[STUDENT_COUNT]"
+                      lineageId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output].Columns[STUDENT_COUNT]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input].ExternalColumns[SCHOOL_CODE]"
+                      dataType="wstr"
+                      length="20"
+                      name="SCHOOL_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input].ExternalColumns[BADGE_NUM]"
+                      dataType="wstr"
+                      length="4000"
+                      name="BADGE_NUM" />
+                    <externalMetadataColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input].ExternalColumns[COURSE_ID]"
+                      dataType="wstr"
+                      length="20"
+                      name="COURSE_ID" />
+                    <externalMetadataColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input].ExternalColumns[COURSE_TITLE]"
+                      dataType="wstr"
+                      length="50"
+                      name="COURSE_TITLE" />
+                    <externalMetadataColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input].ExternalColumns[SECTION_ID]"
+                      dataType="wstr"
+                      length="30"
+                      name="SECTION_ID" />
+                    <externalMetadataColumn
+                      refId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input].ExternalColumns[STUDENT_COUNT]"
+                      dataType="i4"
+                      name="STUDENT_COUNT" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\APS Business_Systems_Schedule_Info.Paths[OLE DB Source Output]"
+              endId="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="261,42"
+          Id="Package\APS Business_Systems_Schedule_Info"
+          TopLeft="130.857145085627,20.18823557725" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\APS Business_Systems_Schedule_Info">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="261,42"
+          Id="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info"
+          TopLeft="68.5714297391931,24.4705885784849" />
+        <NodeLayout
+          Size="238,42"
+          Id="Package\APS Business_Systems_Schedule_Info\Business_Systems_Schedule_Info"
+          TopLeft="134.857145153746,104.611766173023" />
+        <EdgeLayout
+          Id="Package\APS Business_Systems_Schedule_Info.Paths[OLE DB Source Output]"
+          TopLeft="198.971429739193,66.0705885784849">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="55.0857154145533,38.541177594538"
+              Start="0,0"
+              End="55.0857154145533,31.041177594538">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.270588797269" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.270588797269"
+                    Point2="0,19.270588797269"
+                    Point3="4,19.270588797269" />
+                  <mssgle:LineSegment
+                    End="51.0857154145533,19.270588797269" />
+                  <mssgle:CubicBezierSegment
+                    Point1="51.0857154145533,19.270588797269"
+                    Point2="55.0857154145533,19.270588797269"
+                    Point3="55.0857154145533,23.270588797269" />
+                  <mssgle:LineSegment
+                    End="55.0857154145533,31.041177594538" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\APS Business_Systems_Schedule_Info\APS Business_Systems_Schedule_Info">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

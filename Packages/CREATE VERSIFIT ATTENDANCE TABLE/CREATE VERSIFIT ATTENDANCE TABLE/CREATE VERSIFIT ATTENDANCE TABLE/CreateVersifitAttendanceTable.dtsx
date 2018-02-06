@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/24/2017 12:12:29 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="046-DECHAVEZ"
+  DTS:CreatorName="APS\e104090"
+  DTS:DTSID="{AF97E941-C068-4016-9735-9EF12ECA92F4}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="CreateVersifitAttendanceTable"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{F83C1C64-F939-4A19-917A-D493056F504B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SYNERGYDB01.APS.EDU.ACTD.APSImport]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9DFE2CD9-794E-48D2-8E4A-CAE5A6832B55}"
+      DTS:ObjectName="SYNERGYDB01.APS.EDU.ACTD.APSImport">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SYNERGYDB01.APS.EDU.ACTD;User ID=APSImport;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAdQjjlzA4c0+u+IWAl8L4LgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAY02udtcyOHy2cfKcx06SFAAAAAASAAACgAAAAEAAAAJkSuRHAYzVyTbaaGiL2rT4wAAAATy4eF+1DoIaLN7IfiXX4K16JSvwLko1eLNKoCb7JUqrXQzCl4SRrT371aVWK3lCpFAAAAI3GX12SJfZPLshBlTCYgGk5bRvU</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7D49C92F-0E38-4860-BCCF-C0B4DC656065}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9DFE2CD9-794E-48D2-8E4A-CAE5A6832B55}"
+          SQLTask:SqlStatementSource="&#xA;&#xA;--CREATE VERSIFIT TABLE - DAILY RUN, INCLUDES PERFECT ATTENDANCE STUDENTS&#xA;&#xA;DROP TABLE dbo.ATTENDANCE_2016&#xA;CREATE TABLE dbo.ATTENDANCE_2016&#xA;&#xA;( &#xA;&#x9;SCHOOL_YEAR VARCHAR (4)&#xA;&#x9;  ,[SIS_NUMBER]  VARCHAR (9)&#xA;      ,[SCHOOL_CODE]  VARCHAR (4)&#xA;      ,[GRADE]  VARCHAR (2)&#xA;&#x9;  ,[MEMBERDAYS]  VARCHAR (4)&#xA;&#x9;  ,[Total Excused] VARCHAR (9)&#xA;&#x9;  ,[Total Unexcused] VARCHAR (9)&#xA;,[TOTAL_ABSENCES]  VARCHAR (9)&#xA;) &#xA;&#xA;INSERT INTO dbo.ATTENDANCE_2016&#xA;&#xA;SELECT &#xA;'2016' AS SCHOOL_YEAR&#xA;,SIS_NUMBER&#xA;,SCHOOL_CODE &#xA;,GRADE&#xA;,MEMBERDAYS&#xA;,[Total Excused]&#xA;,[Total Unexcused]&#xA;,CASE WHEN Total_Exc_Unex IS NULL THEN '0.00' ELSE Total_Exc_Unex END AS TOTAL_ABSENCES&#xA;&#xA; &#xA;FROM (&#xA;&#xA;SELECT &#xA;&#xA;AT16.Total_Exc_Unex&#xA;,[Total Excused]&#xA;,[Total Unexcused]&#xA;, MEM16.SIS_NUMBER&#xA;, MEM16.SCHOOL_CODE&#xA;, MEM16.MEMBERDAYS&#xA;, MEM16.GRADE&#xA;  &#xA;  &#xA;  FROM [STUDENT_ATTENDANCE] AS AT16&#xA;  RIGHT JOIN &#xA;   (SELECT &#xA;&#x9;SIS_NUMBER&#xA;&#x9;,FIRST_NAME&#xA;&#x9;,LAST_NAME&#xA;&#x9;,GRADE&#xA;&#x9;,SCHOOL_YEAR&#xA;&#x9;,SCHOOL_CODE&#xA;&#x9;,EXCLUDE_ADA_ADM&#xA;&#x9;,MEMBERDAYS&#xA;&#x9;,MIN(CAST(ENTER_DATE AS DATE)) AS ENTER_DATE&#xA;&#x9;,MAX(CAST(LEAVE_DATE AS DATE)) AS LEAVE_DATE&#xA;&#xA; FROM &#xA;STUDENT_SCHOOL_MEMBERDAYS AS MEM&#xA;&#xA;GROUP BY&#xA;&#x9;SIS_NUMBER&#xA;&#x9;,FIRST_NAME&#xA;&#x9;,LAST_NAME&#xA;&#x9;,GRADE&#xA;&#x9;,SCHOOL_YEAR&#xA;&#x9;,SCHOOL_CODE&#xA;&#x9;,EXCLUDE_ADA_ADM&#xA;&#x9;,MEMBERDAYS&#xA;&#x9;) AS MEM16&#xA;  ON&#xA;AT16.[SIS Number] = MEM16.SIS_NUMBER&#xA;AND AT16.[School Code] = MEM16.SCHOOL_CODE&#xA;&#xA;  LEFT JOIN &#xA;  (SELECT GRADE,SIS_NUMBER FROM &#xA;APS.LatestPrimaryEnrollmentInYear('F7D112F7-354D-4630-A4BC-65F586BA42EC')&#xA;) AS ENR16&#xA;ON&#xA;ENR16.SIS_NUMBER = MEM16.SIS_NUMBER&#xA;&#xA;&#xA;) AS T1&#xA;  ORDER BY SCHOOL_CODE, SIS_NUMBER&#xA;&#xA;  ----------------------------------------------------------------------------------------" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Execute SQL Task"
+          TopLeft="71,24" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
