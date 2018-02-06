@@ -5,6 +5,8 @@ Written by:	JoAnn Smith
 Date:		a long time ago
 Modified:	1/23/2018 - added four more fields - Title 1, Exclude from OLR,
 Staff Receving Email, and Email Address
+			1/30/2018 - latest year wasn't displaying--added join to
+			rev.rev_year on organization_year_gu to fix
 */
 
 declare @School uniqueidentifier = 'CA07DC4C-B218-4298-8562-21DF3606A9B9'
@@ -46,7 +48,7 @@ ON
 as
 (
 select
-	row_number() over(partition by P.last_name, P.first_name order by org.organization_gu) as rn,
+	row_number() over(partition by Y.SCHOOL_YEAR order by Y.SCHOOL_YEAR DESC) as rn,
 	txp_def_inc_entered_by_gu,
 	o.TITLE_1,
 	o.EXCLUDE_FROM_OLR,
@@ -60,6 +62,18 @@ inner join
 	rev.epc_staff_sch_yr ssy
 on
 	o.TXP_DEF_INC_ENTERED_BY_GU = ssy.STAFF_SCHOOL_YEAR_GU
+LEFT JOIN
+	REV.REV_ORGANIZATION_YEAR OY
+ON
+	OY.ORGANIZATION_YEAR_GU = O.ORGANIZATION_YEAR_GU
+LEFT JOIN
+	REV.REV_YEAR Y
+ON
+	OY.YEAR_GU = Y.YEAR_GU
+LEFT JOIN
+	REV.REV_ORGANIZATION ORG
+ON
+	ORG.ORGANIZATION_GU = OY.ORGANIZATION_GU	
 inner join
 	rev.epc_staff s
 on
@@ -67,17 +81,8 @@ on
 inner join
 	rev.rev_person p
 on
-	p.person_gu = s.STAFF_GU
-inner join
-	rev.REV_ORGANIZATION_YEAR oy
-on
-	oy.ORGANIZATION_YEAR_GU = ssy.ORGANIZATION_YEAR_GU
-inner join
-	rev.rev_organization org
-on
-	org.ORGANIZATION_GU = oy.ORGANIZATION_GU
-)
---select * from Incident_Referral where rn = 1
+	p.person_gu = s.STAFF_GU)
+--select * from Incident_Referral where rn = 1 AND ORGANIZATION_GU = 'CA07DC4C-B218-4298-8562-21DF3606A9B9'
 
 ,PXP
 as
@@ -85,7 +90,7 @@ as
 select
 	px.demo_update_staff_gu,
 	s.STAFF_GU,
-	isnull(p.LAST_NAME + ', ' + p.FIRST_NAME, '') as [Staff Receiving Email],
+	isnull(p.LAST_NAME + ', ' + p.FIRST_NAME, '') as [Staff Receiving PVUE Email],
 	isnull(p.EMAIL, ' ') AS [Staff Email],
 	ssy.STAFF_SCHOOL_YEAR_GU, 
 	org.ORGANIZATION_GU
@@ -123,7 +128,7 @@ select
 	p.[School Code],
 	p.Zone,
 	p.[Principal Name],
-	isnull(r.INCIDENT_REFERRAL_LAST_NAME + ' ' + R.INCIDENT_REFERRAL_FIRST_NAME, ' ') as [Incident Referral Default],
+	isnull(r.INCIDENT_REFERRAL_LAST_NAME + ', ' + R.INCIDENT_REFERRAL_FIRST_NAME, ' ') as [Incident Referral Default],
 	p.[School Address],
 	p.City,
 	p.[State],
@@ -134,7 +139,7 @@ select
 	p.[NCES School Number],
 	R.TITLE_1,
 	R.EXCLUDE_FROM_OLR,
-	px.[Staff Receiving Email],
+	px.[Staff Receiving PVUE Email],
 	px.[Staff Email] 
 from
 	Principals p
