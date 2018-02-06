@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/17/2016 8:38:30 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="046-DEBBCHAVEZ"
+  DTS:CreatorName="APS\e104090"
+  DTS:DTSID="{2455E92B-1082-4316-84E1-DCBAA2CFB496}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="FixCredits"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{6776E618-4EDA-40D8-BA04-D8F666A133EB}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SYNERGYDB01.APS.EDU.ACTD.APSImport]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{B9C62AA7-2CF4-4971-AD63-55E8D8F146E1}"
+      DTS:ObjectName="SYNERGYDB01.APS.EDU.ACTD.APSImport">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SYNERGYDB01.APS.EDU.ACTD;User ID=APSImport;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAdQjjlzA4c0+u+IWAl8L4LgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADc+wxWEV1W1dV9Z3iWPRwcAAAAAASAAACgAAAAEAAAAN9Qp+m/spBZ5ZKVSp15+nUwAAAA4vWRniug+lOXTveJ7SHdJEc0A+edzqhNNod8rVEfPrYIh8AV7wPfUWT7T3q36fnSFAAAAPszZMyBjlGQImMxceXFQIwj7VKG</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SYNERGYDBDC.ST_Production.APSImport]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{57D2483E-9AF3-4CB5-AD4B-6DE605C97C88}"
+      DTS:ObjectName="SYNERGYDBDC.ST_Production.APSImport">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SYNERGYDBDC;User ID=APSImport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAdQjjlzA4c0+u+IWAl8L4LgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAC6cEr3mdTes+32S4bLev+gAAAAAASAAACgAAAAEAAAAN+uKY9M5V/OVNsVFNVwrD4wAAAA0vVAI/jIstBqKlxNTBsyfVdVi0ierB/GgH5bgHpiK9vzhEtaV500Szyrd6W24Vg3FAAAAA7H9cZe3G4+xLqYcTKV3SzZDcy+</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FEBB0820-BCBD-47EA-9E2A-5694EAD08BE5}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B9C62AA7-2CF4-4971-AD63-55E8D8F146E1}"
+          SQLTask:SqlStatementSource="EXEC APS.FixCredits" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="165,42"
+          Id="Package\Execute SQL Task"
+          TopLeft="66.2857154145533,39.1529417255758" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

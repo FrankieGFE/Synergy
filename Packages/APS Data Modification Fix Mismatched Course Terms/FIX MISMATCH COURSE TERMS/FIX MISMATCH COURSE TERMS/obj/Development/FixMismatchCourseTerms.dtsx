@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/5/2018 3:21:31 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="046-DECHAVEZ"
+  DTS:CreatorName="APS\e104090"
+  DTS:DTSID="{28E5A569-6181-4A11-A20C-EB974491BEFC}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="FixMismatchCourseTerms"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{AAB66698-141C-4337-9487-DAABB680E188}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SYNERGYDB01.APS.EDU.ACTD.APSImport]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D00D3DF5-FFDE-46B2-8101-9B651B07B835}"
+      DTS:ObjectName="SYNERGYDB01.APS.EDU.ACTD.APSImport">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SYNERGYDB01.APS.EDU.ACTD;User ID=APSImport;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAdQjjlzA4c0+u+IWAl8L4LgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAoGltPWOkS/5MrS4Rear0/AAAAAASAAACgAAAAEAAAAI8PZ97RWaJ82gPxDQCtGaEwAAAA5z428d0nLiPTmzJOeiN6zcsaIv+Xe/izLbLZFjwehW0pHbVQX/5tgz+j5IhhstJnFAAAAGYHsJ/zt2NPnlrGCPSOqJxIxkin</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{07348A44-730B-4463-8866-D173D23B7673}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D00D3DF5-FFDE-46B2-8101-9B651B07B835}"
+          SQLTask:SqlStatementSource="&#xA;&#xA;BEGIN TRAN&#xA;&#xA;UPDATE&#xA;&#x9;[SYSect]&#xA;SET&#xA;&#x9;[TERM_CODE]=[Mismatches].[COURSE_DURATION]&#xA;FROM&#xA;&#x9;[rev].[EPC_SCH_YR_SECT] AS [SYSect]&#xA;&#xA;&#x9;LEFT JOIN&#xA;(&#xA;SELECT&#xA;&#x9;[Org].[ORGANIZATION_NAME]&#xA;&#x9;,[Course].[COURSE_GU]&#xA;&#x9;,[SYSect].[SCHOOL_YEAR_COURSE_GU]&#xA;&#x9;,[Course].[COURSE_TITLE]&#xA;&#x9;,[Course].[COURSE_ID]&#xA;&#x9;,[Course].[COURSE_DURATION]&#xA;&#x9;,[SYSect].[TERM_CODE]&#xA;FROM&#xA;&#x9;[rev].[EPC_CRS] AS [Course]&#xA;&#xA;&#x9;INNER JOIN&#xA;&#x9;[rev].[EPC_SCH_YR_CRS] AS [SYCrs]&#xA;&#x9;ON&#xA;&#x9;[Course].[COURSE_GU]=[SYCrs].[COURSE_GU]&#xA;&#xA;&#x9;INNER JOIN&#xA;&#x9;[rev].[EPC_SCH_YR_SECT] AS [SYSect]&#xA;&#x9;ON&#xA;&#x9;[SYCrs].[SCHOOL_YEAR_COURSE_GU]=[SYSect].[SCHOOL_YEAR_COURSE_GU]&#xA;&#xA;&#x9;INNER JOIN&#xA;&#x9;[rev].[REV_ORGANIZATION_YEAR] AS [OrgYear]&#xA;&#x9;ON&#xA;&#x9;[SYSect].[ORGANIZATION_YEAR_GU]=[OrgYear].[ORGANIZATION_YEAR_GU]&#xA;&#xA;&#x9;INNER JOIN&#xA;&#x9;[rev].[REV_ORGANIZATION] AS [Org]&#xA;&#x9;ON&#xA;&#x9;[OrgYear].[ORGANIZATION_GU]=[Org].[ORGANIZATION_GU]&#xA;&#xA;&#x9;INNER JOIN&#xA;&#x9;[rev].[EPC_SCH] AS [School]&#xA;&#x9;ON&#xA;&#x9;[Org].[ORGANIZATION_GU]=[School].[ORGANIZATION_GU]&#xA;&#xA;&#x9;INNER JOIN&#xA;&#x9;[rev].[REV_YEAR] AS [Year]&#xA;&#x9;ON&#xA;&#x9;[OrgYear].[YEAR_GU]=[Year].[YEAR_GU]&#xA;&#xA;WHERE&#xA;&#x9;[Course].[COURSE_DURATION]!=[SYSect].[TERM_CODE]&#xA;&#x9;AND [Course].[COURSE_DURATION] NOT IN ('Sem','Qrtr')&#xA;&#x9;AND [SYSect].[TERM_CODE] NOT IN ('EYR')&#xA;&#x9;AND ([School].[SCHOOL_CODE] BETWEEN '400' AND '499' AND [School].[SCHOOL_CODE]!='496')&#xA;&#x9;AND [Year].[SCHOOL_YEAR]=2015 AND [Year].[EXTENSION]='R'&#xA;) AS [Mismatches]&#xA;&#xA;ON&#xA;&#x9;[SYSect].[SCHOOL_YEAR_COURSE_GU]=[Mismatches].[SCHOOL_YEAR_COURSE_GU]&#xA;&#x9;AND [SYSect].[TERM_CODE]!=[Mismatches].[COURSE_DURATION]&#xA;&#xA;WHERE&#xA;&#x9;[Mismatches].[SCHOOL_YEAR_COURSE_GU] IS NOT NULL&#xA;&#xA;COMMIT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Execute SQL Task"
+          TopLeft="153,31" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
