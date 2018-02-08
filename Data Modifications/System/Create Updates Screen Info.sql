@@ -30,13 +30,13 @@ SELECT
 	,NULL AS CHANGE_ID_STAMP
 		
 	--ENTER IN THE REFRESH DATE
-	,'2017-06-12' AS REFRESH_DATE
+	,'2018-01-16' AS REFRESH_DATE
 	
 	--ENTER THE USER INTERFACE URL
-	,'http://synergytraining/aps.edu' AS URL
+	,'http://synfunc/' AS URL
 
 	--ENTER IN ANY NOTES FOR ENVIRONMENT
-	,'Restore from Daily' AS NOTES
+	,'Restore from Daily Per Andy' AS NOTES
 
 		
 
@@ -57,6 +57,7 @@ SELECT *  FROM
 rev.UD_VER
 
 --delete from rev.rev_ver
---where ver_gu = '088850F2-B972-46F5-9667-E7F8D844F959'
-ROLLBACK
+--where ver_gu = 'DE24DB4E-7AD2-4FAF-ACEB-E2C0679204E5'
+--commit
+--ROLLBACK
 

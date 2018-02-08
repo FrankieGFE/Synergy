@@ -1,11 +1,12 @@
 
 
-declare @YearGu uniqueidentifier = 'F7D112F7-354D-4630-A4BC-65F586BA42EC'
+declare @YearGu uniqueidentifier = 'A3F9F1FB-4706-49AA-B3A3-21F153966191'
 ;with Main
 as
 (
 select
-	row_number() over (partition by bs.sis_number order by bs.sis_number, ped.enter_date) as rn,
+	row_number() over (partition by bs.sis_number, SP.PARENT_GU order by bs.sis_number, ped.enter_date) as ROWNUM,
+	PED.STUDENT_GU,
 	p.PARENT_GU,
 	sp.PARENT_GU as sp_parent_gu,
 	bs.SIS_NUMBER,
@@ -78,14 +79,18 @@ on
 where
 	PED.EXCLUDE_ADA_ADM is null
 )
+--SELECT * FROM MAIN WHERE ROWNUM  = 1
+
 select
 	*
 from
-	main
+	main M
 where
 	1 = 1
 and
-	rn = 1	
+	ROWNUM = 1	
 order by
-	 SIS_NUMBER
+	 M.SIS_NUMBER
+
+	
 

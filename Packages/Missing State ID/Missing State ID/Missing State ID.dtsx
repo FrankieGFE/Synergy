@@ -8,12 +8,12 @@
   DTS:DelayValidation="True"
   DTS:DTSID="{B503DB85-3B47-421D-A853-7C7C9540A8C8}"
   DTS:ExecutableType="SSIS.Package.3"
-  DTS:LastModifiedProductVersion="11.0.5058.0"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="SSID_Export"
   DTS:PackageType="5"
-  DTS:VersionBuild="43"
-  DTS:VersionGUID="{729CA23E-1E32-4082-AA6B-289E56BF2BD8}">
+  DTS:VersionBuild="49"
+  DTS:VersionGUID="{ECFA76A8-803B-40B8-B1E2-E4145A441EF9}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -24,11 +24,11 @@
       DTS:ObjectName="DB Connection">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=APSExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-SSID_Export-{4F46AE7A-01F2-488F-BFD2-F0C5947FD0A9}azlt-mmelarcode\sql2012.STDemo808_2012;">
+          DTS:ConnectionString="Data Source=synergydb01.aps.edu.actd;User ID=APSExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-SSID_Export-{4F46AE7A-01F2-488F-BFD2-F0C5947FD0A9}azlt-mmelarcode\sql2012.STDemo808_2012;">
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATewWZ/TlJEy+RoEBYRx+mgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADPlfxMYw6wlqP7h04wvl+nAAAAAASAAACgAAAAEAAAAKwvZZNSIDDpWan+ZSiC3pQwAAAAdCITIYUtwFNvgV/yr5SV4S1m8PZnrevl8xxRev368tcYN2zGpRHjq7M9Na++9XyIFAAAAAPJcN1//6/w9KbN2W60lbhfthbi</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQK2Gs4D6akmJWBUgNRQfAAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABesHd/rg7xjc2f1cvLoBnJAAAAAASAAACgAAAAEAAAAGHDg9+WFqJdtWjiFs8F7eowAAAA4En+yj0X1xWEIxDcrQKkQLzqNuBtoWYcK7txklk/fwHHRjG6wPWAwmTaeLrpj4YCFAAAAP2RPEbYteX6IKbcW6RapA+uojLs</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -55,7 +55,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\APS\SEND_072716.txt">
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\APS\SEND_020518.txt">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -64,7 +64,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="RowID"
-              DTS:DTSID="{ADDAB9B8-39C6-499A-97A3-C4010DE3885B}"
+              DTS:DTSID="{7F0441A5-AA04-4B99-810A-86FB5B7B4BD0}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -73,7 +73,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="State School Number"
-              DTS:DTSID="{64A65E7C-5716-461A-99D9-F029501E5C0D}"
+              DTS:DTSID="{D9906205-19B7-4045-90F0-6E8F84476C69}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -82,7 +82,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="District Number1"
-              DTS:DTSID="{3D776EF1-5C35-463E-90AA-EA08173E425C}"
+              DTS:DTSID="{F2555162-0B0F-4013-9219-D42BB9A57F78}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -91,7 +91,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Last Name"
-              DTS:DTSID="{EF1B49A5-839E-47F9-9A9F-13F0BDD592C3}"
+              DTS:DTSID="{9AE8FCCD-F5AF-442F-B296-5F4B9CBFBCC9}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -100,7 +100,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student First Name"
-              DTS:DTSID="{31EFA2DE-9D7D-4C87-A2E4-41F05F6FBF21}"
+              DTS:DTSID="{74D04697-930F-4FED-8938-1E60DBF75C09}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -109,7 +109,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Middle Name"
-              DTS:DTSID="{86F6BC03-9546-43A6-B87C-98803D0BAC5A}"
+              DTS:DTSID="{DD9A929B-D05C-484E-BD8E-4FEE371A479F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -118,7 +118,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Gender"
-              DTS:DTSID="{DC05CDA0-F693-48EA-A63D-E8A89878ED94}"
+              DTS:DTSID="{72D7C7A3-F779-4958-B3A5-E646A2036B11}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -127,7 +127,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Birthdate"
-              DTS:DTSID="{77A874E1-9DB7-4917-8869-20BF89577686}"
+              DTS:DTSID="{E54CC5BD-D7D5-4F36-893E-6C67DFA6AC3E}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -136,7 +136,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Grade Level"
-              DTS:DTSID="{FEA81FAD-0568-43EE-AFA4-9CA2741D08CB}"
+              DTS:DTSID="{594D8E32-E98D-4610-B936-C3326D40BD66}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -145,7 +145,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="State ID Number"
-              DTS:DTSID="{D474CCCA-E3EE-4F65-973B-5FC969D591E1}"
+              DTS:DTSID="{79F3211D-2D6B-4DDF-94DE-74C098CCEB53}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -154,7 +154,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Blank1"
-              DTS:DTSID="{2F1C3120-2449-4847-B905-27DAF80C22F9}"
+              DTS:DTSID="{612C23FC-1E76-4541-AE4C-F384BD136228}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -163,7 +163,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Ethnic Code"
-              DTS:DTSID="{1BCF934D-0CBC-43E8-87D3-2E7A4A81CA35}"
+              DTS:DTSID="{42B87907-5D06-41B6-ADB5-16C8B2C7DFB0}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -172,7 +172,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Blank2"
-              DTS:DTSID="{EDED5014-4B7C-4D68-9DAE-5BD6C87E86B9}"
+              DTS:DTSID="{B2186867-5513-4664-B3F0-9B3E21A4AD98}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -181,7 +181,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="District Number"
-              DTS:DTSID="{3A5512F1-04E5-48E4-BA01-7FFCB02A6F7E}"
+              DTS:DTSID="{77F996DA-6500-4231-B4FC-F6B7A63C7C78}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -189,7 +189,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="3"
               DTS:TextQualified="True"
               DTS:ObjectName="School Year"
-              DTS:DTSID="{5F035624-2C24-47F1-9E04-267855A3449F}"
+              DTS:DTSID="{C3661B55-415D-4FD7-9475-15A5E8FBFC87}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -218,7 +218,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\APS\SEND_072716.txt">
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\APS\SEND_020518.txt">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -227,7 +227,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="rowtype"
-              DTS:DTSID="{09AFCC3C-B439-474C-B227-F607FDD8E87A}"
+              DTS:DTSID="{DD9CAC0E-BFDF-4006-993A-3D18517BD8C6}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -235,7 +235,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="3"
               DTS:TextQualified="True"
               DTS:ObjectName="day"
-              DTS:DTSID="{6EDB1E9E-37C5-4DE1-A4F1-1CA2471E6EE1}"
+              DTS:DTSID="{C5B6F87C-47CF-49D6-8378-3200010B644C}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -243,7 +243,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="3"
               DTS:TextQualified="True"
               DTS:ObjectName="row_count"
-              DTS:DTSID="{D3D783DA-7EBC-4273-B978-BA0402AA16A2}"
+              DTS:DTSID="{6A0E35FA-D0DD-4E03-87AF-7CD36379F02A}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -272,69 +272,60 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\APS\SEND_072716.txt">
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\APS\SEND_020518.txt">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="2"
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="rowtype"
-              DTS:DTSID="{A01F0A1A-E530-4AEC-99A2-76D4F070BAED}"
+              DTS:DTSID="{4F21E977-CC13-4A40-ACE9-18794F56FEEF}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="10"
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="date"
-              DTS:DTSID="{65697880-B947-464F-9659-C5E42666C3B0}"
+              DTS:DTSID="{11217E45-1C36-4C42-ABFA-7FB00D69059F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="8"
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="dtime"
-              DTS:DTSID="{1034CA42-378D-49D5-8D65-2FFD5712537B}"
+              DTS:DTSID="{63E8FEC4-6C58-41B2-84E7-4DFB40ABED34}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:DataType="3"
               DTS:TextQualified="True"
               DTS:ObjectName="day"
-              DTS:DTSID="{6E69658C-E372-4E42-B679-74C6B257CAD9}"
+              DTS:DTSID="{E10B867F-4B29-499B-97EC-F1BC2A4CE50D}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
+              DTS:ColumnDelimiter="_x002C_"
               DTS:MaximumWidth="3"
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="ver"
-              DTS:DTSID="{EEC11883-3101-4238-A21D-44C30330950B}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x0009_"
-              DTS:MaximumWidth="14"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="delimiter"
-              DTS:DTSID="{ECC15DC0-8334-4C5F-A978-381A1CAAF678}"
+              DTS:DTSID="{259EB204-38F7-4979-A110-E5D35744A928}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x000D__x000A_"
-              DTS:MaximumWidth="88"
+              DTS:MaximumWidth="102"
               DTS:DataType="129"
               DTS:TextQualified="True"
-              DTS:ObjectName="blanks"
-              DTS:DTSID="{BE06C3AA-3AC6-41CB-BF94-D094F2403901}"
+              DTS:ObjectName="delimiter"
+              DTS:DTSID="{015C7F84-2A6E-4788-8730-25A988F3E7D3}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -363,7 +354,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\APS\SEND_072716.txt">
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\APS\SEND_020518.txt">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -372,7 +363,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="RowID"
-              DTS:DTSID="{A11189F7-3571-4A30-8E20-ECA0BA767C08}"
+              DTS:DTSID="{46BBEB5A-5EFC-4111-A36D-F78CD42339DA}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -381,7 +372,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="State School Number"
-              DTS:DTSID="{0B06CA41-8219-4190-A308-A4130C9EE4FC}"
+              DTS:DTSID="{47F588C7-2BFE-4F5B-A526-F0E1E3F4715D}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -390,7 +381,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="District Number1"
-              DTS:DTSID="{CDB1AC4A-A503-40EE-A55A-43A78A2A1A1C}"
+              DTS:DTSID="{3B7BE6AC-FA66-4769-A19E-E21F4F820E7C}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -399,7 +390,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Last Name"
-              DTS:DTSID="{EC36ABB8-E076-4072-8923-98856289A0F3}"
+              DTS:DTSID="{B85FB16A-001F-46AF-A5F6-A5DD40450846}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -408,7 +399,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student First Name"
-              DTS:DTSID="{170F2860-FCE4-452C-B6BA-596B8D29B9F4}"
+              DTS:DTSID="{C41BBD98-C078-443E-99FD-29362F2907CD}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -417,7 +408,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Middle Name"
-              DTS:DTSID="{B76A7A3F-61EE-45CA-AA25-415831D78A7A}"
+              DTS:DTSID="{396489E0-3B19-499D-A40F-53583D78DF30}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -426,7 +417,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Blank3"
-              DTS:DTSID="{3A4D2B38-E082-413C-B939-8A8205729C24}"
+              DTS:DTSID="{A3625DCB-8CCE-49C1-A7C9-B07D034CEE13}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -435,7 +426,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Gender"
-              DTS:DTSID="{2ACE1D5F-CDB0-4043-8B1F-1E6A9370E281}"
+              DTS:DTSID="{9E703156-73EC-448D-BFE2-1FC26E5E5EAC}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -444,7 +435,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Birthdate"
-              DTS:DTSID="{F9C7DF94-E079-4AE3-9A10-4C1958099075}"
+              DTS:DTSID="{651C51D6-FE4F-4F71-83DC-8824D3D5B1B6}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -453,7 +444,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Grade Level"
-              DTS:DTSID="{1C7C7CFC-8492-444F-8FDC-41C764E3DB1A}"
+              DTS:DTSID="{FD7BD990-DFC3-4AAC-A7BA-B9F60E4E31B5}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -462,7 +453,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="State ID Number"
-              DTS:DTSID="{FDB571CD-9E33-4D2E-9086-09EA10E82B66}"
+              DTS:DTSID="{E2EC08F2-D3B1-4FF6-A81A-791147ACD83E}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -471,7 +462,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Blank1"
-              DTS:DTSID="{C75DD164-21E5-483C-A074-B7970D6E01CD}"
+              DTS:DTSID="{0EA7819E-CD76-4622-B4EE-C8E2D5622718}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -480,7 +471,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Student Ethnic Code"
-              DTS:DTSID="{428411C1-A7FD-4549-833B-254F8604A804}"
+              DTS:DTSID="{FEE12041-0347-4267-A26C-00D6855B92F3}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -489,7 +480,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Blank2"
-              DTS:DTSID="{AD1EE223-1E24-465B-A126-D7F351F9AAB5}"
+              DTS:DTSID="{CF62FC4F-9D6B-42AA-A966-0A5B885A0971}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -498,7 +489,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="District Number"
-              DTS:DTSID="{C531AF5E-ADAA-48B6-B986-80A655A7B5B0}"
+              DTS:DTSID="{6B46579F-96BE-46D2-B14C-EB1C49C7C71D}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -506,7 +497,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
               DTS:DataType="3"
               DTS:TextQualified="True"
               DTS:ObjectName="School Year"
-              DTS:DTSID="{49DC0E8D-0B8C-458E-9EBF-BC3E7D88A18C}"
+              DTS:DTSID="{F0CD793D-23FF-41D2-8F96-29CA1E274E42}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -575,7 +566,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
           <components>
             <component
               refId="Package\DetailLines\Flat File Destination 1"
-              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              componentClassID="DTSAdapter.FlatFileDestination.3"
               contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Flat File Destination"
               localeId="1033"
@@ -615,7 +606,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
                     <inputColumn
                       refId="Package\DetailLines\Flat File Destination 1.Inputs[Flat File Destination Input].Columns[State School Number]"
                       cachedDataType="wstr"
-                      cachedLength="20"
+                      cachedLength="10"
                       cachedName="State School Number"
                       externalMetadataColumnId="Package\DetailLines\Flat File Destination 1.Inputs[Flat File Destination Input].ExternalColumns[State School Number]"
                       lineageId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Output].Columns[State School Number]" />
@@ -644,7 +635,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
                     <inputColumn
                       refId="Package\DetailLines\Flat File Destination 1.Inputs[Flat File Destination Input].Columns[Student Middle Name]"
                       cachedDataType="wstr"
-                      cachedLength="20"
+                      cachedLength="40"
                       cachedName="Student Middle Name"
                       externalMetadataColumnId="Package\DetailLines\Flat File Destination 1.Inputs[Flat File Destination Input].ExternalColumns[Student Middle Name]"
                       lineageId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Output].Columns[Student Middle Name]" />
@@ -674,7 +665,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
                     <inputColumn
                       refId="Package\DetailLines\Flat File Destination 1.Inputs[Flat File Destination Input].Columns[Grade Level]"
                       cachedDataType="wstr"
-                      cachedLength="20"
+                      cachedLength="100"
                       cachedName="Grade Level"
                       externalMetadataColumnId="Package\DetailLines\Flat File Destination 1.Inputs[Flat File Destination Input].ExternalColumns[Grade Level]"
                       lineageId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Output].Columns[Grade Level]" />
@@ -819,7 +810,7 @@ RIGHT("0" + (DT_WSTR,2)DATEPART("day", GETDATE() ), 2)
             </component>
             <component
               refId="Package\DetailLines\OLE DB Source"
-              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              componentClassID="DTSAdapter.OLEDBSource.3"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
               name="OLE DB Source"
@@ -853,7 +844,7 @@ SET @DistrictCode = (SELECT CONVERT(xml,[VALUE]).value('(/ROOT/SIS/@DISTRICT_NUM
 
 SELECT 
    'ID'                                       AS [RowID]
- , sch.SCHOOL_CODE                            AS [State School Number]
+ , sch.STATE_SCHOOL_CODE           AS [State School Number]
  , @DistrictCode                              AS [District Number1]
  , per.LAST_NAME                              AS [Student Last Name]
  , per.FIRST_NAME                             AS [Student First Name]
@@ -887,12 +878,12 @@ JOIN rev.EPC_SCH               sch   ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_G
 JOIN rev.REV_PERSON            per   ON per.PERSON_GU = stu.STUDENT_GU
 JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd ON grd.VALUE_CODE = ssyr.GRADE
 LEFT JOIN rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') eth ON eth.VALUE_CODE = per.RESOLVED_ETHNICITY_RACE
-where stu.STATE_STUDENT_NUMBER is null
+where stu.STATE_STUDENT_NUMBER is null AND sch.SCHOOL_CODE != 'TRAN'
  --Include Next year Students
 UNION
 SELECT 
    'ID'                                       AS [RowID]
- , sch.SCHOOL_CODE                            AS [State School Number]
+ , sch.STATE_SCHOOL_CODE           AS [State School Number]
  , @DistrictCode                              AS [District Number1]
  , per.LAST_NAME                              AS [Student Last Name]
  , per.FIRST_NAME                             AS [Student First Name]
@@ -939,7 +930,7 @@ where stu.STATE_STUDENT_NUMBER is null
 									JOIN rev.REV_PERSON            per   ON per.PERSON_GU = stu.STUDENT_GU
 									JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd ON grd.VALUE_CODE = ssyr.GRADE
 									LEFT JOIN rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') eth ON eth.VALUE_CODE = per.RESOLVED_ETHNICITY_RACE
-									where stu.STATE_STUDENT_NUMBER is null)</property>
+									where stu.STATE_STUDENT_NUMBER is null AND sch.SCHOOL_CODE != 'TRAN')</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -992,7 +983,7 @@ where stu.STATE_STUDENT_NUMBER is null
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State School Number]"
-                      length="20"
+                      length="10"
                       lineageId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Output].Columns[State School Number]"
                       name="State School Number"
                       truncationRowDisposition="FailComponent" />
@@ -1033,7 +1024,7 @@ where stu.STATE_STUDENT_NUMBER is null
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Student Middle Name]"
-                      length="20"
+                      length="40"
                       lineageId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Output].Columns[Student Middle Name]"
                       name="Student Middle Name"
                       truncationRowDisposition="FailComponent" />
@@ -1075,7 +1066,7 @@ where stu.STATE_STUDENT_NUMBER is null
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Grade Level]"
-                      length="20"
+                      length="100"
                       lineageId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Output].Columns[Grade Level]"
                       name="Grade Level"
                       truncationRowDisposition="FailComponent" />
@@ -1154,7 +1145,7 @@ where stu.STATE_STUDENT_NUMBER is null
                     <externalMetadataColumn
                       refId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State School Number]"
                       dataType="wstr"
-                      length="20"
+                      length="10"
                       name="State School Number" />
                     <externalMetadataColumn
                       refId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[District Number1]"
@@ -1175,7 +1166,7 @@ where stu.STATE_STUDENT_NUMBER is null
                     <externalMetadataColumn
                       refId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Student Middle Name]"
                       dataType="wstr"
-                      length="20"
+                      length="40"
                       name="Student Middle Name" />
                     <externalMetadataColumn
                       refId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Blank3]"
@@ -1197,7 +1188,7 @@ where stu.STATE_STUDENT_NUMBER is null
                     <externalMetadataColumn
                       refId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Grade Level]"
                       dataType="wstr"
-                      length="20"
+                      length="100"
                       name="Grade Level" />
                     <externalMetadataColumn
                       refId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State ID Number]"
@@ -1249,7 +1240,7 @@ where stu.STATE_STUDENT_NUMBER is null
                     <outputColumn
                       refId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State School Number]"
                       dataType="wstr"
-                      length="20"
+                      length="10"
                       lineageId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State School Number]"
                       name="State School Number" />
                     <outputColumn
@@ -1274,7 +1265,7 @@ where stu.STATE_STUDENT_NUMBER is null
                     <outputColumn
                       refId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Student Middle Name]"
                       dataType="wstr"
-                      length="20"
+                      length="40"
                       lineageId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Student Middle Name]"
                       name="Student Middle Name" />
                     <outputColumn
@@ -1300,7 +1291,7 @@ where stu.STATE_STUDENT_NUMBER is null
                     <outputColumn
                       refId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Grade Level]"
                       dataType="wstr"
-                      length="20"
+                      length="100"
                       lineageId="Package\DetailLines\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Grade Level]"
                       name="Grade Level" />
                     <outputColumn
@@ -1384,7 +1375,7 @@ where stu.STATE_STUDENT_NUMBER is null
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{4F46AE7A-01F2-488F-BFD2-F0C5947FD0A9}"
-          SQLTask:SqlStatementSource="DECLARE @SchYr int, @NextSchYr int, @NextSchYrDisplay int&#xA;DECLARE @DistrictCode varchar(3)&#xA;SET @SchYr = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)&#xA;SET @NextSchYr = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear) + 1&#xA;select count(*)+2 as c1&#xA;from&#xA;(&#xA;SELECT &#xA;   'ID'                                       AS [RowID]&#xA; , sch.SCHOOL_CODE                            AS [State School Number]&#xA; , @DistrictCode                              AS [District Number1]&#xA; , per.LAST_NAME                              AS [Student Last Name]&#xA; , per.FIRST_NAME                             AS [Student First Name]&#xA; , per.MIDDLE_NAME                            AS [Student Middle Name]&#xA; , ''&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; AS [Blank3]&#xA; , per.GENDER                                 AS [Gender]&#xA; , CONVERT(VARCHAR(10), per.BIRTH_DATE, 101)  AS [Birthdate]&#xA; , CASE&#xA;    WHEN grd.ALT_CODE_2 = 'PK' THEN 'KF'&#xA;&#x9;ELSE grd.ALT_CODE_2&#xA;   END                                        AS [Grade Level]&#xA; --, stu.STATE_STUDENT_NUMBER                   AS [State ID Number]&#xA; , stu.SIS_NUMBER                             AS [State ID Number]&#xA; , ''                                         AS [Blank1]&#xA; , CASE&#xA;    WHEN  eth.ALT_CODE_3 = 'W' THEN 'C'&#xA;    WHEN  eth.ALT_CODE_3 = 'B' THEN 'B'&#xA;    WHEN  eth.ALT_CODE_3 = 'AI' THEN 'I'&#xA;    WHEN  eth.ALT_CODE_3 = 'A' THEN 'A'&#xA;    WHEN  eth.ALT_CODE_3 = 'P' THEN 'A'&#xA;&#x9;ELSE  'C'&#xA;   END                                        AS [Student Ethnic Code]&#xA; , ''                                         AS [Blank2]&#xA; , @DistrictCode                              AS [District Number]&#xA; , @SchYr                                     AS [School Year]&#xA;FROM rev.EPC_STU               stu   &#xA;JOIN rev.EPC_STU_SCH_YR        ssyr  ON ssyr.STUDENT_GU = stu.STUDENT_GU &#xA;JOIN rev.REV_ORGANIZATION_YEAR oyr   ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU&#xA;                                        AND oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)&#xA;JOIN rev.EPC_SCH               sch   ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU&#xA;JOIN rev.REV_PERSON            per   ON per.PERSON_GU = stu.STUDENT_GU&#xA;JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd ON grd.VALUE_CODE = ssyr.GRADE&#xA;LEFT JOIN rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') eth ON eth.VALUE_CODE = per.RESOLVED_ETHNICITY_RACE&#xA;where stu.STATE_STUDENT_NUMBER is null&#xA; --Include Next year Students&#xA;UNION&#xA;SELECT &#xA;   'ID'                                       AS [RowID]&#xA; , sch.SCHOOL_CODE                            AS [State School Number]&#xA; , @DistrictCode                              AS [District Number1]&#xA; , per.LAST_NAME                              AS [Student Last Name]&#xA; , per.FIRST_NAME                             AS [Student First Name]&#xA; , per.MIDDLE_NAME                            AS [Student Middle Name]&#xA; ,''&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;      AS [Blank3]&#xA; , per.GENDER                                 AS [Gender]&#xA; , CONVERT(VARCHAR(10), per.BIRTH_DATE, 101)  AS [Birthdate]&#xA; , CASE&#xA;    WHEN grd.ALT_CODE_2 = 'PK' THEN 'KF'&#xA;&#x9;ELSE grd.ALT_CODE_2&#xA;   END                                        AS [Grade Level]&#xA; --, stu.STATE_STUDENT_NUMBER                   AS [State ID Number]&#xA; , stu.SIS_NUMBER                             AS [State ID Number]&#xA; , ''                                         AS [Blank1]&#xA; , CASE&#xA;    WHEN  eth.ALT_CODE_3 = 'W' THEN 'C'&#xA;    WHEN  eth.ALT_CODE_3 = 'B' THEN 'B'&#xA;    WHEN  eth.ALT_CODE_3 = 'AI' THEN 'I'&#xA;    WHEN  eth.ALT_CODE_3 = 'A' THEN 'A'&#xA;    WHEN  eth.ALT_CODE_3 = 'P' THEN 'A'&#xA;&#x9;ELSE  'C'&#xA;   END                                        AS [Student Ethnic Code]&#xA; , ''                                         AS [Blank2]&#xA; , @DistrictCode                              AS [District Number]&#xA; , @NextSchYrDisplay                          AS [School Year]&#xA; &#xA;FROM rev.EPC_STU               stu   &#xA;JOIN rev.EPC_STU_SCH_YR        ssyr  ON ssyr.STUDENT_GU = stu.STUDENT_GU &#xA;JOIN rev.REV_ORGANIZATION_YEAR oyr   ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU&#xA;JOIN rev.REV_YEAR              yr    ON yr.YEAR_GU               = oyr.YEAR_GU      &#xA;                                        AND yr.SCHOOL_YEAR = @NextSchYr&#xA;JOIN rev.EPC_SCH               sch   ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU&#xA;JOIN rev.REV_PERSON            per   ON per.PERSON_GU = stu.STUDENT_GU&#xA;JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd ON grd.VALUE_CODE = ssyr.GRADE&#xA;LEFT JOIN rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') eth ON eth.VALUE_CODE = per.RESOLVED_ETHNICITY_RACE&#xA;where stu.STATE_STUDENT_NUMBER is null&#xA;&#x9;  AND [stu].[SIS_NUMBER] NOT IN (SELECT &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[stu].[SIS_NUMBER]&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;FROM rev.EPC_STU               stu   &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;JOIN rev.EPC_STU_SCH_YR        ssyr  ON ssyr.STUDENT_GU = stu.STUDENT_GU &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;JOIN rev.REV_ORGANIZATION_YEAR oyr   ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AND oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;JOIN rev.EPC_SCH               sch   ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;JOIN rev.REV_PERSON            per   ON per.PERSON_GU = stu.STUDENT_GU&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd ON grd.VALUE_CODE = ssyr.GRADE&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;LEFT JOIN rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') eth ON eth.VALUE_CODE = per.RESOLVED_ETHNICITY_RACE&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;where stu.STATE_STUDENT_NUMBER is null)&#xA;) cn&#xA;"
+          SQLTask:SqlStatementSource="DECLARE @SchYr int, @NextSchYr int, @NextSchYrDisplay int&#xA;DECLARE @DistrictCode varchar(3)&#xA;SET @SchYr = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear)&#xA;SET @NextSchYr = (select SCHOOL_YEAR from rev.SIF_22_Common_CurrentYear) + 1&#xA;select count(*)+2 as c1&#xA;from&#xA;(&#xA;SELECT &#xA;   'ID'                                       AS [RowID]&#xA; , sch.STATE_SCHOOL_CODE                      AS [State School Number]&#xA; , @DistrictCode                              AS [District Number1]&#xA; , per.LAST_NAME                              AS [Student Last Name]&#xA; , per.FIRST_NAME                             AS [Student First Name]&#xA; , per.MIDDLE_NAME                            AS [Student Middle Name]&#xA; , ''&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; AS [Blank3]&#xA; , per.GENDER                                 AS [Gender]&#xA; , CONVERT(VARCHAR(10), per.BIRTH_DATE, 101)  AS [Birthdate]&#xA; , CASE&#xA;    WHEN grd.ALT_CODE_2 = 'PK' THEN 'KF'&#xA;&#x9;ELSE grd.ALT_CODE_2&#xA;   END                                        AS [Grade Level]&#xA; --, stu.STATE_STUDENT_NUMBER                   AS [State ID Number]&#xA; , stu.SIS_NUMBER                             AS [State ID Number]&#xA; , ''                                         AS [Blank1]&#xA; , CASE&#xA;    WHEN  eth.ALT_CODE_3 = 'W' THEN 'C'&#xA;    WHEN  eth.ALT_CODE_3 = 'B' THEN 'B'&#xA;    WHEN  eth.ALT_CODE_3 = 'AI' THEN 'I'&#xA;    WHEN  eth.ALT_CODE_3 = 'A' THEN 'A'&#xA;    WHEN  eth.ALT_CODE_3 = 'P' THEN 'A'&#xA;&#x9;ELSE  'C'&#xA;   END                                        AS [Student Ethnic Code]&#xA; , ''                                         AS [Blank2]&#xA; , @DistrictCode                              AS [District Number]&#xA; , @SchYr                                     AS [School Year]&#xA;FROM rev.EPC_STU               stu   &#xA;JOIN rev.EPC_STU_SCH_YR        ssyr  ON ssyr.STUDENT_GU = stu.STUDENT_GU &#xA;JOIN rev.REV_ORGANIZATION_YEAR oyr   ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU&#xA;                                        AND oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)&#xA;JOIN rev.EPC_SCH               sch   ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU&#xA;JOIN rev.REV_PERSON            per   ON per.PERSON_GU = stu.STUDENT_GU&#xA;JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd ON grd.VALUE_CODE = ssyr.GRADE&#xA;LEFT JOIN rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') eth ON eth.VALUE_CODE = per.RESOLVED_ETHNICITY_RACE&#xA;where stu.STATE_STUDENT_NUMBER is null and sch.SCHOOL_CODE != 'tran'&#xA; --Include Next year Students&#xA;UNION&#xA;SELECT &#xA;   'ID'                                       AS [RowID]&#xA; , sch.STATE_SCHOOL_CODE                      AS [State School Number]&#xA; , @DistrictCode                              AS [District Number1]&#xA; , per.LAST_NAME                              AS [Student Last Name]&#xA; , per.FIRST_NAME                             AS [Student First Name]&#xA; , per.MIDDLE_NAME                            AS [Student Middle Name]&#xA; ,''&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;      AS [Blank3]&#xA; , per.GENDER                                 AS [Gender]&#xA; , CONVERT(VARCHAR(10), per.BIRTH_DATE, 101)  AS [Birthdate]&#xA; , CASE&#xA;    WHEN grd.ALT_CODE_2 = 'PK' THEN 'KF'&#xA;&#x9;ELSE grd.ALT_CODE_2&#xA;   END                                        AS [Grade Level]&#xA; --, stu.STATE_STUDENT_NUMBER                   AS [State ID Number]&#xA; , stu.SIS_NUMBER                             AS [State ID Number]&#xA; , ''                                         AS [Blank1]&#xA; , CASE&#xA;    WHEN  eth.ALT_CODE_3 = 'W' THEN 'C'&#xA;    WHEN  eth.ALT_CODE_3 = 'B' THEN 'B'&#xA;    WHEN  eth.ALT_CODE_3 = 'AI' THEN 'I'&#xA;    WHEN  eth.ALT_CODE_3 = 'A' THEN 'A'&#xA;    WHEN  eth.ALT_CODE_3 = 'P' THEN 'A'&#xA;&#x9;ELSE  'C'&#xA;   END                                        AS [Student Ethnic Code]&#xA; , ''                                         AS [Blank2]&#xA; , @DistrictCode                              AS [District Number]&#xA; , @NextSchYrDisplay                          AS [School Year]&#xA; &#xA;FROM rev.EPC_STU               stu   &#xA;JOIN rev.EPC_STU_SCH_YR        ssyr  ON ssyr.STUDENT_GU = stu.STUDENT_GU &#xA;JOIN rev.REV_ORGANIZATION_YEAR oyr   ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU&#xA;JOIN rev.REV_YEAR              yr    ON yr.YEAR_GU               = oyr.YEAR_GU      &#xA;                                        AND yr.SCHOOL_YEAR = @NextSchYr&#xA;JOIN rev.EPC_SCH               sch   ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU&#xA;JOIN rev.REV_PERSON            per   ON per.PERSON_GU = stu.STUDENT_GU&#xA;JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd ON grd.VALUE_CODE = ssyr.GRADE&#xA;LEFT JOIN rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') eth ON eth.VALUE_CODE = per.RESOLVED_ETHNICITY_RACE&#xA;where stu.STATE_STUDENT_NUMBER is null and sch.STATE_SCHOOL_CODE != 'tran'&#xA;&#x9;  AND [stu].[SIS_NUMBER] NOT IN (SELECT &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;[stu].[SIS_NUMBER]&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;FROM rev.EPC_STU               stu   &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;JOIN rev.EPC_STU_SCH_YR        ssyr  ON ssyr.STUDENT_GU = stu.STUDENT_GU &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;JOIN rev.REV_ORGANIZATION_YEAR oyr   ON oyr.ORGANIZATION_YEAR_GU = ssyr.ORGANIZATION_YEAR_GU&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AND oyr.YEAR_GU = (select YEAR_GU from rev.SIF_22_Common_CurrentYearGU)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;JOIN rev.EPC_SCH               sch   ON sch.ORGANIZATION_GU = oyr.ORGANIZATION_GU&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;JOIN rev.REV_PERSON            per   ON per.PERSON_GU = stu.STUDENT_GU&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;JOIN rev.SIF_22_Common_GetLookupValues('K12', 'GRADE') grd ON grd.VALUE_CODE = ssyr.GRADE&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;LEFT JOIN rev.SIF_22_Common_GetLookupValues('Revelation', 'ETHNICITY') eth ON eth.VALUE_CODE = per.RESOLVED_ETHNICITY_RACE&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;where stu.STATE_STUDENT_NUMBER is null and sch.STATE_SCHOOL_CODE != 'tran')&#xA;) cn&#xA;"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="c1"
@@ -1410,7 +1401,7 @@ where stu.STATE_STUDENT_NUMBER is null
           <components>
             <component
               refId="Package\Footer\DB Query"
-              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              componentClassID="DTSAdapter.OLEDBSource.3"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
               name="DB Query"
@@ -1433,7 +1424,10 @@ where stu.STATE_STUDENT_NUMBER is null
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select
+  'TT'                                  as [rowtype]
+, convert(nvarchar(2),DATEPART(day, getdate()),101)             as [day]
+, 0 as [row_count]</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1450,7 +1444,7 @@ where stu.STATE_STUDENT_NUMBER is null
                   dataType="System.Int32"
                   description="Specifies the mode used to access the database."
                   name="AccessMode"
-                  typeConverter="AccessMode">3</property>
+                  typeConverter="AccessMode">2</property>
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
@@ -1509,7 +1503,8 @@ where stu.STATE_STUDENT_NUMBER is null
                       name="rowtype" />
                     <externalMetadataColumn
                       refId="Package\Footer\DB Query.Outputs[OLE DB Source Output].ExternalColumns[day]"
-                      dataType="i4"
+                      dataType="wstr"
+                      length="2"
                       name="day" />
                     <externalMetadataColumn
                       refId="Package\Footer\DB Query.Outputs[OLE DB Source Output].ExternalColumns[row_count]"
@@ -1531,7 +1526,8 @@ where stu.STATE_STUDENT_NUMBER is null
                       name="rowtype" />
                     <outputColumn
                       refId="Package\Footer\DB Query.Outputs[OLE DB Source Error Output].Columns[day]"
-                      dataType="i4"
+                      dataType="wstr"
+                      length="2"
                       lineageId="Package\Footer\DB Query.Outputs[OLE DB Source Error Output].Columns[day]"
                       name="day" />
                     <outputColumn
@@ -1558,7 +1554,7 @@ where stu.STATE_STUDENT_NUMBER is null
             </component>
             <component
               refId="Package\Footer\Flat File Destination"
-              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              componentClassID="DTSAdapter.FlatFileDestination.3"
               contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Flat File Destination"
               localeId="1033"
@@ -1658,7 +1654,7 @@ where stu.STATE_STUDENT_NUMBER is null
           <components>
             <component
               refId="Package\Header\Flat File Destination"
-              componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+              componentClassID="DTSAdapter.FlatFileDestination.3"
               contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Flat File Destination"
               localeId="1033"
@@ -1768,21 +1764,15 @@ where stu.STATE_STUDENT_NUMBER is null
                       refId="Package\Header\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[delimiter]"
                       codePage="1252"
                       dataType="str"
-                      length="14"
+                      length="102"
                       name="delimiter" />
-                    <externalMetadataColumn
-                      refId="Package\Header\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[blanks]"
-                      codePage="1252"
-                      dataType="str"
-                      length="88"
-                      name="blanks" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
             </component>
             <component
               refId="Package\Header\Header row"
-              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              componentClassID="DTSAdapter.OLEDBSource.3"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
               name="Header row"
@@ -1809,7 +1799,7 @@ where stu.STATE_STUDENT_NUMBER is null
   'TH'                                  as [rowtype]
 , convert(varchar(10), getdate(), 101)  as [date]
 , convert(varchar(8), getdate(), 108)   as [dtime]
-, DATEPART(day, getdate())              as [day]
+, convert(varchar(2),DATEPART(day, getdate()),101)             as [day]
 , '1.0'                                 as [ver]
 , 'DELIMITER=0X09'+SPACE(88)            as [delimiter]</property>
                 <property
@@ -1934,7 +1924,9 @@ where stu.STATE_STUDENT_NUMBER is null
                       name="dtime" />
                     <externalMetadataColumn
                       refId="Package\Header\Header row.Outputs[OLE DB Source Output].ExternalColumns[day]"
-                      dataType="i4"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
                       name="day" />
                     <externalMetadataColumn
                       refId="Package\Header\Header row.Outputs[OLE DB Source Output].ExternalColumns[ver]"
@@ -1990,7 +1982,9 @@ where stu.STATE_STUDENT_NUMBER is null
                       name="dtime" />
                     <outputColumn
                       refId="Package\Header\Header row.Outputs[OLE DB Source Error Output].Columns[day]"
-                      dataType="i4"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
                       lineageId="Package\Header\Header row.Outputs[OLE DB Source Error Output].Columns[day]"
                       name="day" />
                     <outputColumn
@@ -2153,11 +2147,11 @@ where stu.STATE_STUDENT_NUMBER is null
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="152,41.6"
+          Size="152,42"
           Id="Package\DetailLines\OLE DB Source"
           TopLeft="31,24" />
         <NodeLayout
-          Size="183.2,41.6"
+          Size="183,42"
           Id="Package\DetailLines\Flat File Destination 1"
           TopLeft="40,115" />
         <EdgeLayout
@@ -2211,11 +2205,11 @@ where stu.STATE_STUDENT_NUMBER is null
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="174.4,41.6"
+          Size="174,42"
           Id="Package\Footer\Flat File Destination"
           TopLeft="94,265" />
         <NodeLayout
-          Size="126.4,41.6"
+          Size="126,42"
           Id="Package\Footer\DB Query"
           TopLeft="170,141" />
         <EdgeLayout
@@ -2255,22 +2249,30 @@ where stu.STATE_STUDENT_NUMBER is null
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Footer\DB Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Header">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="136,41.6"
+          Size="136,42"
           Id="Package\Header\Header row"
           TopLeft="24.5,5.5" />
         <NodeLayout
-          Size="174.4,41.6"
+          Size="172,42"
           Id="Package\Header\Flat File Destination"
           TopLeft="5.50000000000001,107.5" />
         <EdgeLayout
           Id="Package\Header.Paths[OLE DB Source Output]"
-          TopLeft="92.5,47.5">
+          TopLeft="92,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2293,5 +2295,13 @@ where stu.STATE_STUDENT_NUMBER is null
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Header\Header row">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

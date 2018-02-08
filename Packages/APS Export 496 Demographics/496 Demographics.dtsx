@@ -7,12 +7,13 @@
   DTS:CreatorName="APS\e204042"
   DTS:DTSID="{CBFFC74A-0E28-438B-ACD2-9FDF55C15396}"
   DTS:ExecutableType="SSIS.Package.3"
-  DTS:LastModifiedProductVersion="11.0.5058.0"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="496Demographics"
   DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
   DTS:VersionBuild="4"
-  DTS:VersionGUID="{6DB421CC-6675-4140-9E9F-70FF91FCEE25}">
+  DTS:VersionGUID="{040AAC66-200D-435F-92E2-222A9ECB9370}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -36,7 +37,7 @@
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\496Demographics\496Demographics_20160426.csv">
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Export\496Demographics\496Demographics_20180205.csv">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -122,10 +123,16 @@
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectionString="Data Source=synergydbdc.aps.edu.actd;User ID=APSExport;Initial Catalog=ST_Production;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJaKKzmHZJkS0lRtKSC1KQgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAApUeJ7/394uAC2HmuZhb6CAAAAAASAAACgAAAAEAAAACC6RqRpv2G98aVZLEgOldwwAAAAO6YW4imsrXMuCDhJVGpDBteK0h2b6x67uZBiWDxNmtT9yUk9soP4NiIlySPiHqQYFAAAALCA9N02EuisgxsiJHDu4y2LJbRV</DTS:Password>
+          <EncryptedData
+            Type="http://www.w3.org/2001/04/xmlenc#Element"
+            Salt="ClUSm5TbCg=="
+            IV="F/nVAg9DYiI=" xmlns="http://www.w3.org/2001/04/xmlenc#">
+            <EncryptionMethod
+              Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc" />
+            <CipherData>
+              <CipherValue>F/nVAg9DYiLWxibQ+P/sX3fUXqkSc8i2fQ/wZezPA4OtlDOwYXxwcv9AXE916Mknx+f73/UNG/qpRdJj/Q974aA/WVcJM1bx0z9YZRxzDmxXtE1xSR71aqp+11LekvRVoko5TaUEnDRv0Sl6mZOCu+vdOqBA/JHDBDoNAIkVTd1nyTzwJjMB9g==</CipherValue>
+            </CipherData>
+          </EncryptedData>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>

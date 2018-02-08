@@ -1,0 +1,2724 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/18/2017 3:20:29 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="046-DECHAVEZ"
+  DTS:CreatorName="APS\e104090"
+  DTS:DTSID="{162BFD6F-5DDB-4CE7-9C37-A0DE60962CD2}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Licensure"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{74BAFC14-1D21-4E60-8275-F6455E35BCC2}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Licensure]"
+      DTS:CreationName="HTTP"
+      DTS:DTSID="{82A1D30D-1AA6-4D74-8347-C162F1AF2E26}"
+      DTS:ObjectName="Licensure">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="https://eui.ped.state.nm.us/sites/stars/IT File Transfer/APS/Licensure/LicensureInformationByDistrict-AllActiveLicenses.csv">
+          <DTS:HttpConnection
+            DTS:ServerURL="https://eui.ped.state.nm.us/sites/stars/IT File Transfer/APS/Licensure/LicensureInformationByDistrict-AllActiveLicenses.csv"
+            DTS:UseServerCredentials="True"
+            DTS:ServerUserName="SIS@APS.edu">
+            <DTS:Property
+              DTS:Name="ServerPassword"
+              Sensitive="1"
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAdQjjlzA4c0+u+IWAl8L4LgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADJvlyApf57gtquQ4XMYGiGAAAAAASAAACgAAAAEAAAAGrSlptghXmmbG7wCF9Kt10YAAAAcUYl511kUxdsYc2AWx7bCbr0I8laze/8FAAAAITrZvoOMiTboX1PI2/7ENNK28F3</DTS:Property>
+            <DTS:Property
+              DTS:Name="ProxyPassword"
+              Sensitive="1"
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAdQjjlzA4c0+u+IWAl8L4LgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABnVtSrDk0HxDhnQYxUQF8iAAAAAASAAACgAAAAEAAAANetSchF2yZjE+nDD4/k7HMIAAAAO4E3iQ6ZEEYUAAAAvcxEseZsXxnphbOl96lNxwiJyGY</DTS:Property>
+          </DTS:HttpConnection>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Licensure File]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{F20A62C8-A989-4D94-8B68-85A101E01097}"
+      DTS:ObjectName="Licensure File">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\syntempssis.aps.edu.actd\Files\Import\Licensure\Licensure.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="District_Name"
+              DTS:DTSID="{59EF5360-38FD-4CB1-BB7A-10461741481B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="District_Code"
+              DTS:DTSID="{8AB848C4-7598-4F77-B765-45EB445C78E7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="128"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Staff_Name"
+              DTS:DTSID="{6F86DE21-D4D9-4EFB-9815-921152DC11F2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Certificate_Number"
+              DTS:DTSID="{E5C49C97-51DD-415A-9017-6792318A6D1C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Certification_Type_Code"
+              DTS:DTSID="{C9E0802E-46A3-4057-BA3E-CE7ABB6BDCF0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Certification_Type"
+              DTS:DTSID="{BB643D21-4A77-4631-9B8D-3A4D5413800B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Certification_Type_Category"
+              DTS:DTSID="{D724BC1A-6F79-4D6E-A1D2-500CEC689724}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Certification_Level_Code"
+              DTS:DTSID="{E46667E8-5F10-4B50-AC0F-9A599EFE840F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Certification_Level"
+              DTS:DTSID="{113F2FF1-FC0E-41A6-9EBD-306C94C2E649}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Certification_Area_Code"
+              DTS:DTSID="{E03241A4-D040-40AC-BD84-26E78801A183}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Certification_Area"
+              DTS:DTSID="{8BD86585-CADE-4D11-B778-B0D3807C8D4C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Certification_Effective_Date"
+              DTS:DTSID="{17E3F250-BBE3-4294-97AC-2A633AC08E8E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Certification_Expiration_Date"
+              DTS:DTSID="{78C496C6-4393-4634-A9CB-412EDC8D6878}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Certification_Status"
+              DTS:DTSID="{53D6CCFE-F0D8-44E0-9516-34ED02178ACA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Staff_ID"
+              DTS:DTSID="{8A423EBA-45DA-413D-9A46-73E43A014E1F}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[synergydb01.aps.edu.actd.APSExport]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{5B8A87FF-F059-47DB-A951-383C5F7B6FFF}"
+      DTS:ObjectName="synergydb01.aps.edu.actd.APSExport">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=synergydb01.aps.edu.actd;User ID=SystemImport;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAdQjjlzA4c0+u+IWAl8L4LgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADAWjPdIjwYXm1tTB3CbNkRAAAAAASAAACgAAAAEAAAALgmLXi0zGm4zEvKVFEmEGkwAAAADclCtp6NoO7PW5m8QDPSK6LhC1KutcoDKdzmf28xXVBxstz4uPa+LZsRawcf5gE/FAAAAATmKzdtU8uULx4DrR/qoDcBlLaB</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\APS CredentialsSync"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{b3ab90a7-3f28-40a3-b7f5-6295af66246d}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="APS CredentialsSync"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{5B8A87FF-F059-47DB-A951-383C5F7B6FFF}"
+          SQLTask:SqlStatementSource="EXEC APS.CredentialsSync 0" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Download Licensure File"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ScriptTask.ScriptTask, Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Script Task"
+      DTS:DTSID="{67dcba22-03eb-4bf5-814b-691f2cb0bf44}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ScriptTask.ScriptTask, Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Download Licensure File"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <ScriptProject
+          Name="ST_9c9560bc276f47588d2c1cb0b4cb3149"
+          VSTAMajorVersion="2"
+          VSTAMinorVersion="2"
+          Language="VisualBasic">
+          <ProjectItem
+            Name="My Project\AssemblyInfo.vb"
+            Encoding="UTF8"><![CDATA[Imports System
+Imports System.Reflection
+Imports System.Runtime.InteropServices
+
+' General Information about an assembly is controlled through the following 
+' set of attributes. Change these attribute values to modify the information
+' associated with an assembly.
+
+' Review the values of the assembly attributes
+
+<Assembly: AssemblyTitle("ST_e37241701f2f4a6eb8840f96058a1ebf")> 
+<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyProduct("ST_e37241701f2f4a6eb8840f96058a1ebf")> 
+<Assembly: AssemblyCopyright("Copyright @  2014")> 
+<Assembly: AssemblyTrademark("")> 
+<Assembly: CLSCompliant(True)> 
+
+<Assembly: ComVisible(False)> 
+
+'The following GUID is for the ID of the typelib if this project is exposed to COM
+<Assembly: Guid("6494be29-4dae-4e19-8490-c857bf3eed32")> 
+
+' Version information for an assembly consists of the following four values:
+'
+'      Major Version
+'      Minor Version 
+'      Build Number
+'      Revision
+'
+' You can specify all the values or you can default the Build and Revision Numbers 
+' by using the '*' as shown below:
+' <Assembly: AssemblyVersion("1.0.*")>
+
+<Assembly: AssemblyVersion("1.0.0.0")> 
+<Assembly: AssemblyFileVersion("1.0.0.0")> ]]></ProjectItem>
+          <ProjectItem
+            Name="ST_9c9560bc276f47588d2c1cb0b4cb3149.vbproj"
+            Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?><Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"><PropertyGroup><ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids><Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration><Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform><ProductVersion>8.0.30703</ProductVersion><SchemaVersion>2.0</SchemaVersion><ProjectGuid>{03AF0927-65E9-473E-A62F-9CD1E2E3CFA5}</ProjectGuid><OutputType>Library</OutputType><AppDesignerFolder>My Project</AppDesignerFolder><RootNamespace>ST_e37241701f2f4a6eb8840f96058a1ebf</RootNamespace><AssemblyName>ST_9c9560bc276f47588d2c1cb0b4cb3149</AssemblyName><TargetFrameworkVersion>v4.0</TargetFrameworkVersion><FileAlignment>512</FileAlignment><TargetFrameworkProfile></TargetFrameworkProfile></PropertyGroup><PropertyGroup Condition=" '$(Configuration)' == 'Debug' "><DebugSymbols>true</DebugSymbols><DebugType>full</DebugType><Optimize>false</Optimize><OutputPath>.\bin\Debug\</OutputPath><EnableUnmanagedDebugging>false</EnableUnmanagedDebugging><DefineDebug>true</DefineDebug><DefineTrace>true</DefineTrace><ErrorReport>prompt</ErrorReport><WarningLevel>4</WarningLevel></PropertyGroup><PropertyGroup Condition=" '$(Configuration)' == 'Release' "><DebugSymbols>false</DebugSymbols><Optimize>true</Optimize><OutputPath>.\bin\Release\</OutputPath><EnableUnmanagedDebugging>false</EnableUnmanagedDebugging><DefineDebug>false</DefineDebug><DefineTrace>true</DefineTrace><ErrorReport>prompt</ErrorReport><WarningLevel>4</WarningLevel></PropertyGroup><ItemGroup><Reference Include="System" /><Reference Include="System.Data" /><Reference Include="System.Windows.Forms" /><Reference Include="System.Xml" /><Reference Include="Microsoft.SqlServer.ManagedDTS, Version=13.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" /><Reference Include="Microsoft.SqlServer.ScriptTask, Version=13.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" /></ItemGroup><ItemGroup><Import Include="Microsoft.VisualBasic" /><Import Include="System" /><Import Include="System.Collections" /><Import Include="System.Data" /><Import Include="System.Diagnostics" /><Import Include="System.Windows.Forms" /></ItemGroup><ItemGroup><AppDesigner Include="My Project\" /><Compile Include="My Project\AssemblyInfo.vb"><SubType>Code</SubType></Compile><EmbeddedResource Include="My Project\Resources.resx"><Generator>VbMyResourcesResXFileCodeGenerator</Generator><LastGenOutput>Resources.Designer.vb</LastGenOutput><CustomToolNamespace>My.Resources</CustomToolNamespace></EmbeddedResource><Compile Include="My Project\Resources.Designer.vb"><AutoGen>True</AutoGen><DesignTime>True</DesignTime><DependentUpon>Resources.resx</DependentUpon><SubType>Code</SubType></Compile><None Include="My Project\Settings.settings"><Generator>SettingsSingleFileGenerator</Generator><LastGenOutput>Settings.Designer.vb</LastGenOutput></None><Compile Include="My Project\Settings.Designer.vb"><AutoGen>True</AutoGen><DependentUpon>Settings.settings</DependentUpon><SubType>Code</SubType></Compile><Compile Include="ScriptMain.vb"><SubType>Code</SubType></Compile></ItemGroup><!-- Include the build rules for a VB project.--><Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" /><ProjectExtensions><VisualStudio><FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}"><ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="vb" TemplatesPath="" DebugInfoExeName="" DebugInfoCommandLine="/vstaHostDebugUri:&quot;vstadebugfe80daff-253b-434b-b04e-0704089a546d/79e24e19-bd22-4155-83b8-72d56c6b982f&quot;" /><Host Name="ScriptTask" /><ProjectClient><HostIdentifier>SSIS_ST130</HostIdentifier></ProjectClient></FlavorProperties></VisualStudio></ProjectExtensions></Project>]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Settings.settings"
+            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)" GeneratedClassNamespace="$safeprojectname" GeneratedClassName="MySettings">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Settings.Designer.vb"
+            Encoding="UTF8"><![CDATA['------------------------------------------------------------------------------
+' <autogenerated>
+'     This code was generated by a tool.
+'
+'     Changes to this file may cause incorrect behavior and will be lost if
+'     the code is regenerated.
+' </autogenerated>
+'------------------------------------------------------------------------------
+
+Option Strict Off
+Option Explicit On
+
+
+
+Partial Friend NotInheritable Class MySettings
+    Inherits System.Configuration.ApplicationSettingsBase
+
+    Private Shared m_Value As MySettings
+
+    Private Shared m_SyncObject As Object = New Object
+
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Public Shared ReadOnly Property Value() As MySettings
+        Get
+            If (MySettings.m_Value Is Nothing) Then
+                System.Threading.Monitor.Enter(MySettings.m_SyncObject)
+                If (MySettings.m_Value Is Nothing) Then
+                    Try
+                        MySettings.m_Value = New MySettings
+                    Finally
+                        System.Threading.Monitor.Exit(MySettings.m_SyncObject)
+                    End Try
+                End If
+            End If
+            Return MySettings.m_Value
+        End Get
+    End Property
+End Class]]></ProjectItem>
+          <ProjectItem
+            Name="Project"
+            Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:Language>msBuild</msb:Language>
+		<msb:CodeName>ST_e37241701f2f4a6eb8840f96058a1ebf</msb:CodeName>
+		<msb:DisplayName>ST_e37241701f2f4a6eb8840f96058a1ebf</msb:DisplayName>
+		<msb:ProjectId>{2116C998-3924-404B-B7E1-B5073C0FF743}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="ST_9c9560bc276f47588d2c1cb0b4cb3149.vbproj"/>
+		<msb:File Include="My Project\AssemblyInfo.vb"/>
+		<msb:File Include="My Project\Resources.resx"/>
+		<msb:File Include="ScriptMain.vb"/>
+		<msb:File Include="My Project\Resources.Designer.vb"/>
+		<msb:File Include="My Project\Settings.settings"/>
+		<msb:File Include="My Project\Settings.Designer.vb"/>
+	</msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+          <ProjectItem
+            Name="ScriptMain.vb"
+            Encoding="UTF8"><![CDATA[#Region "Help:  Introduction to the script task"
+'The Script Task allows you to perform virtually any operation that can be accomplished in
+'a .Net application within the context of an Integration Services control flow. 
+
+'Expand the other regions which have "Help" prefixes for examples of specific ways to use
+'Integration Services features within this script task.
+#End Region
+
+
+#Region "Imports"
+Imports System
+Imports System.IO
+Imports System.Text
+Imports System.Windows.Forms
+Imports Microsoft.SqlServer.Dts.Runtime
+#End Region
+
+'ScriptMain is the entry point class of the script.  Do not change the name, attributes,
+'or parent of this class.
+<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute()> _
+<System.CLSCompliantAttribute(False)> _
+Partial Public Class ScriptMain
+    Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+
+#Region "Help:  Using Integration Services variables and parameters in a script"
+    'To use a variable in this script, first ensure that the variable has been added to 
+    'either the list contained in the ReadOnlyVariables property or the list contained in 
+    'the ReadWriteVariables property of this script task, according to whether or not your
+    'code needs to write to the variable.  To add the variable, save this script, close this instance of
+    'Visual Studio, and update the ReadOnlyVariables and 
+    'ReadWriteVariables properties in the Script Transformation Editor window.
+    'To use a parameter in this script, follow the same steps. Parameters are always read-only.
+
+    'Example of reading from a variable:
+    ' startTime = Dts.Variables("System::StartTime").Value
+
+    'Example of writing to a variable:
+    ' Dts.Variables("User::myStringVariable").Value = "new value"
+
+    'Example of reading from a package parameter:
+    ' batchId = Dts.Variables("$Package::batchId").Value
+
+    'Example of reading from a project parameter:
+    ' batchId = Dts.Variables("$Project::batchId").Value
+
+    'Example of reading from a sensitive project parameter:
+    ' batchId = Dts.Variables("$Project::batchId").GetSensitiveValue()
+#End Region
+
+#Region "Help:  Firing Integration Services events from a script"
+    'This script task can fire events for logging purposes.
+
+    'Example of firing an error event:
+    ' Dts.Events.FireError(18, "Process Values", "Bad value", "", 0)
+
+    'Example of firing an information event:
+    ' Dts.Events.FireInformation(3, "Process Values", "Processing has started", "", 0, fireAgain)
+
+    'Example of firing a warning event:
+    ' Dts.Events.FireWarning(14, "Process Values", "No values received for input", "", 0)
+#End Region
+
+#Region "Help:  Using Integration Services connection managers in a script"
+    'Some types of connection managers can be used in this script task.  See the topic 
+    '"Working with Connection Managers Programatically" for details.
+
+    'Example of using an ADO.Net connection manager:
+    ' Dim rawConnection As Object = Dts.Connections("Sales DB").AcquireConnection(Dts.Transaction)
+    ' Dim myADONETConnection As SqlConnection = CType(rawConnection, SqlConnection)
+    ' <Use the connection in some code here, then release the connection>
+    ' Dts.Connections("Sales DB").ReleaseConnection(rawConnection)
+
+    'Example of using a File connection manager
+    ' Dim rawConnection As Object = Dts.Connections("Prices.zip").AcquireConnection(Dts.Transaction)
+    ' Dim filePath As String = CType(rawConnection, String)
+    ' <Use the connection in some code here, then release the connection>
+    ' Dts.Connections("Prices.zip").ReleaseConnection(rawConnection)
+#End Region
+
+    'This method is called when this script task executes in the control flow.
+    'Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+    'To open Help, press F1.
+
+    Public Sub Main()
+        ' Get the unmanaged connection object, from the connection manager called "HTTP Connection Manager"
+        Dim nativeObject As Object = Dts.Connections("Licensure").AcquireConnection(Nothing)
+
+        ' Create a new HTTP client connection
+        Dim connection As New HttpClientConnection(nativeObject)
+
+
+        ' Download the file #1
+        ' Save the file from the connection manager to the local path specified
+        Dim filename As String = "\\syntempssis.aps.edu.actd\Files\Import\Licensure\Licensure_New.csv"
+        connection.DownloadFile(filename, True)
+
+        ' Confirm file is there
+        If File.Exists(filename) Then
+
+        End If
+
+
+        ' Download the file #2
+        ' Read the text file straight into memory
+        'Dim buffer As Byte() = connection.DownloadData()
+        'Dim data As String = Encoding.ASCII.GetString(buffer)
+        '
+        '' Display the file contents
+        'MessageBox.Show(data)
+
+        Dts.TaskResult = ScriptResults.Success
+    End Sub
+
+#Region "ScriptResults declaration"
+    'This enum provides a convenient shorthand within the scope of this class for setting the
+    'result of the script.
+
+    'This code was generated automatically.
+    Enum ScriptResults
+        Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
+        Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+    End Enum
+
+#End Region
+
+End Class]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Resources.resx"
+            Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Resources.Designer.vb"
+            Encoding="UTF8"><![CDATA['------------------------------------------------------------------------------
+' <autogenerated>
+'     This code was generated by a tool.
+'
+'     Changes to this file may cause incorrect behavior and will be lost if
+'     the code is regenerated.
+' </autogenerated>
+'------------------------------------------------------------------------------
+
+Option Strict Off
+Option Explicit On
+
+
+Namespace My.Resources
+    
+    '''<summary>
+    '''   A strongly-typed resource class, for looking up localized strings, etc.
+    '''</summary>
+    'This class was auto-generated by the Strongly Typed Resource Builder
+    'class via a tool like ResGen or Visual Studio.NET.
+    'To add or remove a member, edit your .ResX file then rerun ResGen
+    'with the /str option, or rebuild your VS project.
+    Class MyResources
+        
+        Private Shared _resMgr As System.Resources.ResourceManager
+        
+        Private Shared _resCulture As System.Globalization.CultureInfo
+        
+        Friend Sub New()
+            MyBase.New
+        End Sub
+        
+        '''<summary>
+        '''   Returns the cached ResourceManager instance used by this class.
+        '''</summary>
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Shared ReadOnly Property ResourceManager() As System.Resources.ResourceManager
+            Get
+                If (_resMgr Is Nothing) Then
+                    Dim temp As System.Resources.ResourceManager = New System.Resources.ResourceManager("My.Resources.MyResources", GetType(MyResources).Assembly)
+                    _resMgr = temp
+                End If
+                Return _resMgr
+            End Get
+        End Property
+        
+        '''<summary>
+        '''   Overrides the current thread's CurrentUICulture property for all
+        '''   resource lookups using this strongly typed resource class.
+        '''</summary>
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Shared Property Culture() As System.Globalization.CultureInfo
+            Get
+                Return _resCulture
+            End Get
+            Set
+                _resCulture = value
+            End Set
+        End Property
+    End Class
+End Namespace]]></ProjectItem>
+          <BinaryItem
+            Name="ST_9c9560bc276f47588d2c1cb0b4cb3149.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAHuYeFoAAAAAAAAAAOAAIiALAVAAABoAAAAIAAAAAAAAUjkA
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACAAAAAAgAAAAAAAAMAQIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAAA5AABPAAAAAEAAAEgEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAWBkAAAAgAAAAGgAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAEgEAAAAQAAAAAYAAAAcAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAIgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAAA0
+OQAAAAAAAEgAAAACAAUAdCIAANQVAAABAAAAAAAAAEg4AAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CKBgAAAoqHgIoGQAACiqmcxoAAAqAAQAABHMbAAAKgAIA
+AARzHAAACoADAAAEcx0AAAqABAAABCoufgEAAARvHgAACioufgIAAARvHwAACioufgMAAARvIAAA
+CioufgQAAARvIQAACioeAigiAAAKKq5+BQAABC0ecgEAAHDQBQAAAigjAAAKbyQAAApzJQAACoAF
+AAAEfgUAAAQqGn4GAAAEKh4CgAYAAAQqQnMiAAAKKCYAAAqACAAABCoeAignAAAKKgAAGzABAD8A
+AAAAAAAAfgcAAAQtMn4IAAAEKCYAAAooKAAACn4HAAAELRxzDQAABoAHAAAE3hB+CAAABCgmAAAK
+KCkAAArcfgcAAAQqAAEQAAACAB0ADCkAEAAAAAAeAigqAAAKKhMwAwBNAAAAAQAAEQIoKwAACm8s
+AAAKcjMAAHBvLQAAChRvLgAACigmAAAKCgYoJgAACnMvAAAKckcAAHALBxdvMAAACgcoMQAACiYC
+KCsAAAoWbzIAAAoqNgIDKCYAAAooMwAACioeAig0AAAKKi7QCAAAAigjAAAKKh4CKDUAAAoqABMw
+AQAUAAAAAgAAEQKMBQAAGy0IKAEAACsKKwICCgYqIgP+FQUAABsqAAAAEzACACgAAAADAAARAns3
+AAAKbzgAAAoKBowIAAAbLRIoAgAAKwoCezcAAAoGbzkAAAoGKkoCKCIAAAoCczoAAAp9NwAACioA
+QlNKQgEAAQAAAAAADAAAAHY0LjAuMzAzMTkAAAAABQBsAAAAxAcAACN+AAAwCAAAVAkAACNTdHJp
+bmdzAAAAAIQRAADQAAAAI1VTAFQSAAAQAAAAI0dVSUQAAABkEgAAcAMAACNCbG9iAAAAAAAAAAIA
+AAFXHaIJCQ8AAAD6ATMAFgAAAQAAAC4AAAAKAAAADAAAABkAAAAEAAAAOgAAAAIAAAA3AAAAAwAA
+AAQAAAAIAAAACQAAAAgAAAABAAAABQAAAAEAAAADAAAAAwAAAAIAAAAAAEMFAQAAAAAABgBjA+AH
+BgAIBOAHBgA6AiEHDwCGCAAABgB7AvAFBgBGA/AFBgDvA/AFBgCDA/AFBgCcA/AFBgDCAvAFBgC3
+A3QFBgBnApoHBgDjAZoHBgAOA/AFBgDdAoYECgAGArsGCgDOAS0FCgBOAi0FDgCmAXAHDgDxBjQH
+BgD2AiEHDgCSArkHDgCqArsABgDxCHQFDgDXBnAHDgArA7sABgBZAXQFDgABAPEECgDxAYAFBgCZ
+BgAIBgApBtsFCgC2AcYFBgAdAiEHEgDNA8gEEgCKAcgEBgB7BXQFBgAFAXQFBgBLCfAFBgC3COAH
+BgAZB3UEEgAbBcgEFgCrCDYBFgCpBjYBFgAUBjYBBgAxAVgABgACB3QFAAAAAE8AAAAAAAEAAQAA
+AAAAuAUgCU0AAQABAAAAAADvBiAJUQABAAIAAAEQAPgIIAlhAAEAAwAAAAAAQggRCGEABQAIAAAB
+EACVCFEEgQAHAAwAAQAAAJ0FUQSNAAkADwAFAQAAYgcAAGEACQARAAUBAAAQAAAAYQAJABgAAgEA
+ANYIAACRAAoAGgAxAF4GCgExADUGEgExAEkGGgExAHcGIgERAPoGKgERAH4BLgERACYEMgERAOsI
+NgEhABYJyAAGBqoAOQFWgMYIPAFWgF4BPAFQIAAAAAAGGAwHBgABAFggAAAAAAYYDAcGAAEAYCAA
+AAAAERgSB0ABAQCKIAAAAAATCOIGRAEBAJYgAAAAABMIqAVJAQEAoiAAAAAAEwjTBk4BAQCuIAAA
+AAATCFIHUwEBALogAAAAAAMYDAcGAAEAwiAAAAAAFgiVBlgBAQDuIAAAAAAWCGYBXQEBAPUgAAAA
+ABYIcgFiAQEA/SAAAAAAERgSB0ABAgAOIQAAAAAGGAwHBgACABghAAAAABYILgRoAQIAdCEAAAAA
+BhgMBwYAAgB8IQAAAAAGAKMFBgACANUhAAAAAMYCoAicAAIA4yEAAAAAxgL5AKEAAwDrIQAAAACD
+AFYBbQEDAPchAAAAAMYCoASlAAMAACIAAAAAEQCXAHIBAwAgIgAAAAABAIMAegEEALogAAAAAAYY
+DAcGAAUALCIAAAAAAwjgAEoABQBgIgAAAAAGGAwHBgAFAAAAAQBLBAAAAQAzBgAAAQDwAAAAAQDw
+AAkADAcBABEADAcGABkADAcKACkADAcQADEADAcQADkADAcQAEEADAcQAEkADAcQAFEADAcQAFkA
+DAcVAGEADAcVAGkADAcQAHEADAcQAHkADAcQAIEADAcaAJEADAcgAKkADAcGALEADAcGALkADAcG
+ANEADAcmAOkADAcQAAkBDAcGABEBDAcGAJkADAcGAKEADAcGAAwADAcGABQADAcGABwADAcGACQA
+DAcGAAwA4ABKABQA4ABKABwA4ABKACQA4ABKAMEADAcGANkAFwFPANkARwlXAPEADAddADkBQgRl
+AAEBDAcGAEEB3AZqAEEBAglqABkBDAcGABkBzgh0AEkBpwh6AFEBawWAAFkBAgaHAGEBDAeMAGEB
+KQGRAGkB5AiXAEkBBwkBAMEAoAicAMEA+QChAMEAoASlAHEB0QCxADQAFgnIADwALgRKADwAOATf
+ADwADAcGAAgALAAAAQgAMAAFASkAqwAqAy4ACwCqAS4AEwCzAS4AGwDSAS4AIwDbAS4AKwAEAi4A
+MwAEAi4AOwDbAS4AQwAKAi4ASwAEAi4AUwAhAi4AWwAEAi4AYwAnAi4AawBRAi4AcwBeAkAAiwAF
+AUAAgwCmAkMAewCvAkMAgwCmAkkAqwA7A2MAewCvAmMAgwCmAmkAqwBPA4AAiwAFAYMAkwAFAYMA
+mwAFAYMAewCvAokAqwBcA6AAiwAFAakAgwDSAcAAiwAFAckAgwDSAeAAiwAFAeMAuwAFAeMAUwAE
+AukAswAFAQMBgwCmAgMBowDIAiMBgwCmAiMBWwAEAiACgwCmAiACiwAFAUACgwCmAkACiwAFAWAC
+gwCmAmACiwAFAYACgwCmAoACiwAFAaACiwAFAcACiwAFAeACiwAFAeACgwCmAgADiwAFASADiwAF
+ASADgwCmAm8AqQC8AAQAAQAFAAUABgAHAAkACAAAAPEGggEAALoFhwEAANcGjAEAAGQHkQEAAJkG
+lgEAAIIBmwEAAEsEoAEAAOQApQECAAQAAwACAAUABQACAAYABwACAAcACQACAAkACwACAAoADQAB
+AAsADQACAA4ADwACABgAEQAuADUAPABDAK4AwQDQANcABIAAAAEAAAAAAAAAAAAAAAAAKwAAAAQA
+AAAAAAAAAAAAAOUAsgAAAAAABAAAAAAAAAAAAAAA5QB0BQAAAAAKAAAAAAAAAAAAAADuALsAAAAA
+AA0AAAAAAAAAAAAAAPcAqQQAAAAADQAAAAAAAAAAAAAA9wBiAAAAAAAAAAAAAQAAAE4IAAAIAAQA
+CQAEAAoABwAAABAAEgCBAAAAEAArAIEAAAAAAC0AgQBtALcAbQDaAAAAAAAAQ29udGV4dFZhbHVl
+YDEAVGhyZWFkU2FmZU9iamVjdFByb3ZpZGVyYDEAU1RfOWM5NTYwYmMyNzZmNDc1ODhkMmMxY2Iw
+YjRjYjMxNDkAPE1vZHVsZT4AU3lzdGVtLklPAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuTWFuYWdlZERU
+UwBUAERpc3Bvc2VfX0luc3RhbmNlX18AQ3JlYXRlX19JbnN0YW5jZV9fAHZhbHVlX18AbXNjb3Js
+aWIATWljcm9zb2Z0LlZpc3VhbEJhc2ljAENyZWF0ZUluc3RhbmNlAGdldF9HZXRJbnN0YW5jZQBp
+bnN0YW5jZQBHZXRIYXNoQ29kZQBSdW50aW1lVHlwZUhhbmRsZQBHZXRUeXBlRnJvbUhhbmRsZQBE
+b3dubG9hZEZpbGUATWljcm9zb2Z0LlNxbFNlcnZlci5EdHMuUnVudGltZQBHZXRUeXBlAEZhaWx1
+cmUAZ2V0X0N1bHR1cmUAc2V0X0N1bHR1cmUAX3Jlc0N1bHR1cmUAVlNUQVJUU2NyaXB0T2JqZWN0
+TW9kZWxCYXNlAEFwcGxpY2F0aW9uQmFzZQBBcHBsaWNhdGlvblNldHRpbmdzQmFzZQBFZGl0b3JC
+cm93c2FibGVTdGF0ZQBHdWlkQXR0cmlidXRlAEhlbHBLZXl3b3JkQXR0cmlidXRlAEdlbmVyYXRl
+ZENvZGVBdHRyaWJ1dGUARGVidWdnZXJOb25Vc2VyQ29kZUF0dHJpYnV0ZQBEZWJ1Z2dhYmxlQXR0
+cmlidXRlAEVkaXRvckJyb3dzYWJsZUF0dHJpYnV0ZQBDb21WaXNpYmxlQXR0cmlidXRlAEFzc2Vt
+Ymx5VGl0bGVBdHRyaWJ1dGUAU3RhbmRhcmRNb2R1bGVBdHRyaWJ1dGUASGlkZU1vZHVsZU5hbWVB
+dHRyaWJ1dGUAQXNzZW1ibHlUcmFkZW1hcmtBdHRyaWJ1dGUAVGFyZ2V0RnJhbWV3b3JrQXR0cmli
+dXRlAERlYnVnZ2VySGlkZGVuQXR0cmlidXRlAEFzc2VtYmx5RmlsZVZlcnNpb25BdHRyaWJ1dGUA
+TXlHcm91cENvbGxlY3Rpb25BdHRyaWJ1dGUAQXNzZW1ibHlEZXNjcmlwdGlvbkF0dHJpYnV0ZQBD
+b21waWxhdGlvblJlbGF4YXRpb25zQXR0cmlidXRlAEFzc2VtYmx5UHJvZHVjdEF0dHJpYnV0ZQBB
+c3NlbWJseUNvcHlyaWdodEF0dHJpYnV0ZQBDTFNDb21wbGlhbnRBdHRyaWJ1dGUAU1NJU1Njcmlw
+dFRhc2tFbnRyeVBvaW50QXR0cmlidXRlAEFzc2VtYmx5Q29tcGFueUF0dHJpYnV0ZQBSdW50aW1l
+Q29tcGF0aWJpbGl0eUF0dHJpYnV0ZQBtX1ZhbHVlAGdldF9WYWx1ZQBzZXRfVmFsdWUAR2V0T2Jq
+ZWN0VmFsdWUAU1RfZTM3MjQxNzAxZjJmNGE2ZWI4ODQwZjk2MDU4YTFlYmYAU3lzdGVtLlRocmVh
+ZGluZwBTeXN0ZW0uUnVudGltZS5WZXJzaW9uaW5nAFRvU3RyaW5nAE1pY3Jvc29mdC5TcWxTZXJ2
+ZXIuU2NyaXB0VGFzawBNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5UYXNrcy5TY3JpcHRUYXNrAE1p
+Y3Jvc29mdC5WaXN1YWxCYXNpYy5NeVNlcnZpY2VzLkludGVybmFsAFNjcmlwdE9iamVjdE1vZGVs
+AFN5c3RlbS5Db21wb25lbnRNb2RlbABTVF85Yzk1NjBiYzI3NmY0NzU4OGQyYzFjYjBiNGNiMzE0
+OS5kbGwAZ2V0X0l0ZW0AU3lzdGVtAEVudW0AU3lzdGVtLkNvbXBvbmVudE1vZGVsLkRlc2lnbgBT
+Y3JpcHRNYWluAGdldF9BcHBsaWNhdGlvbgBNeUFwcGxpY2F0aW9uAFN5c3RlbS5Db25maWd1cmF0
+aW9uAFN5c3RlbS5HbG9iYWxpemF0aW9uAFN5c3RlbS5SZWZsZWN0aW9uAEFjcXVpcmVDb25uZWN0
+aW9uAEh0dHBDbGllbnRDb25uZWN0aW9uAEN1bHR1cmVJbmZvAG1fQXBwT2JqZWN0UHJvdmlkZXIA
+bV9Vc2VyT2JqZWN0UHJvdmlkZXIAbV9Db21wdXRlck9iamVjdFByb3ZpZGVyAG1fTXlXZWJTZXJ2
+aWNlc09iamVjdFByb3ZpZGVyAGdldF9SZXNvdXJjZU1hbmFnZXIAQ29ubmVjdGlvbk1hbmFnZXIA
+U3lzdGVtLkNvZGVEb20uQ29tcGlsZXIAZ2V0X1VzZXIARW50ZXIAZ2V0X0NvbXB1dGVyAE15Q29t
+cHV0ZXIAX3Jlc01ncgBBY3RpdmF0b3IALmN0b3IALmNjdG9yAE1vbml0b3IAU3lzdGVtLkRpYWdu
+b3N0aWNzAE1pY3Jvc29mdC5WaXN1YWxCYXNpYy5EZXZpY2VzAGdldF9XZWJTZXJ2aWNlcwBNeVdl
+YlNlcnZpY2VzAE1pY3Jvc29mdC5WaXN1YWxCYXNpYy5BcHBsaWNhdGlvblNlcnZpY2VzAFN5c3Rl
+bS5SdW50aW1lLkludGVyb3BTZXJ2aWNlcwBNaWNyb3NvZnQuVmlzdWFsQmFzaWMuQ29tcGlsZXJT
+ZXJ2aWNlcwBTeXN0ZW0uUnVudGltZS5Db21waWxlclNlcnZpY2VzAFN5c3RlbS5SZXNvdXJjZXMA
+U1RfZTM3MjQxNzAxZjJmNGE2ZWI4ODQwZjk2MDU4YTFlYmYuTXkuUmVzb3VyY2VzAE15UmVzb3Vy
+Y2VzAFNUX2UzNzI0MTcwMWYyZjRhNmViODg0MGY5NjA1OGExZWJmLlJlc291cmNlcy5yZXNvdXJj
+ZXMARGVidWdnaW5nTW9kZXMATXlTZXR0aW5ncwBFcXVhbHMAZ2V0X0Nvbm5lY3Rpb25zAFJ1bnRp
+bWVIZWxwZXJzAFN1Y2Nlc3MAZ2V0X0R0cwBTY3JpcHRSZXN1bHRzAEV4aXN0cwBtX1N5bmNPYmpl
+Y3QATXlQcm9qZWN0AEV4aXQAc2V0X1Rhc2tSZXN1bHQAbV9Db250ZXh0AFNUX2UzNzI0MTcwMWYy
+ZjRhNmViODg0MGY5NjA1OGExZWJmLk15AGdldF9Bc3NlbWJseQAAMU0AeQAuAFIAZQBzAG8AdQBy
+AGMAZQBzAC4ATQB5AFIAZQBzAG8AdQByAGMAZQBzAAATTABpAGMAZQBuAHMAdQByAGUAAICHXABc
+AHMAeQBuAHQAZQBtAHAAcwBzAGkAcwAuAGEAcABzAC4AZQBkAHUALgBhAGMAdABkAFwARgBpAGwA
+ZQBzAFwASQBtAHAAbwByAHQAXABMAGkAYwBlAG4AcwB1AHIAZQBcAEwAaQBjAGUAbgBzAHUAcgBl
+AF8ATgBlAHcALgBjAHMAdgAAtkDC7pgCGEW6vX2fmAvHewAEIAEBCAMgAAEFIAEBEREEIAEBDgQg
+AQECBSACAQ4OBSABARFFByAEAQ4ODg4GFRIkARIMBhUSJAESCAYVEiQBEmUGFRIkARIgBCAAEwAH
+AAESbRGAlQUgABKAmQcgAgEOEoCZBAABHBwEAAEBHAQHAhwOBSAAEoClBSAAEoCpBiABEoCtHAQg
+ARwcBCABARwFIAIBDgIEAAECDgQgAQIcAyAACAMgAA4EBwEeAAIeAAUQAQAeAAQKAR4ABAcBEwAG
+FRIkARMABwYVEnEBEwAGFRJxARMAAhMABAoBEwAFIAEBEwAIt3pcVhk04IkIsD9ffxHVCjoIiYRd
+zYCAzJEEAAAAAAQBAAAABwYVEiQBEgwHBhUSJAESCAcGFRIkARJlBwYVEiQBEiADBhJ5AwYSfQMG
+EhgCBhwCBggDBhEoAwAAAQQAABIMBAAAEggEAAASZQQAABIgBAAAEnkEAAASfQUAAQESfQQAABIY
+BCAAEm0HEAEBHgAeAAcwAQEBEB4ABAgAEgwECAASCAQIABJlBAgAEiAECAASeQQIABJ9BAgAEhgE
+KAATAAgBAAgAAAAAAB4BAAEAVAIWV3JhcE5vbkV4Y2VwdGlvblRocm93cwEIAQACAAAAAAAoAQAj
+U1RfZTM3MjQxNzAxZjJmNGE2ZWI4ODQwZjk2MDU4YTFlYmYAAAUBAAAAABYBABFDb3B5cmlnaHQg
+QCAgMjAxNAAABQEAAQAAKQEAJDY0OTRiZTI5LTRkYWUtNGUxOS04NDkwLWM4NTdiZjNlZWQzMgAA
+DAEABzEuMC4wLjAAAEcBABouTkVURnJhbWV3b3JrLFZlcnNpb249djQuMAEAVA4URnJhbWV3b3Jr
+RGlzcGxheU5hbWUQLk5FVCBGcmFtZXdvcmsgNAgBAAEAAAAAABgBAApNeVRlbXBsYXRlCDExLjAu
+MC4wAABhAQA0U3lzdGVtLldlYi5TZXJ2aWNlcy5Qcm90b2NvbHMuU29hcEh0dHBDbGllbnRQcm90
+b2NvbBJDcmVhdGVfX0luc3RhbmNlX18TRGlzcG9zZV9fSW5zdGFuY2VfXwAAABABAAtNeS5Db21w
+dXRlcgAAEwEADk15LkFwcGxpY2F0aW9uAAAMAQAHTXkuVXNlcgAAEwEADk15LldlYlNlcnZpY2Vz
+AAC0AAAAzsrvvgEAAACRAAAAbFN5c3RlbS5SZXNvdXJjZXMuUmVzb3VyY2VSZWFkZXIsIG1zY29y
+bGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3
+YTVjNTYxOTM0ZTA4OSNTeXN0ZW0uUmVzb3VyY2VzLlJ1bnRpbWVSZXNvdXJjZVNldAIAAAAAAAAA
+AAAAAFBBRFBBRFC0AAAAKDkAAAAAAAAAAAAAQjkAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQ5
+AAAAAAAAAAAAAAAAX0NvckRsbE1haW4AbXNjb3JlZS5kbGwAAAAAAP8lACAAEAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AQAQAAAAGAAAgAAAAAAAAAAAAAAAAAAAAQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAASAAA
+AFhAAADsAwAAAAAAAAAAAADsAzQAAABWAFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAAAAAA
+vQTv/gAAAQAAAAEAAAAAAAAAAQAAAAAAPwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQAAAAB
+AFYAYQByAEYAaQBsAGUASQBuAGYAbwAAAAAAJAAEAAAAVAByAGEAbgBzAGwAYQB0AGkAbwBuAAAA
+AAAAALAETAMAAAEAUwB0AHIAaQBuAGcARgBpAGwAZQBJAG4AZgBvAAAAKAMAAAEAMAAwADAAMAAw
+ADQAYgAwAAAAGgABAAEAQwBvAG0AbQBlAG4AdABzAAAAAAAAACIAAQABAEMAbwBtAHAAYQBuAHkA
+TgBhAG0AZQAAAAAAAAAAAHAAJAABAEYAaQBsAGUARABlAHMAYwByAGkAcAB0AGkAbwBuAAAAAABT
+AFQAXwBlADMANwAyADQAMQA3ADAAMQBmADIAZgA0AGEANgBlAGIAOAA4ADQAMABmADkANgAwADUA
+OABhADEAZQBiAGYAAAAwAAgAAQBGAGkAbABlAFYAZQByAHMAaQBvAG4AAAAAADEALgAwAC4AMAAu
+ADAAAABwACgAAQBJAG4AdABlAHIAbgBhAGwATgBhAG0AZQAAAFMAVABfADkAYwA5ADUANgAwAGIA
+YwAyADcANgBmADQANwA1ADgAOABkADIAYwAxAGMAYgAwAGIANABjAGIAMwAxADQAOQAuAGQAbABs
+AAAASAASAAEATABlAGcAYQBsAEMAbwBwAHkAcgBpAGcAaAB0AAAAQwBvAHAAeQByAGkAZwBoAHQA
+IABAACAAIAAyADAAMQA0AAAAKgABAAEATABlAGcAYQBsAFQAcgBhAGQAZQBtAGEAcgBrAHMAAAAA
+AAAAAAB4ACgAAQBPAHIAaQBnAGkAbgBhAGwARgBpAGwAZQBuAGEAbQBlAAAAUwBUAF8AOQBjADkA
+NQA2ADAAYgBjADIANwA2AGYANAA3ADUAOAA4AGQAMgBjADEAYwBiADAAYgA0AGMAYgAzADEANAA5
+AC4AZABsAGwAAABoACQAAQBQAHIAbwBkAHUAYwB0AE4AYQBtAGUAAAAAAFMAVABfAGUAMwA3ADIA
+NAAxADcAMAAxAGYAMgBmADQAYQA2AGUAYgA4ADgANAAwAGYAOQA2ADAANQA4AGEAMQBlAGIAZgAA
+ADQACAABAFAAcgBvAGQAdQBjAHQAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4AMAAuADAAAAA4AAgA
+AQBBAHMAcwBlAG0AYgBsAHkAIABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgAwAC4AMAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAMAAAAVDkAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
+        </ScriptProject>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Licensure Table"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{a06c3f23-b183-4f5a-ad96-a40aa6361904}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Licensure Table"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Licensure Table\Add 0s to columns and add PED_Date"
+              componentClassID="DTSTransform.DerivedColumn.3"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Add 0s to columns and add PED_Date"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load Licensure Table\Add 0s to columns and add PED_Date.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Licensure Table\Add 0s to columns and add PED_Date.Inputs[Derived Column Input].Columns[Certificate_Number]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Certificate_Number"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certificate_Number]"
+                      truncationRowDisposition="IgnoreFailure"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"0" + #{Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certificate_Number]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"0" + Certificate_Number</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load Licensure Table\Add 0s to columns and add PED_Date.Inputs[Derived Column Input].Columns[Certification_Type_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Certification_Type_Code"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Type_Code]"
+                      truncationRowDisposition="IgnoreFailure"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"0" + #{Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Type_Code]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"0" + Certification_Type_Code</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load Licensure Table\Add 0s to columns and add PED_Date.Inputs[Derived Column Input].Columns[Certification_Level_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Certification_Level_Code"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Level_Code]"
+                      truncationRowDisposition="IgnoreFailure"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"0" + #{Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Level_Code]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"0" + Certification_Level_Code</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Licensure Table\Add 0s to columns and add PED_Date.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load Licensure Table\Add 0s to columns and add PED_Date.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Add 0s to columns and add PED_Date.Outputs[Derived Column Output].Columns[PED_Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load Licensure Table\Add 0s to columns and add PED_Date.Outputs[Derived Column Output].Columns[PED_Date]"
+                      name="PED_Date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Licensure Table\Add 0s to columns and add PED_Date.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load Licensure Table\Add 0s to columns and add PED_Date.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Add 0s to columns and add PED_Date.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Licensure Table\Add 0s to columns and add PED_Date.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Add 0s to columns and add PED_Date.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Licensure Table\Add 0s to columns and add PED_Date.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Licensure Table\Licensure Load"
+              componentClassID="DTSAdapter.FlatFileSource.3"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="Licensure Load"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Licensure Table\Licensure Load.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Licensure File]"
+                  connectionManagerRefId="Package.ConnectionManagers[Licensure File]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[District_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[District_Name]"
+                      length="50"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[District_Name]"
+                      name="District_Name"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[District_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[District_Code]"
+                      length="50"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[District_Code]"
+                      name="District_Code"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Staff_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Staff_Name]"
+                      length="128"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Staff_Name]"
+                      name="Staff_Name"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certificate_Number]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certificate_Number]"
+                      length="50"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certificate_Number]"
+                      name="Certificate_Number"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Type_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Type_Code]"
+                      length="50"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Type_Code]"
+                      name="Certification_Type_Code"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Type]"
+                      length="50"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Type]"
+                      name="Certification_Type"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Type_Category]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Type_Category]"
+                      length="50"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Type_Category]"
+                      name="Certification_Type_Category"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Level_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Level_Code]"
+                      length="10"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Level_Code]"
+                      name="Certification_Level_Code"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Level]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Level]"
+                      length="50"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Level]"
+                      name="Certification_Level"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Area_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Area_Code]"
+                      length="50"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Area_Code]"
+                      name="Certification_Area_Code"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Area]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Area]"
+                      length="50"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Area]"
+                      name="Certification_Area"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Effective_Date]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Effective_Date]"
+                      length="50"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Effective_Date]"
+                      name="Certification_Effective_Date"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Expiration_Date]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Expiration_Date]"
+                      length="50"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Expiration_Date]"
+                      name="Certification_Expiration_Date"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Status]"
+                      length="20"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Status]"
+                      name="Certification_Status"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Staff_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Staff_ID]"
+                      length="50"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Staff_ID]"
+                      name="Staff_ID"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[District_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="District_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[District_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="District_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Staff_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="Staff_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certificate_Number]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Certificate_Number" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Type_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Certification_Type_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Certification_Type" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Type_Category]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Certification_Type_Category" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Level_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Certification_Level_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Level]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Certification_Level" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Area_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Certification_Area_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Area]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Certification_Area" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Effective_Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Certification_Effective_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Expiration_Date]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Certification_Expiration_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Certification_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="Certification_Status" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].ExternalColumns[Staff_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Staff_ID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Licensure Table\OLE DB Destination"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Licensure]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Licensure Table\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[synergydb01.aps.edu.actd.APSExport]"
+                  connectionManagerRefId="Package.ConnectionManagers[synergydb01.aps.edu.actd.APSExport]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[District_Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="District_Name"
+                      externalMetadataColumnId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[District_Name]"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[District_Name]" />
+                    <inputColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[District_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="District_Code"
+                      externalMetadataColumnId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[District_Code]"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[District_Code]" />
+                    <inputColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Staff_Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="128"
+                      cachedName="Staff_Name"
+                      externalMetadataColumnId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Staff_Name]"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Staff_Name]" />
+                    <inputColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Certificate_Number]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Certificate_Number"
+                      externalMetadataColumnId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certificate_Number]"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certificate_Number]" />
+                    <inputColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Certification_Type_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Certification_Type_Code"
+                      externalMetadataColumnId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Type_Code]"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Type_Code]" />
+                    <inputColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Certification_Type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Certification_Type"
+                      externalMetadataColumnId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Type]"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Type]" />
+                    <inputColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Certification_Type_Category]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Certification_Type_Category"
+                      externalMetadataColumnId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Type_Category]"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Type_Category]" />
+                    <inputColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Certification_Level_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Certification_Level_Code"
+                      externalMetadataColumnId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Level_Code]"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Level_Code]" />
+                    <inputColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Certification_Level]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Certification_Level"
+                      externalMetadataColumnId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Level]"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Level]" />
+                    <inputColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Certification_Area_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Certification_Area_Code"
+                      externalMetadataColumnId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Area_Code]"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Area_Code]" />
+                    <inputColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Certification_Area]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Certification_Area"
+                      externalMetadataColumnId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Area]"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Area]" />
+                    <inputColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Certification_Effective_Date]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Certification_Effective_Date"
+                      externalMetadataColumnId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Effective_Date]"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Effective_Date]" />
+                    <inputColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Certification_Expiration_Date]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Certification_Expiration_Date"
+                      externalMetadataColumnId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Expiration_Date]"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Expiration_Date]" />
+                    <inputColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Certification_Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="Certification_Status"
+                      externalMetadataColumnId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Status]"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Certification_Status]" />
+                    <inputColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Staff_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Staff_ID"
+                      externalMetadataColumnId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Staff_ID]"
+                      lineageId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output].Columns[Staff_ID]" />
+                    <inputColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PED_Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="PED_Date"
+                      externalMetadataColumnId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PED_Date]"
+                      lineageId="Package\Load Licensure Table\Add 0s to columns and add PED_Date.Outputs[Derived Column Output].Columns[PED_Date]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[District_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="District_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[District_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="District_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Staff_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="128"
+                      name="Staff_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certificate_Number]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="Certificate_Number" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Type_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="Certification_Type_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Certification_Type" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Type_Category]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Certification_Type_Category" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Level_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Certification_Level_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Level]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Certification_Level" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Area_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="Certification_Area_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Area]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Certification_Area" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Effective_Date]"
+                      dataType="dbDate"
+                      name="Certification_Effective_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Expiration_Date]"
+                      dataType="dbDate"
+                      name="Certification_Expiration_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Certification_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="Certification_Status" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Staff_ID]"
+                      dataType="numeric"
+                      name="Staff_ID"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PED_Date]"
+                      dataType="dbDate"
+                      name="PED_Date" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Licensure Table\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Licensure Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Licensure Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Licensure Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Licensure Table.Paths[Derived Column Output]"
+              endId="Package\Load Licensure Table\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Load Licensure Table\Add 0s to columns and add PED_Date.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load Licensure Table.Paths[Flat File Source Output]"
+              endId="Package\Load Licensure Table\Add 0s to columns and add PED_Date.Inputs[Derived Column Input]"
+              name="Flat File Source Output"
+              startId="Package\Load Licensure Table\Licensure Load.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Re-encode file to 1252"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ScriptTask.ScriptTask, Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Script Task"
+      DTS:DTSID="{7cb9cbf9-f122-45fe-9c66-18f948171dc8}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ScriptTask.ScriptTask, Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Re-encode file to 1252"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <ScriptProject
+          Name="ST_0f3664f3a78c42559c7cc657093fa87a"
+          VSTAMajorVersion="2"
+          VSTAMinorVersion="2"
+          Language="VisualBasic">
+          <ProjectItem
+            Name="ST_0f3664f3a78c42559c7cc657093fa87a.vbproj"
+            Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?><Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"><PropertyGroup><ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids><Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration><Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform><ProductVersion>8.0.30703</ProductVersion><SchemaVersion>2.0</SchemaVersion><ProjectGuid>{FFDF5A02-A703-4185-B497-8FFD1043FEE6}</ProjectGuid><OutputType>Library</OutputType><AppDesignerFolder>My Project</AppDesignerFolder><RootNamespace>ST_6af710c0ebc7486abb74a81a7ba7a75d</RootNamespace><AssemblyName>ST_0f3664f3a78c42559c7cc657093fa87a</AssemblyName><TargetFrameworkVersion>v4.0</TargetFrameworkVersion><FileAlignment>512</FileAlignment><TargetFrameworkProfile></TargetFrameworkProfile></PropertyGroup><PropertyGroup Condition=" '$(Configuration)' == 'Debug' "><DebugSymbols>true</DebugSymbols><DebugType>full</DebugType><Optimize>false</Optimize><OutputPath>.\bin\Debug\</OutputPath><EnableUnmanagedDebugging>false</EnableUnmanagedDebugging><DefineDebug>true</DefineDebug><DefineTrace>true</DefineTrace><ErrorReport>prompt</ErrorReport><WarningLevel>4</WarningLevel></PropertyGroup><PropertyGroup Condition=" '$(Configuration)' == 'Release' "><DebugSymbols>false</DebugSymbols><Optimize>true</Optimize><OutputPath>.\bin\Release\</OutputPath><EnableUnmanagedDebugging>false</EnableUnmanagedDebugging><DefineDebug>false</DefineDebug><DefineTrace>true</DefineTrace><ErrorReport>prompt</ErrorReport><WarningLevel>4</WarningLevel></PropertyGroup><ItemGroup><Reference Include="System" /><Reference Include="System.Data" /><Reference Include="System.Windows.Forms" /><Reference Include="System.Xml" /><Reference Include="Microsoft.SqlServer.ManagedDTS, Version=13.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" /><Reference Include="Microsoft.SqlServer.ScriptTask, Version=13.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" /></ItemGroup><ItemGroup><Import Include="Microsoft.VisualBasic" /><Import Include="System" /><Import Include="System.Collections" /><Import Include="System.Data" /><Import Include="System.Diagnostics" /><Import Include="System.Windows.Forms" /></ItemGroup><ItemGroup><AppDesigner Include="My Project\" /><Compile Include="My Project\AssemblyInfo.vb"><SubType>Code</SubType></Compile><EmbeddedResource Include="My Project\Resources.resx"><Generator>VbMyResourcesResXFileCodeGenerator</Generator><LastGenOutput>Resources.Designer.vb</LastGenOutput><CustomToolNamespace>My.Resources</CustomToolNamespace></EmbeddedResource><Compile Include="My Project\Resources.Designer.vb"><AutoGen>True</AutoGen><DesignTime>True</DesignTime><DependentUpon>Resources.resx</DependentUpon><SubType>Code</SubType></Compile><None Include="My Project\Settings.settings"><Generator>SettingsSingleFileGenerator</Generator><LastGenOutput>Settings.Designer.vb</LastGenOutput></None><Compile Include="My Project\Settings.Designer.vb"><AutoGen>True</AutoGen><DependentUpon>Settings.settings</DependentUpon><SubType>Code</SubType></Compile><Compile Include="ScriptMain.vb"><SubType>Code</SubType></Compile></ItemGroup><!-- Include the build rules for a VB project.--><Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" /><ProjectExtensions><VisualStudio><FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}"><ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="vb" TemplatesPath="" DebugInfoExeName="" DebugInfoCommandLine="/vstaHostDebugUri:&quot;vstadebug5bd87c9b-00be-4557-97b2-94d9fb757c31/941bf149-e69b-4ec4-8b3a-27eed7b52230&quot;" /><Host Name="ScriptTask" /><ProjectClient><HostIdentifier>SSIS_ST130</HostIdentifier></ProjectClient></FlavorProperties></VisualStudio></ProjectExtensions></Project>]]></ProjectItem>
+          <ProjectItem
+            Name="ScriptMain.vb"
+            Encoding="UTF8"><![CDATA[#Region "Help:  Introduction to the script task"
+'The Script Task allows you to perform virtually any operation that can be accomplished in
+'a .Net application within the context of an Integration Services control flow. 
+
+'Expand the other regions which have "Help" prefixes for examples of specific ways to use
+'Integration Services features within this script task.
+#End Region
+
+
+#Region "Imports"
+Imports System
+Imports System.Data
+Imports System.Math
+Imports System.Text
+Imports System.IO
+Imports Microsoft.SqlServer.Dts.Runtime
+#End Region
+
+'ScriptMain is the entry point class of the script.  Do not change the name, attributes,
+'or parent of this class.
+<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute()> _
+<System.CLSCompliantAttribute(False)> _
+Partial Public Class ScriptMain
+    Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+
+#Region "Help:  Using Integration Services variables and parameters in a script"
+    'To use a variable in this script, first ensure that the variable has been added to 
+    'either the list contained in the ReadOnlyVariables property or the list contained in 
+    'the ReadWriteVariables property of this script task, according to whether or not your
+    'code needs to write to the variable.  To add the variable, save this script, close this instance of
+    'Visual Studio, and update the ReadOnlyVariables and 
+    'ReadWriteVariables properties in the Script Transformation Editor window.
+    'To use a parameter in this script, follow the same steps. Parameters are always read-only.
+
+    'Example of reading from a variable:
+    ' startTime = Dts.Variables("System::StartTime").Value
+
+    'Example of writing to a variable:
+    ' Dts.Variables("User::myStringVariable").Value = "new value"
+
+    'Example of reading from a package parameter:
+    ' batchId = Dts.Variables("$Package::batchId").Value
+
+    'Example of reading from a project parameter:
+    ' batchId = Dts.Variables("$Project::batchId").Value
+
+    'Example of reading from a sensitive project parameter:
+    ' batchId = Dts.Variables("$Project::batchId").GetSensitiveValue()
+#End Region
+
+#Region "Help:  Firing Integration Services events from a script"
+    'This script task can fire events for logging purposes.
+
+    'Example of firing an error event:
+    ' Dts.Events.FireError(18, "Process Values", "Bad value", "", 0)
+
+    'Example of firing an information event:
+    ' Dts.Events.FireInformation(3, "Process Values", "Processing has started", "", 0, fireAgain)
+
+    'Example of firing a warning event:
+    ' Dts.Events.FireWarning(14, "Process Values", "No values received for input", "", 0)
+#End Region
+
+#Region "Help:  Using Integration Services connection managers in a script"
+    'Some types of connection managers can be used in this script task.  See the topic 
+    '"Working with Connection Managers Programatically" for details.
+
+    'Example of using an ADO.Net connection manager:
+    ' Dim rawConnection As Object = Dts.Connections("Sales DB").AcquireConnection(Dts.Transaction)
+    ' Dim myADONETConnection As SqlConnection = CType(rawConnection, SqlConnection)
+    ' <Use the connection in some code here, then release the connection>
+    ' Dts.Connections("Sales DB").ReleaseConnection(rawConnection)
+
+    'Example of using a File connection manager
+    ' Dim rawConnection As Object = Dts.Connections("Prices.zip").AcquireConnection(Dts.Transaction)
+    ' Dim filePath As String = CType(rawConnection, String)
+    ' <Use the connection in some code here, then release the connection>
+    ' Dts.Connections("Prices.zip").ReleaseConnection(rawConnection)
+#End Region
+
+    'This method is called when this script task executes in the control flow.
+    'Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+    'To open Help, press F1.
+
+    Public Sub Main()
+        '
+        ' Add your code here
+        '
+        Dim inputFileName As String = "\\syntempssis.aps.edu.actd\Files\Import\Licensure\Licensure_New.csv"
+        Dim outputFileName As String = "\\syntempssis.aps.edu.actd\Files\Import\Licensure\Licensure.csv"
+
+        If Not File.Exists(inputFileName) Then
+            Throw New Exception("The input file could not be found.")
+        End If
+
+        ConvertFile(inputFileName, Encoding.UTF8, outputFileName, Encoding.ASCII)
+
+        Dts.TaskResult = ScriptResults.Success
+    End Sub
+    Private Sub ConvertFile(ByVal inputFileName As String, ByVal inputEncoding As Encoding, ByVal outputFileName As String, ByVal outputEncoding As Encoding)
+        Using reader As New StreamReader(inputFileName, inputEncoding)
+            Using writer As New StreamWriter(outputFileName, False, outputEncoding)
+                Dim line As String
+                While (reader.EndOfStream() = False)
+                    line = reader.ReadLine()
+                    If Len(line) > 0 Then
+                        writer.WriteLine(line)
+                    End If
+                End While
+                writer.Flush()
+                writer.Close()
+            End Using
+        End Using
+        System.IO.File.Delete(inputFileName)
+    End Sub
+
+#Region "ScriptResults declaration"
+    'This enum provides a convenient shorthand within the scope of this class for setting the
+    'result of the script.
+
+    'This code was generated automatically.
+    Enum ScriptResults
+        Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
+        Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+    End Enum
+
+#End Region
+
+End Class]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Settings.settings"
+            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)" GeneratedClassNamespace="$safeprojectname" GeneratedClassName="MySettings">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\AssemblyInfo.vb"
+            Encoding="UTF8"><![CDATA[Imports System
+Imports System.Reflection
+Imports System.Runtime.InteropServices
+
+' General Information about an assembly is controlled through the following 
+' set of attributes. Change these attribute values to modify the information
+' associated with an assembly.
+
+' Review the values of the assembly attributes
+
+<Assembly: AssemblyTitle("ST_6af710c0ebc7486abb74a81a7ba7a75d")> 
+<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyProduct("ST_6af710c0ebc7486abb74a81a7ba7a75d")> 
+<Assembly: AssemblyCopyright("Copyright @  2014")> 
+<Assembly: AssemblyTrademark("")> 
+<Assembly: CLSCompliant(True)> 
+
+<Assembly: ComVisible(False)> 
+
+'The following GUID is for the ID of the typelib if this project is exposed to COM
+<Assembly: Guid("2efa084a-1b37-4a98-b2f3-6fb21aa32f78")> 
+
+' Version information for an assembly consists of the following four values:
+'
+'      Major Version
+'      Minor Version 
+'      Build Number
+'      Revision
+'
+' You can specify all the values or you can default the Build and Revision Numbers 
+' by using the '*' as shown below:
+' <Assembly: AssemblyVersion("1.0.*")>
+
+<Assembly: AssemblyVersion("1.0.0.0")> 
+<Assembly: AssemblyFileVersion("1.0.0.0")> ]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Settings.Designer.vb"
+            Encoding="UTF8"><![CDATA['------------------------------------------------------------------------------
+' <autogenerated>
+'     This code was generated by a tool.
+'
+'     Changes to this file may cause incorrect behavior and will be lost if
+'     the code is regenerated.
+' </autogenerated>
+'------------------------------------------------------------------------------
+
+Option Strict Off
+Option Explicit On
+
+
+
+Partial Friend NotInheritable Class MySettings
+    Inherits System.Configuration.ApplicationSettingsBase
+
+    Private Shared m_Value As MySettings
+
+    Private Shared m_SyncObject As Object = New Object
+
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Public Shared ReadOnly Property Value() As MySettings
+        Get
+            If (MySettings.m_Value Is Nothing) Then
+                System.Threading.Monitor.Enter(MySettings.m_SyncObject)
+                If (MySettings.m_Value Is Nothing) Then
+                    Try
+                        MySettings.m_Value = New MySettings
+                    Finally
+                        System.Threading.Monitor.Exit(MySettings.m_SyncObject)
+                    End Try
+                End If
+            End If
+            Return MySettings.m_Value
+        End Get
+    End Property
+End Class]]></ProjectItem>
+          <ProjectItem
+            Name="Project"
+            Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:Language>msBuild</msb:Language>
+		<msb:CodeName>ST_6af710c0ebc7486abb74a81a7ba7a75d</msb:CodeName>
+		<msb:DisplayName>ST_6af710c0ebc7486abb74a81a7ba7a75d</msb:DisplayName>
+		<msb:ProjectId>{CBC8A0B4-06EE-4C39-98AA-DE19285005E9}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="ST_0f3664f3a78c42559c7cc657093fa87a.vbproj"/>
+		<msb:File Include="My Project\AssemblyInfo.vb"/>
+		<msb:File Include="My Project\Resources.resx"/>
+		<msb:File Include="ScriptMain.vb"/>
+		<msb:File Include="My Project\Resources.Designer.vb"/>
+		<msb:File Include="My Project\Settings.settings"/>
+		<msb:File Include="My Project\Settings.Designer.vb"/>
+	</msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Resources.resx"
+            Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Resources.Designer.vb"
+            Encoding="UTF8"><![CDATA['------------------------------------------------------------------------------
+' <autogenerated>
+'     This code was generated by a tool.
+'
+'     Changes to this file may cause incorrect behavior and will be lost if
+'     the code is regenerated.
+' </autogenerated>
+'------------------------------------------------------------------------------
+
+Option Strict Off
+Option Explicit On
+
+
+Namespace My.Resources
+    
+    '''<summary>
+    '''   A strongly-typed resource class, for looking up localized strings, etc.
+    '''</summary>
+    'This class was auto-generated by the Strongly Typed Resource Builder
+    'class via a tool like ResGen or Visual Studio.NET.
+    'To add or remove a member, edit your .ResX file then rerun ResGen
+    'with the /str option, or rebuild your VS project.
+    Class MyResources
+        
+        Private Shared _resMgr As System.Resources.ResourceManager
+        
+        Private Shared _resCulture As System.Globalization.CultureInfo
+        
+        Friend Sub New()
+            MyBase.New
+        End Sub
+        
+        '''<summary>
+        '''   Returns the cached ResourceManager instance used by this class.
+        '''</summary>
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Shared ReadOnly Property ResourceManager() As System.Resources.ResourceManager
+            Get
+                If (_resMgr Is Nothing) Then
+                    Dim temp As System.Resources.ResourceManager = New System.Resources.ResourceManager("My.Resources.MyResources", GetType(MyResources).Assembly)
+                    _resMgr = temp
+                End If
+                Return _resMgr
+            End Get
+        End Property
+        
+        '''<summary>
+        '''   Overrides the current thread's CurrentUICulture property for all
+        '''   resource lookups using this strongly typed resource class.
+        '''</summary>
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Shared Property Culture() As System.Globalization.CultureInfo
+            Get
+                Return _resCulture
+            End Get
+            Set
+                _resCulture = value
+            End Set
+        End Property
+    End Class
+End Namespace]]></ProjectItem>
+          <BinaryItem
+            Name="ST_0f3664f3a78c42559c7cc657093fa87a.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAHuYeFoAAAAAAAAAAOAAIiALAVAAABwAAAAIAAAAAAAAUjsA
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACAAAAAAgAAAAAAAAMAQIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAAA7AABPAAAAAEAAAEgEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAWBsAAAAgAAAAHAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAEgEAAAAQAAAAAYAAAAeAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAJAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAAA0
+OwAAAAAAAEgAAAACAAUA7CIAAFwXAAABAAAAAAAAAEg6AAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CKBgAAAoqHgIoGQAACiqmcxoAAAqAAQAABHMbAAAKgAIA
+AARzHAAACoADAAAEcx0AAAqABAAABCoufgEAAARvHgAACioufgIAAARvHwAACioufgMAAARvIAAA
+CioufgQAAARvIQAACioeAigiAAAKKq5+BQAABC0ecgEAAHDQBQAAAigjAAAKbyQAAApzJQAACoAF
+AAAEfgUAAAQqGn4GAAAEKh4CgAYAAAQqQnMiAAAKKCYAAAqACAAABCoeAignAAAKKgAAGzABAD8A
+AAAAAAAAfgcAAAQtMn4IAAAEKCYAAAooKAAACn4HAAAELRxzDQAABoAHAAAE3hB+CAAABCgmAAAK
+KCkAAArcfgcAAAQqAAEQAAACAB0ADCkAEAAAAAAeAigqAAAKKhMwBQA+AAAAAQAAEXIzAABwCnK8
+AABwCwYoKwAACi0LcjwBAHBzLAAACnoCBigtAAAKByguAAAKKBEAAAYCKC8AAAoWbzAAAAoqAAAb
+MAMAXAAAAAIAABEDBHMxAAAKCgUWDgRzMgAACgsrFwZvMwAACgwIKDQAAAoWMQcHCG81AAAKBm82
+AAAKLOEHbzcAAAoHbzgAAAreFAcsBgdvOQAACtwGLAYGbzkAAArcAyg6AAAKKgEcAAACABIAL0EA
+CgAAAAACAAgAQ0sACgAAAAA2AgMoJgAACig7AAAKKh4CKDwAAAoqLtAIAAACKCMAAAoqHgIoPQAA
+CioAABMwAQAUAAAAAwAAEQKMBQAAGy0IKAEAACsKKwICCgYqIgP+FQUAABsqAAAAEzACACgAAAAE
+AAARAns/AAAKb0AAAAoKBowIAAAbLRIoAgAAKwoCez8AAAoGb0EAAAoGKkoCKCIAAAoCc0IAAAp9
+PwAACioAQlNKQgEAAQAAAAAADAAAAHY0LjAuMzAzMTkAAAAABQBsAAAAJAgAACN+AACQCAAAqAkA
+ACNTdHJpbmdzAAAAADgSAACEAQAAI1VTALwTAAAQAAAAI0dVSUQAAADMEwAAkAMAACNCbG9iAAAA
+AAAAAAIAAAFXHaIJCQ8AAAD6ATMAFgAAAQAAADMAAAAKAAAADAAAABoAAAAIAAAAQgAAAAIAAAA3
+AAAABAAAAAQAAAAIAAAACQAAAAgAAAABAAAABAAAAAEAAAADAAAAAwAAAAIAAAAAAI8FAQAAAAAA
+BgCrAy0IBgBQBC0IBgCCAm4HDwDTCAAABgDDAkcGBgCOA0cGBgA3BEcGBgDLA0cGBgDkA0cGBgAK
+A0cGBgD/A8cFBgCvAucHBgArAucHBgBWA0cGBgAlA8cECgBOAvAGCgAPAnkFCgCWAnkFDgDZAb0H
+DgA+B4EHBgA+A24HDgDaAgYIDgDyAq8ABgA2CccFDgAMB70HDgBzA68ABgCMAccFDgABAD0FCgA5
+AtcFBgDgBk0IBgBjBjIGCgDpAR0GBgBlAm4HEgAVBBQFEgC9ARQFBgDwBMcFBgC+BFsJBgBvBkcA
+BgARB0cABgDOBccFBgApAccFBgCcCUcGBgD8CC0IBgBmB5kEBgBUAUcABgBZBscFEgBnBRQFDgDi
+CK8ABgAeB0cABgAdAccFBgBPB8cFAAAAADQAAAAAAAEAAQAAAAAADwZxCU0AAQABAAAAAAA8B3EJ
+UQABAAIAAAEQAD0JcQlhAAEAAwAAAAAAjwheCGEABQAIAAABEADqCMUAgQAHAAwAAQAAAPQFxQCN
+AAkADwAFAQAArwcAAGEACQASAAUBAAAQAAAAYQAJABkAAgEAABsJAAChAAoAGwAxAKUGHAExAHwG
+JAExAJAGLAExAL4GNAERAEcHPAERALEBQAERAG4ERAERADAJSAEhAGcJ2gAGBnoASwFWgAsJTgFW
+gJEBTgFQIAAAAAAGGFkHBgABAFggAAAAAAYYWQcGAAEAYCAAAAAAERhfB1IBAQCKIAAAAAATCC8H
+VgEBAJYgAAAAABMI/wVbAQEAoiAAAAAAEwgIB2ABAQCuIAAAAAATCJ8HZQEBALogAAAAAAMYWQcG
+AAEAwiAAAAAAFgjcBmoBAQDuIAAAAAAWCJkBbwEBAPUgAAAAABYIpQF0AQEA/SAAAAAAERhfB1IB
+AgAOIQAAAAAGGFkHBgACABghAAAAABYIdgR6AQIAdCEAAAAABhhZBwYAAgB8IQAAAAAGAPoFBgAC
+AMghAAAAAAEATQF/AQIATCIAAAAAxgL1CLIABgBaIgAAAADGAhEBtwAHAGIiAAAAAIMAiQGLAQcA
+biIAAAAAxgLhBKAABwB4IgAAAAARAGcAkAEHAJgiAAAAAAEAUwCYAQgAuiAAAAAABhhZBwYACQCk
+IgAAAAADCPgASgAJANgiAAAAAAYYWQcGAAkAAAABAJMEAAABAFkBAAACAKoEAAADAGcBAAAEALgE
+AAABAG0GAAABAAgBAAABAAgBCQBZBwEAEQBZBwYAGQBZBwoAKQBZBxAAMQBZBxAAOQBZBxAAQQBZ
+BxAASQBZBxAAUQBZBxAAWQBZBxUAYQBZBxUAaQBZBxAAcQBZBxAAeQBZBxAAgQBZBxoAkQBZByAA
+qQBZBwYAsQBZBwYAuQBZBwYA0QBZByYA6QBZBxAACQFZBwYAEQFZBwYAmQBZBwYAoQBZBwYADABZ
+BwYAFABZBwYAHABZBwYAJABZBwYADAD4AEoAFAD4AEoAHAD4AEoAJAD4AEoAwQBZBwYA2QA7AU8A
+2QCYCVcA8QBZB10AWQGKBGUAAQFZBwYAYQEpB2oAYQFHCWoAGQFZBwYAaQEpCXQAcQFZBxAAKQEr
+AHkAKQE9AHkAGQETCX8AeQFMCQEAMQFZB48AOQFZB5cAMQF2AaAAgQHTBaQAiQF/ARAAMQG3BakA
+OQHqBAYAOQEBAgYAkQEHAgYAaQEkAq0AwQD1CLIAwQARAbcAwQDhBKAAmQHpAMMANABnCdoAPAB2
+BEoAPACABPEAPABZBwYACAAsABIBCAAwABcBKQCrAEgDLgALAMgBLgATANEBLgAbAPABLgAjAPkB
+LgArACICLgAzACICLgA7APkBLgBDACgCLgBLACICLgBTAD8CLgBbACICLgBjAEUCLgBrAG8CLgBz
+AHwCQACLABcBQACDAMQCQwB7AM0CQwCDAMQCSQCrAFkDYwB7AM0CYwCDAMQCaQCrAG0DgACLABcB
+gwCTABcBgwCbABcBgwB7AM0CiQCrAHoDoACLABcBqQCDAPABwACLABcByQCDAPAB4ACLABcB4wC7
+ABcB4wBTACIC6QCzABcBAwGDAMQCAwGjAOYCIwGDAMQCIwFbACICQAKDAMQCQAKLABcBYAKDAMQC
+YAKLABcBgAKDAMQCgAKLABcBoAKDAMQCoAKLABcBwAKLABcB4AKLABcBAAOLABcBAAODAMQCIAOL
+ABcBQAOLABcBQAODAMQCbwCFALsAzgAEAAEABQAFAAYABwAJAAgAAAA+B6ABAAARBqUBAAAMB6oB
+AACxB68BAADgBrQBAAC1AbkBAACTBL4BAAD8AMMBAgAEAAMAAgAFAAUAAgAGAAcAAgAHAAkAAgAJ
+AAsAAgAKAA0AAQALAA0AAgAOAA8AAgAZABEALgA1ADwAQwDAANMA4gDpAASAAAABAAAAAAAAAAAA
+AAAAAIIAAAAEAAAAAAAAAAAAAAD3AKYAAAAAAAQAAAAAAAAAAAAAAPcAxwUAAAAACgAAAAAAAAAA
+AAAAAAGvAAAAAAANAAAAAAAAAAAAAAAJAfUEAAAAAAAAAAABAAAAmwgAAAgABAAJAAQACgAHAAAA
+EAASAFEAAAAQAC0AUQAAAAAALwBRAH0AyQB9AOwAAAAAQ29udGV4dFZhbHVlYDEAVGhyZWFkU2Fm
+ZU9iamVjdFByb3ZpZGVyYDEAZ2V0X1VURjgAPE1vZHVsZT4AZ2V0X0FTQ0lJAFN5c3RlbS5JTwBU
+AERpc3Bvc2VfX0luc3RhbmNlX18AQ3JlYXRlX19JbnN0YW5jZV9fAHZhbHVlX18AU1RfMGYzNjY0
+ZjNhNzhjNDI1NTljN2NjNjU3MDkzZmE4N2EAbXNjb3JsaWIATWljcm9zb2Z0LlZpc3VhbEJhc2lj
+AFNUXzZhZjcxMGMwZWJjNzQ4NmFiYjc0YTgxYTdiYTdhNzVkAENyZWF0ZUluc3RhbmNlAGdldF9H
+ZXRJbnN0YW5jZQBpbnN0YW5jZQBHZXRIYXNoQ29kZQBJRGlzcG9zYWJsZQBSdW50aW1lVHlwZUhh
+bmRsZQBHZXRUeXBlRnJvbUhhbmRsZQBDb252ZXJ0RmlsZQBpbnB1dEZpbGVOYW1lAG91dHB1dEZp
+bGVOYW1lAFJlYWRMaW5lAFdyaXRlTGluZQBHZXRUeXBlAEZhaWx1cmUAZ2V0X0N1bHR1cmUAc2V0
+X0N1bHR1cmUAX3Jlc0N1bHR1cmUAVlNUQVJUU2NyaXB0T2JqZWN0TW9kZWxCYXNlAEFwcGxpY2F0
+aW9uQmFzZQBBcHBsaWNhdGlvblNldHRpbmdzQmFzZQBDbG9zZQBEaXNwb3NlAEVkaXRvckJyb3dz
+YWJsZVN0YXRlAERlbGV0ZQBHdWlkQXR0cmlidXRlAEhlbHBLZXl3b3JkQXR0cmlidXRlAEdlbmVy
+YXRlZENvZGVBdHRyaWJ1dGUARGVidWdnZXJOb25Vc2VyQ29kZUF0dHJpYnV0ZQBEZWJ1Z2dhYmxl
+QXR0cmlidXRlAEVkaXRvckJyb3dzYWJsZUF0dHJpYnV0ZQBDb21WaXNpYmxlQXR0cmlidXRlAEFz
+c2VtYmx5VGl0bGVBdHRyaWJ1dGUAU3RhbmRhcmRNb2R1bGVBdHRyaWJ1dGUASGlkZU1vZHVsZU5h
+bWVBdHRyaWJ1dGUAQXNzZW1ibHlUcmFkZW1hcmtBdHRyaWJ1dGUAVGFyZ2V0RnJhbWV3b3JrQXR0
+cmlidXRlAERlYnVnZ2VySGlkZGVuQXR0cmlidXRlAEFzc2VtYmx5RmlsZVZlcnNpb25BdHRyaWJ1
+dGUATXlHcm91cENvbGxlY3Rpb25BdHRyaWJ1dGUAQXNzZW1ibHlEZXNjcmlwdGlvbkF0dHJpYnV0
+ZQBDb21waWxhdGlvblJlbGF4YXRpb25zQXR0cmlidXRlAEFzc2VtYmx5UHJvZHVjdEF0dHJpYnV0
+ZQBBc3NlbWJseUNvcHlyaWdodEF0dHJpYnV0ZQBDTFNDb21wbGlhbnRBdHRyaWJ1dGUAU1NJU1Nj
+cmlwdFRhc2tFbnRyeVBvaW50QXR0cmlidXRlAEFzc2VtYmx5Q29tcGFueUF0dHJpYnV0ZQBSdW50
+aW1lQ29tcGF0aWJpbGl0eUF0dHJpYnV0ZQBtX1ZhbHVlAGdldF9WYWx1ZQBzZXRfVmFsdWUAR2V0
+T2JqZWN0VmFsdWUAU3lzdGVtLlRocmVhZGluZwBpbnB1dEVuY29kaW5nAG91dHB1dEVuY29kaW5n
+AFN5c3RlbS5SdW50aW1lLlZlcnNpb25pbmcAVG9TdHJpbmcARmx1c2gATWF0aABNaWNyb3NvZnQu
+U3FsU2VydmVyLlNjcmlwdFRhc2sATWljcm9zb2Z0LlNxbFNlcnZlci5EdHMuVGFza3MuU2NyaXB0
+VGFzawBNaWNyb3NvZnQuVmlzdWFsQmFzaWMuTXlTZXJ2aWNlcy5JbnRlcm5hbABTY3JpcHRPYmpl
+Y3RNb2RlbABTeXN0ZW0uQ29tcG9uZW50TW9kZWwAU1RfMGYzNjY0ZjNhNzhjNDI1NTljN2NjNjU3
+MDkzZmE4N2EuZGxsAGdldF9FbmRPZlN0cmVhbQBTeXN0ZW0ARW51bQBMZW4AU3lzdGVtLkNvbXBv
+bmVudE1vZGVsLkRlc2lnbgBTY3JpcHRNYWluAGdldF9BcHBsaWNhdGlvbgBNeUFwcGxpY2F0aW9u
+AFN5c3RlbS5Db25maWd1cmF0aW9uAFN5c3RlbS5HbG9iYWxpemF0aW9uAFN5c3RlbS5SZWZsZWN0
+aW9uAEV4Y2VwdGlvbgBDdWx0dXJlSW5mbwBTdHJlYW1SZWFkZXIAbV9BcHBPYmplY3RQcm92aWRl
+cgBtX1VzZXJPYmplY3RQcm92aWRlcgBtX0NvbXB1dGVyT2JqZWN0UHJvdmlkZXIAbV9NeVdlYlNl
+cnZpY2VzT2JqZWN0UHJvdmlkZXIAZ2V0X1Jlc291cmNlTWFuYWdlcgBTeXN0ZW0uQ29kZURvbS5D
+b21waWxlcgBnZXRfVXNlcgBTdHJlYW1Xcml0ZXIAVGV4dFdyaXRlcgBFbnRlcgBnZXRfQ29tcHV0
+ZXIATXlDb21wdXRlcgBfcmVzTWdyAEFjdGl2YXRvcgAuY3RvcgAuY2N0b3IATW9uaXRvcgBTeXN0
+ZW0uRGlhZ25vc3RpY3MATWljcm9zb2Z0LlZpc3VhbEJhc2ljLkRldmljZXMAZ2V0X1dlYlNlcnZp
+Y2VzAE15V2ViU2VydmljZXMATWljcm9zb2Z0LlZpc3VhbEJhc2ljLkFwcGxpY2F0aW9uU2Vydmlj
+ZXMAU3lzdGVtLlJ1bnRpbWUuSW50ZXJvcFNlcnZpY2VzAE1pY3Jvc29mdC5WaXN1YWxCYXNpYy5D
+b21waWxlclNlcnZpY2VzAFN5c3RlbS5SdW50aW1lLkNvbXBpbGVyU2VydmljZXMAU3lzdGVtLlJl
+c291cmNlcwBTVF82YWY3MTBjMGViYzc0ODZhYmI3NGE4MWE3YmE3YTc1ZC5NeS5SZXNvdXJjZXMA
+TXlSZXNvdXJjZXMAU1RfNmFmNzEwYzBlYmM3NDg2YWJiNzRhODFhN2JhN2E3NWQuUmVzb3VyY2Vz
+LnJlc291cmNlcwBEZWJ1Z2dpbmdNb2RlcwBTdHJpbmdzAE15U2V0dGluZ3MARXF1YWxzAFJ1bnRp
+bWVIZWxwZXJzAFN1Y2Nlc3MAZ2V0X0R0cwBTY3JpcHRSZXN1bHRzAEV4aXN0cwBtX1N5bmNPYmpl
+Y3QATXlQcm9qZWN0AEV4aXQAc2V0X1Rhc2tSZXN1bHQAU3lzdGVtLlRleHQAbV9Db250ZXh0AFNU
+XzZhZjcxMGMwZWJjNzQ4NmFiYjc0YTgxYTdiYTdhNzVkLk15AGdldF9Bc3NlbWJseQAAAAAAMU0A
+eQAuAFIAZQBzAG8AdQByAGMAZQBzAC4ATQB5AFIAZQBzAG8AdQByAGMAZQBzAACAh1wAXABzAHkA
+bgB0AGUAbQBwAHMAcwBpAHMALgBhAHAAcwAuAGUAZAB1AC4AYQBjAHQAZABcAEYAaQBsAGUAcwBc
+AEkAbQBwAG8AcgB0AFwATABpAGMAZQBuAHMAdQByAGUAXABMAGkAYwBlAG4AcwB1AHIAZQBfAE4A
+ZQB3AC4AYwBzAHYAAH9cAFwAcwB5AG4AdABlAG0AcABzAHMAaQBzAC4AYQBwAHMALgBlAGQAdQAu
+AGEAYwB0AGQAXABGAGkAbABlAHMAXABJAG0AcABvAHIAdABcAEwAaQBjAGUAbgBzAHUAcgBlAFwA
+TABpAGMAZQBuAHMAdQByAGUALgBjAHMAdgAARVQAaABlACAAaQBuAHAAdQB0ACAAZgBpAGwAZQAg
+AGMAbwB1AGwAZAAgAG4AbwB0ACAAYgBlACAAZgBvAHUAbgBkAC4AAAAAuvI9TvXHcE6DPJ7ef9/a
+EQAEIAEBCAMgAAEFIAEBEREEIAEBDgQgAQECBSACAQ4OBSABARFFByAEAQ4ODg4GFRIkARIMBhUS
+JAESCAYVEiQBEmUGFRIkARIgBCAAEwAHAAESbRGApQUgABKAqQcgAgEOEoCpBAABHBwEAAEBHAQH
+Ag4OBAABAg4FAAASgJUFIAASgL0JBwMSgJkSgJ0OByACAQ4SgJUIIAMBDgISgJUDIAAOBAABCA4D
+IAACBAABAQ4EIAECHAMgAAgEBwEeAAIeAAUQAQAeAAQKAR4ABAcBEwAGFRIkARMABwYVEnEBEwAG
+FRJxARMAAhMABAoBEwAFIAEBEwAIt3pcVhk04IkIsD9ffxHVCjoIiYRdzYCAzJEEAAAAAAQBAAAA
+BwYVEiQBEgwHBhUSJAESCAcGFRIkARJlBwYVEiQBEiADBhJ5AwYSfQMGEhgCBhwCBggDBhEoAwAA
+AQQAABIMBAAAEggEAAASZQQAABIgBAAAEnkEAAASfQUAAQESfQQAABIYCyAEAQ4SgJUOEoCVBCAA
+Em0HEAEBHgAeAAcwAQEBEB4ABAgAEgwECAASCAQIABJlBAgAEiAECAASeQQIABJ9BAgAEhgEKAAT
+AAgBAAgAAAAAAB4BAAEAVAIWV3JhcE5vbkV4Y2VwdGlvblRocm93cwEIAQACAAAAAAAoAQAjU1Rf
+NmFmNzEwYzBlYmM3NDg2YWJiNzRhODFhN2JhN2E3NWQAAAUBAAAAABYBABFDb3B5cmlnaHQgQCAg
+MjAxNAAABQEAAQAAKQEAJDJlZmEwODRhLTFiMzctNGE5OC1iMmYzLTZmYjIxYWEzMmY3OAAADAEA
+BzEuMC4wLjAAAEcBABouTkVURnJhbWV3b3JrLFZlcnNpb249djQuMAEAVA4URnJhbWV3b3JrRGlz
+cGxheU5hbWUQLk5FVCBGcmFtZXdvcmsgNAgBAAEAAAAAABgBAApNeVRlbXBsYXRlCDExLjAuMC4w
+AABhAQA0U3lzdGVtLldlYi5TZXJ2aWNlcy5Qcm90b2NvbHMuU29hcEh0dHBDbGllbnRQcm90b2Nv
+bBJDcmVhdGVfX0luc3RhbmNlX18TRGlzcG9zZV9fSW5zdGFuY2VfXwAAABABAAtNeS5Db21wdXRl
+cgAAEwEADk15LkFwcGxpY2F0aW9uAAAMAQAHTXkuVXNlcgAAEwEADk15LldlYlNlcnZpY2VzAAAA
+ALQAAADOyu++AQAAAJEAAABsU3lzdGVtLlJlc291cmNlcy5SZXNvdXJjZVJlYWRlciwgbXNjb3Js
+aWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdh
+NWM1NjE5MzRlMDg5I1N5c3RlbS5SZXNvdXJjZXMuUnVudGltZVJlc291cmNlU2V0AgAAAAAAAAAA
+AAAAUEFEUEFEULQAAAAoOwAAAAAAAAAAAABCOwAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANDsA
+AAAAAAAAAAAAAABfQ29yRGxsTWFpbgBtc2NvcmVlLmRsbAAAAAAA/yUAIAAQAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB
+ABAAAAAYAACAAAAAAAAAAAAAAAAAAAABAAEAAAAwAACAAAAAAAAAAAAAAAAAAAABAAAAAABIAAAA
+WEAAAOwDAAAAAAAAAAAAAOwDNAAAAFYAUwBfAFYARQBSAFMASQBPAE4AXwBJAE4ARgBPAAAAAAC9
+BO/+AAABAAAAAQAAAAAAAAABAAAAAAA/AAAAAAAAAAQAAAACAAAAAAAAAAAAAAAAAAAARAAAAAEA
+VgBhAHIARgBpAGwAZQBJAG4AZgBvAAAAAAAkAAQAAABUAHIAYQBuAHMAbABhAHQAaQBvAG4AAAAA
+AAAAsARMAwAAAQBTAHQAcgBpAG4AZwBGAGkAbABlAEkAbgBmAG8AAAAoAwAAAQAwADAAMAAwADAA
+NABiADAAAAAaAAEAAQBDAG8AbQBtAGUAbgB0AHMAAAAAAAAAIgABAAEAQwBvAG0AcABhAG4AeQBO
+AGEAbQBlAAAAAAAAAAAAcAAkAAEARgBpAGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4AAAAAAFMA
+VABfADYAYQBmADcAMQAwAGMAMABlAGIAYwA3ADQAOAA2AGEAYgBiADcANABhADgAMQBhADcAYgBh
+ADcAYQA3ADUAZAAAADAACAABAEYAaQBsAGUAVgBlAHIAcwBpAG8AbgAAAAAAMQAuADAALgAwAC4A
+MAAAAHAAKAABAEkAbgB0AGUAcgBuAGEAbABOAGEAbQBlAAAAUwBUAF8AMABmADMANgA2ADQAZgAz
+AGEANwA4AGMANAAyADUANQA5AGMANwBjAGMANgA1ADcAMAA5ADMAZgBhADgANwBhAC4AZABsAGwA
+AABIABIAAQBMAGUAZwBhAGwAQwBvAHAAeQByAGkAZwBoAHQAAABDAG8AcAB5AHIAaQBnAGgAdAAg
+AEAAIAAgADIAMAAxADQAAAAqAAEAAQBMAGUAZwBhAGwAVAByAGEAZABlAG0AYQByAGsAcwAAAAAA
+AAAAAHgAKAABAE8AcgBpAGcAaQBuAGEAbABGAGkAbABlAG4AYQBtAGUAAABTAFQAXwAwAGYAMwA2
+ADYANABmADMAYQA3ADgAYwA0ADIANQA1ADkAYwA3AGMAYwA2ADUANwAwADkAMwBmAGEAOAA3AGEA
+LgBkAGwAbAAAAGgAJAABAFAAcgBvAGQAdQBjAHQATgBhAG0AZQAAAAAAUwBUAF8ANgBhAGYANwAx
+ADAAYwAwAGUAYgBjADcANAA4ADYAYQBiAGIANwA0AGEAOAAxAGEANwBiAGEANwBhADcANQBkAAAA
+NAAIAAEAUAByAG8AZAB1AGMAdABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgAwAC4AMAAAADgACAAB
+AEEAcwBzAGUAbQBiAGwAeQAgAFYAZQByAHMAaQBvAG4AAAAxAC4AMAAuADAALgAwAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAwAAABUOwAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
+        </ScriptProject>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Licensure Table"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2a5fc68e-d0de-4e1c-ab33-e6795b389b01}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Licensure Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{5B8A87FF-F059-47DB-A951-383C5F7B6FFF}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [dbo].[Licensure]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{00985e9c-efc5-4151-b186-be740b4e7e26}"
+      DTS:From="Package\Download Licensure File"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Re-encode file to 1252" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{7B338AC5-9218-4E16-8B3F-F90704F122F5}"
+      DTS:From="Package\Re-encode file to 1252"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Truncate Licensure Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{4B2B62B9-1310-41C5-8ACA-028DC5F9994A}"
+      DTS:From="Package\Truncate Licensure Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Load Licensure Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{7CCCD656-98BA-449E-9FCD-333650A6BFFF}"
+      DTS:From="Package\Load Licensure Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\APS CredentialsSync" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="175,42"
+          Id="Package\APS CredentialsSync"
+          TopLeft="167,364" />
+        <NodeLayout
+          Size="195,42"
+          Id="Package\Download Licensure File"
+          TopLeft="152,38" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Load Licensure Table"
+          TopLeft="163,267" />
+        <NodeLayout
+          Size="187,42"
+          Id="Package\Re-encode file to 1252"
+          TopLeft="159,107" />
+        <NodeLayout
+          Size="200,42"
+          Id="Package\Truncate Licensure Table"
+          TopLeft="155,180" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="251,80">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="253.75,149">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31"
+              Start="0,0"
+              End="0,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="254,222">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="253.75,309">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55"
+              Start="0,0"
+              End="0,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Licensure Table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Load Licensure Table\Licensure Load"
+          TopLeft="131,49" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Load Licensure Table\OLE DB Destination"
+          TopLeft="119,258" />
+        <NodeLayout
+          Size="258,42"
+          Id="Package\Load Licensure Table\Add 0s to columns and add PED_Date"
+          TopLeft="93,139" />
+        <EdgeLayout
+          Id="Package\Load Licensure Table.Paths[Flat File Source Output]"
+          TopLeft="206.5,91">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="15.5,48"
+              Start="0,0"
+              End="15.5,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20"
+                    Point2="0,24"
+                    Point3="4,24" />
+                  <mssgle:LineSegment
+                    End="11.5,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="11.5,24"
+                    Point2="15.5,24"
+                    Point3="15.5,28" />
+                  <mssgle:LineSegment
+                    End="15.5,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Licensure Table.Paths[Derived Column Output]"
+          TopLeft="222,181">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-17.5,77"
+              Start="0,0"
+              End="-17.5,69.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,34.5"
+                    Point2="0,38.5"
+                    Point3="-4,38.5" />
+                  <mssgle:LineSegment
+                    End="-13.5,38.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-13.5,38.5"
+                    Point2="-17.5,38.5"
+                    Point3="-17.5,42.5" />
+                  <mssgle:LineSegment
+                    End="-17.5,69.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Licensure Table\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
